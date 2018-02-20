@@ -1,4 +1,4 @@
-package dev.mvc.user;
+package dev.mvc.join;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -15,14 +15,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * Handles requests for the application home page.
  */
 @Controller
-public class TestControllerUser {
+public class JoinController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(TestControllerUser.class);
+	private static final Logger logger = LoggerFactory.getLogger(JoinController.class);
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@RequestMapping(value = "/testuser", method = RequestMethod.GET)
+	@RequestMapping(value = "/join", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
@@ -33,7 +33,7 @@ public class TestControllerUser {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
-		return "home";
+		return "join";
 	}
 	
 }

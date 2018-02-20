@@ -24,9 +24,14 @@
 	
 	
 	<!-- 에너테이션의 위치를 체크해주는 영역 -->
+	
+	<!-- TEST -->
+	<context:component-scan base-package="dev.mvc.test" />
+	
 	<!-- 김상욱, 박영원 -->
 	<context:component-scan base-package="dev.mvc.user" />
-	
+	<context:component-scan base-package="dev.mvc.join" />
+	<context:component-scan base-package="dev.mvc.login" />
 	<!-- 김소희 -->
 	<context:component-scan base-package="dev.mvc.admin" />
 		
