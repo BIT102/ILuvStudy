@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -47,13 +48,16 @@
                 <th>사용여부</th>
                 <th>최근 접속정보</th>
             </tr>
+            
+<c:forEach items="${list}" var="adminVO">
             <tr>
-                <td>1</td>
-                <td><a href="adminDetail">test123</a></td>
-                <td>김소희</td>
-                <td>사용</td>
-                <td>2018-02-16 17:50:22</td>
+                <td>${adminVO.bno}</td>
+                <td><a href="adminDetail">${adminVO.adminid}</a></td>
+                <td>${adminVO.name}</td>
+                <td>${adminVO.status}</td>
+                <td>${adminVO.lastLoginDate}</td>
             </tr>
+</c:forEach>
         </table>
 
         <a href="adminRegister">등록</a>
