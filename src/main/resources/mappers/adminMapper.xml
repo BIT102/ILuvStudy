@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dev.mvc.mapper.AdminMapper">
+	
+	<!-- admin 계정 로그인 처리 -->
+	<select id="adminlogin" resultType="dev.mvc.admin.AdminVO">
+		select adminid, adminpw from admin where adminid=#{adminid} and adminpw=#{adminpw}
+	</select>
+	
+	<!-- 로그인 시 마지막 접속일 갱신 -->
+	<update id="adminlastlogin">
+		update admin set lastLoginDate=now() where adminid=#{adminid}
+	</update>
+	
+	<!-- admin 회원 정보 조회 -->
+	<select id="adminlistAll" resultType="dev.mvc.admin.AdminVO">
+	<![CDATA[
+		select bno, adminid, name, status, lastLoginDate 
+		from admin
+		where bno > 0
+		order by bno desc, lastLoginDate desc
+	]]>
+	</select>
+	
+	<!--  admin 정보 상세 -->
+	<select id="adminDetail" resultType="dev.mvc.admin.AdminVO">
+		select bno, adminid, name, adminpw, status, lastLoginDate
+		from admin
+		where bno = #{bno}
+	</select>
+	
+</mapper>

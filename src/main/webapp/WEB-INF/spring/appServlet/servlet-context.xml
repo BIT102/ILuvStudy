@@ -34,6 +34,15 @@
 	<context:component-scan base-package="dev.mvc.login" />
 	<!-- 김소희 -->
 	<context:component-scan base-package="dev.mvc.admin" />
+	
+	<!-- 로그인 인터셉터 설정 -->
+	<beans:bean id="loginInterceptor" class="dev.mvc.admin.LoginInterceptor"></beans:bean>
+		<interceptors>
+			<interceptor>
+				<mapping path="/admin/adminLoginPost"/>
+				<beans:ref bean="loginInterceptor"/>
+			</interceptor>
+		</interceptors>
 		
 	<!-- 권한길, 조정인 -->
 	<context:component-scan base-package="dev.mvc.study" />
