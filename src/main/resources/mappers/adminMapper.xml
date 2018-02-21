@@ -17,7 +17,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- admin 회원 정보 조회 -->
 	<select id="adminlistAll" resultType="dev.mvc.admin.AdminVO">
-		select bno, adminid, name, status, lastLoginDate from admin
+	<![CDATA[
+		select bno, adminid, name, status, lastLoginDate 
+		from admin
+		where bno > 0
+		order by bno desc, lastLoginDate desc
+	]]>
+	</select>
+	
+	<!--  admin 정보 상세 -->
+	<select id="adminDetail" resultType="dev.mvc.admin.AdminVO">
+		select bno, adminid, name, adminpw, status, lastLoginDate
+		from admin
+		where bno = #{bno}
 	</select>
 	
 </mapper>

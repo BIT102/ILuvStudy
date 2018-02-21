@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/admin")
@@ -47,6 +48,15 @@ public class AdminController {
 	public String adminList(Model model) throws Exception{
 		model.addAttribute("list", service.adminListAll());
 		return "admin/adminList";
+	}
+	
+	//admin/adminDetail.jsp
+	@RequestMapping(value="/adminDetail", method = RequestMethod.GET)
+	public void adminDetail(@RequestParam("bno") int bno, Model model) throws Exception{
+		
+		
+		System.out.println(bno);
+		model.addAttribute(service.adminDetail(bno));
 	}
 
 }

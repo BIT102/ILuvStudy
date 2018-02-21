@@ -2,6 +2,7 @@ package dev.mvc.admin;
 
 import java.io.PrintWriter;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -13,6 +14,9 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 public class LoginInterceptor extends HandlerInterceptorAdapter{
+	
+	@Inject
+	private AdminService service;
 	
 	private static final String LOGIN = "login";
 	private static final Logger logger = LoggerFactory.getLogger(LoginInterceptor.class);
@@ -29,7 +33,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 		if(adminVO != null){
 			logger.info("new login success");
 			session.setAttribute(LOGIN, adminVO);
-
+			service.loginupdate(adminVO);
 			//로그인 성공 시 회원리스트로 이동
 			response.sendRedirect("/admin/userList");
 		} else{

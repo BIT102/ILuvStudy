@@ -18,12 +18,17 @@ public class AdminServiceImpl implements AdminService{
 	}
 	
 	@Override
-	public void modify(AdminVO vo) throws Exception{
-		dao.update(vo);
+	public void loginupdate(Object adminVO) throws Exception{
+		dao.loginupdate(adminVO);
 	}
 	
 	@Override
 	public List<AdminVO> adminListAll() throws Exception{
 		return dao.adminListAll();
+	}
+	
+	@Override
+	public AdminVO adminDetail(Integer bno)throws Exception{
+		return dao.adminDetail(bno);
 	}
 }

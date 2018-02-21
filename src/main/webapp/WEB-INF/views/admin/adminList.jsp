@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -52,10 +53,10 @@
 <c:forEach items="${list}" var="adminVO">
             <tr>
                 <td>${adminVO.bno}</td>
-                <td><a href="adminDetail">${adminVO.adminid}</a></td>
+                <td><a href="/admin/adminDetail?bno=${adminVO.bno}">${adminVO.adminid}</a></td>
                 <td>${adminVO.name}</td>
                 <td>${adminVO.status}</td>
-                <td>${adminVO.lastLoginDate}</td>
+                <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${adminVO.lastLoginDate}"/></td>
             </tr>
 </c:forEach>
         </table>

@@ -17,6 +17,10 @@
         </div>
     </div>
 
+<form role="form" method="post">
+	<input type="hidden" name="bno" value="${AdminVO.bno}">
+</form>
+
     <!--내용-->
     <div id="container">
         <a>계정 관리</a>
@@ -24,11 +28,11 @@
         <table>
             <tr>
                 <th>아이디</th>
-                <td>test123</td>
+                <td>${AdminVO.adminid}</td>
             </tr>
             <tr>
                 <th>이름</th>
-                <td><input type="text" value="김소희"></td>
+                <td><input type="text" value="${AdminVO.name}"></td>
             </tr>
             <tr>
                 <th>비밀번호</th>
@@ -44,7 +48,7 @@
             </tr>
             <tr>
                 <th>최근 접속일</th>
-                <td>2018-02-16 17:50:22</td>
+                <td>${AdminVO.lastLoginDate}</td>
             </tr>
         </table>
         
