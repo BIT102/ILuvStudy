@@ -71,22 +71,6 @@
                         <a href="boarder.html" class="btn btn-primary">$99</a>
                         </div>
                 </div>
-   <!--             <div class="scard cborder" style="width: 20rem;">
-                        <img class="card-img-top" src="hq.jpg" alt="Card image cap">
-                        <div class="card-body">
-                        <h4 class="card-title">인싸정인</h4>
-                        <p class="card-text">체대출신 조정인님의 인생 상담</p>
-                        <a href="boarder.html" class="btn btn-primary">$12</a>
-                        </div>
-                </div>
-                <div class="scard cborder" style="width: 20rem;">
-                        <img class="card-img-top" src="보랏.jpg" alt="Card image cap">
-                        <div class="card-body">
-                        <h4 class="card-title">영원4ever</h4>
-                        <p class="card-text">연륜의 영원님의 인생강의 <br> CHECK IT!</p>
-                        <a href="boarder.html" class="btn btn-primary">$20</a>
-                        </div>
-                </div>  -->
                 </c:forEach>
             </div>  
         </div>
