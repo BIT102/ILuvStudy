@@ -9,22 +9,24 @@ import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import dev.mvc.study.StudyDAO;
-import dev.mvc.study.StudyVO;
+import dev.mvc.study.NoticeDAO;
+import dev.mvc.study.NoticeVO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(
 		locations = {"file:src/main/webapp/WEB-INF/spring/**/root-context.xml"})
-public class StudyDAOTest {
+public class NoticeDAOTest {
 	
 	@Inject
-	private StudyDAO dao;
-
+	private NoticeDAO dao;
+	
 	private static Logger logger = LoggerFactory.getLogger(NoticeDAOTest.class);
 	
+	
 	@Test
-	public void readStudy() throws Exception {
+	public void testReadNotice() throws Exception {
 		
-		logger.info(dao.readStudy(2).toString());
+		logger.info(dao.readNotice(3).toString());
 	}
+
 }

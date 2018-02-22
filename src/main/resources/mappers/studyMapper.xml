@@ -5,37 +5,96 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <!-- board_study mapper -->
 <mapper namespace="dev.mvc.mapper.StudyMapper">
-<!-- 스터디 등록 -->
 
+<!-- 스터디 등록 -->
  <insert id="createStudy">
 insert into board_study (
-BS_TITLE
-, BS_WRITER
-, BS_CATEGORY_D
-, BS_CATEGORY_S
-, BS_MAX
-, BS_R_D_ID
-, BS_R_S_ID
-, BS_AGE
-, BS_SC
-, BS_SD
-, BS_ST
-, BS_ET
-, BS_CONTENT
-) VALUES (
-#{title}
-, #{writer}
-, #{categoryD}
-, #{categoryS}
-, #{max}
-, #{rDId}
-, #{rSId} <!-- null허용 -->
-, #{age}
-, #{sc}
-, #{sd}
-, #{st}
-, #{et}
-, #{content} <!-- null허용 -->
+BSTITLE
+, BSWRITER
+, BSCATEGORYD
+, BSCATEGORYS
+, BSMAX
+, BSRDID
+, BSRSID
+, BSAGE
+, BSSC
+, BSSD
+, BSST
+, BSET
+, BSCONTENT
+) values (
+#{bsTitle}
+, #{bsWriter}
+, #{bsCategoryD}
+, #{bsCategoryS}
+, #{bsMax}
+, #{bsRDId}
+, #{bsRSId} <!-- null허용 -->
+, #{bsAge}
+, #{bsSc}
+, #{bsSd}
+, #{bsSt}
+, #{bsEt}
+, #{bsContent} <!-- null허용 -->
 )
 </insert>
+
+<!-- 스터디 읽어오기 -->
+<select id="readStudy" resultType="dev.mvc.study.StudyVO">
+select
+BSBNO
+, BSTITLE
+, BSWRITER
+, BSCATEGORYD
+, BSCATEGORYS
+, BSNOW
+, BSMAX
+, BSRDID
+, BSRSID
+, BSAGE
+, BSSC
+, BSSD
+, BSST
+, BSET
+, BSCONTENT
+, BSVCT
+, BSRCT
+, BSREGDATE
+, BSENDDATE
+from
+board_study
+where BSBNO = #{bsBno}
+</select>
+
+<!-- 전체불러오기 -->
+<select id="studyList" resultType="dev.mvc.study.StudyVO">
+<![CDATA[
+select
+BSBNO
+, BSTITLE
+, BSWRITER
+, BSCATEGORYD
+, BSCATEGORYS
+, BSNOW
+, BSMAX
+, BSRDID
+, BSRSID
+, BSAGE
+, BSSC
+, BSSD
+, BSST
+, BSET
+, BSCONTENT
+, BSVCT
+, BSRCT
+, BSREGDATE
+, BSENDDATE
+from
+board_study
+where bsBno > 0
+order by bsBno desc, bsRegdate desc
+]]>
+</select>
+
+
 </mapper>
