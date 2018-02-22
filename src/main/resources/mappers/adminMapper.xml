@@ -6,17 +6,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="dev.mvc.mapper.AdminMapper">
 	
 	<!-- admin 계정 로그인 처리 -->
-	<select id="adminlogin" resultType="dev.mvc.admin.AdminVO">
-		select adminid, adminpw from admin where adminid=#{adminid} and adminpw=#{adminpw}
+	<select id="adminLogin" resultType="dev.mvc.admin.AdminVO">
+		select adminid, adminpw from admin where adminid=#{adminId} and adminpw=#{adminPw}
 	</select>
 	
 	<!-- 로그인 시 마지막 접속일 갱신 -->
-	<update id="adminlastlogin">
-		update admin set lastLoginDate=now() where adminid=#{adminid}
+	<update id="adminLastLogin">
+		update admin set lastLoginDate=now() where adminid=#{adminId}
 	</update>
 	
 	<!-- admin 회원 정보 조회 -->
-	<select id="adminlistAll" resultType="dev.mvc.admin.AdminVO">
+	<select id="adminListAll" resultType="dev.mvc.admin.AdminVO">
 	<![CDATA[
 		select bno, adminid, name, status, lastLoginDate 
 		from admin
@@ -30,6 +30,40 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select bno, adminid, name, adminpw, status, lastLoginDate
 		from admin
 		where bno = #{bno}
+	</select>
+	
+	<!-- admin 계정 정보 업데이트 -->
+	<update id="adminUpdate">
+		update admin set name=#{name}, adminpw=#{adminPw}, status=#{status}
+		where bno = #{bno}
+	</update>
+	
+	<!-- admin 계정 정보 등록 -->
+	<insert id="adminRegister">
+		insert into admin (adminid, adminpw, name, registdate, status) 
+		values(#{adminId},#{adminPw},#{name},now(),#{status})
+	</insert>
+	
+	<!-- adminList 페이징 처리 -->
+	<select id="adminListPage" resultType="dev.mvc.admin.AdminVO">
+		<![CDATA[
+			select bno, adminid, name, status, lastLoginDate 
+			from admin
+			where bno > 0
+			order by bno desc, lastLoginDate desc
+			limit #{page}, 0
+		]]>
+	</select>
+	
+	<!-- adminList 페이징 처리 도움용 -->
+	<select id="adminListCriteria" resultType="dev.mvc.admin.AdminVO">
+		<![CDATA[
+			select bno, adminid, name, status, lastLoginDate 
+			from admin
+			where bno > 0
+			order by bno desc, lastLoginDate desc
+			limit #{pageStart}, #{perPageNum}
+		]]>
 	</select>
 	
 </mapper>
