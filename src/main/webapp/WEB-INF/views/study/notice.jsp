@@ -28,7 +28,7 @@
 <div class="header">
 
 <c:forEach items="${list}" var="noticeVO">
-	<!-- 처음보일 부분 -->
+	<!-- 처음보일 부분1 -->
 	<div class="ntTitle">
 		<p>공지사항 제목</p>
 		<input type="text" name="ntTitle" value="${noticeVO.ntTitle}">
