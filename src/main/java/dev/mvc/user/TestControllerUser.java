@@ -33,7 +33,7 @@ public class TestControllerUser {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
-		return "home";
+		return "/mypage/profile";
 	}
 	
 }
