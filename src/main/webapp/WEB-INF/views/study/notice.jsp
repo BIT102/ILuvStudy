@@ -24,7 +24,7 @@
 	<input type="hidden" name="ntBno" value="${NoticeVO.ntBno}">
 </form>-->
 
-<!-- 공지사항 내용들111111 -->
+<!-- 공지사항 내용들111111111 -->
 <div class="header">
 
 <c:forEach items="${list}" var="noticeVO">
