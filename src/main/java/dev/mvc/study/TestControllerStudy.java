@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * Handles requests for the application home page.
  */
 @Controller
+
 public class TestControllerStudy {
 	
 	private static final Logger logger = LoggerFactory.getLogger(TestControllerStudy.class);
@@ -33,7 +34,7 @@ public class TestControllerStudy {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
-		return "home";
+		return "main";
 	}
 	
 }
