@@ -52,19 +52,19 @@
         </div>
     
         <div class="basic border">
-            <a href="study_bookmark.jsp">스터디 관리</a>
+            <a href="bookmark">스터디 관리</a>
         </div>
        </div>
 
    <div id="div2">
     <div class="profile border">
-            <a href="profile.jsp">프로필</a></div>
+            <a href="profile">프로필</a></div>
     <div class="profile border">
-            <a href="add_info.jsp">부가 정보</a></div>
+            <a href="addInfo">부가 정보</a></div>
     <div class="profile border">
-            <a href="change_pw.jsp">비밀번호 변경</a></div>
+            <a href="changePw">비밀번호 변경</a></div>
     <div class="profile border">
-            <a href="quit_user.jsp">회원탈퇴</a></div>
+            <a href="quit">회원탈퇴</a></div>
    </div>
 
     <br>

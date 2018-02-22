@@ -49,6 +49,10 @@
 	</aop:config>
 	
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+	
+	
+	<!-- dev.mvc.user 패키지 인식-->
+	<context:component-scan base-package="dev.mvc.user"></context:component-scan>
 		
 		
 </beans>

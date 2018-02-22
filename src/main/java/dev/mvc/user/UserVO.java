@@ -2,114 +2,121 @@ package dev.mvc.user;
 
 import java.sql.Date;
 
+//UserÅ×ÀÌºí VO
 public class UserVO {
 
-	private String EMAIL;
-	private String PASSWORD;
-	private String NAME;
-	private String NICKNAME;
-	private int GENDER;
-	private int PHONE_NUM;
-	private int BIRTH;
-	private String PHOTO;
-	private String HOMEPAGE;
-	private String INTRODUCTION;
-	private Date REGIST_DATE;
-	private Date MODIFY_DATE;
-	private Date QUIT_DATE;
-	private int IS_DEL;
-	public String getEMAIL() {
-		return EMAIL;
+	private String email;
+	private String password;
+	private String name;
+	private String nickName;
+	private int gender;
+	private int phoneNum;
+	private int birth;
+	private String photo;
+	private String homepage;
+	private String introduction;
+	private Date registDate;
+	private Date modifyDate;
+	private Date quitDate;
+	private int isDel;
+	
+	
+	public String getEmail() {
+		return email;
 	}
-	public void setEMAIL(String eMAIL) {
-		EMAIL = eMAIL;
+	public void setEmail(String email) {
+		this.email = email;
 	}
-	public String getPASSWORD() {
-		return PASSWORD;
+	public String getPassword() {
+		return password;
 	}
-	public void setPASSWORD(String pASSWORD) {
-		PASSWORD = pASSWORD;
+	public void setPassword(String password) {
+		this.password = password;
 	}
-	public String getNAME() {
-		return NAME;
+	public String getName() {
+		return name;
 	}
-	public void setNAME(String nAME) {
-		NAME = nAME;
+	public void setName(String name) {
+		this.name = name;
 	}
-	public String getNICKNAME() {
-		return NICKNAME;
+	public String getNickName() {
+		return nickName;
 	}
-	public void setNICKNAME(String nICKNAME) {
-		NICKNAME = nICKNAME;
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
 	}
-	public int getGENDER() {
-		return GENDER;
+	public int getGender() {
+		return gender;
 	}
-	public void setGENDER(int gENDER) {
-		GENDER = gENDER;
+	public void setGender(int gender) {
+		this.gender = gender;
 	}
-	public int getPHONE_NUM() {
-		return PHONE_NUM;
+	public int getPhoneNum() {
+		return phoneNum;
 	}
-	public void setPHONE_NUM(int pHONE_NUM) {
-		PHONE_NUM = pHONE_NUM;
+	public void setPhoneNum(int phoneNum) {
+		this.phoneNum = phoneNum;
 	}
-	public int getBIRTH() {
-		return BIRTH;
+	public int getBirth() {
+		return birth;
 	}
-	public void setBIRTH(int bIRTH) {
-		BIRTH = bIRTH;
+	public void setBirth(int birth) {
+		this.birth = birth;
 	}
-	public String getPHOTO() {
-		return PHOTO;
+	public String getPhoto() {
+		return photo;
 	}
-	public void setPHOTO(String pHOTO) {
-		PHOTO = pHOTO;
+	public void setPhoto(String photo) {
+		this.photo = photo;
 	}
-	public String getHOMEPAGE() {
-		return HOMEPAGE;
+	public String getHomepage() {
+		return homepage;
 	}
-	public void setHOMEPAGE(String hOMEPAGE) {
-		HOMEPAGE = hOMEPAGE;
+	public void setHomepage(String homepage) {
+		this.homepage = homepage;
 	}
-	public String getINTRODUCTION() {
-		return INTRODUCTION;
+	public String getIntroduction() {
+		return introduction;
 	}
-	public void setINTRODUCTION(String iNTRODUCTION) {
-		INTRODUCTION = iNTRODUCTION;
+	public void setIntroduction(String introduction) {
+		this.introduction = introduction;
 	}
-	public Date getREGIST_DATE() {
-		return REGIST_DATE;
+	public Date getRegistDate() {
+		return registDate;
 	}
-	public void setREGIST_DATE(Date rEGIST_DATE) {
-		REGIST_DATE = rEGIST_DATE;
+	public void setRegistDate(Date registDate) {
+		this.registDate = registDate;
 	}
-	public Date getMODIFY_DATE() {
-		return MODIFY_DATE;
+	public Date getModifyDate() {
+		return modifyDate;
 	}
-	public void setMODIFY_DATE(Date mODIFY_DATE) {
-		MODIFY_DATE = mODIFY_DATE;
+	public void setModifyDate(Date modifyDate) {
+		this.modifyDate = modifyDate;
 	}
-	public Date getQUIT_DATE() {
-		return QUIT_DATE;
+	public Date getQuitDate() {
+		return quitDate;
 	}
-	public void setQUIT_DATE(Date qUIT_DATE) {
-		QUIT_DATE = qUIT_DATE;
+	public void setQuitDate(Date quitDate) {
+		this.quitDate = quitDate;
 	}
-	public int getIS_DEL() {
-		return IS_DEL;
+	public int getIsDel() {
+		return isDel;
 	}
-	public void setIS_DEL(int iS_DEL) {
-		IS_DEL = iS_DEL;
+	public void setIsDel(int isDel) {
+		this.isDel = isDel;
 	}
+	
+	
 	
 	@Override
 	public String toString() {
-		return "UserVO [EMAIL=" + EMAIL + ", PASSWORD=" + PASSWORD + ", NAME=" + NAME + ", NICKNAME=" + NICKNAME
-				+ ", GENDER=" + GENDER + ", PHONE_NUM=" + PHONE_NUM + ", BIRTH=" + BIRTH + ", PHOTO=" + PHOTO
-				+ ", HOMEPAGE=" + HOMEPAGE + ", INTRODUCTION=" + INTRODUCTION + ", REGIST_DATE=" + REGIST_DATE
-				+ ", MODIFY_DATE=" + MODIFY_DATE + ", QUIT_DATE=" + QUIT_DATE + ", IS_DEL=" + IS_DEL + "]";
+		return "UserVO [email=" + email + ", password=" + password + ", name=" + name + ", nickName=" + nickName
+				+ ", gender=" + gender + ", phoneNum=" + phoneNum + ", birth=" + birth + ", photo=" + photo
+				+ ", homepage=" + homepage + ", introduction=" + introduction + ", registDate=" + registDate
+				+ ", modifyDate=" + modifyDate + ", quitDate=" + quitDate + ", isDel=" + isDel + "]";
 	}
+
+	
 	
 	
 	

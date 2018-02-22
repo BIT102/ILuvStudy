@@ -4,8 +4,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>북마크 스터디</title>
- <style>
+<title>완료 스터디</title>
+<style>
     .border{border:2px solid grey; }
     .basic{width:300px; height:50px; float:left; text-align: center;}
     
@@ -53,37 +53,37 @@
 <body>
     <div id="div1"> 
         <div class="basic border">
-            <a href="profile.jsp">기본정보 관리</a>
+            <a href="profile">기본정보 관리</a>
         </div>
     
         <div class="basic border">
-            <a href="study_bookmark.jsp">스터디 관리</a>
+            <a href="bookmark">스터디 관리</a>
         </div>
        </div>
 
        <div id="div2">
             <div class="profile border">
-                    <a href="study_bookmark.jsp">북마크</a></div>
+                    <a href="bookmark">북마크</a></div>
             <div class="profile border">
-                    <a href="study_recruit.jsp">모집</a></div>
+                    <a href="recruit">모집</a></div>
             <div class="profile border">
-                    <a href="study_apply.jsp">신청</a></div>
+                    <a href="application">신청</a></div>
             <div class="profile border">
-                    <a href="study_finish.jsp">완료</a></div>
+                    <a href="completed">완료</a></div>
     
         </div>   
     <br>
     <br>
     <br>     
     
-    <h4>북마크</h4>
+  <h4>북마크</h4>
 
 
     <table id="table1">
             <tr>
                 <th> 번호</th>
-                <th> 북마크 관리 </th>
                 <th> 스터디명 </th>
+                <th> 신청자 목록</th>
                 <th> 사진 </th>
                 <th> 주최자 </th>
                 <th> 지역 </th>
@@ -93,9 +93,9 @@
             </tr>
             <tr>
                 <td>1</td>
-                <td>□</td>
                 <td><a href="#">JAVA 스터디 모집해요</a></td>
-                <td><img src="th.jpg" alt="김태희" width="100" height="100"></td>
+                <td><button type="button">신청자 보기 </button></td>
+                <td><img src="/resources/dist/img/th.jpg" alt="김태희" width="100" height="100"></td>
                 <td>김태희</td>
                 <td>서울시 강남구</td>
                 <td>2018-02-21</td>
@@ -104,15 +104,20 @@
             </tr>
             <tr>
                 <td>2</td>
-                <td>■</td>
                 <td><a href="#">SPRING 스터디 모집해요</a></td>
-                <td><img src="yj.png" alt="손예진" width="100"></td>
+                <td><button type="button">신청자 보기 </button></td>
+                <td><img src="/resources/dist/img/yj.png" alt="손예진" width="100"></td>
                 <td>손예진</td>
                 <td>서울시 서초구</td>
                 <td>2018-04-21</td>
                 <td> 7 </td>
                 <td> 150 </td>
             </tr>
+
+    <table>
+
+        
+    </table>        
     
     </table>   
    
