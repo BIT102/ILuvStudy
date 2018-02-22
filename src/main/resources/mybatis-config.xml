@@ -6,4 +6,8 @@
 	<!-- <typeAliases>
 		<package name="dev.mvc" />
 	</typeAliases> -->
+<typeAliases>
+	<package name ="dev.mvc.study"/>
+</typeAliases>	
+	
 </configuration>
