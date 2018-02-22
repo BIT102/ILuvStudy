@@ -33,7 +33,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 		if(adminVO != null){
 			logger.info("new login success");
 			session.setAttribute(LOGIN, adminVO);
-			service.loginupdate(adminVO);
+			service.loginupdate(adminVO);  //로그인 성공 시 
 			//로그인 성공 시 회원리스트로 이동
 			response.sendRedirect("/admin/userList");
 		} else{

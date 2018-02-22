@@ -7,7 +7,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>계정 관리</title>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 </head>
 <body>
 <%@ include file="nav.jsp" %>
@@ -38,8 +39,9 @@
         <button>초기화</button>
         
 
-        <!--리스트-->
-        <div>총 1건 1/1페이지</div>
+        <!--리스트 -->
+        <!--페이징 처리 -->
+        <div>총 ${pageMaker.totalCount}건 ${criteria.page}/${pageMaker.endPage}페이지</div>
 
         <table>
             <tr>
@@ -49,20 +51,63 @@
                 <th>사용여부</th>
                 <th>최근 접속정보</th>
             </tr>
-            
+<!-- DB데이터 가져옴 -->
 <c:forEach items="${list}" var="adminVO">
             <tr>
                 <td>${adminVO.bno}</td>
-                <td><a href="/admin/adminDetail?bno=${adminVO.bno}">${adminVO.adminid}</a></td>
+                <!-- 페이징 정보 유지 -->
+                <td><a href="/admin/adminDetail${pageMaker.makeQuery(pageMaker.cri.page)}
+                &bno=${adminVO.bno}">${adminVO.adminId}</a></td>
                 <td>${adminVO.name}</td>
-                <td>${adminVO.status}</td>
+                <td>
+                	<!-- jstl로 eq 사용 시 char형 데이터는 형변환 오류, string형 데이터 비교 필요 -->
+                	<!-- V: 사용 / D: 미사용 -->
+                	<c:if test="${adminVO.status eq 'V'}">사용 </c:if>
+                	<c:if test="${adminVO.status eq 'D'}">미사용</c:if>
+                </td>
                 <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${adminVO.lastLoginDate}"/></td>
             </tr>
 </c:forEach>
         </table>
 
-        <a href="adminRegister">등록</a>
+		<!-- 계정 등록 -->
+        <!-- <a href="adminRegister">등록</a> -->
+        <button type="submit" class="btn-register">등록</button>
+        
+        <!-- 페이징 처리 -->
+        <!-- 페이징 정보 저장 -->
+        <ul>
+        	<c:if test="${pageMaker.prev}">
+        		<li><a href="adminList${pageMaker.makeQuery(pageMaker.startPage - 1)}">&laquo;</a></li>
+        	</c:if>
+        
+        	<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage}" var="idx">
+        	<li
+        		<c:out value="${pageMaker.cri.page == idx?'class=active':''}"/>>
+        		<a href="adminList${pageMaker.makeQuery(idx)}">${idx}</a>
+        	</li>
+        	</c:forEach>
+        
+        	<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+        		<li><a href="adminList${pageMaker.makeQuery(pageMaker.endPage + 1)}">&raquo;</a></li>
+        	</c:if>
+        </ul>
     </div>
 
+<script>
+	var result='${msg}';
+	
+	if(result=='SUCCESS'){
+		alert("처리가 완료되었습니다.");
+	}
+	
+	$(document).ready(function(){		
+		//등록 클릭 시 액션
+		$(".btn-register").on("click", function(){
+			self.location = "/admin/adminRegister";
+		});
+		
+	});
+</script>
 </body>
 </html>

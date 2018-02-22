@@ -3,14 +3,14 @@ package dev.mvc.admin;
 import java.util.Date;
 
 public class AdminVO {
-	private	String	adminid;			//	아이디
-	private	String	adminpw;			//	비밀번호
+	private	String	adminId;			//	아이디
+	private	String	adminPw;			//	비밀번호
 	private	String	name;				//	이름
 	private	Date	registDate;			//	생성일
 	private	String	registUser;			//	생성자
 	private	Date	lastModifyDate;		//	마지막 수정일
 	private	Date	lastLoginDate;		//	마지막 접속일
-	private	char status;				//	상태(V:활성, D:사용안함)
+	private	String status;				//	상태(V:활성, D:사용안함)
 	private int bno;					// 번호
 
 	public int getBno() {
@@ -19,17 +19,18 @@ public class AdminVO {
 	public void setBno(int bno) {
 		this.bno = bno;
 	}
-	public String getAdminid() {
-		return adminid;
+
+	public String getAdminId() {
+		return adminId;
 	}
-	public void setAdminid(String adminid) {
-		this.adminid = adminid;
+	public void setAdminId(String adminId) {
+		this.adminId = adminId;
 	}
-	public String getAdminpw() {
-		return adminpw;
+	public String getAdminPw() {
+		return adminPw;
 	}
-	public void setAdminpw(String adminpw) {
-		this.adminpw = adminpw;
+	public void setAdminPw(String adminPw) {
+		this.adminPw = adminPw;
 	}
 	public String getName() {
 		return name;
@@ -61,17 +62,18 @@ public class AdminVO {
 	public void setLastLoginDate(Date lastLoginDate) {
 		this.lastLoginDate = lastLoginDate;
 	}
-	public char getStatus() {
+	public String getStatus() {
 		return status;
 	}
-	public void setStatus(char status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 	@Override
 	public String toString() {
-		return "AdminVO [adminid=" + adminid + ", adminpw=" + adminpw + ", name=" + name + ", registDate=" + registDate
+		return "AdminVO [adminId=" + adminId + ", adminPw=" + adminPw + ", name=" + name + ", registDate=" + registDate
 				+ ", registUser=" + registUser + ", lastModifyDate=" + lastModifyDate + ", lastLoginDate="
 				+ lastLoginDate + ", status=" + status + ", bno=" + bno + "]";
 	}
+
 	
 }

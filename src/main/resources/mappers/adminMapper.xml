@@ -15,13 +15,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update admin set lastLoginDate=now() where adminid=#{adminId}
 	</update>
 	
-	<!-- admin 회원 정보 조회 -->
-	<select id="adminListAll" resultType="dev.mvc.admin.AdminVO">
+	<!-- admin 계정 리스트 -->
+	<select id="adminList" resultType="dev.mvc.admin.AdminVO">
 	<![CDATA[
 		select bno, adminid, name, status, lastLoginDate 
 		from admin
 		where bno > 0
 		order by bno desc, lastLoginDate desc
+		limit #{pageStart}, #{perPageNum}
 	]]>
 	</select>
 	
@@ -55,15 +56,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		]]>
 	</select>
 	
-	<!-- adminList 페이징 처리 도움용 -->
-	<select id="adminListCriteria" resultType="dev.mvc.admin.AdminVO">
+	<!-- totalCount 반환 -->
+	<select id="adminCountPaging" resultType="int">
 		<![CDATA[
-			select bno, adminid, name, status, lastLoginDate 
+			select count(bno)
 			from admin
 			where bno > 0
-			order by bno desc, lastLoginDate desc
-			limit #{pageStart}, #{perPageNum}
 		]]>
 	</select>
-	
 </mapper>
