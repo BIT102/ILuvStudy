@@ -28,20 +28,19 @@
         <table>
             <tr>
                 <th>아이디</th>
-                <td><input type="text"></td>
+                <td><input type="text" name="idKeyword" id="idKeywordInput" value="${cri.idKeyword}"></td>
                 <th>이름</th>
-                <td><input type="text"></td>
+                <td><input type="text" name="nameKeyword" id="nameKeywordInput" value="${cri.nameKeyword}"></td>
             </tr>
 
         </table>
         
-        <button>검색</button>
+        <button id="searchBtn">검색</button>
         <button>초기화</button>
-        
 
         <!--리스트 -->
         <!--페이징 처리 -->
-        <div>총 ${pageMaker.totalCount}건 ${criteria.page}/${pageMaker.endPage}페이지</div>
+        <div>총 ${pageMaker.totalCount}건 ${cri.page}/${pageMaker.endPage}페이지</div>
 
         <table>
             <tr>
@@ -56,7 +55,7 @@
             <tr>
                 <td>${adminVO.bno}</td>
                 <!-- 페이징 정보 유지 -->
-                <td><a href="/admin/adminDetail${pageMaker.makeQuery(pageMaker.cri.page)}
+                <td><a href="/admin/adminDetail${pageMaker.makeSearch(pageMaker.cri.page)}
                 &bno=${adminVO.bno}">${adminVO.adminId}</a></td>
                 <td>${adminVO.name}</td>
                 <td>
@@ -72,24 +71,24 @@
 
 		<!-- 계정 등록 -->
         <!-- <a href="adminRegister">등록</a> -->
-        <button type="submit" class="btn-register">등록</button>
+        <button type="submit" class="registerBtn">등록</button>
         
         <!-- 페이징 처리 -->
         <!-- 페이징 정보 저장 -->
         <ul>
         	<c:if test="${pageMaker.prev}">
-        		<li><a href="adminList${pageMaker.makeQuery(pageMaker.startPage - 1)}">&laquo;</a></li>
+        		<li><a href="adminList${pageMaker.makeSearch(pageMaker.startPage - 1)}">&laquo;</a></li>
         	</c:if>
         
-        	<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage}" var="idx">
+        	<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
         	<li
         		<c:out value="${pageMaker.cri.page == idx?'class=active':''}"/>>
-        		<a href="adminList${pageMaker.makeQuery(idx)}">${idx}</a>
+        		<a href="adminList${pageMaker.makeSearch(idx)}">${idx}</a>
         	</li>
         	</c:forEach>
         
         	<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-        		<li><a href="adminList${pageMaker.makeQuery(pageMaker.endPage + 1)}">&raquo;</a></li>
+        		<li><a href="adminList${pageMaker.makeSearch(pageMaker.endPage + 1)}">&raquo;</a></li>
         	</c:if>
         </ul>
     </div>
@@ -102,9 +101,17 @@
 	}
 	
 	$(document).ready(function(){		
+		
 		//등록 클릭 시 액션
-		$(".btn-register").on("click", function(){
+		$("#registerBtn").on("click", function(){
 			self.location = "/admin/adminRegister";
+		});
+		
+		//검색 클릭 시 액션
+		$("#searchBtn").on("click", function(event){
+			self.location = "adminList" + "${pageMaker.makeQuery(1)}"
+				+"&idKeyword="+encodeURIComponent($("#idKeywordInput").val())
+				+"&nameKeyword="+encodeURIComponent($("#nameKeywordInput").val());
 		});
 		
 	});

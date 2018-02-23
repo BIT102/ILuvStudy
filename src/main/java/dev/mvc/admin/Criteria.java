@@ -1,8 +1,13 @@
 package dev.mvc.admin;
 
 public class Criteria {
+	
 	private int page;
 	private int perPageNum;
+	
+	//검색처리
+	private String idKeyword;
+	private String nameKeyword;
 	
 	public Criteria(){
 		this.page = 1;
@@ -31,9 +36,22 @@ public class Criteria {
 	public int getPerPageNum() {
 		return this.perPageNum;
 	}
+	public String getIdKeyword() {
+		return idKeyword;
+	}
+	public void setIdKeyword(String idKeyword) {
+		this.idKeyword = idKeyword;
+	}
+	public String getNameKeyword() {
+		return nameKeyword;
+	}
+	public void setNameKeyword(String nameKeyword) {
+		this.nameKeyword = nameKeyword;
+	}
 	@Override
 	public String toString() {
-		return "Criteria [page=" + page + ", perPageNum=" + perPageNum + "]";
+		return "Criteria [page=" + page + ", perPageNum=" + perPageNum + ", idKeyword=" + idKeyword + ", nameKeyword="
+				+ nameKeyword + "]";
 	}
-	
+
 }

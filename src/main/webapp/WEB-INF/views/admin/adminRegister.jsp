@@ -47,8 +47,8 @@
             </tr>
         </table>
 	</form>        
-		<button type="submit" class="btn-list">목록</button>
-		<button type="submit" class="btn-register">등록</button>
+		<button type="submit" id="listBtn">목록</button>
+		<button type="submit" id="registerBtn">등록</button>
         
     </div>
     
@@ -59,14 +59,14 @@
 		console.log(formObj);
 		
 		//등록 클릭 시 액션
-		$(".btn-register").on("click", function(){
+		$("#registerBtn").on("click", function(){
 			//form 유효성 검사 추가 필요
 			
 			formObj.submit();
 		});
 		
 		//목록 클릭 시 액션
-		$(".btn-list").on("click", function(){
+		$("#listBtn").on("click", function(){
 			self.location = "/admin/adminList";
 		});
 	});

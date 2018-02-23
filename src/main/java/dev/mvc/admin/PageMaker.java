@@ -1,5 +1,8 @@
 package dev.mvc.admin;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -14,6 +17,17 @@ public class PageMaker {
 	
 	private Criteria cri;
 	
+	//페이지 검색
+	public String makeSearch(int page){
+		UriComponents uriComponents = UriComponentsBuilder.newInstance()
+					.queryParam("page", page)
+					.queryParam("perPageNum", cri.getPerPageNum())
+					.queryParam("idKeyword", encoding(cri.getIdKeyword()))  //검색 처리
+					.queryParam("nameKeyword",encoding(cri.getNameKeyword()))
+					.build();
+		return uriComponents.toUriString();
+	}
+	
 	//페이지 정보 저장
 	public String makeQuery(int page){
 		UriComponents uriComponents = UriComponentsBuilder.newInstance()
@@ -21,6 +35,18 @@ public class PageMaker {
 					.queryParam("perPageNum", cri.getPerPageNum())
 					.build();
 		return uriComponents.toUriString();
+	}
+	
+	//검색 처리
+	private String encoding(String keyword){
+		if(keyword == null || keyword.trim().length() == 0){
+			return "";
+		}
+		try{
+			return URLEncoder.encode(keyword, "UTF-8");
+		}catch(UnsupportedEncodingException e){
+			return "";
+		}
 	}
 	
 	public void setCri(Criteria cri){

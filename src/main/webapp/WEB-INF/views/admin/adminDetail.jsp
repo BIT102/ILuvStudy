@@ -69,10 +69,13 @@
         <input type="hidden" name="page" value="${cri.page}">
         <input type="hidden" name="perPageNum" value="${cri.perPageNum}">
         
+        <!-- 검색 정보 저장 -->
+<%--    <input type="hidden" name="idKeyword" value="${cri.idKeyword}">
+        <input type="hidden" name="nameKeyword" value="${cri.nameKeyword}"> --%>
+        
 	</form>
-		<!-- <a href="adminList">목록</a> -->
-		<button type="submit" class="btn-list">목록</button>
-		<button type="submit" class="btn-modify">수정</button>
+		<button type="submit" id="listBtn">목록</button>
+		<button type="submit" id="modifyBtn">수정</button>
 		
     </div>
 
@@ -83,17 +86,20 @@
 		console.log(formObj);
 		
 		//수정 클릭 시 액션
-		$(".btn-modify").on("click", function(){
+		$("#modifyBtn").on("click", function(){
 			//form 데이터 유효성 검사 추가 필요
 			
 			formObj.submit();
 		});
 		
 		//목록 클릭 시 액션
-		$(".btn-list").on("click", function(){
-			formObj.attr("method", "get");
-			formObj.attr("action", "/admin/adminList");
-			formObj.submit();
+		$("#listBtn").on("click", function(){
+			self.location = "/admin/adminList?page=${cri.page}&perPageNum=${cri.perPageNum}"
+							+"&idKeyword=${cri.idKeyword}&nameKeyword=${cri.nameKeyword}";
+
+			//formObj.attr("method", "get");
+			//formObj.attr("action", "/admin/adminList");
+			//formObj.submit();
 			//self.location = "/admin/adminList";
 		});
 	});

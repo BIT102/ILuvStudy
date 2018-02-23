@@ -52,7 +52,7 @@ public class AdminController {
 	
 	//admin/adminList.jsp
 	@RequestMapping(value = "/adminList", method = RequestMethod.GET)
-	public void adminList(Criteria cri, Model model) throws Exception{
+	public void adminList(@ModelAttribute("cri") Criteria cri, Model model) throws Exception{
 		logger.info("adminList get...");
 		logger.info(cri.toString());
 		model.addAttribute("list", service.adminList(cri));  //페이징 처리
@@ -69,15 +69,26 @@ public class AdminController {
 	public void adminDetail(@RequestParam("bno") int bno, @ModelAttribute("cri") Criteria cri, 
 						Model model) throws Exception{
 		logger.info("adminDetail get...");
+		logger.info(cri.toString());
 		model.addAttribute(service.adminDetail(bno));
 	}
 	
 	//admin/adminDetail.jsp 에서 계정 정보 수정 시
 	@RequestMapping(value="/adminDetail", method = RequestMethod.POST)
-	public String adminUpdate(AdminVO vo, RedirectAttributes rttr) throws Exception{
+	public String adminUpdate(AdminVO vo, Criteria cri, RedirectAttributes rttr) throws Exception{
 		logger.info("adminDetail post...");
+		logger.info(cri.toString());
 		service.adminUpdate(vo);
+		
+		//페이징 정보 유지
+		rttr.addAttribute("page", cri.getPage());
+		rttr.addAttribute("perPageNum", cri.getPerPageNum());
+		//검색 정보 유지
+		rttr.addAttribute("idKeyword", cri.getIdKeyword());
+		rttr.addAttribute("nameKeyword", cri.getNameKeyword());
 		rttr.addFlashAttribute("msg", "SUCCESS");
+		
+		logger.info(rttr.toString());
 		
 		return "redirect:/admin/adminList";
 	}

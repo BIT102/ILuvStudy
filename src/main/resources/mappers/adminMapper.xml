@@ -15,15 +15,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update admin set lastLoginDate=now() where adminid=#{adminId}
 	</update>
 	
+	<sql id="search">
+		<if test="idKeyword != null">
+			and adminid like concat('%', #{idKeyword}, '%')
+		</if>
+		<if test="nameKeyword != null">
+			and name like concat('%', #{nameKeyword}, '%')
+		</if>
+	</sql>
+	
 	<!-- admin 계정 리스트 -->
+	<!-- 검색처리 -->
 	<select id="adminList" resultType="dev.mvc.admin.AdminVO">
 	<![CDATA[
 		select bno, adminid, name, status, lastLoginDate 
 		from admin
 		where bno > 0
+	]]>
+		<include refid="search"></include>	
+	<![CDATA[
 		order by bno desc, lastLoginDate desc
 		limit #{pageStart}, #{perPageNum}
 	]]>
+	
 	</select>
 	
 	<!--  admin 정보 상세 -->
@@ -64,4 +78,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			where bno > 0
 		]]>
 	</select>
+	
+
 </mapper>
