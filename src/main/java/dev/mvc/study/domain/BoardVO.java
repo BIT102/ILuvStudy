@@ -100,16 +100,16 @@ public class BoardVO {
 	public void setBSCONTENT(String bSCONTENT) {
 		BSCONTENT = bSCONTENT;
 	}
-	public String getBSVCT() {
+	public int getBSVCT() {
 		return BSVCT;
 	}
-	public void setBSVCT(String bSVCT) {
+	public void setBSVCT(int bSVCT) {
 		BSVCT = bSVCT;
 	}
-	public String getBSRCT() {
+	public int getBSRCT() {
 		return BSRCT;
 	}
-	public void setBSRCT(String bSRCT) {
+	public void setBSRCT(int bSRCT) {
 		BSRCT = bSRCT;
 	}
 	public Date getBSREGDATE() {
@@ -135,8 +135,8 @@ public class BoardVO {
 	private String BSST;
 	private String BSET;
 	private String BSCONTENT;
-	private String BSVCT;
-	private String BSRCT;
+	private int BSVCT;
+	private int BSRCT;
 	private Date BSREGDATE;
 	private Date BSENDDATE;
 	

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="dev.mvc.mapper.qnaMapper">
+  
+  	<insert id="create">
+  	insert into board_qna( qnaTitle, qnaWriter, qnaCategoryD, qnaCategoryS, qnaContent, qnaRct, qnaRegdate, qnaType)
+  	values( #{qnaTitle}, #{qnaWriter}, #{qnaCategoryD}, #{qnaCategoryS}, #{qnaContent}, #{qnaRct}, #{qnaRegdate}, #{qnaType})
+  	</insert>
+  
+  	<select id="read" resultType="dev.mvc.study.domain.QnaVO">
+  	select
+  		qnaType, qnaTitle, qnaWriter, qnaContent, qnaRegdate
+  	from 
+  		board_qna
+  	where qnaBno = #{qnaBno} 
+  	</select>
+  	
+  	<update id="update">
+  	update board_qna set qnaTitle =#{qnaTitle}, qnaContent =#{content}
+  	where qnaBno =#{qnaBno}
+  	</update>
+  	
+  	<delete id="delete">
+  	delete from board_qna 
+  	where qnaBno =#{qnaBno}
+  	</delete>
+  	
+  	<select id="listAll" resultType="dev.mvc.study.domain.QnaVO">
+  	<![CDATA[
+  	select
+  		qnaBno, qnaTitle, qnaContent, qnaWriter, qnaRegdate
+  	from
+  		board_qna
+  	where qnaBno > 0
+  	order by qnaBno desc, qnaRegdate desc
+  	]]>
+  	</select>
+  	
+  </mapper>

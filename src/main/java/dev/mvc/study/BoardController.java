@@ -26,4 +26,11 @@ public class BoardController {
 		logger.info("show all list ...................");
 		model.addAttribute("list", service.listAll());
 	}
+	
+	@RequestMapping(value="/register1", method=RequestMethod.GET)
+	public void register1(Model model) throws Exception{
+		
+		logger.info("show all list ...................");
+		model.addAttribute("list", service.listAll());
+	}
 }

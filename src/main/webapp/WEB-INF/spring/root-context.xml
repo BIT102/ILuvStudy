@@ -54,4 +54,5 @@
 		
 	<context:component-scan base-package="dev.mvc.study.persistence"></context:component-scan>
 	<context:component-scan base-package="dev.mvc.study.service"></context:component-scan>
+	<context:component-scan base-package="dev.mvc.study.domain"></context:component-scan>
 </beans>
