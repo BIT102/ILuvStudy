@@ -35,4 +35,36 @@ order by NTBNO desc
 , NTREGDATE desc
 ]]>
 </select>
+
+<select id="listPage" resultType="dev.mvc.study.NoticeVO">
+<![CDATA[
+select
+NTBNO
+, NTTITLE
+, NTCONTENT
+, NTREGDATE
+, NTWRITER
+from
+notice
+where NTBNO > 0
+ORDER BY NTBNO desc, NTREGDATE desc
+limit #{page}, 9
+]]>
+</select>
+
+<select id="listCriteria" resultType="dev.mvc.study.NoticeVO">
+<![CDATA[
+select
+NTBNO
+, NTTITLE
+, NTCONTENT
+, NTREGDATE
+, NTWRITER
+from
+notice
+where NTBNO > 0
+ORDER BY NTBNO desc, NTREGDATE desc
+limit #{pageStart}, #{perPageNum}
+]]>
+</select>
 </mapper>

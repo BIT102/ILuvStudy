@@ -7,7 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-@Repository
+@Repository  
 public class NoticeDAOImpl implements NoticeDAO {
 	
 	@Inject
@@ -22,8 +22,27 @@ public class NoticeDAOImpl implements NoticeDAO {
 	}
 	
 	//전체 불러오기
+	@Override
 	public List<NoticeVO> noticeList() throws Exception {
 		return session.selectList(namespace+".noticeList");
+	}
+	
+	@Override
+	public List<NoticeVO> listPage(int page) throws Exception {
+		
+		if(page <= 0) {
+			page = 1;
+		}
+		
+		page = (page-1)*10;
+		
+		return session.selectList(namespace+".listPage", page);
+		
+	}
+	
+	@Override
+	public List<NoticeVO> listCriteria(Criteria cri) throws Exception {
+		return session.selectList(namespace+".listCriteria", cri);
 	}
 
 }

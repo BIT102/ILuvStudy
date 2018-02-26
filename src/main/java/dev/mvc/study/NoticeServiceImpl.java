@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class NoticeServiceImpl implements NoticeService {
 
-	@Inject
+	@Inject  
 	private NoticeDAO dao;
 	
 	//공지사항 불러오기
@@ -21,6 +21,11 @@ public class NoticeServiceImpl implements NoticeService {
 	//공지사항 전체
 	public List<NoticeVO> noticeList() throws Exception {
 		return dao.noticeList();
+	}
+	
+	//페이지당 데이터
+	public List<NoticeVO> listCriteria(Criteria cri) throws Exception {
+		return dao.listCriteria(cri);
 	}
 	
 }
