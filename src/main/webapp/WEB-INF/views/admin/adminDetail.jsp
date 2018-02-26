@@ -32,7 +32,7 @@
             </tr>
             <tr>
                 <th>아이디</th>
-                <td>${adminVO.adminId}</td>
+                <td>${adminVO.id}</td>
             </tr>
             <tr>
                 <th>이름</th>
@@ -40,7 +40,7 @@
             </tr>
             <tr>
                 <th>비밀번호</th>
-                <td><input type="password" name="adminPw"></td>
+                <td><input type="password" name="pw"></td>
             </tr>
             <tr>
                 <th>비밀번호 확인</th>

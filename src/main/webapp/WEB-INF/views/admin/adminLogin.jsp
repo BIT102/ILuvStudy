@@ -13,8 +13,8 @@
 
 <!-- 로그인 처리 -->
 <form action="/admin/adminLoginPost" method="post">
-<div>아이디 : <input type="text" name="adminId"></div>
-<div>비밀번호 : <input type="password" name="adminPw"></div>
+<div>아이디 : <input type="text" name="id"></div>
+<div>비밀번호 : <input type="password" name="pw"></div>
 
 <button type="submit">로그인</button>
 </form>

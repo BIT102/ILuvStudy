@@ -56,7 +56,7 @@
                 <td>${adminVO.bno}</td>
                 <!-- 페이징 정보 유지 -->
                 <td>
-                <a href="/admin/adminDetail${pageMaker.adminSearch(pageMaker.cri.page)}&bno=${adminVO.bno}">${adminVO.adminId}</a>
+                <a href="/admin/adminDetail${pageMaker.adminSearch(pageMaker.cri.page)}&bno=${adminVO.bno}">${adminVO.id}</a>
                 </td>
                 <td>${adminVO.name}</td>
                 <td>

@@ -25,7 +25,7 @@
         <table>
             <tr>
                 <th>아이디</th>
-                <td><input type="text" name="adminId"></td>
+                <td><input type="text" name="id"></td>
             </tr>
             <tr>
                 <th>이름</th>
@@ -33,7 +33,7 @@
             </tr>
             <tr>
                 <th>비밀번호</th>
-                <td><input type="password" name="adminPw"></td>
+                <td><input type="password" name="pw"></td>
             </tr>
             <tr>
                 <th>비밀번호 확인</th>
