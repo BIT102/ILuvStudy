@@ -40,17 +40,12 @@
 	<!-- 에너테이션의 위치를 체크해주는 영역 -->
 	
 	<!-- TEST -->
-	<context:component-scan base-package="dev.mvc.test" />
+	<context:component-scan base-package="dev.mvc.controller" />
 	
 	<!-- 김상욱, 박영원 -->
-	<context:component-scan base-package="dev.mvc.user" />
-	<context:component-scan base-package="dev.mvc.join" />
-	<context:component-scan base-package="dev.mvc.login" />
-	<!-- 김소희 -->
-	<context:component-scan base-package="dev.mvc.admin" />
-	
+		
 	<!-- 로그인 인터셉터 설정 -->
-	<beans:bean id="loginInterceptor" class="dev.mvc.admin.LoginInterceptor"></beans:bean>
+	<beans:bean id="loginInterceptor" class="dev.mvc.interceptor.LoginInterceptor"></beans:bean>
 		<interceptors>
 			<interceptor>
 				<mapping path="/admin/adminLoginPost"/>
@@ -58,10 +53,7 @@
 			</interceptor>
 		</interceptors>
 		
-	<!-- 권한길, 조정인 -->
-	<context:component-scan base-package="dev.mvc.study" />
-    <context:component-scan base-package="dev.mvc.fileUpload" />
-	
+	<!-- 권한길, 조정인 -->	
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<beans:property name="maxUploadSize" value="10485760"></beans:property>
 	</beans:bean>

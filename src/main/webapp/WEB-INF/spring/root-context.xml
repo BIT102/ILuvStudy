@@ -17,10 +17,7 @@
 		<!-- DB위치 및 접근 설정 -->	
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 	  	<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
-
-	  	<property name="url" value="jdbc:log4jdbc:mysql://127.0.0.1:3306/jjstudy?useSSL=false&amp;serverTimezone=UTC"></property>
-
-
+	  	<property name="url" value="jdbc:log4jdbc:mysql://192.168.0.12:3306/jjstudy?useSSL=false&amp;serverTimezone=UTC"></property>
 		<property name="username" value="root"></property>
 	  	<property name="password" value="1234"></property>
 	</bean>	
@@ -28,10 +25,6 @@
 	<!-- sessionFactory 설정 JDBC connection -->	
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<!-- 패키지를 나누려면 여기에 등록이 필요함
-		<property name="typeAliasesPackage"
-      			  value = "dev.mvc.study,  
-      					   dev.mvc.admin" /> -->
 		<property name="configLocation" value="classpath:/mybatis-config.xml" />
 		<property name="mapperLocations" value="classpath:mappers/**/*Mapper.xml" />
 	</bean>
@@ -45,11 +38,7 @@
 	<bean id = "transactionManager" class = "org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name = "dataSource" ref = "dataSource"></property>
 	</bean>
-	
-	<context:component-scan base-package="dev.mvc.study" />
-	<context:component-scan base-package="dev.mvc.fileUpload" />
-	
-	
+		
 	<tx:annotation-driven/>
 
 	<aop:config>
@@ -57,20 +46,9 @@
 	
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 	
-
-	<context:component-scan base-package="dev.mvc.admin">
-	</context:component-scan>
-
-
-	<!-- sangwook Test -->
-
-
-
-	
 	<!-- dev.mvc.user 패키지 인식-->
-	<context:component-scan base-package="dev.mvc.user"></context:component-scan>
-		
-
+	<context:component-scan base-package="dev.mvc.persistance" />
+	<context:component-scan base-package="dev.mvc.service" />
 		
 </beans>
 

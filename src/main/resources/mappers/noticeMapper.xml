@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="dev.mvc.mapper.NoticeMapper">
 
 <!-- 공지사항 읽어오기 -->
-<select id="readNotice" resultType="dev.mvc.study.NoticeVO">
+<select id="readNotice" resultType="NoticeVO">
 select
 NTBNO
 , NTTITLE
@@ -20,7 +20,7 @@ where NTBNO = #{ntBno}
 </select>
 
 <!-- 게시판 전체 -->
-<select id="noticeList" resultType="dev.mvc.study.NoticeVO">
+<select id="noticeList" resultType="NoticeVO">
 <![CDATA[
 select
 NTBNO
@@ -36,7 +36,7 @@ order by NTBNO desc
 ]]>
 </select>
 
-<select id="listPage" resultType="dev.mvc.study.NoticeVO">
+<select id="listPage" resultType="NoticeVO">
 <![CDATA[
 select
 NTBNO
@@ -52,7 +52,7 @@ limit #{page}, 9
 ]]>
 </select>
 
-<select id="listCriteria" resultType="dev.mvc.study.NoticeVO">
+<select id="listCriteria" resultType="NoticeVO">
 <![CDATA[
 select
 NTBNO

@@ -40,7 +40,7 @@ BSTITLE
 </insert>
 
 <!-- 스터디 읽어오기 -->
-<select id="readStudy" resultType="dev.mvc.study.StudyVO">
+<select id="readStudy" resultType="StudyVO">
 SELECT
 bs.BSBNO
 , bs.BSTITLE
@@ -75,7 +75,7 @@ AND BSBNO = #{bsBno}
 </select>
 
 <!-- 전체불러오기 -->
-<select id="studyList" resultType="dev.mvc.study.StudyVO">
+<select id="studyList" resultType="StudyVO">
 <![CDATA[
 SELECT
 bs.BSBNO
@@ -113,7 +113,7 @@ ORDER BY bs.BSBNO desc, bs.BSREGDATE desc
 </select>
 
 <!-- 페이지마다 9개씩 불러올께요 -->
-<select id="listPage" resultType="dev.mvc.study.StudyVO">
+<select id="listPage" resultType="StudyVO">
 <![CDATA[
 SELECT
 bs.BSBNO
@@ -152,7 +152,7 @@ limit #{page}, 9
 ]]>
 </select>
 
-<select id="listCriteria" resultType="dev.mvc.study.StudyVO">
+<select id="listCriteria" resultType="StudyVO">
 <![CDATA[
 SELECT
 bs.BSBNO

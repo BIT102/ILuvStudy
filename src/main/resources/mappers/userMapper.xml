@@ -13,5 +13,8 @@
 	values(#{email}, #{name}, #{password}, #{nickName}, #{birth}, #{gender}, #{phoneNum}); 
   	</insert>
   	
-
+  	<!-- 로그인 -->
+  	<select id = "loginUser" resultType="UserVO">
+  		select * from user where email = #{email} and password = #{password}
+  	</select>
   </mapper>

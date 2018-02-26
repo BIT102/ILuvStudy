@@ -9,8 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import dev.mvc.study.StudyDAO;
-import dev.mvc.study.StudyVO;
+import dev.mvc.domain.StudyVO;
+import dev.mvc.persistance.StudyDAO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(

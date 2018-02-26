@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="dev.mvc.mapper.AdminMapper">
 	
 	<!-- admin 계정 로그인 처리 -->
-	<select id="adminLogin" resultType="dev.mvc.admin.AdminVO">
+	<select id="adminLogin" resultType="AdminVO">
 		select adminid, adminpw from admin where adminid=#{adminId} and adminpw=#{adminPw}
 	</select>
 	
@@ -27,7 +27,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- admin 계정 리스트 -->
 	<!-- 검색처리 -->
-	<select id="adminList" resultType="dev.mvc.admin.AdminVO">
+	<select id="adminList" resultType="AdminVO">
 	<![CDATA[
 		select bno, adminid, name, status, lastLoginDate 
 		from admin
@@ -42,7 +42,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!--  admin 정보 상세 -->
-	<select id="adminDetail" resultType="dev.mvc.admin.AdminVO">
+	<select id="adminDetail" resultType="AdminVO">
 		select bno, adminid, name, adminpw, status, lastLoginDate
 		from admin
 		where bno = #{bno}
@@ -61,7 +61,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<!-- adminList 페이징 처리 -->
-	<select id="adminListPage" resultType="dev.mvc.admin.AdminVO">
+	<select id="adminListPage" resultType="AdminVO">
 		<![CDATA[
 			select bno, adminid, name, status, lastLoginDate 
 			from admin

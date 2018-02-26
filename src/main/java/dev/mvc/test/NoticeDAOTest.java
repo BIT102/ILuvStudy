@@ -11,9 +11,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import dev.mvc.study.Criteria;
-import dev.mvc.study.NoticeDAO;
-import dev.mvc.study.NoticeVO;
+import dev.mvc.commons.Criteria;
+import dev.mvc.domain.NoticeVO;
+import dev.mvc.persistance.NoticeDAO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(
