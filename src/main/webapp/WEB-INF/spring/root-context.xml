@@ -17,11 +17,10 @@
 		<!-- DB위치 및 접근 설정 -->	
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 	  	<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
-<<<<<<< HEAD
+
 	  	<property name="url" value="jdbc:log4jdbc:mysql://127.0.0.1:3306/jjstudy?useSSL=false&amp;serverTimezone=UTC"></property>
-=======
-	  	<property name="url" value="jdbc:log4jdbc:mysql://192.168.0.12:3306/jjstudy"></property>
->>>>>>> branch 'YWPARK' of https://github.com/BIT102/ILuvStudy.git
+
+
 		<property name="username" value="root"></property>
 	  	<property name="password" value="1234"></property>
 	</bean>	
@@ -58,7 +57,7 @@
 	
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 	
-<<<<<<< HEAD
+
 	<context:component-scan base-package="dev.mvc.admin">
 	</context:component-scan>
 
@@ -66,12 +65,12 @@
 	<!-- sangwook Test -->
 
 
-=======
+
 	
 	<!-- dev.mvc.user 패키지 인식-->
 	<context:component-scan base-package="dev.mvc.user"></context:component-scan>
 		
->>>>>>> branch 'YWPARK' of https://github.com/BIT102/ILuvStudy.git
+
 		
 </beans>
 
