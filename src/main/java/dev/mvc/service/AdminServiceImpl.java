@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import dev.mvc.admin.Criteria;
 import dev.mvc.domain.AdminVO;
+import dev.mvc.domain.UserVO;
 import dev.mvc.dto.AdminDTO;
 import dev.mvc.persistance.AdminDAO;
 
@@ -52,4 +53,23 @@ public class AdminServiceImpl implements AdminService{
 		return dao.adminCountPaging(cri);
 	}
 	
+	@Override
+	public List<UserVO> userList(Criteria cri) throws Exception{
+		return dao.userList(cri);
+	}
+	
+	@Override
+	public int userCountPaging(Criteria cri)throws Exception{
+		return dao.userCountPaging(cri);
+	}
+	
+	@Override
+	public UserVO userDetail(Integer bno)throws Exception{
+		return dao.userDetail(bno);
+	}
+	
+	@Override
+	public void userUpdate(UserVO vo)throws Exception{
+		dao.userUpdate(vo);
+	}
 }

@@ -19,8 +19,16 @@ public class UserVO {
 	private Date modifyDate;
 	private Date quitDate;
 	private int isDel;
+	private int bno;
 	
 	
+	
+	public int getBno() {
+		return bno;
+	}
+	public void setBno(int bno) {
+		this.bno = bno;
+	}
 	public String getEmail() {
 		return email;
 	}
@@ -105,16 +113,17 @@ public class UserVO {
 	public void setIsDel(int isDel) {
 		this.isDel = isDel;
 	}
-	
-	
-	
 	@Override
 	public String toString() {
 		return "UserVO [email=" + email + ", password=" + password + ", name=" + name + ", nickName=" + nickName
 				+ ", gender=" + gender + ", phoneNum=" + phoneNum + ", birth=" + birth + ", photo=" + photo
 				+ ", homepage=" + homepage + ", introduction=" + introduction + ", registDate=" + registDate
-				+ ", modifyDate=" + modifyDate + ", quitDate=" + quitDate + ", isDel=" + isDel + "]";
+				+ ", modifyDate=" + modifyDate + ", quitDate=" + quitDate + ", isDel=" + isDel + ", bno=" + bno + "]";
 	}
+	
+	
+	
+	
 
 	
 	

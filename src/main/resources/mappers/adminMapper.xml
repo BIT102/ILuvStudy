@@ -16,7 +16,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	<!-- adminid, name 검색 SQL -->
-	<sql id="search">
+	<sql id="adminsearch">
 		<if test="idKeyword != null">
 			and adminid like concat('%', #{idKeyword}, '%')
 		</if>
@@ -33,7 +33,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from admin
 		where bno > 0
 	]]>
-		<include refid="search"></include>	
+		<include refid="adminsearch"></include>	
 	<![CDATA[
 		order by bno desc, lastLoginDate desc
 		limit #{pageStart}, #{perPageNum}
@@ -78,8 +78,68 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			from admin
 			where bno > 0
 		]]>
-		<include refid="search"></include>	
+		<include refid="adminsearch"></include>	
+	</select>
+
+<!-- 회원조회 메뉴 -->
+
+	<!-- isdel, id, nickname 검색 SQL -->
+	<!-- 검색 부분 수정 필요 -->
+	<sql id="usersearch">
+		<if test="isDelType != null">
+			<if test="isDelType == 'v'.toString()">
+				and isdel=0
+			</if>
+			<if test="isDelType == 'd'.toString()">
+				and isdel=1
+			</if>
+		</if>
+		<if test="emailKeyword != null">
+			and email like concat('%', #{emailKeyword}, '%')
+		</if>
+		<if test="nickNameKeyword != null">
+			and nickname like concat('%', #{nickNameKeyword}, '%')
+		</if>
+	</sql>
+	<!-- 검색 추가  -->	
+	<!-- user 정보 리스트 -->
+	<select id="userList" resultType="UserVO">
+	<![CDATA[
+		select bno, email, name, nickname, phonenum, isdel, registdate
+		from user
+		where bno > 0
+	]]>
+		<include refid="usersearch"></include>	
+	<![CDATA[
+		order by bno desc, registdate desc
+		limit #{pageStart}, #{perPageNum}
+	]]>
 	</select>
 	
-
+	<!-- user 페이지 totalCount 반환 -->
+	<!-- 검색 추가 -->
+	<select id="userCountPaging" resultType="int">
+		<![CDATA[
+			select count(bno)
+			from user
+			where bno > 0
+		]]>
+		<include refid="usersearch"></include>
+	</select>
+	
+	<!-- user 정보 상세 -->
+	<select id="userDetail" resultType="UserVO">
+		select *
+		from user
+		where bno = #{bno}
+	</select>
+	
+	<!-- user 정보 업데이트 -->
+	<update id="userUpdate">
+		update user 
+		set name=#{name}, password=#{password}, nickname=#{nickName}, 
+		birth=#{birth}, gender=#{gender}, phonenum=#{phoneNum}, homepage=#{homepage}, introduction=#{introduction}
+		where bno = #{bno}
+	</update>
+	
 </mapper>

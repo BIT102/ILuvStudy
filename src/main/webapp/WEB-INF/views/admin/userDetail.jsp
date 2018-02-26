@@ -1,10 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>회원조회 상세</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 </head>
 <body>
 <%@ include file="nav.jsp" %>
@@ -20,56 +24,68 @@
     <div id="container">
         <a>회원조회 상세</a>
         
+    <form role="form" method="post">    
         <div>* 기본정보</div>
             <table>
+            	<tr>
+            		<th>번호</th>
+            		<td>${userVO.bno}</td>
+            	</tr>
                 <tr>
                     <th>이메일 주소</th>
-                    <td>asdf@naver.com</td>
+                    <td>${userVO.email}</td>
                 </tr>
                 <tr>
                     <th>이름</th>
-                    <td><input type="text" value="홍길동"></td>
+                    <td><input type="text" name="name" value="${userVO.name}"></td>
                 </tr>
                 <tr>
                     <th>비밀번호</th>
-                    <td><input type="text"></td>
+                    <td><input type="password" name="password"></td>
                 </tr>
                 <tr>
                     <th>닉네임</th>
-                    <td><input type="text" value="테스터"></td>
+                    <td><input type="text" name="nickName" value="${userVO.nickName}"></td>
                 </tr>
                 <tr>
                     <th>생년월일</th>
-                    <td><input type="text" value="940916"></td>
+                    <td><input type="text" name="birth" value="${userVO.birth}"></td>
                 </tr>
                 <tr>
                     <th>성별</th>
-                    <td><input type="radio" name="thesex">남성  <input type="radio" name="thesex" checked="checked">여성</td>
+                    <td>
+                    	<!-- 1:남성  2:여성 -->
+                    	<c:if test="${userVO.gender eq 1}">
+                    		<input type="radio" name="gender" value="1" checked="checked">남성  
+                    		<input type="radio" name="gender" value="2">여성
+                    	</c:if>
+                    	<c:if test="${userVO.gender eq 2}">
+                    		<input type="radio" name="gender" value="1">남성  
+                    		<input type="radio" name="gender" value="2" checked="checked">여성
+                    	</c:if>
+                    </td>
                 </tr>
                 <tr>
                     <th>핸드폰 번호</th>
-                    <td><input type="text" value="010">-<input type="text" value="1234">-<input type="text" value="5678"></td>
+                    <td><input type="text" name="phoneNum" value="${userVO.phoneNum}"></td>
                 </tr>
                 <tr>
                     <th>가입 상태</th>
-                    <td>회원</td>
-                </tr>
-                <tr>
-                    <th>가입 경로</th>
-                    <td>자체 회원가입</td>
+                    <td>
+                    	<!-- 0:회원  1:탈퇴 -->
+                		<c:if test="${userVO.isDel eq 0}">회원 </c:if>
+                		<c:if test="${userVO.isDel eq 1}">탈퇴</c:if>
+                	</td>
                 </tr>
                 <tr>
                     <th>가입일</th>
-                    <td>2018-01-10</td>
+                    <td>${userVO.registDate}</td>
                 </tr>
                 <tr>
                     <th>이미지</th>
-                    <td>이미지 경로 노출</td>
+                    <td>${userVO.photo}</td>
                 </tr>
             </table>
-
-        <button>비활성</button>
-
         <div>* 부가정보</div>
             <table>
                 <tr>
@@ -90,12 +106,16 @@
                     </td>
                 </tr>
                 <tr>
+                	<th>홈페이지</th>
+                	<td><input type="text" name="homepage" value="${userVO.homepage}"></td>
+                <tr>
                     <th>자기소개</th>
-                    <td><textarea>잘 부탁 드립니다.</textarea></td>
+                    <td><textarea name="introduction">${userVO.introduction}</textarea></td>
                 </tr>
             </table>
-
-        <button>수정</button>
+	</form>
+        <button type="submit" id="modifyBtn">수정</button>
+        <button type="submit" id="stopBtn">비활성</button>
 
         <div>* 북마크</div>
             <table>
@@ -171,8 +191,35 @@
                 </tr>
             </table>
 
-        <a type="button" href="userList">목록</a>
+<!--         <a type="button" href="userList">목록</a> -->
+        <button type="submit" id="listBtn">목록</button>
     </div>
+
+<script>
+	$(document).ready(function(){
+		var formObj = $("form[role='form']");
+		
+		console.log(formObj);
+		
+		//수정 클릭 시 액션
+		$("#modifyBtn").on("click", function(){
+			//form 데이터 유효성 검사 추가 필요
+			
+			formObj.submit();
+		});
+		
+		//목록 클릭 시 액션
+		$("#listBtn").on("click", function(){
+			self.location = "/admin/userList?page=${cri.page}&perPageNum=${cri.perPageNum}"
+							+"&isDelType=${cri.isDelType}&emailKeyword=${cri.emailKeyword}&nickNameKeyword=${cri.nickNameKeyword}";
+		});
+		
+		//비활성 클릭 시 액션
+		$("#stopBtn").on("click", function(){
+			//isdel 1로 변경 처리 필요
+		});
+	});
+</script>
 
 </body>
 </html>

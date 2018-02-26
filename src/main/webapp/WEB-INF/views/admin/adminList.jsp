@@ -56,7 +56,7 @@
                 <td>${adminVO.bno}</td>
                 <!-- 페이징 정보 유지 -->
                 <td>
-                <a href="/admin/adminDetail${pageMaker.makeSearch(pageMaker.cri.page)}&bno=${adminVO.bno}">${adminVO.adminId}</a>
+                <a href="/admin/adminDetail${pageMaker.adminSearch(pageMaker.cri.page)}&bno=${adminVO.bno}">${adminVO.adminId}</a>
                 </td>
                 <td>${adminVO.name}</td>
                 <td>
@@ -78,18 +78,18 @@
         <!-- 페이징 정보 저장 -->
         <ul>
         	<c:if test="${pageMaker.prev}">
-        		<li><a href="adminList${pageMaker.makeSearch(pageMaker.startPage - 1)}">&laquo;</a></li>
+        		<li><a href="adminList${pageMaker.adminSearch(pageMaker.startPage - 1)}">&laquo;</a></li>
         	</c:if>
         
         	<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
         	<li
         		<c:out value="${pageMaker.cri.page == idx?'class=active':''}"/>>
-        		<a href="adminList${pageMaker.makeSearch(idx)}">${idx}</a>
+        		<a href="adminList${pageMaker.adminSearch(idx)}">${idx}</a>
         	</li>
         	</c:forEach>
         
         	<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-        		<li><a href="adminList${pageMaker.makeSearch(pageMaker.endPage + 1)}">&raquo;</a></li>
+        		<li><a href="adminList${pageMaker.adminSearch(pageMaker.endPage + 1)}">&raquo;</a></li>
         	</c:if>
         </ul>
     </div>

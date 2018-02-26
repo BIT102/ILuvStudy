@@ -1,10 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>회원조회</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 </head>
 <body>
 <%@ include file="nav.jsp" %>
@@ -25,27 +29,32 @@
             <tr>
                 <th>가입 상태</th>
                 <td colspan="3">
-                    <select>
-                        <option>전체</option>
-                        <option>회원</option>
-                        <option>비활성</option>
-                        <option>탈퇴</option>
+                    <select name="isDelType">
+                        <option value="n"
+                        	<c:out value="${cri.isDelType == null?'selected':''}"/>>전체</option>
+                        <option value="v"
+                        	<c:out value="${cri.isDelType eq 'v'?'selected':''}"/>>회원</option>
+                        <!-- <option>비활성</option> -->
+                        <option value="d"
+                        	<c:out value="${cri.isDelType eq 'd'?'selected':''}"/>>탈퇴</option>
                     </select>
                 </td>
             </tr>
             <tr>
                 <th>아이디</th>
-                <td><input type="text"></td>
+                <td><input type="text" name="emailKeyword" id="emailKeywordInput" value="${cri.emailKeyword}"></td>
                 <th>닉네임</th>
-                <td><input type="text"></td>
+                <td><input type="text" name="nickNameKeyword" id="nickNameKeywordInput" value="${cri.nickNameKeyword}"></td>
             </tr>
         </table>
 
-        <button>검색</button>
+        <button type="submit" id="searchBtn">검색</button>
         <button>초기화</button>
 
-        <!--리스트-->
-        <div>총 3건 1/1페이지</div>
+		<!--리스트 -->
+        <!--페이징 처리 -->
+        <div>총 ${pageMaker.totalCount}건 ${cri.page}/${pageMaker.endPage}페이지</div>
+        
         <table>
             <tr>
                 <th>번호</th>
@@ -56,18 +65,64 @@
                 <th>가입 상태</th>
                 <th>가입일</th>
             </tr>
+<!-- DB데이터 가져옴 -->
+<c:forEach items="${list}" var="userVO">
             <tr>
-                <td>1</td>
-                <td><a href="userDetail">asdf@naver.com</a></td>
-                <td>홍길동</td>
-                <td>테스터</td>
-                <td>010-1234-5678</td>
-                <td>회원</td>
-                <td>2018-01-10</td>
+                <td>${userVO.bno}</td>
+                <td><a href="/admin/userDetail${pageMaker.userSearch(pageMaker.cri.page)}&bno=${userVO.bno}">${userVO.email}</a></td>
+                <td>${userVO.name}</td>
+                <td>${userVO.nickName}</td>
+                <td>${userVO.phoneNum}</td>
+                <td>
+                	<!-- 0:회원  1:탈퇴 -->
+                	<c:if test="${userVO.isDel eq 0}">회원 </c:if>
+                	<c:if test="${userVO.isDel eq 1}">탈퇴</c:if>
+                </td>
+                <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${userVO.registDate}"/></td>
             </tr>
+</c:forEach>
         </table>
-
+        
+        <!-- 페이징 처리 -->
+        <!-- 페이징 정보 저장 -->
+        <ul>
+        	<c:if test="${pageMaker.prev}">
+        		<li><a href="userList${pageMaker.userSearch(pageMaker.startPage - 1)}">&laquo;</a></li>
+        	</c:if>
+        
+        	<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+        	<li
+        		<c:out value="${pageMaker.cri.page == idx?'class=active':''}"/>>
+        		<a href="userList${pageMaker.userSearch(idx)}">${idx}</a>
+        	</li>
+        	</c:forEach>
+        
+        	<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+        		<li><a href="userList${pageMaker.userSearch(pageMaker.endPage + 1)}">&raquo;</a></li>
+        	</c:if>
+        </ul>
     </div>
+
+<script>
+	var result='${msg}';
+	
+	if(result=='SUCCESS'){
+		alert("처리가 완료되었습니다.");
+	}
+	
+	$(document).ready(function(){		
+		
+		//검색 클릭 시 액션
+		$("#searchBtn").on("click", function(event){
+			self.location = "userList" + "${pageMaker.makeQuery(1)}"
+				+"&isDelType="
+				+$("select option:selected").val()
+				+"&emailKeyword="+encodeURIComponent($("#emailKeywordInput").val())
+				+"&nickNameKeyword="+encodeURIComponent($("#nickNameKeywordInput").val());
+		});
+		
+	});
+</script>
 
 </body>
 </html>

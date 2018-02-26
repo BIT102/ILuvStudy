@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import dev.mvc.admin.Criteria;
 import dev.mvc.domain.AdminVO;
+import dev.mvc.domain.UserVO;
 import dev.mvc.dto.AdminDTO;
 
 @Repository
@@ -63,5 +64,25 @@ public class AdminDAOImpl implements AdminDAO{
 	@Override
 	public int adminCountPaging(Criteria cri)throws Exception{
 		return session.selectOne(namespace + ".adminCountPaging", cri); // totalCount 반환
+	}
+	
+	@Override
+	public List<UserVO> userList(Criteria cri) throws Exception{
+		return session.selectList(namespace + ".userList", cri);  //사용자 계정 정보 리스트,페이징 
+	}
+	
+	@Override
+	public int userCountPaging(Criteria cri)throws Exception{
+		return session.selectOne(namespace + ".userCountPaging", cri); // totalCount 반환
+	}
+	
+	@Override
+	public UserVO userDetail(Integer bno)throws Exception{
+		return session.selectOne(namespace + ".userDetail", bno);  //사용자 계정 정보 상세 가져옴
+	}
+	
+	@Override
+	public void userUpdate(UserVO vo)throws Exception{
+		session.update(namespace + ".userUpdate", vo);   // 사용자 계정 정보 수정
 	}
 }

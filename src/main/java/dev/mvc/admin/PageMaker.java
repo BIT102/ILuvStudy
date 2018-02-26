@@ -17,8 +17,8 @@ public class PageMaker {
 	
 	private Criteria cri;
 	
-	//페이지 검색
-	public String makeSearch(int page){
+	//admin관리 페이지 검색
+	public String adminSearch(int page){
 		UriComponents uriComponents = UriComponentsBuilder.newInstance()
 					.queryParam("page", page)
 					.queryParam("perPageNum", cri.getPerPageNum())
@@ -28,6 +28,18 @@ public class PageMaker {
 		return uriComponents.toUriString();
 	}
 	
+	//회원조회 페이지 검색
+	public String userSearch(int page){
+		UriComponents uriComponents = UriComponentsBuilder.newInstance()
+					.queryParam("page", page)
+					.queryParam("perPageNum", cri.getPerPageNum())
+					.queryParam("isDelType", cri.getIsDelType())  //검색 처리
+					.queryParam("emailKeyword",encoding(cri.getEmailKeyword()))
+					.queryParam("nickNameKeyword",encoding(cri.getNickNameKeyword()))
+					.build();
+		return uriComponents.toUriString();
+	}
+		
 	//페이지 정보 저장
 	public String makeQuery(int page){
 		UriComponents uriComponents = UriComponentsBuilder.newInstance()
