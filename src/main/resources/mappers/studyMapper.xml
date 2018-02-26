@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- board_study mapper -->
+<mapper namespace="dev.mvc.mapper.StudyMapper">
+
+<!-- 스터디 등록 -->
+ <insert id="createStudy">
+insert into board_study (
+BSTITLE
+, BSWRITER
+, BSCATEGORYD
+, BSCATEGORYS
+, BSMAX
+, BSRDID
+, BSRSID
+, BSAGE
+, BSSC
+, BSSD
+, BSST
+, BSET
+, BSCONTENT
+) values (
+#{bsTitle}
+, #{bsWriter}
+, #{bsCategoryD}
+, #{bsCategoryS}
+, #{bsMax}
+, #{bsRDId}
+, #{bsRSId} <!-- null허용 -->
+, #{bsAge}
+, #{bsSc}
+, #{bsSd}
+, #{bsSt}
+, #{bsEt}
+, #{bsContent} <!-- null허용 -->
+)
+</insert>
+
+<!-- 스터디 읽어오기 -->
+<select id="readStudy" resultType="dev.mvc.study.StudyVO">
+SELECT
+bs.BSBNO
+, bs.BSTITLE
+, u.NICKNAME
+, sc.SCDNAME
+, sc.SCSNAME
+, bs.BSNOW
+, bs.BSMAX
+, r.RGDNAME
+, r.RGSNAME
+, bs.BSAGE
+, bs.BSSC
+, bs.BSSD
+, bs.BSST
+, bs.BSET
+, bs.BSCONTENT
+, bs.BSVCT
+, bs.BSRCT
+, bs.BSREGDATE
+, bs.BSENDDATE
+FROM 
+board_study bs
+, region r
+, study_category sc
+, user u
+WHERE bs.BSRDID = r.RGDID
+AND bs.BSCATEGORYD = sc.SCDID
+AND bs.BSCATEGORYS = sc.SCSID
+AND bs.BSRSID = r.RGSID
+AND u.EMAIL = bs.BSWRITER
+AND BSBNO = #{bsBno}
+</select>
+
+<!-- 전체불러오기 -->
+<select id="studyList" resultType="dev.mvc.study.StudyVO">
+<![CDATA[
+SELECT
+bs.BSBNO
+, bs.BSTITLE
+, u.NICKNAME
+, sc.SCDNAME
+, sc.SCSNAME
+, bs.BSNOW
+, bs.BSMAX
+, r.RGDNAME
+, r.RGSNAME
+, bs.BSAGE
+, bs.BSSC
+, bs.BSSD
+, bs.BSST
+, bs.BSET
+, bs.BSCONTENT
+, bs.BSVCT
+, bs.BSRCT
+, bs.BSREGDATE
+, bs.BSENDDATE
+FROM 
+board_study bs
+, region r
+, study_category sc
+, user u
+WHERE bs.BSRDID = r.RGDID
+AND bs.BSCATEGORYD = sc.SCDID
+AND bs.BSCATEGORYS = sc.SCSID
+AND bs.BSRSID = r.RGSID
+AND u.EMAIL = bs.BSWRITER
+AND bs.BSBNO > 0
+ORDER BY bs.BSBNO desc, bs.BSREGDATE desc
+]]>
+</select>
+
+<!-- 페이지마다 9개씩 불러올께요 -->
+<select id="listPage" resultType="dev.mvc.study.StudyVO">
+<![CDATA[
+SELECT
+bs.BSBNO
+, bs.BSTITLE
+, u.NICKNAME
+, sc.SCDNAME
+, sc.SCSNAME
+, bs.BSNOW
+, bs.BSMAX
+, r.RGDNAME
+, r.RGSNAME
+, bs.BSAGE
+, bs.BSSC
+, bs.BSSD
+, bs.BSST
+, bs.BSET
+, bs.BSCONTENT
+, bs.BSVCT
+, bs.BSRCT
+, bs.BSREGDATE
+, bs.BSENDDATE
+FROM 
+board_study bs
+, region r
+, study_category sc
+, user u
+WHERE bs.BSRDID = r.RGDID
+AND bs.BSCATEGORYD = sc.SCDID
+AND bs.BSCATEGORYS = sc.SCSID
+AND bs.BSRSID = r.RGSID
+AND u.EMAIL = bs.BSWRITER
+AND bs.BSBNO > 0
+ORDER BY bs.BSBNO DESC
+, bs.BSREGDATE DESC
+limit #{page}, 9
+]]>
+</select>
+
+<select id="listCriteria" resultType="dev.mvc.study.StudyVO">
+<![CDATA[
+SELECT
+bs.BSBNO
+, bs.BSTITLE
+, u.NICKNAME
+, sc.SCDNAME
+, sc.SCSNAME
+, bs.BSNOW
+, bs.BSMAX
+, r.RGDNAME
+, r.RGSNAME
+, bs.BSAGE
+, bs.BSSC
+, bs.BSSD
+, bs.BSST
+, bs.BSET
+, bs.BSCONTENT
+, bs.BSVCT
+, bs.BSRCT
+, bs.BSREGDATE
+, bs.BSENDDATE
+FROM 
+board_study bs
+, region r
+, study_category sc
+, user u
+
+WHERE bs.BSRDID = r.RGDID
+AND bs.BSCATEGORYD = sc.SCDID
+AND bs.BSCATEGORYS = sc.SCSID
+AND bs.BSRSID = r.RGSID
+AND u.EMAIL = bs.BSWRITER
+AND bs.BSBNO > 0
+ORDER BY bs.BSBNO DESC
+, bs.BSREGDATE DESC
+limit #{pageStart}
+, #{perPageNum}
+]]>
+
+</select>
+
+</mapper>
