@@ -161,4 +161,19 @@ public class AdminController {
 		return "redirect:/admin/userList";
 	}
 	
+//스터디관리 > 스터디목록
+	//admin/studyList.jsp
+	@RequestMapping(value = "/studyList", method = RequestMethod.GET)
+	public void studyList(@ModelAttribute("cri") Criteria cri, Model model) throws Exception {
+		logger.info("studyList get...");
+		logger.info(cri.toString());
+		model.addAttribute("list", service.studyList(cri));  //페이징 처리
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		
+		pageMaker.setTotalCount(service.studyCountPaging(cri));  //totalCount 반환
+		
+		model.addAttribute("pageMaker", pageMaker);
+	}
+	
 }

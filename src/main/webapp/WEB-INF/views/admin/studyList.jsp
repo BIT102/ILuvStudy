@@ -1,10 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>스터디 목록</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 </head>
 <body>
 <%@ include file="nav.jsp" %>
@@ -54,7 +58,8 @@
         <button>초기화</button>
 
         <!--리스트-->
-        <div>총 2건 1/1페이지</div>
+        <!--페이징 처리 -->
+        <div>총 ${pageMaker.totalCount}건 ${cri.page}/${pageMaker.endPage}페이지</div>
         
         <table>
             <tr>
@@ -66,25 +71,45 @@
                 <th>스터디 시작일</th>
                 <th>조회 수</th>
             </tr>
+<!-- DB데이터 가져옴 -->
+<c:forEach items="${list}" var="studyVO">
             <tr>
-                <td>1</td>
-                <td><a href="studyDetail">자바 프로그래밍 스터디 모집합니다.</a></td>
-                <td>테스터j123</td>
-                <td>서울 강남구</td>
-                <td>모집중</td>
-                <td>2018-02-25</td>
-                <td>50</td>
+                <td>${studyVO.bno}</td>
+                <td><a href="/admin/studyDetail${pageMaker.studySearch(pageMaker.cri.page)}&bno=${studyVO.bno}">${studyVO.title}</a></td>
+                <td>${studyVO.writer}</td>
+                <td>${studyVO.rDName} ${studyVO.rSName}</td>
+                <td>
+                	<!-- 시작일이 오늘보다  -->
+                	<jsp:useBean id="now" class="java.util.Date" />
+                	<c:if test="${studyVO.sd < now}">모집중</c:if>
+                	<c:if test="${studyVO.sd >= now && studyVO.enddate >= now}">진행중</c:if>
+                	<c:if test="${studyVO.enddate < now}">마감</c:if>
+                </td>
+                <td>${studyVO.sd}</td>
+                <td>${studyVO.vct}</td>
+                <td>${studyVO.enddate}</td>
             </tr>
-            <tr>
-                <td>2</td>
-                <td>AWS 공부하실분</td>
-                <td>서울대생임</td>
-                <td>서울 전체</td>
-                <td>모집중</td>
-                <td>2018-03-01</td>
-                <td>10</td>
-            </tr>
+</c:forEach>
         </table>
+        
+        <!-- 페이징 처리 -->
+        <!-- 페이징 정보 저장 -->
+        <ul>
+        	<c:if test="${pageMaker.prev}">
+        		<li><a href="studyList${pageMaker.studySearch(pageMaker.startPage - 1)}">&laquo;</a></li>
+        	</c:if>
+        
+        	<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+        	<li
+        		<c:out value="${pageMaker.cri.page == idx?'class=active':''}"/>>
+        		<a href="studyList${pageMaker.studySearch(idx)}">${idx}</a>
+        	</li>
+        	</c:forEach>
+        
+        	<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+        		<li><a href="studyList${pageMaker.studySearch(pageMaker.endPage + 1)}">&raquo;</a></li>
+        	</c:if>
+        </ul>
     </div>
 
 </body>

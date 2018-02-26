@@ -72,4 +72,14 @@ public class AdminServiceImpl implements AdminService{
 	public void userUpdate(UserVO vo)throws Exception{
 		dao.userUpdate(vo);
 	}
+	
+	@Override
+	public List<UserVO> studyList(Criteria cri) throws Exception{
+		return dao.studyList(cri);
+	}
+	
+	@Override
+	public int studyCountPaging(Criteria cri)throws Exception{
+		return dao.studyCountPaging(cri);
+	}
 }

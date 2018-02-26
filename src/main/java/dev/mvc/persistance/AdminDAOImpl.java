@@ -85,4 +85,14 @@ public class AdminDAOImpl implements AdminDAO{
 	public void userUpdate(UserVO vo)throws Exception{
 		session.update(namespace + ".userUpdate", vo);   // 사용자 계정 정보 수정
 	}
+	
+	@Override
+	public List<UserVO> studyList(Criteria cri) throws Exception{
+		return session.selectList(namespace + ".studyList", cri);  //study 정보 리스트,페이징 
+	}
+	
+	@Override
+	public int studyCountPaging(Criteria cri)throws Exception{
+		return session.selectOne(namespace + ".studyCountPaging", cri); // totalCount 반환
+	}
 }

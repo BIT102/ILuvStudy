@@ -21,4 +21,7 @@ public interface AdminDAO {
 	public int userCountPaging(Criteria cri)throws Exception;
 	public UserVO userDetail(Integer bno)throws Exception;
 	public void userUpdate(UserVO vo)throws Exception;
+
+	public List<UserVO> studyList(Criteria cri) throws Exception;
+	public int studyCountPaging(Criteria cri)throws Exception;
 }

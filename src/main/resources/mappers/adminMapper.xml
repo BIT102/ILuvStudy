@@ -71,7 +71,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		]]>
 	</select>
 	
-	<!-- totalCount 반환 -->
+	<!-- totalCount 반환 -->  
 	<select id="adminCountPaging" resultType="int">
 		<![CDATA[
 			select count(bno)
@@ -142,4 +142,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where bno = #{bno}
 	</update>
 	
+	
+<!-- 스터디관리 > 스터디목록 메뉴 -->
+	<!-- 검색 추가 필요  -->	
+	<!-- study 정보 리스트 -->
+	<select id="studyList" resultType="StudyVO">
+	<![CDATA[
+		select bs.bno, bs.title, bs.writer, r.rdname, r.rsname, bs.sd, bs.enddate, bs.regdate, bs.vct
+		from board_study bs, region r
+		where bs.bno > 0 
+		and bs.rdid = r.rdid
+		and bs.rsid = r.rsid
+	]]>
+			
+	<![CDATA[
+		order by bno desc
+		limit #{pageStart}, #{perPageNum}
+	]]>
+	</select>
+	
+	<!-- study 페이지 totalCount 반환 -->
+	<!-- 검색 추가 필요-->
+	<select id="studyCountPaging" resultType="int">
+		<![CDATA[
+			select count(bno)
+			from board_study
+			where bno > 0
+		]]>
+	</select>
 </mapper>
