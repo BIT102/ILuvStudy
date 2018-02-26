@@ -15,6 +15,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update admin set lastLoginDate=now() where adminid=#{adminId}
 	</update>
 	
+	<!-- adminid, name 검색 SQL -->
 	<sql id="search">
 		<if test="idKeyword != null">
 			and adminid like concat('%', #{idKeyword}, '%')
@@ -77,6 +78,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			from admin
 			where bno > 0
 		]]>
+		<include refid="search"></include>	
 	</select>
 	
 
