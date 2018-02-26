@@ -63,6 +63,7 @@ public class QnaDAOImpl implements QnaDAO {
 
 	@Override
 	public int countPaging(Criteria cri) throws Exception {
+		
 		return session.selectOne(namespace+".countPaging", cri);
 	}
 }

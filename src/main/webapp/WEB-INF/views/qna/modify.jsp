@@ -3,10 +3,21 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page session="false" %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+</head>
+
 <!-- Main content -->
 <section class="content">
 
-<form role="form" action="modifyPage" method="post">
+<form role="form" method="post">
 
 	<div class="box-body">
 	  <div class="form-group">
@@ -45,7 +56,7 @@ $(document).ready(function() {
 
  $(".btn-warning")
   .on("click", function() {
-    self.location = "qna/qnaList";
+    self.location = "/qna/listPage";
    });
 
  $(".btn-primary").on("click",

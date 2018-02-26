@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -58,18 +59,24 @@ public class QnaController {
 	
 	//조회 매핑(bno를 @RequestParam으로 전달받아서 처리할 수 있게)
 	@RequestMapping(value="/qnaDetail", method = RequestMethod.GET)
-	public void read(@RequestParam("bno") int bno, Model model)
-		throws Exception{
+	public void read(@RequestParam("bno") int bno,
+			@ModelAttribute("cri") Criteria cri,
+			Model model)throws Exception{
+		
 		model.addAttribute(service.read(bno)); //조회된 결과 게시물을 JSP로 전달(model객체 사용)
 	}
 	
 	//삭제매핑  에러메시지...... Failed to convert value of type [java.lang.String] to required type [int]; nested exception is java.lang.NumberFormatException: For input string: ""
 	@RequestMapping(value = "/remove", method = RequestMethod.POST)
-	public String remove(@RequestParam("bno")int bno, RedirectAttributes rttr)throws Exception{
+	public String remove(@RequestParam("bno")int bno, 
+			Criteria cri,
+			RedirectAttributes rttr)throws Exception{
 		logger.info("remove post...............");
+		
 		service.remove(bno);
 		
-		
+		rttr.addAttribute("page", cri.getPage()); //원래의 목록페이지로 이동
+		rttr.addAttribute("perPageNum", cri.getPerPageNum());
 		rttr.addFlashAttribute("msg", "SUCCESS");
 		
 		return "redirect:/qna/listPage";
@@ -78,10 +85,10 @@ public class QnaController {
 	//수정 매핑
 	@RequestMapping(value = "/modify", method = RequestMethod.GET)
 	public void modifyGET(int bno, Model model)throws Exception{
-		System.out.println("===================");
-		System.out.println(bno);
-		System.out.println(model);
-		System.out.println("===================");
+//		System.out.println("===================");
+//		System.out.println(bno);
+//		System.out.println(model);
+//		System.out.println("===================");
 		model.addAttribute(service.read(bno));
 	}
 	@RequestMapping(value = "/modify", method = RequestMethod.POST)

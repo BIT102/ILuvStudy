@@ -1,5 +1,7 @@
 package dev.mvc.study.domain;
 
+import java.util.Date;
+
 public class QnaVO {
 
   /*QNA_BNO			번호		int(11)		PK/AI	NN	
@@ -13,8 +15,10 @@ public class QnaVO {
 	QNA_TYPE		FAQ여부	int(2)		NN		0
   */
 	
-// +조회수 QNA_VCT 는 필요한가?
+	// +조회수 QNA_VCT 는 필요한가?
+
 	
+	//getter, setter ,toString
 	private int qnaBno; //Integer 는 안된다...!
 	
 	private String qnaTitle;
@@ -29,11 +33,10 @@ public class QnaVO {
 	
 	private int qnaRct;
 	
-	private String qnaRegdate;
+	private Date qnaRegdate;
 	
 	private int qnaType;
 
-	//getter, setter ,toString
 	public int getQnaBno() {
 		return qnaBno;
 	}
@@ -90,11 +93,11 @@ public class QnaVO {
 		this.qnaRct = qnaRct;
 	}
 
-	public String getQnaRegdate() {
+	public Date getQnaRegdate() {
 		return qnaRegdate;
 	}
 
-	public void setQnaRegdate(String qnaRegdate) {
+	public void setQnaRegdate(Date qnaRegdate) {
 		this.qnaRegdate = qnaRegdate;
 	}
 
@@ -112,6 +115,7 @@ public class QnaVO {
 				+ qnaCategoryD + ", qnaCategoryS=" + qnaCategoryS + ", qnaContent=" + qnaContent + ", qnaRct=" + qnaRct
 				+ ", qnaRegdate=" + qnaRegdate + ", qnaType=" + qnaType + "]";
 	}
+
 	
 	
 }

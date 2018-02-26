@@ -14,8 +14,10 @@
 </head>
 <body>
 	
-	<form role="form" method="post">
+	<form role="form" action="listPage" method="post">
 		<input type='hidden' name='bno' value="${qnaVO.qnaBno}">
+		<input type='hidden' name='page' value="${cri.page}">  <!-- page, perPageNum추가 -->
+		<input type='hidden' name='perPageNum' value="${cri.perPageNum}">
 	</form>
 	
 	<div>
@@ -37,7 +39,7 @@
 	<div>
 		<button type="submit" class="btn-warning">MODIFY</button>
 		<button type="submit" class="btn-danger">REMOVE</button><!-- 삭제는 POST방식으로 조회화면에서 처리 (controller에서 /remove를 매핑) -->
-		<button type="submit" class="btn-primary">LIST ALL</button>
+		<button type="submit" class="btn-primary goListBtn">LIST ALL</button>
 	</div>
 	
 	<script>
@@ -58,9 +60,13 @@
 		formObj.submit();
 	});
 	
-	$(".btn-primary").on("click", function(){
-		self.location = "/qna/listPage";
+	$(".goListBtn").on("click", function(){
+		formObj.attr("method", "get");
+		formObj.attr("action", "/qna/listPage");
+		formObj.submit();
 	});
+	
+	
 	});
 
 	</script>

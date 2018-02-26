@@ -19,7 +19,7 @@
   	</select>
   	
   	<update id="update">
-  	update board_qna set qnaTitle =#{qnaTitle}, qnaContent =#{content}
+  	update board_qna set qnaTitle =#{qnaTitle}, qnaContent =#{qnaContent}
   	where qnaBno =#{qnaBno}
   	</update>
   	
