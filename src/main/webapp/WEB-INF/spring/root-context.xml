@@ -54,12 +54,9 @@
 	
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 	
-<<<<<<< HEAD
-
-=======
 	<context:component-scan base-package="dev.mvc.admin">
 	</context:component-scan>
->>>>>>> branch 'SHKIM' of https://github.com/BIT102/ILuvStudy.git
+
 		
 </beans>
 
