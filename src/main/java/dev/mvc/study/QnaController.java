@@ -16,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import dev.mvc.study.domain.Criteria;
 import dev.mvc.study.domain.PageMaker;
 import dev.mvc.study.domain.QnaVO;
+import dev.mvc.study.domain.SearchCriteria;
 import dev.mvc.study.service.QnaService;
 
 @Controller
@@ -84,19 +85,28 @@ public class QnaController {
 	
 	//수정 매핑
 	@RequestMapping(value = "/modify", method = RequestMethod.GET)
-	public void modifyGET(int bno, Model model)throws Exception{
+	public void modifyGET(int bno, 
+			@ModelAttribute("cri") SearchCriteria cri,
+			Model model)throws Exception{
 //		System.out.println("===================");
 //		System.out.println(bno);
 //		System.out.println(model);
 //		System.out.println("===================");
+		
 		model.addAttribute(service.read(bno));
 	}
+	
 	@RequestMapping(value = "/modify", method = RequestMethod.POST)
-	public String modifyPOST(QnaVO board, RedirectAttributes rttr)throws Exception{
+	public String modifyPOST(QnaVO board,
+			Criteria cri,
+			RedirectAttributes rttr)throws Exception{
 		
-		logger.info("modify post...............");
-		
+		logger.info("modify post...............!!!!!!!!!!!");
+//		System.out.println(board);
 		service.modify(board);
+		
+		rttr.addAttribute("page", cri.getPage());
+		rttr.addAttribute("perPageNum", cri.getPerPageNum());
 		rttr.addFlashAttribute("msg", "SUCCESS");
 		
 		return "redirect:/qna/listPage";

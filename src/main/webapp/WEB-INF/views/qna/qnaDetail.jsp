@@ -37,8 +37,8 @@
 	</div>
 	
 	<div>
-		<button type="submit" class="btn-warning">MODIFY</button>
-		<button type="submit" class="btn-danger">REMOVE</button><!-- 삭제는 POST방식으로 조회화면에서 처리 (controller에서 /remove를 매핑) -->
+		<button type="submit" class="btn-warning modifyBtn">MODIFY</button>
+		<button type="submit" class="btn-danger ">REMOVE</button><!-- 삭제는 POST방식으로 조회화면에서 처리 (controller에서 /remove를 매핑) -->
 		<button type="submit" class="btn-primary goListBtn">LIST ALL</button>
 	</div>
 	
@@ -49,7 +49,7 @@
 	
 	console.log(formObj);
 	
-	$(".btn-warning").on("click", function(){
+	$(".modifyBtn").on("click", function(){
 		formObj.attr("action", "/qna/modify");
 		formObj.attr("method", "get");
 		formObj.submit();

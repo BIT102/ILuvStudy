@@ -17,25 +17,28 @@
 <!-- Main content -->
 <section class="content">
 
-<form role="form" method="post">
+<form role="form" method="post" action="modify">
+
+	<input type="hidden" name="page" value="${cri.page}">
+	<input type="hidden" name="perPageNum" value="${cri.perPageNum}">
 
 	<div class="box-body">
 	  <div class="form-group">
 	  	<label for="exampleInputEmail1">BNO</label>
-	  	<input type="text" name='bno' class="form-control" value="${qnaVO.qnaBno}" readonly="readonly">
+	  	<input type="text" name='qnaBno' class="form-control" value="${qnaVO.qnaBno}" readonly="readonly">
 	  </div>
 	  
       <div class="form-group">
        <label for="exampleInputEmail1">Title</label> <input type="text"
-        name='title' class="form-control" value="${qnaVO.qnaTitle}">
+        name='qnaTitle' class="form-control" value="${qnaVO.qnaTitle}">
       </div>
       <div class="form-group">
        <label for="exampleInputPassword1">Content</label>
-       <textarea class="form-control" name="content" rows="3">${qnaVO.qnaContent}</textarea>
+       <textarea class="form-control" name="qnaContent" rows="3">${qnaVO.qnaContent}</textarea>
       </div>
       <div class="form-group">
        <label for="exampleInputEmail1">Writer</label> <input
-        type="text" name="writer" class="form-control"
+        type="text" name="qnaWriter" class="form-control"
         value="${qnaVO.qnaWriter}">
       </div>
      </div>
@@ -54,9 +57,10 @@ $(document).ready(function() {
 
  console.log(formObj);
 
+ //qna/listPage링크처리
  $(".btn-warning")
   .on("click", function() {
-    self.location = "/qna/listPage";
+    self.location = "/qna/listPage?page=${cri.page}&perPageNum=${cri.perPageNum}";
    });
 
  $(".btn-primary").on("click",
