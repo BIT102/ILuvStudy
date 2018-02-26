@@ -10,9 +10,9 @@
 <body>
 
 
-	<form name="joinForm" method="post">
+	<form name="joinForm" action="/joinUser" method="post">
 		이메일주소<br/>
-		<input type="text" placeholder="아이디를 입력하세요" /> 
+		<input type="text" placeholder="아이디를 입력하세요" name="email" /> 
 		@ 
 		<input type="text" placeholder="주소값을 입력하세요" /> 
 		<select name="" id=""> 
@@ -26,11 +26,11 @@
 		
 		<br/>
 		이름<br/>
-		<input type="text" placeholder = "실명을 입력하세요"/>
+		<input type="text" placeholder = "실명을 입력하세요" name="name" />
 		<br/>
 		
 		비밀번호<br/>
-		<input type="password" style = "width:500px" placeholder = "비밀번호 8자리 이상 20자리 이하 영문 숫자로만 입력해 주세요" />
+		<input type="password" style = "width:500px" placeholder = "비밀번호 8자리 이상 20자리 이하 영문 숫자로만 입력해 주세요" name="password"/>
 		<p id = "pwcheck" style = "color:red">사용이 불가능한 비밀번호입니다.</p>
 		<br/>
 		
@@ -40,19 +40,19 @@
 		<br/>
 		
 		닉네임<br/>
-		<input type="text" placeholder = "닉네임을 입력하세요"/>
+		<input type="text" placeholder = "닉네임을 입력하세요" name="nickName"/>
 		<br/>
 		
 		생년월일<br/>
-		<input type="text" placeholder = "주민번호 앞자리를 입력하세요"/>
+		<input type="text" placeholder = "주민번호 앞자리를 입력하세요" name="birth"/>
 		<br/>
 		
 		성별<br/> <!-- 남이 눌리면 여는 안눌리도록 처리필요 -->
-		남<input type = "checkbox">  여<input type = "checkbox">
+		남<input type = "checkbox"/>  여<input type = "checkbox" />
 		
 		<br/>
 		전화번호<br/>
-		<input type="text" />-<input type="text" />-<input type="text" />
+		<input type="text" name="phoneNum"/>
 		<br/>
 		<button>인증하기</button> 
 		
