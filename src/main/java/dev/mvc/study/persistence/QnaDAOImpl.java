@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import dev.mvc.study.domain.Criteria;
 import dev.mvc.study.domain.QnaVO;
 
 @Repository
@@ -34,11 +35,34 @@ public class QnaDAOImpl implements QnaDAO {
 
 	@Override
 	public void delete(Integer bno) throws Exception {
+		System.out.println("delete_2");
 		session.delete(namespace+".delete", bno);
 	}
 
 	@Override
 	public List<QnaVO> listAll() throws Exception {
 		return session.selectList(namespace+".listAll");
+	}
+
+	@Override  // ∆‰¿Ã¬°
+	public List<QnaVO> listPage(int page) throws Exception {
+
+		if(page <=0){
+			page = 1;
+		}
+		
+		page = (page -1)*10;
+		return session.selectList(namespace+".listPage", page);
+	}
+
+	@Override
+	public List<QnaVO> listCriteria(Criteria cri) throws Exception {
+
+		return session.selectList(namespace+".listCriteria", cri);
+	}
+
+	@Override
+	public int countPaging(Criteria cri) throws Exception {
+		return session.selectOne(namespace+".countPaging", cri);
 	}
 }

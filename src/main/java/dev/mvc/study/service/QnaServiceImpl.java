@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import dev.mvc.study.domain.Criteria;
 import dev.mvc.study.domain.QnaVO;
 import dev.mvc.study.persistence.QnaDAO;
 
@@ -32,11 +33,23 @@ public class QnaServiceImpl implements QnaService {
 
 	@Override
 	public void remove(Integer bno) throws Exception {
+		System.out.println("delete_1");
 		dao.delete(bno);
 	}
 
 	@Override
 	public List<QnaVO> listAll() throws Exception {
 		return dao.listAll();
+	}
+
+	@Override
+	public List<QnaVO> listCriteria(Criteria cri) throws Exception {
+		return dao.listCriteria(cri);
+	}
+
+	@Override
+	public int listCountCriteria(Criteria cri) throws Exception {
+
+		return dao.countPaging(cri);
 	}
 }

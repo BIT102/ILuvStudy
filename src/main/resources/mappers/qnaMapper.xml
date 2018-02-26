@@ -12,7 +12,7 @@
   
   	<select id="read" resultType="dev.mvc.study.domain.QnaVO">
   	select
-  		qnaType, qnaTitle, qnaWriter, qnaContent, qnaRegdate
+  		qnaBno, qnaType, qnaTitle, qnaWriter, qnaContent, qnaRegdate
   	from 
   		board_qna
   	where qnaBno = #{qnaBno} 
@@ -39,4 +39,41 @@
   	]]>
   	</select>
   	
+  	<!-- 페이징 SQL -->
+  	<select id="listPage" resultType="dev.mvc.study.domain.QnaVO"> <!-- alias를 하면 QnaVO만 쓸 수 있다. -->
+  	<![CDATA[
+  	select 
+  		qnaBno, qnaTitle, qnaWriter, qnaContent, qnaRegdate, qnaType
+  	from
+  		board_qna
+  	where qnaBno > 0
+  	order by qnaBno desc, qnaRegdate desc
+  	limit #{page},10
+  	]]>
+  	</select>
+  	
+  	<!-- listCritetia추가 -->
+  	<select id="listCriteria" resultType="dev.mvc.study.domain.QnaVO"> <!-- 까먹지말아라 -->
+  	<![CDATA[
+  	select
+  		qnaBno, qnaTitle, qnaWriter, qnaContent, qnaRegdate, qnaType
+  	from
+  		board_qna
+  	where qnaBno > 0
+  	order by qnaBno desc, qnaRegdate desc
+  	limit #{pageStart}, #{perPageNum}
+  	]]>
+  	</select>
+  	
+  	<!-- paging qnaDAO에서사용할 -->
+  	<select id="countPaging" resultType="int">
+  	<![CDATA[
+  	select
+  		count(qnaBno)
+  	from
+  		board_qna
+  	where
+  		qnaBno > 0
+  	]]>
+  	</select>
   </mapper>

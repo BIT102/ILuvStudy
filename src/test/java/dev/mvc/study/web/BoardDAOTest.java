@@ -1,5 +1,7 @@
 package dev.mvc.study.web;
 
+
+
 import javax.inject.Inject;
 
 import org.junit.Test;
@@ -10,6 +12,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import dev.mvc.study.domain.BoardVO;
+
 import dev.mvc.study.persistence.BoardDAO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -46,5 +49,7 @@ public class BoardDAOTest {
 	public void testRead() throws Exception{
 		logger.info(dao.read(13).toString());
 	}
+	
+
 	
 }

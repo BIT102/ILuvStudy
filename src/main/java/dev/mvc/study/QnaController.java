@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+
+import dev.mvc.study.domain.Criteria;
+import dev.mvc.study.domain.PageMaker;
 import dev.mvc.study.domain.QnaVO;
 import dev.mvc.study.service.QnaService;
 
@@ -60,13 +63,58 @@ public class QnaController {
 		model.addAttribute(service.read(bno)); //조회된 결과 게시물을 JSP로 전달(model객체 사용)
 	}
 	
-	//삭제매핑
+	//삭제매핑  에러메시지...... Failed to convert value of type [java.lang.String] to required type [int]; nested exception is java.lang.NumberFormatException: For input string: ""
 	@RequestMapping(value = "/remove", method = RequestMethod.POST)
 	public String remove(@RequestParam("bno")int bno, RedirectAttributes rttr)throws Exception{
+		logger.info("remove post...............");
 		service.remove(bno);
+		
 		
 		rttr.addFlashAttribute("msg", "SUCCESS");
 		
-		return "redirect:/qna/qnaList";
+		return "redirect:/qna/listPage";
+	}
+	
+	//수정 매핑
+	@RequestMapping(value = "/modify", method = RequestMethod.GET)
+	public void modifyGET(int bno, Model model)throws Exception{
+		System.out.println("===================");
+		System.out.println(bno);
+		System.out.println(model);
+		System.out.println("===================");
+		model.addAttribute(service.read(bno));
+	}
+	@RequestMapping(value = "/modify", method = RequestMethod.POST)
+	public String modifyPOST(QnaVO board, RedirectAttributes rttr)throws Exception{
+		
+		logger.info("modify post...............");
+		
+		service.modify(board);
+		rttr.addFlashAttribute("msg", "SUCCESS");
+		
+		return "redirect:/qna/listPage";
+	}
+	
+	@RequestMapping(value = "/listCri", method = RequestMethod.GET)
+	public void listAll(Criteria cri, Model model) throws Exception{
+		logger.info("show list Page with Criteria................");
+		
+		model.addAttribute("list", service.listCriteria(cri));
+	}
+	
+	//Criteria cri 파라미터 Model객체 이용해서 PageMaker저장
+	@RequestMapping(value="/listPage", method = RequestMethod.GET)
+	public void listPage(Criteria cri, Model model)throws Exception{
+		
+		logger.info(cri.toString());
+		
+		model.addAttribute("list", service.listCriteria(cri));
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+//		pageMaker.setTotalCount(35);
+		
+		pageMaker.setTotalCount(service.listCountCriteria(cri));
+		
+		model.addAttribute("pageMaker", pageMaker);
 	}
 }

@@ -1,6 +1,6 @@
 package dev.mvc.study.domain;
 
-public class SearchCriteria {
+public class SearchCriteria extends Criteria {
 	private String searchType;
 	private String keyword;
 	

@@ -15,7 +15,7 @@ public class QnaVO {
 	
 // +조회수 QNA_VCT 는 필요한가?
 	
-	private Integer qnaBno;
+	private int qnaBno; //Integer 는 안된다...!
 	
 	private String qnaTitle;
 	
@@ -34,11 +34,11 @@ public class QnaVO {
 	private int qnaType;
 
 	//getter, setter ,toString
-	public Integer getQnaBno() {
+	public int getQnaBno() {
 		return qnaBno;
 	}
 
-	public void setQnaBno(Integer qnaBno) {
+	public void setQnaBno(int qnaBno) {
 		this.qnaBno = qnaBno;
 	}
 

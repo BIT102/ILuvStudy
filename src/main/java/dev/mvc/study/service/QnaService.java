@@ -2,6 +2,7 @@ package dev.mvc.study.service;
 
 import java.util.List;
 
+import dev.mvc.study.domain.Criteria;
 import dev.mvc.study.domain.QnaVO;
 
 public interface QnaService {
@@ -15,4 +16,10 @@ public interface QnaService {
 	public void remove(Integer bno)throws Exception;
 	
 	public List<QnaVO> listAll() throws Exception;
+	
+	public List<QnaVO> listCriteria(Criteria cri) throws Exception;
+	
+	public int listCountCriteria(Criteria cri)throws Exception;
+	
+
 }
