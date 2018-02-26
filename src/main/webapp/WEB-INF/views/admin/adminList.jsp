@@ -55,8 +55,9 @@
             <tr>
                 <td>${adminVO.bno}</td>
                 <!-- 페이징 정보 유지 -->
-                <td><a href="/admin/adminDetail${pageMaker.makeSearch(pageMaker.cri.page)}
-                &bno=${adminVO.bno}">${adminVO.adminId}</a></td>
+                <td>
+                <a href="/admin/adminDetail${pageMaker.makeSearch(pageMaker.cri.page)}&bno=${adminVO.bno}">${adminVO.adminId}</a>
+                </td>
                 <td>${adminVO.name}</td>
                 <td>
                 	<!-- jstl로 eq 사용 시 char형 데이터는 형변환 오류, string형 데이터 비교 필요 -->
