@@ -29,7 +29,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 검색처리 -->
 	<select id="adminList" resultType="AdminVO">
 	<![CDATA[
-		select bno, adminid, name, status, lastLoginDate 
+		select bno, id, name, status, lastLoginDate 
 		from admin
 		where bno > 0
 	]]>
