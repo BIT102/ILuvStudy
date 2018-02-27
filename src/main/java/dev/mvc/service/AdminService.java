@@ -4,6 +4,10 @@ import java.util.List;
 
 import dev.mvc.admin.Criteria;
 import dev.mvc.domain.AdminVO;
+import dev.mvc.domain.QnaVO;
+import dev.mvc.domain.ReplyStudyVO;
+import dev.mvc.domain.ReplyVO;
+import dev.mvc.domain.StudyVO;
 import dev.mvc.domain.UserVO;
 import dev.mvc.dto.AdminDTO;
 
@@ -21,6 +25,20 @@ public interface AdminService {
 	public UserVO userDetail(Integer bno)throws Exception;
 	public void userUpdate(UserVO vo)throws Exception;
 	
-	public List<UserVO> studyList(Criteria cri) throws Exception;
+	public List<StudyVO> studyList(Criteria cri) throws Exception;
 	public int studyCountPaging(Criteria cri)throws Exception;
+	public StudyVO studyDetail(Integer bno)throws Exception;
+	public List<StudyVO> studyDCategory(Criteria cri) throws Exception;
+	public List<StudyVO> studySCategory(Criteria cri) throws Exception;
+	public List<StudyVO> region(Criteria cri) throws Exception;
+	
+	public List<ReplyStudyVO> replyList(Criteria cri) throws Exception;
+	public int replyCountPaging(Criteria cri)throws Exception;
+	
+	public List<QnaVO> qnaList(Criteria cri) throws Exception;
+	public int qnaCountPaging(Criteria cri)throws Exception;
+	public QnaVO qnaDetail(Integer bno)throws Exception;
+
+	public List<ReplyVO> qnaReply(Integer bno) throws Exception;
+	public void qnaRegister(ReplyVO vo)throws Exception;
 }

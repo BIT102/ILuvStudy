@@ -25,57 +25,101 @@
 
         <div>* 기본정보</div>
         <table>
+       		<tr>
+                <th>번호</th>
+                <td>${qnaVO.bno}</td>
+            </tr>
             <tr>
                 <th>아이디</th>
-                <td>asdf@naver.com</td>
+                <td>${qnaVO.writer}</td>
             </tr>
             <tr>
                 <th>제목</th>
-                <td>스터디 등록 문의</td>
+                <td>${qnaVO.title}</td>
             </tr>
             <tr>
                 <th>내용</th>
-                <td>스터디 등록할때 보안 카테고리 추가해주세요.</td>
+                <td>${qnaVO.content}</td>
             </tr>
             <tr>
                 <th>작성일</th>
-                <td>2018-02-18</td>
+                <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${qnaVO.regdate}"/></td>
             </tr>
             <tr>
-                <th>답변여부</th>
-                <td>답변완료</td>
+                <th>댓글수</th>
+                <td>${qnaVO.rct}</td>
             </tr>
             <tr>
-                <th>공개여부</th>
-                <td>공개</td>
+                <th>FAQ 여부</th>
+                <!-- 0: 미등록  1: 등록 -->
+                <td>
+                	<c:if test="${qnaVO.type eq 0}">미등록 </c:if>
+                	<c:if test="${qnaVO.type eq 1}">등록</c:if>
+                </td>
             </tr>
         </table>
-
-        <div>* 답변</div>
+        
+<form role="form" method="post">
+        <div>* 관리자 답변</div>
         <table>
             <tr>
                 <th>답변내용</th>
-                <td>
-                    <textarea>
-                        안녕하세요.고객님
-                        요청하신 보안 카테고리 추가 완료하였습니다.
-                        감사합니다.
-                    </textarea>
-                </td>
+                <td><textarea name="content">${qnaVO.content}</textarea></td>
             </tr>
             <tr>
                 <th>관리자 아이디</th>
-                <td>admin123</td>
+                <td>${admin.id}</td>
             </tr>
             <tr>
                 <th>답변일</th>
-                <td>2018-02-18</td>
+                <jsp:useBean id="now" class="java.util.Date" />
+                <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${now}"/></td>
             </tr>
         </table>
+</form>
+	<button type="submit" id="registerBtn">등록</button>   
+	
+		<div>* 사용자 답변</div>
+		<table>
+			<tr>
+				<th>번호</th>
+				<th>아이디</th>
+				<th>내용</th>
+				<th>작성일</th>
+			</tr>
+<c:forEach items="${list}" var="replyVO">	     
+			<tr>
+				<td>${replyVO.rno}</td>
+				<td>${replyVO.replyer}</td>
+				<td>${replyVO.content}</td>
+				<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${replyVO.regdate}"/></td>				
+			</tr>
+</c:forEach>
+		</table>
 
-        <a type="button" href="qnaList">목록</a>
-        <button>등록</button>
+        <button type="submit" id="listBtn">목록</button>
     </div>
-
+    
+<script>
+	$(document).ready(function(){
+		var formObj = $("form[role='form']");
+		
+		console.log(formObj);
+		
+		//등록 클릭 시 액션
+		$("#registerBtn").on("click", function(){
+			//form 데이터 유효성 검사 추가 필요
+			
+			formObj.submit();
+		});
+		
+		//목록 클릭 시 액션
+		$("#listBtn").on("click", function(){
+			self.location = "/admin/qnaList?page=${cri.page}&perPageNum=${cri.perPageNum}"
+							+"&faqType=${cri.faqType}&emailKeyword=${cri.emailKeyword}";
+		});
+		
+	});
+</script>
 </body>
 </html>

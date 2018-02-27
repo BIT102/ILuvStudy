@@ -3,20 +3,21 @@ package dev.mvc.dto;
 import java.util.Date;
 
 public class AdminDTO {
-	private	String	adminId;		//	아이디
-	private	String	adminPw;		//	비밀번호
+	private	String	id;		//	아이디
+	private	String	pw;		//	비밀번호
 	private	Date	lastLoginDate;		//	마지막 접속일
-	public String getAdminId() {
-		return adminId;
+
+	public String getId() {
+		return id;
 	}
-	public void setAdminId(String adminId) {
-		this.adminId = adminId;
+	public void setId(String id) {
+		this.id = id;
 	}
-	public String getAdminPw() {
-		return adminPw;
+	public String getPw() {
+		return pw;
 	}
-	public void setAdminPw(String adminPw) {
-		this.adminPw = adminPw;
+	public void setPw(String pw) {
+		this.pw = pw;
 	}
 	public Date getLastLoginDate() {
 		return lastLoginDate;
@@ -26,10 +27,6 @@ public class AdminDTO {
 	}
 	@Override
 	public String toString() {
-		return "AdminDTO [adminId=" + adminId + ", adminPw=" + adminPw + ", lastLoginDate=" + lastLoginDate + "]";
-	}
-
-	
-	
-	
+		return "AdminDTO [id=" + id + ", pw=" + pw + ", lastLoginDate=" + lastLoginDate + "]";
+	}	
 }

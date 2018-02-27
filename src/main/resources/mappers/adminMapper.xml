@@ -5,18 +5,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="dev.mvc.mapper.AdminMapper">
 	
-	<!-- admin 계정 로그인 처리 -->
+<!-- admin 계정 로그인 처리 -->
 	<select id="adminLogin" resultType="AdminVO">
 		select id, pw from admin where id=#{id} and pw=#{pw}
 	</select>
 	
-	<!-- 로그인 시 마지막 접속일 갱신 -->
+<!-- 로그인 시 마지막 접속일 갱신 -->
 	<update id="adminLastLogin">
 		update admin set lastLoginDate=now() where id=#{id}
 	</update>
 	
+<!-- Admin관리 > 계정관리 메뉴 -->
+	
 	<!-- adminid, name 검색 SQL -->
-	<sql id="adminsearch">
+	<sql id="adminSearch">
 		<if test="idKeyword != null">
 			and id like concat('%', #{idKeyword}, '%')
 		</if>
@@ -33,7 +35,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from admin
 		where bno > 0
 	]]>
-		<include refid="adminsearch"></include>	
+		<include refid="adminSearch"></include>	
 	<![CDATA[
 		order by bno desc, lastLoginDate desc
 		limit #{pageStart}, #{perPageNum}
@@ -78,14 +80,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			from admin
 			where bno > 0
 		]]>
-		<include refid="adminsearch"></include>	
+		<include refid="adminSearch"></include>	
 	</select>
 
 <!-- 회원조회 메뉴 -->
 
 	<!-- isdel, id, nickname 검색 SQL -->
-	<!-- 검색 부분 수정 필요 -->
-	<sql id="usersearch">
+	<!-- 검색 부분 수정 필요 비활성 관련-->
+	<sql id="userSearch">
 		<if test="isDelType != null">
 			<if test="isDelType == 'v'.toString()">
 				and isdel=0
@@ -109,7 +111,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from user
 		where bno > 0
 	]]>
-		<include refid="usersearch"></include>	
+		<include refid="userSearch"></include>	
 	<![CDATA[
 		order by bno desc, registdate desc
 		limit #{pageStart}, #{perPageNum}
@@ -124,7 +126,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			from user
 			where bno > 0
 		]]>
-		<include refid="usersearch"></include>
+		<include refid="userSearch"></include>
 	</select>
 	
 	<!-- user 정보 상세 -->
@@ -144,7 +146,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	
 <!-- 스터디관리 > 스터디목록 메뉴 -->
-	<!-- 검색 추가 필요  -->	
+	<!-- 스터디상태, 스터디명, 작성자 검색 SQL -->
+	<sql id="studySearch">
+		<if test="stStatusType != null">
+			<if test="stStatusType == 'v'.toString()">
+				<![CDATA[
+					and sd <= now() and enddate >= now()
+				]]>
+			</if>
+			<if test="stStatusType == 'd'.toString()">
+				<![CDATA[
+					and enddate < now()
+				]]>
+			</if>
+		</if>
+		<if test="titleKeyword != null">
+			and title like concat('%', #{titleKeyword}, '%')
+		</if>
+		<if test="writerKeyword != null">
+			and writer like concat('%', #{writerKeyword}, '%')
+		</if>
+	</sql>
+	
+	<!-- 검색 추가  -->	
 	<!-- study 정보 리스트 -->
 	<select id="studyList" resultType="StudyVO">
 	<![CDATA[
@@ -154,7 +178,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		and bs.rdid = r.rdid
 		and bs.rsid = r.rsid
 	]]>
-			
+		<include refid="studySearch"></include>	
 	<![CDATA[
 		order by bno desc
 		limit #{pageStart}, #{perPageNum}
@@ -162,12 +186,147 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- study 페이지 totalCount 반환 -->
-	<!-- 검색 추가 필요-->
+	<!-- 검색 추가 -->
 	<select id="studyCountPaging" resultType="int">
 		<![CDATA[
 			select count(bno)
 			from board_study
 			where bno > 0
 		]]>
+		<include refid="studySearch"></include>
 	</select>
+	
+	<!-- study 정보 상세 -->
+	<select id="studyDetail" resultType="StudyVO">
+		select *
+		from board_study bs, region r, study_category c
+		where bno = #{bno}
+		and bs.rdid = r.rdid
+		and bs.rsid = r.rsid
+		and bs.categoryD = c.CDID
+		and bs.categoryS = c.CSID
+	</select>
+	
+	<!-- study 대카테고리 -->
+	<select id="studyDCategory" resultType="StudyVO">
+		select distinct cdname, cdid
+		from study_category
+	</select>
+
+	<!-- study 소카테고리 -->
+	<select id="studySCategory" resultType="StudyVO">
+		select csname, csid
+		from study_category
+	</select>
+	
+	<!-- 지역정보 -->
+	<select id="region" resultType="StudyVO">
+		select *
+		from region
+	</select>
+	
+<!-- 스터디관리 > 댓글 관리 메뉴 -->
+	<!-- 검색 SQL -->
+	<!-- 스터디번호, 작성자 검색 SQL -->
+	<sql id="studyReplySearch">
+		<if test="bsBnoKeyword != null">
+			and bsbno like concat('%', #{bsBnoKeyword}, '%')
+		</if>
+		<if test="writerKeyword != null">
+			and writer like concat('%', #{writerKeyword}, '%')
+		</if>
+	</sql>
+	<!-- 검색 추가 -->	
+	<!-- study 정보 리스트 -->
+	<select id="replyList" resultType="ReplyStudyVO">
+	<![CDATA[
+		select *
+		from reply_study
+		where rno > 0 
+	]]>
+		<include refid="studyReplySearch"></include>
+	<![CDATA[
+		order by rno desc, bsbno desc
+		limit #{pageStart}, #{perPageNum}
+	]]>
+	</select>
+	
+	<!-- study 페이지 totalCount 반환 -->
+	<!-- 검색 추가-->
+	<select id="replyCountPaging" resultType="int">
+		<![CDATA[
+			select count(rno)
+			from reply_study
+			where rno > 0
+		]]>
+		<include refid="studyReplySearch"></include>
+	</select>	
+	
+<!-- 사이트관리 > qna관리 메뉴 -->
+	<!-- 검색 SQL -->
+	<!-- SQL -->
+	<sql id="qnaSearch">
+		<if test="faqType != null">
+			<if test="faqType == 'v'.toString()">
+				<![CDATA[
+					and type=1
+				]]>
+			</if>
+			<if test="faqType == 'd'.toString()">
+				<![CDATA[
+					and type=0
+				]]>
+			</if>
+		</if>
+		<if test="emailKeyword != null">
+			and writer like concat('%', #{emailKeyword}, '%')
+		</if>
+	</sql>
+	
+	<!-- 검색 추가 필요 -->	
+	<!-- qna 정보 리스트 -->
+	<select id="qnaList" resultType="QnaVO">
+	<![CDATA[
+		select *
+		from board_qna
+		where bno > 0 
+	]]>
+		<include refid="qnaSearch"></include>
+	<![CDATA[
+		order by bno desc, regdate desc
+		limit #{pageStart}, #{perPageNum}
+	]]>
+	</select>
+	
+	<!-- qna 페이지 totalCount 반환 -->
+	<!-- 검색 추가 필요-->
+	<select id="qnaCountPaging" resultType="int">
+		<![CDATA[
+			select count(bno)
+			from board_qna
+			where bno > 0
+		]]>
+		<include refid="qnaSearch"></include>
+	</select>
+	
+	<!-- qna 정보 상세 -->
+	<select id="qnaDetail" resultType="QnaVO">
+		select *
+		from board_qna
+		where bno = #{bno}
+	</select>
+	
+	<!-- qna 댓글 내용 -->
+	<select id="qnaReply" resultType="ReplyVO">
+		select *
+		from reply_qna
+		where bqbno = #{bno}
+	</select>
+	
+	<!-- qna 댓글 정보 등록 -->
+	<insert id="qnaRegister">
+		values(#{id},#{pw},#{name},now(),#{status})
+		insert into reply_qna (bqbno, content, replyer)
+		values (#{bno},#{content},#{id})
+	</insert>
 </mapper>

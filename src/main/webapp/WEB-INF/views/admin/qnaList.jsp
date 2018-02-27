@@ -26,54 +26,91 @@
         <!--검색-->
         <table>
             <tr>
-                <th>아이디</th>
-                <td><input type="text"></td>
-                <th>답변여부</th>
+                <th>FAQ</th>
                 <td>
-                    <select>
-                        <option>전체</option>
-                        <option>답변</option>
-                        <option>미답변</option>
+                    <select name="faqType">
+                		<!-- 0: 미등록  1: 등록 -->
+                        <option value="n"
+                        	<c:out value="${cri.faqType == null?'selected':''}"/>>전체</option>
+                        <option value="v"
+                        	<c:out value="${cri.faqType eq 'v'?'selected':''}"/>>등록</option>
+                        <option value="d"
+                        	<c:out value="${cri.faqType eq 'd'?'selected':''}"/>>미등록</option>
                     </select>
                 </td>
+                <th>아이디</th>
+                <td><input type="text" name="emailKeyword" id="emailKeywordInput" value="${cri.emailKeyword}"></td>
             </tr>
 
         </table>
         
-        <button>검색</button>
+        <button type="submit" id="searchBtn">검색</button>
         <button>초기화</button>
         
 
-        <!--리스트-->
-        <div>총 2건 1/1페이지</div>
+        <!--리스트 -->
+        <!--페이징 처리 -->
+        <div>총 ${pageMaker.totalCount}건 ${cri.page}/${pageMaker.endPage}페이지</div>
 
         <table>
             <tr>
                 <th>번호</th>
                 <th>아이디</th>
                 <th>제목</th>
-                <th>공개여부</th>
-                <th>답변여부</th>
+                <th>FAQ</th>
+                <th>댓글수</th>
                 <th>작성일</th>
             </tr>
+<!-- DB데이터 가져옴 -->
+<c:forEach items="${list}" var="qnaVO">
             <tr>
-                <td>1</td>
-                <td>asdf@naver.com</td>
-                <td><a href="qnaDetail">스터디 등록 문의</a></td>
-                <td>공개</td>
-                <td>답변</td>
-                <td>2018-02-18</td>
+                <td>${qnaVO.bno}</td>
+                <td>${qnaVO.writer}</td>
+                <td><a href="/admin/qnaDetail${pageMaker.qnaSearch(pageMaker.cri.page)}&bno=${qnaVO.bno}">${qnaVO.title}</a></td>
+                <!-- 0: 미등록  1: 등록 -->
+                <td>
+                	<c:if test="${qnaVO.type eq 0}">미등록 </c:if>
+                	<c:if test="${qnaVO.type eq 1}">등록</c:if>
+                </td>
+                <td>${qnaVO.rct}</td>
+                <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${qnaVO.regdate}"/></td>
             </tr>
-            <tr>
-                <td>2</td>
-                <td>asdf@naver.com</td>
-                <td>스터디 완료 문의</td>
-                <td>비공개</td>
-                <td>미답변</td>
-                <td>2018-02-20</td>
-            </tr>
+</c:forEach>
         </table>
+        
+        <!-- 페이징 처리 -->
+        <!-- 페이징 정보 저장 -->
+        <ul>
+        	<c:if test="${pageMaker.prev}">
+        		<li><a href="qnaList${pageMaker.qnaSearch(pageMaker.startPage - 1)}">&laquo;</a></li>
+        	</c:if>
+        
+        	<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+        	<li
+        		<c:out value="${pageMaker.cri.page == idx?'class=active':''}"/>>
+        		<a href="qnaList${pageMaker.qnaSearch(idx)}">${idx}</a>
+        	</li>
+        	</c:forEach>
+        
+        	<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+        		<li><a href="qnaList${pageMaker.qnaSearch(pageMaker.endPage + 1)}">&raquo;</a></li>
+        	</c:if>
+        </ul>
+        
     </div>
+<script>
 
+	$(document).ready(function(){		
+		
+		//검색 클릭 시 액션
+ 		$("#searchBtn").on("click", function(event){
+			self.location = "qnaList" + "${pageMaker.makeQuery(1)}"
+				+"&faqType="
+				+$("select option:selected").val()
+				+"&emailKeyword="+encodeURIComponent($("#emailKeywordInput").val());
+		}); 
+		
+	});
+</script>
 </body>
 </html>

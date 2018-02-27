@@ -9,6 +9,10 @@ import org.springframework.stereotype.Repository;
 
 import dev.mvc.admin.Criteria;
 import dev.mvc.domain.AdminVO;
+import dev.mvc.domain.QnaVO;
+import dev.mvc.domain.ReplyStudyVO;
+import dev.mvc.domain.ReplyVO;
+import dev.mvc.domain.StudyVO;
 import dev.mvc.domain.UserVO;
 import dev.mvc.dto.AdminDTO;
 
@@ -87,7 +91,7 @@ public class AdminDAOImpl implements AdminDAO{
 	}
 	
 	@Override
-	public List<UserVO> studyList(Criteria cri) throws Exception{
+	public List<StudyVO> studyList(Criteria cri) throws Exception{
 		return session.selectList(namespace + ".studyList", cri);  //study 정보 리스트,페이징 
 	}
 	
@@ -95,4 +99,60 @@ public class AdminDAOImpl implements AdminDAO{
 	public int studyCountPaging(Criteria cri)throws Exception{
 		return session.selectOne(namespace + ".studyCountPaging", cri); // totalCount 반환
 	}
+	
+	@Override
+	public StudyVO studyDetail(Integer bno)throws Exception{
+		return session.selectOne(namespace + ".studyDetail", bno);  //스터디 정보 정보 상세 가져옴
+	}
+	
+	@Override
+	public List<StudyVO> studyDCategory(Criteria cri) throws Exception{
+		return session.selectList(namespace + ".studyDCategory", cri);  //study 대카테고리 정보
+	}
+	
+	@Override
+	public List<StudyVO> studySCategory(Criteria cri) throws Exception{
+		return session.selectList(namespace + ".studySCategory", cri);  //study 소카테고리 정보
+	}
+	
+	@Override
+	public List<StudyVO> region(Criteria cri) throws Exception{
+		return session.selectList(namespace + ".region", cri);   //지역 정보 가져옴  
+	}
+	
+	@Override
+	public List<ReplyStudyVO> replyList(Criteria cri) throws Exception{
+		return session.selectList(namespace + ".replyList", cri);   //스터디 댓글 정보 가져옴  
+	}
+	
+	@Override
+	public int replyCountPaging(Criteria cri)throws Exception{
+		return session.selectOne(namespace + ".replyCountPaging", cri); // totalCount 반환
+	}
+	
+	@Override
+	public List<QnaVO> qnaList(Criteria cri) throws Exception{
+		return session.selectList(namespace + ".qnaList", cri);   //qna 리스트 정보 가져옴  
+	}
+	
+	@Override
+	public int qnaCountPaging(Criteria cri)throws Exception{
+		return session.selectOne(namespace + ".qnaCountPaging", cri); // totalCount 반환
+	}
+	
+	@Override
+	public QnaVO qnaDetail(Integer bno)throws Exception{
+		return session.selectOne(namespace + ".qnaDetail", bno);  //qna 정보 정보 상세 가져옴
+	}
+	
+	@Override
+	public List<ReplyVO> qnaReply(Integer bno) throws Exception{
+		return session.selectList(namespace + ".qnaReply", bno);   //qna 댓글 리스트 정보 가져옴  
+	}
+	
+	@Override
+	public void qnaRegister(ReplyVO vo)throws Exception{
+		session.update(namespace + ".qnaRegister", vo);   // qna 댓글 등록
+	}
+		
 }

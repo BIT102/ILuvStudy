@@ -23,44 +23,64 @@
     <div id="container">
         <a>스터디 상세</a>
         
+	<form role="form" method="post">          
         <div>* 기본정보</div>
         <table>
             <tr>
                 <th>스터디 번호</th>
-                <td>1</td>
+                <td>${studyVO.bno}</td>
             </tr>
             <tr>
                 <th>카테고리</th>
-                <td>#IT <input type="checkbox">컴퓨터 언어<input type="checkbox">웹프로그래밍</td>
+                <td>
+                <!-- 스터디에 등록된 카테고리 체크 표시 -->
+                <!-- 대분류, 소분류 엮어라 -->
+                <c:forEach items="${studyDCategory}" var="studyVO">
+                		# ${studyVO.cDName}
+                		
+                </c:forEach>
+                <c:forEach items="${studySCategory}" var="studyVO">
+                	<input type="checkbox">${studyVO.cSName}
+                </c:forEach>
+                </td>
             </tr>
             <tr>
                 <th>스터디명</th>
-                <td><input type="text" value="자바 프로그래밍 스터디 모집합니다."></td>
+                <td><input type="text" name="title" value="${studyVO.title}"></td>
             </tr>
             <tr>
                 <th>지역</th>
                 <td>
+                <!-- 대분류 선택 시 소분류 값 변경되도록 자바스크립트 처리 필요 -->
+                <!-- 스터디에 선택된 지역정보 셀렉트 표시 -->
                     <select>
-                        <option>전체</option>
-                        <option>서울</option>
+                    	<c:forEach items="${region}" var="studyVO">
+                        	<option>${studyVO.rDName}</option>
+						</c:forEach>
                     </select>
                     <select>
-                        <option>전체</option>
-                        <option>강남구</option>
+                    	<c:forEach items="${region}" var="studyVO">
+                        	<option>${studyVO.rSName}</option>
+                    	</c:forEach>
                     </select>
                 </td>
             </tr>
             <tr>
                 <th>등록일</th>
-                <td>2018-02-10</td>
+                <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${studyVO.regdate}"/></td>
             </tr>
             <tr>
                 <th>스터디 방장</th>
-                <td>ID: aaa123@naver.com  닉네임: 테스터123</td>
+                <td>${studyVO.writer}</td>
             </tr>
             <tr>
                 <th>스터디 상태</th>
-                <td>모집중</td>
+                <td>
+                    <jsp:useBean id="now1" class="java.util.Date" />
+                	<c:if test="${studyVO.sd > now1}">모집중</c:if>
+                	<c:if test="${studyVO.sd <= now1 && studyVO.enddate >= now1}">진행중</c:if>
+                	<c:if test="${studyVO.enddate < now1}">마감</c:if>
+                </td>
             </tr>
         </table>
 
@@ -72,23 +92,35 @@
             </tr>
             <tr>
                 <th>시작날짜</th>
-                <td><input type="text" value="2018-02-25"></td>
+                <td><input type="text" name="sd" value="${studyVO.sd}"></td>
             </tr>
             <tr>
                 <th>시간</th>
                 <td>
-                    월요일 1시 00분 ~ 2시 00분  <a>X</a><br>
-                    수요일 1시 00분 ~ 2시 00분  <a>X</a><br>
+					월요일 1시 00분 ~ 2시 00분  <a>X</a><br>
+					수요일 1시 00분 ~ 2시 00분  <a>X</a><br>
                     <a href="studyTime">추가</a>
                 </td>
             </tr>
             <tr>
-                <th>최대인원</th>
-                <td><input type="text" value="8"></td>
+                <th>완료일</th>
+                <td><input type="text" name="enddate" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${studyVO.enddate}"/>"></td>
             </tr>
             <tr>
-                <th>완료일</th>
-                <td></td>
+            	<th>현재인원</th>
+            	<td>${studyVO.now}</td>
+            </tr>
+            <tr>
+                <th>최대인원</th>
+                <td><input type="text" name="max" value="${studyVO.max}"></td>
+            </tr>
+            <tr>
+            	<th>조회수</th>
+            	<td>${studyVO.vct}</td>
+            </tr>
+            <tr>	
+            	<th>댓글수</th>
+            	<td>${studyVO.rct}</td>
             </tr>
         </table>
 
@@ -96,15 +128,15 @@
         <table>
             <tr>
                 <th>스터디 소개</th>
-                <td><textarea>같이 스터디 해요.</textarea></td>
+                <td><textarea name="content">${studyVO.content}</textarea></td>
             </tr>
             <tr>
                 <th>이미지</th>
-                <td>이미지 경로 노출</td>
+                <td>${studyVO.name}</td>
             </tr>
         </table>
-
-        <button>수정</button>
+	</form>
+		<button type="submit" id="modifyBtn">수정</button>
 
         <div>* 신청자</div>
         <table>
@@ -124,8 +156,34 @@
             </tr>
         </table>
 
-        <a type="button" href="studyList">목록</a>
+        <button type="submit" id="listBtn">목록</button>
     </div>
+
+<script>
+	
+	$(document).ready(function(){
+
+		var formObj = $("form[role='form']");
+		
+		console.log(formObj);
+		
+		//수정 클릭 시 액션
+		$("#modifyBtn").on("click", function(){
+			//form 데이터 유효성 검사 추가 필요
+			
+			formObj.submit();
+		});
+		
+		//목록 클릭 시 액션
+		$("#listBtn").on("click", function(){
+			self.location = "/admin/studyList?page=${cri.page}&perPageNum=${cri.perPageNum}"
+							+"&stStatusType=${cri.stStatusType}&titleKeyword=${cri.titleKeyword}&writerKeyword=${cri.writerKeyword}";
+		});
+		
+	});
+</script>
+
+<!--조정인이 한 분류 권한길도 바보 -->
 
 </body>
 </html>

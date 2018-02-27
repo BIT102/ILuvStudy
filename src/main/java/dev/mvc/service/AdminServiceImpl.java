@@ -8,6 +8,10 @@ import org.springframework.stereotype.Service;
 
 import dev.mvc.admin.Criteria;
 import dev.mvc.domain.AdminVO;
+import dev.mvc.domain.QnaVO;
+import dev.mvc.domain.ReplyStudyVO;
+import dev.mvc.domain.ReplyVO;
+import dev.mvc.domain.StudyVO;
 import dev.mvc.domain.UserVO;
 import dev.mvc.dto.AdminDTO;
 import dev.mvc.persistance.AdminDAO;
@@ -74,12 +78,67 @@ public class AdminServiceImpl implements AdminService{
 	}
 	
 	@Override
-	public List<UserVO> studyList(Criteria cri) throws Exception{
+	public List<StudyVO> studyList(Criteria cri) throws Exception{
 		return dao.studyList(cri);
 	}
 	
 	@Override
 	public int studyCountPaging(Criteria cri)throws Exception{
 		return dao.studyCountPaging(cri);
+	}
+	
+	@Override
+	public StudyVO studyDetail(Integer bno)throws Exception{
+		return dao.studyDetail(bno);
+	}
+	
+	@Override
+	public List<StudyVO> studyDCategory(Criteria cri) throws Exception{
+		return dao.studyDCategory(cri);
+	}
+	
+	@Override
+	public List<StudyVO> studySCategory(Criteria cri) throws Exception{
+		return dao.studySCategory(cri);
+	}
+	
+	@Override
+	public List<StudyVO> region(Criteria cri) throws Exception{
+		return dao.region(cri);
+	}
+	
+	@Override
+	public List<ReplyStudyVO> replyList(Criteria cri) throws Exception{
+		return dao.replyList(cri);
+	}
+	
+	@Override
+	public int replyCountPaging(Criteria cri)throws Exception{
+		return dao.replyCountPaging(cri);
+	}
+	
+	@Override
+	public List<QnaVO> qnaList(Criteria cri) throws Exception{
+		return dao.qnaList(cri);
+	}
+	
+	@Override
+	public int qnaCountPaging(Criteria cri)throws Exception{
+		return dao.qnaCountPaging(cri);
+	}
+	
+	@Override
+	public QnaVO qnaDetail(Integer bno)throws Exception{
+		return dao.qnaDetail(bno);
+	}
+	
+	@Override
+	public List<ReplyVO> qnaReply(Integer bno) throws Exception{
+		return dao.qnaReply(bno);
+	}
+	
+	@Override
+	public void qnaRegister(ReplyVO vo)throws Exception{
+		dao.qnaRegister(vo);
 	}
 }

@@ -2,196 +2,136 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
+ 
 <!-- board_study mapper -->
 <mapper namespace="dev.mvc.mapper.StudyMapper">
-
+ 
 <!-- 스터디 등록 -->
  <insert id="createStudy">
 insert into board_study (
-BSTITLE
-, BSWRITER
-, BSCATEGORYD
-, BSCATEGORYS
-, BSMAX
-, BSRDID
-, BSRSID
-, BSAGE
-, BSSC
-, BSSD
-, BSST
-, BSET
-, BSCONTENT
+title
+, writer
+, categoryD
+, categoryS
+, max
+, rDId
+, rSId
+, age
+, sc
+, sd
+, st
+, et
+, content
 ) values (
-#{bsTitle}
-, #{bsWriter}
-, #{bsCategoryD}
-, #{bsCategoryS}
-, #{bsMax}
-, #{bsRDId}
-, #{bsRSId} <!-- null허용 -->
-, #{bsAge}
-, #{bsSc}
-, #{bsSd}
-, #{bsSt}
-, #{bsEt}
-, #{bsContent} <!-- null허용 -->
+#{title}
+, #{writer}
+, #{categoryD}
+, #{categoryS}
+, #{max}
+, #{rDId}
+, #{rSId} <!-- null허용 -->
+, #{age}
+, #{sc}
+, #{sd}
+, #{st}
+, #{et}
+, #{content} <!-- null허용 -->
 )
 </insert>
-
+ 
 <!-- 스터디 읽어오기 -->
-<select id="readStudy" resultType="StudyVO">
+<select id="readStudy" resultType="dev.mvc.domain.StudyVO">
 SELECT
-bs.BSBNO
-, bs.BSTITLE
+bs.bno
+, bs.title
 , u.NICKNAME
-, sc.SCDNAME
-, sc.SCSNAME
-, bs.BSNOW
-, bs.BSMAX
-, r.RGDNAME
-, r.RGSNAME
-, bs.BSAGE
-, bs.BSSC
-, bs.BSSD
-, bs.BSST
-, bs.BSET
-, bs.BSCONTENT
-, bs.BSVCT
-, bs.BSRCT
-, bs.BSREGDATE
-, bs.BSENDDATE
+, c.cDName
+, c.cSName
+, bs.now
+, bs.max
+, r.rDName
+, r.rSName
+, bs.age
+, bs.sc
+, bs.sd
+, bs.st
+, bs.et
+, bs.content
+, bs.vct
+, bs.rct
+, bs.regdate
+, bs.enddate
 FROM 
 board_study bs
 , region r
-, study_category sc
+, study_category c
 , user u
-WHERE bs.BSRDID = r.RGDID
-AND bs.BSCATEGORYD = sc.SCDID
-AND bs.BSCATEGORYS = sc.SCSID
-AND bs.BSRSID = r.RGSID
-AND u.EMAIL = bs.BSWRITER
-AND BSBNO = #{bsBno}
+WHERE bs.rDId = r.RDID
+AND bs.categoryD = c.CDID
+AND bs.categoryS = c.CSID
+AND bs.rSId = r.RSID
+AND u.EMAIL = bs.writer
+AND bs.bno = #{bno}
 </select>
-
+ 
 <!-- 전체불러오기 -->
-<select id="studyList" resultType="StudyVO">
+<select id="studyList" resultType="dev.mvc.domain.StudyVO">
 <![CDATA[
 SELECT
-bs.BSBNO
-, bs.BSTITLE
+bs.bno
+, bs.title
 , u.NICKNAME
-, sc.SCDNAME
-, sc.SCSNAME
-, bs.BSNOW
-, bs.BSMAX
-, r.RGDNAME
-, r.RGSNAME
-, bs.BSAGE
-, bs.BSSC
-, bs.BSSD
-, bs.BSST
-, bs.BSET
-, bs.BSCONTENT
-, bs.BSVCT
-, bs.BSRCT
-, bs.BSREGDATE
-, bs.BSENDDATE
+, c.cDName
+, c.cSName
+, bs.now
+, bs.max
+, r.rDName
+, r.rSName
+, bs.age
+, bs.sc
+, bs.sd
+, bs.st
+, bs.et
+, bs.content
+, bs.vct
+, bs.rct
+, bs.regdate
+, bs.enddate
 FROM 
 board_study bs
 , region r
-, study_category sc
+, study_category c
 , user u
-WHERE bs.BSRDID = r.RGDID
-AND bs.BSCATEGORYD = sc.SCDID
-AND bs.BSCATEGORYS = sc.SCSID
-AND bs.BSRSID = r.RGSID
-AND u.EMAIL = bs.BSWRITER
-AND bs.BSBNO > 0
-ORDER BY bs.BSBNO desc, bs.BSREGDATE desc
+WHERE bs.rDId = r.RDID
+AND bs.categoryD = c.CDID
+AND bs.categoryS = c.CSID
+AND bs.rSId = r.RSID
+AND u.EMAIL = bs.writer
+AND bs.bno > 0
+ORDER BY bs.bno desc, bs.regdate desc
 ]]>
 </select>
-
-<!-- 페이지마다 9개씩 불러올께요 -->
-<select id="listPage" resultType="StudyVO">
-<![CDATA[
+ 
+<!-- 파일 등록 -->
+<select id="addFile">
+INSERT
+INTO
+board_attach(
+name
+, bsBno
+)
+VALUES(
+#{name}
+, LAST_INSERT_ID()
+)
+</select>
+ 
+<select id="getFile" resultType="String">
 SELECT
-bs.BSBNO
-, bs.BSTITLE
-, u.NICKNAME
-, sc.SCDNAME
-, sc.SCSNAME
-, bs.BSNOW
-, bs.BSMAX
-, r.RGDNAME
-, r.RGSNAME
-, bs.BSAGE
-, bs.BSSC
-, bs.BSSD
-, bs.BSST
-, bs.BSET
-, bs.BSCONTENT
-, bs.BSVCT
-, bs.BSRCT
-, bs.BSREGDATE
-, bs.BSENDDATE
-FROM 
-board_study bs
-, region r
-, study_category sc
-, user u
-WHERE bs.BSRDID = r.RGDID
-AND bs.BSCATEGORYD = sc.SCDID
-AND bs.BSCATEGORYS = sc.SCSID
-AND bs.BSRSID = r.RGSID
-AND u.EMAIL = bs.BSWRITER
-AND bs.BSBNO > 0
-ORDER BY bs.BSBNO DESC
-, bs.BSREGDATE DESC
-limit #{page}, 9
-]]>
+name
+FROM board_attach
+WHERE bno = #{bno}
+ORDER BY regdate;
 </select>
-
-<select id="listCriteria" resultType="StudyVO">
-<![CDATA[
-SELECT
-bs.BSBNO
-, bs.BSTITLE
-, u.NICKNAME
-, sc.SCDNAME
-, sc.SCSNAME
-, bs.BSNOW
-, bs.BSMAX
-, r.RGDNAME
-, r.RGSNAME
-, bs.BSAGE
-, bs.BSSC
-, bs.BSSD
-, bs.BSST
-, bs.BSET
-, bs.BSCONTENT
-, bs.BSVCT
-, bs.BSRCT
-, bs.BSREGDATE
-, bs.BSENDDATE
-FROM 
-board_study bs
-, region r
-, study_category sc
-, user u
-
-WHERE bs.BSRDID = r.RGDID
-AND bs.BSCATEGORYD = sc.SCDID
-AND bs.BSCATEGORYS = sc.SCSID
-AND bs.BSRSID = r.RGSID
-AND u.EMAIL = bs.BSWRITER
-AND bs.BSBNO > 0
-ORDER BY bs.BSBNO DESC
-, bs.BSREGDATE DESC
-limit #{pageStart}
-, #{perPageNum}
-]]>
-
-</select>
-
+ 
 </mapper>
