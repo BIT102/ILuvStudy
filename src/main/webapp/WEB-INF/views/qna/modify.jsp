@@ -25,21 +25,21 @@
 	<div class="box-body">
 	  <div class="form-group">
 	  	<label for="exampleInputEmail1">BNO</label>
-	  	<input type="text" name='qnaBno' class="form-control" value="${qnaVO.qnaBno}" readonly="readonly">
+	  	<input type="text" name='bno' class="form-control" value="${qnaVO.bno}" readonly="readonly">
 	  </div>
 	  
       <div class="form-group">
        <label for="exampleInputEmail1">Title</label> <input type="text"
-        name='qnaTitle' class="form-control" value="${qnaVO.qnaTitle}">
+        name='title' class="form-control" value="${qnaVO.title}">
       </div>
       <div class="form-group">
        <label for="exampleInputPassword1">Content</label>
-       <textarea class="form-control" name="qnaContent" rows="3">${qnaVO.qnaContent}</textarea>
+       <textarea class="form-control" name="content" rows="3">${qnaVO.content}</textarea>
       </div>
       <div class="form-group">
        <label for="exampleInputEmail1">Writer</label> <input
-        type="text" name="qnaWriter" class="form-control"
-        value="${qnaVO.qnaWriter}">
+        type="text" name="writer" class="form-control"
+        value="${qnaVO.writer}">
       </div>
      </div>
  </form>

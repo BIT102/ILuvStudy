@@ -19,23 +19,23 @@
             <!--제목입력-->
             <div class="studytitle"></div>
                 <p>qna제목</p>
-                <input type="text" placeholder="질문제목" name="qnaTitle">
+                <input type="text" placeholder="질문제목" name="title">
             </div>
 
               <!--쓴사람//value값수정-->
             <div class="studywriter">
                 <p>쓴사람</p>
-                <input type="text" placeholder="쓴사람" name="qnaWriter" value="abc1@gmail.com">
+                <input type="text" placeholder="쓴사람" name="writer" value="abc1@gmail.com">
             </div>
             
             <div class="studywriter">
                 <p>내용</p>
-                <textarea name="qnaContent" rows="12">내용</textarea>
+                <textarea name="content" rows="12">내용</textarea>
             </div>
             
             <div class="studywriter">
                 <p>타입</p>
-                <select name="qnaType">
+                <select name="type">
                 <option value="0">FAQ등록</option>
                 <option value="1">미등록</option>
                 </select>

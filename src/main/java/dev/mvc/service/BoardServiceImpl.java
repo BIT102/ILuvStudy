@@ -1,4 +1,4 @@
-package dev.mvc.study.service;
+package dev.mvc.service;
 
 import java.util.List;
 
@@ -6,8 +6,8 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
-import dev.mvc.study.domain.BoardVO;
-import dev.mvc.study.persistence.BoardDAO;
+import dev.mvc.domain.BoardVO;
+import dev.mvc.persistence.BoardDAO;
 
 @Service
 public class BoardServiceImpl implements BoardService {

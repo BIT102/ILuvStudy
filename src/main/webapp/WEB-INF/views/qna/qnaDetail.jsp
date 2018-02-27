@@ -15,7 +15,7 @@
 <body>
 	
 	<form role="form" action="listPage" method="post">
-		<input type='hidden' name='bno' value="${qnaVO.qnaBno}">
+		<input type='hidden' name='bno' value="${qnaVO.bno}">
 		<input type='hidden' name='page' value="${cri.page}">  <!-- page, perPageNum추가 -->
 		<input type='hidden' name='perPageNum' value="${cri.perPageNum}">
 	</form>
@@ -23,15 +23,15 @@
 	<div>
 		
 		<div>
-			<label>Title</label><input type="text" name="title" value="${qnaVO.qnaTitle}" readonly="readonly">
+			<label>Title</label><input type="text" name="title" value="${qnaVO.title}" readonly="readonly">
 		</div>
 		
 		<div>
-			<label>Content</label><textarea name="content" rows="3" readonly="readonly">${qnaVO.qnaContent}</textarea> 
+			<label>Content</label><textarea name="content" rows="3" readonly="readonly">${qnaVO.content}</textarea> 
 		</div>
 		
 		<div>
-			<label>Writer</label><input type="text" name="writer" value="${qnaVO.qnaWriter}" readonly="readonly">
+			<label>Writer</label><input type="text" name="writer" value="${qnaVO.writer}" readonly="readonly">
 		</div>
 	
 	</div>

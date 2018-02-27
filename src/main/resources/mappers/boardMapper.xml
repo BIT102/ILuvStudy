@@ -10,7 +10,7 @@
   	values( #{BSTITLE}, #{BSWRITER}, #{BSCATEGORYD}, #{BSCATEGORYS}, #{BSNOW}, #{BSMAX}, #{BSRDID}, #{BSAGE}, #{BSSC}, #{BSSD}, #{BSST}, #{BSET})
   </insert>
   
-  <select id="read" resultType="dev.mvc.study.domain.BoardVO">
+  <select id="read" resultType="dev.mvc.domain.BoardVO">
   select
   	BSBNO, BSTITLE, BSCONTENT, BSWRITER, BSREGDATE, BSVCT
   from
@@ -18,7 +18,7 @@
   where BSBNO = #{BSBNO}
   </select>
   
-  <select id="listAll" resultType="dev.mvc.study.domain.BoardVO">
+  <select id="listAll" resultType="dev.mvc.domain.BoardVO">
   <![CDATA[
   select 
   	BSBNO, BSTITLE, BSCONTENT, BSWRITER, BSREGDATE, BSVCT

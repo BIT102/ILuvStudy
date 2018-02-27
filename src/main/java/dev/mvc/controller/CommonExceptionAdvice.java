@@ -1,4 +1,4 @@
-package dev.mvc.study;
+package dev.mvc.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

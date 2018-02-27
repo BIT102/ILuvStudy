@@ -1,9 +1,11 @@
-package dev.mvc.study.persistence;
+package dev.mvc.persistence;
 
 import java.util.List;
 
-import dev.mvc.study.domain.Criteria;
-import dev.mvc.study.domain.QnaVO;
+import dev.mvc.domain.Criteria;
+import dev.mvc.domain.QnaVO;
+import dev.mvc.domain.ReplyVO;
+import dev.mvc.domain.SearchCriteria;
 
 public interface QnaDAO {
 
@@ -30,4 +32,18 @@ public interface QnaDAO {
 	
 	//페이지
 	public int countPaging(Criteria cri)throws Exception;
+	
+	//동적SQL문을 적용하기 위한 메서드 (둘다 SearchCriteria를 파라미터로 받아들이도록설계)  - page, perPageNum, searchType, keyword 데이터 유지가능
+	public List<QnaVO> listSearch(SearchCriteria cri)throws Exception;
+	
+	public int listSearchCount(SearchCriteria cri)throws Exception;
+	
+	//ReplyDAO
+	public List<ReplyVO> list(Integer bqBno)throws Exception;
+	
+	public void create(ReplyVO vo) throws Exception;
+	
+	public void update(ReplyVO vo)throws Exception;
+	
+	public void deleteReply(Integer rno)throws Exception;
 }

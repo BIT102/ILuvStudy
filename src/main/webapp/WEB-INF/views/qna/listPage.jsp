@@ -41,13 +41,13 @@
 	<c:forEach items="${list}" var="QnaVO">
 	
 		<tr>
-			<td>${QnaVO.qnaBno}</td>
-			<td><a href="/qna/qnaDetail${pageMaker.makeQuery(pageMaker.cri.page)}&bno=${QnaVO.qnaBno}">
-			${QnaVO.qnaTitle}</a>
+			<td>${QnaVO.bno}</td>
+			<td><a href="/qna/qnaDetail${pageMaker.makeQuery(pageMaker.cri.page)}&bno=${QnaVO.bno}">
+			${QnaVO.title}</a>
 			</td>
-			<td>${QnaVO.qnaWriter}</td>
-			<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${QnaVO.qnaRegdate}" /></td> <!-- VO의  qnaRegdate타입을 Date로 바꿔야함. -->
-			<td><span>${QnaVO.qnaType}</span></td>
+			<td>${QnaVO.writer}</td>
+			<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${QnaVO.regdate}" /></td> <!-- VO의  regdate타입을 Date로 바꿔야함. -->
+			<td><span>${QnaVO.type}</span></td>
 		</tr>
 		
 	</c:forEach>

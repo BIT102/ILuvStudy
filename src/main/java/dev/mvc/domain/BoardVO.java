@@ -1,4 +1,4 @@
-package dev.mvc.study.domain;
+package dev.mvc.domain;
 
 import java.util.Date;
 

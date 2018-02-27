@@ -1,8 +1,8 @@
-package dev.mvc.study.persistence;
+package dev.mvc.persistence;
 
 import java.util.List;
 
-import dev.mvc.study.domain.BoardVO;
+import dev.mvc.domain.BoardVO;
 
 public interface BoardDAO {
 	

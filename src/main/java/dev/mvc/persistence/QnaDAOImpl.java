@@ -1,4 +1,4 @@
-package dev.mvc.study.persistence;
+package dev.mvc.persistence;
 
 import java.util.List;
 
@@ -7,8 +7,10 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import dev.mvc.study.domain.Criteria;
-import dev.mvc.study.domain.QnaVO;
+import dev.mvc.domain.Criteria;
+import dev.mvc.domain.QnaVO;
+import dev.mvc.domain.ReplyVO;
+import dev.mvc.domain.SearchCriteria;
 
 @Repository
 public class QnaDAOImpl implements QnaDAO {
@@ -17,7 +19,7 @@ public class QnaDAOImpl implements QnaDAO {
 	private SqlSession session;
 	
 	private static String namespace = "dev.mvc.mapper.qnaMapper"; //qnaMapper.xml에서 설정한 namespace
-	
+	private static String namespace2 = "dev.mvc.mapper.replyMapper"; //replyMapper.xml namespace2
 	@Override
 	public void create(QnaVO vo) throws Exception {
 		session.insert(namespace+".create", vo);
@@ -65,5 +67,41 @@ public class QnaDAOImpl implements QnaDAO {
 	public int countPaging(Criteria cri) throws Exception {
 		
 		return session.selectOne(namespace+".countPaging", cri);
+	}
+
+	@Override
+	public List<QnaVO> listSearch(SearchCriteria cri) throws Exception {
+
+		return session.selectList(namespace+".listSearch", cri);
+	}
+
+	@Override
+	public int listSearchCount(SearchCriteria cri) throws Exception {
+
+		return session.selectOne(namespace+".listSearchCount", cri);
+	}
+
+	@Override
+	public List<ReplyVO> list(Integer bqBno) throws Exception {
+		
+		return session.selectList(namespace2 + ".list", bqBno);
+	}
+
+	@Override
+	public void create(ReplyVO vo) throws Exception {
+
+		session.insert(namespace2 + ".create", vo);
+	}
+
+	@Override
+	public void update(ReplyVO vo) throws Exception {
+		
+		session.update(namespace2 + ".update", vo);
+	}
+
+	@Override
+	public void deleteReply(Integer rno) throws Exception {
+
+		session.delete(namespace2 + ".delete", rno);
 	}
 }

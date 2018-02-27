@@ -1,4 +1,4 @@
-package dev.mvc.study.persistence;
+package dev.mvc.persistence;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import dev.mvc.study.domain.BoardVO;
+import dev.mvc.domain.BoardVO;
 
 @Repository//DAO를 스프링에 인식시키는 애노테이션
 public class BoardDAOImpl implements BoardDAO {

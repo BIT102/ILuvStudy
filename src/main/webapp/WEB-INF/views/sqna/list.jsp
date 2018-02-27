@@ -14,6 +14,8 @@
     <style>
     	.table{border:1px solid grey; width:60%; margin:0 auto;}
     </style>
+    
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script>
     
     	var result = '${msg}';
@@ -21,7 +23,7 @@
     	if(result == 'SUCCESS'){
     		alert("처리완료.");
     	}
-    
+
     </script>
 </head>
 <body>
@@ -72,12 +74,11 @@
 	<c:forEach items="${list}" var="QnaVO">
 	
 		<tr>
-			<td>${QnaVO.qnaBno}</td>
-			<td><a href="/qna/qnaDetail?bno=${QnaVO.qnaBno}">${QnaVO.qnaTitle}</a></td>
-			<td>${QnaVO.qnaWriter}</td>
-			<td><fmt //fmt가 안먹음.....
-			:formatDate pattern="yyyy-MM-dd HH:mm" value="${QnaVO.qnaRegdate}" /></td>
-			<td><span>${QnaVO.qnaType}</span></td>
+			<td>${QnaVO.bno}</td>
+			<td><a href="/qna/qnaDetail${pageMaker.makeSearch(pageMaker.cri.page)}&bno=${QnaVO.bno}">${QnaVO.title}</a></td>
+			<td>${QnaVO.writer}</td>
+			<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${QnaVO.regdate}" /></td>
+			<td><span>${QnaVO.type}</span></td>
 		</tr>
 		
 	</c:forEach>
@@ -89,24 +90,52 @@
 		
 		<!-- 스프링 MVC를 이용하는 방식 -->
 			<c:if test="${pageMaker.prev}">
-				<li><a href="listPage?page=${pageMaker.startPage -1}">&laquo;</a></li>
+				<li><a href="list${pageMaker.makeSearch(pageMaker.startPage -1)}">&laquo;</a></li>
 			</c:if>
 			
 			<c:forEach begin="${pageMaker.startPage }"
 				end="${pageMaker.endPage}" var = "idx">
 				<li 
 					<c:out value="${pageMaker.cri.page == idx?'class=active':''}"/>>
-					<a href="listPage?page=${idx}">${idx}</a>
+					<a href="list${pageMaker.makeSearch(idx)}">${idx}</a>
 				</li>
 			</c:forEach>
 			
 			<c:if test="${pageMaker.next && pageMaker.endPage>0 }">
-				<li><a href="listPage?page=${pageMaker.endPage +1}">&raquo;</a>
+				<li><a href="list${pageMaker.makeSearch(pageMaker.endPage +1)}">&raquo;</a>
 				</li>
 			</c:if> 
 			
 		</ul>
 	</div>
+
+<script>
+
+<!-- search버튼 동작  -->
+$(document).ready(
+		function(){
+			
+			$('#searchBtn').on(
+					"click",
+					function(event){
+						
+						self.location = "list"
+							+ '${pageMaker.makeQuery(1)}'
+							+ "&searchType="
+							+ $("select option:selected").val()
+							+ "&keyword=" + encodeURIComponent($('#keywordInput').val());
+					});
+			
+			$('#newBtn').on("click", function(evt){
+				
+				self.location = "register";
+			});
+			
+		});
+</script>
+
 	
 </body>
+
+
 </html>

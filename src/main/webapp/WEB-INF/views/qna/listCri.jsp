@@ -40,12 +40,12 @@
 	<c:forEach items="${list}" var="QnaVO">
 	
 		<tr>
-			<td>${QnaVO.qnaBno}</td>
-			<td><a href="/qna/qnaDetail?bno=${QnaVO.qnaBno}">${QnaVO.qnaTitle}</a></td>
-			<td>${QnaVO.qnaWriter}</td>
+			<td>${QnaVO.bno}</td>
+			<td><a href="/qna/qnaDetail?bno=${QnaVO.bno}">${QnaVO.title}</a></td>
+			<td>${QnaVO.writer}</td>
 			<td><fmt //fmt가 안먹음.....
-			:formatDate pattern="yyyy-MM-dd HH:mm" value="${QnaVO.qnaRegdate}" /></td>
-			<td><span>${QnaVO.qnaType}</span></td>
+			:formatDate pattern="yyyy-MM-dd HH:mm" value="${QnaVO.regdate}" /></td>
+			<td><span>${QnaVO.type}</span></td>
 		</tr>
 		
 	</c:forEach>

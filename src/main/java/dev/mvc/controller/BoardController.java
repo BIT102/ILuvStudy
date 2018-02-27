@@ -1,4 +1,4 @@
-package dev.mvc.study;
+package dev.mvc.controller;
 
 import javax.inject.Inject;
 
@@ -9,7 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import dev.mvc.study.service.BoardService;
+import dev.mvc.service.BoardService;
 
 @Controller
 @RequestMapping("/board/")

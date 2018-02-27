@@ -1,4 +1,4 @@
-package dev.mvc.study.service;
+package dev.mvc.service;
 
 import java.util.List;
 
@@ -6,9 +6,11 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
-import dev.mvc.study.domain.Criteria;
-import dev.mvc.study.domain.QnaVO;
-import dev.mvc.study.persistence.QnaDAO;
+import dev.mvc.domain.Criteria;
+import dev.mvc.domain.QnaVO;
+import dev.mvc.domain.ReplyVO;
+import dev.mvc.domain.SearchCriteria;
+import dev.mvc.persistence.QnaDAO;
 
 @Service
 public class QnaServiceImpl implements QnaService {
@@ -51,5 +53,41 @@ public class QnaServiceImpl implements QnaService {
 	public int listCountCriteria(Criteria cri) throws Exception {
 
 		return dao.countPaging(cri);
+	}
+
+	@Override
+	public List<QnaVO> listSearchCriteria(SearchCriteria cri) throws Exception {
+		
+		return dao.listSearch(cri);
+	}
+
+	@Override
+	public int listSearchCount(SearchCriteria cri) throws Exception {
+		
+		return dao.listSearchCount(cri);
+	}
+//reply
+	@Override
+	public void addReply(ReplyVO vo) throws Exception {
+
+		dao.create(vo);
+	}
+
+	@Override
+	public List<ReplyVO> listReply(Integer bqBno) throws Exception {
+		
+		return dao.list(bqBno);
+	}
+
+	@Override
+	public void modifyReply(ReplyVO vo) throws Exception {
+
+		dao.update(vo);
+	}
+
+	@Override
+	public void removeReply(Integer rno) throws Exception {
+
+		dao.delete(rno);
 	}
 }
