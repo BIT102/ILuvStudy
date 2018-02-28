@@ -28,7 +28,7 @@ public class UserController {
 	//회원가입 컨트롤러
 	@RequestMapping(value = "/join", method = RequestMethod.GET)
 	public void joinUserGET(UserVO vo, Model model) {
-		
+		System.out.println("join......................");
 	}
 	
 	@RequestMapping(value = "/joinUser", method = RequestMethod.POST)
