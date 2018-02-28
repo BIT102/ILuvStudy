@@ -56,27 +56,34 @@
     <br>
     <br>
     <br>
+    
+   <form name="changePwForm" action="/changePw" method="post"> 
 
    <div id="acinfo">
         <p2>비밀번호 변경</p2>
         <table id="actable">
             <tr>
                 <td><label for="nowPW">기존 비밀번호</label></td>
-                <td><input id="nowPW" type="password" value="default"></td>
+                <td><input id="nowPW" type="password" value="${vo.password}"></td>
+              
+                	
             </tr>
             <tr>
                 <td><label for="newPW">새 비밀번호</label></td>
-                <td><input id="newPW" type="password" placeholder="8자리에서 20자리 이하 영문, 숫자로만 설정해 주세요."></td>
+                <td><input id="newPW" type="password" name="password" placeholder="8자리에서 20자리 이하 영문, 숫자로만 설정해 주세요."></td>
             </tr>
             <tr>
                 <td><label for="repeatPW">비밀번호 확인</label></td>
-                <td><input id="repeatPW" type="password" placeholder="비밀번호를 한번 더 입력해주세요."></td>
+                <td><input id="repeatPW" type="password" placeholder="비밀번호를 한번 더 입력해주세요." ></td>
              
         </table>
+        <input type="hidden" value="${vo.email}" name="email" readonly> 
    </div>
 <div>
-   <input type="button" value="변경하기">
+   <input type="submit" value="변경하기">
 </div>
+
+	</form>
 </body>
 
 

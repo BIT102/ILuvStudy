@@ -71,6 +71,8 @@
     <br>
     <br>
 
+	<form name="addInfoForm" action="/addInfo" method="post">
+
 	<!-- 부가정보  -->
     <h4>부가정보 입력</h4>
    
@@ -102,8 +104,6 @@
     //     var kk = document.getElementsByClassName("IT");
     //     kk[0].style.visibility = "visible"
     // }
-
-
     </script>
 
     <div class="IT" id="IT">
@@ -143,15 +143,21 @@
     </select>
 
 
-    
-
-
    <h3>자기소개</h3>
-   <textarea row="5" cols="50"></textarea>
-
+   <textarea row="5" cols="50" name="introduction">${vo.introduction}</textarea>
+   
+   <h3>홈페이지</h3>
+   <input type="url" name="homepage" value="${vo.homepage}">
+   <br>
+   
+   
+   <input type="hidden" value="${vo.email}" name="email" readonly>
+   
 <div>
-   <input type="button" value="저장하기">
+   <input type="submit" value="저장하기">
 </div>
+
+</form>
 </body>
  
 

@@ -57,19 +57,28 @@
     <br>
     <br>
 
+   <form name="quitForm" action="/quit" method="post">
    
-   <div id="acinfo">
+<!--    <div id="acinfo">
         <p3>회원 탈퇴</p3>
         <table id="actable">
             <tr>
-                <td><input type="button" value="탈퇴하기"></td>
+            	<td><input id="quit">	
+                <td><input type="submit" name="quit" value="탈퇴하기"></td>
                 <td>탈퇴하시면 취소가 불가능합니다.</td> 
             </tr>
         </table>
    </div>
-<div>
-   
-</div>
+<div>   
+</div> -->
+
+	<p3>회원 탈퇴</p3><br><br>
+	<!-- <input id="butt" type="text" name="quit" > -->
+	
+	<input type="submit" value="탈퇴하기">
+	<input type="hidden" value="${vo.email}" name="email" readonly> 
+
+	</form>
 </body>
 
 
