@@ -21,7 +21,7 @@
 
 <!-- 나중에 수정 삭제 작업에 값을 넘겨주기 위해서 사용
 <form role="form" method="post">
-	<input type="hidden" name="ntBno" value="${NoticeVO.ntBno}">
+	<input type="hidden" name="bno" value="${NoticeVO.bno}">
 </form>-->
 
 <!-- 공지사항 내용들111111111 -->
@@ -29,20 +29,20 @@
 
 <c:forEach items="${list}" var="noticeVO">
 	<!-- 처음보일 부분1 -->
-	<div class="ntTitle">
+	<div class="title">
 		<p>공지사항 제목</p>
-		<input type="text" name="ntTitle" value="${noticeVO.ntTitle}">
+		<input type="text" name="title" value="${noticeVO.title}">
 		<p>올린날짜</p>
 		<fmt:formatDate pattern="yyyy-MM-dd HH:mm" 
-		value="${noticeVO.ntRegdate}" />
+		value="${noticeVO.regdate}" />
 	</div>
 	
 	<!-- 클릭하면 내용, 쓴사람 (관리자)-->
-	<div class="ntContentt">
+	<div class="contentt">
 		<p>글쓴이</p>
-		<input type="text" name="ntWriter" value="${noticeVO.ntWriter}">
+		<input type="text" name="writer" value="${noticeVO.writer}">
 		<p>내용</p>
-		<textarea name="ntContent" row="10">${noticeVO.ntContent}</textarea>
+		<textarea name="content" row="10">${noticeVO.content}</textarea>
 	</div>
 	
 </c:forEach>	

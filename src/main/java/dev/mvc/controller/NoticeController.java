@@ -9,8 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import dev.mvc.commons.Criteria;
-import dev.mvc.commons.PageMaker;
 import dev.mvc.service.NoticeService;
 
 @Controller  
@@ -29,20 +27,4 @@ public class NoticeController {
 		logger.info("show notice..........");
 		model.addAttribute("list", service.noticeList());
 	}
-	
-	@RequestMapping(value="/listCri", method=RequestMethod.GET)
-	public void listAll(Criteria cri, Model model) throws Exception {
-		
-		
-		logger.info(cri.toString());
-		
-		logger.info("show board.........");
-		model.addAttribute("list", service.listCriteria(cri));
-		PageMaker page = new PageMaker();
-		page.setCri(cri);
-		page.setTotalCount(131);
-		
-		model.addAttribute("pageMaker", page);
-	}
-	
 }

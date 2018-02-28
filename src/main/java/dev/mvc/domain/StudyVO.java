@@ -25,239 +25,278 @@ public class StudyVO {
 //	BS_ENDDATE	스터디완료일
 	//우아아앙아아아아아아아아앙
 	//우우우우우우우우우아아아아아아아아아아아아아아아아아아앙
-	private Integer bsBno; 
-	private String bsTitle; 
-	private String bsWriter; 
-	private String bsCategoryD; 
-	private Integer bsCategoryS; 
-	private Integer bsNow;
-	private Integer bsMax;
-	private String bsRDId;
-	private Integer bsRSId;
-	private String bsAge;
-	private String bsSc;
-	private String bsSd;
-	private String bsSt;
-	private String bsEt;
-	private String bsContent;
-	private Integer bsVct;
-	private Integer bsRct;
-	private Date bsRegdate;
-	private Date bsEnddate;
+	private Integer bno; 
+	private String title; 
+	private String writer; 
+	private String categoryD; 
+	private Integer categoryS; 
+	private Integer now;
+	private Integer max;
+	private String rDId;
+	private Integer rSId;
+	private String age;
+	private String sc;
+	private String sd;
+	private String st;
+	private String et;
+	private String content;
+	private Integer vct;
+	private Integer rct;
+	private Date regdate;
+	private Date enddate;
 	
 	
 	//지역이랑 카테고리는 이름으로 가져올께요
-	private String rgDName;
-	private String rgSName;
-	private String scDName;
-	private String scSName;
+	private String rDName;
+	private String rSName;
+	private String cDName;
+	private String cSName;
 	
 	// 작성자는 닉네임으로 표시
 	private String nickname;
 	
-	
+
+	//파일을 엄로드합니다
+	private Integer no;
+	private String name;
+	private Integer bsBno;
+
+	private String[] files;
+
+	public Integer getBno() {
+		return bno;
+	}
+
+	public void setBno(Integer bno) {
+		this.bno = bno;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getWriter() {
+		return writer;
+	}
+
+	public void setWriter(String writer) {
+		this.writer = writer;
+	}
+
+	public String getCategoryD() {
+		return categoryD;
+	}
+
+	public void setCategoryD(String categoryD) {
+		this.categoryD = categoryD;
+	}
+
+	public Integer getCategoryS() {
+		return categoryS;
+	}
+
+	public void setCategoryS(Integer categoryS) {
+		this.categoryS = categoryS;
+	}
+
+	public Integer getNow() {
+		return now;
+	}
+
+	public void setNow(Integer now) {
+		this.now = now;
+	}
+
+	public Integer getMax() {
+		return max;
+	}
+
+	public void setMax(Integer max) {
+		this.max = max;
+	}
+
+	public String getrDId() {
+		return rDId;
+	}
+
+	public void setrDId(String rDId) {
+		this.rDId = rDId;
+	}
+
+	public Integer getrSId() {
+		return rSId;
+	}
+
+	public void setrSId(Integer rSId) {
+		this.rSId = rSId;
+	}
+
+	public String getAge() {
+		return age;
+	}
+
+	public void setAge(String age) {
+		this.age = age;
+	}
+
+	public String getSc() {
+		return sc;
+	}
+
+	public void setSc(String sc) {
+		this.sc = sc;
+	}
+
+	public String getSd() {
+		return sd;
+	}
+
+	public void setSd(String sd) {
+		this.sd = sd;
+	}
+
+	public String getSt() {
+		return st;
+	}
+
+	public void setSt(String st) {
+		this.st = st;
+	}
+
+	public String getEt() {
+		return et;
+	}
+
+	public void setEt(String et) {
+		this.et = et;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public Integer getVct() {
+		return vct;
+	}
+
+	public void setVct(Integer vct) {
+		this.vct = vct;
+	}
+
+	public Integer getRct() {
+		return rct;
+	}
+
+	public void setRct(Integer rct) {
+		this.rct = rct;
+	}
+
+	public Date getRegdate() {
+		return regdate;
+	}
+
+	public void setRegdate(Date regdate) {
+		this.regdate = regdate;
+	}
+
+	public Date getEnddate() {
+		return enddate;
+	}
+
+	public void setEnddate(Date enddate) {
+		this.enddate = enddate;
+	}
+
+	public String getrDName() {
+		return rDName;
+	}
+
+	public void setrDName(String rDName) {
+		this.rDName = rDName;
+	}
+
+	public String getrSName() {
+		return rSName;
+	}
+
+	public void setrSName(String rSName) {
+		this.rSName = rSName;
+	}
+
+	public String getcDName() {
+		return cDName;
+	}
+
+	public void setcDName(String cDName) {
+		this.cDName = cDName;
+	}
+
+	public String getcSName() {
+		return cSName;
+	}
+
+	public void setcSName(String cSName) {
+		this.cSName = cSName;
+	}
+
 	public String getNickname() {
 		return nickname;
 	}
+
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
 
-	//파일을 엄로드합니다
-	private Integer baNo;
-	private String baName;
-	private Integer baBsBno;
-	private Date baRegdate;
-	private char baStatus;
-	
-	private String[] files;
-	
-	public String[] getFiles() {
-		return files;
+	public Integer getNo() {
+		return no;
 	}
-	public void setFiles(String[] files) {
-		this.files = files;
+
+	public void setNo(Integer no) {
+		this.no = no;
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public Integer getBsBno() {
 		return bsBno;
 	}
+
 	public void setBsBno(Integer bsBno) {
 		this.bsBno = bsBno;
 	}
-	public String getBsTitle() {
-		return bsTitle;
-	}
-	public void setBsTitle(String bsTitle) {
-		this.bsTitle = bsTitle;
-	}
-	public String getBsWriter() {
-		return bsWriter;
-	}
-	public void setBsWriter(String bsWriter) {
-		this.bsWriter = bsWriter;
-	}
-	public String getBsCategoryD() {
-		return bsCategoryD;
-	}
-	public void setBsCategoryD(String bsCategoryD) {
-		this.bsCategoryD = bsCategoryD;
-	}
-	public Integer getBsCategoryS() {
-		return bsCategoryS;
-	}
-	public void setBsCategoryS(Integer bsCategoryS) {
-		this.bsCategoryS = bsCategoryS;
-	}
-	public Integer getBsNow() {
-		return bsNow;
-	}
-	public void setBsNow(Integer bsNow) {
-		this.bsNow = bsNow;
-	}
-	public Integer getBsMax() {
-		return bsMax;
-	}
-	public void setBsMax(Integer bsMax) {
-		this.bsMax = bsMax;
-	}
-	public String getBsRDId() {
-		return bsRDId;
-	}
-	public void setBsRDId(String bsRDId) {
-		this.bsRDId = bsRDId;
-	}
-	public Integer getBsRSId() {
-		return bsRSId;
-	}
-	public void setBsRSId(Integer bsRSId) {
-		this.bsRSId = bsRSId;
-	}
-	public String getBsAge() {
-		return bsAge;
-	}
-	public void setBsAge(String bsAge) {
-		this.bsAge = bsAge;
-	}
-	public String getBsSc() {
-		return bsSc;
-	}
-	public void setBsSc(String bsSc) {
-		this.bsSc = bsSc;
-	}
-	public String getBsSd() {
-		return bsSd;
-	}
-	public void setBsSd(String bsSd) {
-		this.bsSd = bsSd;
-	}
-	public String getBsSt() {
-		return bsSt;
-	}
-	public void setBsSt(String bsSt) {
-		this.bsSt = bsSt;
-	}
-	public String getBsEt() {
-		return bsEt;
-	}
-	public void setBsEt(String bsEt) {
-		this.bsEt = bsEt;
-	}
-	public String getBsContent() {
-		return bsContent;
-	}
-	public void setBsContent(String bsContent) {
-		this.bsContent = bsContent;
-	}
-	public Integer getBsVct() {
-		return bsVct;
-	}
-	public void setBsVct(Integer bsVct) {
-		this.bsVct = bsVct;
-	}
-	public Integer getBsRct() {
-		return bsRct;
-	}
-	public void setBsRct(Integer bsRct) {
-		this.bsRct = bsRct;
-	}
-	public Date getBsRegdate() {
-		return bsRegdate;
-	}
-	public void setBsRegdate(Date bsRegdate) {
-		this.bsRegdate = bsRegdate;
-	}
-	public Date getBsEnddate() {
-		return bsEnddate;
-	}
-	public void setBsEnddate(Date bsEnddate) {
-		this.bsEnddate = bsEnddate;
-	}
-	public String getRgDName() {
-		return rgDName;
-	}
-	public void setRgDName(String rgDName) {
-		this.rgDName = rgDName;
-	}
-	public String getRgSName() {
-		return rgSName;
-	}
-	public void setRgSName(String rgSName) {
-		this.rgSName = rgSName;
-	}
-	public String getScDName() {
-		return scDName;
-	}
-	public void setScDName(String scDName) {
-		this.scDName = scDName;
-	}
-	public String getScSName() {
-		return scSName;
-	}
-	public void setScSName(String scSName) {
-		this.scSName = scSName;
-	}
-	public Integer getBaNo() {
-		return baNo;
-	}
-	public void setBaNo(Integer baNo) {
-		this.baNo = baNo;
-	}
-	public String getBaName() {
-		return baName;
-	}
-	public void setBaName(String baName) {
-		this.baName = baName;
-	}
-	public Integer getBaBsBno() {
-		return baBsBno;
-	}
-	public void setBaBsBno(Integer baBsBno) {
-		this.baBsBno = baBsBno;
-	}
-	public Date getBaRegdate() {
-		return baRegdate;
-	}
-	public void setBaRegdate(Date baRegdate) {
-		this.baRegdate = baRegdate;
-	}
-	public char getBaStatus() {
-		return baStatus;
-	}
-	public void setBaStatus(char baStatus) {
-		this.baStatus = baStatus;
-	}
-	
-	@Override
-	public String toString() {
-		return "StudyVO [bsBno=" + bsBno + ", bsTitle=" + bsTitle + ", bsWriter=" + bsWriter + ", bsCategoryD="
-				+ bsCategoryD + ", bsCategoryS=" + bsCategoryS + ", bsNow=" + bsNow + ", bsMax=" + bsMax + ", bsRDId="
-				+ bsRDId + ", bsRSId=" + bsRSId + ", bsAge=" + bsAge + ", bsSc=" + bsSc + ", bsSd=" + bsSd + ", bsSt="
-				+ bsSt + ", bsEt=" + bsEt + ", bsContent=" + bsContent + ", bsVct=" + bsVct + ", bsRct=" + bsRct
-				+ ", bsRegdate=" + bsRegdate + ", bsEnddate=" + bsEnddate + ", rgDName=" + rgDName + ", rgSName="
-				+ rgSName + ", scDName=" + scDName + ", scSName=" + scSName + ", nickname=" + nickname + ", baNo="
-				+ baNo + ", baName=" + baName + ", baBsBno=" + baBsBno + ", baRegdate=" + baRegdate + ", baStatus="
-				+ baStatus + ", files=" + Arrays.toString(files) + ", getClass()=" + getClass() + ", hashCode()="
-				+ hashCode() + ", toString()=" + super.toString() + "]";
+
+	public String[] getFiles() {
+		return files;
 	}
 
+	public void setFiles(String[] files) {
+		this.files = files;
+	}
+
+	@Override
+	public String toString() {
+		return "StudyVO [bno=" + bno + ", title=" + title + ", writer=" + writer + ", categoryD=" + categoryD
+				+ ", categoryS=" + categoryS + ", now=" + now + ", max=" + max + ", rDId=" + rDId + ", rSId=" + rSId
+				+ ", age=" + age + ", sc=" + sc + ", sd=" + sd + ", st=" + st + ", et=" + et + ", content=" + content
+				+ ", vct=" + vct + ", rct=" + rct + ", regdate=" + regdate + ", enddate=" + enddate + ", rDName="
+				+ rDName + ", rSName=" + rSName + ", cDName=" + cDName + ", cSName=" + cSName + ", nickname=" + nickname
+				+ ", no=" + no + ", name=" + name + ", bsBno=" + bsBno + ", files=" + Arrays.toString(files)
+				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
+				+ "]";
+	}
 }
+	

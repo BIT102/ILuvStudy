@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import dev.mvc.commons.Criteria;
 import dev.mvc.domain.StudyVO;
 import dev.mvc.service.StudyService;
   
@@ -41,50 +40,23 @@ public class StudyController {
 		service.regist(vo);
 	
 	//	rttr.addFlashAttribute("msg", "success");
-		return "redirect:/listAll";
+		return "redirect:/study/listAll";
 	}
 	
 	//스터디 목록 불러오기
 	@RequestMapping(value="/listAll", method = RequestMethod.GET)
-	public void readStudy(Criteria cri, Model model) throws Exception {
+	public void readStudy(Model model) throws Exception {
 		
 		logger.info("show list..........");
 		model.addAttribute("list", service.studyList());
-		
-		logger.info(cri.toString());
-		
-//		model.addAttribute("list", service.listCriteria(cri));
-//		PageMaker pageMaker = new PageMaker();
-//		pageMaker.setCri(cri);
-//		pageMaker.setTotalCount(131);
-//		
-//		model.addAttribute("pageMaker", pageMaker);
-		
+
 	}
-	
+
 	//상세페이지
 	@RequestMapping(value="/board", method = RequestMethod.GET)
-	public void readBoard(@RequestParam("bsBno") int bsBno, Model model) throws Exception {
+	public void readBoard(@RequestParam("bno") int bno, Model model) throws Exception {
 		
-		logger.info("show board.........");
-		model.addAttribute(service.read(bsBno));
+		model.addAttribute(service.read(bno));
 	}
-	
-	
-//	//연습
-//	@RequestMapping(value="/listCri", method = RequestMethod.GET)
-//	public void readBoard(Criteria cri, Model model) throws Exception {
-//		
-//		
-//		logger.info(cri.toString());
-//		
-//		model.addAttribute("list", service.listCriteria(cri));
-//		logger.info("show board.........");
-//		PageMaker page = new PageMaker();
-//		page.setCri(cri);
-//		page.setTotalCount(131);
-//		
-//		model.addAttribute("pageMaker", page);
-//	}
 }
 

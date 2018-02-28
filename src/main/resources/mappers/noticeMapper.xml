@@ -7,64 +7,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="dev.mvc.mapper.NoticeMapper">
 
 <!-- 공지사항 읽어오기 -->
-<select id="readNotice" resultType="NoticeVO">
+<select id="readNotice" resultType="dev.mvc.domain.NoticeVO">
 select
-NTBNO
-, NTTITLE
-, NTCONTENT
-, NTREGDATE
-, NTWRITER
+bno
+, title
+, content
+, regdate
+, writer
 from
 notice
-where NTBNO = #{ntBno}
+where bno = #{bno}
 </select>
 
 <!-- 게시판 전체 -->
-<select id="noticeList" resultType="NoticeVO">
+<select id="noticeList" resultType="dev.mvc.domain.NoticeVO">
 <![CDATA[
 select
-NTBNO
-, NTTITLE
-, NTCONTENT
-, NTREGDATE
-, NTWRITER
+bno
+, title
+, content
+, regdate
+, writer
 from
 notice
-where NTBNO > 0
-order by NTBNO desc
-, NTREGDATE desc
-]]>
-</select>
-
-<select id="listPage" resultType="NoticeVO">
-<![CDATA[
-select
-NTBNO
-, NTTITLE
-, NTCONTENT
-, NTREGDATE
-, NTWRITER
-from
-notice
-where NTBNO > 0
-ORDER BY NTBNO desc, NTREGDATE desc
-limit #{page}, 9
-]]>
-</select>
-
-<select id="listCriteria" resultType="NoticeVO">
-<![CDATA[
-select
-NTBNO
-, NTTITLE
-, NTCONTENT
-, NTREGDATE
-, NTWRITER
-from
-notice
-where NTBNO > 0
-ORDER BY NTBNO desc, NTREGDATE desc
-limit #{pageStart}, #{perPageNum}
+where bno > 0
+order by bno desc
+, regdate desc
 ]]>
 </select>
 </mapper>

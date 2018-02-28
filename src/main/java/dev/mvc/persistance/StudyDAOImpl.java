@@ -7,7 +7,6 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import dev.mvc.commons.Criteria;
 import dev.mvc.domain.StudyVO;
 
 @Repository
@@ -26,8 +25,8 @@ public class StudyDAOImpl implements StudyDAO {
 	
 	//스터디 불러오기
 	@Override
-	public StudyVO readStudy(Integer bsBno) {
-		return session.selectOne(namespace+".readStudy", bsBno);
+	public StudyVO readStudy(Integer bno) {
+		return session.selectOne(namespace+".readStudy", bno);
 	}
 	
 	//스터디전체
@@ -35,30 +34,16 @@ public class StudyDAOImpl implements StudyDAO {
 	public List<StudyVO> studyList() throws Exception {
 		return session.selectList(namespace+".studyList");
 	}
-	
-	//페이징처리
+
+	//파일업로드
 	@Override
-	public List<StudyVO> listPage(int page) throws Exception {
-		
-		if(page <= 0) { page = 1;}
-		
-		page = (page-1)*10;
-		
-		return session.selectList(namespace+".listPage", page);
+	public void addFile(String name) throws Exception {
+		session.insert(namespace+".addFile", name);
 	}
 	
-	//페이지당 리스트 처리
+	//파일 불러오기
 	@Override
-	public List<StudyVO> listCriteria(Criteria cri) throws Exception {
-		return session.selectList(namespace+".listCriteria", cri);
+	public List<String> getFile(Integer bno) throws Exception {
+		return session.selectList(namespace+".getFile", bno);
 	}
-	
-	
-	
-	
-//	//파일업로드
-//	@Override
-//	public void addFile(String baName) throws Exception {
-//		session.insert(namespace+".addFile", baName);
-//	}
 }
