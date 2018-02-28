@@ -44,14 +44,21 @@
 	
 	<!-- 김상욱, 박영원 -->
 		
-	<!-- 로그인 인터셉터 설정 -->
+	<!-- 관리자 로그인 인터셉터 설정 -->
+	<beans:bean id="authInterceptor" class="dev.mvc.interceptor.AuthInterceptor"></beans:bean>
 	<beans:bean id="loginInterceptor" class="dev.mvc.interceptor.LoginInterceptor"></beans:bean>
 		<interceptors>
 			<interceptor>
-				<mapping path="/admin/adminLoginPost"/>
+				<mapping path="/adminLoginPost"/>
 				<beans:ref bean="loginInterceptor"/>
 			</interceptor>
+			
+			<interceptor>
+				<mapping path="/admin/*"/>
+				<beans:ref bean="authInterceptor"/>
+			</interceptor>
 		</interceptors>
+
 		
 	<!-- 권한길, 조정인 -->	
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">

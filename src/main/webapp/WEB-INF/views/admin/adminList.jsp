@@ -5,6 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>계정 관리</title>
+
 </head>
 <body>
 <%@ include file="nav.jsp" %>
@@ -68,7 +69,7 @@
 
 		<!-- 계정 등록 -->
         <!-- <a href="adminRegister">등록</a> -->
-        <button type="submit" class="registerBtn">등록</button>
+        <button type="submit" id="registerBtn">등록</button>
         
         <!-- 페이징 처리 -->
         <!-- 페이징 정보 저장 -->

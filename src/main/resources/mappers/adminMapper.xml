@@ -325,8 +325,57 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- qna 댓글 정보 등록 -->
 	<insert id="qnaRegister">
-		values(#{id},#{pw},#{name},now(),#{status})
 		insert into reply_qna (bqbno, content, replyer)
-		values (#{bno},#{content},#{id})
+		values (#{bqBno},#{content},#{replyer})
 	</insert>
+	
+	
+<!-- 사트관리 > 공지사항 등록 메뉴 -->
+	<!-- 검색 SQL -->
+	<!-- SQL -->
+	<sql id="noticeSearch">
+		<if test="titleKeyword != null">
+			and title like concat('%', #{titleKeyword}, '%')
+		</if>
+	</sql>
+	
+	<!-- 검색 추가 필요 -->
+	<!-- 공지사항 등록 리스트 -->
+	<select id="noticeList" resultType="NoticeVO">
+	<![CDATA[
+		select *
+		from notice
+		where bno > 0 
+	]]>
+		<include refid="noticeSearch"></include>
+	<![CDATA[
+		order by bno desc, regdate desc
+		limit #{pageStart}, #{perPageNum}
+	]]>
+	</select>
+	
+	<!-- 공지사항 페이지 totalCount 반환 -->
+	<!-- 검색 추가 필요-->
+	<select id="noticeCountPaging" resultType="int">
+		<![CDATA[
+			select count(bno)
+			from notice
+			where bno > 0
+		]]>
+		<include refid="noticeSearch"></include>
+	</select>
+	
+	<!-- 공지사항 정보 상세 -->
+	<select id="noticeDetail" resultType="NoticeVO">
+		select *
+		from notice
+		where bno = #{bno}
+	</select>
+	
+	<!-- 공지사항 정보 업데이트 -->
+	<update id="noticeUpdate">
+		update notice 
+		set title=#{title}, content=#{content}, writer=#{writer}, lastModifyDate=#{now()}
+		where bno = #{bno}
+	</update>
 </mapper>

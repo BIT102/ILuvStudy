@@ -62,18 +62,35 @@
 <form role="form" method="post">
         <div>* 관리자 답변</div>
         <table>
+			<input type="hidden" name="bqBno" value="${qnaVO.bno}">
             <tr>
                 <th>답변내용</th>
-                <td><textarea name="content">${qnaVO.content}</textarea></td>
+                <td>
+                <!-- replyVO에서 작성자와 관리자 아이디가 일치할 경우 break할 설정값 -->
+                <c:set var="doneLoop" value="false"/>
+                <c:forEach items="${list}" var="replyVO" varStatus="status">
+                	<c:if test="${not doneLoop}">
+                		<!-- 댓글 작성자와 관리자 아이디가 일치할 경우 -->
+                		<c:if test="${replyVO.replyer eq login.id}">
+                			<textarea name="content" readonly>${replyVO.content}</textarea>
+                			<c:set var="doneLoop" value="true"/>
+                		</c:if>
+                		<!-- c:foreach 반복 마지막일때, 아이디가 일치하지 않는 경우 -->
+                		<c:if test="${status.last and !(replyVO.replyer eq login.id)}">
+                			<textarea name="content"></textarea>
+                		</c:if>
+                	</c:if>
+                </c:forEach>
+                <!-- replyVO에 데이터가 없을 경우 -->
+                <c:if test="${list.size() == 0}">
+               		<textarea name="content"></textarea>
+                </c:if>
+                </td>
             </tr>
             <tr>
                 <th>관리자 아이디</th>
-                <td>${admin.id}</td>
-            </tr>
-            <tr>
-                <th>답변일</th>
-                <jsp:useBean id="now" class="java.util.Date" />
-                <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${now}"/></td>
+                <!-- 세션에 저장되어 있는 관리자 아이디 가져옴 -->
+                <td><input type="hidden" name="replyer" value="${login.id}">${login.id}</td>
             </tr>
         </table>
 </form>

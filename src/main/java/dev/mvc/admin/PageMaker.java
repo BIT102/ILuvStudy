@@ -73,6 +73,16 @@ public class PageMaker {
 				.build();
 		return uriComponents.toUriString();
 	}
+	
+	//공지사항 페이지 검색
+	public String noticeSearch(int page){
+		UriComponents uriComponents = UriComponentsBuilder.newInstance()
+				.queryParam("page", page)
+				.queryParam("perPageNum", cri.getPerPageNum())
+				.queryParam("titleKeyword",encoding(cri.getTitleKeyword()))//검색 처리
+				.build();
+		return uriComponents.toUriString();
+	}
 		
 	//페이지 정보 저장
 	public String makeQuery(int page){

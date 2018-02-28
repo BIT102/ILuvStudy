@@ -1,7 +1,6 @@
 package dev.mvc.controller;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,11 +15,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import dev.mvc.admin.Criteria;
 import dev.mvc.admin.PageMaker;
 import dev.mvc.domain.AdminVO;
-import dev.mvc.domain.QnaVO;
+import dev.mvc.domain.NoticeVO;
 import dev.mvc.domain.ReplyVO;
 import dev.mvc.domain.StudyVO;
 import dev.mvc.domain.UserVO;
-import dev.mvc.dto.AdminDTO;
 import dev.mvc.service.AdminService;
 
 @Controller
@@ -31,28 +29,6 @@ public class AdminController {
 	
 	@Inject
 	private AdminService service;
-	
-//로그인 처리
-	//admin/adminLogin.jsp
-	@RequestMapping(value="/adminLogin", method=RequestMethod.GET)
-	public void loginGET(@ModelAttribute("vo") AdminVO vo){
-		logger.info("adminLogin get...");
-	}
-	
-	//admin/adminLoginPost.jsp
-	@RequestMapping(value="/adminLoginPost", method=RequestMethod.POST)
-	public void loginPOST(AdminDTO dto, HttpSession session, Model model)throws Exception{
-		logger.info("loginPOST post...");
-		
-		AdminVO vo = service.login(dto);
-		
-		if(vo == null){
-			return;
-		}
-		
-		model.addAttribute("AdminVO", vo);
-	}
-//로그인 처리 끝
 	
 //admin관리 > 계정관리
 	//admin/adminList.jsp
@@ -236,49 +212,96 @@ public class AdminController {
 
 	
 //사이트관리 > qna 관리
-		//admin/qnaList.jsp
-		@RequestMapping(value = "/qnaList", method = RequestMethod.GET)
-		public void qnaList(@ModelAttribute("cri") Criteria cri, Model model) throws Exception{
-			logger.info("qnaList get...");
-			logger.info(cri.toString());
-			model.addAttribute("list", service.qnaList(cri));  //페이징 처리
-			PageMaker pageMaker = new PageMaker();
-			pageMaker.setCri(cri);
-			
-			pageMaker.setTotalCount(service.qnaCountPaging(cri));  //totalCount 반환
-			
-			model.addAttribute("pageMaker", pageMaker);
-		}	
+	//admin/qnaList.jsp
+	@RequestMapping(value = "/qnaList", method = RequestMethod.GET)
+	public void qnaList(@ModelAttribute("cri") Criteria cri, Model model) throws Exception{
+		logger.info("qnaList get...");
+		logger.info(cri.toString());
+		model.addAttribute("list", service.qnaList(cri));  //페이징 처리
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
 		
-		//admin/qnaDetail.jsp
-		@RequestMapping(value="/qnaDetail", method = RequestMethod.GET)
-		public void qnaDetail(@RequestParam("bno") int bno, @ModelAttribute("cri") Criteria cri, 
-							Model model) throws Exception{
-			logger.info("qnaDetail get...");
-			logger.info(cri.toString());
-			
-			model.addAttribute(service.qnaDetail(bno));
-			model.addAttribute("list", service.qnaReply(bno));
-		}
+		pageMaker.setTotalCount(service.qnaCountPaging(cri));  //totalCount 반환
 		
-		//admin/qnaDetail.jsp 에서 댓글 정보 등록 시
-		@RequestMapping(value="/qnaDetail", method = RequestMethod.POST)
-		public String qnaDetail(ReplyVO vo1, QnaVO vo, Criteria cri, RedirectAttributes rttr) throws Exception{
-			logger.info("qnaDetail post...");
-			logger.info(cri.toString());
-			service.qnaRegister(vo1);
-			
-			//페이징 정보 유지
-			rttr.addAttribute("page", cri.getPage());
-			rttr.addAttribute("perPageNum", cri.getPerPageNum());
-			//검색 정보 유지
-			rttr.addAttribute("faqType", cri.getFaqType());
-			rttr.addAttribute("emailKeyword", cri.getEmailKeyword());
-			rttr.addFlashAttribute("msg", "SUCCESS");
-			
-			logger.info(rttr.toString());
-			
-			return "redirect:/admin/qnaList";
-		}
+		model.addAttribute("pageMaker", pageMaker);
+	}	
 		
+	//admin/qnaDetail.jsp
+	@RequestMapping(value="/qnaDetail", method = RequestMethod.GET)
+	public void qnaDetail(@RequestParam("bno") int bno, @ModelAttribute("cri") Criteria cri, 
+						Model model) throws Exception{
+		logger.info("qnaDetail get...");
+		logger.info(cri.toString());
+		
+		model.addAttribute(service.qnaDetail(bno));
+		model.addAttribute("list", service.qnaReply(bno));
+	}
+		
+	//admin/qnaDetail.jsp 에서 댓글 정보 등록 시
+	@RequestMapping(value="/qnaDetail", method = RequestMethod.POST)
+	public String qnaDetail(ReplyVO vo, Model model, Criteria cri, RedirectAttributes rttr) throws Exception{
+		logger.info("qnaDetail post...");
+		logger.info(cri.toString());
+		logger.info(vo.toString());
+		service.qnaRegister(vo);
+	
+		//페이징 정보 유지
+		rttr.addAttribute("page", cri.getPage());
+		rttr.addAttribute("perPageNum", cri.getPerPageNum());
+		//검색 정보 유지
+		rttr.addAttribute("faqType", cri.getFaqType());
+		rttr.addAttribute("emailKeyword", cri.getEmailKeyword());
+		rttr.addFlashAttribute("msg", "SUCCESS");
+		
+		logger.info(rttr.toString());
+		
+		return "redirect:/admin/qnaList";
+	}
+	
+	
+//사이트관리 > qna 관리 끝
+	//admin/noticeList.jsp
+	@RequestMapping(value = "/noticeList", method = RequestMethod.GET)
+	public void noticeList(@ModelAttribute("cri") Criteria cri, Model model) throws Exception{
+		logger.info("noticeList get...");
+		logger.info(cri.toString());
+		model.addAttribute("list", service.noticeList(cri));  //페이징 처리
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		
+		pageMaker.setTotalCount(service.noticeCountPaging(cri));  //totalCount 반환
+		
+		model.addAttribute("pageMaker", pageMaker);
+	}	
+	
+	//admin/noticeDetail.jsp
+	@RequestMapping(value="/noticeDetail", method = RequestMethod.GET)
+	public void noticeDetail(@RequestParam("bno") int bno, @ModelAttribute("cri") Criteria cri, 
+						Model model) throws Exception{
+		logger.info("noticeDetail get...");
+		logger.info(cri.toString());
+		
+		model.addAttribute(service.noticeDetail(bno));
+	}
+	
+	//admin/noticeDetail.jsp 에서 공지사항 수정 시
+	@RequestMapping(value="/noticeDetail", method = RequestMethod.POST)
+	public String noticeUpdate(NoticeVO vo, Criteria cri, RedirectAttributes rttr) throws Exception{
+		logger.info("noticeDetail post...");
+		logger.info(cri.toString());
+		service.noticeUpdate(vo);
+		
+		//페이징 정보 유지
+		rttr.addAttribute("page", cri.getPage());
+		rttr.addAttribute("perPageNum", cri.getPerPageNum());
+		//검색 정보 유지
+		rttr.addAttribute("titleKeyword", cri.getTitleKeyword());
+		
+		rttr.addFlashAttribute("msg", "SUCCESS");
+		
+		logger.info(rttr.toString());
+		
+		return "redirect:/admin/noticeList";
+	}
+
 }

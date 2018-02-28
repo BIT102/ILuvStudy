@@ -31,15 +31,11 @@
             </tr>
             <tr>
                 <th>작성자</th>
-                <td>admin123</td>
+                <td>${login.id}</td>
             </tr>
             <tr>
                 <th>내용</th>
                 <td><textarea></textarea></td>
-            </tr>
-            <tr>
-                <th>공개여부</th>
-                <td><input type="radio" name="check">공개  <input type="radio" name="check">비공개</td>
             </tr>
         </table>
 

@@ -4,6 +4,7 @@ import java.util.List;
 
 import dev.mvc.admin.Criteria;
 import dev.mvc.domain.AdminVO;
+import dev.mvc.domain.NoticeVO;
 import dev.mvc.domain.QnaVO;
 import dev.mvc.domain.ReplyStudyVO;
 import dev.mvc.domain.ReplyVO;
@@ -41,4 +42,9 @@ public interface AdminService {
 
 	public List<ReplyVO> qnaReply(Integer bno) throws Exception;
 	public void qnaRegister(ReplyVO vo)throws Exception;
+	
+	public List<NoticeVO> noticeList(Criteria cri) throws Exception;
+	public int noticeCountPaging(Criteria cri)throws Exception;
+	public NoticeVO noticeDetail(Integer bno)throws Exception;
+	public void noticeUpdate(NoticeVO vo)throws Exception;
 }

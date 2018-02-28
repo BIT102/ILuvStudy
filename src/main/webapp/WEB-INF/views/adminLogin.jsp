@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>계정 관리</title>
+    <title>로그인 페이지</title>
 
 </head>
 <body>
@@ -12,7 +12,7 @@
 <a>I love study 관리자 로그인</a>
 
 <!-- 로그인 처리 -->
-<form action="/admin/adminLoginPost" method="post">
+<form action="/adminLoginPost" method="post">
 <div>아이디 : <input type="text" name="id"></div>
 <div>비밀번호 : <input type="password" name="pw"></div>
 

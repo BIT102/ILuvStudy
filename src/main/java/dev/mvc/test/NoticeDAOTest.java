@@ -41,7 +41,7 @@ public class NoticeDAOTest {
 		
 		for(NoticeVO noticeVO : list) {
 			
-			logger.info(noticeVO.getNtBno() + ":" + noticeVO.getNtTitle()
+			logger.info(noticeVO.getBno() + ":" + noticeVO.getTitle()
 			);
 		}
 	}
@@ -57,7 +57,7 @@ public class NoticeDAOTest {
 		
 		for(NoticeVO noticeVO : list) {
 			
-			logger.info(noticeVO.getNtBno() + ":" + noticeVO.getNtTitle()
+			logger.info(noticeVO.getBno() + ":" + noticeVO.getTitle()
 			);
 		}
 	}

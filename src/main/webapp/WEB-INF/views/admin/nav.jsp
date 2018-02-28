@@ -33,9 +33,9 @@
 <body>
     <!--헤더-->
     <div>
-        <a>관리자님</a>
+        <a>${login.id} 님</a>
         <a href="pwChange">[정보수정]</a>
-        <a>[로그아웃]</a>
+        <a href="/adminLogout">[로그아웃]</a>
     </div>
 
     <!--메뉴-->

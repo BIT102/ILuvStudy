@@ -3,52 +3,58 @@ package dev.mvc.domain;
 import java.util.Date;
 
 public class NoticeVO {
-	//ntBno 공지사항 순서
+	//bno 공지사항 순서
 	//ntTtile 제목
-	//ntContent 내용
-	//ntRegdate 올린날짜
+	//content 내용
+	//regdate 올린날짜
 	  
-	private Integer ntBno;
-	private String ntTitle;
-	private String ntContent;
-	private Date ntRegdate;
-	private String ntWriter;
+	private int bno;
+	private String title;
+	private String content;
+	private Date regdate;
+	private String writer;
+	private Date lastModifyDate;
 	
-	public Integer getNtBno() {
-		return ntBno;
-	}
-	public void setNtBno(Integer ntBno) {
-		this.ntBno = ntBno;
-	}
-	public String getNtTitle() {
-		return ntTitle;
-	}
-	public void setNtTitle(String ntTitle) {
-		this.ntTitle = ntTitle;
-	}
-	public String getNtContent() {
-		return ntContent;
-	}
-	public void setNtContent(String ntContent) {
-		this.ntContent = ntContent;
-	}
-	public Date getNtRegdate() {
-		return ntRegdate;
-	}
-	public void setNtRegdate(Date ntRegdate) {
-		this.ntRegdate = ntRegdate;
-	}
-	public String getNtWriter() {
-		return ntWriter;
-	}
-	public void setNtWriter(String ntWriter) {
-		this.ntWriter = ntWriter;
-	}
 	
+	public Date getLastModifyDate() {
+		return lastModifyDate;
+	}
+	public void setLastModifyDate(Date lastModifyDate) {
+		this.lastModifyDate = lastModifyDate;
+	}
+	public int getBno() {
+		return bno;
+	}
+	public void setBno(int bno) {
+		this.bno = bno;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
+	public Date getRegdate() {
+		return regdate;
+	}
+	public void setRegdate(Date regdate) {
+		this.regdate = regdate;
+	}
+	public String getWriter() {
+		return writer;
+	}
+	public void setWriter(String writer) {
+		this.writer = writer;
+	}
 	@Override
 	public String toString() {
-		return "NoticeVO [ntBno=" + ntBno + ", ntTitle=" + ntTitle + ", ntContent=" + ntContent + ", ntRegdate="
-				+ ntRegdate + ", ntWriter=" + ntWriter + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
-				+ ", toString()=" + super.toString() + "]";
+		return "NoticeVO [bno=" + bno + ", title=" + title + ", content=" + content + ", regdate=" + regdate
+				+ ", writer=" + writer + ", lastModifyDate=" + lastModifyDate + "]";
 	}
 }

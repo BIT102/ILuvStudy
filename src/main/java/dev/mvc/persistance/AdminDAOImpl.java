@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import dev.mvc.admin.Criteria;
 import dev.mvc.domain.AdminVO;
+import dev.mvc.domain.NoticeVO;
 import dev.mvc.domain.QnaVO;
 import dev.mvc.domain.ReplyStudyVO;
 import dev.mvc.domain.ReplyVO;
@@ -154,5 +155,26 @@ public class AdminDAOImpl implements AdminDAO{
 	public void qnaRegister(ReplyVO vo)throws Exception{
 		session.update(namespace + ".qnaRegister", vo);   // qna 댓글 등록
 	}
+	
+	@Override
+	public List<NoticeVO> noticeList(Criteria cri) throws Exception{
+		return session.selectList(namespace + ".noticeList", cri);   //공지사항 리스트 정보 가져옴 
+	}
+	
+	@Override
+	public int noticeCountPaging(Criteria cri)throws Exception{
+		return session.selectOne(namespace + ".noticeCountPaging", cri); // totalCount 반환
+	}
+	
+	@Override
+	public NoticeVO noticeDetail(Integer bno)throws Exception{
+		return session.selectOne(namespace + ".noticeDetail", bno);  //공지사항 정보 정보 상세 가져옴
+	}
+	
+	@Override
+	public void noticeUpdate(NoticeVO vo)throws Exception{
+		session.update(namespace + ".noticeUpdate", vo);   // 공지사항 정보 수정
+	}
+	
 		
 }

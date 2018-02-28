@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import dev.mvc.admin.Criteria;
 import dev.mvc.domain.AdminVO;
+import dev.mvc.domain.NoticeVO;
 import dev.mvc.domain.QnaVO;
 import dev.mvc.domain.ReplyStudyVO;
 import dev.mvc.domain.ReplyVO;
@@ -140,5 +141,25 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public void qnaRegister(ReplyVO vo)throws Exception{
 		dao.qnaRegister(vo);
+	}
+	
+	@Override
+	public List<NoticeVO> noticeList(Criteria cri) throws Exception{
+		return dao.noticeList(cri);
+	}
+	
+	@Override
+	public int noticeCountPaging(Criteria cri)throws Exception{
+		return dao.noticeCountPaging(cri);
+	}
+	
+	@Override
+	public NoticeVO noticeDetail(Integer bno)throws Exception{
+		return dao.noticeDetail(bno);
+	}
+	
+	@Override
+	public void noticeUpdate(NoticeVO vo)throws Exception{
+		dao.noticeUpdate(vo);
 	}
 }
