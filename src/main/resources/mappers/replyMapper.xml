@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+	<mapper namespace="dev.mvc.mapper.replyMapper">
+	
+	<select id="list" resultType="dev.mvc.domain.ReplyVO">
+		select *
+		from reply_qna
+		where bqBno = #{bqBno}
+		order by rno desc		
+	</select>
+	
+	<insert id="create">
+		insert into reply_qna (bqBno, content, replyer)
+		values (#{bqBno}, #{content}, #{replyer})
+	</insert>
+	
+	<update id="update">
+		update reply_qna set content = #{content}, updatedate = now() 
+		where rno = #{rno}
+	</update>
+	
+	<delete id="delete">
+		delete from reply_qna 
+		where rno = #{rno}
+	</delete>
+	
+</mapper>
