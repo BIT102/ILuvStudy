@@ -8,83 +8,109 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="http://code.jquery.com/jquery-1.7.js"></script>
+    <script type="text/javascript" src="/resources/js/upload.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
     <title>Document</title>
+    
+<style>
+
+.fileDrop{
+width:200px;
+height:200px;
+border:1px dotted blue;
+}
+
+.small {
+	margin-left:3px;
+	font-weight:bold;
+	color:gray;
+}
+
+.small:hover {
+	background-color:black;
+}
+
+    
+</style>    
+
+   
 </head>
 <body>
     
 <!--스터디등록-->
-    <form role="form" method="post">
+    <form id="registerForm" role="form" method="post">
 
         <!--첫번째 페이지-->
         <div class="register1">
             <!--제목입력-->
             <div class="studytitle">
                 <p>스터디명</p>
-                <input type="text" placeholder="스터디명" name="bsTitle">
+                <input type="text" placeholder="스터디명" name="title">
             </div>
 
               <!--쓴사람//value값수정-->
             <div class="studywriter">
                 <p>쓴사람</p>
-                <input type="text" placeholder="쓴사람" name="bsWriter" value="abc1@gmail.com">
+                <input type="text" placeholder="쓴사람" name="writer" value="abc1@gmail.com">
             </div>
 
             <!--카테고리-->
-            <div clas="stucycategory">
+            <div class="stucycategory">
                 <!--대분류-->
                 <div class="CD">
                     <p>대분류</p>
-                    <input type="checkbox" name="bsCategoryD" value="A">외국어
-                    <input type="checkbox" name="bsCategoryD" value="B">IT
-                    <input type="checkbox" name="bsCategoryD" value="C">라이프스타일
-                    <input type="checkbox" name="bsCategoryD" value="D">취업
+                    <input type="checkbox" name="categoryD" value="A">외국어
+                    <input type="checkbox" name="categoryD" value="B">IT
+                    <input type="checkbox" name="categoryD" value="C">라이프스타일
+                    <input type="checkbox" name="categoryD" value="D">취업
                 </div>
                 <!--소분류 외국어-->
                 <div class="CSA">
                     <p>소분류</p>
-                    <input type="checkbox" name="bsCategoryS" value="1">토익
-                    <input type="checkbox" name="bsCategoryS" value="2">토플
-                    <input type="checkbox" name="bsCategoryS" value="3">텝스
-                    <input type="checkbox" name="bsCategoryS" value="4">토스/오픽
-                    <input type="checkbox" name="bsCategoryS" value="5">회화
-                    <input type="checkbox" name="bsCategoryS" value="6">작문/독해
-                    <input type="checkbox" name="bsCategoryS" value="7">중국어
-                    <input type="checkbox" name="bsCategoryS" value="8">일본어
-                    <input type="checkbox" name="bsCategoryS" value="9">기타
+                    <input type="checkbox" name="categoryS" value="1">토익
+                    <input type="checkbox" name="categoryS" value="2">토플
+                    <input type="checkbox" name="categoryS" value="3">텝스
+                    <input type="checkbox" name="categoryS" value="4">토스/오픽
+                    <input type="checkbox" name="categoryS" value="5">회화
+                    <input type="checkbox" name="categoryS" value="6">작문/독해
+                    <input type="checkbox" name="categoryS" value="7">중국어
+                    <input type="checkbox" name="categoryS" value="8">일본어
+                    <input type="checkbox" name="categoryS" value="9">기타
                 </div>
                 
                 <!-- 소분류IT -->
                 <div class="CSB">
                     <p>소분류</p>
-                    <input type="checkbox" name="bsCategoryS" value="1">컴퓨터언어
-                    <input type="checkbox" name="bsCategoryS" value="2">웹프로그래밍
-                    <input type="checkbox" name="bsCategoryS" value="3">모바일프로그래밍
-                    <input type="checkbox" name="bsCategoryS" value="4">데이터베이스/서버
-                    <input type="checkbox" name="bsCategoryS" value="5">게임프로그래밍
-                    <input type="checkbox" name="bsCategoryS" value="6">문서작성
-                    <input type="checkbox" name="bsCategoryS" value="7">자격증
-                    <input type="checkbox" name="bsCategoryS" value="8">기타
+                    <input type="checkbox" name="categoryS" value="1">컴퓨터언어
+                    <input type="checkbox" name="categoryS" value="2">웹프로그래밍
+                    <input type="checkbox" name="categoryS" value="3">모바일프로그래밍
+                    <input type="checkbox" name="categoryS" value="4">데이터베이스/서버
+                    <input type="checkbox" name="categoryS" value="5">게임프로그래밍
+                    <input type="checkbox" name="categoryS" value="6">문서작성
+                    <input type="checkbox" name="categoryS" value="7">자격증
+                    <input type="checkbox" name="categoryS" value="8">기타
                 </div>
                 
                 <!-- 소분류라이프스타일 -->
                 <div class="CSC">
                     <p>소분류</p>
-                    <input type="checkbox" name="bsCategoryS" value="1">미술/디자인
-                    <input type="checkbox" name="bsCategoryS" value="2">뷰티/미용
-                    <input type="checkbox" name="bsCategoryS" value="3">스포츠
-                    <input type="checkbox" name="bsCategoryS" value="4">음악/공연
-                    <input type="checkbox" name="bsCategoryS" value="5">게임
-                    <input type="checkbox" name="bsCategoryS" value="6">기타
+                    <input type="checkbox" name="categoryS" value="1">미술/디자인
+                    <input type="checkbox" name="categoryS" value="2">뷰티/미용
+                    <input type="checkbox" name="categoryS" value="3">스포츠
+                    <input type="checkbox" name="categoryS" value="4">음악/공연
+                    <input type="checkbox" name="categoryS" value="5">게임
+                    <input type="checkbox" name="categoryS" value="6">기타
                 </div>
                 
                 <!-- 소분류취업 -->
                 <div class="CSD">
                     <p>소분류</p>
-                    <input type="checkbox" name="bsCategoryS" value="1">면접
-                    <input type="checkbox" name="bsCategoryS" value="2">자소서
-                    <input type="checkbox" name="bsCategoryS" value="3">고시
-                    <input type="checkbox" name="bsCategoryS" value="4">기술
-                    <input type="checkbox" name="bsCategoryS" value="5">기타
+                    <input type="checkbox" name="categoryS" value="1">면접
+                    <input type="checkbox" name="categoryS" value="2">자소서
+                    <input type="checkbox" name="categoryS" value="3">고시
+                    <input type="checkbox" name="categoryS" value="4">기술
+                    <input type="checkbox" name="categoryS" value="5">기타
                 </div>
             </div>    
         </div>    
@@ -93,7 +119,7 @@
             <!--최대인원-->
             <div class="studymax">
                 <p>최대인원</p>
-                <input type="number" name="bsMax">
+                <input type="number" name="max">
             </div>
   
             <!--지역분류-->
@@ -101,7 +127,7 @@
                 <!--대분류-->
                 <div class="RD">
                     <p>지역대분류</p>
-                    <select class="bsRDId" name="bsRDId">
+                    <select class="rDId" name="rDId">
                     	<option selected> -- </option>
                         <option value="A">서울</option>
                         <option value="B">경기도</option>
@@ -125,7 +151,7 @@
                 <!--소분류//나중에추가하기-->
                 <div class="RSP">
                     <p>지역소분류</p>
-                    <select class="bsRSId" name="bsRSId">
+                    <select class="rSId" name="rSId">
                    		<option selected> -- </option>
                         <option value="1">남구</option>
                         <option value="2">동구</option>
@@ -139,20 +165,20 @@
             <!--연령-->
             <div class="studyage">
                 <p>연령</p>
-                <input type="checkbox" name="bsAge" value="10대">10대
-                <input type="checkbox" name="bsAge" value="20대">20대
-                <input type="checkbox" name="bsAge" value="30대">30대
-                <input type="checkbox" name="bsAge" value="40대">40대
-                <input type="checkbox" name="bsAge" value="50대">50대
-                <input type="checkbox" name="bsAge" value="무관">무관
+                <input type="checkbox" name="age" value="10대">10대
+                <input type="checkbox" name="age" value="20대">20대
+                <input type="checkbox" name="age" value="30대">30대
+                <input type="checkbox" name="age" value="40대">40대
+                <input type="checkbox" name="age" value="50대">50대
+                <input type="checkbox" name="age" value="무관">무관
             </div>
 
             <!--요일별-->
             <div class="studysc">
                 <p>요일</p>
-                <select class="bsSc" name="bsSc">
-                    <option>월요일</option>
+                <select class="sc" name="sc">
                     <option selected> -- </option>
+                    <option>월요일</option>
                     <option value="화요일">화요일</option>
                     <option value="수요일">수요일</option>
                     <option value="목요일">목요일</option>
@@ -165,12 +191,12 @@
 			<!-- 시작날짜 -->
 			<div class="studysd">
 				<p>시작날짜</p>
-				<input type="date" name="bsSd">
+				<input type="date" name="sd">
 			</div>
             <!--시작시간//나중에추가하기-->
             <div class="studyst">
                 <p>시작시간</p>
-                <select class="bsSt" name="bsSt">
+                <select class="st" name="st">
                 	<option selected> -- </option>
                     <option value="1시">1시</option>
                     <option value="2시">2시</option>
@@ -202,7 +228,7 @@
             <!--끝나는시간//나중에추가하기-->
             <div class="studyet">
                 <p>끝나는시간</p>
-                <select class="bsEt" name="bsEt">
+                <select class="et" name="et">
                 	<option selected> -- </option>
                     <option value="1시">1시</option>
                     <option value="2시">2시</option>
@@ -237,20 +263,118 @@
             <!--내용-->
             <div class=studycontent>
                 <p>추가글</p>
-                <textarea name="bsContent" row="10"></textarea>
+                <textarea name="content" row="10"></textarea>
             </div>
 
         <!-- 파일업로드부분 -->
             <div class="studyfile">
                 <P>파일업로드</P>
-                <input type="file" name="file">파일을 골라주세용
-            </div>
+          <input type="file" name="file">파일을 골라주세용
+          
+          	<h3>Ajax File upload</h3>
+			<div class='fileDrop'></div>
+
+			<div class='uploadedList'></div>
+
+            </div>      
         </div>
-        
-        <input type="submit" value="종료">
+
+        <button type="submit" >종료</button>
     </form>
 
  <iframe name="zeroFrame"></iframe>
+ <!-- 파일등록 핸들러 -->
+ <script id="template" type="text/x-handlebars-template">
+
+	<span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment"></span>
+	<div class="mailbox-attachment-info">
+		<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>
+		<a href="{{name}}"
+			class="small">X</a>
+	</span>
+</div>
+
+
+</script>
+
+	<script>
+		var template = Handlebars.compile($("#template").html());
+		
+		$(".fileDrop").on("dragenter dragover", function(event){
+			event.preventDefault();
+		});
+		//파일을 떨구는 장소	
+		$(".fileDrop").on("drop", function(event){
+			
+		event.preventDefault();
+	
+			var files = event.originalEvent.dataTransfer.files;
+
+			var file = files[0];
+				
+			console.log(file);
+			
+			var formData = new FormData();
+			
+			formData.append("file", file);
+			
+			$.ajax({
+				url: '/study/uploadAjax',
+				data: formData,
+				dataType: 'text',
+				processData: false,
+				contentType: false,
+				type: 'POST',
+				//파일을 드롭했을때 성공시
+				success: function(data){
+				
+			var fileInfo = getFileInfo(data);
+					
+					var html = template(fileInfo);
+					
+					$(".uploadedList").append(html);
+				}
+
+				});
+			});
+		//취소버튼
+		$(".uploadedList").on("click", "small", function(event){
+			
+			var that = $(this);
+			
+			$.ajax({
+				url:"deleteFile",
+				type:"post",
+				data:{fileName:$(this).attr("data-src")},
+				dataType:"text",
+				success:function(result){
+					if(result == 'deleted') {
+						alert("deleted");
+					}
+				}
+			});
+			
+		});
+		
+		//스터디 보드 등록후 이미지 등록을 위해서
+		$("#registerForm").submit(function(event){
+			
+			event.preventDefault();
+			
+			var that = $(this);
+			
+			var str = "";
+			
+			$(".uploadedList .small").each(function(index){
+				
+				str += "<input type='hidden' name='files["+index+"]' value='"+$(this).attr("href")+"'>";
+			});
+			
+			that.append(str);
+			
+			that.get(0).submit();
+		});
+	</script>
 
 
 </body>

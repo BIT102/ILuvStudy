@@ -63,52 +63,32 @@
         </div>
  -->
 <!-- 스터디 등록된 목록 -->
-<!-- 공지사항 내용들111111111 -->
-<div class="header">
-
-<c:forEach items="${list}" var="noticeVO">
-	<!-- 처음보일 부분1 -->
-	<div class="ntTitle">
-		<p>공지사항 제목</p>
-		<input type="text" name="ntTitle" value="${noticeVO.ntTitle}">
-		<p>올린날짜</p>
-		<fmt:formatDate pattern="yyyy-MM-dd HH:mm" 
-		value="${noticeVO.ntRegdate}" />
-	</div>
-	
-	<!-- 클릭하면 내용, 쓴사람 (관리자)-->
-	<div class="ntContentt">
-		<p>글쓴이</p>
-		<input type="text" name="ntWriter" value="${noticeVO.ntWriter}">
-		<p>내용</p>
-		<textarea name="ntContent" row="10">${noticeVO.ntContent}</textarea>
-	</div>
-	
-</c:forEach>	
-	
-	
-<div class="text-center">
-	<ul class="pagination">
-		
-		<c:if test="${pageMaker.prev}">
-			<li><a href="listCri?page=${pageMaker.startPage=1}">&laquo;</a></li>
-		</c:if>
-		
-		<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
-		<li 
-			<c:out value="${pageMaker.cri.page == idx?'class=active':''}"/>>
-			<a href="listCri?page=${idx}">${idx}</a>
-		</li>
-		</c:forEach>
-		
-		<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-		<li><a href="listCri?page=${pageMaker.endPage+1}">&raquo;</a></li>
-		</c:if>
-	</ul>
-</div>	
-	
-</div>
-	
+        <div id="studycard">
+        
+               <div id="innerdiv">
+        <c:forEach items="${list}" var="studyVO">
+                <div class="scard cborder" style="width: 20rem;">
+                     <!--   <img class="card-img-top" src="kazakhstan.jpg" alt="Card image cap"> -->
+                        <div class="card-body">
+     
+                        <!-- 작성자 -->
+                        <p class="card-writer">${studyVO.nickname}</p>
+                        <!-- 스터디 제목 -->
+                        <h4 class="card-title">${studyVO.title}</h4>
+                        <!-- 현재인원/최대인원 -->
+                        <p class="nowandmax">${studyVO.now}/${studyVO.max}</p>
+                        <!-- 지역 -->
+                        <p class="regionDS">${studyVO.rDName}/${studyVO.rSName}</p>
+                        
+                        <!-- 시작일 -->
+                        <p class="st">${studyVO.sd}</p>
+                        
+                        <a href="/study/board?bno=${studyVO.bno}" class="btn btn-primary">$99</a>
+                        </div>
+                </div>
+                </c:forEach>
+            </div> 
+        </div>
         
         
         

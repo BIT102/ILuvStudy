@@ -7,7 +7,6 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import dev.mvc.commons.Criteria;
 import dev.mvc.domain.StudyVO;
 import dev.mvc.persistance.StudyDAO;
 
@@ -17,25 +16,47 @@ public class StudyServiceImpl implements StudyService {
 	@Inject
 	private StudyDAO dao;
 	
-	//스터디등록
+	//스터디등록, 파일등록
+	@Transactional
 	@Override
 	public void regist(StudyVO vo) throws Exception {
+		
 		dao.createStudy(vo);
+		
+		String[] files = vo.getFiles();
+	
+		if(files == null) return;
+		
+//		for(int i=0; i<files.length; i++) {
+//			if(i==0) { 
+//				vo.setStatus('O');
+//			} else {
+//				vo.setStatus('X');
+//			}
+//		}
+		
+		for(String fileName : files) {
+			dao.addFile(fileName);
+		}
 	
 	}
 	
 	//스터디 불러오기
-	public StudyVO read(Integer bsBno) throws Exception {
-		return dao.readStudy(bsBno);
+	@Override
+	public StudyVO read(Integer bno) throws Exception {
+		return dao.readStudy(bno);
 	}
 	
 	//전체불러오기
+	@Override
 	public List<StudyVO> studyList() throws Exception {
 		return dao.studyList();
 	}
 	
-	//페이지마다 데이터
-	public List<StudyVO> listCriteria(Criteria cri) throws Exception {
-		return dao.listCriteria(cri);
+	//파일 불러오기
+	@Override
+	public List<String> getFile(Integer bno) throws Exception {
+		return dao.getFile(bno);
 	}
+	
 }

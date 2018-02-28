@@ -3,52 +3,52 @@ package dev.mvc.domain;
 import java.util.Date;
 
 public class NoticeVO {
-	//ntBno 공지사항 순서
+	//bno 공지사항 순서
 	//ntTtile 제목
-	//ntContent 내용
-	//ntRegdate 올린날짜
+	//content 내용
+	//regdate 올린날짜
 	  
-	private Integer ntBno;
-	private String ntTitle;
-	private String ntContent;
-	private Date ntRegdate;
-	private String ntWriter;
+	private Integer bno;
+	private String title;
+	private String content;
+	private Date regdate;
+	private String writer;
 	
-	public Integer getNtBno() {
-		return ntBno;
+	public Integer getbno() {
+		return bno;
 	}
-	public void setNtBno(Integer ntBno) {
-		this.ntBno = ntBno;
+	public void setbno(Integer bno) {
+		this.bno = bno;
 	}
-	public String getNtTitle() {
-		return ntTitle;
+	public String gettitle() {
+		return title;
 	}
-	public void setNtTitle(String ntTitle) {
-		this.ntTitle = ntTitle;
+	public void settitle(String title) {
+		this.title = title;
 	}
-	public String getNtContent() {
-		return ntContent;
+	public String getcontent() {
+		return content;
 	}
-	public void setNtContent(String ntContent) {
-		this.ntContent = ntContent;
+	public void setcontent(String content) {
+		this.content = content;
 	}
-	public Date getNtRegdate() {
-		return ntRegdate;
+	public Date getregdate() {
+		return regdate;
 	}
-	public void setNtRegdate(Date ntRegdate) {
-		this.ntRegdate = ntRegdate;
+	public void setregdate(Date regdate) {
+		this.regdate = regdate;
 	}
-	public String getNtWriter() {
-		return ntWriter;
+	public String getwriter() {
+		return writer;
 	}
-	public void setNtWriter(String ntWriter) {
-		this.ntWriter = ntWriter;
+	public void setwriter(String writer) {
+		this.writer = writer;
 	}
 	
 	@Override
 	public String toString() {
-		return "NoticeVO [ntBno=" + ntBno + ", ntTitle=" + ntTitle + ", ntContent=" + ntContent + ", ntRegdate="
-				+ ntRegdate + ", ntWriter=" + ntWriter + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
+		return "NoticeVO [bno=" + bno + ", title=" + title + ", content=" + content + ", regdate="
+				+ regdate + ", writer=" + writer + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
 				+ ", toString()=" + super.toString() + "]";
 	}
 }

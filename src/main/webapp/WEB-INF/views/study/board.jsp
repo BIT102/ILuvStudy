@@ -51,9 +51,9 @@ div.desc {
 </head>
 <body>
 
-<!-- bsBno값 유지하자 -->
+<!-- bno값 유지하자 -->
 <form role="form" method="post">
-	<input type="hidden" name="bsBno" value="${studyVO.bsBno}">
+	<input type="hidden" name="bno" value="${studyVO.bno}">
 </form>
 
         <header id="header">
@@ -80,7 +80,7 @@ div.desc {
             <div id="brdimg">
                 <img src="kazakhstan.jpg"></img>
                 <!-- 스터디 제목 -->
-                <h2>${studyVO.bsTitle}</h2>
+                <h2>${studyVO.title}</h2>
                 <!-- 작성자 -->
                 <p>${studyVO.nickname}</p>
                 
@@ -97,40 +97,40 @@ div.desc {
                 <tr>
                 <!-- 카테고리 -->
                     <td>카테고리</td>
-                    <td>${studyVO.scDName}, ${studyVO.scSName}</td>
+                    <td>${studyVO.cDName}, ${studyVO.cSName}</td>
                 </tr>
                 <tr>
                 <!-- 현재인원 -->
                     <td>현재인원</td>
-                    <td>${studyVO.bsNow}</td>
+                    <td>${studyVO.now}</td>
                 </tr>
                 <tr>
                 <!-- 최대인원 -->
                     <td>최대인원</td>
-                    <td>${studyVO.bsMax}</td>
+                    <td>${studyVO.max}</td>
                 </tr>
                 <tr>
                 <!-- 지역 -->
                     <td>지역</td>
-                    <td>${studyVO.rgDName}/${studyVO.rgSName}</td>
+                    <td>${studyVO.rDName}/${studyVO.rSName}</td>
                 </tr>
                 <tr>
                 <!-- 시작날짜 -->
                     <td>시작날짜</td>
-                    <td>${studyVO.bsSd}</td>
+                    <td>${studyVO.sd}</td>
                     <!-- 시작시간 -->
                     <td>시작시간</td>
-                    <td>${studyVO.bsSt}</td>
+                    <td>${studyVO.st}</td>
                     <!-- 끝나는시간 -->
                     <td>끝나는시간</td>
-                    <td>${studyVO.bsEt}</td>
+                    <td>${studyVO.et}</td>
                 </tr>
             </table>
             <!-- 요일별 -->
-            <div>요일별 스터디 시간 <p>${studyVO.bsSc}</p></div>
+            <div>요일별 스터디 시간 <p>${studyVO.sc}</p></div>
             <!-- 스터디내용 -->
             <div class="brdtext"><p>소개글</p></div>
-            <div class="brdtext"><p>${studyVO.bsContent}</p></div>
+            <div class="brdtext"><p>${studyVO.content}</p></div>
 
         </div>
         
