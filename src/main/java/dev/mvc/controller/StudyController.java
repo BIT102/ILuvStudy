@@ -37,8 +37,12 @@ public class StudyController {
 		logger.info("regist post......");
 		logger.info(vo.toString());
 		
+		System.out.println("===========================");
+		System.out.println("reg vo="+vo);
+		System.out.println("===========================");
+		
 		service.regist(vo);
-	
+		
 	//	rttr.addFlashAttribute("msg", "success");
 		return "redirect:/study/listAll";
 	}
@@ -48,6 +52,9 @@ public class StudyController {
 	public void readStudy(Model model) throws Exception {
 		
 		logger.info("show list..........");
+		System.out.println("======================================");
+		System.out.println("service.studyList() = "+service.studyList());
+		System.out.println("======================================");
 		model.addAttribute("list", service.studyList());
 
 	}

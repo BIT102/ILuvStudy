@@ -10,6 +10,7 @@ public interface StudyService {
 	public void regist(StudyVO vo) throws Exception;
 	
 	//스터디 불러오기
+	
 	public StudyVO read(Integer bno) throws Exception;
 	
 	

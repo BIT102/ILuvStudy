@@ -5,6 +5,8 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import dev.mvc.domain.StudyVO;
@@ -16,7 +18,9 @@ public class StudyDAOImpl implements StudyDAO {
 	private SqlSession session;
 	
 	private static final String namespace = "dev.mvc.mapper.StudyMapper";
-	
+	private static final Logger logger = LoggerFactory.getLogger(StudyDAOImpl.class);
+			
+			
 	//스터디등록
 	@Override
 	public void createStudy(StudyVO vo) {
@@ -39,6 +43,10 @@ public class StudyDAOImpl implements StudyDAO {
 	@Override
 	public void addFile(String name) throws Exception {
 		session.insert(namespace+".addFile", name);
+		logger.info("===================================");
+		logger.info("LAST_INSERT"+session.selectOne(namespace+".addFileLast"));
+		logger.info("===================================");
+		//session.selectOne(namespace+".addFileLast");
 	}
 	
 	//파일 불러오기

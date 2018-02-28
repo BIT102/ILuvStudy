@@ -24,4 +24,11 @@ public interface UserDAO {
 
 /*	//회원 전체 리스트 조회
 	public List<UserVO> listAll() throws Exception;*/
+	
+	
+	// ========================================================
+	// sangwook
+	
+	// email 중복체크
+	public int chkEmail(String email) throws Exception;
 }

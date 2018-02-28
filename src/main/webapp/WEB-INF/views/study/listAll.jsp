@@ -72,46 +72,33 @@
 <!-- 스터디 등록된 목록 -->
   	
   	  <!-- 파일등록 핸듶러 -->
-  
-
-        <div id="studycard">
-        
-        
-               <div id="innerdiv">
-        <c:forEach items="${list}" var="studyVO">
-                <div class="scard cborder" style="width: 20rem;">
-                
-                <c:if test="${studyVO.bno == studyVO.bsBno}">
+      <div id="studycard">
+      	<div id="innerdiv">
+        	<c:forEach items="${list}" var="studyVO">
+            	<div class="scard cborder" style="width: 20rem;">
+                	<c:if test="${studyVO.bno == studyVO.bsBno}">
         				<div class='uploadedList'></div>
-                  </c:if>
+                  	</c:if>
                         <div class="card-body">
                         ${studyVO.bsBno}
      					${studyVO.bno}
-     					                 	<script id="template" type="text/x-handlebars-template">
-	<span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment"></span>
-   
-	</script>
-
-                  <!-- 파일등록 -->
-                <script>
-      
-                var bno = ${studyVO.bno};
+							<span class="mailbox-attachment-icon has-img">
+								<img src="/study/displayFile?fileName=${studyVO.name}" alt="Attachment" />
+							</span>
+                		<!-- 파일등록 -->
+                <!-- 		<script>
+                		
+                			var bno = ${studyVO.bno};
+                			var template = Handlebars.compile($("#template").html());
                 
-                
-                var template = Handlebars.compile($("#template").html());
-            	$.getJSON("/study/getFile/"+bno, function(list){
-            		$(list).each(function(){ 
-            			     			
-            			console.log(this);
-            			
-            			var html = template(getFileInfo);
-            			
-            			$(".uploadedList").append(html);
-            	
-            			});
-            		
-            		});
-                </script>
+			            	$.getJSON("/study/getFile/"+bno, function(list){
+			            		$(list).each(function(){      			
+			            			console.log(this);
+			            			var html = template(getFileInfo);
+			            			$(".uploadedList").append(html);
+			            		});
+			            	});
+               			</script> -->
      					
                         <!-- 작성자 -->
                         <p class="card-writer">${studyVO.nickname}</p>

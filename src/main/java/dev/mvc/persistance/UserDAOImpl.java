@@ -54,5 +54,15 @@ public class UserDAOImpl implements UserDAO {
 		session.update(namespace+".quit", vo);
 	}
 
+	
+	
+	//=================================================
+	// sangwook
+	
+	@Override
+	public int chkEmail(String email) throws Exception {
+		return session.selectOne(namespace+".chkEmail", email);
+	}
+
 
 }

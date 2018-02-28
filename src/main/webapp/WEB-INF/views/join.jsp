@@ -10,11 +10,11 @@
 <body>
 
 
-	<form name="joinForm" action="/joinUser" method="post">
+	<form name="joinForm" action="/chkEmail" method="post">
 		이메일주소<br/>
-		<input type="text" placeholder="아이디를 입력하세요" name="email" /> 
+		<input type="text" placeholder="아이디를 입력하세요" name="email1" /> 
 		@ 
-		<input type="text" placeholder="주소값을 입력하세요" /> 
+		<input type="text" placeholder="주소값을 입력하세요" name="email2" /> 
 		<select name="" id=""> 
 			<option>직접입력</option>
 			<option>naver.com</option>
@@ -22,7 +22,7 @@
 			<option>google.com</option>
 		</select>
 		<br/>
-		<button>인증하기</button> <!-- 중복체크도 겸비할 것 -->
+		<input type="submit" value = "인증하기"> <!-- 중복체크도 겸비할 것 -->
 		
 		<br/>
 		이름<br/>
