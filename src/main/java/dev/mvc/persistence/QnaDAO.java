@@ -46,4 +46,9 @@ public interface QnaDAO {
 	public void update(ReplyVO vo)throws Exception;
 	
 	public void deleteReply(Integer rno)throws Exception;
+	
+	public List<ReplyVO> listPage(
+			Integer bqBno, Criteria cri)throws Exception;
+	
+	public int count(Integer bqBno)throws Exception;
 }

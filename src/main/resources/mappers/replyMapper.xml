@@ -13,7 +13,11 @@
 	</select>
 	
 	<insert id="create">
-		insert into reply_qna (bqBno, content, replyer)
+		insert into reply_qna (
+		bqBno
+		, content
+		, replyer
+		)
 		values (#{bqBno}, #{content}, #{replyer})
 	</insert>
 	
@@ -27,4 +31,17 @@
 		where rno = #{rno}
 	</delete>
 	
+	<select id="listPage" resultType="dev.mvc.domain.ReplyVO">
+		select *
+		from reply_qna
+		where bqBno = #{bqBno}
+		order by rno desc
+		limit #{cri.pageStart}, #{cri.perPageNum}
+	</select>
+	
+	<select id="count" resultType="int">
+		select count(bqBno) 
+		from reply_qna 
+		where bqBno = #{bqBno}
+	</select>
 </mapper>

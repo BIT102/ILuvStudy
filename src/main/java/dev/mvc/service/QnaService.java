@@ -36,4 +36,8 @@ public interface QnaService {
 	public void modifyReply(ReplyVO vo)throws Exception;
 	
 	public void removeReply(Integer rno)throws Exception;
+	
+	public List<ReplyVO> listReplyPage(Integer bqBno, Criteria cri)throws Exception;
+	
+	public int count(Integer bqBno)throws Exception;
 }

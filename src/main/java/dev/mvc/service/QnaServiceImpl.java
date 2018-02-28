@@ -88,6 +88,18 @@ public class QnaServiceImpl implements QnaService {
 	@Override
 	public void removeReply(Integer rno) throws Exception {
 
-		dao.delete(rno);
+		dao.deleteReply(rno); //deleteReply (QnaDAO)
+	}
+
+	@Override
+	public List<ReplyVO> listReplyPage(Integer bqBno, Criteria cri) throws Exception {
+
+		return dao.listPage(bqBno, cri);
+	}
+
+	@Override
+	public int count(Integer bqBno) throws Exception {
+
+		return dao.count(bqBno);
 	}
 }
