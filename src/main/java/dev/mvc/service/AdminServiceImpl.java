@@ -79,6 +79,16 @@ public class AdminServiceImpl implements AdminService{
 	}
 	
 	@Override
+	public void userRegister(UserVO vo)throws Exception{
+		dao.userRegister(vo);
+	}
+	
+	@Override
+	public UserVO isDelUpdate(Integer bno)throws Exception{
+		return dao.isDelUpdate(bno);
+	}
+	
+	@Override
 	public List<StudyVO> studyList(Criteria cri) throws Exception{
 		return dao.studyList(cri);
 	}

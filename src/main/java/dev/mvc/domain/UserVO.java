@@ -1,6 +1,6 @@
 package dev.mvc.domain;
 
-import java.sql.Date;
+import java.util.Date;
 
 //UserÅ×ÀÌºí VO
 public class UserVO {
@@ -20,7 +20,6 @@ public class UserVO {
 	private Date quitDate;
 	private int isDel;
 	private int bno;
-	
 	
 	
 	public int getBno() {

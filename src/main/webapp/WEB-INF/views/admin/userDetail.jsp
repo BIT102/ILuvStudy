@@ -25,7 +25,7 @@
             <table>
             	<tr>
             		<th>번호</th>
-            		<td>${userVO.bno}</td>
+            		<td><input type="hidden" name="bno" value="${userVO.bno}">${userVO.bno}</td>
             	</tr>
                 <tr>
                     <th>이메일 주소</th>
@@ -75,7 +75,11 @@
                 </tr>
                 <tr>
                     <th>가입일</th>
-                    <td>${userVO.registDate}</td>
+                    <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${userVO.registDate}"/></td>
+                </tr>
+                <tr>
+                    <th>최종수정일</th>
+                    <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${userVO.modifyDate}"/></td>
                 </tr>
                 <tr>
                     <th>이미지</th>
@@ -111,7 +115,11 @@
             </table>
 	</form>
         <button type="submit" id="modifyBtn">수정</button>
-        <button type="submit" id="stopBtn">비활성</button>
+        
+        <!-- 0:회원  1:탈퇴 -->
+        <c:if test="${userVO.isDel eq 0}">
+        	<button type="submit" id="updateBtn">탈퇴</button>
+        </c:if>
 
         <div>* 북마크</div>
             <table>
@@ -187,7 +195,6 @@
                 </tr>
             </table>
 
-<!--         <a type="button" href="userList">목록</a> -->
         <button type="submit" id="listBtn">목록</button>
     </div>
 
@@ -211,8 +218,10 @@
 		});
 		
 		//비활성 클릭 시 액션
-		$("#stopBtn").on("click", function(){
+		$("#updateBtn").on("click", function(){
 			//isdel 1로 변경 처리 필요
+ 			formObj.attr("action", "/admin/isDelUpdate");
+			formObj.submit();
 		});
 	});
 </script>

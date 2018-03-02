@@ -57,18 +57,22 @@
                 </td>
             </tr>
             <tr>
+            	<th>생성일</th>
+            	<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${adminVO.registDate}"/></td>
+            </tr>
+            <tr>
+            	<th>생성자</th>
+            	<td>${adminVO.registUser}</td>
+            </tr>
+            <tr>
+            	<th>최종수정일</th>
+            	<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${adminVO.lastModifyDate}"/></td>
+            </tr>
+            <tr>
                 <th>최근 접속일</th>
                 <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${adminVO.lastLoginDate}"/></td>
             </tr>
         </table>
-        
-        <!-- 페이징 정보 저장 -->
-        <input type="hidden" name="page" value="${cri.page}">
-        <input type="hidden" name="perPageNum" value="${cri.perPageNum}">
-        
-        <!-- 검색 정보 저장 -->
-<%--    <input type="hidden" name="idKeyword" value="${cri.idKeyword}">
-        <input type="hidden" name="nameKeyword" value="${cri.nameKeyword}"> --%>
         
 	</form>
 		<button type="submit" id="listBtn">목록</button>
@@ -93,11 +97,6 @@
 		$("#listBtn").on("click", function(){
 			self.location = "/admin/adminList?page=${cri.page}&perPageNum=${cri.perPageNum}"
 							+"&idKeyword=${cri.idKeyword}&nameKeyword=${cri.nameKeyword}";
-
-			//formObj.attr("method", "get");
-			//formObj.attr("action", "/admin/adminList");
-			//formObj.submit();
-			//self.location = "/admin/adminList";
 		});
 	});
 </script>

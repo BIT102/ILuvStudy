@@ -45,33 +45,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!--  admin 정보 상세 -->
 	<select id="adminDetail" resultType="AdminVO">
-		select bno, id, name, pw, status, lastLoginDate
+		select *
 		from admin
 		where bno = #{bno}
 	</select>
 	
 	<!-- admin 계정 정보 업데이트 -->
 	<update id="adminUpdate">
-		update admin set name=#{name}, pw=#{pw}, status=#{status}
+		update admin set name=#{name}, pw=#{pw}, status=#{status}, lastModifyDate=now()
 		where bno = #{bno}
 	</update>
 	
 	<!-- admin 계정 정보 등록 -->
 	<insert id="adminRegister">
-		insert into admin (id, pw, name, registdate, status) 
-		values(#{id},#{pw},#{name},now(),#{status})
+		insert into admin (id, pw, name, registDate, registUser, lastModifyDate,status) 
+		values(#{id}, #{pw}, #{name}, now(), #{registUser}, now(), #{status})
 	</insert>
-	
-	<!-- adminList 페이징 처리 -->
-	<select id="adminListPage" resultType="AdminVO">
-		<![CDATA[
-			select bno, id, name, status, lastLoginDate 
-			from admin
-			where bno > 0
-			order by bno desc, lastLoginDate desc
-			limit #{page}, 0
-		]]>
-	</select>
 	
 	<!-- totalCount 반환 -->  
 	<select id="adminCountPaging" resultType="int">
@@ -140,10 +129,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="userUpdate">
 		update user 
 		set name=#{name}, password=#{password}, nickname=#{nickName}, 
-		birth=#{birth}, gender=#{gender}, phonenum=#{phoneNum}, homepage=#{homepage}, introduction=#{introduction}
+			birth=#{birth}, gender=#{gender}, phonenum=#{phoneNum}, homepage=#{homepage}, 
+			introduction=#{introduction}, modifyDate=now()
 		where bno = #{bno}
 	</update>
 	
+	<!-- user 탈퇴 처리 -->
+	<update id="isDelUpdate">
+		update user 
+		set isDel = 1
+		where bno = #{bno}
+	</update>
+	
+	<!-- 회원 정보 등록 -->
+	<insert id="userRegister">
+		insert into user (email, password, name, nickName, gender, phoneNum, birth, registDate, modifyDate, isDel) 
+		values(#{email}, #{password}, #{name}, #{nickName}, #{gender}, #{phoneNum}, #{birth}, now(), now(), 0)
+	</insert>
 	
 <!-- 스터디관리 > 스터디목록 메뉴 -->
 	<!-- 스터디상태, 스터디명, 작성자 검색 SQL -->

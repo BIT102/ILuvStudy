@@ -76,7 +76,7 @@ public class AdminController {
 	
 	//admin/adminRegister.jsp 페이지 이동
 	@RequestMapping(value="/adminRegister", method = RequestMethod.GET)
-	public void adminRegister(AdminVO vo, RedirectAttributes rttr) throws Exception{
+	public void adminRegister(AdminVO vo) throws Exception{
 		logger.info("adminRegister get...");
 	}
 	
@@ -118,11 +118,28 @@ public class AdminController {
 		model.addAttribute(service.userDetail(bno));
 	}
 	
+	//admin/userDetail.jsp 에서 탈퇴 처리 시
+	@RequestMapping(value="/isDelUpdate", method = RequestMethod.POST)
+	public String isDelUpdate(@RequestParam("bno") int bno, Criteria cri, 
+			RedirectAttributes rttr) throws Exception{
+		logger.info("isDelUpdate get...");
+		logger.info(cri.toString());
+		
+		service.isDelUpdate(bno);
+		
+		rttr.addFlashAttribute("msg", "SUCCESS");
+		
+		logger.info(rttr.toString());
+		
+		return "redirect:/admin/userList";
+	}
+	
 	//admin/userDetail.jsp 에서 계정 정보 수정 시
 	@RequestMapping(value="/userDetail", method = RequestMethod.POST)
 	public String userUpdate(UserVO vo, Criteria cri, RedirectAttributes rttr) throws Exception{
 		logger.info("userDetail post...");
 		logger.info(cri.toString());
+		
 		service.userUpdate(vo);
 		
 		//페이징 정보 유지
@@ -136,6 +153,25 @@ public class AdminController {
 		rttr.addFlashAttribute("msg", "SUCCESS");
 		
 		logger.info(rttr.toString());
+		
+		return "redirect:/admin/userList";
+	}
+	
+	//admin/userRegister.jsp 페이지 이동
+	@RequestMapping(value="/userRegister", method = RequestMethod.GET)
+	public void userRegister(UserVO vo) throws Exception{
+		logger.info("userRegister get...");
+	}
+	
+	//admin/userRegister.jsp 패아자애서 계정 등록
+	@RequestMapping(value="/userRegister", method = RequestMethod.POST)
+	public String userRegisterPOST(UserVO vo, RedirectAttributes rttr) throws Exception{
+		logger.info("userRegister post...");
+		logger.info(vo.toString());
+		
+		service.userRegister(vo);
+		
+		rttr.addFlashAttribute("msg", "SUCCESS");
 		
 		return "redirect:/admin/userList";
 	}
@@ -308,7 +344,7 @@ public class AdminController {
 	
 	//admin/noticeRegister.jsp 페이지 이동
 	@RequestMapping(value="/noticeRegister", method = RequestMethod.GET)
-	public void noticeRegister(NoticeVO vo, RedirectAttributes rttr) throws Exception{
+	public void noticeRegister(NoticeVO vo) throws Exception{
 		logger.info("noticeRegister get...");
 	}
 	

@@ -45,7 +45,7 @@
         </table>
 
         <button type="submit" id="searchBtn">검색</button>
-        <button>초기화</button>
+        <button type="submit" id="removeBtn">초기화</button>
 
 		<!--리스트 -->
         <!--페이징 처리 -->
@@ -97,6 +97,8 @@
         		<li><a href="userList${pageMaker.userSearch(pageMaker.endPage + 1)}">&raquo;</a></li>
         	</c:if>
         </ul>
+        
+        <button type="submit" id="registerBtn">등록</button>
     </div>
 
 <script>
@@ -108,6 +110,11 @@
 	
 	$(document).ready(function(){		
 		
+		//등록 클릭 시 액션
+		$("#registerBtn").on("click", function(){
+			self.location = "/admin/userRegister";
+		});
+		
 		//검색 클릭 시 액션
 		$("#searchBtn").on("click", function(event){
 			self.location = "userList" + "${pageMaker.makeQuery(1)}"
@@ -117,6 +124,12 @@
 				+"&nickNameKeyword="+encodeURIComponent($("#nickNameKeywordInput").val());
 		});
 		
+		//초기화 클릭 시 액션
+		$("#removeBtn").on("click", function(){
+			$("#isDelType").find("option:first").attr("selected", "selected");  //이거 안됨 수정해야됨
+			$("#emailKeywordInput").val('');
+			$("#nickNameKeywordInput").val('');
+		});
 	});
 </script>
 

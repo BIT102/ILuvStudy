@@ -56,17 +56,6 @@ public class AdminDAOImpl implements AdminDAO{
 	}
 	
 	@Override
-	public List<AdminVO> adminListPage(int page)throws Exception{
-		if(page<=0){
-			page = 1;
-		}
-		
-		page = (page-1)*10;
-		
-		return session.selectList(namespace + ".adminListPage", page); // 관리자 계정 리스트 페이지 페이징 처리
-	}
-	
-	@Override
 	public int adminCountPaging(Criteria cri)throws Exception{
 		return session.selectOne(namespace + ".adminCountPaging", cri); // totalCount 반환
 	}
@@ -89,6 +78,16 @@ public class AdminDAOImpl implements AdminDAO{
 	@Override
 	public void userUpdate(UserVO vo)throws Exception{
 		session.update(namespace + ".userUpdate", vo);   // 사용자 계정 정보 수정
+	}
+	
+	@Override
+	public void userRegister(UserVO vo)throws Exception{
+		session.insert(namespace + ".userRegister", vo);  // 사용자 계정 정보 등록
+	}
+	
+	@Override
+	public UserVO isDelUpdate(Integer bno)throws Exception{
+		return session.selectOne(namespace + ".isDelUpdate", bno);  //사용자 계정 탈퇴 처리
 	}
 	
 	@Override
