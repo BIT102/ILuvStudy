@@ -4,7 +4,7 @@ import java.util.List;
 
 import dev.mvc.domain.Criteria;
 import dev.mvc.domain.QnaVO;
-import dev.mvc.domain.ReplyVO;
+
 import dev.mvc.domain.SearchCriteria;
 
 public interface QnaDAO {
@@ -38,17 +38,5 @@ public interface QnaDAO {
 	
 	public int listSearchCount(SearchCriteria cri)throws Exception;
 	
-	//ReplyDAO
-	public List<ReplyVO> list(Integer bqBno)throws Exception;
 	
-	public void create(ReplyVO vo) throws Exception;
-	
-	public void update(ReplyVO vo)throws Exception;
-	
-	public void deleteReply(Integer rno)throws Exception;
-	
-	public List<ReplyVO> listPage(
-			Integer bqBno, Criteria cri)throws Exception;
-	
-	public int count(Integer bqBno)throws Exception;
 }

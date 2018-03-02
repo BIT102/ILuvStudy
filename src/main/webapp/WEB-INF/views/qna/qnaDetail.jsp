@@ -11,8 +11,10 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
-
-
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<style>
+body {margin-left:50px;}
+</style>
 </head>
 <body>
 	
@@ -70,7 +72,7 @@
 			</ul>
 			
 			<div>
-				<ul id="pagination" class="pagination">
+				<ul class="pagination">
 				
 				</ul>
 			</div>
@@ -78,6 +80,28 @@
 		</div>
 	</div>
 	
+	<!-- Modal -->
+	<div id="modifyModal" class="modal modal-primary fade" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content -->
+			<div class="modal-content">
+				
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title"></h4>
+				</div>
+				<div class="modal-body" data-rno>
+					<p><input type="text" id="replytext" class="form-control"></p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-info" id="replyModBtn">Modify</button>
+					<button type="button" class="btn btn-danger" id="replyDelBtn">Delete</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			
+			</div>		
+		</div>
+	</div>
 	
 	<script>
 	$(document).ready(function(){
@@ -116,9 +140,9 @@
 			<i></i>{{prettifyDate regdate}}
 		</span>
 		<h3><string>{{rno}}><strong> -{{replyer}}</h3>
-		<div>{{replytext}}</div>
+		<div>{{content}}</div>
 			<div>
-				<a data-toggle="modal" data-target="#modifyModal">Modify</a>
+				<a class="btn btn-primary btn-xs" data-toggle="modal" data-target="#modifyModal">Modify</a>
 			</div>
 	</div>
 </li>
@@ -136,7 +160,7 @@ Handlebars.registerHelper("prettifyDate", function(timeValue){
 
 var printData = function (replyArr, target, templateObject){
 	
-	var template = Handlebars.complie(templateObject.html());
+	var template = Handlebars.compile(templateObject.html());
 
 	var html = template(replyArr);
 	$(".replyLi").remove();
@@ -144,7 +168,7 @@ var printData = function (replyArr, target, templateObject){
 }
 
 	//핸들바템플릿을이용
-	var bno = ${replyVO.bqBno};
+	var bno = ${qnaVO.bno};
 	
 	var replyPage = 1;
 	//특정한 게시물에 대한 페이징 처리를 위해서 호출되는 함수. jQuery를 이용해서 JSON타입의 데이터를 처리.
@@ -180,7 +204,7 @@ var printData = function (replyArr, target, templateObject){
 	if($(".timeline li").size() > 1){
 		return;
 	}
-	getPage("/qna/" + bno + "/1");
+	getPage("/replies/" + bno + "/1");
 	
 	});
 	
@@ -192,6 +216,38 @@ var printData = function (replyArr, target, templateObject){
 		
 		getPage("/replies/"+bno+"/"+replyPage);
 	});
+	
+	//ADD REPLY버튼
+	$("#replyAddBtn").on("click", function(){
+		var replyerObj = $("#newReplyWriter");
+		
+		var replytextObj = $("#newReplyText");
+		var replyer = replyerObj.val();
+		var content = replytextObj.val();
+		
+		$.ajax({ 		//Asyncronized javascript and XML
+			type:'post',
+			url:'/replies/',
+			headers: {
+				"Content-Type": "application/json",
+				"X-HTTP-Method-Override": "POST" },
+			dataType:'text',
+			data: JSON.stringify({bqBno:bno, replyer:replyer, content:content}),
+			success:function(result){
+				console.log("result: " + result);
+				if(result == 'SUCCESS'){
+					alert("등록 되었습니다.");
+					replyPage = 1;
+					getPage("/replies/"+bno+"/"+replyPage);
+					replyerObj.val("");
+					replytextObj.val("");
+				}
+			}
+		});
+	});
 	</script>
+<!-- 부트스트랩 JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -4,7 +4,6 @@ import java.util.List;
 
 import dev.mvc.domain.Criteria;
 import dev.mvc.domain.QnaVO;
-import dev.mvc.domain.ReplyVO;
 import dev.mvc.domain.SearchCriteria;
 
 public interface QnaService {
@@ -28,16 +27,5 @@ public interface QnaService {
 	
 	public int listSearchCount(SearchCriteria cri)throws Exception;
 	
-	//replyService
-	public void addReply(ReplyVO vo)throws Exception;
 	
-	public List<ReplyVO> listReply(Integer bqBno)throws Exception;
-	
-	public void modifyReply(ReplyVO vo)throws Exception;
-	
-	public void removeReply(Integer rno)throws Exception;
-	
-	public List<ReplyVO> listReplyPage(Integer bqBno, Criteria cri)throws Exception;
-	
-	public int count(Integer bqBno)throws Exception;
 }

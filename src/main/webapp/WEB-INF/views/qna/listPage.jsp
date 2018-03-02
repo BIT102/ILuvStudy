@@ -15,6 +15,8 @@
     <style>
     	.table{border:1px solid grey; width:60%; margin:0 auto;}
     </style>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    
     <script>
     
     	var result = '${msg}';
@@ -111,7 +113,7 @@
 	
 	<script>
 
-<!-- search버튼 동작  -->
+// search버튼 동작  
 $(document).ready(
 		function(){
 			

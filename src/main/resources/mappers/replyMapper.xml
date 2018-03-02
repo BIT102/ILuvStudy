@@ -31,6 +31,8 @@
 		where rno = #{rno}
 	</delete>
 	
+	<!-- 댓글 페이징 -->
+	<!-- listPage와 count를 위한 SQL문 -->
 	<select id="listPage" resultType="dev.mvc.domain.ReplyVO">
 		select *
 		from reply_qna
