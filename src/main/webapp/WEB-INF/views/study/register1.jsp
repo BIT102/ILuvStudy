@@ -21,13 +21,19 @@ height:200px;
 border:1px dotted blue;
 }
 
-.small {
+.fileList{
+width:200px;
+height:200px;
+border:1px dotted blue;
+}
+
+small {
 	margin-left:3px;
 	font-weight:bold;
 	color:gray;
 }
 
-.small:hover {
+small:hover {
 	background-color:black;
 }
 
@@ -121,15 +127,16 @@ border:1px dotted blue;
                 <p>최대인원</p>
                 <input type="number" name="max">
             </div>
-  
+            
             <!--지역분류-->
             <div class="studyRegion">
                 <!--대분류-->
-                <div class="RD">
+
                     <p>지역대분류</p>
-                    <select class="rDId" name="rDId">
-                    	<option selected> -- </option>
-                        <option value="A">서울</option>
+                    <select id="rDId" name="rDId">  
+                 		<option value='' selected>--</option>
+
+           <option value="A">서울</option>
                         <option value="B">경기도</option>
                         <option value="C">인천광역시</option>
                         <option value="D">세종틀별자치시</option>
@@ -145,23 +152,34 @@ border:1px dotted blue;
                         <option value="N">광주광역시</option>
                         <option value="O">부산광역시</option>
                         <option value="P" >울산광역시</option>
-                        <option value="Q">제주특별시</option>
+                        <option value="Q">제주특별시</option> 
                     </select>
-                </div>
+                    
                 <!--소분류//나중에추가하기-->
-                <div class="RSP">
                     <p>지역소분류</p>
-                    <select class="rSId" name="rSId">
-                   		<option selected> -- </option>
-                        <option value="1">남구</option>
+                    <select id="rSId" name="rSId">
+                    
+               		<option selected> -- </option>
+                       <option value="1">남구</option>
                         <option value="2">동구</option>
                         <option value="3">북구</option>
                         <option value="4">울주군</option>
-                        <option value="5">중구</option>
+                        <option value="5">중구</option>  
+	                </select>  
+  <!--              <div class="RSQ"> 
+                    <p>지역소분류</p>
+                    <select class="rSId" name="rSId">
+                   		<option selected> -- </option>
+                        <option value="1">서귀포시</option>
+                        <option value="2">제주시</option>
                     </select>    
-                </div>
-            </div>
+                </div> -->
 
+<script>
+
+</script>				
+				
+ 			</div> 
             <!--연령-->
             <div class="studyage">
                 <p>연령</p>
@@ -269,14 +287,19 @@ border:1px dotted blue;
         <!-- 파일업로드부분 -->
             <div class="studyfile">
                 <P>파일업로드</P>
-          <input type="file" name="file">파일을 골라주세용
           
           	<h3>Ajax File upload</h3>
 			<div class='fileDrop'></div>
+			
+			<div class='uploaded'></div>
+			
+			
+			<h3>나머지 떨구자</h3>
+			<div class="fileList"></div>
 
 			<div class='uploadedList'></div>
-
-            </div>      
+			
+ 		  </div>      
         </div>
 
         <button type="submit" >종료</button>
@@ -287,17 +310,16 @@ border:1px dotted blue;
  <script id="template" type="text/x-handlebars-template">
 
 	<span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment"></span>
-	<div class="mailbox-attachment-info">
+
 		<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>
-		<a href="{{name}}"
-			class="small">X</a>
+		<a href="{{name}}"></a><small data-src=data>X</small>
 	</span>
 </div>
-
 
 </script>
 
 	<script>
+	
 		var template = Handlebars.compile($("#template").html());
 		
 		$(".fileDrop").on("dragenter dragover", function(event){
@@ -328,23 +350,88 @@ border:1px dotted blue;
 				//파일을 드롭했을때 성공시
 				success: function(data){
 				
-			var fileInfo = getFileInfo(data);
+					var fileInfo = getFileInfo(data);
 					
 					var html = template(fileInfo);
 					
-					$(".uploadedList").append(html);
+					$(".uploaded").append(html);
 				}
 
 				});
 			});
-		//취소버튼
-		$(".uploadedList").on("click", "small", function(event){
+		
+		//나머지 떨구자
+		$(".fileList").on("dragenter dragover", function(event){
+			event.preventDefault();
+		});
+		
+	
+		//파일을 떨구는 장소	
+		$(".fileList").on("drop", function(event){
+			
+	
+			event.preventDefault();
+
+			var files = event.originalEvent.dataTransfer.files;
+	
+			for(var i=1; i<files.length; i++) {
+			
+			var file = files[i];
+			
+			console.log(file);
+			var formData = new FormData();
+			
+			formData.append("file", file);
+			
+			$.ajax({
+				url: '/study/uploadAjax',
+				data: formData,
+				dataType: 'text',
+				processData: false,
+				contentType: false,
+				type: 'POST',
+				//파일을 드롭했을때 성공시
+				success: function(data){
+				
+					var fileInfo = getFileInfo(data);
+					
+					var html = template(fileInfo);
+					
+					$(".uploadedList").append(html);
+						}
+
+					});
+			}
+			});
+		
+		
+		//이미지삭제합니다
+		$(".uploaded").on("click", "small", function(event){
 			
 			var that = $(this);
 			
 			$.ajax({
-				url:"deleteFile",
-				type:"post",
+				url:"/study/deleteFile",
+				type:"POST",
+				data:{fileName:$(this).attr("data-src")},
+				dataType:"text",
+				success:function(result){
+					if(result == 'deleted') {
+						/*  alert("deleted");*/
+						that.parent("div").remove();
+					}
+				}
+			})
+			
+		});
+		
+	$(".uploadedList").on("click", "small", function(event){
+			
+			var that = $(this);
+			
+			$.ajax({
+				url:"/study/deleteFile",
+				type:"POST",
 				data:{fileName:$(this).attr("data-src")},
 				dataType:"text",
 				success:function(result){
@@ -352,9 +439,10 @@ border:1px dotted blue;
 						alert("deleted");
 					}
 				}
-			});
+			})
 			
 		});
+		
 		
 		//스터디 보드 등록후 이미지 등록을 위해서
 		$("#registerForm").submit(function(event){
@@ -365,7 +453,7 @@ border:1px dotted blue;
 			
 			var str = "";
 			
-			$(".uploadedList .small").each(function(index){
+			$(".uploaded hi").each(function(index){
 				
 				str += "<input type='hidden' name='files["+index+"]' value='"+$(this).attr("href")+"'>";
 			});
@@ -374,6 +462,9 @@ border:1px dotted blue;
 			
 			that.get(0).submit();
 		});
+
+
+	
 	</script>
 
 

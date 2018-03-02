@@ -2,8 +2,8 @@ package dev.mvc.service;
 
 import java.util.List;
 
-import dev.mvc.admin.Criteria;
 import dev.mvc.domain.AdminVO;
+import dev.mvc.domain.Criteria;
 import dev.mvc.domain.UserVO;
 import dev.mvc.dto.AdminDTO;
 

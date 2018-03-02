@@ -6,8 +6,8 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
-import dev.mvc.admin.Criteria;
 import dev.mvc.domain.AdminVO;
+import dev.mvc.domain.Criteria;
 import dev.mvc.domain.UserVO;
 import dev.mvc.dto.AdminDTO;
 import dev.mvc.persistance.AdminDAO;

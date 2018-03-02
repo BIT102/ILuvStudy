@@ -6,7 +6,7 @@ import java.net.URLEncoder;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
-public class PageMaker {
+public class PageMakerStudy  {
 
 	private int totalCount;
 	private int startPage;
@@ -16,9 +16,9 @@ public class PageMaker {
 	
 	private int displayPageNum = 10;
 	
-	private Criteria cri;
+	private CriteriaStudy cri;
 	
-	public void setCri(Criteria cri){
+	public void setCri(CriteriaStudy cri){
 		this.cri = cri;
 	}
 	
@@ -63,8 +63,8 @@ public class PageMaker {
 		UriComponents uriComponents = 
 				UriComponentsBuilder.newInstance().queryParam("page", page)
 				.queryParam("perPageNum", cri.getPerPageNum())
-				.queryParam("searchType", ((SearchCriteria) cri).getSearchType())
-				.queryParam("keyword", encoding(((SearchCriteria)cri).getKeyword())).build();
+				.queryParam("searchType", ((SearchCriteriaStudy) cri).getSearchType())
+				.queryParam("keyword", encoding(((SearchCriteriaStudy)cri).getKeyword())).build();
 		
 		return uriComponents.toUriString();
 	}
@@ -138,8 +138,11 @@ public class PageMaker {
 		return totalCount;
 	}
 
-	public Criteria getCri() {
+	public CriteriaStudy getCri() {
 		return cri;
 	}
 	
 }
+
+
+	

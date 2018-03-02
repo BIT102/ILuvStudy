@@ -19,7 +19,7 @@
   	</select>
   	
   	<!-- 프로필 읽어오기 #(email)-->
-  	<select id="read" resultType="dev.mvc.user.UserVO">
+  	<select id="read" resultType="UserVO">
   	select photo, email,password, name, nickname, birth, gender, phoneNum, introduction, homepage
   	from jjstudy.user 
   	where email = "abc3@gmail.com";

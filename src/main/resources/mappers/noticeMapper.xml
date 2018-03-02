@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="dev.mvc.mapper.NoticeMapper">
 
 <!-- 공지사항 읽어오기 -->
-<select id="readNotice" resultType="dev.mvc.domain.NoticeVO">
+<select id="readNotice" resultType="NoticeVO">
 select
 bno
 , title
@@ -20,7 +20,7 @@ where bno = #{bno}
 </select>
 
 <!-- 게시판 전체 -->
-<select id="noticeList" resultType="dev.mvc.domain.NoticeVO">
+<select id="noticeList" resultType="NoticeVO">
 <![CDATA[
 select
 bno
@@ -31,8 +31,150 @@ bno
 from
 notice
 where bno > 0
-order by bno desc
-, regdate desc
+order by bno desc, regdate desc
 ]]>
 </select>
+
+<!-- 페이지 처리 -->
+<select id="listPage" resultType="NoticeVO">
+<![CDATA[
+SELECT
+bno
+, title
+, content
+, regdate
+, writer
+FROM
+notice
+WHERE bno > 0
+ORDER BY bno desc
+, regdate desc
+limit #{page}, 10
+]]>
+</select>
+
+<select id="listCriteria" resultType="NoticeVO">
+<![CDATA[
+SELECT
+bno
+, title
+, content
+, regdate
+, writer
+FROM
+notice
+WHERE bno > 0
+ORDER BY bno desc
+, regdate desc
+limit #{pageStart}
+, #{perPageNum}
+]]>
+</select>
+
+<!-- 공지사항 삭제 -->
+<delete id="delete">
+DELETE
+FROM
+notice
+WHERE bno = #{bno}
+</delete>
+
+<!-- 공지사항 수정 -->
+<update id="update">
+UPDATE 
+notice
+SET
+title = #{title}
+, content = #{content}
+WHERE
+bno = #{bno}
+</update>
+
+
+<!-- 페이징 개수 -->
+<select id="countPaging" resultType="int">
+<![CDATA[
+SELECT
+COUNT(bno)
+FROM
+notice
+WHERE bno > 0
+]]>
+</select>
+
+ <!-- 검색하기 페이지 -->
+<!-- <select id="listCriteria" resultType="NoticeVO">
+<![CDATA[
+SELECT
+*
+FROM
+notice
+WHERE bno > 0
+ORDER BY bno desc
+limit #{pageStart}
+, #{perPageNum}
+]]>
+</select> -->
+
+<!-- 검색 -->
+<select id="listSearchCount" resultType="int">
+<![CDATA[
+SELECT 
+COUNT(bno)
+FROM
+notice
+WHERE bno > 0
+]]>
+
+<include refid="search"></include>
+
+</select>
+
+<!-- 검색 결과  -->
+<select id="listSearch" resultType="NoticeVO">
+<![CDATA[
+select *
+from
+notice
+where
+bno>0
+]]>
+
+<include refid="search"></include>
+
+<![CDATA[
+order by bno desc
+limit #{pageStart}, #{perPageNum}
+]]>
+</select>
+
+
+<!-- 검색의 필요한 화면구성 -->
+<sql id="search">
+ 		<if test="searchType != null">
+  			<if test="searchType == 't'.toString()">
+  				and title like CONCAT('%', #{keyword}, '%')
+  			</if>
+  			<if test="searchType == 'c'.toString()">
+  				and content like CONCAT('%', #{keyword}, '%')
+  			</if>
+  			<if test="searchType == 'w'.toString()">
+  				and writer like CONCAT('%', #{keyword}, '%')
+  			</if>
+  			<if test="searchType == 'tc'.toString()">
+  				and ( title like CONCAT('%', #{keyword}, '%') OR content like CONCAT('%', #{keyword}, '%'))
+  			</if>
+  			<if test="searchType == 'cw'.toString()">
+  				and ( content like CONCAT('%', #{keyword}, '%') OR writer like CONCAT('%', #{keyword}, '%'))
+  			</if>
+  			<if test="searchType == 'tcw'.toString()">
+  				and ( title like CONCAT('%', #{keyword}, '%') 
+  						OR content like CONCAT('%', #{keyword}, '%') 
+  						OR writer like CONCAT('%', #{keyword}, '%') )
+  			</if>
+  		</if> 
+  </sql>		
+
+  	 		
+
 </mapper>

@@ -5,7 +5,7 @@
   
 	<mapper namespace="dev.mvc.mapper.replyMapper">
 	
-	<select id="list" resultType="dev.mvc.domain.ReplyVO">
+	<select id="list" resultType="ReplyVO">
 		select *
 		from reply_qna
 		where bqBno = #{bqBno}

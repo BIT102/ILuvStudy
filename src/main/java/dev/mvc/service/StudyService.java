@@ -2,6 +2,8 @@ package dev.mvc.service;
 
 import java.util.List;
 
+import dev.mvc.domain.CriteriaStudy;
+import dev.mvc.domain.SearchCriteriaStudy;
 import dev.mvc.domain.StudyVO;
 
 public interface StudyService {
@@ -15,8 +17,19 @@ public interface StudyService {
 	
 	//전체불러오기
 	public List<StudyVO> studyList() throws Exception;
+
+	//페이지당 데이터 불러오기
+	public List<StudyVO> listCriteria(CriteriaStudy cri) throws Exception;
+		
+	//페이징 ㅈ개수전체
+	public int listCountCriteria(CriteriaStudy cri) throws Exception;
 	
-	//파일불러오기
-	public List<String> getFile(Integer bno) throws Exception;
+	//보드 삭제히가
+	public void remove(Integer bno) throws Exception;
 	
+	//검색
+	public List<StudyVO> listSearchCriteria(SearchCriteriaStudy cri) throws Exception;
+	
+	//검색수
+	public int listSearchCount(SearchCriteriaStudy cri) throws Exception;
 }

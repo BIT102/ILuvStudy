@@ -1,9 +1,7 @@
 package dev.mvc.domain;
 
-/*Criteria를 상속받아 page와 perPageNum를 쓸수있다.
-     새로운 SearchQnaController를 만든다.
-*/
-public class SearchCriteria extends Criteria { 
+public class SearchCriteriaStudy extends CriteriaStudy{
+	
 	private String searchType;
 	private String keyword;
 	

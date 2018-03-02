@@ -45,7 +45,7 @@ public class StudyVO {
 	private Date regdate;
 	private Date enddate;
 	
-	
+
 	//지역이랑 카테고리는 이름으로 가져올께요
 	private String rDName;
 	private String rSName;
@@ -57,9 +57,17 @@ public class StudyVO {
 	
 
 	//파일을 엄로드합니다
-	private Integer no;
+	private int no;
 	private String name;
-	private Integer bsBno;
+	private String status;
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
 	private String[] files;
 
@@ -255,11 +263,11 @@ public class StudyVO {
 		this.nickname = nickname;
 	}
 
-	public Integer getNo() {
+	public int getNo() {
 		return no;
 	}
 
-	public void setNo(Integer no) {
+	public void setNo(int no) {
 		this.no = no;
 	}
 
@@ -269,14 +277,6 @@ public class StudyVO {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public Integer getBsBno() {
-		return bsBno;
-	}
-
-	public void setBsBno(Integer bsBno) {
-		this.bsBno = bsBno;
 	}
 
 	public String[] getFiles() {
@@ -294,9 +294,10 @@ public class StudyVO {
 				+ ", age=" + age + ", sc=" + sc + ", sd=" + sd + ", st=" + st + ", et=" + et + ", content=" + content
 				+ ", vct=" + vct + ", rct=" + rct + ", regdate=" + regdate + ", enddate=" + enddate + ", rDName="
 				+ rDName + ", rSName=" + rSName + ", cDName=" + cDName + ", cSName=" + cSName + ", nickname=" + nickname
-				+ ", no=" + no + ", name=" + name + ", bsBno=" + bsBno + ", files=" + Arrays.toString(files)
+				+ ", no=" + no + ", name=" + name + ", status=" + status + ", files=" + Arrays.toString(files)
 				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
 				+ "]";
 	}
-}
+
 	
+}

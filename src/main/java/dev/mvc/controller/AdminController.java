@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import dev.mvc.admin.Criteria;
-import dev.mvc.admin.PageMaker;
 import dev.mvc.domain.AdminVO;
+import dev.mvc.domain.Criteria;
+import dev.mvc.domain.PageMaker;
 import dev.mvc.domain.UserVO;
 import dev.mvc.dto.AdminDTO;
 import dev.mvc.service.AdminService;

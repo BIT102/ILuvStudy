@@ -10,7 +10,7 @@
   	values( #{title}, #{writer}, #{categoryD}, #{categoryS}, #{content}, #{rct}, #{regdate}, #{type})
   	</insert>
   
-  	<select id="read" resultType="dev.mvc.domain.QnaVO">
+  	<select id="read" resultType="QnaVO">
   	select
   		bno, type, title, writer, content, regdate
   	from 
@@ -28,7 +28,7 @@
   	where bno =#{bno}
   	</delete>
   	
-  	<select id="listAll" resultType="dev.mvc.domain.QnaVO">
+  	<select id="listAll" resultType="QnaVO">
   	<![CDATA[
   	select
   		bno, title, content, writer, regdate
@@ -40,7 +40,7 @@
   	</select>
   	
   	<!-- 페이징 SQL -->
-  	<select id="listPage" resultType="dev.mvc.domain.QnaVO"> <!-- alias를 하면 QnaVO만 쓸 수 있다. -->
+  	<select id="listPage" resultType="QnaVO"> <!-- alias를 하면 QnaVO만 쓸 수 있다. -->
   	<![CDATA[
   	select 
   		bno, title, writer, content, regdate, type
@@ -53,7 +53,7 @@
   	</select>
   	
   	<!-- listCritetia추가 -->
-  	<select id="listCriteria" resultType="dev.mvc.domain.QnaVO"> <!-- 까먹지말아라 -->
+  	<select id="listCriteria" resultType="QnaVO"> <!-- 까먹지말아라 -->
   	<![CDATA[
   	select
   		bno, title, writer, content, regdate, type
@@ -104,7 +104,7 @@
   	</sql>
   	
   	
-  	<select id="listSearch" resultType="dev.mvc.domain.QnaVO">
+  	<select id="listSearch" resultType="QnaVO">
   	<![CDATA[
   	select *
   	from

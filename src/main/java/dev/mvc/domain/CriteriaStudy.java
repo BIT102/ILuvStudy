@@ -1,9 +1,11 @@
-package dev.mvc.admin;
+package dev.mvc.domain;
 
-public class Criteria {
-	
+public class CriteriaStudy {
+
 	private int page;
 	private int perPageNum;
+	
+
 	
 	//admin 拌沥 包府 八祸贸府
 	private String idKeyword;
@@ -14,9 +16,10 @@ public class Criteria {
 	private String emailKeyword;
 	private String nickNameKeyword;
 	
-	public Criteria(){
+	public CriteriaStudy(){
 		this.page = 1;
-		this.perPageNum = 10;
+		this.perPageNum = 9;
+
 	}
 	public void setPage(int page){
 		if(page <= 0){
@@ -26,12 +29,13 @@ public class Criteria {
 		this.page = page;
 	}
 	public void setPerPageNum(int perPageNum){
-		if(perPageNum <= 0 || perPageNum > 100){
-			this.perPageNum = 10;
+		if(perPageNum <= 0 || perPageNum > 99){
+			this.perPageNum = 9;
 			return;
 		}
 		this.perPageNum = perPageNum;
 	}
+
 	public int getPage() {
 		return page;
 	}
@@ -41,6 +45,7 @@ public class Criteria {
 	public int getPerPageNum() {
 		return this.perPageNum;
 	}
+	
 	public String getIdKeyword() {
 		return idKeyword;
 	}
@@ -72,11 +77,13 @@ public class Criteria {
 	public void setNickNameKeyword(String nickNameKeyword) {
 		this.nickNameKeyword = nickNameKeyword;
 	}
+	
 	@Override
 	public String toString() {
 		return "Criteria [page=" + page + ", perPageNum=" + perPageNum + ", idKeyword=" + idKeyword + ", nameKeyword="
 				+ nameKeyword + ", isDelType=" + isDelType + ", emailKeyword=" + emailKeyword + ", nickNameKeyword="
-				+ nickNameKeyword + "]";
+				+ nickNameKeyword + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()="
+				+ super.toString() + "]";
 	}
-
+	
 }

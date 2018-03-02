@@ -10,6 +10,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="http://code.jquery.com/jquery-1.7.js"></script>
     <title>Document</title>
     <style>
     h1 {float:left;}
@@ -56,8 +57,7 @@ div.desc {
 	<input type="hidden" name="bno" value="${studyVO.bno}">
 </form>
 
-        <header id="header">
-            <h1><a href="main.html"><img src="ilove.jpg" width="200" height="128"></a></h1>
+        <header id="header">       
             <nav id="nav1">
                 <a href="listAll.html">전체</a>
                 <a href="boarder.html">외국어</a>
@@ -78,7 +78,15 @@ div.desc {
 
         <div style="height:700px;">
             <div id="brdimg">
-                <img src="kazakhstan.jpg"></img>
+                <c:if test="${studyVO.name!=null}">
+					<div class='uploadedList'>
+						<span class="mailbox-attachment-icon has-img"><img
+							src="/study/displayFile?fileName=${studyVO.name}"
+							alt="Attachment"></span>
+					</div>
+				</c:if>
+				
+				
                 <!-- 스터디 제목 -->
                 <h2>${studyVO.title}</h2>
                 <!-- 작성자 -->
@@ -176,10 +184,31 @@ div.desc {
         <input type="button" value="신청하기">
         <input type="button" value="목록으로">
         <!-- 로그인시 --> </br></br>
-        <input type="button" value="목록">
-        <input type="button" value="수정">
-        <input type="button" value="삭제">
-        <input type="button" value="스터디완료">
+        <input type="submit" class="preee" value="목록">
+        <input type="submit" value="수정">
+        <input type="submit" class="delete" value="삭제">
+        <input type="submit" value="스터디완료">
     </div>
+    
+    <from role="form" action="">
+
+<script>
+$(document).ready(function(){
+	
+	var formObj = $("form[role='form']");
+	
+	$(".preee").on("click", function(){
+		self.location = "/study/listAll?page=${cri.page}&perPageNum=${cri.perPageNum}";
+	});
+	
+	$(".delete").on("click", function(){
+		formObj.attr("action", "/study/remove");
+		formObj.submit();
+	})
+	
+});
+
+</script>    
+    
 </body>
 </html>
