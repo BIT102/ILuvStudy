@@ -337,6 +337,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="titleKeyword != null">
 			and title like concat('%', #{titleKeyword}, '%')
 		</if>
+		<if test="idKeyword != null">
+			and writer like concat('%', #{idKeyword}, '%')
+		</if>
 	</sql>
 	
 	<!-- 검색 추가 필요 -->
@@ -375,7 +378,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 공지사항 정보 업데이트 -->
 	<update id="noticeUpdate">
 		update notice 
-		set title=#{title}, content=#{content}, writer=#{writer}, lastModifyDate=#{now()}
+		set title=#{title}, content=#{content}, writer=#{writer}, lastModifyDate=now()
 		where bno = #{bno}
 	</update>
+	
+	<!-- 공지사항 정보 등록 -->
+	<insert id="noticeRegister">
+		insert into notice (title, content, regdate, writer)
+		values (#{title},#{content},now(), #{writer});
+	</insert>
 </mapper>

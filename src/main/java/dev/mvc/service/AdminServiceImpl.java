@@ -162,4 +162,9 @@ public class AdminServiceImpl implements AdminService{
 	public void noticeUpdate(NoticeVO vo)throws Exception{
 		dao.noticeUpdate(vo);
 	}
+	
+	@Override
+	public void noticeRegister(NoticeVO vo)throws Exception{
+		dao.noticeRegister(vo);
+	}
 }

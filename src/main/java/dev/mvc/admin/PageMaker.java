@@ -80,6 +80,7 @@ public class PageMaker {
 				.queryParam("page", page)
 				.queryParam("perPageNum", cri.getPerPageNum())
 				.queryParam("titleKeyword",encoding(cri.getTitleKeyword()))//검색 처리
+				.queryParam("idKeyword",encoding(cri.getIdKeyword()))
 				.build();
 		return uriComponents.toUriString();
 	}

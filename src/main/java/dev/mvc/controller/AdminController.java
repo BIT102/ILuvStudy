@@ -76,19 +76,19 @@ public class AdminController {
 	
 	//admin/adminRegister.jsp 페이지 이동
 	@RequestMapping(value="/adminRegister", method = RequestMethod.GET)
-	public void adminRegister(AdminVO vo, Model model) throws Exception{
+	public void adminRegister(AdminVO vo, RedirectAttributes rttr) throws Exception{
 		logger.info("adminRegister get...");
 	}
 	
 	//admin/adminRegister.jsp 패아자애서 계정 등록
 	@RequestMapping(value="/adminRegister", method = RequestMethod.POST)
-	public String adminRegisterPOST(AdminVO vo, Model model) throws Exception{
+	public String adminRegisterPOST(AdminVO vo, RedirectAttributes rttr) throws Exception{
 		logger.info("adminRegister post...");
 		logger.info(vo.toString());
 		
 		service.adminRegister(vo);
 		
-		model.addAttribute("result", "SUCCESS");
+		rttr.addFlashAttribute("msg", "SUCCESS");
 		
 		return "redirect:/admin/adminList";
 	}
@@ -260,6 +260,8 @@ public class AdminController {
 	
 	
 //사이트관리 > qna 관리 끝
+	
+//사이트관리 > 공지사항 등록	
 	//admin/noticeList.jsp
 	@RequestMapping(value = "/noticeList", method = RequestMethod.GET)
 	public void noticeList(@ModelAttribute("cri") Criteria cri, Model model) throws Exception{
@@ -303,5 +305,25 @@ public class AdminController {
 		
 		return "redirect:/admin/noticeList";
 	}
+	
+	//admin/noticeRegister.jsp 페이지 이동
+	@RequestMapping(value="/noticeRegister", method = RequestMethod.GET)
+	public void noticeRegister(NoticeVO vo, RedirectAttributes rttr) throws Exception{
+		logger.info("noticeRegister get...");
+	}
+	
+	//admin/noticeRegister.jsp 패아자애서 계정 등록
+	@RequestMapping(value="/noticeRegister", method = RequestMethod.POST)
+	public String noticeRegisterPOST(NoticeVO vo, RedirectAttributes rttr) throws Exception{
+		logger.info("noticeRegister post...");
+		logger.info(vo.toString());
+		
+		service.noticeRegister(vo);
+		
+		rttr.addFlashAttribute("msg", "SUCCESS");
+		
+		return "redirect:/admin/noticeList";
+	}
+//사이트관리 > 공지사항 등록 끝
 
 }

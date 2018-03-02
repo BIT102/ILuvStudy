@@ -71,7 +71,8 @@
 		//목록 클릭 시 액션
 		$("#listBtn").on("click", function(){
 			self.location = "/admin/noticeList?page=${cri.page}&perPageNum=${cri.perPageNum}"
-							+"&titleKeyword=${cri.titleKeyword}";
+							+"&titleKeyword=${cri.titleKeyword}"
+							+"&idKeyword=${cri.idKeyword}";
 
 		});
 	});

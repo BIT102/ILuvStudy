@@ -28,7 +28,9 @@
             <tr>
                 <th>제목</th>
                 <td><input type="text" name="titleKeyword" id="titleKeywordInput" value="${cri.titleKeyword}"></td>
-            </tr>
+                <th>작성자</th>
+                <td><input type="text" name="idKeyword" id="idKeywordInput" value="${cri.idKeyword}"></td>
+            </tr>            
         </table>
         
         <button type="submit" id="searchBtn">검색</button>
@@ -76,7 +78,7 @@
         	</c:if>
         </ul>
 
-        <a href="noticeRegister">등록</a>
+        <button type="submit" id="registerBtn">등록</button>
     </div>
 
 <script>
@@ -88,10 +90,16 @@
 	
 	$(document).ready(function(){		
 		
+		//등록 클릭 시 액션
+		$("#registerBtn").on("click", function(){
+			self.location = "/admin/noticeRegister";
+		});
+		
 		//검색 클릭 시 액션
 		$("#searchBtn").on("click", function(event){
 			self.location = "noticeList" + "${pageMaker.makeQuery(1)}"
-				+"&titleKeyword="+encodeURIComponent($("#titleKeywordInput").val());
+				+"&titleKeyword="+encodeURIComponent($("#titleKeywordInput").val())
+				+"&idKeyword="+encodeURIComponent($("#idKeywordInput").val());
 		});
 		
 	});

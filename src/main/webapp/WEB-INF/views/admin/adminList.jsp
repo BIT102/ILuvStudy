@@ -66,10 +66,6 @@
             </tr>
 </c:forEach>
         </table>
-
-		<!-- 계정 등록 -->
-        <!-- <a href="adminRegister">등록</a> -->
-        <button type="submit" id="registerBtn">등록</button>
         
         <!-- 페이징 처리 -->
         <!-- 페이징 정보 저장 -->
@@ -89,6 +85,10 @@
         		<li><a href="adminList${pageMaker.adminSearch(pageMaker.endPage + 1)}">&raquo;</a></li>
         	</c:if>
         </ul>
+        
+		<!-- 계정 등록 -->
+        <!-- <a href="adminRegister">등록</a> -->
+        <button type="submit" id="registerBtn">등록</button>
     </div>
 
 <script>

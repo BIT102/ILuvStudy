@@ -48,4 +48,5 @@ public interface AdminDAO {
 	public int noticeCountPaging(Criteria cri)throws Exception;
 	public NoticeVO noticeDetail(Integer bno)throws Exception;
 	public void noticeUpdate(NoticeVO vo)throws Exception;
+	public void noticeRegister(NoticeVO vo)throws Exception;
 }

@@ -176,5 +176,10 @@ public class AdminDAOImpl implements AdminDAO{
 		session.update(namespace + ".noticeUpdate", vo);   // 공지사항 정보 수정
 	}
 	
+	@Override
+	public void noticeRegister(NoticeVO vo)throws Exception{
+		session.insert(namespace + ".noticeRegister", vo);  // 공지사항 정보 등록
+	}
+	
 		
 }
