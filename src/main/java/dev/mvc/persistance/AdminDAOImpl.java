@@ -91,6 +91,21 @@ public class AdminDAOImpl implements AdminDAO{
 	}
 	
 	@Override
+	public List<StudyVO> userApply(Integer bno)throws Exception{
+		return session.selectList(namespace + ".userApply", bno);  //사용자가 신청한 스터디 정보
+	}
+	
+	@Override
+	public List<StudyVO> userStudy(Integer bno)throws Exception{
+		return session.selectList(namespace + ".userStudy", bno);  //사용자가 모집한 스터디 정보
+	}
+	
+	@Override
+	public List<StudyVO> userBookMark(Integer bno)throws Exception{
+		return session.selectList(namespace + ".userBookMark", bno);  //사용자 스터디 북마크 정보
+	}
+	
+	@Override
 	public List<StudyVO> studyList(Criteria cri) throws Exception{
 		return session.selectList(namespace + ".studyList", cri);  //study 정보 리스트,페이징 
 	}

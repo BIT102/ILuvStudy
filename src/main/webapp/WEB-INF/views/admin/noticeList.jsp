@@ -33,8 +33,8 @@
             </tr>            
         </table>
         
-        <button type="submit" id="searchBtn">검색</button>
-        <button>초기화</button>
+        <button type="button" id="searchBtn">검색</button>
+        <button type="button" id="removeBtn">초기화</button>
         
 
         <!--리스트 -->
@@ -78,7 +78,7 @@
         	</c:if>
         </ul>
 
-        <button type="submit" id="registerBtn">등록</button>
+        <button type="button" id="registerBtn">등록</button>
     </div>
 
 <script>
@@ -100,6 +100,12 @@
 			self.location = "noticeList" + "${pageMaker.makeQuery(1)}"
 				+"&titleKeyword="+encodeURIComponent($("#titleKeywordInput").val())
 				+"&idKeyword="+encodeURIComponent($("#idKeywordInput").val());
+		});
+		
+		//초기화 클릭 시 액션
+		$("#removeBtn").on("click", function(){
+			$("#titleKeywordInput").val('');
+			$("#idKeywordInput").val('');
 		});
 		
 	});

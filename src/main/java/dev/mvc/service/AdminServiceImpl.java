@@ -89,6 +89,21 @@ public class AdminServiceImpl implements AdminService{
 	}
 	
 	@Override
+	public List<StudyVO> userApply(Integer bno)throws Exception{
+		return dao.userApply(bno);
+	}
+	
+	@Override
+	public List<StudyVO> userStudy(Integer bno)throws Exception{
+		return dao.userStudy(bno);
+	}
+	
+	@Override
+	public List<StudyVO> userBookMark(Integer bno)throws Exception{
+		return dao.userBookMark(bno);
+	}
+	
+	@Override
 	public List<StudyVO> studyList(Criteria cri) throws Exception{
 		return dao.studyList(cri);
 	}

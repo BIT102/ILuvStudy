@@ -32,8 +32,8 @@
 
         </table>
         
-        <button id="searchBtn">검색</button>
-        <button>초기화</button>
+        <button type="button" id="searchBtn">검색</button>
+        <button type="button" id="removeBtn">초기화</button>
 
         <!--리스트 -->
         <!--페이징 처리 -->
@@ -88,7 +88,7 @@
         
 		<!-- 계정 등록 -->
         <!-- <a href="adminRegister">등록</a> -->
-        <button type="submit" id="registerBtn">등록</button>
+        <button type="button" id="registerBtn">등록</button>
     </div>
 
 <script>
@@ -110,6 +110,12 @@
 			self.location = "adminList" + "${pageMaker.makeQuery(1)}"
 				+"&idKeyword="+encodeURIComponent($("#idKeywordInput").val())
 				+"&nameKeyword="+encodeURIComponent($("#nameKeywordInput").val());
+		});
+		
+		//초기화 클릭 시 액션
+		$("#removeBtn").on("click", function(){
+			$("#idKeywordInput").val('');
+			$("#nameKeywordInput").val('');
 		});
 		
 	});

@@ -34,7 +34,7 @@
     <!--헤더-->
     <div>
         <a>${login.id} 님</a>
-        <a href="pwChange">[정보수정]</a>
+        <a href="adminDetail?bno=${login.bno}">[정보수정]</a>
         <a href="/adminLogout">[로그아웃]</a>
     </div>
 

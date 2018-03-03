@@ -156,7 +156,7 @@
             </tr>
         </table>
 
-        <button type="submit" id="listBtn">목록</button>
+        <button type="button" id="listBtn">목록</button>
     </div>
 
 <script>

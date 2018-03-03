@@ -81,30 +81,16 @@
                     <th>최종수정일</th>
                     <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${userVO.modifyDate}"/></td>
                 </tr>
-                <tr>
-                    <th>이미지</th>
-                    <td>${userVO.photo}</td>
-                </tr>
+                <!-- 탈퇴회원인 경우 탈퇴일자 노출 -->
+                <c:if test="${userVO.isDel eq 1}">
+               		<tr>
+                		<th>탈퇴일</th>
+                		<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${userVO.quitDate}"/></td>
+                	</tr>
+                </c:if>
             </table>
         <div>* 부가정보</div>
             <table>
-                <tr>
-                    <th>관심 카테고리</th>
-                    <td>#IT <input type="checkbox">컴퓨터 언어<input type="checkbox">웹프로그래밍</td>
-                </tr>
-                <tr>
-                    <th>관심 지역</th>
-                    <td>
-                        <select>
-                            <option>전체</option>
-                            <option>서울</option>
-                        </select>
-                        <select>
-                            <option>전체</option>
-                            <option>강남구</option>
-                        </select>
-                    </td>
-                </tr>
                 <tr>
                 	<th>홈페이지</th>
                 	<td><input type="text" name="homepage" value="${userVO.homepage}"></td>
@@ -112,12 +98,16 @@
                     <th>자기소개</th>
                     <td><textarea name="introduction">${userVO.introduction}</textarea></td>
                 </tr>
+                <tr>
+                    <th>이미지</th>
+                    <td>${userVO.photo}</td>
+                </tr>
             </table>
 	</form>
-        <button type="submit" id="modifyBtn">수정</button>
         
         <!-- 0:회원  1:탈퇴 -->
         <c:if test="${userVO.isDel eq 0}">
+        	<button type="submit" id="modifyBtn">수정</button>
         	<button type="submit" id="updateBtn">탈퇴</button>
         </c:if>
 
@@ -130,72 +120,60 @@
                     <th>지역</th>
                     <th>스터디 시작일</th>
                 </tr>
+<c:forEach items="${userBookMark}" var="studyVO">
                 <tr>
-                    <td>1</td>
-                    <td>자바 프로그래밍 스터디 모집합니다.</td>
-                    <td>테스터123</td>
-                    <td>서울 강남구</td>
-                    <td>2018-02-25</td>
+                    <td>${studyVO.bno}</td>
+                    <td>${studyVO.title}</td>
+                    <td>${studyVO.writer}</td>
+                    <td>${studyVO.rDName} ${studyVO.rSName}</td>
+                    <td>${studyVO.sd}</td>
                 </tr>
+</c:forEach>
             </table>
 
         <div>* 모집</div>
             <table>
                 <tr>
-                    <th>번호</th>
+                    <th>스터디 번호</th>
                     <th>스터디명</th>
-                    <th>스터디방장</th>
+                    <th>스터디 방장</th>
                     <th>지역</th>
                     <th>스터디 시작일</th>
                 </tr>
+<c:forEach items="${userStudy}" var="studyVO">
                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>${studyVO.bno}</td>
+                    <td>${studyVO.title}</td>
+                    <td>${studyVO.writer}</td>
+                    <td>${studyVO.rDName} ${studyVO.rSName}</td>
+                    <td>${studyVO.sd}</td>
                 </tr>
+</c:forEach>
             </table>
         
         <div>* 신청</div>
             <table>
                 <tr>
-                    <th>번호</th>
+                    <th>스터디 번호</th>
                     <th>스터디명</th>
-                    <th>스터디방장</th>
+                    <th>스터디 방장</th>
                     <th>지역</th>
                     <th>신청일</th>
                     <th>승인여부</th>
                 </tr>
+<c:forEach items="${userApply}" var="studyVO">        
                 <tr>
-                    <td>1</td>
-                    <td>자바 프로그래밍 스터디 모집합니다.</td>
-                    <td>테스터123</td>
-                    <td>서울 강남구</td>
-                    <td>2018-02-17</td>
-                    <td>미승인</td>
+                    <td>${studyVO.bno}</td>
+                    <td>${studyVO.title}</td>
+                    <td>${studyVO.writer}</td>
+                    <td>${studyVO.rDName} ${studyVO.rSName}</td>
+                    <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${studyVO.regdate}"/></td>
+                    <td>${studyVO.status}</td>
                 </tr>
+</c:forEach>
             </table>
 
-        <div>* 완료</div>
-            <table>
-                <tr>
-                    <th>번호</th>
-                    <th>스터디명</th>
-                    <th>스터디방장</th>
-                    <th>지역</th>
-                    <th>스터디 시작일</th>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </table>
-
-        <button type="submit" id="listBtn">목록</button>
+        <button type="button" id="listBtn">목록</button>
     </div>
 
 <script>

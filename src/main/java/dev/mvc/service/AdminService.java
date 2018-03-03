@@ -28,6 +28,9 @@ public interface AdminService {
 	public void userUpdate(UserVO vo)throws Exception;
 	public void userRegister(UserVO vo)throws Exception;
 	public UserVO isDelUpdate(Integer bno)throws Exception;
+	public List<StudyVO> userApply(Integer bno)throws Exception;
+	public List<StudyVO> userStudy(Integer bno)throws Exception;
+	public List<StudyVO> userBookMark(Integer bno)throws Exception;
 	
 	public List<StudyVO> studyList(Criteria cri) throws Exception;
 	public int studyCountPaging(Criteria cri)throws Exception;

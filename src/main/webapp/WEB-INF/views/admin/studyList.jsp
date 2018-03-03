@@ -28,7 +28,7 @@
             <tr>
                 <th>스터디상태</th>
                 <td colspan="3">
-                    <select name="stStatusType">
+                    <select name="stStatusType" id="stStatusTypeSelect">
                         <option value="n"
                         	<c:out value="${cri.stStatusType == null?'selected':''}"/>>전체</option>
  	 	     			<option value="v"
@@ -46,8 +46,8 @@
             </tr>
         </table>
 
-        <button type="submit" id="searchBtn">검색</button>
-        <button>초기화</button>
+        <button type="button" id="searchBtn">검색</button>
+        <button type="button" id="removeBtn">초기화</button>
 
         <!--리스트-->
         <!--페이징 처리 -->
@@ -121,6 +121,13 @@
 				+$("select option:selected").val()
 				+"&titleKeyword="+encodeURIComponent($("#titleKeywordInput").val())
 				+"&writerKeyword="+encodeURIComponent($("#writerKeywordInput").val());
+		});
+		
+		//초기화 클릭 시 액션
+		$("#removeBtn").on("click", function(){
+			$("#stStatusTypeSelect").val('n');
+			$("#titleKeywordInput").val('');
+			$("#writerKeywordInput").val('');
 		});
 		
 	});

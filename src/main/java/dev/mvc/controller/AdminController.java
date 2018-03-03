@@ -115,7 +115,10 @@ public class AdminController {
 						Model model) throws Exception{
 		logger.info("userDetail get...");
 		logger.info(cri.toString());
-		model.addAttribute(service.userDetail(bno));
+		model.addAttribute(service.userDetail(bno)); //사용자 상세 정보
+		model.addAttribute("userApply", service.userApply(bno)); //사용자가 신청한 스터디 정보
+		model.addAttribute("userStudy", service.userStudy(bno)); //사용자가 모집한 스터디 정보
+		model.addAttribute("userBookMark", service.userBookMark(bno)); //사용자 북마크 정보
 	}
 	
 	//admin/userDetail.jsp 에서 탈퇴 처리 시
@@ -202,6 +205,7 @@ public class AdminController {
 		//스터디 카테고리 정보 가져옴
 		model.addAttribute("studyDCategory", service.studyDCategory(cri));
 		model.addAttribute("studySCategory", service.studySCategory(cri));
+		//지역테이블 정보
 		model.addAttribute("region", service.region(cri));
 		model.addAttribute(service.studyDetail(bno));
 	}

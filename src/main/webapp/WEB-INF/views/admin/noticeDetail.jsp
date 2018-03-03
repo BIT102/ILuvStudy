@@ -51,7 +51,7 @@
             </tr>
         </table>
 	</form>
-		<button type="submit" id="listBtn">목록</button>
+		<button type="button" id="listBtn">목록</button>
 		<button type="submit" id="modifyBtn">수정</button>
     </div>
 

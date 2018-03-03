@@ -67,7 +67,7 @@
         <input type="hidden" name="registUser" value="${login.id}">
 	</form>   
 	     
-		<button type="submit" id="listBtn">목록</button>
+		<button type="button" id="listBtn">목록</button>
 		<button type="submit" id="registerBtn">등록</button>
         
     </div>

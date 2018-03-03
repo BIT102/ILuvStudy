@@ -25,7 +25,7 @@
             <tr>
                 <th>가입 상태</th>
                 <td colspan="3">
-                    <select name="isDelType">
+                    <select name="isDelType" id="isDelTypeSelect">
                         <option value="n"
                         	<c:out value="${cri.isDelType == null?'selected':''}"/>>전체</option>
                         <option value="v"
@@ -44,8 +44,8 @@
             </tr>
         </table>
 
-        <button type="submit" id="searchBtn">검색</button>
-        <button type="submit" id="removeBtn">초기화</button>
+        <button type="button" id="searchBtn">검색</button>
+        <button type="button" id="removeBtn">초기화</button>
 
 		<!--리스트 -->
         <!--페이징 처리 -->
@@ -98,7 +98,7 @@
         	</c:if>
         </ul>
         
-        <button type="submit" id="registerBtn">등록</button>
+        <button type="button" id="registerBtn">등록</button>
     </div>
 
 <script>
@@ -126,7 +126,7 @@
 		
 		//초기화 클릭 시 액션
 		$("#removeBtn").on("click", function(){
-			$("#isDelType").find("option:first").attr("selected", "selected");  //이거 안됨 수정해야됨
+			$("#isDelTypeSelect").val('n');
 			$("#emailKeywordInput").val('');
 			$("#nickNameKeywordInput").val('');
 		});

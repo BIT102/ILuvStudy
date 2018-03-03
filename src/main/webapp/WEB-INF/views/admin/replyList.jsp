@@ -34,8 +34,8 @@
 
         </table>
 
-        <button type="submit" id="searchBtn">검색</button>
-        <button>초기화</button>
+        <button type="button" id="searchBtn">검색</button>
+        <button type="button" id="removeBtn">초기화</button>
         
 
         <!--리스트 -->
@@ -90,6 +90,12 @@
 			self.location = "replyList" + "${pageMaker.makeQuery(1)}"
 				+"&bsBnoKeyword="+encodeURIComponent($("#bsBnoKeywordInput").val())
 				+"&writerKeyword="+encodeURIComponent($("#writerKeywordInput").val());
+		});
+		
+		//초기화 클릭 시 액션
+		$("#removeBtn").on("click", function(){
+			$("#bsBnoKeywordInput").val('');
+			$("#writerKeywordInput").val('');
 		});
 		
 	});

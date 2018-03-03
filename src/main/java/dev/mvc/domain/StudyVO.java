@@ -55,13 +55,22 @@ public class StudyVO {
 	// 작성자는 닉네임으로 표시
 	private String nickname;
 	
- 
 	//파일을 엄로드합니다
 	private Integer no;
 	private String name;
-	
 	private String[] files;
- 
+	
+	//관리자에서 회원조회
+	private String status;  //스터디 신청자 상태값
+	
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	public Integer getBno() {
 		return bno;
 	}
@@ -285,7 +294,6 @@ public class StudyVO {
 				+ ", age=" + age + ", sc=" + sc + ", sd=" + sd + ", st=" + st + ", et=" + et + ", content=" + content
 				+ ", vct=" + vct + ", rct=" + rct + ", regdate=" + regdate + ", enddate=" + enddate + ", rDName="
 				+ rDName + ", rSName=" + rSName + ", cDName=" + cDName + ", cSName=" + cSName + ", nickname=" + nickname
-				+ ", no=" + no + ", name=" + name + ", files=" + Arrays.toString(files) + ", getClass()=" + getClass()
-				+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
+				+ ", no=" + no + ", name=" + name + ", files=" + Arrays.toString(files) + ", status=" + status + "]";
 	}
 }

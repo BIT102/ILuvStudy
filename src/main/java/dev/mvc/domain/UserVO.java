@@ -21,7 +21,6 @@ public class UserVO {
 	private int isDel;
 	private int bno;
 	
-	
 	public int getBno() {
 		return bno;
 	}

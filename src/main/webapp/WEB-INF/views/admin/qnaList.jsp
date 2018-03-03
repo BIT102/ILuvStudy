@@ -28,7 +28,7 @@
             <tr>
                 <th>FAQ</th>
                 <td>
-                    <select name="faqType">
+                    <select name="faqType" id="faqTypeSelect">
                 		<!-- 0: 미등록  1: 등록 -->
                         <option value="n"
                         	<c:out value="${cri.faqType == null?'selected':''}"/>>전체</option>
@@ -44,8 +44,8 @@
 
         </table>
         
-        <button type="submit" id="searchBtn">검색</button>
-        <button>초기화</button>
+        <button type="button" id="searchBtn">검색</button>
+        <button type="button" id="removeBtn">초기화</button>
         
 
         <!--리스트 -->
@@ -113,7 +113,13 @@
 				+"&faqType="
 				+$("select option:selected").val()
 				+"&emailKeyword="+encodeURIComponent($("#emailKeywordInput").val());
-		}); 
+		});
+		
+ 		//초기화 클릭 시 액션
+		$("#removeBtn").on("click", function(){
+			$("#faqTypeSelect").val('n');
+			$("#emailKeywordInput").val('');
+		});
 		
 	});
 </script>
