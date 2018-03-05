@@ -1,15 +1,21 @@
 package dev.mvc.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import dev.mvc.admin.Criteria;
@@ -203,12 +209,27 @@ public class AdminController {
 		logger.info(cri.toString());
 		
 		//스터디 카테고리 정보 가져옴
-		model.addAttribute("studyDCategory", service.studyDCategory(cri));
-		model.addAttribute("studySCategory", service.studySCategory(cri));
+		model.addAttribute("studyCategory", service.studyCategory(cri));
 		//지역테이블 정보
 		model.addAttribute("region", service.region(cri));
+		//스터디 상세 정보
 		model.addAttribute(service.studyDetail(bno));
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="/region/{rDId}", method = RequestMethod.POST)
+	public ResponseEntity<List<StudyVO>> region(@PathVariable("rDId") String rDId,
+			Model model) throws Exception{
+		logger.info("region post...");
+		
+		ResponseEntity<List<StudyVO>> entity=null;
+		
+		//지역테이블 정보
+		entity = new ResponseEntity<List<StudyVO>>(service.region2(rDId), HttpStatus.OK);
+		
+		return entity;
+	}
+	
 	
 	//admin/studyDetail.jsp 에서 계정 정보 수정 시
 	@RequestMapping(value="/studyDetail", method = RequestMethod.POST)

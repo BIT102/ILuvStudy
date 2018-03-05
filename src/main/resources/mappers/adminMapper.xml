@@ -238,23 +238,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		and bs.categoryD = c.CDID
 		and bs.categoryS = c.CSID
 	</select>
-	
-	<!-- study 대카테고리 -->
-	<select id="studyDCategory" resultType="StudyVO">
-		select distinct cdname, cdid
-		from study_category
-	</select>
 
-	<!-- study 소카테고리 -->
-	<select id="studySCategory" resultType="StudyVO">
-		select csname, csid
+	<!-- study 카테고리 -->
+	<select id="studyCategory" resultType="StudyVO">
+		select *
 		from study_category
+		order by cdid, csid
 	</select>
 	
 	<!-- 지역정보 -->
 	<select id="region" resultType="StudyVO">
 		select *
 		from region
+		order by rdid, rsid
+	</select>
+	<select id="region2" resultType="StudyVO">
+		select *
+		from region
+		where rdid=#{rDId}
+		order by rdid, rsid
 	</select>
 	
 <!-- 스터디관리 > 댓글 관리 메뉴 -->

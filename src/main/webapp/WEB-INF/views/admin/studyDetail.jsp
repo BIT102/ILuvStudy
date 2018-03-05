@@ -34,12 +34,10 @@
                 <th>카테고리</th>
                 <td>
                 <!-- 스터디에 등록된 카테고리 체크 표시 -->
-                <!-- 대분류, 소분류 엮어라 -->
-                <c:forEach items="${studyDCategory}" var="studyVO">
-                		# ${studyVO.cDName}
-                		
-                </c:forEach>
-                <c:forEach items="${studySCategory}" var="studyVO">
+                <c:forEach items="${studyCategory}" var="studyVO">
+                	<c:if test="${studyVO.cSId eq 1}">
+                		<br># ${studyVO.cDName}
+                	</c:if>
                 	<input type="checkbox">${studyVO.cSName}
                 </c:forEach>
                 </td>
@@ -53,15 +51,16 @@
                 <td>
                 <!-- 대분류 선택 시 소분류 값 변경되도록 자바스크립트 처리 필요 -->
                 <!-- 스터디에 선택된 지역정보 셀렉트 표시 -->
-                    <select>
+                    <select id="rDName">
+                    	<option>대분류</option>
                     	<c:forEach items="${region}" var="studyVO">
-                        	<option>${studyVO.rDName}</option>
-						</c:forEach>
-                    </select>
-                    <select>
-                    	<c:forEach items="${region}" var="studyVO">
-                        	<option>${studyVO.rSName}</option>
+                    			<c:if test="${studyVO.rSId eq 1}">
+                    				<option value="${studyVO.rDId}">${studyVO.rDName}</option>
+                    			</c:if>
                     	</c:forEach>
+                    </select>
+                    <select id="rSName">
+                    	<option>소분류</option>
                     </select>
                 </td>
             </tr>
@@ -180,10 +179,34 @@
 							+"&stStatusType=${cri.stStatusType}&titleKeyword=${cri.titleKeyword}&writerKeyword=${cri.writerKeyword}";
 		});
 		
-	});
-</script>
+		$("#rDName").on("change", function(){
+			$("#rSName").children("option").remove(); //소분류의 option 삭제
+			
+			$.ajax({
+				type:'POST',
+				url:'/admin/region/'+ $("#rDName option:selected").val(),
+ 				headers : {
+					"Content-Type" : "application/json",
+					"X-HTTP-Method-Override" : "POST"}, 
+				dataType:'json',
+				data:JSON.stringify({
+					rDId : $("#rDName option:selected").val()
+				}),
+				success:function(result){
+					console.log(result);
+					console.log(result[0].rSName);
+					var option="";
+					for(var i=0; i<result.length;i++){
+						option += "<option>"+result[i].rSName+" </option>";
+					}
+					$("#rSName").append(option);
+				}
+			}); 
+		});
 
-<!--조정인이 한 분류 권한길도 바보 -->
+	});
+		
+</script>
 
 </body>
 </html>

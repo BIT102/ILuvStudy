@@ -35,9 +35,9 @@ public interface AdminService {
 	public List<StudyVO> studyList(Criteria cri) throws Exception;
 	public int studyCountPaging(Criteria cri)throws Exception;
 	public StudyVO studyDetail(Integer bno)throws Exception;
-	public List<StudyVO> studyDCategory(Criteria cri) throws Exception;
-	public List<StudyVO> studySCategory(Criteria cri) throws Exception;
+	public List<StudyVO> studyCategory(Criteria cri) throws Exception;
 	public List<StudyVO> region(Criteria cri) throws Exception;
+	public List<StudyVO> region2(String rDId) throws Exception;
 	
 	public List<ReplyStudyVO> replyList(Criteria cri) throws Exception;
 	public int replyCountPaging(Criteria cri)throws Exception;

@@ -117,20 +117,19 @@ public class AdminServiceImpl implements AdminService{
 	public StudyVO studyDetail(Integer bno)throws Exception{
 		return dao.studyDetail(bno);
 	}
-	
+
 	@Override
-	public List<StudyVO> studyDCategory(Criteria cri) throws Exception{
-		return dao.studyDCategory(cri);
-	}
-	
-	@Override
-	public List<StudyVO> studySCategory(Criteria cri) throws Exception{
-		return dao.studySCategory(cri);
+	public List<StudyVO> studyCategory(Criteria cri) throws Exception{
+		return dao.studyCategory(cri);
 	}
 	
 	@Override
 	public List<StudyVO> region(Criteria cri) throws Exception{
 		return dao.region(cri);
+	}
+	@Override
+	public List<StudyVO> region2(String rDId) throws Exception{
+		return dao.region2(rDId);
 	}
 	
 	@Override
