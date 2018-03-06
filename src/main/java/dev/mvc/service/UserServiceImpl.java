@@ -71,7 +71,7 @@ public class UserServiceImpl implements UserService{
 		String setfrom = "lswkim322@gmail.com";         
 	    String tomail  = email;     // 받는 사람 이메일
 	    String title   = "[ILOVESTUDY]인증번호 발송";      // 제목
-	    String content = "1111";    // 내용
+	    String content = "1234";    // 내용
 	   	    
 	    MimeMessage message = mailSender.createMimeMessage();
 	    MimeMessageHelper messageHelper 

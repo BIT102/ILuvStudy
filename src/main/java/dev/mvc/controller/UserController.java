@@ -5,10 +5,15 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import dev.mvc.domain.UserVO;
 import dev.mvc.persistance.UserDAO;
@@ -180,7 +185,7 @@ public class UserController {
 				model.addAttribute("result","이미 가입된 이메일입니다.");
 				System.out.println("이미가입된이메일");
 			}else{
-				model.addAttribute("인증번호를 입력하세요.");
+				model.addAttribute("result","인증번호를 입력하세요.");
 				// 인증번호 이메일 전송
 				service.sendEmail(email);
 			}
@@ -189,5 +194,47 @@ public class UserController {
 		}
 		
 		
-	
+		@RequestMapping(value = "/chkEmailAjax", method = RequestMethod.POST)
+		  public ResponseEntity<String> ajaxTest(@RequestParam("email1") String email1, @RequestParam("email2") String email2, Model model)throws Exception{
+			
+			logger.info("chkEmail.......................");
+			
+			
+			//String email = email1+"@"+email2;
+			
+			String email = email1+"@"+email2;
+			
+			
+			
+			System.out.println("==============================");
+			System.out.println(email);
+			System.out.println("==============================");
+			
+			ResponseEntity<String> entity = null;
+			
+			if(service.chkEmail(email)==-1){
+				model.addAttribute("result","유효하지 않은 이메일입니다.");
+				System.out.println("유효하지 않은 이메일입니다.");
+			}else if(service.chkEmail(email)==1){
+				model.addAttribute("result","이미 가입된 이메일입니다.");
+				System.out.println("이미가입된이메일");
+			}else{
+				model.addAttribute("result","인증번호를 입력하세요.");
+				// 인증번호 이메일 전송
+				service.sendEmail(email);
+			}
+			
+			
+			  try {
+				entity = new ResponseEntity<String>("test2", HttpStatus.OK);
+			} catch (Exception e) {
+				// TODO: handle exception
+				entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+			}
+			  
+			  return entity;
+			  
+		  }
+		
+
 }

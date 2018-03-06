@@ -44,7 +44,8 @@ public class StudyController {
 		service.regist(vo);
 		
 	//	rttr.addFlashAttribute("msg", "success");
-		return "redirect:/study/listAll";
+		//return "redirect:/study/listAll";
+		return "login";
 	}
 	
 	//스터디 목록 불러오기

@@ -10,11 +10,11 @@
 <body>
 
 
-	<form name="joinForm" action="/chkEmail" method="post">
+	<form role="form" name="joinForm" action="/join" method="post">
 		이메일주소<br/>
-		<input type="text" placeholder="아이디를 입력하세요" name="email1" /> 
+		<input id = "email1" type="text" placeholder="아이디를 입력하세요" name="email1" /> 
 		@ 
-		<input type="text" placeholder="주소값을 입력하세요" name="email2" /> 
+		<input id = "email2" type="text" placeholder="주소값을 입력하세요" name="email2" /> 
 		<select name="" id=""> 
 			<option>직접입력</option>
 			<option>naver.com</option>
@@ -22,7 +22,7 @@
 			<option>google.com</option>
 		</select>
 		<br/>
-		<input type="submit" value = "인증하기"> <!-- 중복체크도 겸비할 것 -->
+		<input class = "ajaxTest" type="button" value = "인증하기"> <!-- 중복체크도 겸비할 것 -->
 		
 		<br/>
 		이름<br/>
@@ -65,5 +65,59 @@
 	           value="다시입력" />
 	
 	</form>
+	
 </body>
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script>
+	
+	$(document).ready(function(){
+		var formObj = $("form[role='form']");
+		
+		console.log(formObj);
+		
+		$(".ajaxTest").on("click",function(){
+			
+			var email1 = $('#email1').val(); 
+			var email2 = $('#email2').val();
+			
+			console.log(email1);
+			console.log(email2);
+			
+			$.ajax({
+				type : 'POST',
+				url : '/chkEmailAjax',
+				headers : {
+					/* "Content-Type" : "application/json", */
+					"X-HTTP-Method-Override" : "POST"
+				},
+				data : {
+					email1 : email1,
+					email2 : email2
+				},
+				/* dataType: 'text', */
+				success : function(result){
+					
+					console.log("result = " + result);
+					
+					alert(result);
+					
+					/* if(result == "test1"){
+						alert("test1 입니다");
+					}else if(result == "test2"){
+						alert("test2 입니다.");						
+					}else{
+						
+					} */
+				}
+			});
+		})
+		
+	});
+	
+	
+	
+	
+	
+	</script>
+
 </html>

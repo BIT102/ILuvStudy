@@ -286,13 +286,16 @@ border:1px dotted blue;
  <!-- 파일등록 핸들러 -->
  <script id="template" type="text/x-handlebars-template">
 
-	<span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment"></span>
+	
 	<div class="mailbox-attachment-info">
+		<span class="mailbox-attachment-icon has-img">
+			<img src="{{imgsrc}}" alt="Attachment">
+		</span>
 		<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>
-		<a href="{{name}}"
-			class="small">X</a>
-	</span>
-</div>
+		<!-- <a href="{{name}}" class="small">X</a> -->
+		<small data-src=data style="cursor:pointer">X</small>
+		</span>
+	</div>
 
 
 </script>
@@ -306,7 +309,7 @@ border:1px dotted blue;
 		//파일을 떨구는 장소	
 		$(".fileDrop").on("drop", function(event){
 			
-		event.preventDefault();
+			event.preventDefault();
 	
 			var files = event.originalEvent.dataTransfer.files;
 
@@ -328,7 +331,7 @@ border:1px dotted blue;
 				//파일을 드롭했을때 성공시
 				success: function(data){
 				
-			var fileInfo = getFileInfo(data);
+					var fileInfo = getFileInfo(data);
 					
 					var html = template(fileInfo);
 					
@@ -350,6 +353,7 @@ border:1px dotted blue;
 				success:function(result){
 					if(result == 'deleted') {
 						alert("deleted");
+						that.parent("div").remove();
 					}
 				}
 			});
