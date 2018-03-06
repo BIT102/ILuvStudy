@@ -2,10 +2,10 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
+ 
 <!-- board_study mapper -->
 <mapper namespace="dev.mvc.mapper.StudyMapper">
-
+ 
 <!-- 스터디 등록 -->
  <insert id="createStudy">
 insert into board_study (
@@ -38,12 +38,16 @@ title
 , #{content} <!-- null허용 -->
 )
 </insert>
-
+ 
 <!-- 스터디 읽어오기 -->
 <select id="readStudy" resultType="dev.mvc.domain.StudyVO">
 SELECT
+<<<<<<< HEAD
 ba.bsbno
 , bs.bno
+=======
+bs.bno
+>>>>>>> branch 'SHKIM' of https://github.com/BIT102/ILuvStudy.git
 , bs.title
 , u.NICKNAME
 , c.cDName
@@ -76,13 +80,17 @@ AND bs.rSId = r.RSID
 AND u.EMAIL = bs.writer
 AND bs.bno = #{bno}
 </select>
-
+ 
 <!-- 전체불러오기 -->
 <select id="studyList" resultType="dev.mvc.domain.StudyVO">
 <![CDATA[
 SELECT
+<<<<<<< HEAD
 ba.bsbno
 , bs.bno
+=======
+bs.bno
+>>>>>>> branch 'SHKIM' of https://github.com/BIT102/ILuvStudy.git
 , bs.title
 , u.NICKNAME
 , c.cDName
@@ -114,9 +122,14 @@ AND bs.categoryS = c.CSID
 AND bs.rSId = r.RSID
 AND u.EMAIL = bs.writer
 AND bs.bno > 0
+<<<<<<< HEAD
 ORDER BY bs.bno desc, bs.regdate desc;
+=======
+ORDER BY bs.bno desc, bs.regdate desc
+>>>>>>> branch 'SHKIM' of https://github.com/BIT102/ILuvStudy.git
 ]]>
 </select>
+<<<<<<< HEAD
 
 <!-- 파일 등록 -->
 <select id="addFile">
@@ -132,7 +145,31 @@ VALUES(
 , LAST_INSERT_ID()
 
 )
+=======
+ 
+<!-- 파일 등록 -->
+<select id="addFile">
+INSERT
+INTO
+board_attach(
+name
+, bsBno
+)
+VALUES(
+#{name}
+, LAST_INSERT_ID()
+)
 </select>
+ 
+<select id="getFile" resultType="String">
+SELECT
+name
+FROM board_attach
+WHERE bno = #{bno}
+ORDER BY regdate;
+>>>>>>> branch 'SHKIM' of https://github.com/BIT102/ILuvStudy.git
+</select>
+<<<<<<< HEAD
 
 <select id="getFile" resultType="String">
 SELECT
@@ -142,4 +179,7 @@ WHERE bsbno = #{bno}
 ORDER BY regdate;
 </select>
 
+=======
+ 
+>>>>>>> branch 'SHKIM' of https://github.com/BIT102/ILuvStudy.git
 </mapper>

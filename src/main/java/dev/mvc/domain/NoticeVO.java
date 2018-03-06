@@ -7,13 +7,17 @@ public class NoticeVO {
 	//ntTtile 제목
 	//content 내용
 	//regdate 올린날짜
-	  
-	private Integer bno;
+
+
+	private int bno;
 	private String title;
 	private String content;
 	private Date regdate;
 	private String writer;
+	private Date lastModifyDate;
+
 	
+
 	public Integer getbno() {
 		return bno;
 	}
@@ -43,12 +47,48 @@ public class NoticeVO {
 	}
 	public void setwriter(String writer) {
 		this.writer = writer;
+	}	
+	public Date getLastModifyDate() {
+		return lastModifyDate;
 	}
-	
+	public void setLastModifyDate(Date lastModifyDate) {
+		this.lastModifyDate = lastModifyDate;
+	}
+	public int getBno() {
+		return bno;
+	}
+	public void setBno(int bno) {
+		this.bno = bno;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
+	public Date getRegdate() {
+		return regdate;
+	}
+	public void setRegdate(Date regdate) {
+		this.regdate = regdate;
+	}
+	public String getWriter() {
+		return writer;
+	}
+	public void setWriter(String writer) {
+		this.writer = writer;
+	}
 	@Override
 	public String toString() {
-		return "NoticeVO [bno=" + bno + ", title=" + title + ", content=" + content + ", regdate="
-				+ regdate + ", writer=" + writer + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
-				+ ", toString()=" + super.toString() + "]";
+
+		return "NoticeVO [bno=" + bno + ", title=" + title + ", content=" + content + ", regdate=" + regdate
+				+ ", writer=" + writer + ", lastModifyDate=" + lastModifyDate + "]";
+
 	}
 }

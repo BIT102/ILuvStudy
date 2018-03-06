@@ -1,8 +1,8 @@
 package dev.mvc.domain;
-
+ 
 import java.util.Arrays;
 import java.util.Date;
-
+ 
 public class StudyVO {
 //	BS_BNO	번호
 //	BS_TITLE	제목
@@ -23,51 +23,53 @@ public class StudyVO {
 //	BS_RCT	댓글수
 //	BS_REGDATE	올린 날짜
 //	BS_ENDDATE	스터디완료일
-	//우아아앙아아아아아아아아앙
-	//우우우우우우우우우아아아아아아아아아아아아아아아아아아앙
-	private Integer bno; 
+
+	private int bno; 
 	private String title; 
 	private String writer; 
 	private String categoryD; 
-	private Integer categoryS; 
-	private Integer now;
-	private Integer max;
+	private int categoryS; 
+	private int now;
+	private int max;
 	private String rDId;
-	private Integer rSId;
+	private int rSId;
 	private String age;
 	private String sc;
 	private String sd;
 	private String st;
 	private String et;
 	private String content;
-	private Integer vct;
-	private Integer rct;
+	private int vct;
+	private int rct;
 	private Date regdate;
 	private Date enddate;
-	
 	
 	//지역이랑 카테고리는 이름으로 가져올께요
 	private String rDName;
 	private String rSName;
 	private String cDName;
 	private String cSName;
-	
+
+	private int cSId;
+
 	// 작성자는 닉네임으로 표시
 	private String nickname;
 	
-
 	//파일을 엄로드합니다
 	private Integer no;
 	private String name;
 	private Integer bsBno;
 
 	private String[] files;
+	
+	//관리자에서 회원조회
+	private String status;  //스터디 신청자 상태값
 
-	public Integer getBno() {
+	public int getBno() {
 		return bno;
 	}
 
-	public void setBno(Integer bno) {
+	public void setBno(int bno) {
 		this.bno = bno;
 	}
 
@@ -95,27 +97,27 @@ public class StudyVO {
 		this.categoryD = categoryD;
 	}
 
-	public Integer getCategoryS() {
+	public int getCategoryS() {
 		return categoryS;
 	}
 
-	public void setCategoryS(Integer categoryS) {
+	public void setCategoryS(int categoryS) {
 		this.categoryS = categoryS;
 	}
 
-	public Integer getNow() {
+	public int getNow() {
 		return now;
 	}
 
-	public void setNow(Integer now) {
+	public void setNow(int now) {
 		this.now = now;
 	}
 
-	public Integer getMax() {
+	public int getMax() {
 		return max;
 	}
 
-	public void setMax(Integer max) {
+	public void setMax(int max) {
 		this.max = max;
 	}
 
@@ -127,11 +129,11 @@ public class StudyVO {
 		this.rDId = rDId;
 	}
 
-	public Integer getrSId() {
+	public int getrSId() {
 		return rSId;
 	}
 
-	public void setrSId(Integer rSId) {
+	public void setrSId(int rSId) {
 		this.rSId = rSId;
 	}
 
@@ -183,19 +185,19 @@ public class StudyVO {
 		this.content = content;
 	}
 
-	public Integer getVct() {
+	public int getVct() {
 		return vct;
 	}
 
-	public void setVct(Integer vct) {
+	public void setVct(int vct) {
 		this.vct = vct;
 	}
 
-	public Integer getRct() {
+	public int getRct() {
 		return rct;
 	}
 
-	public void setRct(Integer rct) {
+	public void setRct(int rct) {
 		this.rct = rct;
 	}
 
@@ -247,6 +249,14 @@ public class StudyVO {
 		this.cSName = cSName;
 	}
 
+	public int getcSId() {
+		return cSId;
+	}
+
+	public void setcSId(int cSId) {
+		this.cSId = cSId;
+	}
+
 	public String getNickname() {
 		return nickname;
 	}
@@ -287,16 +297,26 @@ public class StudyVO {
 		this.files = files;
 	}
 
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	@Override
 	public String toString() {
 		return "StudyVO [bno=" + bno + ", title=" + title + ", writer=" + writer + ", categoryD=" + categoryD
 				+ ", categoryS=" + categoryS + ", now=" + now + ", max=" + max + ", rDId=" + rDId + ", rSId=" + rSId
 				+ ", age=" + age + ", sc=" + sc + ", sd=" + sd + ", st=" + st + ", et=" + et + ", content=" + content
 				+ ", vct=" + vct + ", rct=" + rct + ", regdate=" + regdate + ", enddate=" + enddate + ", rDName="
-				+ rDName + ", rSName=" + rSName + ", cDName=" + cDName + ", cSName=" + cSName + ", nickname=" + nickname
-				+ ", no=" + no + ", name=" + name + ", bsBno=" + bsBno + ", files=" + Arrays.toString(files)
-				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
-				+ "]";
+				+ rDName + ", rSName=" + rSName + ", cDName=" + cDName + ", cSName=" + cSName + ", cSId=" + cSId
+				+ ", nickname=" + nickname + ", no=" + no + ", name=" + name + ", bsBno=" + bsBno + ", files="
+				+ Arrays.toString(files) + ", status=" + status + "]";
 	}
-}
+
 	
+	
+	
+}

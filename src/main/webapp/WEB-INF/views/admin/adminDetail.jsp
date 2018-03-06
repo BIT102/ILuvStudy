@@ -1,14 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>계정 관리</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+
 </head>
 <body>
 <%@ include file="nav.jsp" %>
@@ -32,7 +29,7 @@
             </tr>
             <tr>
                 <th>아이디</th>
-                <td>${adminVO.adminId}</td>
+                <td>${adminVO.id}</td>
             </tr>
             <tr>
                 <th>이름</th>
@@ -40,7 +37,7 @@
             </tr>
             <tr>
                 <th>비밀번호</th>
-                <td><input type="password" name="adminPw"></td>
+                <td><input type="password" name="pw"></td>
             </tr>
             <tr>
                 <th>비밀번호 확인</th>
@@ -60,21 +57,25 @@
                 </td>
             </tr>
             <tr>
+            	<th>생성일</th>
+            	<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${adminVO.registDate}"/></td>
+            </tr>
+            <tr>
+            	<th>생성자</th>
+            	<td>${adminVO.registUser}</td>
+            </tr>
+            <tr>
+            	<th>최종수정일</th>
+            	<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${adminVO.lastModifyDate}"/></td>
+            </tr>
+            <tr>
                 <th>최근 접속일</th>
                 <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${adminVO.lastLoginDate}"/></td>
             </tr>
         </table>
         
-        <!-- 페이징 정보 저장 -->
-        <input type="hidden" name="page" value="${cri.page}">
-        <input type="hidden" name="perPageNum" value="${cri.perPageNum}">
-        
-        <!-- 검색 정보 저장 -->
-<%--    <input type="hidden" name="idKeyword" value="${cri.idKeyword}">
-        <input type="hidden" name="nameKeyword" value="${cri.nameKeyword}"> --%>
-        
 	</form>
-		<button type="submit" id="listBtn">목록</button>
+		<button type="button" id="listBtn">목록</button>
 		<button type="submit" id="modifyBtn">수정</button>
 		
     </div>
@@ -96,11 +97,6 @@
 		$("#listBtn").on("click", function(){
 			self.location = "/admin/adminList?page=${cri.page}&perPageNum=${cri.perPageNum}"
 							+"&idKeyword=${cri.idKeyword}&nameKeyword=${cri.nameKeyword}";
-
-			//formObj.attr("method", "get");
-			//formObj.attr("action", "/admin/adminList");
-			//formObj.submit();
-			//self.location = "/admin/adminList";
 		});
 	});
 </script>

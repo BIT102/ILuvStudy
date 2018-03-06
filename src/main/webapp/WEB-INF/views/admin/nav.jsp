@@ -1,8 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <style>
         body{width:1080px;}
@@ -29,9 +33,9 @@
 <body>
     <!--헤더-->
     <div>
-        <a>관리자님</a>
-        <a href="pwChange">[정보수정]</a>
-        <a>[로그아웃]</a>
+        <a>${login.id} 님</a>
+        <a href="adminDetail?bno=${login.bno}">[정보수정]</a>
+        <a href="/adminLogout">[로그아웃]</a>
     </div>
 
     <!--메뉴-->

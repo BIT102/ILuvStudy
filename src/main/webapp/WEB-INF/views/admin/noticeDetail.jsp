@@ -21,45 +21,62 @@
 
     <!--내용-->
     <div id="container">
-        <a>공지사항 등록</a>
+        <a>공지사항</a>
         
+	<form role="form" method="post">
         <table>
             <tr>
                 <th>제목</th>
-                <td><input type="text" value="오픈 공지"></td>
+                <td><input type="text" name="title" value="${noticeVO.title}"></td>
             </tr>
             <tr>
                 <th>작성자</th>
-                <td>admin123</td>
+                <td><input type="hidden" name="writer" value="${login.id}">${noticeVO.writer}</td>
             </tr>
             <tr>
                 <th>내용</th>
                 <td>
-                    <textarea>
-                        안녕하세요.
-                        사이트 오픈 기념 이벤트 진행예정입니다.
-                        자세한 내용은 추후 공지하겠습니다.
-                        감사합니다.
-                    </textarea>
+                    <textarea name="content">${noticeVO.content}</textarea>
                 </td>
             </tr>
             <tr>
-                <th>공개여부</th>
-                <td><input type="radio" name="check">공개  <input type="radio" name="check">비공개</td>
-            </tr>
-            <tr>
                 <th>등록일</th>
-                <td>2018-02-03 14:52</td>
+                <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${noticeVO.regdate}"/></td>
             </tr>
             <tr>
                 <th>최종 수정일</th>
-                <td>2018-02-03 14:52</td>
+                <td>
+                	<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${noticeVO.lastModifyDate}"/>
+                </td>
             </tr>
         </table>
-
-        <a href="noticeList">목록</a>
-        <button>수정</button>
+	</form>
+		<button type="button" id="listBtn">목록</button>
+		<button type="submit" id="modifyBtn">수정</button>
     </div>
+
+<script>
+	$(document).ready(function(){
+		var formObj = $("form[role='form']");
+		
+		console.log(formObj);
+		
+		//수정 클릭 시 액션
+		$("#modifyBtn").on("click", function(){
+			//form 데이터 유효성 검사 추가 필요
+			
+			formObj.submit();
+		});
+		
+		//목록 클릭 시 액션
+		$("#listBtn").on("click", function(){
+			self.location = "/admin/noticeList?page=${cri.page}&perPageNum=${cri.perPageNum}"
+							+"&titleKeyword=${cri.titleKeyword}"
+							+"&idKeyword=${cri.idKeyword}";
+
+		});
+	});
+</script>
 
 </body>
 </html>

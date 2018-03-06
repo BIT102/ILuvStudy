@@ -10,7 +10,7 @@ import dev.mvc.domain.Criteria;
 import dev.mvc.domain.QnaVO;
 import dev.mvc.domain.ReplyVO;
 import dev.mvc.domain.SearchCriteria;
-import dev.mvc.persistence.QnaDAO;
+import dev.mvc.persistance.QnaDAO;
 
 @Service
 public class QnaServiceImpl implements QnaService {

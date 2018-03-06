@@ -23,29 +23,47 @@
     <!--내용-->
     <div id="container">
         <a>공지사항 등록</a>
-        
+    <form role="form" method="post">    
         <table>
             <tr>
                 <th>제목</th>
-                <td><input type="text"></td>
+                <td><input type="text" name="title"></td>
             </tr>
             <tr>
                 <th>작성자</th>
-                <td>admin123</td>
+                <td><input type="hidden" name="writer" value="${login.id}">${login.id}</td>
             </tr>
             <tr>
                 <th>내용</th>
-                <td><textarea></textarea></td>
-            </tr>
-            <tr>
-                <th>공개여부</th>
-                <td><input type="radio" name="check">공개  <input type="radio" name="check">비공개</td>
+                <td><textarea name="content"></textarea></td>
             </tr>
         </table>
-
-        <a href="noticeList">목록</a>
-        <button>등록</button>
+	</form>
+	
+        <button type="button" id="listBtn">목록</button>
+		<button type="submit" id="registerBtn">등록</button>
+		
     </div>
+    
+<script>
 
+	$(document).ready(function(){
+		var formObj = $("form[role='form']");
+		
+		console.log(formObj);
+		
+		//등록 클릭 시 액션
+		$("#registerBtn").on("click", function(){
+			//form 유효성 검사 추가 필요
+			
+			formObj.submit();
+		});
+		
+		//목록 클릭 시 액션
+		$("#listBtn").on("click", function(){
+			self.location = "/admin/noticeList";
+		});
+	});
+</script>
 </body>
 </html>

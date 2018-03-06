@@ -1,5 +1,7 @@
 package dev.mvc.test;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.junit.Test;
@@ -9,6 +11,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import dev.mvc.admin.Criteria;
+import dev.mvc.domain.NoticeVO;
 import dev.mvc.persistance.NoticeDAO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -26,6 +30,38 @@ public class NoticeDAOTest {
 	public void testReadNotice() throws Exception {
 		
 		logger.info(dao.readNotice(3).toString());
+
+	}
+	
+	@Test
+	public void testList() throws Exception {
+		
+		int page = 3;
+		
+		//List<NoticeVO> list = dao.listPage(page);
+		
+		/*for(NoticeVO noticeVO : list) {
+			
+			logger.info(noticeVO.getBno() + ":" + noticeVO.getTitle()
+			);
+		}*/
+	}
+	
+	@Test
+	public void testCriteria() throws Exception {
+		
+		Criteria cri = new Criteria();
+		cri.setPage(2);
+		cri.setPerPageNum(20);
+		
+		//List<NoticeVO> list = dao.listCriteria(cri);
+		
+		/*for(NoticeVO noticeVO : list) {
+			
+			logger.info(noticeVO.getBno() + ":" + noticeVO.getTitle()
+			);
+		}*/
+
 	}
 
 }

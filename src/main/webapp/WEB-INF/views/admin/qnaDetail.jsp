@@ -25,57 +25,118 @@
 
         <div>* 기본정보</div>
         <table>
+       		<tr>
+                <th>번호</th>
+                <td>${qnaVO.bno}</td>
+            </tr>
             <tr>
                 <th>아이디</th>
-                <td>asdf@naver.com</td>
+                <td>${qnaVO.writer}</td>
             </tr>
             <tr>
                 <th>제목</th>
-                <td>스터디 등록 문의</td>
+                <td>${qnaVO.title}</td>
             </tr>
             <tr>
                 <th>내용</th>
-                <td>스터디 등록할때 보안 카테고리 추가해주세요.</td>
+                <td>${qnaVO.content}</td>
             </tr>
             <tr>
                 <th>작성일</th>
-                <td>2018-02-18</td>
+                <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${qnaVO.regdate}"/></td>
             </tr>
             <tr>
-                <th>답변여부</th>
-                <td>답변완료</td>
+                <th>댓글수</th>
+                <td>${qnaVO.rct}</td>
             </tr>
             <tr>
-                <th>공개여부</th>
-                <td>공개</td>
+                <th>FAQ 여부</th>
+                <!-- 0: 미등록  1: 등록 -->
+                <td>
+                	<c:if test="${qnaVO.type eq 0}">미등록 </c:if>
+                	<c:if test="${qnaVO.type eq 1}">등록</c:if>
+                </td>
             </tr>
         </table>
-
-        <div>* 답변</div>
+        
+<form role="form" method="post">
+        <div>* 관리자 답변</div>
         <table>
+			<input type="hidden" name="bqBno" value="${qnaVO.bno}">
             <tr>
                 <th>답변내용</th>
                 <td>
-                    <textarea>
-                        안녕하세요.고객님
-                        요청하신 보안 카테고리 추가 완료하였습니다.
-                        감사합니다.
-                    </textarea>
+                <!-- replyVO에서 작성자와 관리자 아이디가 일치할 경우 break할 설정값 -->
+                <c:set var="doneLoop" value="false"/>
+                <c:forEach items="${list}" var="replyVO" varStatus="status">
+                	<c:if test="${not doneLoop}">
+                		<!-- 댓글 작성자와 관리자 아이디가 일치할 경우 -->
+                		<c:if test="${replyVO.replyer eq login.id}">
+                			<textarea name="content" readonly>${replyVO.content}</textarea>
+                			<c:set var="doneLoop" value="true"/>
+                		</c:if>
+                		<!-- c:foreach 반복 마지막일때, 아이디가 일치하지 않는 경우 -->
+                		<c:if test="${status.last and !(replyVO.replyer eq login.id)}">
+                			<textarea name="content"></textarea>
+                		</c:if>
+                	</c:if>
+                </c:forEach>
+                <!-- replyVO에 데이터가 없을 경우 -->
+                <c:if test="${list.size() == 0}">
+               		<textarea name="content"></textarea>
+                </c:if>
                 </td>
             </tr>
             <tr>
                 <th>관리자 아이디</th>
-                <td>admin123</td>
-            </tr>
-            <tr>
-                <th>답변일</th>
-                <td>2018-02-18</td>
+                <!-- 세션에 저장되어 있는 관리자 아이디 가져옴 -->
+                <td><input type="hidden" name="replyer" value="${login.id}">${login.id}</td>
             </tr>
         </table>
+</form>
+	<button type="submit" id="registerBtn">등록</button>   
+	
+		<div>* 사용자 답변</div>
+		<table>
+			<tr>
+				<th>번호</th>
+				<th>아이디</th>
+				<th>내용</th>
+				<th>작성일</th>
+			</tr>
+<c:forEach items="${list}" var="replyVO">	     
+			<tr>
+				<td>${replyVO.rno}</td>
+				<td>${replyVO.replyer}</td>
+				<td>${replyVO.content}</td>
+				<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${replyVO.regdate}"/></td>				
+			</tr>
+</c:forEach>
+		</table>
 
-        <a type="button" href="qnaList">목록</a>
-        <button>등록</button>
+        <button type="submit" id="listBtn">목록</button>
     </div>
-
+    
+<script>
+	$(document).ready(function(){
+		var formObj = $("form[role='form']");
+		
+		console.log(formObj);
+		
+		//등록 클릭 시 액션
+		$("#registerBtn").on("click", function(){
+			//form 데이터 유효성 검사 추가 필요
+			
+			formObj.submit();
+		});
+		
+		//목록 클릭 시 액션
+		$("#listBtn").on("click", function(){
+			self.location = "/admin/qnaList?page=${cri.page}&perPageNum=${cri.perPageNum}"
+							+"&faqType=${cri.faqType}&emailKeyword=${cri.emailKeyword}";
+		});
+		
+	});
+</script>
 </body>
 </html>

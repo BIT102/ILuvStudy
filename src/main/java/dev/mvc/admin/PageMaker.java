@@ -28,7 +28,7 @@ public class PageMaker {
 		return uriComponents.toUriString();
 	}
 	
-	//회원조회 페이지 검색
+	//회원관리 > 회원조회 페이지 검색
 	public String userSearch(int page){
 		UriComponents uriComponents = UriComponentsBuilder.newInstance()
 					.queryParam("page", page)
@@ -37,6 +37,51 @@ public class PageMaker {
 					.queryParam("emailKeyword",encoding(cri.getEmailKeyword()))
 					.queryParam("nickNameKeyword",encoding(cri.getNickNameKeyword()))
 					.build();
+		return uriComponents.toUriString();
+	}
+	
+	//스터디 관리 > 스터디목록 페이지 검색
+	public String studySearch(int page){
+		UriComponents uriComponents = UriComponentsBuilder.newInstance()
+					.queryParam("page", page)
+					.queryParam("perPageNum", cri.getPerPageNum())
+					.queryParam("stStatusType", cri.getStStatusType())  //검색 처리
+					.queryParam("titleKeyword",encoding(cri.getTitleKeyword()))
+					.queryParam("writerKeyword",encoding(cri.getWriterKeyword()))
+					.build();
+		return uriComponents.toUriString();
+	}
+	
+	//댓글관리 페이지 검색
+	public String replySearch(int page){
+		UriComponents uriComponents = UriComponentsBuilder.newInstance()
+					.queryParam("page", page)
+					.queryParam("perPageNum", cri.getPerPageNum())
+					.queryParam("bsBnoKeyword",encoding(cri.getBsBnoKeyword()))   //검색 처리
+					.queryParam("writerKeyword",encoding(cri.getWriterKeyword()))
+					.build();
+		return uriComponents.toUriString();
+	}
+	
+	//qna관리 페이지 검색
+	public String qnaSearch(int page){
+		UriComponents uriComponents = UriComponentsBuilder.newInstance()
+				.queryParam("page", page)
+				.queryParam("perPageNum", cri.getPerPageNum())
+				.queryParam("faqType", cri.getFaqType())   //검색 처리
+				.queryParam("emailKeyword",encoding(cri.getEmailKeyword()))
+				.build();
+		return uriComponents.toUriString();
+	}
+	
+	//공지사항 페이지 검색
+	public String noticeSearch(int page){
+		UriComponents uriComponents = UriComponentsBuilder.newInstance()
+				.queryParam("page", page)
+				.queryParam("perPageNum", cri.getPerPageNum())
+				.queryParam("titleKeyword",encoding(cri.getTitleKeyword()))//검색 처리
+				.queryParam("idKeyword",encoding(cri.getIdKeyword()))
+				.build();
 		return uriComponents.toUriString();
 	}
 		

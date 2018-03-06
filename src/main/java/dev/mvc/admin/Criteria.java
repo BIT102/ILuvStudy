@@ -6,13 +6,24 @@ public class Criteria {
 	private int perPageNum;
 	
 	//admin 계정 관리 검색처리
-	private String idKeyword;
-	private String nameKeyword;
+	private String idKeyword;  //관리자 아이디 검색
+	private String nameKeyword;  //관리자명 검색
 	
 	//user 검색처리
-	private String isDelType;
-	private String emailKeyword;
-	private String nickNameKeyword;
+	private String isDelType;  //회원인지 판단
+	private String emailKeyword;  //이메일 검색
+	private String nickNameKeyword;  //닉네임 검색
+	
+	//study 검색처리
+	private String stStatusType;  //스터디 상태
+	private String titleKeyword;  //스터디명
+	private String writerKeyword;  //스터디 작성자
+	
+	//스터디 댓글 관리 검색처리
+	private String bsBnoKeyword;   //스터디 번호 검색
+	
+	//qna 관리 검색처리
+	private String faqType;  //faq 여부 검색
 	
 	public Criteria(){
 		this.page = 1;
@@ -31,6 +42,37 @@ public class Criteria {
 			return;
 		}
 		this.perPageNum = perPageNum;
+	}
+	
+	public String getFaqType() {
+		return faqType;
+	}
+	public void setFaqType(String faqType) {
+		this.faqType = faqType;
+	}
+	public String getBsBnoKeyword() {
+		return bsBnoKeyword;
+	}
+	public void setBsBnoKeyword(String bsBnoKeyword) {
+		this.bsBnoKeyword = bsBnoKeyword;
+	}
+	public String getStStatusType() {
+		return stStatusType;
+	}
+	public void setStStatusType(String stStatusType) {
+		this.stStatusType = stStatusType;
+	}
+	public String getTitleKeyword() {
+		return titleKeyword;
+	}
+	public void setTitleKeyword(String titleKeyword) {
+		this.titleKeyword = titleKeyword;
+	}
+	public String getWriterKeyword() {
+		return writerKeyword;
+	}
+	public void setWriterKeyword(String writerKeyword) {
+		this.writerKeyword = writerKeyword;
 	}
 	public int getPage() {
 		return page;
@@ -76,7 +118,8 @@ public class Criteria {
 	public String toString() {
 		return "Criteria [page=" + page + ", perPageNum=" + perPageNum + ", idKeyword=" + idKeyword + ", nameKeyword="
 				+ nameKeyword + ", isDelType=" + isDelType + ", emailKeyword=" + emailKeyword + ", nickNameKeyword="
-				+ nickNameKeyword + "]";
+				+ nickNameKeyword + ", stStatusType=" + stStatusType + ", titleKeyword=" + titleKeyword
+				+ ", writerKeyword=" + writerKeyword + ", bsBnoKeyword=" + bsBnoKeyword + ", faqType=" + faqType + "]";
 	}
 
 }

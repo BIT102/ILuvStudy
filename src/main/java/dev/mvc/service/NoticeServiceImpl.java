@@ -7,7 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import dev.mvc.domain.NoticeVO;
-import dev.mvc.persistence.NoticeDAO;
+import dev.mvc.persistance.NoticeDAO;
 
 @Service
 public class NoticeServiceImpl implements NoticeService {

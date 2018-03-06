@@ -13,18 +13,21 @@
     <!--상세메뉴-->
     <div id="topmenu2">
         <div class="border">
-            <a href="adminList">계정관리</a>
+            <a href="userList">회원조회</a>
         </div>
     </div>
 
     <!--내용-->
     <div id="container">
-        <a>계정 관리</a>
+        <a>회원 등록</a>
 	<form role="form" method="post">
         <table>
             <tr>
                 <th>아이디</th>
-                <td><input type="text" name="id"></td>
+                <td>
+                	<input type="text" name="email">
+                	<button>중복확인</button>
+                </td>
             </tr>
             <tr>
                 <th>이름</th>
@@ -32,17 +35,33 @@
             </tr>
             <tr>
                 <th>비밀번호</th>
-                <td><input type="password" name="pw"></td>
+                <td><input type="password" name="password"></td>
             </tr>
             <tr>
                 <th>비밀번호 확인</th>
                 <td><input type="password"></td>
             </tr>
             <tr>
-                <th>사용여부</th>
-                <td><input type="radio" name="status" value="V">사용  
-                	<input type="radio" name="status" value="D" checked>미사용
+                <th>닉네임</th>
+                <td>
+    	            <input type="text" name="nickName">
+    	            <button>중복확인</button>
                 </td>
+            </tr>
+            <tr>
+                <th>성별</th>
+                <td>
+                	<input type="radio" name="gender" value="1" checked>남성
+                	<input type="radio" name="gender" value="2">여성
+                </td>
+            </tr>
+            <tr>
+            	<th>핸드폰번호</th>
+            	<td><input type="text" name="phoneNum"></td>
+            </tr>
+            <tr>
+            	<th>생년월일</th>
+            	<td><input type="text" name="birth"></td>
             </tr>
         </table>
         <input type="hidden" name="registUser" value="${login.id}">
@@ -54,7 +73,7 @@
     </div>
     
 <script>
-	
+
 	$(document).ready(function(){
 		var formObj = $("form[role='form']");
 		
@@ -69,7 +88,7 @@
 		
 		//목록 클릭 시 액션
 		$("#listBtn").on("click", function(){
-			self.location = "/admin/adminList";
+			self.location = "/admin/userList";
 		});
 	});
 </script>
