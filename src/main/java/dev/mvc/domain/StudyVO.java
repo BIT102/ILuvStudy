@@ -29,11 +29,11 @@ public class StudyVO {
 	private String title; 
 	private String writer; 
 	private String categoryD; 
-	private Integer categoryS; 
+	private String categoryS; 
 	private Integer now;
 	private Integer max;
 	private String rDId;
-	private Integer rSId;
+	private String rSId;
 	private String age;
 	private String sc;
 	private String sd;
@@ -61,6 +61,11 @@ public class StudyVO {
 	private String name;
 	private String status;
 
+	//파일 업로드
+	private String[] files;
+
+	
+	
 	public String getStatus() {
 		return status;
 	}
@@ -69,7 +74,6 @@ public class StudyVO {
 		this.status = status;
 	}
 
-	private String[] files;
 
 	public Integer getBno() {
 		return bno;
@@ -103,11 +107,11 @@ public class StudyVO {
 		this.categoryD = categoryD;
 	}
 
-	public Integer getCategoryS() {
+	public String getCategoryS() {
 		return categoryS;
 	}
 
-	public void setCategoryS(Integer categoryS) {
+	public void setCategoryS(String categoryS) {
 		this.categoryS = categoryS;
 	}
 
@@ -135,11 +139,11 @@ public class StudyVO {
 		this.rDId = rDId;
 	}
 
-	public Integer getrSId() {
+	public String getrSId() {
 		return rSId;
 	}
 
-	public void setrSId(Integer rSId) {
+	public void setrSId(String rSId) {
 		this.rSId = rSId;
 	}
 

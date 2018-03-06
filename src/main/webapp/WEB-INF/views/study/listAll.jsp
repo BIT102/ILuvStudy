@@ -12,8 +12,7 @@
 
 <script src="http://code.jquery.com/jquery-1.7.js"></script>
 <script type="text/javascript" src="/resources/js/upload.js"></script>
-<script
-	src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 <!-- Bootstrap CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -102,24 +101,24 @@
 				<div class="scard cborder" style="width: 20rem;">
 
 					<!-- 파일등록 -->
-                <c:if test="${studyVO.name!=null}">
+                 <c:if test="${studyVO.name!=null}">
 					<div class='uploadedList'>
 						<span class="mailbox-attachment-icon has-img"><img
 							src="/study/displayFile?fileName=${studyVO.name}"
 							alt="Attachment"></span>
 					</div>
-				</c:if>
+				</c:if> 
 
 					<div class="card-body">
 						${studyVO.bno}
 						<!-- 작성자 -->
-						<p class="card-writer">${studyVO.writer}</p>
+						<p class="card-writer">${studyVO.nickname}</p>
 						<!-- 스터디 제목 -->
 						<h4 class="card-title">${studyVO.title}</h4>
 						<!-- 현재인원/최대인원 -->
 						<p class="nowandmax">${studyVO.now}/${studyVO.max}</p>
 						<!-- 지역 -->
-						<p class="regionDS">${studyVO.rDId}/${studyVO.rSId}</p>
+						<p class="regionDS">${studyVO.rDName}/${studyVO.rSName}</p>
 
 						<!-- 시작일 -->
 						<p class="st">${studyVO.sd}</p>

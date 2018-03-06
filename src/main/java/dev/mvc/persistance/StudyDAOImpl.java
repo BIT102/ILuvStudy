@@ -29,7 +29,20 @@ public class StudyDAOImpl implements StudyDAO {
 	//스터디 불러오기
 	@Override
 	public StudyVO readStudy(Integer bno) {
-		return session.selectOne(namespace+".readStudy", bno);
+		
+		// 사진의 갯수때문에 리턴값이 여러개가 될수 있으므로 리턴값을 배열에 담는다.
+		List<StudyVO> vo = session.selectList(namespace+".readStudy", bno);
+		
+		StudyVO resultVo = vo.get(0); // 새롭게 생성된 resultVo의 다른 값들을 맞춰주기위함.
+		String[] resultFiles = new String[vo.size()];
+
+		for(int i = 0; i<vo.size(); i++){
+			resultFiles[i] = resultVo.getName();		
+		}
+		
+		resultVo.setFiles(resultFiles);
+		
+		return resultVo;
 	}
 	
 	//스터디전체
@@ -40,13 +53,20 @@ public class StudyDAOImpl implements StudyDAO {
 
 	//파일업로드
 	@Override
-	public void addFile(Map<String, String> map) throws Exception {
+	public void addFile(Map<String, Object> map) throws Exception {
 		System.out.println("============================");
 		System.out.println(map);
 		System.out.println("============================");
 		
 		session.insert(namespace+".addFile", map);
 		
+	}
+	
+	//파일불러오기
+	@Override
+	public List<String> getFile(Integer bsBno) throws Exception {
+		
+		return session.selectList(namespace+".getFile", bsBno);
 	}
 	
 
@@ -97,6 +117,12 @@ public class StudyDAOImpl implements StudyDAO {
 	@Override
 	public int listSearchCount(SearchCriteriaStudy cri) throws Exception {
 		return session.selectOne(namespace+".listSearchCount", cri);
+	}
+	
+	//라스트인트값 저장하기
+	@Override
+	public int getBno() throws Exception {
+		return session.selectOne(namespace+".getNextBno");
 	}
 
 }

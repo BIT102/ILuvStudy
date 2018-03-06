@@ -24,28 +24,53 @@ public class StudyServiceImpl implements StudyService {
 	//스터디등록, 파일등록
 	@Transactional
 	@Override
-	public void regist(StudyVO vo) throws Exception {
-		
-		dao.createStudy(vo);
-		
-		String[] files = vo.getFiles();
-	
-		if(files == null) return;
-		
-		
-		Map<String, String> map = new HashMap<>();
-		for(String fileName : files) {
-			if(fileName == files[0]){
-				map.put("name", fileName);
-				map.put("status", "O");
-			} else {
-				map.put("name", fileName);
-				map.put("status", "X");
-			}
+public void regist(StudyVO vo) throws Exception {
 
+		
+
+		System.out.println("====================");
+
+		System.out.println("registService..........");
+
+		System.out.println(vo);
+
+		System.out.println("====================");
+
+		String[] files = vo.getFiles();
+
+		if(files == null) return;
+
+		dao.createStudy(vo);
+
+		// bno 값 가져오기
+
+		int bno = dao.getBno();
+
+		vo.setBno(bno);
+		
+		Map<String, Object> map = new HashMap<>();
+
+		for(String fileName : files) {
+
+			if(fileName == files[0]){
+
+				map.put("name", fileName);
+
+				map.put("status", "O");
+
+				map.put("bno", bno);
+
+			} else {
+
+				map.put("name", fileName);
+
+				map.put("status", "X");
+
+				map.put("bno", bno);
+
+			}
 			dao.addFile(map);
 		}
-	
 	}
 	
 	//스터디 불러오기
@@ -87,8 +112,15 @@ public class StudyServiceImpl implements StudyService {
 	}
 	
 	//검색수
+	@Override
 	public int listSearchCount(SearchCriteriaStudy cri) throws Exception {
 		return dao.listSearchCount(cri);
+	}
+	
+	//파일 불러오기
+	@Override
+	public List<String> getFile(Integer bsBno) throws Exception {
+		return dao.getFile(bsBno);
 	}
 
 }

@@ -58,8 +58,6 @@ public class UploadController {
 									HttpStatus.CREATED);
 		
 //		(file.getOriginalFilename(), HttpStatus.CREATED);
-		
-
 	}
 	//데이터출력
 	@ResponseBody

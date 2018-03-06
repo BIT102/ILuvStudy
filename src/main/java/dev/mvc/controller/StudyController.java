@@ -1,5 +1,7 @@
 package dev.mvc.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
@@ -7,9 +9,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import dev.mvc.domain.CriteriaStudy;
@@ -44,9 +48,10 @@ public class StudyController {
 		service.regist(vo);
 		
 
-	//	rttr.addFlashAttribute("msg", "success");
-		//return "redirect:/study/listAll";
-		return "/login";
+		rttr.addFlashAttribute("msg", "success");
+		
+//		return "redirect:/study/listAll";
+	return "/login";
 	}
 	
 	//스터디 목록 불러오기
@@ -54,8 +59,8 @@ public class StudyController {
 	public void readStudy(@ModelAttribute("cri") SearchCriteriaStudy cri, Model model) throws Exception {
 		
 		logger.info("show list..........");
-		model.addAttribute("list", service.studyList());
 	
+		model.addAttribute("list", service.studyList());
 		//model.addAttribute("list", service.listCriteria(cri));
 		model.addAttribute("list", service.listSearchCriteria(cri));
 
@@ -67,6 +72,7 @@ public class StudyController {
 		
 		model.addAttribute("pageMakerStudy", pageMakerStudy);
 
+		
 	}
 
 	//상세페이지
@@ -91,6 +97,13 @@ public class StudyController {
 		rttr.addFlashAttribute("msg", "success");
 		
 		return "redirect:/study/listAll";
+	}
+	
+	//파일가져오기
+	@RequestMapping("/getFile/{bsBno}")
+	@ResponseBody
+	public List<String> getFile(@PathVariable("bsBno") Integer bsBno) throws Exception {
+		return service.getFile(bsBno);
 	}
 }
 

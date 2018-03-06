@@ -20,7 +20,10 @@ public interface StudyDAO {
 	
 
 	//파일업로드
-	public void addFile(Map<String, String> map) throws Exception;
+	public void addFile(Map<String, Object> map) throws Exception;
+	
+	//파일 불러오기
+	public List<String> getFile(Integer bsBno) throws Exception;
 	
 	//조회수 처리
 	public void upVct(Integer bno) throws Exception;
@@ -42,6 +45,9 @@ public interface StudyDAO {
 	
 	//검색수
 	public int listSearchCount(SearchCriteriaStudy cri) throws Exception;
+	
+	public int getBno() throws Exception;
+	
 	
 //	public void deleteFile(int )
 }

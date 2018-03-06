@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+	<mapper namespace="dev.mvc.mapper.replyStudyMapper">
+	
+	<!-- 댓글 불러오기 -->
+	<select id="list" resultType="ReplyStudyVO">
+		select *
+		from reply_study
+		where bsBno = #{bsBno}
+		order by rno desc		
+	</select>
+	
+	<!-- 댓글등록 -->
+	<insert id="create">
+		insert into reply_study (bsBno, content, writer)
+		values (#{bsBno}, #{content}, #{writer})
+	</insert>
+	
+	<!-- 댓글수정 -->
+	<update id="update">
+		update reply_study set content = #{content}, regdate = now() 
+		where rno = #{rno}
+	</update>
+	
+	<!-- 댓글삭제 -->
+	<delete id="delete">
+		delete from reply_study 
+		where rno = #{rno}
+	</delete>
+	
+	<!-- 페이징 처리 -->
+	<select id="listPage" resultType="ReplyStudyVO">
+		select * from reply_study
+		where bsBno = #{bsBno}
+		order by rno desc
+		limit #{cri.pageStart}, #{cri.perPageNum}
+	</select>
+	
+	<!-- 데이터수 -->
+	<select id="count" resultType="int">
+		select count(bsBno) from reply_study
+		where bsBno = #{bsBno}
+	</select>
+</mapper>

@@ -45,6 +45,7 @@ SELECT
 ba.name
 , bs.bno
 , bs.title
+, bs.writer
 , u.NICKNAME
 , sc.cDName
 , sc.cSName
@@ -78,7 +79,8 @@ SELECT
 ba.name
 , bs.bno
 , bs.title
-, u.NICKNAME
+, bs.writer
+, u.nickname
 , sc.cDName
 , sc.cSName
 , bs.now
@@ -98,7 +100,7 @@ ba.name
 FROM 
 board_study bs
 left outer join user u on bs.writer = u.EMAIL
-left outer join board_attach ba on bs.bno = ba.bsbno
+left outer join (select * from board_attach where status = "O") ba on bs.bno = ba.bsbno
 left outer join study_category sc on bs.CATEGORYD = sc.CDID and bs.CATEGORYS = sc.CSID
 left outer join region r on bs.RDID = r.RDID and bs.RSID = r.RSID
 WHERE bs.bno > 0
@@ -126,10 +128,23 @@ name
 )
 VALUES(
 #{name}
-, LAST_INSERT_ID()
+, #{bno}
 , #{status}
 )
 </insert>
+
+<!-- 파일불러오기 -->
+<select id="getFile" resultType="string">
+SELECT 
+name
+, status
+FROM
+board_attach
+WHERE
+bsbno = #{bsBno}
+AND status = 'X'
+ORDER BY regdate
+</select>
 
 <!-- 게시물 조회수 -->
 <update id="upVct">
@@ -149,6 +164,7 @@ SELECT
 ba.name
 , bs.bno
 , bs.title
+, bs.writer
 , u.NICKNAME
 , sc.cDName
 , sc.cSName
@@ -169,7 +185,7 @@ ba.name
 FROM 
 board_study bs
 left outer join user u on bs.writer = u.EMAIL
-left outer join board_attach ba on bs.bno = ba.bsbno
+left outer join (select * from board_attach where status = "O") ba on bs.bno = ba.bsbno
 left outer join study_category sc on bs.CATEGORYD = sc.CDID and bs.CATEGORYS = sc.CSID
 left outer join region r on bs.RDID = r.RDID and bs.RSID = r.RSID
 WHERE bs.bno > 0
@@ -186,6 +202,7 @@ SELECT
 ba.name
 , bs.bno
 , bs.title
+, bs.writer
 , u.NICKNAME
 , sc.cDName
 , sc.cSName
@@ -206,7 +223,7 @@ ba.name
 FROM 
 board_study bs
 left outer join user u on bs.writer = u.EMAIL
-left outer join board_attach ba on bs.bno = ba.bsbno
+left outer join (select * from board_attach where status = "O") ba on bs.bno = ba.bsbno
 left outer join study_category sc on bs.CATEGORYD = sc.CDID and bs.CATEGORYS = sc.CSID
 left outer join region r on bs.RDID = r.RDID and bs.RSID = r.RSID
 WHERE bs.bno > 0
@@ -222,9 +239,34 @@ limit #{pageStart}
 <![CDATA[
 SELECT
 COUNT(bno)
-FROM
-board_study
-WHERE bno > 0
+ba.name
+, bs.bno
+, bs.title
+, bs.writer
+, u.NICKNAME
+, sc.cDName
+, sc.cSName
+, bs.now
+, bs.max
+, r.rDName
+, r.rSName
+, bs.age
+, bs.sc
+, bs.sd
+, bs.st
+, bs.et
+, bs.content
+, bs.vct
+, bs.rct
+, bs.regdate
+, bs.enddate
+FROM 
+board_study bs
+left outer join user u on bs.writer = u.EMAIL
+left outer join (select * from board_attach where status = "O") ba on bs.bno = ba.bsbno
+left outer join study_category sc on bs.CATEGORYD = sc.CDID and bs.CATEGORYS = sc.CSID
+left outer join region r on bs.RDID = r.RDID and bs.RSID = r.RSID
+WHERE bs.bno > 0
 ]]>
 </select>
 
@@ -256,10 +298,34 @@ WHERE bno > 0
 <select id="listSearch" resultType="studyVO">
 <![CDATA[
 SELECT
-*
-FROM
-board_study
-WHERE bno > 0
+ba.name
+, bs.bno
+, bs.title
+, bs.writer
+, u.NICKNAME
+, sc.cDName
+, sc.cSName
+, bs.now
+, bs.max
+, r.rDName
+, r.rSName
+, bs.age
+, bs.sc
+, bs.sd
+, bs.st
+, bs.et
+, bs.content
+, bs.vct
+, bs.rct
+, bs.regdate
+, bs.enddate
+FROM 
+board_study bs
+left outer join user u on bs.writer = u.EMAIL
+left outer join (select * from board_attach where status = "O") ba on bs.bno = ba.bsbno
+left outer join study_category sc on bs.CATEGORYD = sc.CDID and bs.CATEGORYS = sc.CSID
+left outer join region r on bs.RDID = r.RDID and bs.RSID = r.RSID
+WHERE bs.bno > 0
 ]]>
 
 <include refid="search"></include>
@@ -273,10 +339,36 @@ limit #{pageStart}
 
 <select id="listSearchCount" resultType="int">
 <![CDATA[
-SELECT 
-COUNT(bno)
-FROM board_study
-WHERE bno > 0
+SELECT
+count(bs.bno)
+,ba.name
+, bs.bno
+, bs.title
+, bs.writer
+, u.NICKNAME
+, sc.cDName
+, sc.cSName
+, bs.now
+, bs.max
+, r.rDName
+, r.rSName
+, bs.age
+, bs.sc
+, bs.sd
+, bs.st
+, bs.et
+, bs.content
+, bs.vct
+, bs.rct
+, bs.regdate
+, bs.enddate
+FROM 
+board_study bs
+left outer join user u on bs.writer = u.EMAIL
+left outer join (select * from board_attach where status = "O") ba on bs.bno = ba.bsbno
+left outer join study_category sc on bs.CATEGORYD = sc.CDID and bs.CATEGORYS = sc.CSID
+left outer join region r on bs.RDID = r.RDID and bs.RSID = r.RSID
+WHERE bs.bno > 0
 ]]>
 <include refid="search"></include>
 </select>
@@ -307,6 +399,10 @@ WHERE bno > 0
   		</if> 
   </sql>		
 
-  	 		
+  	 		  <select id="getNextBno" resultType="int">
+
+  select LAST_INSERT_ID();
+
+  </select>
 
 </mapper>
