@@ -148,6 +148,24 @@
 		<item value="org.springsource.sts.package:3.8.2.201610040743-RELEASE-e46"/>
 		<item value="org.springsource.sts:3.8.2.201610040743-RELEASE"/>
 	</list>
+	<section name="CleanDialogSettings">
+		<item value="500" key="DIALOG_WIDTH"/>
+		<item value="false" key="TOGGLE_SELECTED"/>
+		<item value="378" key="DIALOG_HEIGHT"/>
+		<item value="989" key="DIALOG_X_ORIGIN"/>
+		<item value="289" key="DIALOG_Y_ORIGIN"/>
+	</section>
+	<section name="ExternalProjectImportWizard">
+		<item value="false" key="WizardProjectsImportPage.STORE_NESTED_PROJECTS"/>
+		<item value="false" key="WizardProjectsImportPage.STORE_COPY_PROJECT_ID"/>
+		<item value="false" key="WizardProjectsImportPage.STORE_ARCHIVE_SELECTED"/>
+		<list key="WizardProjectsImportPage.STORE_DIRECTORIES">
+			<item value="C:\Users\504CLASS 01\Desktop\ILuvStudy_v1_0"/>
+		</list>
+		<list key="WizardProjectsImportPage.STORE_ARCHIVES">
+			<item value=""/>
+		</list>
+	</section>
 	<section name="ChooseWorkspaceDialogSettings">
 		<item value="201" key="DIALOG_X_ORIGIN"/>
 		<item value="197" key="DIALOG_Y_ORIGIN"/>

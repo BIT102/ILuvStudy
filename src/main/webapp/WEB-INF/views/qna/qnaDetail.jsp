@@ -14,6 +14,8 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <style>
 body {margin-left:50px;}
+
+#repliesDiv{font-size:40px; border:2px dotted black;}
 </style>
 </head>
 <body>
@@ -68,7 +70,7 @@ body {margin-left:50px;}
 			
 			<!-- 댓글목록 페이징 -->
 			<ul>
-				<li id="repliesDiv"><span>Replies List</span>
+				<li id="repliesDiv"><span>Replies List(click me!)</span>
 			</ul>
 			
 			<div>
@@ -133,15 +135,15 @@ body {margin-left:50px;}
 
 <script id="template" type="text/x-handelbars-template">
 {{#each .}}
-<li data-rno={{rno}}>
+<li class="replyLi" data-rno={{rno}}>
 	<i></i>
-	<div>
-		<span>
+	<div class="timeline-item">
+		<span class="time">
 			<i></i>{{prettifyDate regdate}}
 		</span>
-		<h3><string>{{rno}}><strong> -{{replyer}}</h3>
-		<div>{{content}}</div>
-			<div>
+		<h3 class="timeline-header"><string>{{rno}}<strong> -{{replyer}}</h3>
+		<div class="timeline-body">{{content}}</div>
+			<div class="timeline-footer">
 				<a class="btn btn-primary btn-xs" data-toggle="modal" data-target="#modifyModal">Modify</a>
 			</div>
 	</div>
@@ -244,6 +246,49 @@ var printData = function (replyArr, target, templateObject){
 				}
 			}
 		});
+	});
+	
+	//modal footer에 replymod 버튼
+	$("#replyModBtn").on("click", function(){
+		var rno = $(".modal-title").html();
+		var content = $("#replytext").val();
+		
+		$.ajax({
+			type:'put',
+			url:'/replies/'+rno,
+			headers:{
+				"Content-Type": "application/json",
+				"X-HTTP-Method-Override": "PUT" },
+			data:JSON.stringify({content:content}),
+			dataType:'text',
+			success:function(result){
+				console.log("result:" +result);
+				if(result == 'SUCCESS'){
+					alert("수정 되었습니다.");
+					getPage("/replies/"+bno+"/"+replyPage);
+				}
+			}});
+	});
+	
+	//modal footer에 replyDelBtn 버튼
+	$("#replyDelBtn").on("click", function(){
+		var rno = $(".modal-title").html();
+		var content = $("#replytext").val();
+		
+		$.ajax({
+			type:'delete',
+			url:'/replies/'+rno,
+			headers: {
+				"Content-Type": "application.json",
+				"X-HTTP-Method-Override": "DELETE"},
+			dataType:'text',
+			success:function(result){
+				console.log("result:" + result);
+				if(result == 'SUCCESS'){
+					alert("삭제 되었다.");
+					getPage("/replies/"+bno+"/"+replyPage);
+				}
+			}});
 	});
 	</script>
 <!-- 부트스트랩 JS -->

@@ -1,0 +1,8 @@
+INDEX VERSION 1.3+C:\Users\504CLASS 01\git\ILuvStudy\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+2547822123.index
+4233453015.index
+2149906673.index
+2615742246.index
+3294412640.index
+3423725363.index
+3849630642.index

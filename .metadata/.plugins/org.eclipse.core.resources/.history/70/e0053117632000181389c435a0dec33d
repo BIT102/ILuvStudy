@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- board_study mapper -->
+<mapper namespace="dev.mvc.mapper.StudyMapper">
+
+<!-- 스터디 등록 -->
+ <insert id="createStudy">
+insert into board_study (
+title
+, writer
+, categoryD
+, categoryS
+, max
+, rDId
+, rSId
+, age
+, sc
+, sd
+, st
+, et
+, content
+) values (
+#{title}
+, #{writer}
+, #{categoryD}
+, #{categoryS}
+, #{max}
+, #{rDId}
+, #{rSId} <!-- null허용 -->
+, #{age}
+, #{sc}
+, #{sd}
+, #{st}
+, #{et}
+, #{content} <!-- null허용 -->
+)
+</insert>
+
+<!-- 스터디 읽어오기 -->
+<select id="readStudy" resultType="StudyVO">
+SELECT
+ba.name
+, bs.bno
+, bs.title
+, bs.writer
+, u.NICKNAME
+, sc.cDName
+, sc.cSName
+, bs.now
+, bs.max
+, r.rDName
+, r.rSName
+, bs.age
+, bs.sc
+, bs.sd
+, bs.st
+, bs.et
+, bs.content
+, bs.vct
+, bs.rct
+, bs.regdate
+, bs.enddate
+FROM 
+board_study bs
+left outer join user u on bs.writer = u.EMAIL
+left outer join board_attach ba on bs.bno = ba.bsbno
+left outer join study_category sc on bs.CATEGORYD = sc.CDID and bs.CATEGORYS = sc.CSID
+left outer join region r on bs.RDID = r.RDID and bs.RSID = r.RSID
+WHERE bs.bno = #{bno}
+</select>
+
+<!-- 전체불러오기 -->
+<select id="studyList" resultType="StudyVO">
+<![CDATA[
+SELECT
+ba.name
+, bs.bno
+, bs.title
+, u.nickname
+, sc.cDName
+, sc.cSName
+, bs.now
+, bs.max
+, r.rDName
+, r.rSName
+, bs.age
+, bs.sc
+, bs.sd
+, bs.st
+, bs.et
+, bs.content
+, bs.vct
+, bs.rct
+, bs.regdate
+, bs.enddate
+FROM 
+board_study bs
+left outer join user u on bs.writer = u.EMAIL
+left outer join board_attach ba on bs.bno = ba.bsbno
+left outer join study_category sc on bs.CATEGORYD = sc.CDID and bs.CATEGORYS = sc.CSID
+left outer join region r on bs.RDID = r.RDID and bs.RSID = r.RSID
+WHERE bs.bno > 0
+ORDER BY bs.bno desc, bs.regdate desc;
+]]>
+</select>
+
+<!-- 보드삭제합니다 -->
+<delete id="delete">
+DELETE 
+FROM
+board_study
+WHERE
+bno = #{bno}
+
+</delete>
+<!-- 파일 등록 -->
+<insert id="addFile" parameterType="map">
+INSERT
+INTO
+board_attach(
+name
+, bsBno
+, status
+)
+VALUES(
+#{name}
+, LAST_INSERT_ID()
+, #{status}
+)
+</insert>
+
+<!-- 게시물 조회수 -->
+<update id="upVct">
+
+UPDATE
+board_study
+SET
+vct = vct + 1 
+WHERE
+bno = #{bno}
+</update>
+
+<!-- 페이지 처리 -->
+<select id="listPage" resultType="StudyVO">
+<![CDATA[
+SELECT
+ba.name
+, bs.bno
+, bs.title
+, u.NICKNAME
+, sc.cDName
+, sc.cSName
+, bs.now
+, bs.max
+, r.rDName
+, r.rSName
+, bs.age
+, bs.sc
+, bs.sd
+, bs.st
+, bs.et
+, bs.content
+, bs.vct
+, bs.rct
+, bs.regdate
+, bs.enddate
+FROM 
+board_study bs
+left outer join user u on bs.writer = u.EMAIL
+left outer join board_attach ba on bs.bno = ba.bsbno
+left outer join study_category sc on bs.CATEGORYD = sc.CDID and bs.CATEGORYS = sc.CSID
+left outer join region r on bs.RDID = r.RDID and bs.RSID = r.RSID
+WHERE bs.bno > 0
+ORDER BY bs.bno desc
+, bs.regdate desc
+limit #{page}, 9
+]]>
+</select>
+
+<!-- 페이지데이터 -->
+<select id="listCriteria" resultType="StudyVO">
+<![CDATA[
+SELECT
+ba.name
+, bs.bno
+, bs.title
+, u.NICKNAME
+, sc.cDName
+, sc.cSName
+, bs.now
+, bs.max
+, r.rDName
+, r.rSName
+, bs.age
+, bs.sc
+, bs.sd
+, bs.st
+, bs.et
+, bs.content
+, bs.vct
+, bs.rct
+, bs.regdate
+, bs.enddate
+FROM 
+board_study bs
+left outer join user u on bs.writer = u.EMAIL
+left outer join board_attach ba on bs.bno = ba.bsbno
+left outer join study_category sc on bs.CATEGORYD = sc.CDID and bs.CATEGORYS = sc.CSID
+left outer join region r on bs.RDID = r.RDID and bs.RSID = r.RSID
+WHERE bs.bno > 0
+ORDER BY bs.bno desc
+, bs.regdate desc
+limit #{pageStart}
+, #{perPageNum}
+]]>
+</select>
+
+<!-- 페이징 개수 -->
+<select id="countPaging" resultType="int">
+<![CDATA[
+SELECT
+COUNT(bno)
+FROM
+board_study
+WHERE bno > 0
+]]>
+</select>
+
+<!-- 검색 -->
+<!-- <select id="listSearch" resultType="StudyVO">
+<![CDATA[
+SELECT
+*
+FROM
+board_study
+WHERE bno > 0
+ORDER BY bno desc
+limit #{pageStart}
+, #{perPageNum}
+]]>
+</select> -->
+
+<!-- 검색수 -->
+<!-- <select id="listSearchCount" resultType="int">
+<![CDATA[
+SELECT
+COUNT(bno)
+FROM
+board_study
+WHERE bno > 0
+]]>
+</select> -->
+
+<select id="listSearch" resultType="studyVO">
+<![CDATA[
+SELECT
+ba.name
+, bs.bno
+, bs.title
+, u.NICKNAME
+, sc.cDName
+, sc.cSName
+, bs.now
+, bs.max
+, r.rDName
+, r.rSName
+, bs.age
+, bs.sc
+, bs.sd
+, bs.st
+, bs.et
+, bs.content
+, bs.vct
+, bs.rct
+, bs.regdate
+, bs.enddate
+FROM 
+board_study bs
+left outer join user u on bs.writer = u.EMAIL
+left outer join board_attach ba on bs.bno = ba.bsbno
+left outer join study_category sc on bs.CATEGORYD = sc.CDID and bs.CATEGORYS = sc.CSID
+left outer join region r on bs.RDID = r.RDID and bs.RSID = r.RSID
+WHERE bs.bno > 0
+]]>
+
+<include refid="search"></include>
+
+<![CDATA[
+ORDER BY bno desc
+limit #{pageStart}
+, #{perPageNum}
+]]>
+</select>
+
+<select id="listSearchCount" resultType="int">
+<![CDATA[
+SELECT
+count(bs.bno)
+,ba.name
+, bs.bno
+, bs.title
+, u.NICKNAME
+, sc.cDName
+, sc.cSName
+, bs.now
+, bs.max
+, r.rDName
+, r.rSName
+, bs.age
+, bs.sc
+, bs.sd
+, bs.st
+, bs.et
+, bs.content
+, bs.vct
+, bs.rct
+, bs.regdate
+, bs.enddate
+FROM 
+board_study bs
+left outer join user u on bs.writer = u.EMAIL
+left outer join board_attach ba on bs.bno = ba.bsbno
+left outer join study_category sc on bs.CATEGORYD = sc.CDID and bs.CATEGORYS = sc.CSID
+left outer join region r on bs.RDID = r.RDID and bs.RSID = r.RSID
+WHERE bs.bno > 0
+]]>
+<include refid="search"></include>
+</select>
+
+<!-- 검색에 필요한 화면구성 -->
+<sql id="search">
+ 		<if test="searchType != null">
+  			<if test="searchType == 't'.toString()">
+  				and title like CONCAT('%', #{keyword}, '%')
+  			</if>
+  			<if test="searchType == 'c'.toString()">
+  				and content like CONCAT('%', #{keyword}, '%')
+  			</if>
+  			<if test="searchType == 'w'.toString()">
+  				and writer like CONCAT('%', #{keyword}, '%')
+  			</if>
+  			<if test="searchType == 'tc'.toString()">
+  				and ( title like CONCAT('%', #{keyword}, '%') OR content like CONCAT('%', #{keyword}, '%'))
+  			</if>
+  			<if test="searchType == 'cw'.toString()">
+  				and ( content like CONCAT('%', #{keyword}, '%') OR writer like CONCAT('%', #{keyword}, '%'))
+  			</if>
+  			<if test="searchType == 'tcw'.toString()">
+  				and ( title like CONCAT('%', #{keyword}, '%') 
+  						OR content like CONCAT('%', #{keyword}, '%') 
+  						OR writer like CONCAT('%', #{keyword}, '%') )
+  			</if>
+  		</if> 
+  </sql>		
+  
+<!-- 카테고리 분류 SQL -->
+ <select id="catList" resultType="studyVO">
+<![CDATA[
+select DISTINCT cDName
+ from study_category
+
+]]>
+</select>
+   <select id="catList2" resultType="studyVO">
+<![CDATA[
+select cSName
+ from study_category
+ where cdId=${csid} 
+
+]]>
+</select>
+
+</mapper>

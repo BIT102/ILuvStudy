@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dev.mvc.mapper.AdminMapper">
+	
+	<!-- admin 계정 로그인 처리 -->
+	<select id="adminLogin" resultType="AdminVO">
+		select adminid, adminpw from admin where adminid=#{adminId} and adminpw=#{adminPw}
+	</select>
+	
+	<!-- 로그인 시 마지막 접속일 갱신 -->
+	<update id="adminLastLogin">
+		update admin set lastLoginDate=now() where adminid=#{adminId}
+	</update>
+	
+	<!-- adminid, name 검색 SQL -->
+	<sql id="adminsearch">
+		<if test="idKeyword != null">
+			and adminid like concat('%', #{idKeyword}, '%')
+		</if>
+		<if test="nameKeyword != null">
+			and name like concat('%', #{nameKeyword}, '%')
+		</if>
+	</sql>
+	
+	<!-- admin 계정 리스트 -->
+	<!-- 검색처리 -->
+	<select id="adminList" resultType="AdminVO">
+	<![CDATA[
+		select bno, adminid, name, status, lastLoginDate 
+		from admin
+		where bno > 0
+	]]>
+		<include refid="adminsearch"></include>	
+	<![CDATA[
+		order by bno desc, lastLoginDate desc
+		limit #{pageStart}, #{perPageNum}
+	]]>
+	
+	</select>
+	
+	<!--  admin 정보 상세 -->
+	<select id="adminDetail" resultType="AdminVO">
+		select bno, adminid, name, adminpw, status, lastLoginDate
+		from admin
+		where bno = #{bno}
+	</select>
+	
+	<!-- admin 계정 정보 업데이트 -->
+	<update id="adminUpdate">
+		update admin set name=#{name}, adminpw=#{adminPw}, status=#{status}
+		where bno = #{bno}
+	</update>
+	
+	<!-- admin 계정 정보 등록 -->
+	<insert id="adminRegister">
+		insert into admin (adminid, adminpw, name, registdate, status) 
+		values(#{adminId},#{adminPw},#{name},now(),#{status})
+	</insert>
+	
+	<!-- adminList 페이징 처리 -->
+	<select id="adminListPage" resultType="AdminVO">
+		<![CDATA[
+			select bno, adminid, name, status, lastLoginDate 
+			from admin
+			where bno > 0
+			order by bno desc, lastLoginDate desc
+			limit #{page}, 0
+		]]>
+	</select>
+	
+	<!-- totalCount 반환 -->
+	<select id="adminCountPaging" resultType="int">
+		<![CDATA[
+			select count(bno)
+			from admin
+			where bno > 0
+		]]>
+		<include refid="adminsearch"></include>	
+	</select>
+
+<!-- 회원조회 메뉴 -->
+
+	<!-- isdel, id, nickname 검색 SQL -->
+	<!-- 검색 부분 수정 필요 -->
+	<sql id="usersearch">
+		<if test="isDelType != null">
+			<if test="isDelType == 'v'.toString()">
+				and isdel=0
+			</if>
+			<if test="isDelType == 'd'.toString()">
+				and isdel=1
+			</if>
+		</if>
+		<if test="emailKeyword != null">
+			and email like concat('%', #{emailKeyword}, '%')
+		</if>
+		<if test="nickNameKeyword != null">
+			and nickname like concat('%', #{nickNameKeyword}, '%')
+		</if>
+	</sql>
+	<!-- 검색 추가  -->	
+	<!-- user 정보 리스트 -->
+	<select id="userList" resultType="UserVO">
+	<![CDATA[
+		select bno, email, name, nickname, phonenum, isdel, registdate
+		from user
+		where bno > 0
+	]]>
+		<include refid="usersearch"></include>	
+	<![CDATA[
+		order by bno desc, registdate desc
+		limit #{pageStart}, #{perPageNum}
+	]]>
+	</select>
+	
+	<!-- user 페이지 totalCount 반환 -->
+	<!-- 검색 추가 -->
+	<select id="userCountPaging" resultType="int">
+		<![CDATA[
+			select count(bno)
+			from user
+			where bno > 0
+		]]>
+		<include refid="usersearch"></include>
+	</select>
+	
+	<!-- user 정보 상세 -->
+	<select id="userDetail" resultType="UserVO">
+		select *
+		from user
+		where bno = #{bno}
+	</select>
+	
+	<!-- user 정보 업데이트 -->
+	<update id="userUpdate">
+		update user 
+		set name=#{name}, password=#{password}, nickname=#{nickName}, 
+		birth=#{birth}, gender=#{gender}, phonenum=#{phoneNum}, homepage=#{homepage}, introduction=#{introduction}
+		where bno = #{bno}
+	</update>
+	
+</mapper>
