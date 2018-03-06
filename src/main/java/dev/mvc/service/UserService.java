@@ -1,11 +1,11 @@
-package dev.mvc.persistance;
+package dev.mvc.service;
 
 import java.util.Date;
 
 import dev.mvc.domain.UserVO;
 import dev.mvc.dto.UserLoginDTO;
 
-public interface UserDAO {
+public interface UserService {
 
 	//회원 가입 메소드
 	public void joinUser(UserVO vo) throws Exception;
@@ -28,12 +28,9 @@ public interface UserDAO {
 	//회원 로그인 (세션활용) 
 	public UserVO login(UserLoginDTO dto) throws Exception;
 	
-	// sessionKey & sessionLimit 업데이트
-	public void keepLogin(String email, String sessionId, Date next) throws Exception; // sessinId = DB의 sessionKey
+	// session 로그인 여부 판단
+	public void keepLogin(String email, String sessionId, Date next) throws Exception;
 	
-	// loginCookie에 기록된 값으로 사용자의 정보 조회
-	public UserVO checkUserWithSessionKey(String value) throws Exception;
-	
-/*	//회원 전체 리스트 조회
-	public List<UserVO> listAll() throws Exception;*/
+	// 로그인시 사용자가 sessionKey를 가지고 있나 체크 (loginCookie에 기록된 값으로 사용자의 정보 조회) 
+	public UserVO checkLoginBefore(String value) throws Exception;
 }

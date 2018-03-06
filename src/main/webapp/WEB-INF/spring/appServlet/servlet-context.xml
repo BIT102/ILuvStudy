@@ -43,8 +43,34 @@
 	<context:component-scan base-package="dev.mvc.controller" />
 	
 	<!-- 김상욱, 박영원 -->
+	<!-- 사용자 로그인 인터셉터 -->
+	
+		<beans:bean id="authInterceptor" class="dev.mvc.interceptor.AuthInterceptor"></beans:bean>
+	
+		<beans:bean id="UserloginInterceptor" class="dev.mvc.interceptor.UserLoginInterceptor"></beans:bean>
+		<interceptors>
+			<interceptor>
+				<mapping path="/loginPost"/>
+				<beans:ref bean="UserloginInterceptor"/>
+			</interceptor>
+			
+			<interceptor>
+				<!-- <mapping path="/login"/> -->
+				<mapping path="/addInfo"/>
+				<mapping path="/application"/>
+				<mapping path="/bookmark"/>
+				<mapping path="/changePw"/>
+				<mapping path="/completed"/>
+				<mapping path="/profile"/>
+				<mapping path="/quit"/>
+				<mapping path="/recurit"/>
+				<beans:ref bean="authInterceptor"/>
+			</interceptor>
+		</interceptors>
 		
-	<!-- 로그인 인터셉터 설정 -->
+		
+		
+	<!-- 관리자 로그인 인터셉터 설정 -->
 	<beans:bean id="loginInterceptor" class="dev.mvc.interceptor.LoginInterceptor"></beans:bean>
 		<interceptors>
 			<interceptor>

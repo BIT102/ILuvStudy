@@ -1,11 +1,16 @@
 package dev.mvc.persistance;
 
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import dev.mvc.domain.UserVO;
+import dev.mvc.dto.UserLoginDTO;
 
 @Repository
 public class UserDAOImpl implements UserDAO {
@@ -17,7 +22,8 @@ public class UserDAOImpl implements UserDAO {
 	private static String namespace = "dev.mvc.mapper.userMapper";
 	
 	
-	//회원가입 메소드
+	
+	//회원가입 
 	@Override
 	public void joinUser(UserVO vo) throws Exception {
 		session.insert(namespace+".joinUser", vo);
@@ -52,6 +58,29 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public void quit(UserVO vo) throws Exception {
 		session.update(namespace+".quit", vo);
+	}
+
+	// 로그인
+	@Override
+	public UserVO login(UserLoginDTO dto) throws Exception {
+		return session.selectOne(namespace + ".userDTOLogin",dto);
+	}
+
+	// 세션으로 로그인 여부 판단
+	@Override
+	public void keepLogin(String email, String sessionId, Date next) throws Exception {
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("email", email);
+		paramMap.put("sessionId", sessionId);
+		paramMap.put("next", next);
+		
+		session.update(namespace +".keepLogin", paramMap);
+	}
+
+	// 로그인시 사용자가 세션키를 가지고 있나 체크 (loginCookie에 기록된 값으로 사용자의 정보 조회) 
+	@Override
+	public UserVO checkUserWithSessionKey(String value) throws Exception {
+		return session.selectOne(namespace +".checkUserWithSessionKey", value);
 	}
 
 

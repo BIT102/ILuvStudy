@@ -76,7 +76,7 @@
 	<!-- <input id="butt" type="text" name="quit" > -->
 	
 	<input type="submit" value="탈퇴하기">
-	<input type="hidden" value="${vo.email}" name="email" readonly> 
+	<input type="hidden" value="${login.email}" name="email" readonly> 
 
 	</form>
 </body>

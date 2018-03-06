@@ -1,4 +1,4 @@
-package dev.mvc.controller;
+/*package dev.mvc.controller;
 
 import javax.inject.Inject;
 
@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import dev.mvc.domain.UserVO;
 import dev.mvc.service.LoginService;
 
-/**
+*//**
  * Handles requests for the application home page.
- */
+ *//*
 @Controller
 public class LoginController {
 	
@@ -23,9 +23,9 @@ public class LoginController {
 	@Inject
 	LoginService service;
 	
-	/**
+	*//**
 	 * Simply selects the home view to render by returning its name.
-	 */
+	 *//*
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public void loginGet() {
 		logger.info("login joined...................");
@@ -52,3 +52,4 @@ public class LoginController {
 	}
 	
 }
+*/

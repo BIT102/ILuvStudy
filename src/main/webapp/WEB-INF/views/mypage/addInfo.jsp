@@ -151,7 +151,7 @@
    <br>
    
    
-   <input type="hidden" value="${vo.email}" name="email" readonly>
+   <input type="hidden" value="${login.email}" name="email" readonly>
    
 <div>
    <input type="submit" value="저장하기">

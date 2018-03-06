@@ -3,6 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script> 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>프로필</title>
 <style>
@@ -56,34 +57,66 @@
     <br>
     <br>
     <br>
-    
-   <form name="changePwForm" action="/changePw" method="post"> 
+   
 
    <div id="acinfo">
         <p2>비밀번호 변경</p2>
         <table id="actable">
             <tr>
-                <td><label for="nowPW">기존 비밀번호</label></td>
-                <td><input id="nowPW" type="password" value="${vo.password}"></td>
+                <td><label for="nowPw">기존 비밀번호</label></td>
+                <td><input id="nowPw" type="password" name="nowPw"></td>
               
                 	
             </tr>
             <tr>
-                <td><label for="newPW">새 비밀번호</label></td>
-                <td><input id="newPW" type="password" name="password" placeholder="8자리에서 20자리 이하 영문, 숫자로만 설정해 주세요."></td>
+                <td><label for="newPw1">새 비밀번호</label></td>
+                <td><input id="newPw1" type="password" name="newPw1" placeholder="8자리에서 20자리 이하 영문, 숫자로만 설정해 주세요."></td>
             </tr>
             <tr>
-                <td><label for="repeatPW">비밀번호 확인</label></td>
-                <td><input id="repeatPW" type="password" placeholder="비밀번호를 한번 더 입력해주세요." ></td>
+                <td><label for="newPw2">비밀번호 확인</label></td>
+                <td><input id="newPw2" type="password" name="newPw2" placeholder="비밀번호를 한번 더 입력해주세요." ></td>
              
         </table>
-        <input type="hidden" value="${vo.email}" name="email" readonly> 
+        <input type="hidden" value="${login.email}" name="email" readonly> 
    </div>
 <div>
-   <input type="submit" value="변경하기">
+   <input class="changePw" type="button" value="변경하기">
 </div>
 
-	</form>
+
+	
+	<script>
+	
+	$(".changePw").on("click", function(){
+		
+		var nowPw = $('#nowPw').val();
+		var newPw1 = $('#newPw1').val();
+		var newPw2 = $('#newPw2').val();
+		
+		
+		console.log(nowPw);
+		console.log(newPw1);
+		console.log(newPw2);
+		
+		$.ajax({
+			url: '/changePw',
+			type: 'POST',
+			header:{
+				"X-HTTP-Method-Override" : "POST"
+			},
+			data:{ 	nowPw : nowPw,
+					newPw1 : newPw1, // 앞에는 컨트롤러에서 가져다 쓸 이름이고 뒤에는 값임!!
+					newPw2 : newPw2		
+			},
+			success : function(result){ //alert으로 result값을 하면 컨트롤에서 ""안에 쓴 값이 뜸
+			alert(result);
+			}
+		})
+	})
+	
+	</script>
+	
+	
 </body>
 
 
