@@ -130,8 +130,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where a.bsbno=b.bno
 		and b.rdid=r.rdid
 		and b.rsid=r.rsid
-		and a.usbno=u.bno
-		and a.usbno=#{bno}
+		and a.usemail=u.email
+		and u.bno=#{bno}
 	</select>
 	
 	<!-- user 상세 스터디 모집 정보 -->
@@ -258,6 +258,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where rdid=#{rDId}
 		order by rdid, rsid
 	</select>
+	
+	<!-- 스터디 신청자 정보 -->
+	<select id="applyStudy" resultType="StudyVO">
+		select u.bno, u.email, a.regdate, a.status
+		from apply_user a, user u
+		where a.usemail=u.email
+		and a.bsbno=#{bno}
+	</select>
+	
+	<!-- 스터디 정보 수정  -->
+	<update id="studyUpdate">
+		update board_study
+		set title=#{title}, writer=#{writer}, categoryd=#{categoryD}, categorys=#{categoryS}, 
+		max=#{max}, sc=#{sc}, sd=#{sd}, st=#{st}, et=#{et}, content=#{content}
+		where bno = #{bno}
+	</update>
 	
 <!-- 스터디관리 > 댓글 관리 메뉴 -->
 	<!-- 검색 SQL -->
