@@ -214,6 +214,8 @@ public class AdminController {
 		model.addAttribute("region", service.region(cri));
 		//스터디 상세 정보
 		model.addAttribute(service.studyDetail(bno));
+		//스터디 신청자 정보
+		model.addAttribute("applyStudy", service.applyStudy(bno));
 	}
 	
 	@ResponseBody
@@ -231,13 +233,13 @@ public class AdminController {
 	}
 	
 	
-	//admin/studyDetail.jsp 에서 계정 정보 수정 시
+	//admin/studyDetail.jsp 에서 스터디 정보 수정 시
 	@RequestMapping(value="/studyDetail", method = RequestMethod.POST)
-	public String studyDetail(StudyVO vo, Criteria cri, RedirectAttributes rttr) throws Exception{
+	public String studyDetailPOST(StudyVO vo, Criteria cri, RedirectAttributes rttr) throws Exception{
 		logger.info("studyDetail post...");
 		logger.info(cri.toString());
 		
-		//service.studyUpdate(vo);
+		service.studyUpdate(vo);
 		
 		//페이징 정보 유지
 		rttr.addAttribute("page", cri.getPage());

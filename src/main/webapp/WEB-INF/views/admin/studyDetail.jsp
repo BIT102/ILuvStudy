@@ -34,11 +34,15 @@
                 <th>카테고리</th>
                 <td>
                 <!-- 스터디에 등록된 카테고리 체크 표시 -->
+                <!-- 스터디 카테고리 데이터 -->
                 <c:forEach items="${studyCategory}" var="studyVO">
-                	<c:if test="${studyVO.cSId eq 1}">
-                		<br># ${studyVO.cDName}
+                 	<c:if test="${studyVO.cSId eq 1 and studyVO.cDName eq '외국어'}">
+                		# <a name="categoryD" value="${studyVO.cDId}">${studyVO.cDName}</a>
+                	</c:if> 
+                	<c:if test="${studyVO.cSId eq 1 and studyVO.cDName ne '외국어'}">
+                		<br><a name="categoryD" value="${studyVO.cDId}"># ${studyVO.cDName}</a>
                 	</c:if>
-                	<input type="checkbox">${studyVO.cSName}
+                	<input type="checkbox" name="categoryS" id="${studyVO.cDId}${studyVO.cSId}" value="${studyVO.cSId}">${studyVO.cSName}
                 </c:forEach>
                 </td>
             </tr>
@@ -49,18 +53,15 @@
             <tr>
                 <th>지역</th>
                 <td>
-                <!-- 대분류 선택 시 소분류 값 변경되도록 자바스크립트 처리 필요 -->
                 <!-- 스터디에 선택된 지역정보 셀렉트 표시 -->
                     <select id="rDName">
-                    	<option>대분류</option>
                     	<c:forEach items="${region}" var="studyVO">
                     			<c:if test="${studyVO.rSId eq 1}">
-                    				<option value="${studyVO.rDId}">${studyVO.rDName}</option>
+                    				<option name='rDId' value="${studyVO.rDId}">${studyVO.rDName}</option>
                     			</c:if>
                     	</c:forEach>
                     </select>
                     <select id="rSName">
-                    	<option>소분류</option>
                     </select>
                 </td>
             </tr>
@@ -87,7 +88,14 @@
         <table>
             <tr>
                 <th>연령</th>
-                <td><input type="checkbox">10대 <input type="checkbox">20대 <input type="checkbox">무관</td>
+                <td>
+                	<input type="checkbox" name="bsAge" value="10대">10대
+                	<input type="checkbox" name="bsAge" value="20대">20대
+                	<input type="checkbox" name="bsAge" value="30대">30대
+                	<input type="checkbox" name="bsAge" value="40대">40대
+                	<input type="checkbox" name="bsAge" value="50대">50대
+                	<input type="checkbox" name="bsAge" value="무관">무관
+                </td>
             </tr>
             <tr>
                 <th>시작날짜</th>
@@ -96,8 +104,7 @@
             <tr>
                 <th>시간</th>
                 <td>
-					월요일 1시 00분 ~ 2시 00분  <a>X</a><br>
-					수요일 1시 00분 ~ 2시 00분  <a>X</a><br>
+                	${studyVO.sc}  ${studyVO.st} ~ ${studyVO.et} <a>X</a><br>
                     <a href="studyTime">추가</a>
                 </td>
             </tr>
@@ -142,17 +149,17 @@
             <tr>
                 <th>번호</th>
                 <th>아이디</th>
-                <th>닉네임</th>
                 <th>신청일</th>
                 <th>승인여부</th>
             </tr>
+<c:forEach items="${applyStudy}" var="studyVO">
             <tr>
-                <td>1</td>
-                <td>asdf@naver.com</td>
-                <td>홍길동</td>
-                <td>2018-02-17</td>
-                <td>미승인</td>
+                <td>${studyVO.bno}</td>
+                <td>${studyVO.email}</td>
+                <td><fmt:formatDate pattern="yyyy-MM-dd" value="${studyVO.regdate}"/></td>
+                <td>${studyVO.status}</td>
             </tr>
+</c:forEach>
         </table>
 
         <button type="button" id="listBtn">목록</button>
@@ -161,7 +168,8 @@
 <script>
 	
 	$(document).ready(function(){
-
+		getStudy(); //스터디 정보 불러옴
+		
 		var formObj = $("form[role='form']");
 		
 		console.log(formObj);
@@ -169,7 +177,7 @@
 		//수정 클릭 시 액션
 		$("#modifyBtn").on("click", function(){
 			//form 데이터 유효성 검사 추가 필요
-			
+			//formObj.attr("action", "/admin/studyDetail");
 			formObj.submit();
 		});
 		
@@ -180,9 +188,17 @@
 		});
 		
 		$("#rDName").on("change", function(){
+			getRegion();
+		});
+		
+		
+	});
+	
+		//지역정보 2단 콤보박스 메서드
+		function getRegion(){
 			$("#rSName").children("option").remove(); //소분류의 option 삭제
 			
-			$.ajax({
+			$.ajax({ //rdid값을 POST형식으로 region 컨트롤러에 전송
 				type:'POST',
 				url:'/admin/region/'+ $("#rDName option:selected").val(),
  				headers : {
@@ -190,21 +206,44 @@
 					"X-HTTP-Method-Override" : "POST"}, 
 				dataType:'json',
 				data:JSON.stringify({
-					rDId : $("#rDName option:selected").val()
+					rDId : $("#rDName option:selected").val()  //rdid의 값 전송
 				}),
-				success:function(result){
-					console.log(result);
-					console.log(result[0].rSName);
+				success:function(result){ //반환받은 지역테이블 정보, list 배열
 					var option="";
 					for(var i=0; i<result.length;i++){
-						option += "<option>"+result[i].rSName+" </option>";
+						option += "<option name='rSId' value="+result[i].rSId+">"+result[i].rSName+" </option>"; //option에 배열값 추가
 					}
-					$("#rSName").append(option);
+					$("#rSName").append(option); //html에 뿌려줌
 				}
-			}); 
-		});
-
-	});
+			}); //$.ajax 끝
+		}
+		
+		function getStudy(){
+			$("input:checkbox[id='${studyVO.categoryD}${studyVO.categoryS}']").attr("checked", "checked"); //카테고리 정보 불러옴
+			console.log("${studyVO.categoryS}");
+			$("input:checkbox[value='${studyVO.age}']").attr("checked", "checked"); //연령 정보 불러옴
+			$("option[value='${studyVO.rDId}']").attr("selected", "selected"); //스터디 지역 정보 불러옴
+			
+			$.ajax({ //rdid값을 POST형식으로 region 컨트롤러에 전송
+				type:'POST',
+				url:'/admin/region/'+ $("#rDName option:selected").val(),
+ 				headers : {
+					"Content-Type" : "application/json",
+					"X-HTTP-Method-Override" : "POST"}, 
+				dataType:'json',
+				data:JSON.stringify({
+					rDId : $("#rDName option:selected").val()  //rdid의 값 전송
+				}),
+				success:function(result){ //반환받은 지역테이블 정보, list 배열
+					var option="";
+					for(var i=0; i<result.length;i++){
+						option += "<option name='rSId' value="+result[i].rSId+">"+result[i].rSName+" </option>"; //option에 배열값 추가
+					}
+					$("#rSName").append(option); //html에 뿌려줌
+					$("option[value='${studyVO.rSId}']").attr("selected", "selected"); //소분류 지역 정보 불러옴
+				}
+			}); //$.ajax 끝
+		} //getStudy() 끝
 		
 </script>
 

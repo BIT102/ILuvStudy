@@ -10,7 +10,6 @@ public class StudyVO {
 //	BS_CATEGORY_D	카테고리 대분류
 //	BS_CATEGORY_S	카테고리 소분류
 //	BS_NOW	현재인원
-//	BS_MAX	최대인원
 //	BS_R_D_ID	지역(대분류)
 //	BS_R_S_ID	지역(소분류)
 //	BS_AGE	연령
@@ -29,11 +28,11 @@ public class StudyVO {
 	private String title; 
 	private String writer; 
 	private String categoryD; 
-	private int categoryS; 
+	private String categoryS; 
 	private int now;
 	private int max;
 	private String rDId;
-	private int rSId;
+	private String rSId;
 	private String age;
 	private String sc;
 	private String sd;
@@ -51,6 +50,7 @@ public class StudyVO {
 	private String cDName;
 	private String cSName;
 	private int cSId;
+	private String cDId;
 	
 	// 작성자는 닉네임으로 표시
 	private String nickname;
@@ -62,6 +62,24 @@ public class StudyVO {
 	
 	//관리자에서 회원조회
 	private String status;  //스터디 신청자 상태값
+	private String email;  //회원 이메일
+
+	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getcDId() {
+		return cDId;
+	}
+
+	public void setcDId(String cDId) {
+		this.cDId = cDId;
+	}
 
 	public int getBno() {
 		return bno;
@@ -95,11 +113,11 @@ public class StudyVO {
 		this.categoryD = categoryD;
 	}
 
-	public int getCategoryS() {
+	public String getCategoryS() {
 		return categoryS;
 	}
 
-	public void setCategoryS(int categoryS) {
+	public void setCategoryS(String categoryS) {
 		this.categoryS = categoryS;
 	}
 
@@ -127,11 +145,11 @@ public class StudyVO {
 		this.rDId = rDId;
 	}
 
-	public int getrSId() {
+	public String getrSId() {
 		return rSId;
 	}
 
-	public void setrSId(int rSId) {
+	public void setrSId(String rSId) {
 		this.rSId = rSId;
 	}
 
@@ -302,18 +320,8 @@ public class StudyVO {
 				+ ", age=" + age + ", sc=" + sc + ", sd=" + sd + ", st=" + st + ", et=" + et + ", content=" + content
 				+ ", vct=" + vct + ", rct=" + rct + ", regdate=" + regdate + ", enddate=" + enddate + ", rDName="
 				+ rDName + ", rSName=" + rSName + ", cDName=" + cDName + ", cSName=" + cSName + ", cSId=" + cSId
-				+ ", nickname=" + nickname + ", no=" + no + ", name=" + name + ", files=" + Arrays.toString(files)
-				+ ", status=" + status + ", getBno()=" + getBno() + ", getTitle()=" + getTitle() + ", getWriter()="
-				+ getWriter() + ", getCategoryD()=" + getCategoryD() + ", getCategoryS()=" + getCategoryS()
-				+ ", getNow()=" + getNow() + ", getMax()=" + getMax() + ", getrDId()=" + getrDId() + ", getrSId()="
-				+ getrSId() + ", getAge()=" + getAge() + ", getSc()=" + getSc() + ", getSd()=" + getSd() + ", getSt()="
-				+ getSt() + ", getEt()=" + getEt() + ", getContent()=" + getContent() + ", getVct()=" + getVct()
-				+ ", getRct()=" + getRct() + ", getRegdate()=" + getRegdate() + ", getEnddate()=" + getEnddate()
-				+ ", getrDName()=" + getrDName() + ", getrSName()=" + getrSName() + ", getcDName()=" + getcDName()
-				+ ", getcSName()=" + getcSName() + ", getcSId()=" + getcSId() + ", getNickname()=" + getNickname()
-				+ ", getNo()=" + getNo() + ", getName()=" + getName() + ", getFiles()=" + Arrays.toString(getFiles())
-				+ ", getStatus()=" + getStatus() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
-				+ ", toString()=" + super.toString() + "]";
+				+ ", cDId=" + cDId + ", nickname=" + nickname + ", no=" + no + ", name=" + name + ", files="
+				+ Arrays.toString(files) + ", status=" + status + ", email=" + email + "]";
 	}
 	
 }
