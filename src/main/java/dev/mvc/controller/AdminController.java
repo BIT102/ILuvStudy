@@ -218,6 +218,16 @@ public class AdminController {
 		model.addAttribute("applyStudy", service.applyStudy(bno));
 	}
 	
+	@RequestMapping(value="/studyDetailTest", method = RequestMethod.POST)
+	public String sdTest() throws Exception{
+		
+		System.out.println("====================");
+		System.out.println("Test input");
+		System.out.println("====================");
+		
+		return "login";
+	}
+	
 	@ResponseBody
 	@RequestMapping(value="/region/{rDId}", method = RequestMethod.POST)
 	public ResponseEntity<List<StudyVO>> region(@PathVariable("rDId") String rDId,
@@ -235,9 +245,9 @@ public class AdminController {
 	
 	//admin/studyDetail.jsp 에서 스터디 정보 수정 시
 	@RequestMapping(value="/studyDetail", method = RequestMethod.POST)
-	public String studyDetailPOST(StudyVO vo, Criteria cri, RedirectAttributes rttr) throws Exception{
+	public String studyDetailPOST(StudyVO vo, RedirectAttributes rttr) throws Exception{
 		logger.info("studyDetail post...");
-		logger.info(cri.toString());
+		/*logger.info(cri.toString());
 		
 		service.studyUpdate(vo);
 		
@@ -252,7 +262,7 @@ public class AdminController {
 		rttr.addFlashAttribute("msg", "SUCCESS");
 		
 		logger.info(rttr.toString());
-		
+		*/
 		return "redirect:/admin/studyList";
 	}
 
