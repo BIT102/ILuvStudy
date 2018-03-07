@@ -5,57 +5,77 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<!-- VENDOR CSS -->
+	<link rel="stylesheet" href="/resources/vendor/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/resources/vendor/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/resources/vendor/linearicons/style.css">
+	<!-- MAIN CSS -->
+	<link rel="stylesheet" href="/resources/css/main.css">
+	<!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
+	<link rel="stylesheet" href="/resources/css/demo.css">
+	<!-- GOOGLE FONTS -->
+	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
+	<!-- ICONS -->
+	<link rel="apple-touch-icon" sizes="76x76" href="/resources/img/apple-icon.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="/resources/img/favicon.png">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <style>
-        body{width:1080px;}
-
-        /*nav*/
-        .border{border:1px solid grey;}
-        #topmenu{height:35px;}
-        #topmenu > div{float:left; width:110px; height:30px; text-align:center;}
-        
-        #topmenu2{height:35px; float:left; width:110px; text-align:center;}
-
-        /*내용*/
-        #container{ 
-            float:left;
-        }
-
-        table{
-            border-collapse:collapse;
-        }
-        td,th{
-            border:1px solid black;
-        }
-    </style>
+	<script src="/resources/vendor/jquery/jquery.min.js"></script>
+	<script src="/resources/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="/resources/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+	<script src="/resources/scripts/klorofil-common.js"></script>
 <body>
-    <!--헤더-->
-    <div>
-        <a>${login.id} 님</a>
-        <a href="adminDetail?bno=${login.bno}">[정보수정]</a>
-        <a href="/adminLogout">[로그아웃]</a>
-    </div>
-
+<!--헤더-->
+<div class="navbar navbar-default navbar-fixed-top">
+			<div class="brand">
+				<a href="index.html"><img src="/resources/img/logo-dark.png" alt="Klorofil Logo" class="img-responsive logo"></a>
+			</div>
+			<div class="container-fluid">
+				<div class="navbar-btn">
+					<button type="button" class="btn-toggle-fullwidth"><i class="lnr lnr-arrow-left-circle"></i></button>
+				</div>
+				<div id="navbar-menu">
+					<ul class="nav navbar-nav navbar-right">
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span>${login.id} 님</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+							<ul class="dropdown-menu">
+								<li><a href="adminDetail?bno=${login.bno}"><i class="lnr lnr-user"></i> <span>정보수정</span></a></li>
+								<li><a href="/adminLogout"><i class="lnr lnr-envelope"></i> <span>로그아웃</span></a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+</div>
     <!--메뉴-->
-    <div id="topmenu">    
-        <div class="border">
-            <a href="userList">회원관리</a>
-        </div>
-        <div class="border">
-            <a href="studyList">스터디관리</a>
-        </div>
-        <div class="border">
-            <a href="qnaList">사이트관리</a>
-        </div>
-        <div class="border">
-            <a href="userStatistic">통계관리</a>
-        </div>
-        <div class="border">
-            <a href="adminList">Admin관리</a>
-        </div>
-    </div>
 
+		<!-- LEFT SIDEBAR -->
+		<div id="sidebar-nav" class="sidebar">
+			<div class="sidebar-scroll">
+				<div>
+					<ul class="nav">
+						<li><a id="userListnav" href="userList" class=""><i class="lnr lnr-user"></i> <span>회원관리</span></a></li>
+						<li><a id="studyListnav" href="studyList" class=""><i class="lnr lnr-pencil"></i> <span>스터디관리</span></a></li>
+						<li><a id="qnaListnav" href="qnaList" class=""><i class="lnr lnr-cog"></i> <span>사이트관리</span></a></li>
+						<li><a id="userStatisticnav" href="userStatistic" class=""><i class="lnr lnr-chart-bars"></i> <span>통계관리</span></a></li>
+						<li><a id="adminListnav" href="adminList" class=""><i class="lnr lnr-text-format"></i> <span>Admin관리</span></a></li>
+						<li>
+							<a href="#subPages" data-toggle="collapse" class="collapsed"><i class="lnr lnr-file-empty"></i> <span>Pages</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+							<div id="subPages" class="collapse ">
+								<ul class="nav">
+									<li><a href="page-profile.html" class="">Profile</a></li>
+									<li><a href="page-login.html" class="">Login</a></li>
+									<li><a href="page-lockscreen.html" class="">Lockscreen</a></li>
+								</ul>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- END LEFT SIDEBAR -->
+ 
 </body>
 </html>

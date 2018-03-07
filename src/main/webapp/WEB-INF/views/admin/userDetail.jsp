@@ -7,18 +7,20 @@
     <title>회원조회 상세</title>
 </head>
 <body>
+<div id="wrapper">
 <%@ include file="nav.jsp" %>
-
-    <!--상세메뉴-->
-    <div id="topmenu2">
-        <div class="border">
-            <a href="userList">회원조회</a>
-        </div>
-    </div>
-
-    <!--내용-->
-    <div id="container">
-        <a>회원조회 상세</a>
+        <!-- MAIN -->
+		<div class="main">
+			<!-- MAIN CONTENT -->
+			<div class="main-content">
+				<div class="container-fluid">
+					<h3 class="page-title">회원조회</h3>
+					<div class="row">
+						<div class="col-md-12">
+    						<div class="panel">
+        <div class="panel-heading">
+			<h3 class="panel-title">회원조회 상세</h3>
+		</div>
         
     <form role="form" method="post">    
         <div>* 기본정보</div>
@@ -174,13 +176,22 @@
             </table>
 
         <button type="button" id="listBtn">목록</button>
-    </div>
-
+   		 					</div>
+						</div>
+					</div>
+					</div>
+				</div>
+			<!-- END MAIN CONTENT -->
+			</div>
+		<!-- END MAIN -->
+		</div>
 <script>
 	$(document).ready(function(){
 		var formObj = $("form[role='form']");
 		
 		console.log(formObj);
+		
+		$("#userListnav").attr("class", "active");
 		
 		//수정 클릭 시 액션
 		$("#modifyBtn").on("click", function(){

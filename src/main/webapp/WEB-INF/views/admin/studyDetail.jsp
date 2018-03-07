@@ -89,12 +89,12 @@
             <tr>
                 <th>연령</th>
                 <td>
-                	<input type="checkbox" name="bsAge" value="10대">10대
-                	<input type="checkbox" name="bsAge" value="20대">20대
-                	<input type="checkbox" name="bsAge" value="30대">30대
-                	<input type="checkbox" name="bsAge" value="40대">40대
-                	<input type="checkbox" name="bsAge" value="50대">50대
-                	<input type="checkbox" name="bsAge" value="무관">무관
+                	<input type="checkbox" name="age" value="10대">10대
+                	<input type="checkbox" name="age" value="20대">20대
+                	<input type="checkbox" name="age" value="30대">30대
+                	<input type="checkbox" name="age" value="40대">40대
+                	<input type="checkbox" name="age" value="50대">50대
+                	<input type="checkbox" name="age" value="무관">무관
                 </td>
             </tr>
             <tr>

@@ -220,8 +220,7 @@ public class AdminController {
 	
 	@ResponseBody
 	@RequestMapping(value="/region/{rDId}", method = RequestMethod.POST)
-	public ResponseEntity<List<StudyVO>> region(@PathVariable("rDId") String rDId,
-			Model model) throws Exception{
+	public ResponseEntity<List<StudyVO>> region(@PathVariable("rDId") String rDId) throws Exception{
 		logger.info("region post...");
 		
 		ResponseEntity<List<StudyVO>> entity=null;
