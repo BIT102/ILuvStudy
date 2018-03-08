@@ -519,12 +519,12 @@ ul.list-justify > li {
     border-color: #32cf4d; }
 
 .fancy-radio {
-  display: block;
+   display: block; 
   font-weight: normal; }
   .fancy-radio input[type="radio"] {
     display: none; }
     .fancy-radio input[type="radio"] + span {
-      display: block;
+       display: block; 
       cursor: pointer;
       position: relative;
       font-size: 13px; }
@@ -548,7 +548,7 @@ ul.list-justify > li {
       -webkit-border-radius: 50%;
       -moz-border-radius: 50%;
       border-radius: 50%;
-      display: block;
+      display: block; 
       position: relative;
       top: 3px;
       left: 3px;

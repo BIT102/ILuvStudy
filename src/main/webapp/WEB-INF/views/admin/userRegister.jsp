@@ -8,25 +8,32 @@
     
 </head>
 <body>
+<div id="wrapper">
 <%@ include file="nav.jsp" %>
     
-    <!--상세메뉴-->
-    <div id="topmenu2">
-        <div class="border">
-            <a href="userList">회원조회</a>
-        </div>
-    </div>
+    
+     <!-- MAIN -->
+		<div class="main">
+			<!-- MAIN CONTENT -->
+			<div class="main-content">
+				<div class="container-fluid">
+					<h3 class="page-title">회원조회</h3>
+					<div class="row">
+						<div class="col-md-12">
+    						<div class="panel">
+        <div class="panel-heading">
+			<h3 class="panel-title">회원 등록</h3>
+		</div>
 
-    <!--내용-->
-    <div id="container">
-        <a>회원 등록</a>
+<div class="panel-body">
 	<form role="form" method="post">
-        <table>
+        <table class="table table-hover">
+        <tbody>
             <tr>
                 <th>아이디</th>
                 <td>
-                	<input type="text" name="email">
-                	<button>중복확인</button>
+                	<input type="text" name="email" placeholder="asdf@gmail.com">
+                	<button class="btn btn-default btn-xs">중복확인</button>
                 </td>
             </tr>
             <tr>
@@ -45,36 +52,50 @@
                 <th>닉네임</th>
                 <td>
     	            <input type="text" name="nickName">
-    	            <button>중복확인</button>
+    	            <button class="btn btn-default btn-xs">중복확인</button>
                 </td>
             </tr>
             <tr>
                 <th>성별</th>
                 <td>
-                	<input type="radio" name="gender" value="1" checked>남성
-                	<input type="radio" name="gender" value="2">여성
+                	<label class="fancy-radio" style="display:inline-block;">
+                    	<input type="radio" name="gender" value="1"><span><i></i>남성&nbsp;</span>
+                    </label>
+                    <label class="fancy-radio" style="display:inline-block;">
+                    	<input type="radio" name="gender" value="2"><span><i></i>여성</span>
+                    </label>
                 </td>
             </tr>
             <tr>
             	<th>핸드폰번호</th>
-            	<td><input type="text" name="phoneNum"></td>
+            	<td><input type="text" name="phoneNum" placeholder="01012345678"></td>
             </tr>
             <tr>
             	<th>생년월일</th>
-            	<td><input type="text" name="birth"></td>
+            	<td><input type="text" name="birth" placeholder="900101"></td>
             </tr>
+            </tbody>
         </table>
         <input type="hidden" name="registUser" value="${login.id}">
 	</form>   
 	     
-		<button type="button" id="listBtn">목록</button>
-		<button type="submit" id="registerBtn">등록</button>
-        
-    </div>
+		<button type="button" id="listBtn" class="btn btn-primary">목록</button>
+		<button type="submit" id="registerBtn" class="btn btn-success" style="float:right">등록</button>
+        </div>
+           		 					</div>
+						</div>
+					</div>
+					</div>
+				</div>
+			<!-- END MAIN CONTENT -->
+			</div>
+		<!-- END MAIN -->
+		</div>
     
 <script>
 
 	$(document).ready(function(){
+		$("#userListnav").attr("class", "active");
 		var formObj = $("form[role='form']");
 		
 		console.log(formObj);

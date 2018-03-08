@@ -7,25 +7,27 @@
     <title>스터디 상세</title>
 </head>
 <body>
+<div id="wrapper">
 <%@ include file="nav.jsp" %>
 
-    <!--상세메뉴-->
-    <div id="topmenu2">
-        <div class="border">
-            <a href="studyList">스터디 목록</a>
-        </div>
-        <div class="border">
-            <a href="replyList">댓글 관리</a>
-        </div>
-    </div>
-
-    <!--내용-->
-    <div id="container">
-        <a>스터디 상세</a>
-        
+	 <!-- MAIN -->
+		<div class="main">
+			<!-- MAIN CONTENT -->
+			<div class="main-content">
+				<div class="container-fluid">
+					<h3 class="page-title">스터디 목록</h3>
+					<div class="row">
+						<div class="col-md-12">
+    						<div class="panel">
+        <div class="panel-heading">
+			<h3 class="panel-title">스터디 상세</h3>
+		</div>
+    
+    <div class="panel-body">    
 	<form role="form" method="post">          
         <div>* 기본정보</div>
-        <table>
+        <table class="table table-hover">
+        	<tbody>
             <tr>
                 <th>스터디 번호</th>
                 <td>${studyVO.bno}</td>
@@ -42,26 +44,28 @@
                 	<c:if test="${studyVO.cSId eq 1 and studyVO.cDName ne '외국어'}">
                 		<br><a name="categoryD" value="${studyVO.cDId}"># ${studyVO.cDName}</a>
                 	</c:if>
-                	<input type="checkbox" name="categoryS" id="${studyVO.cDId}${studyVO.cSId}" value="${studyVO.cSId}">${studyVO.cSName}
+                	<label class="fancy-checkbox" style="display:inline-block;">
+                		<input type="checkbox" name="categoryS" id="${studyVO.cDId}${studyVO.cSId}" value="${studyVO.cSId}"><span>${studyVO.cSName}</span>
+                	</label>
                 </c:forEach>
                 </td>
             </tr>
             <tr>
                 <th>스터디명</th>
-                <td><input type="text" name="title" value="${studyVO.title}"></td>
+                <td><input type="text" name="title" value="${studyVO.title}" class="form-control"></td>
             </tr>
             <tr>
                 <th>지역</th>
                 <td>
                 <!-- 스터디에 선택된 지역정보 셀렉트 표시 -->
-                    <select id="rDName">
+                    <select id="rDName" class="form-control">
                     	<c:forEach items="${region}" var="studyVO">
                     			<c:if test="${studyVO.rSId eq 1}">
                     				<option name='rDId' value="${studyVO.rDId}">${studyVO.rDName}</option>
                     			</c:if>
                     	</c:forEach>
                     </select>
-                    <select id="rSName">
+                    <select id="rSName" class="form-control">
                     </select>
                 </td>
             </tr>
@@ -82,35 +86,50 @@
                 	<c:if test="${studyVO.enddate < now1}">마감</c:if>
                 </td>
             </tr>
+             </tbody>
         </table>
-
+        
         <div>* 상세정보</div>
-        <table>
+        <table class="table table-hover">
+        <tbody>
             <tr>
                 <th>연령</th>
                 <td>
-                	<input type="checkbox" name="age" value="10대">10대
-                	<input type="checkbox" name="age" value="20대">20대
-                	<input type="checkbox" name="age" value="30대">30대
-                	<input type="checkbox" name="age" value="40대">40대
-                	<input type="checkbox" name="age" value="50대">50대
-                	<input type="checkbox" name="age" value="무관">무관
+                <label class="fancy-checkbox" style="display:inline-block;">
+                	<input type="checkbox" name="age" value="10대"><span>10대</span>
+                </label>
+                <label class="fancy-checkbox" style="display:inline-block;">
+                	<input type="checkbox" name="age" value="20대"><span>20대</span>
+                </label>
+                <label class="fancy-checkbox" style="display:inline-block;">
+                	<input type="checkbox" name="age" value="30대"><span>30대</span>
+                </label>
+                <label class="fancy-checkbox" style="display:inline-block;">
+                	<input type="checkbox" name="age" value="40대"><span>40대</span>
+                </label>
+                <label class="fancy-checkbox" style="display:inline-block;">
+                	<input type="checkbox" name="age" value="50대"><span>50대</span>
+                </label>
+                <label class="fancy-checkbox" style="display:inline-block;">
+                	<input type="checkbox" name="age" value="무관"><span>무관</span>
+                </label>
                 </td>
             </tr>
             <tr>
                 <th>시작날짜</th>
-                <td><input type="text" name="sd" value="${studyVO.sd}"></td>
+                <td><input type="text" name="sd" value="${studyVO.sd}" class="form-control"></td>
             </tr>
             <tr>
                 <th>시간</th>
                 <td>
                 	${studyVO.sc}  ${studyVO.st} ~ ${studyVO.et} <a>X</a><br>
-                    <a href="studyTime">추가</a>
+                    <!-- <a href="studyTime">추가</a> -->
+                    <button type="button" id="" class="btn btn-default btn-xs">추가</button>
                 </td>
             </tr>
             <tr>
                 <th>완료일</th>
-                <td><input type="text" name="enddate" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${studyVO.enddate}"/>"></td>
+                <td><input type="text" name="enddate" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${studyVO.enddate}"/>"  class="form-control"></td>
             </tr>
             <tr>
             	<th>현재인원</th>
@@ -118,7 +137,7 @@
             </tr>
             <tr>
                 <th>최대인원</th>
-                <td><input type="text" name="max" value="${studyVO.max}"></td>
+                <td><input type="text" name="max" value="${studyVO.max}"  class="form-control"></td>
             </tr>
             <tr>
             	<th>조회수</th>
@@ -128,30 +147,41 @@
             	<th>댓글수</th>
             	<td>${studyVO.rct}</td>
             </tr>
+            </tbody>
         </table>
 
         <div>* 소개</div>
-        <table>
+        <table class="table table-hover">
+        <tbody>
             <tr>
                 <th>스터디 소개</th>
-                <td><textarea name="content">${studyVO.content}</textarea></td>
+                <td><textarea name="content" class="form-control">${studyVO.content}</textarea></td>
             </tr>
             <tr>
                 <th>이미지</th>
                 <td>${studyVO.name}</td>
             </tr>
+        </tbody>
         </table>
 	</form>
-		<button type="submit" id="modifyBtn">수정</button>
-
+		<div class="text-right">
+		<button type="submit" id="modifyBtn" class="btn btn-success">수정</button>
+		</div>
+	</div>
+	<!-- panel-body end -->
+	
+	<div class="panel-body">   
         <div>* 신청자</div>
-        <table>
+        <table class="table table-hover">
+            <thead>
             <tr>
                 <th>번호</th>
                 <th>아이디</th>
                 <th>신청일</th>
                 <th>승인여부</th>
             </tr>
+            </thead>
+            <tbody>
 <c:forEach items="${applyStudy}" var="studyVO">
             <tr>
                 <td>${studyVO.bno}</td>
@@ -160,14 +190,30 @@
                 <td>${studyVO.status}</td>
             </tr>
 </c:forEach>
+            </tbody>
         </table>
 
-        <button type="button" id="listBtn">목록</button>
-    </div>
+        <button type="button" id="listBtn" class="btn btn-primary">목록</button>
+    
+  </div>
+  <!-- panel-body end -->
+  							</div>
+						</div>
+					</div>
+					</div>
+				</div>
+			<!-- END MAIN CONTENT -->
+			</div>
+		<!-- END MAIN -->
+		</div>
 
 <script>
 	
 	$(document).ready(function(){
+		$("#studyListsuv").attr("class", "active");
+		$("#studyListnav").attr("class", "active");
+		$("#subPages").attr("class", "in");
+		
 		getStudy(); //스터디 정보 불러옴
 		
 		var formObj = $("form[role='form']");

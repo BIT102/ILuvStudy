@@ -30,7 +30,7 @@
 <!--헤더-->
 <div class="navbar navbar-default navbar-fixed-top">
 			<div class="brand">
-				<a href="index.html"><img src="/resources/img/logo-dark.png" alt="Klorofil Logo" class="img-responsive logo"></a>
+				<a href="index.html"><img src="/resources/img/logo-dark.png" alt="Iluvstudy Logo" class="img-responsive logo"></a>
 			</div>
 			<div class="container-fluid">
 				<div class="navbar-btn">
@@ -57,7 +57,15 @@
 				<div>
 					<ul class="nav">
 						<li><a id="userListnav" href="userList" class=""><i class="lnr lnr-user"></i> <span>회원관리</span></a></li>
-						<li><a id="studyListnav" href="studyList" class=""><i class="lnr lnr-pencil"></i> <span>스터디관리</span></a></li>
+						<li>
+							<a href="#subPages" data-toggle="collapse" class="collapsed" id="studyListsuv"><i class="lnr lnr-pencil"></i> <span>스터디관리</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+							<div id="subPages" class="collapse">
+								<ul class="nav">
+									<li><a href="studyList" id="studyListnav">스터디 목록</a></li>
+									<li><a href="replyList" id="replyListnav">댓글 관리</a></li>
+								</ul>
+							</div>
+						</li>
 						<li><a id="qnaListnav" href="qnaList" class=""><i class="lnr lnr-cog"></i> <span>사이트관리</span></a></li>
 						<li><a id="userStatisticnav" href="userStatistic" class=""><i class="lnr lnr-chart-bars"></i> <span>통계관리</span></a></li>
 						<li><a id="adminListnav" href="adminList" class=""><i class="lnr lnr-text-format"></i> <span>Admin관리</span></a></li>
