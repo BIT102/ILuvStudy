@@ -30,7 +30,7 @@
 <!--헤더-->
 <div class="navbar navbar-default navbar-fixed-top">
 			<div class="brand">
-				<a href="index.html"><img src="/resources/img/logo-dark.png" alt="Iluvstudy Logo" class="img-responsive logo"></a>
+				<a href="userList"><img src="/resources/img/logo-dark.png" alt="Iluvstudy Logo" class="img-responsive logo"></a>
 			</div>
 			<div class="container-fluid">
 				<div class="navbar-btn">
@@ -66,19 +66,17 @@
 								</ul>
 							</div>
 						</li>
-						<li><a id="qnaListnav" href="qnaList" class=""><i class="lnr lnr-cog"></i> <span>사이트관리</span></a></li>
-						<li><a id="userStatisticnav" href="userStatistic" class=""><i class="lnr lnr-chart-bars"></i> <span>통계관리</span></a></li>
-						<li><a id="adminListnav" href="adminList" class=""><i class="lnr lnr-text-format"></i> <span>Admin관리</span></a></li>
 						<li>
-							<a href="#subPages" data-toggle="collapse" class="collapsed"><i class="lnr lnr-file-empty"></i> <span>Pages</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
-							<div id="subPages" class="collapse ">
+							<a href="#subPages2" data-toggle="collapse" class="collapsed" id="qnaListsuv"><i class="lnr lnr-cog"></i> <span>사이트관리</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+							<div id="subPages2" class="collapse">
 								<ul class="nav">
-									<li><a href="page-profile.html" class="">Profile</a></li>
-									<li><a href="page-login.html" class="">Login</a></li>
-									<li><a href="page-lockscreen.html" class="">Lockscreen</a></li>
+									<li><a href="qnaList" id="qnaListnav">QNA 관리</a></li>
+									<li><a href="noticeList" id="noticeListnav">공지사항 등록</a></li>
 								</ul>
 							</div>
 						</li>
+						<li><a id="userStatisticnav" href="userStatistic" class=""><i class="lnr lnr-chart-bars"></i> <span>통계관리</span></a></li>
+						<li><a id="adminListnav" href="adminList" class=""><i class="lnr lnr-text-format"></i> <span>Admin관리</span></a></li>
 					</ul>
 				</div>
 			</div>

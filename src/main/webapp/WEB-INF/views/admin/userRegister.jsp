@@ -32,26 +32,26 @@
             <tr>
                 <th>아이디</th>
                 <td>
-                	<input type="text" name="email" placeholder="asdf@gmail.com">
+                	<input type="text" name="email" placeholder="asdf@gmail.com" class="form-control">
                 	<button class="btn btn-default btn-xs">중복확인</button>
                 </td>
             </tr>
             <tr>
                 <th>이름</th>
-                <td><input type="text" name="name"></td>
+                <td><input type="text" name="name" class="form-control"></td>
             </tr>
             <tr>
                 <th>비밀번호</th>
-                <td><input type="password" name="password"></td>
+                <td><input type="password" name="password" class="form-control"></td>
             </tr>
             <tr>
                 <th>비밀번호 확인</th>
-                <td><input type="password"></td>
+                <td><input type="password" class="form-control"></td>
             </tr>
             <tr>
                 <th>닉네임</th>
                 <td>
-    	            <input type="text" name="nickName">
+    	            <input type="text" name="nickName" class="form-control">
     	            <button class="btn btn-default btn-xs">중복확인</button>
                 </td>
             </tr>
@@ -62,17 +62,17 @@
                     	<input type="radio" name="gender" value="1"><span><i></i>남성&nbsp;</span>
                     </label>
                     <label class="fancy-radio" style="display:inline-block;">
-                    	<input type="radio" name="gender" value="2"><span><i></i>여성</span>
+                    	<input type="radio" name="gender" value="2" checked><span><i></i>여성</span>
                     </label>
                 </td>
             </tr>
             <tr>
             	<th>핸드폰번호</th>
-            	<td><input type="text" name="phoneNum" placeholder="01012345678"></td>
+            	<td><input type="text" name="phoneNum" placeholder="01012345678" class="form-control"></td>
             </tr>
             <tr>
             	<th>생년월일</th>
-            	<td><input type="text" name="birth" placeholder="900101"></td>
+            	<td><input type="text" name="birth" placeholder="900101" class="form-control"></td>
             </tr>
             </tbody>
         </table>
@@ -82,7 +82,8 @@
 		<button type="button" id="listBtn" class="btn btn-primary">목록</button>
 		<button type="submit" id="registerBtn" class="btn btn-success" style="float:right">등록</button>
         </div>
-           		 					</div>
+        <!-- panel-body end -->  
+           		 			</div>
 						</div>
 					</div>
 					</div>

@@ -7,28 +7,35 @@
     <title>QNA 관리</title>
 </head>
 <body>
+<div id="wrapper">
 <%@ include file="nav.jsp" %>
-    
-    <!--상세메뉴-->
-    <div id="topmenu2">
-        <div class="border">
-            <a href="qnaList">QNA 관리</a>
-        </div>
-        <div class="border">
-            <a href="noticeList">공지사항 등록</a>
-        </div>
-    </div>
 
-    <!--내용-->
-    <div id="container">
-        <a>QNA 관리</a>
+	 <!-- MAIN -->
+		<div class="main">
+			<!-- MAIN CONTENT -->
+			<div class="main-content">
+				<div class="container-fluid">
+					<h3 class="page-title">QNA 관리</h3>
+					<div class="row">
+						<div class="col-md-12">
+    						<div class="panel">
+        <div class="panel-heading">
+			<h3 class="panel-title">QNA 관리</h3>
+		</div>
         
         <!--검색-->
-        <table>
+        <div class="panel-body">
+        <table class="table">
+        <thead>
+			<tr>
+				<th>FAQ</th>
+				<th>아이디</th>
+			</tr>
+		</thead>
+		<tbody>
             <tr>
-                <th>FAQ</th>
                 <td>
-                    <select name="faqType" id="faqTypeSelect">
+                    <select name="faqType" id="faqTypeSelect" class="form-control">
                 		<!-- 0: 미등록  1: 등록 -->
                         <option value="n"
                         	<c:out value="${cri.faqType == null?'selected':''}"/>>전체</option>
@@ -38,21 +45,24 @@
                         	<c:out value="${cri.faqType eq 'd'?'selected':''}"/>>미등록</option>
                     </select>
                 </td>
-                <th>아이디</th>
-                <td><input type="text" name="emailKeyword" id="emailKeywordInput" value="${cri.emailKeyword}"></td>
+                <td><input type="text" name="emailKeyword" id="emailKeywordInput" value="${cri.emailKeyword}" class="form-control"></td>
             </tr>
-
+		</tbody>
         </table>
-        
-        <button type="button" id="searchBtn">검색</button>
-        <button type="button" id="removeBtn">초기화</button>
-        
+        <div class="text-center">
+        	<button type="button" id="searchBtn" class="btn btn-primary">검색</button>
+        	<button type="button" id="removeBtn" class="btn btn-primary">초기화</button>
+        </div>
+        </div>
+        <!-- panel-body end -->
 
-        <!--리스트 -->
+        <!--리스트-->
         <!--페이징 처리 -->
+        <div class="panel-body">
         <div>총 ${pageMaker.totalCount}건 ${cri.page}/${pageMaker.endPage}페이지</div>
-
-        <table>
+        
+        <table class="table table-hover">
+        <thead>
             <tr>
                 <th>번호</th>
                 <th>아이디</th>
@@ -61,6 +71,8 @@
                 <th>댓글수</th>
                 <th>작성일</th>
             </tr>
+		</thead>
+		<tbody>
 <!-- DB데이터 가져옴 -->
 <c:forEach items="${list}" var="qnaVO">
             <tr>
@@ -76,11 +88,13 @@
                 <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${qnaVO.regdate}"/></td>
             </tr>
 </c:forEach>
+		</tbody>
         </table>
         
         <!-- 페이징 처리 -->
         <!-- 페이징 정보 저장 -->
-        <ul>
+        <div class="text-center">
+        <ul class="pagination">
         	<c:if test="${pageMaker.prev}">
         		<li><a href="qnaList${pageMaker.qnaSearch(pageMaker.startPage - 1)}">&laquo;</a></li>
         	</c:if>
@@ -96,8 +110,19 @@
         		<li><a href="qnaList${pageMaker.qnaSearch(pageMaker.endPage + 1)}">&raquo;</a></li>
         	</c:if>
         </ul>
+        </div>
+        </div>
+        <!-- panel-body end -->
         
-    </div>
+       		 					</div>
+						</div>
+					</div>
+					</div>
+				</div>
+			<!-- END MAIN CONTENT -->
+			</div>
+		<!-- END MAIN -->
+		</div>
 <script>
 	var result='${msg}';
 
@@ -106,6 +131,9 @@
 	}
 
 	$(document).ready(function(){		
+		$("#qnaListsuv").attr("class", "active");
+		$("#qnaListnav").attr("class", "active");
+		$("#subPages2").attr("class", "in");
 		
 		//검색 클릭 시 액션
  		$("#searchBtn").on("click", function(event){

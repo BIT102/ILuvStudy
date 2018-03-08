@@ -320,6 +320,38 @@ public class AdminController {
 		return "redirect:/admin/qnaList";
 	}
 	
+	//admin/qnaDetail.jsp 에서 faq 등록 시
+	@RequestMapping(value="/typeUpdate", method = RequestMethod.POST)
+	public String typeUpdate(@RequestParam("bno") int bno, Criteria cri, 
+			RedirectAttributes rttr) throws Exception{
+		logger.info("typeUpdate post...");
+		logger.info(cri.toString());
+		
+		service.typeUpdate(bno);
+		
+		rttr.addFlashAttribute("msg", "SUCCESS");
+		
+		logger.info(rttr.toString());
+		
+		return "redirect:/admin/qnaList";
+	}
+	
+	//admin/qnaDetail.jsp 에서 faq 미등록 시
+	@RequestMapping(value="/typeRUpdate", method = RequestMethod.POST)
+	public String typeRUpdate(@RequestParam("bno") int bno, Criteria cri, 
+			RedirectAttributes rttr) throws Exception{
+		logger.info("typeRUpdate post...");
+		logger.info(cri.toString());
+		
+		service.typeRUpdate(bno);
+		
+		rttr.addFlashAttribute("msg", "SUCCESS");
+		
+		logger.info(rttr.toString());
+		
+		return "redirect:/admin/qnaList";
+	}
+	
 	
 //사이트관리 > qna 관리 끝
 	

@@ -195,9 +195,7 @@
 </c:forEach>
 			</tbody>
             </table>
-		<div class="text-left">
         <button type="button" id="listBtn" class="btn btn-primary">목록</button>
-		</div>
         </div>
    		 					</div>
 						</div>

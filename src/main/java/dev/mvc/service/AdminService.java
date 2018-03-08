@@ -47,7 +47,9 @@ public interface AdminService {
 	public List<QnaVO> qnaList(Criteria cri) throws Exception;
 	public int qnaCountPaging(Criteria cri)throws Exception;
 	public QnaVO qnaDetail(Integer bno)throws Exception;
-
+	public void typeUpdate(Integer bno)throws Exception;
+	public void typeRUpdate(Integer bno)throws Exception;
+	
 	public List<ReplyVO> qnaReply(Integer bno) throws Exception;
 	public void qnaRegister(ReplyVO vo)throws Exception;
 	
