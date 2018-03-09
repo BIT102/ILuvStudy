@@ -46,7 +46,7 @@
 
 </head>
 
-<body data-spy="scroll" data-target="#navbar" data-offset="30">
+<body data-spy="scroll" data-target="#navbar" data-offset="30" onLoad="gogogo(), printClock()">
     
     <!-- // Navigation -->
 <%@include file="../header.jsp"%>
@@ -57,13 +57,12 @@
         <div class="container">
           <div class="intro-text">
           <!-- 시계넣었어요 -->
-           <body onload="printClock()">
-              <div id="clock">
+ 
+              <div id="clock" >
               </div>
-            </body> 
-            <div class="intro-lead-in">Welcome To I Luv Study!</div>
-            <div class="intro-heading text-uppercase">김상욱은 바보 멍청이 이었다.</div>
             
+            <div class="intro-lead-in" >Welcome To I Luv Study!</div>
+            <span id="intro-heading" style="font-size:50px;"></span>
             <input type="text" name="keyword" id="keywordInput" placeholder="검색해보지?">
             <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" id="searchBtn" value="${cri.keyword}">Search</a>
           </div>
@@ -155,7 +154,31 @@
       return zero+num;
      }
     </script>
+    <!-- 타이핑 -->
+   
+    <script language="javascript">
+	
+    var mess = "조정인은 바보 멍청이 똥개 말미잘 이었다.";
     
+	var count=0;
+	var newsno=0;
+	
+	function gogogo() {
+		document.all("intro-heading").innerText="_"+mess.substring(0,count++);
+		if(count>=mess.length){
+			count=0;
+			newsno++;
+			
+			if(newsno>=mess.length)
+				newsno--;
+			
+		}
+		setTimeout("gogogo()", 200);
+	}
+	
+	
+    
+    </script>
     <!-- 검색을 위한 스크립트 -->
     <script>
 	$(document).ready(

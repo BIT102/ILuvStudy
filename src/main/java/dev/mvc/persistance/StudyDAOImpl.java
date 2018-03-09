@@ -96,6 +96,30 @@ public class StudyDAOImpl implements StudyDAO {
 		return session.selectList(namespace+".listCriteria", cri);
 	}
 	
+	@Override
+	public List<StudyVO> catList() throws Exception {
+
+		return session.selectList(namespace+".catList");
+	}
+
+	
+
+	@Override
+	public List<StudyVO> catList2(String csId) throws Exception {
+		return session.selectList(namespace+".catList2", csId);
+	}
+
+	@Override
+	public List<StudyVO> rgList() throws Exception {
+		return session.selectList(namespace+".rgList");
+	}
+
+	@Override
+	public List<StudyVO> rgList2(String rsId) throws Exception {
+		return session.selectList(namespace+".rgList2", rsId);
+	}
+	
+	
 	//페이징 개수 불러오기
 	@Override
 	public int countPaging(CriteriaStudy cri) throws Exception {

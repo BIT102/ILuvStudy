@@ -413,5 +413,38 @@ WHERE bs.bno > 0
   select LAST_INSERT_ID();
 
   </select>
+  
+  
+  <!-- 카테고리 분류 SQL -->
+ <select id="catList" resultType="studyVO">
+<![CDATA[
+select DISTINCT cDName
+ from study_category
+]]>
+</select>
+
+   <select id="catList2" resultType="studyVO">
+<![CDATA[
+select cSName, csId
+ from study_category
+ where cdId=#{csId} 
+]]>
+</select>
+
+<!-- region 분류 -->
+ <select id="rgList" resultType="studyVO">
+<![CDATA[
+SELECT distinct rDName
+ from region
+]]>
+</select>
+
+<select id="rgList2" resultType="studyVO">
+<![CDATA[
+select rSName, rSId
+ from region
+where rDId=#{rSId} 
+]]>
+</select>
 
 </mapper>

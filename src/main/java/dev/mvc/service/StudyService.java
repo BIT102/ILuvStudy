@@ -34,4 +34,13 @@ public interface StudyService {
 	
 	//검색수
 	public int listSearchCount(SearchCriteriaStudy cri) throws Exception;
+	
+	//카테고리
+		public List<StudyVO> catList() throws Exception;
+		
+		public List<StudyVO> catList2(String csId) throws Exception;
+		
+		public List<StudyVO> rgList() throws Exception;
+		
+		public List<StudyVO> rgList2(String rsId) throws Exception;
 }

@@ -29,6 +29,8 @@
 </form>-->
 
 
+<%@include file="../header.jsp"%>
+
 	<div class="box-body">
     
     <!-- 검색에 필요한 화면 구현 -->
@@ -91,7 +93,7 @@
 </c:forEach>
 </table>
 		
-	<div class="text-center">
+	<div class="text-center1">
 		<ul class="pagination">
 		
 		<!-- 스프링 MVC를 이용하는 방식 -->

@@ -1,12 +1,13 @@
 package dev.mvc.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -37,7 +38,44 @@ public class StudyController {
 	public void registerGET(StudyVO vo, Model model) throws Exception {
 		
 		logger.info("register1 get.........");
-	}		
+		
+		model.addAttribute("catlist", service.catList()); //BigCat 
+		model.addAttribute("rglist", service.rgList()); //BigCAT(region)
+	}
+	
+	//JSON small카테고리(study)  //URL /category/추가
+	@RequestMapping(value="/register1/category/{csId}", method = RequestMethod.GET)
+	  public ResponseEntity<List<StudyVO>> list2(@PathVariable("csId") String csId) throws Exception {
+
+	    ResponseEntity<List<StudyVO>> entity = null;
+
+	    try {
+	    	
+	      entity = new ResponseEntity<>(service.catList2(csId), HttpStatus.OK);
+
+	    } catch (Exception e) {
+	      e.printStackTrace();
+	      entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+	    }
+
+	    return entity;
+	  }
+	
+//JSON small카테고리(region)  //URL /region/추가  (겹치지않게)
+	@RequestMapping(value="/register1/region/{rSId}",method = RequestMethod.GET)
+		public ResponseEntity<List<StudyVO>> rglist(@PathVariable("rSId") String rsId) {
+		
+			ResponseEntity<List<StudyVO>> entity = null;
+			try{
+				entity = new ResponseEntity<>(service.rgList2(rsId), HttpStatus.OK);
+			}   catch (Exception e) {
+				e.printStackTrace();
+				entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			}
+			
+			return entity;
+	}
+	
 	
 	//스터디 등록건네주기
 	@RequestMapping(value = "/register1", method = RequestMethod.POST)
@@ -51,8 +89,8 @@ public class StudyController {
 
 		rttr.addFlashAttribute("msg", "success");
 		
-//		return "redirect:/study/listAll";
-	return "/login";
+		return "redirect:/study/listAll";
+	
 	}
 	
 	//스터디 목록 불러오기

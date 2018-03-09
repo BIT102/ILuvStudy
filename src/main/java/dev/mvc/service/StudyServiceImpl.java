@@ -122,5 +122,25 @@ public void regist(StudyVO vo) throws Exception {
 	public List<String> getFile(Integer bsBno) throws Exception {
 		return dao.getFile(bsBno);
 	}
+	
+	@Override
+	public List<StudyVO> catList() throws Exception {
+		return dao.catList();
+	}
+
+	@Override
+	public List<StudyVO> catList2(String csId) throws Exception {
+		return dao.catList2(csId);
+	}
+
+	@Override
+	public List<StudyVO> rgList() throws Exception {
+		return dao.rgList();
+	}
+	
+	@Override
+	public List<StudyVO> rgList2(String rsId) throws Exception {
+		return dao.rgList2(rsId);
+	}
 
 }
