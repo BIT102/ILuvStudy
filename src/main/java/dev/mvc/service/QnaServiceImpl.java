@@ -8,9 +8,9 @@ import org.springframework.stereotype.Service;
 
 import dev.mvc.domain.Criteria;
 import dev.mvc.domain.QnaVO;
-import dev.mvc.domain.ReplyVO;
 import dev.mvc.domain.SearchCriteria;
-import dev.mvc.persistance.QnaDAO;
+import dev.mvc.persistence.QnaDAO;
+
 
 @Service
 public class QnaServiceImpl implements QnaService {
@@ -65,29 +65,5 @@ public class QnaServiceImpl implements QnaService {
 	public int listSearchCount(SearchCriteria cri) throws Exception {
 		
 		return dao.listSearchCount(cri);
-	}
-//reply
-	@Override
-	public void addReply(ReplyVO vo) throws Exception {
-
-		dao.create(vo);
-	}
-
-	@Override
-	public List<ReplyVO> listReply(Integer bqBno) throws Exception {
-		
-		return dao.list(bqBno);
-	}
-
-	@Override
-	public void modifyReply(ReplyVO vo) throws Exception {
-
-		dao.update(vo);
-	}
-
-	@Override
-	public void removeReply(Integer rno) throws Exception {
-
-		dao.delete(rno);
 	}
 }

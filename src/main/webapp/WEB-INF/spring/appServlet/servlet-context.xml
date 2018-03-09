@@ -39,6 +39,7 @@
 	
 	<!-- 에너테이션의 위치를 체크해주는 영역 -->
 	
+
 	<!-- TEST -->
 	<context:component-scan base-package="dev.mvc.controller" />
 	

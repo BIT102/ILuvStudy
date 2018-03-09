@@ -2,8 +2,11 @@ package dev.mvc.domain;
  
 import java.util.Arrays;
 import java.util.Date;
- 
+
+
 public class StudyVO {
+
+
 //	BS_BNO	번호
 //	BS_TITLE	제목
 //	BS_WRITER	글쓴이 (USER.EMAIL)
@@ -315,5 +318,6 @@ public class StudyVO {
 				+ ", files=" + Arrays.toString(files) + "]";
 	}
 	
+		
 }
 

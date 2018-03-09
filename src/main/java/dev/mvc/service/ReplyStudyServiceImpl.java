@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import dev.mvc.domain.Criteria;
 import dev.mvc.domain.ReplyStudyVO;
-import dev.mvc.persistance.ReplyStudyDAO;
+import dev.mvc.persistence.ReplyStudyDAO;
 
 @Service
 public class ReplyStudyServiceImpl implements ReplyStudyService{

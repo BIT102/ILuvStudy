@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 import dev.mvc.domain.UserVO;
 import dev.mvc.dto.UserLoginDTO;
-import dev.mvc.persistance.UserDAO;
+import dev.mvc.persistence.UserDAO;
 
 @Service
 public class UserServiceImpl implements UserService {

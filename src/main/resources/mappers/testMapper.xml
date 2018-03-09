@@ -9,6 +9,14 @@
   
   <mapper namespace = "dev.mvc.mapper.TestMapper">
   	
+  	<insert id="insertStudy">
+  	insert into board_study( BSTITLE, BSWRITER, BSCATEGORYD, BSCATEGORYS, BSNOW, BSMAX, BSRDID, BSAGE, BSSC, BSSD, BSST, BSET)
+  	values( #{BSTITLE}, #{BSWRITER}, #{BSCATEGORYD}, #{BSCATEGORYS}, #{BSNOW}, #{BSMAX}, #{BSRDID}, #{BSAGE}, #{BSSC}, #{BSSD}, #{BSST}, #{BSET})
+  	</insert>
+  	
+  	<select id="getTime" resultType="string">
+  	select now()
+  	</select>
   <!-- 	<select id = "getTime" resultType = "string"> 
   	select now() time을 가져오는 쿼리문
   	</select>

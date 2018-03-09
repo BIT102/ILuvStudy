@@ -15,7 +15,7 @@ import dev.mvc.domain.ReplyVO;
 import dev.mvc.domain.StudyVO;
 import dev.mvc.domain.UserVO;
 import dev.mvc.dto.AdminDTO;
-import dev.mvc.persistance.AdminDAO;
+import dev.mvc.persistence.AdminDAO;
 
 @Service
 public class AdminServiceImpl implements AdminService{

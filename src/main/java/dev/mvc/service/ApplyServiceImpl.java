@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import dev.mvc.domain.ApplyVO;
-import dev.mvc.persistance.ApplyDAO;
-import dev.mvc.persistance.StudyDAO;
+import dev.mvc.persistence.ApplyDAO;
+import dev.mvc.persistence.StudyDAO;
 
 @Service
 public class ApplyServiceImpl implements ApplyService {

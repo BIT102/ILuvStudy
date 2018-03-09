@@ -13,7 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import dev.mvc.admin.Criteria;
 import dev.mvc.domain.NoticeVO;
-import dev.mvc.persistance.NoticeDAO;
+import dev.mvc.persistence.NoticeDAO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(

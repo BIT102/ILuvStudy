@@ -5,7 +5,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -31,6 +30,18 @@
 .small:hover {
 	background-color: black;
 }
+
+small {
+	margin-left: 3px;
+	font-weight: bold;
+	color: gray;
+}
+
+.bigcatB{background-color:red; border-radius:8px; width:120px; height:30px;}
+#SmallCat1{visibility:hidden;}
+#SmallCat2{visibility:hidden;}
+#SmallCat3{visibility:hidden;}
+#SmallCat4{visibility:hidden;}
 </style>
 </head>
 
@@ -57,64 +68,38 @@
 
 			<!--카테고리-->
 			<div class="stucycategory">
-
 				<!--대분류-->
-				<div class="CD">
-					<p>대분류</p>
-					<input type="checkbox" name="categoryD" value="A">외국어 <input
-						type="checkbox" name="categoryD" value="B">IT <input
-						type="checkbox" name="categoryD" value="C">라이프스타일 <input
-						type="checkbox" name="categoryD" value="D">취업
+				<div id="BigCat">
+					<p>대분류 (마우스를 올리세요!)</p>
+					
+					<% int cataNum = 64; %>
+					<c:forEach items="${catlist}" var="StudyVO">
+						<% cataNum++; %>
+						<button class="bigcatB" value="<%=(char)cataNum%>" id="<%=(char)cataNum%>">${StudyVO.cDName}</button>
+					</c:forEach>
+					
 				</div>
-
 				<!--소분류 외국어-->
-				<div class="CSA">
-					<p>소분류</p>
-					<input type="checkbox" name="categoryS" value="1">토익 <input
-						type="checkbox" name="categoryS" value="2">토플 <input
-						type="checkbox" name="categoryS" value="3">텝스 <input
-						type="checkbox" name="categoryS" value="4">토스/오픽 <input
-						type="checkbox" name="categoryS" value="5">회화 <input
-						type="checkbox" name="categoryS" value="6">작문/독해 <input
-						type="checkbox" name="categoryS" value="7">중국어 <input
-						type="checkbox" name="categoryS" value="8">일본어 <input
-						type="checkbox" name="categoryS" value="9">기타
+				<p>소분류</p>
+				<div id="SmallCat1">
+				<input type="radio" value="1">	토익	<input type="radio" value="2">	토플	<input type="radio" value="3">	텝스	<input type="radio" value="4">	토스/오픽	<input type="radio" value="5">	회화	<input type="radio" value="6">	작문/독해	<input type="radio" value="7">	중국어	<input type="radio" value="8">	일본어	<input type="radio" value="9">	기타	
 				</div>
-
-				<!-- 소분류IT -->
-				<div class="CSB">
-					<p>소분류</p>
-					<input type="checkbox" name="categoryS" value="1">컴퓨터언어 <input
-						type="checkbox" name="categoryS" value="2">웹프로그래밍 <input
-						type="checkbox" name="categoryS" value="3">모바일프로그래밍 <input
-						type="checkbox" name="categoryS" value="4">데이터베이스/서버 <input
-						type="checkbox" name="categoryS" value="5">게임프로그래밍 <input
-						type="checkbox" name="categoryS" value="6">문서작성 <input
-						type="checkbox" name="categoryS" value="7">자격증 <input
-						type="checkbox" name="categoryS" value="8">기타
+				
+				<div id="SmallCat2">
+				<input type="radio" value="1">	컴퓨터언어	<input type="radio" value="2">	웹프로그래밍	<input type="radio" value="3">	모바일프로그래밍	<input type="radio" value="4">	데이터베이스/서버	<input type="radio" value="5">	게임프로그래밍	<input type="radio" value="6">	문서작정	<input type="radio" value="7">	자격증	<input type="radio" value="8">	기타	
 				</div>
-
-				<!-- 소분류라이프스타일 -->
-				<div class="CSC">
-					<p>소분류</p>
-					<input type="checkbox" name="categoryS" value="1">미술/디자인 <input
-						type="checkbox" name="categoryS" value="2">뷰티/미용 <input
-						type="checkbox" name="categoryS" value="3">스포츠 <input
-						type="checkbox" name="categoryS" value="4">음악/공연 <input
-						type="checkbox" name="categoryS" value="5">게임 <input
-						type="checkbox" name="categoryS" value="6">기타
+				
+				<div id="SmallCat3">
+				<input type="radio" value="1">	미술/디자인	<input type="radio" value="2">	뷰티/미용	<input type="radio" value="3">	스포츠	<input type="radio" value="4">	음악/공연	<input type="radio" value="5">	게임	<input type="radio" value="6">	기타	
 				</div>
-
-				<!-- 소분류취업 -->
-				<div class="CSD">
-					<p>소분류</p>
-					<input type="checkbox" name="categoryS" value="1">면접 <input
-						type="checkbox" name="categoryS" value="2">자소서 <input
-						type="checkbox" name="categoryS" value="3">고시 <input
-						type="checkbox" name="categoryS" value="4">기술 <input
-						type="checkbox" name="categoryS" value="5">기타
+				
+				<div id="SmallCat4">
+				<input type="radio" value="1">	면접	<input type="radio" value="2">	자소서	<input type="radio" value="3">	고시	<input type="radio" value="4">	기술	<input type="radio" value="5">	기타	
 				</div>
+				
+				
 			</div>
+
 		</div>
 
 		<!--두번째 페이지-->
@@ -127,45 +112,29 @@
 			</div>
 
 			<!--지역분류-->
-			<div class="studyRegion">
+			<div id="studyRegion">
 
-				<!--대분류-->
-				<div class="RD">
-					<p>지역대분류</p>
-					<select class="rDId" name="rDId">
-						<option selected>--</option>
-						<option value="A">서울</option>
-						<option value="B">경기도</option>
-						<option value="C">인천광역시</option>
-						<option value="D">세종틀별자치시</option>
-						<option value="E">강원도</option>
-						<option value="F">충청북도</option>
-						<option value="G">충청남도</option>
-						<option value="H">대전광역시</option>
-						<option value="I">대구광역시</option>
-						<option value="J">경상북도</option>
-						<option value="K">경상남도</option>
-						<option value="L">전라북도</option>
-						<option value="M">전라남도</option>
-						<option value="N">광주광역시</option>
-						<option value="O">부산광역시</option>
-						<option value="P">울산광역시</option>
-						<option value="Q">제주특별시</option>
-					</select>
-				</div>
+				<!-- 대분류 -->
+				<p>지역대분류</p>
+				<select name="rDId" id="rDId">
 
-				<!--소분류//나중에추가하기-->
-				<div class="RSP">
-					<p>지역소분류</p>
-					<select class="rSId" name="rSId">
-						<option selected>--</option>
-						<option value="1">남구</option>
-						<option value="2">동구</option>
-						<option value="3">북구</option>
-						<option value="4">울주군</option>
-						<option value="5">중구</option>
-					</select>
-				</div>
+					<option value='' selected>--</option>
+
+					<% int cataNum2 = 64; %>
+					<c:forEach items="${rglist}" var="StudyVO">
+						<% cataNum2++; %>
+						<option value="<%=(char)cataNum2%>">${StudyVO.rDName}</option>
+					</c:forEach>
+
+				</select>
+
+				<!-- 소분류 -->
+				<p>지역소분류</p>
+				<select name="rSId" id="rSId">
+
+					<option selected>--</option>
+
+				</select>
 			</div>
 
 			<!--연령-->
@@ -289,42 +258,17 @@
 		<button type="submit">종료</button>
 	</form>
 
-<<<<<<< HEAD
-	
-=======
 	<iframe name="zeroFrame"></iframe>
 	
 	<!-- 일등록 핸들러 -->
 	<script id="template" type="text/x-handlebars-template">
-
->>>>>>> branch 'JIJO2' of https://github.com/BIT102/ILuvStudy.git
-	<div class="mailbox-attachment-info">
-<<<<<<< HEAD
+		<div class="mailbox-attachment-info">
 		<span class="mailbox-attachment-icon has-img">
 			<img src="{{imgsrc}}" alt="Attachment">
 		</span>
-=======
-
-		<span class="mailbox-attachment-icon has-img">
-
-			<img src="{{imgsrc}}" alt="Attachment">
-
-		</span>
-
->>>>>>> branch 'JIJO2' of https://github.com/BIT102/ILuvStudy.git
 		<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>
-<<<<<<< HEAD
-		<!-- <a href="{{name}}" class="small">X</a> -->
-		<small data-src=data style="cursor:pointer">X</small>
-		</span>
-	</div>
-=======
->>>>>>> branch 'JIJO2' of https://github.com/BIT102/ILuvStudy.git
-
 		<small class = "small" value = "{{name}}" data-src=data style="cursor:pointer">X</small>
-
 		</span>
-
 	</div>
 </script>
 
@@ -340,15 +284,9 @@
 		//파일을 떨구는 장소	
 
 		$(".fileDrop").on("drop", function(event){
-<<<<<<< HEAD
-			
-			event.preventDefault();
-	
-=======
 
 			event.preventDefault();
 
->>>>>>> branch 'JIJO2' of https://github.com/BIT102/ILuvStudy.git
 			var files = event.originalEvent.dataTransfer.files;
 
 			var file = files[0];
@@ -369,11 +307,6 @@
 				type: 'POST',
 				//파일을 드롭했을때 성공시
 				success: function(data){
-<<<<<<< HEAD
-				
-					var fileInfo = getFileInfo(data);
-=======
->>>>>>> branch 'JIJO2' of https://github.com/BIT102/ILuvStudy.git
 					
 					var fileInfo = getFileInfo(data);
 			
@@ -422,6 +355,53 @@
 		});
 
 	</script>
+	<script>
+		
+			$(document).ready(function(){
+				
+			
+				$('#A').mouseover(function(){
+					$("#SmallCat1").css('visibility', 'visible');
+				});
+				$("#B").mouseover(function(){
+					$("#SmallCat2").css('visibility', 'visible');
+				});
+				$("#C").mouseover(function(){
+					$("#SmallCat3").css('visibility', 'visible');
+				});
+				$("#D").mouseover(function(){
+					$("#SmallCat4").css('visibility', 'visible');
+				});
+			});
+			
+	</script>
+	
+	<!-- select지역 이벤트       -->
+		 	<script>
+				$("#rDId").change(function(){
+					
+					var bigNum2 = $(this).val()
+					
+					
+					console.log(bigNum2);
+					smallCat2(bigNum2);
+				})
+	
+				function smallCat2(bigNum2){
+					$.getJSON(
+						"register1/region/"+bigNum2,
+						function(data){
+							var str = "";
+
+							$(data).each(function(){
+								str += "<option value="+this.rSId+">"+this.rSName+"</option>";							
+							});
+							
+							$("#rSId").html(str);
+						}
+					)
+				}			
+			</script> 
 
 </body>
 
