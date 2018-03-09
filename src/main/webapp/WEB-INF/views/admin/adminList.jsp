@@ -9,7 +9,6 @@
 <body>
 <div id="wrapper">
 <%@ include file="nav.jsp" %>
-
 	 <!-- MAIN -->
 		<div class="main">
 			<!-- MAIN CONTENT -->
@@ -28,12 +27,23 @@
         <table class="table">
         <thead>
 			<tr>
+				<th>사용여부</th>
 				<th>아이디</th>
 				<th>이름</th>
 			</tr>
 		</thead>
 		<tbody>
             <tr>
+            	<td>
+                    <select name="statusType" id="statusTypeSelect" class="form-control">
+                        <option value="n"
+                        	<c:out value="${cri.statusType == null?'selected':''}"/>>전체</option>
+ 	 	     			<option value="v"
+                        	<c:out value="${cri.statusType eq 'v'?'selected':''}"/>>사용</option>
+                        <option value="d"
+                        	<c:out value="${cri.statusType eq 'd'?'selected':''}"/>>미사용</option>             
+                    </select>
+                </td>
                 <td><input type="text" name="idKeyword" id="idKeywordInput" value="${cri.idKeyword}" class="form-control"></td>
                 <td><input type="text" name="nameKeyword" id="nameKeywordInput" value="${cri.nameKeyword}" class="form-control"></td>
             </tr>
@@ -51,7 +61,7 @@
         <!--리스트 -->
         <!--페이징 처리 -->
         <div class="panel-body">
-        <div>총 ${pageMaker.totalCount}건 ${cri.page}/${pageMaker.endPage}페이지</div>
+        <div style="float:right">총 ${pageMaker.totalCount}건 ${cri.page}/${pageMaker.endPage}페이지</div>
         
         <table class="table table-hover">
         <thead>
@@ -140,12 +150,15 @@
 		//검색 클릭 시 액션
 		$("#searchBtn").on("click", function(event){
 			self.location = "adminList" + "${pageMaker.makeQuery(1)}"
+				+"&statusType="
+				+$("select option:selected").val()
 				+"&idKeyword="+encodeURIComponent($("#idKeywordInput").val())
 				+"&nameKeyword="+encodeURIComponent($("#nameKeywordInput").val());
 		});
 		
 		//초기화 클릭 시 액션
 		$("#removeBtn").on("click", function(){
+			$("#statusTypeSelect").val('n');
 			$("#idKeywordInput").val('');
 			$("#nameKeywordInput").val('');
 		});

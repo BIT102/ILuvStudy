@@ -22,7 +22,8 @@ public class PageMaker {
 		UriComponents uriComponents = UriComponentsBuilder.newInstance()
 					.queryParam("page", page)
 					.queryParam("perPageNum", cri.getPerPageNum())
-					.queryParam("idKeyword", encoding(cri.getIdKeyword()))  //八祸 贸府
+					.queryParam("statusType", cri.getStatusType()) //八祸 贸府
+					.queryParam("idKeyword", encoding(cri.getIdKeyword()))  
 					.queryParam("nameKeyword",encoding(cri.getNameKeyword()))
 					.build();
 		return uriComponents.toUriString();

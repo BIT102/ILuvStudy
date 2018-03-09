@@ -16,8 +16,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 <!-- Admin관리 > 계정관리 메뉴 -->
-	<!-- adminid, name 검색 SQL -->
+	<!-- status, adminid, name 검색 SQL -->
 	<sql id="adminSearch">
+		<if test="statusType != null">
+			<if test="statusType == 'v'.toString()">
+				and status='V'
+			</if>
+			<if test="statusType == 'd'.toString()">
+				and status='D'
+			</if>
+		</if>
 		<if test="idKeyword != null">
 			and id like concat('%', #{idKeyword}, '%')
 		</if>

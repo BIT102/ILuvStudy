@@ -32,8 +32,11 @@
             <tr>
                 <th>아이디</th>
                 <td>
+                	<!-- 아이디 중복 체크 후 새로운 아이디 입력 했을 경우 중복체크 x로 처리 -->
                 	<input type="text" name="email" placeholder="asdf@gmail.com" class="form-control">
-                	<button class="btn btn-default btn-xs">중복확인</button>
+                	<input type="button" class="btn btn-default btn-xs">중복확인
+                	<!-- 중복체크 여부 확인 value:idUncheck 중복체크안함 -->
+                	<input type="hidden" name="idDuplication" value="idUncheck"> 
                 </td>
             </tr>
             <tr>
@@ -46,7 +49,7 @@
             </tr>
             <tr>
                 <th>비밀번호 확인</th>
-                <td><input type="password" class="form-control"></td>
+                <td><input type="password" name="passwordcheck" class="form-control"></td>
             </tr>
             <tr>
                 <th>닉네임</th>
@@ -113,6 +116,7 @@
 			self.location = "/admin/userList";
 		});
 	});
+
 </script>
 </body>
 </html>
