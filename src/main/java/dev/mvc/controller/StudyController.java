@@ -1,5 +1,8 @@
 package dev.mvc.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
@@ -37,10 +40,15 @@ public class StudyController {
 		logger.info("regist post......");
 		logger.info(vo.toString());
 		
+		System.out.println("===========================");
+		System.out.println("reg vo="+vo);
+		System.out.println("===========================");
+		
 		service.regist(vo);
-	
+		
 	//	rttr.addFlashAttribute("msg", "success");
-		return "redirect:/study/listAll";
+		//return "redirect:/study/listAll";
+		return "login";
 	}
 	
 	//스터디 목록 불러오기
@@ -48,8 +56,11 @@ public class StudyController {
 	public void readStudy(Model model) throws Exception {
 		
 		logger.info("show list..........");
+		System.out.println("======================================");
+		System.out.println("service.studyList() = "+service.studyList());
+		System.out.println("======================================");
 		model.addAttribute("list", service.studyList());
-
+		
 	}
 
 	//상세페이지
@@ -57,6 +68,10 @@ public class StudyController {
 	public void readBoard(@RequestParam("bno") int bno, Model model) throws Exception {
 		
 		model.addAttribute(service.read(bno));
+		
+		
+		
+		
 	}
 }
 

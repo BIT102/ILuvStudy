@@ -1,16 +1,23 @@
 package dev.mvc.controller;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import dev.mvc.domain.UserVO;
 import dev.mvc.persistance.UserDAO;
+import dev.mvc.service.UserService;
 
 /**
  * Handles requests for the application home page.
@@ -23,7 +30,8 @@ public class UserController {
 	
 	@Inject
 	UserDAO dao;
-	
+	@Inject
+	UserService service; 
 	
 	//회원가입 컨트롤러
 	@RequestMapping(value = "/join", method = RequestMethod.GET)
@@ -102,17 +110,11 @@ public class UserController {
 	@RequestMapping(value = "/changePw", method = RequestMethod.POST)
 	public String changePwPOST(UserVO vo, Model model) throws Exception {
 		
-
 		dao.changePw(vo);
 		model.addAttribute("vo", vo);
-		
-		
-		
-		
+
 		return "/mypage/changePw";
 		
-		
-
 	}
 	
 	
@@ -162,5 +164,97 @@ public class UserController {
 			
 			return "/mypage/completed";
 		}
-	
+		
+		// =====================================================================================================
+		// Sangwook
+		
+		
+		// 회원가입
+		// 이메일테스트  Ajax 로 필요함.
+		@RequestMapping(value = "/chkEmail", method = RequestMethod.POST)
+		public String emailTest(HttpServletRequest request, Model model) throws Exception {
+			
+			logger.info("chkEmail.......................");
+			
+			String email = request.getParameter("email1")+"@"+request.getParameter("email2");
+						
+			if(service.chkEmail(email)==-1){
+				model.addAttribute("result","유효하지 않은 이메일입니다.");
+				System.out.println("유효하지 않은 이메일입니다.");
+			}else if(service.chkEmail(email)==1){
+				model.addAttribute("result","이미 가입된 이메일입니다.");
+				System.out.println("이미가입된이메일");
+			}else{
+				model.addAttribute("result","인증번호를 입력하세요.");
+				// 인증번호 이메일 전송
+				service.sendEmail(email);
+			}
+			
+			return "/mypage/completed";
+		}
+		
+		
+		@RequestMapping(value = "/chkEmailAjax", method = RequestMethod.POST)
+		  public ResponseEntity<String> ajaxTest(@RequestParam("email1") String email1, @RequestParam("email2") String email2, Model model)throws Exception{
+			
+			logger.info("chkEmail.......................");
+			
+			String email = email1+"@"+email2;
+			
+			ResponseEntity<String> entity = null;
+			
+			try {
+			 
+				if(service.chkEmail(email)==-1){
+					entity = new ResponseEntity<String>("unvaild", HttpStatus.OK);					
+				}else if(service.chkEmail(email)==1){
+					entity = new ResponseEntity<String>("duplicated", HttpStatus.OK);
+				}else{
+					entity = new ResponseEntity<String>("success", HttpStatus.OK);
+					// 인증번호 이메일 전송
+					service.sendEmail(email);
+				}
+				  
+				
+			} catch (Exception e) {
+				// TODO: handle exception
+				entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+			}
+			  
+			  return entity;
+			  
+		  }
+		
+		@RequestMapping(value = "link", method = RequestMethod.GET)
+		public void link(String aa, String bb, Model model)throws Exception{
+			
+			System.out.println("===============");
+			System.out.println(aa+bb);
+			System.out.println("===============");
+			
+			model.addAttribute("aa",aa);
+			
+		}
+		
+		@RequestMapping(value="/join/nickname",method = RequestMethod.POST)
+		public ResponseEntity<String> chkNickname(@RequestParam("nickname") String nickname) throws Exception{
+			
+			System.out.println("nicknameChk.................");
+			
+			ResponseEntity<String> entity = null;
+			
+			try{
+				if(service.chkNickname(nickname)==0){
+					entity = new ResponseEntity<String>("success", HttpStatus.OK);
+				}else{
+					entity = new ResponseEntity<String>("dup", HttpStatus.BAD_REQUEST);
+				}
+				
+			}catch (Exception e) {
+				entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+			}
+			
+			return entity;
+		} 
+
 }

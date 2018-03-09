@@ -27,18 +27,17 @@ public class StudyServiceImpl implements StudyService {
 	
 		if(files == null) return;
 		
-//		for(int i=0; i<files.length; i++) {
-//			if(i==0) { 
-//				vo.setStatus('O');
-//			} else {
-//				vo.setStatus('X');
-//			}
-//		}
+	/*	for(int i=0; i<files.length; i++) {
+			if(i==0) { 
+				vo.setStatus('O');
+			} else {
+				vo.setStatus('X');
+			}
+		}*/
 		
 		for(String fileName : files) {
 			dao.addFile(fileName);
 		}
-	
 	}
 	
 	//스터디 불러오기

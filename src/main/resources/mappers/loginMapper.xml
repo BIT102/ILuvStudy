@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ 
+  
+  <mapper namespace = "dev.mvc.mapper.loginMapper">
+  
+  	
+  	<!-- 관리자 로그인 -->
+  	
+  	
+  	<!-- admin 계정 로그인 처리 -->
+	<select id="adminLogin" resultType="AdminVO">
+		select id, pw, bno from admin where id=#{id} and pw=#{pw}
+	</select>
+	
+	<!-- 로그인 시 마지막 접속일 갱신 -->
+	<update id="adminLastLogin">
+		update admin set lastLoginDate=now() where id=#{id}
+	</update>
+  	
+  	<!-- 사용자 로그인 -->
+  	<select id = "userLogin" resultType="UserVO">
+  		select * from user where email = #{email} and password = #{password}
+  	</select>
+  	
+  	
+  	
+  	
+  </mapper>

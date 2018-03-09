@@ -19,7 +19,7 @@
   	</select>
   	
   	<!-- 프로필 읽어오기 #(email)-->
-  	<select id="read" resultType="dev.mvc.user.UserVO">
+  	<select id="read" resultType="UserVO">
   	select photo, email,password, name, nickname, birth, gender, phoneNum, introduction, homepage
   	from jjstudy.user 
   	where email = "abc3@gmail.com";
@@ -45,5 +45,15 @@
   	<update id="quit">
   	update jjstudy.user set isDel=1 where email=#{email};
   	</update>
+  	
+  	<!-- 이메일중복체크 -->
+  	<select id = "chkEmail" resultType="int">
+  		select count(*) from user where email = #{email};
+  	</select>
+  	
+  	<select id = "chkNickname" resultType="int">
+  		select count(*) from user where nickname = #{nickName};
+  	</select>
+  	
   	
   </mapper>

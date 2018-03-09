@@ -101,6 +101,7 @@ ba.bsbno
 , bs.rct
 , bs.regdate
 , bs.enddate
+, ba.name
 FROM 
 board_study bs
 LEFT JOIN(board_attach ba)
@@ -119,7 +120,7 @@ ORDER BY bs.bno desc, bs.regdate desc;
 </select>
 
 <!-- 파일 등록 -->
-<select id="addFile">
+<insert id="addFile">
 INSERT
 INTO
 board_attach(
@@ -129,7 +130,13 @@ name
 VALUES(
 #{name}
 , LAST_INSERT_ID()
+
 )
+</insert>
+
+<select id = "addFileLast" resultType="int">
+	select LAST_INSERT_ID()
+>>>>>>> branch 'SWKIM' of https://github.com/BIT102/ILuvStudy.git
 </select>
 
 <select id="getFile" resultType="String">
@@ -139,5 +146,6 @@ FROM board_attach
 WHERE bsbno = #{bno}
 ORDER BY regdate;
 </select>
+
 
 </mapper>
