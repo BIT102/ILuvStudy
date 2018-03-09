@@ -6,6 +6,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- board_study mapper -->
 <mapper namespace="dev.mvc.mapper.StudyMapper">
 
+
+<!-- 스터디 등록 사람숫자 -->
+<update id="updateNow">
+UPDATE 
+board_study
+SET now = now + #{amount}
+WHERE bno = #{bno}
+</update>
+
 <!-- 스터디 등록 -->
  <insert id="createStudy">
 insert into board_study (
@@ -382,19 +391,19 @@ WHERE bs.bno > 0
   			<if test="searchType == 'c'.toString()">
   				and content like CONCAT('%', #{keyword}, '%')
   			</if>
-  			<if test="searchType == 'w'.toString()">
-  				and writer like CONCAT('%', #{keyword}, '%')
+  			<if test="searchType == 'n'.toString()">
+  				and nickname like CONCAT('%', #{keyword}, '%')
   			</if>
   			<if test="searchType == 'tc'.toString()">
   				and ( title like CONCAT('%', #{keyword}, '%') OR content like CONCAT('%', #{keyword}, '%'))
   			</if>
-  			<if test="searchType == 'cw'.toString()">
-  				and ( content like CONCAT('%', #{keyword}, '%') OR writer like CONCAT('%', #{keyword}, '%'))
+  			<if test="searchType == 'cn'.toString()">
+  				and ( content like CONCAT('%', #{keyword}, '%') OR nickname like CONCAT('%', #{keyword}, '%'))
   			</if>
-  			<if test="searchType == 'tcw'.toString()">
+  			<if test="searchType == 'tcn'.toString()">
   				and ( title like CONCAT('%', #{keyword}, '%') 
   						OR content like CONCAT('%', #{keyword}, '%') 
-  						OR writer like CONCAT('%', #{keyword}, '%') )
+  						OR nickname like CONCAT('%', #{keyword}, '%') )
   			</if>
   		</if> 
   </sql>		

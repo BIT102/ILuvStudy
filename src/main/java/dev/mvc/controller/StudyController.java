@@ -1,5 +1,6 @@
 package dev.mvc.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -72,6 +73,28 @@ public class StudyController {
 		
 		model.addAttribute("pageMakerStudy", pageMakerStudy);
 
+		
+	}
+	
+	//main»≠∏È ∏ «Œ
+	@RequestMapping(value="/main", method = RequestMethod.GET)
+	public void mainStudy(@ModelAttribute("cri") SearchCriteriaStudy cri, Model model) throws Exception {
+		
+		logger.info("show list..........");
+		
+		List<StudyVO> studyList = service.studyList().subList(0, 6);
+				
+		model.addAttribute("list", studyList);
+		
+		model.addAttribute("list", service.listSearchCriteria(cri));
+
+		PageMakerStudy pageMakerStudy = new PageMakerStudy();
+		
+		pageMakerStudy.setCri(cri);
+		
+		pageMakerStudy.setTotalCount(service.listSearchCount(cri));
+		
+		model.addAttribute("pageMakerStudy", pageMakerStudy);
 		
 	}
 

@@ -32,6 +32,7 @@ public class ApplyDAOImpl implements ApplyDAO {
 	//상태값 업데이트
 	@Override
 	public void update(ApplyVO vo) throws Exception {
+		
 		session.update(namespace+".updateApply", vo);
 	}
 	

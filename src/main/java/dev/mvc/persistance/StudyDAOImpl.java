@@ -1,5 +1,6 @@
 package dev.mvc.persistance;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -123,6 +124,18 @@ public class StudyDAOImpl implements StudyDAO {
 	@Override
 	public int getBno() throws Exception {
 		return session.selectOne(namespace+".getNextBno");
+	}
+	
+	//참여인원수 늘리기
+	@Override
+	public void updateNow(Integer bno, int amount) throws Exception {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("bno", bno);
+		map.put("amount", amount);
+		
+		session.update(namespace+".updateNow", map);
 	}
 
 }

@@ -107,6 +107,8 @@ div.desc {
 <form role="form" method="post">
 	<input type="hidden" name="bno" id="bno" value="${studyVO.bno}">
 	<input type="hidden" name="writer" id="writer" value="${studyVO.writer}">
+	<input type="hidden" name="now" id="studyNow" value="${studyVO.now}">
+	<input type="hidden" name="max" id="studyMax" value="${studyVO.max}">
 </form>
 
         <header id="header">       
@@ -133,6 +135,7 @@ div.desc {
                 <c:if test="${studyVO.name!=null}">
 					<div class='uploadedList'>
 						<span class="mailbox-attachment-icon has-img"><img
+						
 							src="/study/displayFile?fileName=${studyVO.name}"
 							alt="Attachment"></span>
 					</div>
@@ -332,7 +335,7 @@ function myFunction(x) {
         <!-- 로그인시 --> </br></br>
         
                      등록한 사람
-        <input type="submit" class="aList" value="신청자목록">
+        <input type="submit" class="aList" value="신청자목록" onclick="wait();">
         <div id='amodDiv' style="display:none;">
         	<div class='modal-applyList'>
         	</div>
@@ -341,22 +344,34 @@ function myFunction(x) {
         </div>
         <input type="submit" class="preee" value="목록">
         <input type="submit" value="수정">
-        <input type="submit" class="delete" value="삭제">
-        <input type="submit" value="스터디완료">
+        <input type="submit" class="delete" value="스터디완료">
+
     </div>
 
 
 <!-- 신청자목록 모달 -->
 <script>
 
-
 var applyEmail = $("#writer").val();
 var applybsBno = $("#bno").val();
+
+
+var now = $("#studyNow").val();
+var max = $("#studyMax").val();
 
 var bno = ${studyVO.bno};
 
 //스터디 등록
 $(".apply").on("click", function(){
+
+	if(now == max){
+		
+		console.log(now);
+		console.log(max);
+		
+	alert("참석하실수 없습니다");
+	
+	} else {
 	
 	$.ajax({
 		type:"post",
@@ -371,10 +386,12 @@ $(".apply").on("click", function(){
 			usEmail : applyEmail
 		}),
 		success : function(result){
-		alert("완전등록됨");
 		wait();
+		alert("완전등록됨");
 		}
+	
 	})
+	}
 })
 
 //스터디 취소하기
@@ -394,9 +411,9 @@ $.ajax({
 	}),
  	success : function(result) {
  		if(result=='success'){
- 			alert("삭제되었네");
- 			wait();
  			apply();
+			wait();
+ 			alert("삭제되었네");
  		}
  	}
 })
@@ -417,6 +434,9 @@ $("#applyclose").on("click", function(){
 //수락지 o
 //거절시 x
 function okstudy(event) {
+	
+	var kk = event.parentElement;
+	
 
 	$.ajax({
 		type:"put",
@@ -431,18 +451,19 @@ function okstudy(event) {
 		dataType:"text",
 		success:function(result){
 			if(result=="success"){
-				alert("수락했승ㅁ");
-				
-				wait();
-				
+				kk.remove();
 				apply();
+				alert("수락했승ㅁ");
 			}
 		 }
 	});
 }
 
 //거절시
-function nostudy() {
+function nostudy(event) {
+	
+	var kk = event.parentElement;
+	
 	$.ajax({
 		type:"put",
 		url:"/study/apply/update",
@@ -456,7 +477,10 @@ function nostudy() {
 		dataType:"text",
 		success:function(result){
 			if(result=="success"){
-				alert("거절했습니다")
+				kk.remove();
+				apply();
+				alert("거절했습니다");
+
 			}
 		 }
 	});
@@ -474,34 +498,57 @@ $.getJSON("/study/apply/"+bno, function(data){
 			+ "<span class='mailbox-attachment-icon has-img'><img src='/study/displayFile?fileName="+this.photo+"'"
 			+ "alt=Attachment></span>"
 		    + this.usEmail
-		    + "<button type='button' onclick='okstudy();'>수락</button>"
-		    + "<button type='button' onclick='nostudy();'>거절</button>"
-		    +"</div>"   
+		    + "<button type='button' onclick='okstudy(this);'>수락</button>"
+		    + "<button type='button' onclick='nostudy(this);'>거절</button>"
+		    +"</div>";   
 	});
 	$(".modal-applyList").html(str);
 });
 }
 
 //스터디 등록자 불러오기
+function apply(){
 
-function apply() {
-	
  $.getJSON("/study/apply/"+bno, function(data){
 	var str="";
-	console.log(data.length);
 	
 	$(data).each(function(){
-		str +="<div class='applyLi' data-usEmail='"+this.usEmail+"'>"
+		
+		if(this.status=='O'){
+		
+		str += "<div class='applyLi' data-usEmail='"+this.usEmail+"'>"
 			+ "<span class='mailbox-attachment-icon has-img'><img src='/study/displayFile?fileName="+this.photo+"'"
 			+ "alt=Attachment></span>"
 		    + this.usEmail
-		    +"</div>"
+		    +"</div>";
 		    
 	$(".applyList").html(str);
+		    
+		}		    
 	});
 });
-
 }
+
+//신청자 화면에 고정시키기
+$("document").ready(function apply() {
+$.getJSON("/study/apply/"+bno, function(data){
+	var str="";
+	
+	$(data).each(function(){
+		
+		if(this.status=='O'){
+		
+		str += "<div class='applyLi' data-usEmail='"+this.usEmail+"'>"
+			+ "<span class='mailbox-attachment-icon has-img'><img src='/study/displayFile?fileName="+this.photo+"'"
+			+ "alt=Attachment></span>"
+		    + this.usEmail
+		    +"</div>";
+		    
+	$(".applyList").html(str);
+		}
+	})
+})
+})
 </script>
 
 
@@ -675,8 +722,26 @@ $(document).ready(function(){
         	getPageList(replyPage);
         });
         
-        
-        
+    	//댓클불러오기화면에    
+/*        $("document").ready(function getPageList(page) {       	
+        	
+    	   console.log(page);
+    	   
+        	$.getJSON("/study/replies/" + bno + "/" + page, function(data){
+    		
+    		var str="";
+    		
+    		$(data.list).each(function(){
+    			
+    			str += "<li data-rno='" + this.rno + "' class='replyLi'>"
+    			    + this.rno + ":" + this.content
+    			    + "<button>MOD</button></li>";
+    		});
+    		$("#replies").html(str);
+    		
+    		printPaging(data.pageMaker);
+        	});
+    	});	 */
         </script>    
 </body>
 </html>

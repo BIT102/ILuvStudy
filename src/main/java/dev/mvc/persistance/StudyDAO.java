@@ -47,7 +47,7 @@ public interface StudyDAO {
 	public int listSearchCount(SearchCriteriaStudy cri) throws Exception;
 	
 	public int getBno() throws Exception;
-	
-	
-//	public void deleteFile(int )
+
+	//참여자수
+	public void updateNow(Integer bno, int amount) throws Exception;
 }
