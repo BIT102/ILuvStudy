@@ -169,6 +169,16 @@ public class AdminServiceImpl implements AdminService{
 	}
 	
 	@Override
+	public void typeUpdate(Integer bno)throws Exception{
+		dao.typeUpdate(bno);
+	}
+
+	@Override
+	public void typeRUpdate(Integer bno)throws Exception{
+		dao.typeRUpdate(bno);
+	}
+	
+	@Override
 	public List<ReplyVO> qnaReply(Integer bno) throws Exception{
 		return dao.qnaReply(bno);
 	}

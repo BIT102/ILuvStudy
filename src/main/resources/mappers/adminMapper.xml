@@ -379,6 +379,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values (#{bqBno},#{content},#{replyer})
 	</insert>
 	
+	<!-- FAQ 등록 처리 -->
+	<update id="typeUpdate">
+		update board_qna
+		set type = 1
+		where bno = #{bno}
+	</update>
+	
+	<!-- FAQ 미등록 처리 -->
+	<update id="typeRUpdate">
+		update board_qna
+		set type = 0
+		where bno = #{bno}
+	</update>
+	
 	
 <!-- 사트관리 > 공지사항 등록 메뉴 -->
 	<!-- 검색 SQL -->

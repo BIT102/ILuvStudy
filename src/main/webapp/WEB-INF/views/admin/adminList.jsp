@@ -5,41 +5,56 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>계정 관리</title>
-
 </head>
 <body>
+<div id="wrapper">
 <%@ include file="nav.jsp" %>
-    
-    <!--상세메뉴-->
-    <div id="topmenu2">
-        <div class="border">
-            <a href="adminList">계정관리</a>
-        </div>
-    </div>
 
-    <!--내용-->
-    <div id="container">
-        <a>계정 관리</a>
+	 <!-- MAIN -->
+		<div class="main">
+			<!-- MAIN CONTENT -->
+			<div class="main-content">
+				<div class="container-fluid">
+					<h3 class="page-title">계정관리</h3>
+					<div class="row">
+						<div class="col-md-12">
+    						<div class="panel">
+        <div class="panel-heading">
+			<h3 class="panel-title">계정관리</h3>
+		</div>
         
         <!--검색-->
-        <table>
+        <div class="panel-body">
+        <table class="table">
+        <thead>
+			<tr>
+				<th>아이디</th>
+				<th>이름</th>
+			</tr>
+		</thead>
+		<tbody>
             <tr>
-                <th>아이디</th>
-                <td><input type="text" name="idKeyword" id="idKeywordInput" value="${cri.idKeyword}"></td>
-                <th>이름</th>
-                <td><input type="text" name="nameKeyword" id="nameKeywordInput" value="${cri.nameKeyword}"></td>
+                <td><input type="text" name="idKeyword" id="idKeywordInput" value="${cri.idKeyword}" class="form-control"></td>
+                <td><input type="text" name="nameKeyword" id="nameKeywordInput" value="${cri.nameKeyword}" class="form-control"></td>
             </tr>
-
+		</tbody>
         </table>
         
-        <button type="button" id="searchBtn">검색</button>
-        <button type="button" id="removeBtn">초기화</button>
-
+        <div class="text-center">
+        	<button type="button" id="searchBtn" class="btn btn-primary">검색</button>
+        	<button type="button" id="removeBtn" class="btn btn-primary">초기화</button>
+        </div>
+        
+		</div>
+		<!-- panel-body end -->
+	
         <!--리스트 -->
         <!--페이징 처리 -->
+        <div class="panel-body">
         <div>총 ${pageMaker.totalCount}건 ${cri.page}/${pageMaker.endPage}페이지</div>
-
-        <table>
+        
+        <table class="table table-hover">
+        <thead>
             <tr>
                 <th>번호</th>
                 <th>아이디</th>
@@ -47,6 +62,8 @@
                 <th>사용여부</th>
                 <th>최근 접속정보</th>
             </tr>
+      	</thead>
+      	<tbody>
 <!-- DB데이터 가져옴 -->
 <c:forEach items="${list}" var="adminVO">
             <tr>
@@ -65,11 +82,13 @@
                 <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${adminVO.lastLoginDate}"/></td>
             </tr>
 </c:forEach>
+</tbody>
         </table>
         
         <!-- 페이징 처리 -->
         <!-- 페이징 정보 저장 -->
-        <ul>
+        <div class="text-center">
+        <ul class="pagination">
         	<c:if test="${pageMaker.prev}">
         		<li><a href="adminList${pageMaker.adminSearch(pageMaker.startPage - 1)}">&laquo;</a></li>
         	</c:if>
@@ -85,12 +104,24 @@
         		<li><a href="adminList${pageMaker.adminSearch(pageMaker.endPage + 1)}">&raquo;</a></li>
         	</c:if>
         </ul>
+        </div>
         
 		<!-- 계정 등록 -->
-        <!-- <a href="adminRegister">등록</a> -->
-        <button type="button" id="registerBtn">등록</button>
-    </div>
-
+        <div class="text-right">
+        	<button type="button" id="registerBtn" class="btn btn-primary">등록</button>
+        </div>
+        
+        </div>
+        <!-- panel-body end -->
+							</div>
+						</div>
+					</div>
+					</div>
+				</div>
+			<!-- END MAIN CONTENT -->
+			</div>
+		<!-- END MAIN -->
+		</div>
 <script>
 	var result='${msg}';
 	
@@ -98,7 +129,8 @@
 		alert("처리가 완료되었습니다.");
 	}
 	
-	$(document).ready(function(){		
+	$(document).ready(function(){	
+		$("#adminListnav").attr("class", "active");
 		
 		//등록 클릭 시 액션
 		$("#registerBtn").on("click", function(){

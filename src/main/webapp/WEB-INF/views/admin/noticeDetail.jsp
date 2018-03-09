@@ -7,36 +7,37 @@
     <title>공지사항 등록</title>
 </head>
 <body>
+<div id="wrapper">
 <%@ include file="nav.jsp" %>
-    
-    <!--상세메뉴-->
-    <div id="topmenu2">
-        <div class="border">
-            <a href="qnaList">QNA 관리</a>
-        </div>
-        <div class="border">
-            <a href="noticeList">공지사항 등록</a>
-        </div>
-    </div>
 
-    <!--내용-->
-    <div id="container">
-        <a>공지사항</a>
-        
+	 <!-- MAIN -->
+		<div class="main">
+			<!-- MAIN CONTENT -->
+			<div class="main-content">
+				<div class="container-fluid">
+					<h3 class="page-title">공지사항 등록</h3>
+					<div class="row">
+						<div class="col-md-12">
+    						<div class="panel">
+        <div class="panel-heading">
+			<h3 class="panel-title">공지사항 상세</h3>
+		</div>
+    
+    <div class="panel-body">    
 	<form role="form" method="post">
-        <table>
+        <table class="table table-hover">
             <tr>
                 <th>제목</th>
-                <td><input type="text" name="title" value="${noticeVO.title}"></td>
+                <td><input type="text" name="title" value="${noticeVO.title}" class="form-control"></td>
             </tr>
             <tr>
                 <th>작성자</th>
-                <td><input type="hidden" name="writer" value="${login.id}">${noticeVO.writer}</td>
+                <td><input type="hidden" name="writer" value="${login.id}" class="form-control">${noticeVO.writer}</td>
             </tr>
             <tr>
                 <th>내용</th>
                 <td>
-                    <textarea name="content">${noticeVO.content}</textarea>
+                    <textarea name="content" class="form-control">${noticeVO.content}</textarea>
                 </td>
             </tr>
             <tr>
@@ -51,12 +52,27 @@
             </tr>
         </table>
 	</form>
-		<button type="button" id="listBtn">목록</button>
-		<button type="submit" id="modifyBtn">수정</button>
+		<button type="button" id="listBtn" class="btn btn-primary">목록</button>
+		<button type="submit" id="modifyBtn" class="btn btn-success" style="float:right">수정</button>
     </div>
+    <!-- panel-body end -->
+    						
+    						</div>
+						</div>
+					</div>
+					</div>
+				</div>
+			<!-- END MAIN CONTENT -->
+			</div>
+		<!-- END MAIN -->
+		</div>
 
 <script>
 	$(document).ready(function(){
+		$("#qnaListsuv").attr("class", "active");
+		$("#noticeListnav").attr("class", "active");
+		$("#subPages2").attr("class", "in");
+		
 		var formObj = $("form[role='form']");
 		
 		console.log(formObj);

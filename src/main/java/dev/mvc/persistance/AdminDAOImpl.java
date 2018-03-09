@@ -171,6 +171,16 @@ public class AdminDAOImpl implements AdminDAO{
 	}
 	
 	@Override
+	public void typeUpdate(Integer bno)throws Exception{
+		session.update(namespace + ".typeUpdate", bno);   // faq 등록 처리
+	}
+	
+	@Override
+	public void typeRUpdate(Integer bno)throws Exception{
+		session.update(namespace + ".typeRUpdate", bno);   // faq 미등록 처리
+	}
+	
+	@Override
 	public List<ReplyVO> qnaReply(Integer bno) throws Exception{
 		return session.selectList(namespace + ".qnaReply", bno);   //qna 댓글 리스트 정보 가져옴  
 	}

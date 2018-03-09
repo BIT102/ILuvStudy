@@ -7,25 +7,39 @@
     <title>회원조회</title>
 </head>
 <body>
-<%@ include file="nav.jsp" %>
+	<div id="wrapper">
+	<%@ include file="nav.jsp" %>
 
-    <!--상세메뉴-->
-    <div id="topmenu2">
-        <div class="border">
-            <a href="userList">회원조회</a>
-        </div>
-    </div>
-
-    <!--내용-->
-    <div id="container">
-        <a>회원조회</a>
-
-        <!--검색-->
-        <table>
-            <tr>
-                <th>가입 상태</th>
-                <td colspan="3">
-                    <select name="isDelType" id="isDelTypeSelect">
+    <!-- MAIN -->
+		<div class="main">
+			<!-- MAIN CONTENT -->
+			<div class="main-content">
+				<div class="container-fluid">
+					<h3 class="page-title">회원조회</h3>
+					<div class="row">
+						<div class="col-md-12">
+							<!-- TABLE HOVER -->
+							<div class="panel">
+							
+							
+								<div class="panel-heading">
+									<h3 class="panel-title">회원조회</h3>
+								</div>
+								
+		<!--검색-->
+		<div class="panel-body">
+		<table class="table">
+		<thead>
+			<tr>
+				<th>가입상태</th>
+				<th>아이디</th>
+				<th>닉네임</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+                    <select name="isDelType" id="isDelTypeSelect" class="form-control">
                         <option value="n"
                         	<c:out value="${cri.isDelType == null?'selected':''}"/>>전체</option>
                         <option value="v"
@@ -34,54 +48,64 @@
                         <option value="d"
                         	<c:out value="${cri.isDelType eq 'd'?'selected':''}"/>>탈퇴</option>
                     </select>
-                </td>
-            </tr>
-            <tr>
-                <th>아이디</th>
-                <td><input type="text" name="emailKeyword" id="emailKeywordInput" value="${cri.emailKeyword}"></td>
-                <th>닉네임</th>
-                <td><input type="text" name="nickNameKeyword" id="nickNameKeywordInput" value="${cri.nickNameKeyword}"></td>
-            </tr>
+				</td>
+				<td>
+                	<input type="text" name="emailKeyword" id="emailKeywordInput" value="${cri.emailKeyword}" class="form-control">
+				</td>
+				<td>
+                	<input type="text" name="nickNameKeyword" id="nickNameKeywordInput" value="${cri.nickNameKeyword}" class="form-control">
+				</td>
+			</tr>
+		</tbody>
         </table>
+        	<div class="text-center">
+        		<button type="button" id="searchBtn" class="btn btn-primary">검색</button>
+        		<button type="button" id="removeBtn" class="btn btn-primary">초기화</button>
+        	</div>
+        </div>
 
-        <button type="button" id="searchBtn">검색</button>
-        <button type="button" id="removeBtn">초기화</button>
-
-		<!--리스트 -->
-        <!--페이징 처리 -->
-        <div>총 ${pageMaker.totalCount}건 ${cri.page}/${pageMaker.endPage}페이지</div>
-        
-        <table>
-            <tr>
-                <th>번호</th>
-                <th>아이디</th>
-                <th>이름</th>
-                <th>닉네임</th>
-                <th>핸드폰번호</th>
-                <th>가입 상태</th>
-                <th>가입일</th>
-            </tr>
-<!-- DB데이터 가져옴 -->
-<c:forEach items="${list}" var="userVO">
-            <tr>
-                <td>${userVO.bno}</td>
-                <td><a href="/admin/userDetail${pageMaker.userSearch(pageMaker.cri.page)}&bno=${userVO.bno}">${userVO.email}</a></td>
-                <td>${userVO.name}</td>
-                <td>${userVO.nickName}</td>
-                <td>${userVO.phoneNum}</td>
-                <td>
-                	<!-- 0:회원  1:탈퇴 -->
-                	<c:if test="${userVO.isDel eq 0}">회원 </c:if>
-                	<c:if test="${userVO.isDel eq 1}">탈퇴</c:if>
-                </td>
-                <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${userVO.registDate}"/></td>
-            </tr>
-</c:forEach>
-        </table>
-        
-        <!-- 페이징 처리 -->
+								
+								
+								<div class="panel-body">
+								<!--리스트 -->
+        						<!--페이징 처리 -->
+        						<div>총 ${pageMaker.totalCount}건 ${cri.page}/${pageMaker.endPage}페이지</div>
+									<table class="table table-hover">
+										<thead>
+											<tr>
+												<th>번호</th>
+                								<th>아이디</th>
+                								<th>이름</th>
+                								<th>닉네임</th>
+                								<th>핸드폰번호</th>
+                								<th>가입 상태</th>
+                								<th>가입일</th>
+											</tr>
+										</thead>
+										<tbody>
+									<!-- DB데이터 가져옴 -->
+									<c:forEach items="${list}" var="userVO">
+            							<tr>
+                							<td>${userVO.bno}</td>
+                							<td><a href="/admin/userDetail${pageMaker.userSearch(pageMaker.cri.page)}&bno=${userVO.bno}">${userVO.email}</a></td>
+                							<td>${userVO.name}</td>
+               							 	<td>${userVO.nickName}</td>
+                							<td>${userVO.phoneNum}</td>
+                							<td>
+                								<!-- 0:회원  1:탈퇴 -->
+                								<c:if test="${userVO.isDel eq 0}">회원 </c:if>
+                								<c:if test="${userVO.isDel eq 1}">탈퇴</c:if>
+                							</td>
+                							<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${userVO.registDate}"/></td>
+            							</tr>
+									</c:forEach>
+										</tbody>
+									</table>
+									
+		<!-- 페이징 처리 -->
         <!-- 페이징 정보 저장 -->
-        <ul>
+        <div class="text-center">
+        <ul class="pagination">
         	<c:if test="${pageMaker.prev}">
         		<li><a href="userList${pageMaker.userSearch(pageMaker.startPage - 1)}">&laquo;</a></li>
         	</c:if>
@@ -97,9 +121,23 @@
         		<li><a href="userList${pageMaker.userSearch(pageMaker.endPage + 1)}">&raquo;</a></li>
         	</c:if>
         </ul>
+        </div>
         
-        <button type="button" id="registerBtn">등록</button>
-    </div>
+        <div class="text-right">
+        <button type="button" id="registerBtn" class="btn btn-primary">등록</button>
+        </div>
+        
+								</div>
+							</div>
+							<!-- END TABLE HOVER -->
+						</div>
+					</div>
+					</div>
+				</div>
+			<!-- END MAIN CONTENT -->
+			</div>
+		<!-- END MAIN -->
+		</div>
 
 <script>
 	var result='${msg}';
@@ -109,6 +147,8 @@
 	}
 	
 	$(document).ready(function(){		
+		
+		$("#userListnav").attr("class", "active");
 		
 		//등록 클릭 시 액션
 		$("#registerBtn").on("click", function(){

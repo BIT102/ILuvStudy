@@ -230,8 +230,7 @@ public class AdminController {
 	
 	@ResponseBody
 	@RequestMapping(value="/region/{rDId}", method = RequestMethod.POST)
-	public ResponseEntity<List<StudyVO>> region(@PathVariable("rDId") String rDId,
-			Model model) throws Exception{
+	public ResponseEntity<List<StudyVO>> region(@PathVariable("rDId") String rDId) throws Exception{
 		logger.info("region post...");
 		
 		ResponseEntity<List<StudyVO>> entity=null;
@@ -324,6 +323,38 @@ public class AdminController {
 		//검색 정보 유지
 		rttr.addAttribute("faqType", cri.getFaqType());
 		rttr.addAttribute("emailKeyword", cri.getEmailKeyword());
+		rttr.addFlashAttribute("msg", "SUCCESS");
+		
+		logger.info(rttr.toString());
+		
+		return "redirect:/admin/qnaList";
+	}
+	
+	//admin/qnaDetail.jsp 에서 faq 등록 시
+	@RequestMapping(value="/typeUpdate", method = RequestMethod.POST)
+	public String typeUpdate(@RequestParam("bno") int bno, Criteria cri, 
+			RedirectAttributes rttr) throws Exception{
+		logger.info("typeUpdate post...");
+		logger.info(cri.toString());
+		
+		service.typeUpdate(bno);
+		
+		rttr.addFlashAttribute("msg", "SUCCESS");
+		
+		logger.info(rttr.toString());
+		
+		return "redirect:/admin/qnaList";
+	}
+	
+	//admin/qnaDetail.jsp 에서 faq 미등록 시
+	@RequestMapping(value="/typeRUpdate", method = RequestMethod.POST)
+	public String typeRUpdate(@RequestParam("bno") int bno, Criteria cri, 
+			RedirectAttributes rttr) throws Exception{
+		logger.info("typeRUpdate post...");
+		logger.info(cri.toString());
+		
+		service.typeRUpdate(bno);
+		
 		rttr.addFlashAttribute("msg", "SUCCESS");
 		
 		logger.info(rttr.toString());

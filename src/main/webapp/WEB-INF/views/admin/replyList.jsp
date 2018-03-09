@@ -7,42 +7,50 @@
     <title>댓글 관리</title>
 </head>
 <body>
+<div id="wrapper">
 <%@ include file="nav.jsp" %>
 
-    <!--상세메뉴-->
-    <div id="topmenu2">
-        <div class="border">
-            <a href="studyList">스터디 목록</a>
-        </div>
-        <div class="border">
-            <a href="replyList">댓글 관리</a>
-        </div>
-    </div>
-
-    <!--내용-->
-    <div id="container">
-        <a>댓글 관리</a>
-        
+	 <!-- MAIN -->
+		<div class="main">
+			<!-- MAIN CONTENT -->
+			<div class="main-content">
+				<div class="container-fluid">
+					<h3 class="page-title">댓글 관리</h3>
+					<div class="row">
+						<div class="col-md-12">
+    						<div class="panel">
+        <div class="panel-heading">
+			<h3 class="panel-title">댓글 관리</h3>
+		</div>
+		
         <!--검색-->
-        <table>
+        <div class="panel-body">
+        <table class="table">
+        <thead>
+			<tr>
+				<th>스터디 번호</th>
+				<th>작성자</th>
+			</tr>
+		</thead>
+		<tbody>
             <tr>
-                <th>스터디 번호</th>
-                <td><input type="text" name="bsBnoKeyword" id="bsBnoKeywordInput" value="${cri.bsBnoKeyword}"></td>
-                <th>작성자</th>
-                <td><input type="text" name="writerKeyword" id="writerKeywordInput" value="${cri.writerKeyword}"></td>
+                <td><input type="text" name="bsBnoKeyword" id="bsBnoKeywordInput" value="${cri.bsBnoKeyword}" class="form-control"></td>
+                <td><input type="text" name="writerKeyword" id="writerKeywordInput" value="${cri.writerKeyword}" class="form-control"></td>
             </tr>
-
+		</tbody>
         </table>
-
-        <button type="button" id="searchBtn">검색</button>
-        <button type="button" id="removeBtn">초기화</button>
-        
+		<div class="text-center">
+        	<button type="button" id="searchBtn" class="btn btn-primary">검색</button>
+        	<button type="button" id="removeBtn" class="btn btn-primary">초기화</button>
+		</div>
+		</div>
 
         <!--리스트 -->
         <!--페이징 처리 -->
+        <div class="panel-body">
         <div>총 ${pageMaker.totalCount}건 ${cri.page}/${pageMaker.endPage}페이지</div>
-
-        <table>
+        
+        <table class="table table-hover">
             <tr>
             	<th>번호</th>
                 <th>스터디 번호</th>
@@ -64,7 +72,8 @@
         
 		<!-- 페이징 처리 -->
         <!-- 페이징 정보 저장 -->
-        <ul>
+        <div class="text-center">
+        <ul class="pagination">
         	<c:if test="${pageMaker.prev}">
         		<li><a href="replyList${pageMaker.replySearch(pageMaker.startPage - 1)}">&laquo;</a></li>
         	</c:if>
@@ -80,10 +89,22 @@
         		<li><a href="replyList${pageMaker.replySearch(pageMaker.endPage + 1)}">&raquo;</a></li>
         	</c:if>
         </ul>
+        </div>
     </div>
-    
+       		 					</div>
+						</div>
+					</div>
+					</div>
+				</div>
+			<!-- END MAIN CONTENT -->
+			</div>
+		<!-- END MAIN -->
+		</div>
 <script>	
 	$(document).ready(function(){		
+		$("#studyListsuv").attr("class", "active");
+		$("#replyListnav").attr("class", "active");
+		$("#subPages").attr("class", "in");
 		
 		//검색 클릭 시 액션
 		$("#searchBtn").on("click", function(event){
