@@ -63,6 +63,11 @@ public class UserDAOImpl implements UserDAO {
 	public int chkEmail(String email) throws Exception {
 		return session.selectOne(namespace+".chkEmail", email);
 	}
+	
+	@Override
+	public int chkNickname(String nickName) throws Exception{
+		return session.selectOne(namespace+".chkNickname", nickName);
+	}
 
 
 }

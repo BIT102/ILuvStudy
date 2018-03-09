@@ -31,7 +31,7 @@ public class UserController {
 	@Inject
 	UserDAO dao;
 	@Inject
-	UserService service;
+	UserService service; 
 	
 	//회원가입 컨트롤러
 	@RequestMapping(value = "/join", method = RequestMethod.GET)
@@ -199,34 +199,23 @@ public class UserController {
 			
 			logger.info("chkEmail.......................");
 			
-			
-			//String email = email1+"@"+email2;
-			
 			String email = email1+"@"+email2;
-			
-			
-			
-			System.out.println("==============================");
-			System.out.println(email);
-			System.out.println("==============================");
 			
 			ResponseEntity<String> entity = null;
 			
-			if(service.chkEmail(email)==-1){
-				model.addAttribute("result","유효하지 않은 이메일입니다.");
-				System.out.println("유효하지 않은 이메일입니다.");
-			}else if(service.chkEmail(email)==1){
-				model.addAttribute("result","이미 가입된 이메일입니다.");
-				System.out.println("이미가입된이메일");
-			}else{
-				model.addAttribute("result","인증번호를 입력하세요.");
-				// 인증번호 이메일 전송
-				service.sendEmail(email);
-			}
-			
-			
-			  try {
-				entity = new ResponseEntity<String>("test2", HttpStatus.OK);
+			try {
+			 
+				if(service.chkEmail(email)==-1){
+					entity = new ResponseEntity<String>("unvaild", HttpStatus.OK);					
+				}else if(service.chkEmail(email)==1){
+					entity = new ResponseEntity<String>("duplicated", HttpStatus.OK);
+				}else{
+					entity = new ResponseEntity<String>("success", HttpStatus.OK);
+					// 인증번호 이메일 전송
+					service.sendEmail(email);
+				}
+				  
+				
 			} catch (Exception e) {
 				// TODO: handle exception
 				entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
@@ -236,5 +225,36 @@ public class UserController {
 			  
 		  }
 		
+		@RequestMapping(value = "link", method = RequestMethod.GET)
+		public void link(String aa, String bb, Model model)throws Exception{
+			
+			System.out.println("===============");
+			System.out.println(aa+bb);
+			System.out.println("===============");
+			
+			model.addAttribute("aa",aa);
+			
+		}
+		
+		@RequestMapping(value="/join/nickname",method = RequestMethod.POST)
+		public ResponseEntity<String> chkNickname(@RequestParam("nickname") String nickname) throws Exception{
+			
+			System.out.println("nicknameChk.................");
+			
+			ResponseEntity<String> entity = null;
+			
+			try{
+				if(service.chkNickname(nickname)==0){
+					entity = new ResponseEntity<String>("success", HttpStatus.OK);
+				}else{
+					entity = new ResponseEntity<String>("dup", HttpStatus.BAD_REQUEST);
+				}
+				
+			}catch (Exception e) {
+				entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+			}
+			
+			return entity;
+		} 
 
 }

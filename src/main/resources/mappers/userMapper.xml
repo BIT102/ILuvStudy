@@ -51,4 +51,9 @@
   		select count(*) from user where email = #{email};
   	</select>
   	
+  	<select id = "chkNickname" resultType="int">
+  		select count(*) from user where nickname = #{nickName};
+  	</select>
+  	
+  	
   </mapper>

@@ -31,4 +31,6 @@ public interface UserDAO {
 	
 	// email 중복체크
 	public int chkEmail(String email) throws Exception;
+	
+	public int chkNickname(String nickName) throws Exception;
 }

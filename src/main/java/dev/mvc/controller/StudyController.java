@@ -1,5 +1,8 @@
 package dev.mvc.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
@@ -57,7 +60,7 @@ public class StudyController {
 		System.out.println("service.studyList() = "+service.studyList());
 		System.out.println("======================================");
 		model.addAttribute("list", service.studyList());
-
+		
 	}
 
 	//상세페이지
@@ -65,6 +68,10 @@ public class StudyController {
 	public void readBoard(@RequestParam("bno") int bno, Model model) throws Exception {
 		
 		model.addAttribute(service.read(bno));
+		
+		
+		
+		
 	}
 }
 

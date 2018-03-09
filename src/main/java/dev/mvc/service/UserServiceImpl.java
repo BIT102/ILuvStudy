@@ -1,5 +1,7 @@
 package dev.mvc.service;
 
+import java.util.UUID;
+
 import javax.inject.Inject;
 import javax.mail.internet.MimeMessage;
 
@@ -8,6 +10,7 @@ import org.springframework.mail.MailSender;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import org.springframework.util.MimeType;
 
 import dev.mvc.persistance.UserDAO;
 
@@ -63,7 +66,7 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public void sendEmail(String email) throws Exception {
+	public String sendEmail(String email) throws Exception {
 		
 		System.out.println("==============================");
 		System.out.println("sendEmail.............");
@@ -71,8 +74,20 @@ public class UserServiceImpl implements UserService{
 		String setfrom = "lswkim322@gmail.com";         
 	    String tomail  = email;     // 받는 사람 이메일
 	    String title   = "[ILOVESTUDY]인증번호 발송";      // 제목
-	    String content = "1234";    // 내용
+	    
+	    String code = UUID.randomUUID().toString().replace("-", "").substring(0, 6);;
+	    String content = "인증번호는 ["+code+"] 입니다. 해당 번호를 입력해 주세요.";    // 내용
 	   	    
+	    String htmltext = 
+	    "<html>"
+	    	+"<head>"
+	    	+"<title>/</title>"
+	    	+"</head>"
+	    	+"<body>"
+	    	+"<a href = 'http://localhost:8080/link?aa=ss&&bb=aa'>인증하시려면 여기를 클릭하세요</a>"
+	    	+"</body>"
+	    +"</html>";
+	    
 	    MimeMessage message = mailSender.createMimeMessage();
 	    MimeMessageHelper messageHelper 
 	                      = new MimeMessageHelper(message, true, "UTF-8");
@@ -80,12 +95,17 @@ public class UserServiceImpl implements UserService{
 	    messageHelper.setFrom(setfrom);  // 보내는사람 생략하거나 하면 정상작동을 안함
 	    messageHelper.setTo(tomail);     // 받는사람 이메일
 	    messageHelper.setSubject(title); // 메일제목은 생략이 가능하다
-	    messageHelper.setText(content);  // 메일 내용
-	     
+	    //messageHelper.setText(content);  // 메일 내용
+	    messageHelper.setText(content, htmltext); 
+	    
 	    mailSender.send(message);
 
+	    return code;  // 생성된 인증번호를 담아서 리턴시킴
 	}
-
 	
+	@Override
+	public int chkNickname(String nickName)throws Exception{
+		return dao.chkNickname(nickName); 
+	}
 	
 }
