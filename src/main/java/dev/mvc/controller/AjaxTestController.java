@@ -31,55 +31,74 @@ public class AjaxTestController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(AjaxTestController.class);
 	
-	@Inject
-	UserDAO dao;
-
-	@Inject
-	private UserService service;
 	
 
 	@RequestMapping(value = "/ajaxTest", method = RequestMethod.GET)
-	public String changePwGET(Model model, String password) throws Exception {
-		
+	public String changePwGET(Model model) throws Exception {
+		System.out.println("=======ajaxtest 찍힘??===========================");
 		return "/mypage/ajaxTest";
+		
+		
 	}
+
 	
 	
-	//ajax 비번 수정
 	@RequestMapping(value = "/ajaxTest", method = RequestMethod.POST)
-	public ResponseEntity<String> changePw(@RequestParam("nowPw")String nowPw,
-									@RequestParam("newPw1") String newPw1, @RequestParam("newPw2") String newPw2, HttpServletRequest request) throws Exception{
-	
-		
-		System.out.println("======nowPw 나우Pw=============");
-		System.out.println(nowPw);
-		System.out.println(newPw1);
-		System.out.println(newPw2);
-		
-		HttpSession session = request.getSession();
-		UserVO sUser = (UserVO)session.getAttribute("login");
-		String email = sUser.getEmail();
-		
-		UserVO vo = service.read(email);
-		vo.getPassword();
-		
-		
-		
-		
+	public ResponseEntity<String> changePw(@RequestParam("nnowPw1") String nowPw1, 
+			@RequestParam("nnowPw2") String nowPw2){ // nnowPw2=key, nowPw2=변수
+
+		System.out.println("==========왜 에러??======");
 		
 		ResponseEntity<String> entity = null;
 		
 		try{
-			if(newPw1.equals(newPw2)){
-			entity = new ResponseEntity<String>("pw equal", HttpStatus.OK); // "" 이 안에 값이 jsp파일에 result값이 됨
-			System.out.println("============pw1pw2 같니??=============");
-		}
-			
+			if(nowPw1.equals(nowPw2)){
+				entity = new ResponseEntity<String>("hellohello", HttpStatus.OK); //" "이 안에 값이 jsp파일 result값
+				System.out.println("==========test===============");
+			}
 		}catch(Exception e){
-			entity =  new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+			
 		}
 		return entity;
-		
 	}
+	
+	
+	@RequestMapping(value="/test", method = RequestMethod.GET)
+	public String abcGET(Model model) throws Exception{
+		
+		System.out.println("========test 됨?=======");
+		return "/mypage/test";
+	}
+	
+	
+	
+	@RequestMapping(value = "/test", method = RequestMethod.POST)
+	public ResponseEntity<String> abcPOST(@RequestParam("abc") String abc1, //jsp파일 ajax의 data key값. 변수명
+			@RequestParam("def") String abc2, @RequestParam("ghi") String abc3){
+		
+		System.out.println("==========test post 들어옴?=======");
+		ResponseEntity<String> entity = null;
+		
+		try{
+			if(abc1.equals(abc2) && abc2.equals(abc3)){
+				entity = new ResponseEntity<String>("hihihi", HttpStatus.OK); //" "이 안에 값이 jsp파일 result값
+				System.out.println("==========test===============");
+			}else{
+				entity = new ResponseEntity<String>("false", HttpStatus.OK);
+			}
+		}catch(Exception e){
+			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+			
+		}
+		return entity;
+	}
+	
+	
+	
+	
+	
+
+	
 	
 }
