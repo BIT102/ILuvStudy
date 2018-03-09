@@ -12,12 +12,12 @@
 	<a href="www.kakao.com">카카오배너</a>
 	<br/><br/>
 	
-	<form action="login" method="post">
+	<form action="loginPost" method="post">
 		<input type="text" placeholder = "이메일주소" name = "email" /><br/>
 		<input type="text" placeholder = "비밀번호" name = "password" />
 		
 		<br/>
-		<input type="checkbox" /> 아이디저장  <input type="checkbox" /> 자동로그인
+		<input type="checkbox" /> 아이디저장  <input type="checkbox" name="useCookies" /> 자동로그인
 		<br/>
 		
 		<input type="submit" value ="로그인" />

@@ -10,6 +10,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select id, pw, bno from admin where id=#{id} and pw=#{pw}
 	</select>
 	
+	
 <!-- 로그인 시 마지막 접속일 갱신 -->
 	<update id="adminLastLogin">
 		update admin set lastLoginDate=now() where id=#{id}

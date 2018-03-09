@@ -4,6 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>신청 스터디</title>
 <style>
@@ -25,12 +26,17 @@
     
     #actable{font-size:20px; margin-top:10px;} 
 </style>
+
+<script>
+	$(document).ready(function(){
+		alert("${result}");
+	})
+</script>
+
 </head>
 
 
-<body>
-
- 	
+<body> 	
 	<form name="profileForm" action="/profile" method="post">
 
 	<!-- 상단 메뉴바 -->
@@ -60,7 +66,7 @@
    <div id="pfimage">
         <p3>프로필 사진</p3>
         <p>회원님의 정면 사진을 올려주세요! <br> 상대방이 신뢰를 갖고 연락 할 확률이 높아져요!</p>
-        <input type='file' name='file' value=${vo.photo}><input type='submit'>
+        <input type='file' name='file' value=${login.photo}><input type='submit'>
         <input type="submit" value="사진업로드">
    </div>
 
@@ -72,7 +78,7 @@
         <table id="actable">
             <tr>
                 <td><label for="email">이메일</label></td>
-          		<td><input id="email" type="email" value="${vo.email}" readonly name="email"></td>
+          		<td><input id="email" type="email" value="${login.email}" readonly name="email"></td>
             </tr>
             <tr>
                 <td><label for="name">이름</label></td>
@@ -103,6 +109,7 @@
    <input type="submit" value="저장하기"> 
 </div>
 
+	
 </form>
 </body>
 

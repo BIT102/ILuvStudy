@@ -1,6 +1,9 @@
 package dev.mvc.persistance;
 
+import java.util.Date;
+
 import dev.mvc.domain.UserVO;
+import dev.mvc.dto.UserLoginDTO;
 
 public interface UserDAO {
 
@@ -21,7 +24,16 @@ public interface UserDAO {
 	
 	//사용자 탙뢰
 	public void quit(UserVO vo) throws Exception;
-
+	
+	//회원 로그인 (세션활용) 
+	public UserVO login(UserLoginDTO dto) throws Exception;
+	
+	// sessionKey & sessionLimit 업데이트
+	public void keepLogin(String email, String sessionId, Date next) throws Exception; // sessinId = DB의 sessionKey
+	
+	// loginCookie에 기록된 값으로 사용자의 정보 조회
+	public UserVO checkUserWithSessionKey(String value) throws Exception;
+	
 /*	//회원 전체 리스트 조회
 	public List<UserVO> listAll() throws Exception;*/
 	
