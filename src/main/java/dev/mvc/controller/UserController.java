@@ -101,13 +101,9 @@ public class UserController {
 	//회원가입 컨트롤러
 	@RequestMapping(value = "/join", method = RequestMethod.GET)
 	public String joinUserGET(UserVO vo, Model model) {
-		
 		System.out.println("YWTEST................");
-
 		return "join";
 	}
-	
-	
 
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
 	public String joinUserPOST(UserVO vo, Model model) {
@@ -123,6 +119,7 @@ public class UserController {
 	
 	// profile 컨트롤러
 		@RequestMapping(value = "/profile", method = RequestMethod.GET)
+
 		public String profileGET(Model model,HttpServletRequest request) throws Exception {
 			logger.info("========프로필 get................");
 			
@@ -181,12 +178,14 @@ public class UserController {
 	
 	
 	// 비밀번호 변경(changePw) 컨트롤러
+
 	@RequestMapping(value = "/changePw", method = RequestMethod.GET)
 	public String changePwGET(Model model) throws Exception {
 		
 		return "/mypage/changePw";
 	}
 	
+
 	@RequestMapping(value = "/changePw", method = RequestMethod.POST)
 	public String changePwPOST(Model model, String nowPw, String newPw1, String newPw2, HttpServletRequest request ) throws Exception {
 		
@@ -224,7 +223,6 @@ public class UserController {
 	}
 
 
-	
 	// 회원 탈퇴(quit) 컨트롤러
 	@RequestMapping(value = "/quit", method = RequestMethod.GET)
 	public String quit(Model model, String email) throws Exception {

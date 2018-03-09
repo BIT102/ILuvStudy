@@ -28,8 +28,8 @@ public class StudyVO {
 	private String writer; 
 	private String categoryD; 
 	private String categoryS; 
-	private int now;
-	private int max;
+	private Integer now;
+	private Integer max;
 	private String rDId;
 	private String rSId;
 	private String age;
@@ -42,7 +42,7 @@ public class StudyVO {
 	private int rct;
 	private Date regdate;
 	private Date enddate;
-	
+
 	//지역이랑 카테고리는 이름으로 가져올께요
 	private String rDName;
 	private String rSName;
@@ -53,37 +53,16 @@ public class StudyVO {
 
 	private String cDId;
 	
-
 	// 작성자는 닉네임으로 표시
 	private String nickname;
 	
 	//파일을 엄로드합니다
-	private Integer no;
+	private int no;
 	private String name;
-	private Integer bsBno;
+	private String status;
 
+	//파일 업로드
 	private String[] files;
-	
-	//관리자에서 회원조회
-	private String status;  //스터디 신청자 상태값
-	private String email;  //회원 이메일
-
-	
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getcDId() {
-		return cDId;
-	}
-
-	public void setcDId(String cDId) {
-		this.cDId = cDId;
-	}
 
 	public int getBno() {
 		return bno;
@@ -125,19 +104,19 @@ public class StudyVO {
 		this.categoryS = categoryS;
 	}
 
-	public int getNow() {
+	public Integer getNow() {
 		return now;
 	}
 
-	public void setNow(int now) {
+	public void setNow(Integer now) {
 		this.now = now;
 	}
 
-	public int getMax() {
+	public Integer getMax() {
 		return max;
 	}
 
-	public void setMax(int max) {
+	public void setMax(Integer max) {
 		this.max = max;
 	}
 
@@ -277,6 +256,14 @@ public class StudyVO {
 		this.cSId = cSId;
 	}
 
+	public String getcDId() {
+		return cDId;
+	}
+
+	public void setcDId(String cDId) {
+		this.cDId = cDId;
+	}
+
 	public String getNickname() {
 		return nickname;
 	}
@@ -285,11 +272,11 @@ public class StudyVO {
 		this.nickname = nickname;
 	}
 
-	public Integer getNo() {
+	public int getNo() {
 		return no;
 	}
 
-	public void setNo(Integer no) {
+	public void setNo(int no) {
 		this.no = no;
 	}
 
@@ -301,12 +288,12 @@ public class StudyVO {
 		this.name = name;
 	}
 
-	public Integer getBsBno() {
-		return bsBno;
+	public String getStatus() {
+		return status;
 	}
 
-	public void setBsBno(Integer bsBno) {
-		this.bsBno = bsBno;
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	public String[] getFiles() {
@@ -317,14 +304,6 @@ public class StudyVO {
 		this.files = files;
 	}
 
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
 	@Override
 	public String toString() {
 		return "StudyVO [bno=" + bno + ", title=" + title + ", writer=" + writer + ", categoryD=" + categoryD
@@ -332,12 +311,9 @@ public class StudyVO {
 				+ ", age=" + age + ", sc=" + sc + ", sd=" + sd + ", st=" + st + ", et=" + et + ", content=" + content
 				+ ", vct=" + vct + ", rct=" + rct + ", regdate=" + regdate + ", enddate=" + enddate + ", rDName="
 				+ rDName + ", rSName=" + rSName + ", cDName=" + cDName + ", cSName=" + cSName + ", cSId=" + cSId
-
-				+ ", nickname=" + nickname + ", no=" + no + ", name=" + name + ", bsBno=" + bsBno + ", files="
-				+ Arrays.toString(files) + ", status=" + status + "]";
+				+ ", cDId=" + cDId + ", nickname=" + nickname + ", no=" + no + ", name=" + name + ", status=" + status
+				+ ", files=" + Arrays.toString(files) + "]";
 	}
-
-	
-	
 	
 }
+

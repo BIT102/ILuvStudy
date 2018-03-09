@@ -5,7 +5,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  
 <!-- board_study mapper -->
 <mapper namespace="dev.mvc.mapper.StudyMapper">
- 
+
+<!-- 스터디 등록 사람숫자 -->
+<update id="updateNow">
+UPDATE 
+board_study
+SET now = now + #{amount}
+WHERE bno = #{bno}
+</update>
+
 <!-- 스터디 등록 -->
  <insert id="createStudy">
 insert into board_study (
@@ -40,14 +48,16 @@ title
 </insert>
  
 <!-- 스터디 읽어오기 -->
-<select id="readStudy" resultType="dev.mvc.domain.StudyVO">
+
+<select id="readStudy" resultType="StudyVO">
 SELECT
-ba.bsbno
+ba.name
 , bs.bno
 , bs.title
+, bs.writer
 , u.NICKNAME
-, c.cDName
-, c.cSName
+, sc.cDName
+, sc.cSName
 , bs.now
 , bs.max
 , r.rDName
@@ -64,29 +74,25 @@ ba.bsbno
 , bs.enddate
 FROM 
 board_study bs
-LEFT JOIN(board_attach ba)
-ON bs.bno = ba.BSBNO
-, region r
-, study_category c
-, user u
-WHERE bs.rDId = r.RDID
-AND bs.categoryD = c.CDID
-AND bs.categoryS = c.CSID
-AND bs.rSId = r.RSID
-AND u.EMAIL = bs.writer
-AND bs.bno = #{bno}
+left outer join user u on bs.writer = u.EMAIL
+left outer join board_attach ba on bs.bno = ba.bsbno
+left outer join study_category sc on bs.CATEGORYD = sc.CDID and bs.CATEGORYS = sc.CSID
+left outer join region r on bs.RDID = r.RDID and bs.RSID = r.RSID
+WHERE bs.bno = #{bno}
 </select>
  
 <!-- 전체불러오기 -->
-<select id="studyList" resultType="dev.mvc.domain.StudyVO">
+<select id="studyList" resultType="StudyVO">
 <![CDATA[
+
 SELECT
-ba.bsbno
+ba.name
 , bs.bno
 , bs.title
-, u.NICKNAME
-, c.cDName
-, c.cSName
+, bs.writer
+, u.nickname
+, sc.cDName
+, sc.cSName
 , bs.now
 , bs.max
 , r.rDName
@@ -104,48 +110,315 @@ ba.bsbno
 , ba.name
 FROM 
 board_study bs
-LEFT JOIN(board_attach ba)
-ON bs.bno = ba.BSBNO
-, region r
-, study_category c
-, user u
-WHERE bs.rDId = r.RDID
-AND bs.categoryD = c.CDID
-AND bs.categoryS = c.CSID
-AND bs.rSId = r.RSID
-AND u.EMAIL = bs.writer
-AND bs.bno > 0
+left outer join user u on bs.writer = u.EMAIL
+left outer join (select * from board_attach where status = "O") ba on bs.bno = ba.bsbno
+left outer join study_category sc on bs.CATEGORYD = sc.CDID and bs.CATEGORYS = sc.CSID
+left outer join region r on bs.RDID = r.RDID and bs.RSID = r.RSID
+WHERE bs.bno > 0
 ORDER BY bs.bno desc, bs.regdate desc;
 ]]>
 </select>
 
+<!-- 보드삭제합니다 -->
+<delete id="delete">
+DELETE 
+FROM
+board_study
+WHERE
+bno = #{bno}
+
+</delete>
 <!-- 파일 등록 -->
-<insert id="addFile">
+<insert id="addFile" parameterType="map">
 INSERT
 INTO
 board_attach(
 name
 , bsBno
+, status
 )
 VALUES(
 #{name}
-, LAST_INSERT_ID()
-
+, #{bno}
+, #{status}
 )
 </insert>
 
+
 <select id = "addFileLast" resultType="int">
 	select LAST_INSERT_ID()
->>>>>>> branch 'SWKIM' of https://github.com/BIT102/ILuvStudy.git
 </select>
 
-<select id="getFile" resultType="String">
-SELECT
+<!-- 파일불러오기 -->
+<select id="getFile" resultType="string">
+SELECT 
 name
-FROM board_attach
-WHERE bsbno = #{bno}
-ORDER BY regdate;
+, status
+FROM
+board_attach
+WHERE
+bsbno = #{bsBno}
+AND status = 'X'
+ORDER BY regdate
 </select>
 
+<!-- 게시물 조회수 -->
+<update id="upVct">
 
+UPDATE
+board_study
+SET
+vct = vct + 1 
+WHERE
+bno = #{bno}
+</update>
+
+<!-- 페이지 처리 -->
+<select id="listPage" resultType="StudyVO">
+<![CDATA[
+SELECT
+ba.name
+, bs.bno
+, bs.title
+, bs.writer
+, u.NICKNAME
+, sc.cDName
+, sc.cSName
+, bs.now
+, bs.max
+, r.rDName
+, r.rSName
+, bs.age
+, bs.sc
+, bs.sd
+, bs.st
+, bs.et
+, bs.content
+, bs.vct
+, bs.rct
+, bs.regdate
+, bs.enddate
+FROM 
+board_study bs
+left outer join user u on bs.writer = u.EMAIL
+left outer join (select * from board_attach where status = "O") ba on bs.bno = ba.bsbno
+left outer join study_category sc on bs.CATEGORYD = sc.CDID and bs.CATEGORYS = sc.CSID
+left outer join region r on bs.RDID = r.RDID and bs.RSID = r.RSID
+WHERE bs.bno > 0
+ORDER BY bs.bno desc
+, bs.regdate desc
+limit #{page}, 9
+]]>
+</select>
+
+<!-- 페이지데이터 -->
+<select id="listCriteria" resultType="StudyVO">
+<![CDATA[
+SELECT
+ba.name
+, bs.bno
+, bs.title
+, bs.writer
+, u.NICKNAME
+, sc.cDName
+, sc.cSName
+, bs.now
+, bs.max
+, r.rDName
+, r.rSName
+, bs.age
+, bs.sc
+, bs.sd
+, bs.st
+, bs.et
+, bs.content
+, bs.vct
+, bs.rct
+, bs.regdate
+, bs.enddate
+FROM 
+board_study bs
+left outer join user u on bs.writer = u.EMAIL
+left outer join (select * from board_attach where status = "O") ba on bs.bno = ba.bsbno
+left outer join study_category sc on bs.CATEGORYD = sc.CDID and bs.CATEGORYS = sc.CSID
+left outer join region r on bs.RDID = r.RDID and bs.RSID = r.RSID
+WHERE bs.bno > 0
+ORDER BY bs.bno desc
+, bs.regdate desc
+limit #{pageStart}
+, #{perPageNum}
+]]>
+</select>
+
+<!-- 페이징 개수 -->
+<select id="countPaging" resultType="int">
+<![CDATA[
+SELECT
+COUNT(bno)
+ba.name
+, bs.bno
+, bs.title
+, bs.writer
+, u.NICKNAME
+, sc.cDName
+, sc.cSName
+, bs.now
+, bs.max
+, r.rDName
+, r.rSName
+, bs.age
+, bs.sc
+, bs.sd
+, bs.st
+, bs.et
+, bs.content
+, bs.vct
+, bs.rct
+, bs.regdate
+, bs.enddate
+FROM 
+board_study bs
+left outer join user u on bs.writer = u.EMAIL
+left outer join (select * from board_attach where status = "O") ba on bs.bno = ba.bsbno
+left outer join study_category sc on bs.CATEGORYD = sc.CDID and bs.CATEGORYS = sc.CSID
+left outer join region r on bs.RDID = r.RDID and bs.RSID = r.RSID
+WHERE bs.bno > 0
+]]>
+</select>
+
+<!-- 검색 -->
+<!-- <select id="listSearch" resultType="StudyVO">
+<![CDATA[
+SELECT
+*
+FROM
+board_study
+WHERE bno > 0
+ORDER BY bno desc
+limit #{pageStart}
+, #{perPageNum}
+]]>
+</select> -->
+
+<!-- 검색수 -->
+<!-- <select id="listSearchCount" resultType="int">
+<![CDATA[
+SELECT
+COUNT(bno)
+FROM
+board_study
+WHERE bno > 0
+]]>
+</select> -->
+
+<select id="listSearch" resultType="studyVO">
+<![CDATA[
+SELECT
+ba.name
+, bs.bno
+, bs.title
+, bs.writer
+, u.NICKNAME
+, sc.cDName
+, sc.cSName
+, bs.now
+, bs.max
+, r.rDName
+, r.rSName
+, bs.age
+, bs.sc
+, bs.sd
+, bs.st
+, bs.et
+, bs.content
+, bs.vct
+, bs.rct
+, bs.regdate
+, bs.enddate
+FROM 
+board_study bs
+left outer join user u on bs.writer = u.EMAIL
+left outer join (select * from board_attach where status = "O") ba on bs.bno = ba.bsbno
+left outer join study_category sc on bs.CATEGORYD = sc.CDID and bs.CATEGORYS = sc.CSID
+left outer join region r on bs.RDID = r.RDID and bs.RSID = r.RSID
+WHERE bs.bno > 0
+]]>
+
+<include refid="search"></include>
+
+<![CDATA[
+ORDER BY bno desc
+limit #{pageStart}
+, #{perPageNum}
+]]>
+</select>
+
+<select id="listSearchCount" resultType="int">
+<![CDATA[
+SELECT
+count(bs.bno)
+,ba.name
+, bs.bno
+, bs.title
+, bs.writer
+, u.NICKNAME
+, sc.cDName
+, sc.cSName
+, bs.now
+, bs.max
+, r.rDName
+, r.rSName
+, bs.age
+, bs.sc
+, bs.sd
+, bs.st
+, bs.et
+, bs.content
+, bs.vct
+, bs.rct
+, bs.regdate
+, bs.enddate
+FROM 
+board_study bs
+left outer join user u on bs.writer = u.EMAIL
+left outer join (select * from board_attach where status = "O") ba on bs.bno = ba.bsbno
+left outer join study_category sc on bs.CATEGORYD = sc.CDID and bs.CATEGORYS = sc.CSID
+left outer join region r on bs.RDID = r.RDID and bs.RSID = r.RSID
+WHERE bs.bno > 0
+]]>
+<include refid="search"></include>
+</select>
+
+<!-- 검색에 필요한 화면구성 -->
+<sql id="search">
+ 		<if test="searchType != null">
+  			<if test="searchType == 't'.toString()">
+  				and title like CONCAT('%', #{keyword}, '%')
+  			</if>
+  			<if test="searchType == 'c'.toString()">
+  				and content like CONCAT('%', #{keyword}, '%')
+  			</if>
+  			<if test="searchType == 'n'.toString()">
+  				and nickname like CONCAT('%', #{keyword}, '%')
+  			</if>
+  			<if test="searchType == 'tc'.toString()">
+  				and ( title like CONCAT('%', #{keyword}, '%') OR content like CONCAT('%', #{keyword}, '%'))
+  			</if>
+  			<if test="searchType == 'cn'.toString()">
+  				and ( content like CONCAT('%', #{keyword}, '%') OR nickname like CONCAT('%', #{keyword}, '%'))
+  			</if>
+  			<if test="searchType == 'tcn'.toString()">
+  				and ( title like CONCAT('%', #{keyword}, '%') 
+  						OR content like CONCAT('%', #{keyword}, '%') 
+  						OR nickname like CONCAT('%', #{keyword}, '%') )
+  			</if>
+  		</if> 
+  </sql>		
+
+  <select id="getNextBno" resultType="int">
+
+  select LAST_INSERT_ID();
+
+  </select>
+  
 </mapper>

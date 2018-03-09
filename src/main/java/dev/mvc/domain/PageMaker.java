@@ -59,6 +59,7 @@ public class PageMaker {
 
 	//searchType과 keyword링크 처리 (페이징 처리와 조회 화면으로 이동해서 사용되는 링크의 정보 수정)
 	public String makeSearch(int page){
+		
 		UriComponents uriComponents = 
 				UriComponentsBuilder.newInstance().queryParam("page", page)
 				.queryParam("perPageNum", cri.getPerPageNum())
@@ -82,13 +83,18 @@ public class PageMaker {
 	
 	
 	//toString getter/setter
+
+
+	
+	public int getStartPage() {
+		return startPage;
+	}
+
 	@Override
 	public String toString() {
 		return "PageMaker [totalCount=" + totalCount + ", startPage=" + startPage + ", endPage=" + endPage + ", prev="
-				+ prev + ", next=" + next + ", displayPageNum=" + displayPageNum + ", cri=" + cri + "]";
-	}
-	public int getStartPage() {
-		return startPage;
+				+ prev + ", next=" + next + ", displayPageNum=" + displayPageNum + ", cri=" + cri + ", getClass()="
+				+ getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
 	}
 
 	public void setStartPage(int startPage) {
@@ -114,6 +120,7 @@ public class PageMaker {
 	public boolean isNext() {
 		return next;
 	}
+
 
 	public void setNext(boolean next) {
 		this.next = next;

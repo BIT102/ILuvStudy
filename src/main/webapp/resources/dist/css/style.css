@@ -1,0 +1,439 @@
+
+
+
+
+.cborder {
+	border: 1px solid white;
+	height: 500px;
+	width:230px;
+}
+
+.mainimgbox {
+	height:265px;
+}
+
+
+.uploadedList {
+	height:250px;
+	background-repeat:no-repeat;
+	background-size:230px 265px;
+}
+
+.card-body{
+	margin-top:10px;
+}
+
+
+#keywordInput {
+	background-color:transparent;
+	width:400px;
+	height:60px;
+	padding-bottom:7px;
+	color:white;
+	font-size:25px;
+	margin-right:50px;
+	margin-top:50px;
+	
+	border:none;
+	border-bottom:2px solid yellow;
+
+}
+
+#clock{
+  margin-left:320px;
+  width:600px;
+  height:250px;
+  line-height:250px;
+  color:yellow;
+  font-size:100px;
+}
+
+body {
+    overflow-x: hidden;
+    font-family: 'Roboto Slab', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+  
+  p {
+    line-height: 1.75;
+  }
+  
+  a {
+    color: #fed136;
+  }
+  
+  a:hover {
+    color: #fec503;
+  }
+  
+  .text-primary {
+    color: #fed136 !important;
+  }
+  
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: 700;
+    font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+  
+  .btn {
+    font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 700;
+  }
+  
+  .btn-xl {
+    font-size: 18px;
+    padding: 20px 40px;
+  }
+  
+  .btn-primary {
+    background-color: #fed136;
+    border-color: #fed136;
+  }
+  
+  .btn-primary:active, .btn-primary:focus, .btn-primary:hover {
+    background-color: #fec810 !important;
+    border-color: #fec810 !important;
+    color: white;
+  }
+  
+  .btn-primary:active, .btn-primary:focus {
+    box-shadow: 0 0 0 0.2rem rgba(254, 209, 55, 0.5) !important;
+  }
+  
+  ::-moz-selection {
+    background: #fed136;
+    text-shadow: none;
+  }
+  
+  ::selection {
+    background: #fed136;
+    text-shadow: none;
+  }
+  
+  img::selection {
+    background: transparent;
+  }
+  
+  img::-moz-selection {
+    background: transparent;
+  }
+
+
+/*  Navigation
+----------------------*/
+#mainNav {
+  background-color: black;
+}
+
+#mainNav .navbar-toggler {
+  font-size: 12px;
+  right: 0;
+  padding: 13px;
+  text-transform: uppercase;
+  color: white;
+  border: 0;
+  background-color: #fed136;
+  font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+#mainNav .navbar-brand {
+  color: #fed136;
+  font-family: 'Kaushan Script', 'Helvetica Neue', Helvetica, Arial, cursive;
+}
+
+#mainNav .navbar-brand.active, #mainNav .navbar-brand:active, #mainNav .navbar-brand:focus, #mainNav .navbar-brand:hover {
+  color: #fec503;
+}
+
+#mainNav .navbar-nav .nav-item .nav-link {
+  font-size: 90%;
+  font-weight: 400;
+  padding: 0.75em 0;
+  letter-spacing: 1px;
+  color: white;
+  font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+#mainNav .navbar-nav .nav-item .nav-link.active, #mainNav .navbar-nav .nav-item .nav-link:hover {
+  color: #fed136;
+}
+
+@media (min-width: 992px) {
+
+  #mainNav {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    -webkit-transition: padding-top 0.3s, padding-bottom 0.3s;
+    -moz-transition: padding-top 0.3s, padding-bottom 0.3s;
+    transition: padding-top 0.3s, padding-bottom 0.3s;
+    border: none;
+    background-color: black;
+  }
+
+  #mainNav .navbar-brand {
+    font-size: 1.75em;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+  }
+  #mainNav .navbar-nav .nav-item .nav-link {
+    padding: 1.1em 1em !important;
+  }
+  #mainNav.navbar-shrink {
+    padding-top: 0;
+    padding-bottom: 0;
+    background-color: #212529;
+  }
+  #mainNav.navbar-shrink .navbar-brand {
+    font-size: 1.25em;
+    padding: 12px 0;
+  }
+}
+
+/* Header */
+
+header.masthead {
+  text-align: center;
+  color: yellow;
+  background-image: url("/resources/dist/img/header-bg.jpg");
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-position: center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+header.masthead .intro-text {
+  padding-top: 150px;
+  padding-bottom: 100px;
+}
+
+header.masthead .intro-text .intro-lead-in {
+  font-size: 22px;
+  font-style: italic;
+  line-height: 22px;
+  margin-bottom: 25px;
+  font-family: 'Droid Serif', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+header.masthead .intro-text .intro-heading {
+  font-size: 50px;
+  font-weight: 700;
+  line-height: 50px;
+  margin-bottom: 25px;
+  font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+@media (min-width: 768px) {
+
+  #clock{
+    margin-left:260px;
+    width:600px;
+    height:250px;
+    line-height:250px;
+    color:yellow;
+    font-size:100px;
+  }
+  
+
+
+  header.masthead .intro-text {
+    padding-top: 300px;
+    padding-bottom: 200px;
+  }
+  header.masthead .intro-text .intro-lead-in {
+    font-size: 40px;
+    font-style: italic;
+    line-height: 40px;
+    margin-bottom: 25px;
+    font-family: 'Droid Serif', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+  header.masthead .intro-text .intro-heading {
+    font-size: 75px;
+    font-weight: 700;
+    line-height: 75px;
+    margin-bottom: 50px;
+    font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+}
+
+/*  TESTIMONIALS
+----------------------*/
+#gallery{
+  margin-top:35px;
+}
+
+#gallery h3 {
+  font-size:2rem;
+}
+
+.owl-next.disabled,
+.owl-prev.disabled {
+    opacity: 0.5;
+}
+
+.owl-prev,
+.owl-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.owl-prev {
+    left: 0;
+}
+
+.owl-next {
+    right: 0;
+}
+
+.owl-theme .owl-nav.disabled+.owl-dots {
+    margin-top: 60px;
+}
+
+.owl-theme .owl-dots .owl-dot span {
+    background: #FFEFD5;
+    width: 35px;
+    height: 8px;
+    border-radius: 10px;
+    transition: all 0.3s ease-in;
+}
+
+.owl-theme .owl-dots .owl-dot:hover span {
+    background: gray;
+}
+
+.owl-theme .owl-dots .owl-dot.active span {
+    background: gray;
+    box-shadow: 0px 9px 32px 0px rgba(0, 0, 0, 0.07);
+}
+
+
+/*  IMAGE GALLERY
+----------------------*/
+
+.img-gallery .owl-item {
+    box-shadow: 0px 9px 32px 0px rgba(0, 0, 0, 0.07);
+    transform: scale(0.8);
+    transition: all 0.3s ease-in;
+}
+
+.img-gallery .owl-item.center {
+    transform: scale(1);
+}
+
+
+/*페이징 처리 합시다*/
+
+.text-center {
+	font-size:30px;
+	color:white;
+}
+
+
+
+.text-center li{
+	background-color:black;
+	border:1px solid black;
+	border-radius:50%;	
+	box-shadow:yellow;
+	margin-left:8px;
+}
+
+.text-center:active {
+	background-color: 0px 9px 32px 0px rgba(0, 0, 0, 0.07);
+	box-shadow:yellow;
+	transform:translateY(4px);
+	
+}
+
+.text-center a{
+	padding:13px;
+	text-decoration:none;
+	color:white;
+}
+
+/* contact */
+
+#contact{
+  margin-top:35px;
+}
+
+#contact h2{
+  margin-top:15px;
+}
+
+#contact .btn-primary {
+  margin-bottom:20px;
+}
+
+section#contact {
+  background-color: #212529;
+  background-image: url("/resources/dist/img/map-image.png");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+section#contact .section-heading {
+  color: #fff;
+}
+
+section#contact .form-group {
+  margin-bottom: 25px;
+}
+
+section#contact .form-group input,
+section#contact .form-group textarea {
+  padding: 20px;
+}
+
+section#contact .form-group input.form-control {
+  height: auto;
+}
+
+section#contact .form-group textarea.form-control {
+  height: 248px;
+}
+
+section#contact .form-control:focus {
+  border-color: #fed136;
+  box-shadow: none;
+}
+
+section#contact ::-webkit-input-placeholder {
+  font-weight: 700;
+  color: #ced4da;
+  font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+section#contact :-moz-placeholder {
+  font-weight: 700;
+  color: #ced4da;
+  /* Firefox 18- */
+  font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+section#contact ::-moz-placeholder {
+  font-weight: 700;
+  color: #ced4da;
+  /* Firefox 19+ */
+  font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+section#contact :-ms-input-placeholder {
+  font-weight: 700;
+  color: #ced4da;
+  font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+
+
+
+
+
