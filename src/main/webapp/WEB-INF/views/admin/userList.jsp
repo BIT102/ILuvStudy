@@ -69,7 +69,7 @@
 								<div class="panel-body">
 								<!--리스트 -->
         						<!--페이징 처리 -->
-        						<div>총 ${pageMaker.totalCount}건 ${cri.page}/${pageMaker.endPage}페이지</div>
+        						<div style="float:right">총 ${pageMaker.totalCount}건 ${cri.page}/${pageMaker.endPage}페이지</div>
 									<table class="table table-hover">
 										<thead>
 											<tr>

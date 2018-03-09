@@ -71,6 +71,7 @@ public class AdminController {
 		rttr.addAttribute("page", cri.getPage());
 		rttr.addAttribute("perPageNum", cri.getPerPageNum());
 		//검색 정보 유지
+		rttr.addAttribute("statusType", cri.getStatusType());
 		rttr.addAttribute("idKeyword", cri.getIdKeyword());
 		rttr.addAttribute("nameKeyword", cri.getNameKeyword());
 		rttr.addFlashAttribute("msg", "SUCCESS");

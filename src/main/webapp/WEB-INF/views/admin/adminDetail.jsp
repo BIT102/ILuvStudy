@@ -117,7 +117,7 @@
 		//목록 클릭 시 액션
 		$("#listBtn").on("click", function(){
 			self.location = "/admin/adminList?page=${cri.page}&perPageNum=${cri.perPageNum}"
-							+"&idKeyword=${cri.idKeyword}&nameKeyword=${cri.nameKeyword}";
+							+"&statusType=${cri.statusType}&idKeyword=${cri.idKeyword}&nameKeyword=${cri.nameKeyword}";
 		});
 	});
 </script>

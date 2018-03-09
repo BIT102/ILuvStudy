@@ -8,6 +8,7 @@ public class Criteria {
 	//admin 계정 관리 검색처리
 	private String idKeyword;  //관리자 아이디 검색
 	private String nameKeyword;  //관리자명 검색
+	private String statusType;  //관리자 계정 사용 여부 검색
 	
 	//user 검색처리
 	private String isDelType;  //회원인지 판단
@@ -44,6 +45,12 @@ public class Criteria {
 		this.perPageNum = perPageNum;
 	}
 	
+	public String getStatusType() {
+		return statusType;
+	}
+	public void setStatusType(String statusType) {
+		this.statusType = statusType;
+	}
 	public String getFaqType() {
 		return faqType;
 	}
@@ -117,9 +124,10 @@ public class Criteria {
 	@Override
 	public String toString() {
 		return "Criteria [page=" + page + ", perPageNum=" + perPageNum + ", idKeyword=" + idKeyword + ", nameKeyword="
-				+ nameKeyword + ", isDelType=" + isDelType + ", emailKeyword=" + emailKeyword + ", nickNameKeyword="
-				+ nickNameKeyword + ", stStatusType=" + stStatusType + ", titleKeyword=" + titleKeyword
-				+ ", writerKeyword=" + writerKeyword + ", bsBnoKeyword=" + bsBnoKeyword + ", faqType=" + faqType + "]";
+				+ nameKeyword + ", statusType=" + statusType + ", isDelType=" + isDelType + ", emailKeyword="
+				+ emailKeyword + ", nickNameKeyword=" + nickNameKeyword + ", stStatusType=" + stStatusType
+				+ ", titleKeyword=" + titleKeyword + ", writerKeyword=" + writerKeyword + ", bsBnoKeyword="
+				+ bsBnoKeyword + ", faqType=" + faqType + "]";
 	}
 
 }
