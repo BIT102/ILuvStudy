@@ -27,6 +27,7 @@ public class NoticeDAOImpl implements NoticeDAO {
 	
 	//전체 불러오기
 	public List<NoticeVO> noticeList() throws Exception {
+		System.out.println("noticeList=======================");
 		return session.selectList(namespace+".noticeList");
 	}
 	

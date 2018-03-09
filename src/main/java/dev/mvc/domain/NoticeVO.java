@@ -15,45 +15,6 @@ public class NoticeVO {
 	private Date regdate;
 	private String writer;
 	private Date lastModifyDate;
-
-	
-
-	public Integer getbno() {
-		return bno;
-	}
-	public void setbno(Integer bno) {
-		this.bno = bno;
-	}
-	public String gettitle() {
-		return title;
-	}
-	public void settitle(String title) {
-		this.title = title;
-	}
-	public String getcontent() {
-		return content;
-	}
-	public void setcontent(String content) {
-		this.content = content;
-	}
-	public Date getregdate() {
-		return regdate;
-	}
-	public void setregdate(Date regdate) {
-		this.regdate = regdate;
-	}
-	public String getwriter() {
-		return writer;
-	}
-	public void setwriter(String writer) {
-		this.writer = writer;
-	}	
-	public Date getLastModifyDate() {
-		return lastModifyDate;
-	}
-	public void setLastModifyDate(Date lastModifyDate) {
-		this.lastModifyDate = lastModifyDate;
-	}
 	public int getBno() {
 		return bno;
 	}
@@ -84,11 +45,17 @@ public class NoticeVO {
 	public void setWriter(String writer) {
 		this.writer = writer;
 	}
+	public Date getLastModifyDate() {
+		return lastModifyDate;
+	}
+	public void setLastModifyDate(Date lastModifyDate) {
+		this.lastModifyDate = lastModifyDate;
+	}
 	@Override
 	public String toString() {
-
 		return "NoticeVO [bno=" + bno + ", title=" + title + ", content=" + content + ", regdate=" + regdate
 				+ ", writer=" + writer + ", lastModifyDate=" + lastModifyDate + "]";
-
 	}
+
+	
 }
