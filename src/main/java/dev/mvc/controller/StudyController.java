@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import dev.mvc.domain.Criteria;
 import dev.mvc.domain.CriteriaStudy;
 import dev.mvc.domain.PageMakerStudy;
 import dev.mvc.domain.SearchCriteriaStudy;
@@ -155,6 +156,29 @@ public class StudyController {
 		
 		return "redirect:/study/listAll";
 	}
+	
+	//수정페이지
+	@RequestMapping(value="/modifyPage", method = RequestMethod.GET)
+		public void modifyPagingGET(@RequestParam("bno")int bno,
+				@ModelAttribute("cri")Criteria cri, 
+				Model model)throws Exception{
+		
+		model.addAttribute(service.read(bno));
+	}
+
+	@RequestMapping(value="/modifyPage", method = RequestMethod.POST)
+		public String modifyPagingPOST(StudyVO vo, Criteria cri,
+				RedirectAttributes rttr) throws Exception{
+		
+		service.modify(vo);
+		
+		rttr.addAttribute("page", cri.getPage());
+		rttr.addAttribute("perPageNum", cri.getPerPageNum());
+		rttr.addFlashAttribute("msg", "SUCCESS");
+		
+		return "redirect:/study/listAll";
+	}
+	
 }
 
 

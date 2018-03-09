@@ -2824,3 +2824,858 @@ Binding(CTRL+D,
 		,,true),null),
 	org.eclipse.ui.defaultAcceleratorConfiguration,
 	org.eclipse.ui.textEditorScope,,,system)
+
+!ENTRY org.eclipse.core.jobs 4 2 2018-03-06 18:12:57.661
+!MESSAGE An internal error occurred during: "Updating Git status for repository ILuvStudy".
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.egit.core.internal.indexdiff.IndexDiffCacheEntry.getRepository(IndexDiffCacheEntry.java:188)
+	at org.eclipse.egit.core.internal.indexdiff.IndexDiffCacheEntry.access$1(IndexDiffCacheEntry.java:183)
+	at org.eclipse.egit.core.internal.indexdiff.IndexDiffCacheEntry$5.updateIndexDiff(IndexDiffCacheEntry.java:528)
+	at org.eclipse.egit.core.internal.indexdiff.IndexDiffUpdateJob.run(IndexDiffUpdateJob.java:75)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+!SESSION 2018-03-07 08:56:34.768 -----------------------------------------------
+eclipse.buildId=3.8.2.201610040743-RELEASE-e46
+java.version=1.8.0_151
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ko_KR
+Framework arguments:  -product org.springsource.sts.ide
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.springsource.sts.ide
+
+!ENTRY org.eclipse.jface.text 2 0 2018-03-07 08:56:44.860
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.number'
+
+!ENTRY org.eclipse.jface.text 2 0 2018-03-07 08:56:44.870
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'
+
+!ENTRY org.eclipse.jface.text 2 0 2018-03-07 08:56:44.899
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.number'
+
+!ENTRY org.eclipse.jface.text 2 0 2018-03-07 08:56:44.903
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'
+
+!ENTRY org.eclipse.jface.text 2 0 2018-03-07 08:56:44.963
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.number'
+
+!ENTRY org.eclipse.jface.text 2 0 2018-03-07 08:56:44.993
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'
+
+!ENTRY org.eclipse.jface 2 0 2018-03-07 08:56:47.306
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2018-03-07 08:56:47.306
+!MESSAGE A conflict occurred for CTRL+D:
+Binding(CTRL+D,
+	ParameterizedCommand(Command(org.eclipse.ui.edit.text.delete.line,Delete Line,
+		Delete a line of text,
+		Category(org.eclipse.ui.category.textEditor,Text Editing,Text Editing Commands,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@b4010be,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.textEditorScope,,,system)
+Binding(CTRL+D,
+	ParameterizedCommand(Command(io.emmet.eclipse.commands.match_pair_outward,Match Pair Outward,
+		,
+		Category(io.emmet.eclipse.commands.category,Emmet,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@1e2a39b7,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.textEditorScope,,,system)
+
+!ENTRY org.eclipse.egit.ui 2 0 2018-03-07 08:56:47.910
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\504CLASS 01'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-03-07 08:56:54.135
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-03-07 08:56:54.148
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.equinox.p2.transport.ecf 2 0 2018-03-07 14:13:12.240
+!MESSAGE Connection to http://dist.springsource.com/release/STS/doc/updates.xml failed on dist.springsource.com. Retry attempt 0 started
+!STACK 0
+java.net.UnknownHostException: dist.springsource.com
+	at java.net.Inet6AddressImpl.lookupAllHostAddr(Native Method)
+	at java.net.InetAddress$2.lookupAllHostAddr(InetAddress.java:928)
+	at java.net.InetAddress.getAddressesFromNameService(InetAddress.java:1323)
+	at java.net.InetAddress.getAllByName0(InetAddress.java:1276)
+	at java.net.InetAddress.getAllByName(InetAddress.java:1192)
+	at java.net.InetAddress.getAllByName(InetAddress.java:1126)
+	at org.apache.http.impl.conn.SystemDefaultDnsResolver.resolve(SystemDefaultDnsResolver.java:44)
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.resolveHostname(DefaultClientConnectionOperator.java:259)
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:159)
+	at org.apache.http.impl.conn.AbstractPoolEntry.open(AbstractPoolEntry.java:144)
+	at org.apache.http.impl.conn.AbstractPooledConnAdapter.open(AbstractPooledConnAdapter.java:131)
+	at org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:611)
+	at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:446)
+	at org.apache.http.impl.client.AbstractHttpClient.doExecute(AbstractHttpClient.java:863)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:82)
+	at org.eclipse.ecf.provider.filetransfer.httpclient4.HttpClientRetrieveFileTransfer.performConnect(HttpClientRetrieveFileTransfer.java:1084)
+	at org.eclipse.ecf.provider.filetransfer.httpclient4.HttpClientRetrieveFileTransfer.access$0(HttpClientRetrieveFileTransfer.java:1075)
+	at org.eclipse.ecf.provider.filetransfer.httpclient4.HttpClientRetrieveFileTransfer$1.performFileTransfer(HttpClientRetrieveFileTransfer.java:1071)
+	at org.eclipse.ecf.filetransfer.FileTransferJob.run(FileTransferJob.java:74)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY org.eclipse.equinox.p2.transport.ecf 2 0 2018-03-07 14:13:12.272
+!MESSAGE Connection to https://spring.io/blog.atom failed on spring.io. Retry attempt 0 started
+!STACK 0
+java.net.UnknownHostException: spring.io
+	at java.net.Inet6AddressImpl.lookupAllHostAddr(Native Method)
+	at java.net.InetAddress$2.lookupAllHostAddr(InetAddress.java:928)
+	at java.net.InetAddress.getAddressesFromNameService(InetAddress.java:1323)
+	at java.net.InetAddress.getAllByName0(InetAddress.java:1276)
+	at java.net.InetAddress.getAllByName(InetAddress.java:1192)
+	at java.net.InetAddress.getAllByName(InetAddress.java:1126)
+	at org.apache.http.impl.conn.SystemDefaultDnsResolver.resolve(SystemDefaultDnsResolver.java:44)
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.resolveHostname(DefaultClientConnectionOperator.java:259)
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:159)
+	at org.apache.http.impl.conn.AbstractPoolEntry.open(AbstractPoolEntry.java:144)
+	at org.apache.http.impl.conn.AbstractPooledConnAdapter.open(AbstractPooledConnAdapter.java:131)
+	at org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:611)
+	at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:446)
+	at org.apache.http.impl.client.AbstractHttpClient.doExecute(AbstractHttpClient.java:863)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:82)
+	at org.eclipse.ecf.provider.filetransfer.httpclient4.HttpClientRetrieveFileTransfer.performConnect(HttpClientRetrieveFileTransfer.java:1084)
+	at org.eclipse.ecf.provider.filetransfer.httpclient4.HttpClientRetrieveFileTransfer.access$0(HttpClientRetrieveFileTransfer.java:1075)
+	at org.eclipse.ecf.provider.filetransfer.httpclient4.HttpClientRetrieveFileTransfer$1.performFileTransfer(HttpClientRetrieveFileTransfer.java:1071)
+	at org.eclipse.ecf.filetransfer.FileTransferJob.run(FileTransferJob.java:74)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+!SESSION 2018-03-08 10:36:30.525 -----------------------------------------------
+eclipse.buildId=3.8.2.201610040743-RELEASE-e46
+java.version=1.8.0_151
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ko_KR
+Framework arguments:  -product org.springsource.sts.ide -product org.springsource.sts.ide
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.springsource.sts.ide -data C:\Users\504CLASS 01\git\ILuvStudy -product org.springsource.sts.ide
+
+!ENTRY org.eclipse.jface.text 2 0 2018-03-08 10:36:35.315
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.number'
+
+!ENTRY org.eclipse.jface.text 2 0 2018-03-08 10:36:35.340
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'
+
+!ENTRY org.eclipse.jface.text 2 0 2018-03-08 10:36:35.373
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.number'
+
+!ENTRY org.eclipse.jface.text 2 0 2018-03-08 10:36:35.381
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'
+
+!ENTRY org.eclipse.jface.text 2 0 2018-03-08 10:36:35.424
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.number'
+
+!ENTRY org.eclipse.jface.text 2 0 2018-03-08 10:36:35.429
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'
+
+!ENTRY org.eclipse.egit.ui 2 0 2018-03-08 10:36:38.119
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\504CLASS 01'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-03-08 10:36:50.980
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-03-08 10:36:51.003
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-03-08 10:36:51.022
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:36:51.229
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\imgscalr\imgscalr-lib\4.2\imgscalr-lib-4.2.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:36:51.272
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\imgscalr\imgscalr-lib\4.2\imgscalr-lib-4.2.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:36:51.314
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\imgscalr\imgscalr-lib\4.2\imgscalr-lib-4.2.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:36:51.323
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\imgscalr\imgscalr-lib\4.2\imgscalr-lib-4.2.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:36:51.333
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\imgscalr\imgscalr-lib\4.2\imgscalr-lib-4.2.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:36:51.359
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\imgscalr\imgscalr-lib\4.2\imgscalr-lib-4.2.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:36:51.375
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\imgscalr\imgscalr-lib\4.2\imgscalr-lib-4.2.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:36:51.405
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\imgscalr\imgscalr-lib\4.2\imgscalr-lib-4.2.jar is not on its project's build path
+
+!ENTRY org.eclipse.jface 2 0 2018-03-08 10:36:56.072
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2018-03-08 10:36:56.072
+!MESSAGE A conflict occurred for CTRL+D:
+Binding(CTRL+D,
+	ParameterizedCommand(Command(org.eclipse.ui.edit.text.delete.line,Delete Line,
+		Delete a line of text,
+		Category(org.eclipse.ui.category.textEditor,Text Editing,Text Editing Commands,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@223f8c82,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.textEditorScope,,,system)
+Binding(CTRL+D,
+	ParameterizedCommand(Command(io.emmet.eclipse.commands.match_pair_outward,Match Pair Outward,
+		,
+		Category(io.emmet.eclipse.commands.category,Emmet,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@33d95295,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.textEditorScope,,,system)
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-03-08 10:37:30.417
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-03-08 10:37:30.481
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.wst.common.project.facet.core 4 0 2018-03-08 10:39:49.386
+!MESSAGE Project facet grails.app has not been defined. It is used in plugin com.vmware.vfabric.ide.eclipse.tcserver.core.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-03-08 10:43:54.291
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-03-08 10:43:54.299
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-03-08 10:45:46.337
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-03-08 10:45:46.505
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.jface.text 2 0 2018-03-08 10:46:22.034
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.number'
+
+!ENTRY org.eclipse.jface.text 2 0 2018-03-08 10:46:22.039
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-03-08 10:50:33.962
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-03-08 10:50:34.013
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:38.925
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-03-08 10:52:39.030
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.041
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.050
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.054
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.061
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-03-08 10:52:39.083
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.093
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.100
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.106
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.112
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-03-08 10:52:39.116
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.135
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.146
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.150
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.156
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.162
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.168
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.173
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.190
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.198
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.203
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.208
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.237
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.243
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.248
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.253
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.280
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.290
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.305
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.320
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.329
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.337
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.425
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.432
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.437
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.449
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.485
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.488
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.494
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.504
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.518
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.525
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.539
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.550
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.561
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.573
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.592
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.611
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.643
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.651
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.656
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.667
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.684
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.692
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.696
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.710
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.717
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.726
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.732
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.744
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.753
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.770
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.777
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.784
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.795
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.803
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.808
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.813
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.821
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.828
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.838
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.847
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.851
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.866
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.873
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.879
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.885
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.889
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.906
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.914
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.920
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.926
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.944
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.948
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.953
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.959
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.965
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.975
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.993
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:39.997
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:40.005
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:40.012
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:40.017
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:40.025
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:40.034
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:40.045
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:40.052
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:40.061
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:40.073
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:40.078
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:40.082
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:40.086
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:40.094
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:40.108
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:40.121
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:40.126
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:40.135
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:40.139
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:40.147
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:40.154
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:40.164
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:40.168
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.jdt.core 4 1006 2018-03-08 10:52:40.172
+!MESSAGE C:\Users\504CLASS 01\.m2\repository\org\aspectj\aspectjweaver\1.8.9\aspectjweaver-1.8.9.jar is not on its project's build path
+
+!ENTRY org.eclipse.wst.server.core 4 0 2018-03-08 10:52:40.768
+!MESSAGE Could not delete C:/Users/504CLASS 01/git/ILuvStudy/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/ILuvStudy_v1_0/WEB-INF/lib. May be locked by another process.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-03-08 10:53:05.922
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-03-08 10:53:06.036
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-03-08 11:06:00.827
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-03-08 11:06:00.840
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-03-08 11:07:54.381
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-03-08 11:07:54.462
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-03-08 11:08:05.203
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-03-08 11:08:05.292
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-03-08 11:08:15.288
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-03-08 11:08:15.373
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+!SESSION 2018-03-08 11:12:56.162 -----------------------------------------------
+eclipse.buildId=3.8.2.201610040743-RELEASE-e46
+java.version=1.8.0_151
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ko_KR
+Framework arguments:  -product org.springsource.sts.ide
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.springsource.sts.ide
+
+!ENTRY org.eclipse.jface.text 2 0 2018-03-08 11:13:02.753
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.number'
+
+!ENTRY org.eclipse.jface.text 2 0 2018-03-08 11:13:02.769
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'
+
+!ENTRY org.eclipse.jface.text 2 0 2018-03-08 11:13:02.800
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.number'
+
+!ENTRY org.eclipse.jface.text 2 0 2018-03-08 11:13:02.800
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'
+
+!ENTRY org.eclipse.jface.text 2 0 2018-03-08 11:13:02.824
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.number'
+
+!ENTRY org.eclipse.jface.text 2 0 2018-03-08 11:13:02.824
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'
+
+!ENTRY org.eclipse.egit.ui 2 0 2018-03-08 11:13:06.128
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\504CLASS 01'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.jface 2 0 2018-03-08 11:13:20.385
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2018-03-08 11:13:20.385
+!MESSAGE A conflict occurred for CTRL+D:
+Binding(CTRL+D,
+	ParameterizedCommand(Command(org.eclipse.ui.edit.text.delete.line,Delete Line,
+		Delete a line of text,
+		Category(org.eclipse.ui.category.textEditor,Text Editing,Text Editing Commands,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@4798ff99,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.textEditorScope,,,system)
+Binding(CTRL+D,
+	ParameterizedCommand(Command(io.emmet.eclipse.commands.match_pair_outward,Match Pair Outward,
+		,
+		Category(io.emmet.eclipse.commands.category,Emmet,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@437847dc,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.textEditorScope,,,system)
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-03-08 11:15:00.081
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-03-08 11:15:00.378
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-03-08 11:15:00.394
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-03-08 11:40:37.913
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-03-08 11:40:37.952
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+!SESSION 2018-03-08 12:05:37.095 -----------------------------------------------
+eclipse.buildId=3.8.2.201610040743-RELEASE-e46
+java.version=1.8.0_151
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ko_KR
+Framework arguments:  -product org.springsource.sts.ide -product org.springsource.sts.ide -product org.springsource.sts.ide
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.springsource.sts.ide -product org.springsource.sts.ide -data C:\Users\504CLASS 01\git\ILuvStudy -product org.springsource.sts.ide
+
+!ENTRY org.eclipse.jface.text 2 0 2018-03-08 12:05:41.438
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.number'
+
+!ENTRY org.eclipse.jface.text 2 0 2018-03-08 12:05:41.453
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'
+
+!ENTRY org.eclipse.jface.text 2 0 2018-03-08 12:05:41.469
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.number'
+
+!ENTRY org.eclipse.jface.text 2 0 2018-03-08 12:05:41.485
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'
+
+!ENTRY org.eclipse.jface.text 2 0 2018-03-08 12:05:41.500
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.number'
+
+!ENTRY org.eclipse.jface.text 2 0 2018-03-08 12:05:41.500
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'
+
+!ENTRY org.eclipse.egit.ui 2 0 2018-03-08 12:05:43.018
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\504CLASS 01'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-03-08 12:05:47.333
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-03-08 12:05:47.344
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.jface 2 0 2018-03-08 12:06:30.500
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2018-03-08 12:06:30.500
+!MESSAGE A conflict occurred for CTRL+D:
+Binding(CTRL+D,
+	ParameterizedCommand(Command(org.eclipse.ui.edit.text.delete.line,Delete Line,
+		Delete a line of text,
+		Category(org.eclipse.ui.category.textEditor,Text Editing,Text Editing Commands,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@59a6a709,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.textEditorScope,,,system)
+Binding(CTRL+D,
+	ParameterizedCommand(Command(io.emmet.eclipse.commands.match_pair_outward,Match Pair Outward,
+		,
+		Category(io.emmet.eclipse.commands.category,Emmet,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@266200f6,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.textEditorScope,,,system)
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-03-08 12:07:26.545
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-03-08 12:07:26.566
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-03-08 12:07:35.906
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-03-08 12:07:35.986
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.wst.common.project.facet.core 4 0 2018-03-08 12:12:31.260
+!MESSAGE Project facet grails.app has not been defined. It is used in plugin com.vmware.vfabric.ide.eclipse.tcserver.core.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-03-08 12:12:42.189
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-03-08 12:12:42.241
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-03-08 12:13:11.476
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-03-08 12:13:11.584
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+!SESSION 2018-03-09 12:14:09.002 -----------------------------------------------
+eclipse.buildId=3.8.2.201610040743-RELEASE-e46
+java.version=1.8.0_151
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ko_KR
+Framework arguments:  -product org.springsource.sts.ide
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.springsource.sts.ide
+
+!ENTRY org.eclipse.jface.text 2 0 2018-03-09 12:14:24.123
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.number'
+
+!ENTRY org.eclipse.jface.text 2 0 2018-03-09 12:14:24.132
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'
+
+!ENTRY org.eclipse.jface.text 2 0 2018-03-09 12:14:24.160
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.number'
+
+!ENTRY org.eclipse.jface.text 2 0 2018-03-09 12:14:24.164
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'
+
+!ENTRY org.eclipse.jface.text 2 0 2018-03-09 12:14:24.190
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.number'
+
+!ENTRY org.eclipse.jface.text 2 0 2018-03-09 12:14:24.197
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'
+
+!ENTRY org.eclipse.jface 2 0 2018-03-09 12:14:28.812
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2018-03-09 12:14:28.812
+!MESSAGE A conflict occurred for CTRL+D:
+Binding(CTRL+D,
+	ParameterizedCommand(Command(org.eclipse.ui.edit.text.delete.line,Delete Line,
+		Delete a line of text,
+		Category(org.eclipse.ui.category.textEditor,Text Editing,Text Editing Commands,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@746a671,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.textEditorScope,,,system)
+Binding(CTRL+D,
+	ParameterizedCommand(Command(io.emmet.eclipse.commands.match_pair_outward,Match Pair Outward,
+		,
+		Category(io.emmet.eclipse.commands.category,Emmet,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@44c66c7b,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.textEditorScope,,,system)
+
+!ENTRY org.eclipse.egit.ui 2 0 2018-03-09 12:14:29.754
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\504CLASS 01'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.jst.server.tomcat.core 4 0 2018-03-09 12:15:33.528
+!MESSAGE Port 8080 required by Tomcat v8.5 Server at localhost is already in use. The server may already be running in another process, or a system process may be using the port. To start this server you will need to stop the other process or change the port number(s).
+!SESSION 2018-03-09 12:18:54.084 -----------------------------------------------
+eclipse.buildId=3.8.2.201610040743-RELEASE-e46
+java.version=1.8.0_151
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ko_KR
+Framework arguments:  -product org.springsource.sts.ide
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.springsource.sts.ide
+
+!ENTRY org.eclipse.jface.text 2 0 2018-03-09 12:19:04.776
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.number'
+
+!ENTRY org.eclipse.jface.text 2 0 2018-03-09 12:19:04.783
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'
+
+!ENTRY org.eclipse.jface.text 2 0 2018-03-09 12:19:04.815
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.number'
+
+!ENTRY org.eclipse.jface.text 2 0 2018-03-09 12:19:04.820
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'
+
+!ENTRY org.eclipse.jface.text 2 0 2018-03-09 12:19:04.846
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.number'
+
+!ENTRY org.eclipse.jface.text 2 0 2018-03-09 12:19:04.850
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'
+
+!ENTRY org.eclipse.egit.ui 2 0 2018-03-09 12:19:08.241
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\504CLASS 01'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.

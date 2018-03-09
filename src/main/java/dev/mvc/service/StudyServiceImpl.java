@@ -110,5 +110,23 @@ public class StudyServiceImpl implements StudyService {
 	public List<StudyVO> rgList2(String rsId) throws Exception {
 		return dao.rgList2(rsId);
 	}
+	//¼öÁ¤
+	@Transactional
+	@Override
+	public void modify(StudyVO vo)throws Exception{
+		dao.update(vo);
+		
+		Integer bno = vo.getBno();
+		
+		dao.deleteAttach(bno);
+		
+		String[] files = vo.getFiles();
+		
+		if(files == null) {return;}
+		
+		for(String fileName : files){
+			dao.replaceAttach(fileName, bno);
+		}
+	}
 
 }

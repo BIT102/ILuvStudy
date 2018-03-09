@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
+	<list key="workingset_selection_history">
+		<item value="12123"/>
+	</list>
+	<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+		<item value="C:\Users\504CLASS 01\Desktop\ILuvStudy-JIJO2"/>
+		<item value="C:\Users\504CLASS 01\Desktop\ILuvStudy-master"/>
+	</list>
 	<list key="installedFeatures">
 		<item value="com.ianbrandt.tools.m2e.mdp.feature:0.0.4.201409291703"/>
 		<item value="io.emmet.eclipse:1.0.0.201401132323"/>

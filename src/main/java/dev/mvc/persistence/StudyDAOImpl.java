@@ -1,5 +1,6 @@
 package dev.mvc.persistence;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -120,6 +121,30 @@ public class StudyDAOImpl implements StudyDAO {
 	@Override
 	public List<StudyVO> rgList2(String rsId) throws Exception {
 		return session.selectList(namespace+".rgList2", rsId);
+	}
+
+	@Override
+	public void update(StudyVO vo) throws Exception {
+		session.update(namespace+".update", vo);
+	}
+	
+	@Override
+	public void deleteAttach(Integer bno) throws Exception {
+
+		session.delete(namespace+".deleteAttach", bno);
+		
+	}
+
+	@Override
+	public void replaceAttach(String fullName, Integer bno) throws Exception {
+
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		
+		paramMap.put("bno", bno);
+		paramMap.put("fullName", fullName);
+		
+		session.insert(namespace+".replaceAttach", paramMap);
+		
 	}
 
 }

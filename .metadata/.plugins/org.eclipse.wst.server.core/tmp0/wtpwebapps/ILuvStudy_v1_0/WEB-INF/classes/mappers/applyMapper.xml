@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- apply mapper -->
+<mapper namespace="dev.mvc.mapper.ApplyMapper">
+
+<!-- 스터디 신청하기 -->
+<insert id="createApply">
+INSERT 
+INTO 
+apply_user
+(usemail
+, bsbno
+, status) VALUE (
+#{usEmail}
+, #{bsBno}
+, 'D'
+)
+</insert>
+
+<!-- 신청자 불러오기 -->
+<select id="listApply" resultType="ApplyVO">
+SELECT
+u.photo
+, au.usemail
+, au.bsbno
+, au.status
+, au.regdate
+FROM
+apply_user au
+LEFT JOIN (user u)
+ON u.email = au.usemail
+WHERE au.bsbno = #{bsBno}
+ORDER BY regdate
+</select>
+
+
+<!-- 스터디 상태값 업데이트 -->
+<update id="updateApply">
+UPDATE
+apply_user
+SET status = #{status}
+WHERE usemail = #{usEmail}
+AND bsbno = #{bsBno}
+</update>
+
+
+<!-- 스터디등록 취소 -->
+<delete id="deleteApply">
+DELETE
+FROM
+apply_user
+WHERE usemail = #{usEmail}
+AND bsbno = #{bsBno}
+</delete>
+</mapper>

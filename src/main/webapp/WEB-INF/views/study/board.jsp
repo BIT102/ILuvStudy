@@ -196,7 +196,7 @@ div.desc {
         
                      등록한 사람   
         <input type="submit" class="preee" value="목록">
-        <input type="submit" value="수정">
+        <input type="submit" class="modifyBtn" value="수정">
         <input type="submit" class="delete" value="삭제">
         <input type="submit" value="스터디완료">
     </div>
@@ -238,6 +238,8 @@ var printData = function(replyArr, target, templateObject) {
 
 </script>
  -->
+<!-- 수정버튼 -->
+
 
 <script>
 $(document).ready(function(){
@@ -256,6 +258,12 @@ $(document).ready(function(){
 	$(".fa fa-heart-o").on("click", function(){
 		<i class="fa fa-heart" style="font-size:36px;"></i>
 	})
+	
+	$(".modifyBtn").on("click",function(){
+		formObj.attr("action", "/study/modifyPage");
+		formObj.attr("method", "get");
+		formObj.submit();
+	});
 	
 });
 </script>   

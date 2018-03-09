@@ -25,13 +25,13 @@ public class StudyVO {
 //	BS_ENDDATE	스터디완료일
 	//우아아앙아아아아아아아아앙
 	//우우우우우우우우우아아아아아아아아아아아아아아아아아아앙
-	private Integer bno; 
+	private int bno; 
 	private String title; 
 	private String writer; 
 	private String categoryD; 
 	private String categoryS; 
-	private Integer now;
-	private Integer max;
+	private int now;
+	private int max;
 	private String rDId;
 	private String rSId;
 	private String age;
@@ -40,8 +40,8 @@ public class StudyVO {
 	private String st;
 	private String et;
 	private String content;
-	private Integer vct;
-	private Integer rct;
+	private int vct;
+	private int rct;
 	private Date regdate;
 	private Date enddate;
 	
@@ -95,7 +95,7 @@ public class StudyVO {
 	}
 
 
-	public Integer getBno() {
+	public int getBno() {
 		return bno;
 	}
 

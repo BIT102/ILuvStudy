@@ -14,6 +14,8 @@ public interface StudyService {
 	//스터디 불러오기
 	public StudyVO read(Integer bno) throws Exception;
 	
+	//수정
+	public void modify(StudyVO vo) throws Exception;
 	
 	//전체불러오기
 	public List<StudyVO> studyList() throws Exception;

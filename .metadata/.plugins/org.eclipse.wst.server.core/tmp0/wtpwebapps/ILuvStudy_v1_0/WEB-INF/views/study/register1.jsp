@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -21,19 +22,18 @@
 	border: 1px dotted blue;
 }
 
-small {
+.small {
 	margin-left: 3px;
 	font-weight: bold;
 	color: gray;
 }
 
-small:hover {
+.small:hover {
 	background-color: black;
 }
 </style>
-
-
 </head>
+
 <body>
 
 	<!--스터디등록-->
@@ -41,6 +41,7 @@ small:hover {
 
 		<!--첫번째 페이지-->
 		<div class="register1">
+
 			<!--제목입력-->
 			<div class="studytitle">
 				<p>스터디명</p>
@@ -56,46 +57,69 @@ small:hover {
 
 			<!--카테고리-->
 			<div class="stucycategory">
+
 				<!--대분류-->
-				<div id="BigCat">
+				<div class="CD">
 					<p>대분류</p>
-					<% int cataNum = 64; %>
-					<c:forEach items="${catlist}" var="StudyVO">
-						<% cataNum++; %>
-						<input type="checkbox" value="<%=(char)cataNum%>">${StudyVO.cDName}</input>
-					</c:forEach>
+					<input type="checkbox" name="categoryD" value="A">외국어 <input
+						type="checkbox" name="categoryD" value="B">IT <input
+						type="checkbox" name="categoryD" value="C">라이프스타일 <input
+						type="checkbox" name="categoryD" value="D">취업
 				</div>
+
 				<!--소분류 외국어-->
-				<p>소분류</p>
-				<div id="SmallCat"></div>
+				<div class="CSA">
+					<p>소분류</p>
+					<input type="checkbox" name="categoryS" value="1">토익 <input
+						type="checkbox" name="categoryS" value="2">토플 <input
+						type="checkbox" name="categoryS" value="3">텝스 <input
+						type="checkbox" name="categoryS" value="4">토스/오픽 <input
+						type="checkbox" name="categoryS" value="5">회화 <input
+						type="checkbox" name="categoryS" value="6">작문/독해 <input
+						type="checkbox" name="categoryS" value="7">중국어 <input
+						type="checkbox" name="categoryS" value="8">일본어 <input
+						type="checkbox" name="categoryS" value="9">기타
+				</div>
+
+				<!-- 소분류IT -->
+				<div class="CSB">
+					<p>소분류</p>
+					<input type="checkbox" name="categoryS" value="1">컴퓨터언어 <input
+						type="checkbox" name="categoryS" value="2">웹프로그래밍 <input
+						type="checkbox" name="categoryS" value="3">모바일프로그래밍 <input
+						type="checkbox" name="categoryS" value="4">데이터베이스/서버 <input
+						type="checkbox" name="categoryS" value="5">게임프로그래밍 <input
+						type="checkbox" name="categoryS" value="6">문서작성 <input
+						type="checkbox" name="categoryS" value="7">자격증 <input
+						type="checkbox" name="categoryS" value="8">기타
+				</div>
+
+				<!-- 소분류라이프스타일 -->
+				<div class="CSC">
+					<p>소분류</p>
+					<input type="checkbox" name="categoryS" value="1">미술/디자인 <input
+						type="checkbox" name="categoryS" value="2">뷰티/미용 <input
+						type="checkbox" name="categoryS" value="3">스포츠 <input
+						type="checkbox" name="categoryS" value="4">음악/공연 <input
+						type="checkbox" name="categoryS" value="5">게임 <input
+						type="checkbox" name="categoryS" value="6">기타
+				</div>
+
+				<!-- 소분류취업 -->
+				<div class="CSD">
+					<p>소분류</p>
+					<input type="checkbox" name="categoryS" value="1">면접 <input
+						type="checkbox" name="categoryS" value="2">자소서 <input
+						type="checkbox" name="categoryS" value="3">고시 <input
+						type="checkbox" name="categoryS" value="4">기술 <input
+						type="checkbox" name="categoryS" value="5">기타
+				</div>
 			</div>
 		</div>
 
-		<!-- 체크박스이벤트 -->
-		<script>
-			$("#BigCat>input").change(function(){
-				var bigNum = $(this).val()
-				console.log(bigNum);
-				smallCat(bigNum);
-			});
-	
-			function smallCat(bigNum){
-				$.getJSON(
-					"register1/category/"+bigNum,
-					function(data){
-						var str = "";
-						$(data).each(function(){
-							str += "<input type="+'radio'+" value="+this.csId+">"+this.cSName+"</input>";						
-						});
-						$("#SmallCat").html(str);
-					}
-				)
-			}
-		</script>
-
-
 		<!--두번째 페이지-->
 		<div class="register2">
+
 			<!--최대인원-->
 			<div class="studymax">
 				<p>최대인원</p>
@@ -103,58 +127,47 @@ small:hover {
 			</div>
 
 			<!--지역분류-->
-			<div id="studyRegion">
+			<div class="studyRegion">
 
-				<!-- 대분류 -->
-				<p>지역대분류</p>
-				<select name="rDId" id="rDId">
+				<!--대분류-->
+				<div class="RD">
+					<p>지역대분류</p>
+					<select class="rDId" name="rDId">
+						<option selected>--</option>
+						<option value="A">서울</option>
+						<option value="B">경기도</option>
+						<option value="C">인천광역시</option>
+						<option value="D">세종틀별자치시</option>
+						<option value="E">강원도</option>
+						<option value="F">충청북도</option>
+						<option value="G">충청남도</option>
+						<option value="H">대전광역시</option>
+						<option value="I">대구광역시</option>
+						<option value="J">경상북도</option>
+						<option value="K">경상남도</option>
+						<option value="L">전라북도</option>
+						<option value="M">전라남도</option>
+						<option value="N">광주광역시</option>
+						<option value="O">부산광역시</option>
+						<option value="P">울산광역시</option>
+						<option value="Q">제주특별시</option>
+					</select>
+				</div>
 
-					<option value='' selected>--</option>
-
-					<% int cataNum2 = 64; %>
-					<c:forEach items="${rglist}" var="StudyVO">
-						<% cataNum2++; %>
-						<option value="<%=(char)cataNum2%>">${StudyVO.rDName}</option>
-					</c:forEach>
-
-				</select>
-
-				<!-- 소분류 -->
-				<p>지역소분류</p>
-				<select name="rSId" id="rSId">
-
-					<option selected>--</option>
-
-				</select>
+				<!--소분류//나중에추가하기-->
+				<div class="RSP">
+					<p>지역소분류</p>
+					<select class="rSId" name="rSId">
+						<option selected>--</option>
+						<option value="1">남구</option>
+						<option value="2">동구</option>
+						<option value="3">북구</option>
+						<option value="4">울주군</option>
+						<option value="5">중구</option>
+					</select>
+				</div>
 			</div>
 
-
-			<!-- select지역 이벤트       -->
-		 	<script>
-				$("#rDId").change(function(){
-					
-					var bigNum2 = $(this).val()
-					
-					console.log(bigNum2);
-					smallCat2(bigNum2);
-				})
-	
-				function smallCat2(bigNum2){
-					$.getJSON(
-						"register1/region/"+bigNum2,
-						function(data){
-							var str = "";
-
-							$(data).each(function(){
-								str += "<option value="+this.rSId+">"+this.rSName+"</option>";							
-							});
-							
-							$("#rSId").html(str);
-						}
-					)
-				}			
-			</script> 
-			
 			<!--연령-->
 			<div class="studyage">
 				<p>연령</p>
@@ -171,7 +184,7 @@ small:hover {
 				<p>요일</p>
 				<select class="sc" name="sc">
 					<option selected>--</option>
-					<option>월요일</option>
+					<option value="월요일">월요일</option>
 					<option value="화요일">화요일</option>
 					<option value="수요일">수요일</option>
 					<option value="목요일">목요일</option>
@@ -186,6 +199,7 @@ small:hover {
 				<p>시작날짜</p>
 				<input type="date" name="sd">
 			</div>
+
 			<!--시작시간//나중에추가하기-->
 			<div class="studyst">
 				<p>시작시간</p>
@@ -253,6 +267,7 @@ small:hover {
 
 		<!--3번째 페이지-->
 		<div class="register3">
+		
 			<!--내용-->
 			<div class=studycontent>
 				<p>추가글</p>
@@ -262,13 +277,12 @@ small:hover {
 			<!-- 파일업로드부분 -->
 			<div class="studyfile">
 				<P>파일업로드</P>
+				<input type="file" name="file">파일을 골라주세용
 
 				<h3>Ajax File upload</h3>
 				<div class='fileDrop'></div>
-
+				
 				<div class='uploadedList'></div>
-
-
 			</div>
 		</div>
 
@@ -276,40 +290,54 @@ small:hover {
 	</form>
 
 	<iframe name="zeroFrame"></iframe>
-	<!-- 파일등록 핸들러 -->
+	
+	<!-- 일등록 핸들러 -->
 	<script id="template" type="text/x-handlebars-template">
 
-	<span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment">
+	<div class="mailbox-attachment-info">
+
+		<span class="mailbox-attachment-icon has-img">
+
+			<img src="{{imgsrc}}" alt="Attachment">
+
+		</span>
 
 		<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>
-		<a href="{{name}}" class="big">zzzz</big></a> <small data-src=data>X</small>
 
-</div>
+		<small class = "small" value = "{{name}}" data-src=data style="cursor:pointer">X</small>
 
+		</span>
+
+	</div>
 </script>
 
 	<script>
-	
+
 		var template = Handlebars.compile($("#template").html());
-		
+
 		$(".fileDrop").on("dragenter dragover", function(event){
+
 			event.preventDefault();
 		});
-		
+
 		//파일을 떨구는 장소	
+
 		$(".fileDrop").on("drop", function(event){
-			
+
 			event.preventDefault();
-	
+
 			var files = event.originalEvent.dataTransfer.files;
 
 			var file = files[0];
-			
+
+			console.log(file);
+
 			var formData = new FormData();
-			
+
 			formData.append("file", file);
-			
+
 			$.ajax({
+
 				url: '/study/uploadAjax',
 				data: formData,
 				dataType: 'text',
@@ -318,27 +346,24 @@ small:hover {
 				type: 'POST',
 				//파일을 드롭했을때 성공시
 				success: function(data){
-				
+					
 					var fileInfo = getFileInfo(data);
-					
+			
 					var html = template(fileInfo);
-					
-					$(".uploadedList").append(html);
-					
-					
-				}
 
+					$(".uploadedList").append(html);
+				}
 				});
 			});
 
-		//이미지삭제합니다
-	$(".uploadedList").on("click", "small", function(event){
-			
+		//취소버튼
+		$(".uploadedList").on("click", "small", function(event){
+
 			var that = $(this);
-			
+
 			$.ajax({
-				url:"/study/deleteFile",
-				type:"POST",
+				url:"deleteFile",
+				type:"post",
 				data:{fileName:$(this).attr("data-src")},
 				dataType:"text",
 				success:function(result){
@@ -347,33 +372,29 @@ small:hover {
 						that.parent("div").remove();
 					}
 				}
-			})
-			
+			});
 		});
-		
-		
+
 		//스터디 보드 등록후 이미지 등록을 위해서
 		$("#registerForm").submit(function(event){
-			
+
 			event.preventDefault();
 			
 			var that = $(this);
-			
-			
+
 			var str = "";
-			
-			$("uploadedList .big").each(function(index){
-				
-				str += "<input type='hidden' name='files["+index+"]' value='"+$(this).attr("href")+"'>";
+
+			$(".uploadedList .small").each(function(index){
+				str += "<input type='hidden' name='files["+index+"]' value='"+$(this).attr("value")+"'>";
 			});
-			
 			that.append(str);
-			
+
 			that.get(0).submit();
+
 		});
 
 	</script>
 
-
 </body>
+
 </html>

@@ -12,8 +12,7 @@
 
 <script src="http://code.jquery.com/jquery-1.7.js"></script>
 <script type="text/javascript" src="/resources/js/upload.js"></script>
-<script
-	src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 <!-- Bootstrap CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -58,7 +57,6 @@
 	width: 40px;
 	height: 40px;
 }
-#ddd{width:60px;}
 </style>
 </head>
 <body>
@@ -95,26 +93,6 @@
      <button id="newBtn">NEW BOARD</button>
 	</div>
 	
-	
-	<!-- 이거는 카테고리분류 -->
-	 <select name="" id="BigCat">
-	 <option>선택하세요</option>
-	   <% int cataNum = 64; %>        
-	     <c:forEach items="${catlist}" var="StudyVO">
-	                     <% cataNum++; %>
-	     <option value="<%=(char)cataNum%>">${StudyVO.cDName}</option>
-	                  
-	     </c:forEach>
-     </select>
-   
-	 <select name="" id="SmallCat">
-	 
-	    	                       
-
-     </select>
-     
-     
-     
 	<div id="studycard">
 
 		<div id="innerdiv">
@@ -198,38 +176,6 @@
 						});
 
 			});
-	
-		
-	
-	</script>
-	
-	<script>
-$("#BigCat").change(function(){
-		
-		var bigNum = $(this).val()
-		
-		
-		smallCat(bigNum);
-		
-	})
-	
-	function smallCat(bigNum){
-		$.getJSON(
-				
-					"listAll/"+bigNum,
-					function(data){
-						var str = "";
-
-						
-						$(data).each(function(){
-							str += "<option>"+this.cSName+"</option>";
-						
-						});
-						
-						$("#SmallCat").html(str);
-					}
-		)
-	}
 	</script>
 
 </body>

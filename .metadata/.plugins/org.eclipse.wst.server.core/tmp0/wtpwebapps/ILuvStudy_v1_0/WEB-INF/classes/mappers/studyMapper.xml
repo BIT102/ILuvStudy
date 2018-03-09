@@ -79,6 +79,7 @@ SELECT
 ba.name
 , bs.bno
 , bs.title
+, bs.writer
 , u.nickname
 , sc.cDName
 , sc.cSName
@@ -99,7 +100,7 @@ ba.name
 FROM 
 board_study bs
 left outer join user u on bs.writer = u.EMAIL
-left outer join board_attach ba on bs.bno = ba.bsbno
+left outer join (select * from board_attach where status = "O") ba on bs.bno = ba.bsbno
 left outer join study_category sc on bs.CATEGORYD = sc.CDID and bs.CATEGORYS = sc.CSID
 left outer join region r on bs.RDID = r.RDID and bs.RSID = r.RSID
 WHERE bs.bno > 0
@@ -127,10 +128,23 @@ name
 )
 VALUES(
 #{name}
-, LAST_INSERT_ID()
+, #{bno}
 , #{status}
 )
 </insert>
+
+<!-- 파일불러오기 -->
+<select id="getFile" resultType="string">
+SELECT 
+name
+, status
+FROM
+board_attach
+WHERE
+bsbno = #{bsBno}
+AND status = 'X'
+ORDER BY regdate
+</select>
 
 <!-- 게시물 조회수 -->
 <update id="upVct">
@@ -150,6 +164,7 @@ SELECT
 ba.name
 , bs.bno
 , bs.title
+, bs.writer
 , u.NICKNAME
 , sc.cDName
 , sc.cSName
@@ -170,7 +185,7 @@ ba.name
 FROM 
 board_study bs
 left outer join user u on bs.writer = u.EMAIL
-left outer join board_attach ba on bs.bno = ba.bsbno
+left outer join (select * from board_attach where status = "O") ba on bs.bno = ba.bsbno
 left outer join study_category sc on bs.CATEGORYD = sc.CDID and bs.CATEGORYS = sc.CSID
 left outer join region r on bs.RDID = r.RDID and bs.RSID = r.RSID
 WHERE bs.bno > 0
@@ -187,6 +202,7 @@ SELECT
 ba.name
 , bs.bno
 , bs.title
+, bs.writer
 , u.NICKNAME
 , sc.cDName
 , sc.cSName
@@ -207,7 +223,7 @@ ba.name
 FROM 
 board_study bs
 left outer join user u on bs.writer = u.EMAIL
-left outer join board_attach ba on bs.bno = ba.bsbno
+left outer join (select * from board_attach where status = "O") ba on bs.bno = ba.bsbno
 left outer join study_category sc on bs.CATEGORYD = sc.CDID and bs.CATEGORYS = sc.CSID
 left outer join region r on bs.RDID = r.RDID and bs.RSID = r.RSID
 WHERE bs.bno > 0
@@ -223,9 +239,34 @@ limit #{pageStart}
 <![CDATA[
 SELECT
 COUNT(bno)
-FROM
-board_study
-WHERE bno > 0
+ba.name
+, bs.bno
+, bs.title
+, bs.writer
+, u.NICKNAME
+, sc.cDName
+, sc.cSName
+, bs.now
+, bs.max
+, r.rDName
+, r.rSName
+, bs.age
+, bs.sc
+, bs.sd
+, bs.st
+, bs.et
+, bs.content
+, bs.vct
+, bs.rct
+, bs.regdate
+, bs.enddate
+FROM 
+board_study bs
+left outer join user u on bs.writer = u.EMAIL
+left outer join (select * from board_attach where status = "O") ba on bs.bno = ba.bsbno
+left outer join study_category sc on bs.CATEGORYD = sc.CDID and bs.CATEGORYS = sc.CSID
+left outer join region r on bs.RDID = r.RDID and bs.RSID = r.RSID
+WHERE bs.bno > 0
 ]]>
 </select>
 
@@ -260,6 +301,7 @@ SELECT
 ba.name
 , bs.bno
 , bs.title
+, bs.writer
 , u.NICKNAME
 , sc.cDName
 , sc.cSName
@@ -280,7 +322,7 @@ ba.name
 FROM 
 board_study bs
 left outer join user u on bs.writer = u.EMAIL
-left outer join board_attach ba on bs.bno = ba.bsbno
+left outer join (select * from board_attach where status = "O") ba on bs.bno = ba.bsbno
 left outer join study_category sc on bs.CATEGORYD = sc.CDID and bs.CATEGORYS = sc.CSID
 left outer join region r on bs.RDID = r.RDID and bs.RSID = r.RSID
 WHERE bs.bno > 0
@@ -302,6 +344,7 @@ count(bs.bno)
 ,ba.name
 , bs.bno
 , bs.title
+, bs.writer
 , u.NICKNAME
 , sc.cDName
 , sc.cSName
@@ -322,7 +365,7 @@ count(bs.bno)
 FROM 
 board_study bs
 left outer join user u on bs.writer = u.EMAIL
-left outer join board_attach ba on bs.bno = ba.bsbno
+left outer join (select * from board_attach where status = "O") ba on bs.bno = ba.bsbno
 left outer join study_category sc on bs.CATEGORYD = sc.CDID and bs.CATEGORYS = sc.CSID
 left outer join region r on bs.RDID = r.RDID and bs.RSID = r.RSID
 WHERE bs.bno > 0
@@ -355,41 +398,11 @@ WHERE bs.bno > 0
   			</if>
   		</if> 
   </sql>		
-  
-<!-- 카테고리 분류 SQL -->
- <select id="catList" resultType="studyVO">
-<![CDATA[
-select DISTINCT cDName
- from study_category
 
-]]>
-</select>
+  	 		  <select id="getNextBno" resultType="int">
 
-   <select id="catList2" resultType="studyVO">
-<![CDATA[
-select cSName, csId
- from study_category
- where cdId=#{csId} 
+  select LAST_INSERT_ID();
 
-]]>
-</select>
-
-<!-- region 분류 -->
- <select id="rgList" resultType="studyVO">
-<![CDATA[
-SELECT distinct rDName
- from region
-
-]]>
-</select>
-
-<select id="rgList2" resultType="studyVO">
-<![CDATA[
-select rSName, rSId
- from region
-where rDId=#{rSId} 
-
-]]>
-</select>
+  </select>
 
 </mapper>

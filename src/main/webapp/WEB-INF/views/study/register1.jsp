@@ -30,8 +30,33 @@ small {
 small:hover {
 	background-color: black;
 }
-</style>
 
+.bigcatB{background-color:red; border-radius:8px; width:120px; height:30px;}
+#SmallCat1{visibility:hidden;}
+#SmallCat2{visibility:hidden;}
+#SmallCat3{visibility:hidden;}
+#SmallCat4{visibility:hidden;}
+</style>
+<script>
+		
+			$(document).ready(function(){
+				
+			
+				$('#A').mouseover(function(){
+					$("#SmallCat1").css('visibility', 'visible');
+				});
+				$("#B").mouseover(function(){
+					$("#SmallCat2").css('visibility', 'visible');
+				});
+				$("#C").mouseover(function(){
+					$("#SmallCat3").css('visibility', 'visible');
+				});
+				$("#D").mouseover(function(){
+					$("#SmallCat4").css('visibility', 'visible');
+				});
+			});
+			
+		</script>
 
 </head>
 <body>
@@ -58,22 +83,40 @@ small:hover {
 			<div class="stucycategory">
 				<!--대분류-->
 				<div id="BigCat">
-					<p>대분류</p>
+					<p>대분류 (마우스를 올리세요!)</p>
+					
 					<% int cataNum = 64; %>
 					<c:forEach items="${catlist}" var="StudyVO">
 						<% cataNum++; %>
-						<input type="checkbox" value="<%=(char)cataNum%>">${StudyVO.cDName}</input>
+						<button class="bigcatB" value="<%=(char)cataNum%>" id="<%=(char)cataNum%>">${StudyVO.cDName}</button>
 					</c:forEach>
+					
 				</div>
 				<!--소분류 외국어-->
 				<p>소분류</p>
-				<div id="SmallCat"></div>
+				<div id="SmallCat1">
+				<input type="radio" value="1">	토익	<input type="radio" value="2">	토플	<input type="radio" value="3">	텝스	<input type="radio" value="4">	토스/오픽	<input type="radio" value="5">	회화	<input type="radio" value="6">	작문/독해	<input type="radio" value="7">	중국어	<input type="radio" value="8">	일본어	<input type="radio" value="9">	기타	
+				</div>
+				
+				<div id="SmallCat2">
+				<input type="radio" value="1">	컴퓨터언어	<input type="radio" value="2">	웹프로그래밍	<input type="radio" value="3">	모바일프로그래밍	<input type="radio" value="4">	데이터베이스/서버	<input type="radio" value="5">	게임프로그래밍	<input type="radio" value="6">	문서작정	<input type="radio" value="7">	자격증	<input type="radio" value="8">	기타	
+				</div>
+				
+				<div id="SmallCat3">
+				<input type="radio" value="1">	미술/디자인	<input type="radio" value="2">	뷰티/미용	<input type="radio" value="3">	스포츠	<input type="radio" value="4">	음악/공연	<input type="radio" value="5">	게임	<input type="radio" value="6">	기타	
+				</div>
+				
+				<div id="SmallCat4">
+				<input type="radio" value="1">	면접	<input type="radio" value="2">	자소서	<input type="radio" value="3">	고시	<input type="radio" value="4">	기술	<input type="radio" value="5">	기타	
+				</div>
+				
+				
 			</div>
 		</div>
 
 		<!-- 체크박스이벤트 -->
-		<script>
-			$("#BigCat>input").change(function(){
+		
+			<!-- /*$("#BigCat>button").one("mouseover",function(){
 				var bigNum = $(this).val()
 				console.log(bigNum);
 				smallCat(bigNum);
@@ -90,8 +133,8 @@ small:hover {
 						$("#SmallCat").html(str);
 					}
 				)
-			}
-		</script>
+			}*/
+		 		-->
 
 
 		<!--두번째 페이지-->
@@ -99,7 +142,7 @@ small:hover {
 			<!--최대인원-->
 			<div class="studymax">
 				<p>최대인원</p>
-				<input type="number" name="max">
+				<input type="number" name="max" min="0" max="100">
 			</div>
 
 			<!--지역분류-->
@@ -127,13 +170,28 @@ small:hover {
 
 				</select>
 			</div>
-
-
+			
+			
+			<!-- 유효성검사 -->
+			<script>
+			/*	function checkForm(){
+					var max = document.register2.max;
+					
+					if(max.value)
+					
+					if(user) 
+				}
+				                      
+				console.log(max.value);*/
+			</script>
+			
+			
 			<!-- select지역 이벤트       -->
 		 	<script>
 				$("#rDId").change(function(){
 					
 					var bigNum2 = $(this).val()
+					
 					
 					console.log(bigNum2);
 					smallCat2(bigNum2);
@@ -256,7 +314,7 @@ small:hover {
 			<!--내용-->
 			<div class=studycontent>
 				<p>추가글</p>
-				<textarea name="content" row="10"></textarea>
+				<textarea name="content"  rows="5" cols="30"></textarea>
 			</div>
 
 			<!-- 파일업로드부분 -->
@@ -272,7 +330,7 @@ small:hover {
 			</div>
 		</div>
 
-		<button type="submit">종료</button>
+		<button type="submit">전송</button>
 	</form>
 
 	<iframe name="zeroFrame"></iframe>

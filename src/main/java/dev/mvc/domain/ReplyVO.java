@@ -17,6 +17,8 @@ public class ReplyVO {
 	
 	private Date regdate;
 	private Date updatedate;
+	
+	
 	public int getRno() {
 		return rno;
 	}

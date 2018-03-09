@@ -141,7 +141,7 @@ body {margin-left:50px;}
 		<span class="time">
 			<i></i>{{prettifyDate regdate}}
 		</span>
-		<h3 class="timeline-header"><string>{{rno}}<strong> -{{replyer}}</h3>
+		<h3 class="timeline-header"><string>{{rno}}</strong> - {{replyer}}</h3>
 		<div class="timeline-body">{{content}}</div>
 			<div class="timeline-footer">
 				<a class="btn btn-primary btn-xs" data-toggle="modal" data-target="#modifyModal">Modify</a>
@@ -247,6 +247,16 @@ var printData = function (replyArr, target, templateObject){
 			}
 		});
 	});
+	
+	$(".timeline").on("click", ".replyLi", function(event){
+		
+		var reply = $(this);
+		
+		$("#replytext").val(reply.find('timeline-body').text());
+		$(".modal-title").html(reply.attr("data-rno"));
+	});
+	
+	
 	
 	//modal footer에 replymod 버튼
 	$("#replyModBtn").on("click", function(){
