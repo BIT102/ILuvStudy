@@ -56,7 +56,7 @@ public class UserController {
 			e.printStackTrace();
 		}
 		
-		return "join";
+		return "login";
 	}
 	
 	// profile 컨트롤러
