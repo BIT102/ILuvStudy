@@ -281,8 +281,6 @@
 
 			<!-- 파일업로드부분 -->
 			<div class="studyfile">
-				<P>파일업로드</P>
-				<input type="file" name="file">파일을 골라주세용
 
 				<h3>Ajax File upload</h3>
 				<div class='fileDrop'></div>
@@ -293,6 +291,7 @@
 
 		<button type="submit">종료</button>
 	</form>
+
 
 	<iframe name="zeroFrame"></iframe>
 	
@@ -397,6 +396,7 @@
 			that.get(0).submit();
 
 		});
+		
 
 	</script>
 	

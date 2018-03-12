@@ -79,8 +79,8 @@
 
 .uploadedList {
 	border: 1px solid black;
-	width: 50px;
-	height: 100px;
+	width: 340px;
+	height: 120px;
 }
 
 .vct {
@@ -94,95 +94,39 @@
     
 <%@include file="../header.jsp"%>
 
-	<!-- 검색은 나중에 하겠습니다 -->
-   <!-- 검색에 필요한 화면 구현 -->
-       <div class="col-lg-12 text-center">
-            <h2 class="section-heading text-uppercase">스터디 구경하시죠</h2>
-            <h3 class="section-subheading text-muted">김상욱은 하지마요.</h3>
-       </div>
-   
-   	<div class="box-body">
-     <select name="serchType">
-       <option value="n"
-         <c:out value="${cri.searchType == null?'selected':''}"/>>
-         ---</option>
-       <option value="t"
-         <c:out value="${cri.searchType eq 't'?'selected':''}"/>>
-         Title</option>
-       <option value="c"
-         <c:out value="${cri.searchType eq 'c'?'selected':''}"/>>
-         Content</option>
-       <option value="w"
-         <c:out value="${cri.searchType eq 'n'?'selected':''}"/>>
-         NickName</option>
-       <option value="tc"
-         <c:out value="${cri.searchType eq 'tc'?'selected':''}"/>>
-         Title OR Content</option>
-       <option value="cw"
-         <c:out value="${cri.searchType eq 'cn'?'selected':''}"/>>
-         Content OR NickName</option>
-       <option value="tcw"
-         <c:out value="${cri.searchType eq 'tcn'?'selected':''}"/>>
-         Title OR Content OR NickName</option>
-     </select>
-     
-     <input type="text" name="keyword" id="keywordInput" value="${cri.keyword}">
-     <button id="searchBtn">SEARCH</button>
-     <button id="newBtn">NEW BOARD</button>
-	</div>
-	
-	<!-- 이거는 카테고리분류 -->
-	 <select name="" id="BigCat">
-	 <option>선택하세요</option>
-	   <% int cataNum = 64; %>        
-	     <c:forEach items="${catlist}" var="StudyVO">
-	                     <% cataNum++; %>
-	     <option value="<%=(char)cataNum%>">${StudyVO.cDName}</option>
-	                  
-	     </c:forEach>
-     </select>
-   
-	 <select name="" id="SmallCat">
-	 
-	    	                       
 
-     </select>
-
-    <section class="bg-light" id="portfolio">
-		<c:forEach items="${list}" var="studyVO">		
+    <!-- Portfolio Grid -->
+    <section class="bg-light" id="portfolio" >
+      <div class="container" style="background-color:white;">
  
-        <div class="row1"  style="background-image:url(/study/displayFile?fileName=${studyVO.name});">
-          <div class="portfolio-item">
-            <a class="portfolio-link" data-toggle="modal">
+          <div class="col-lg-12 text-center">
+            <h2 class="section-heading text-uppercase">스터디 구경하세요</h2>
+
+        </div>
+        
+        <div class="row">
+   <c:forEach items="${list}" var="studyVO">
+          <div class="col-md-4 col-sm-6 portfolio-item" style="margin-top:120px;">
+          
+            <div class="portfolio-link" data-toggle="modal">
               <div class="portfolio-hover">
-              
+              <a href="/study/board${pageMakerStudy.makeSearch(pageMakerStudy.cri.page)}&bno=${studyVO.bno}">
                 <div class="portfolio-hover-content">
                   <i class="fa fa-plus fa-3x"></i>
                 </div>
+               </a> 
               </div>
-             <!--  <img class="img-fluid" src="resources/dist/img/portfolio/01-thumbnail.jpg" alt=""> -->
-            </a>
-            
-          </div>
-          </div>
-		</c:forEach>
-		<%-- 		<div class="scard cborder" style="width: 20rem;">
-
-					<!-- 파일등록 -->
-                 <c:if test="${studyVO.name!=null}">
-					<div class='uploadedList'>
-						<span class="mailbox-attachment-icon has-img"><img
-							src="/study/displayFile?fileName=${studyVO.name}"
-							alt="Attachment"></span>
-					</div>
-				</c:if> 
-
-					<div class="card-body">
-						${studyVO.bno}
+            </div>
+             <div class="mainimgbox">        
+              <c:if test="${studyVO.name!=null}">
+            <div class='uploadedList' style="background-image:url(/study/displayFile?fileName=${studyVO.name});" >
+			</div>
+			</c:if>
+				</div>
+            <div class="portfolio-caption">
+              <h4>${studyVO.title}</h4>
 						<!-- 작성자 -->
 						<p class="card-writer">${studyVO.nickname}</p>
-						<!-- 스터디 제목 -->
-						<h4 class="card-title">${studyVO.title}</h4>
 						<!-- 현재인원/최대인원 -->
 						<p class="nowandmax">${studyVO.now}/${studyVO.max}</p>
 						<!-- 지역 -->
@@ -193,16 +137,16 @@
 
 						<!-- 조회수 -->
 						<p class="vct"><i class="fa fa-eye"></i>${studyVO.vct}</p>
-						<!-- 상세페이지로 링크 -->
-					<!--	<a href="/study/board?bno=${studyVO.bno}" class="btn btn-primary">$99</a>  -->
-						<a href="/study/board${pageMakerStudy.makeSearch(pageMakerStudy.cri.page)}&bno=${studyVO.bno}" class="btn btn-primary">$99</a>
-					</div>
-				</div>
- --%></section>
+						김상욱은 ㅗ
+            </div>
+ 
+          </div>
+    </c:forEach>
+          </div>
+        </div> <!-- container -->
+    </section>
 
-	
-	
-		<div class="text-center1">
+	<div class="text-center1">
 		<ul class="pagination">
 		
 		<!-- 스프링 MVC를 이용하는 방식 -->
@@ -226,7 +170,6 @@
 		</ul>
 	</div>
 	
-	
 		<script>
 	<!-- search버튼 동작  -->
 	$(document).ready(
@@ -244,32 +187,6 @@
 						});
 
 			});
-	
-$("#BigCat").change(function(){
-		
-		var bigNum = $(this).val()
-		
-		
-		smallCat(bigNum);
-		
-	})
-	
-	function smallCat(bigNum){
-		$.getJSON(
-				
-					"listAll/"+bigNum,
-					function(data){
-						var str = "";
-						
-						$(data).each(function(){
-							str += "<option>"+this.cSName+"</option>";
-						
-						});
-						
-						$("#SmallCat").html(str);
-					}
-		)
-	}
 	</script>
 	
 	   <!-- Bootstrap core JavaScript -->
@@ -289,6 +206,5 @@ $("#BigCat").change(function(){
     <script src="/resources/dist/js/contact_me.js"></script>
   
 
-	<%@include file="../footer.jsp"%>
 </body>
 </html>

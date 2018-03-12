@@ -87,7 +87,7 @@
 					<!-- 메인사진 -->           			
            		<c:if test="${studyVO.name!=null}">
            			<div class='uploadedList' style="background-image:url(/study/displayFile?fileName=${studyVO.name});">
-					</div>
+				</div>
 				</c:if>
 				</div>
 				</a>
