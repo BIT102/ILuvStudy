@@ -45,6 +45,11 @@ public class AdminServiceImpl implements AdminService{
 	}
 	
 	@Override
+	public int chkId(String id)throws Exception{
+		return dao.chkId(id); 
+	}
+	
+	@Override
 	public int adminCountPaging(Criteria cri)throws Exception{
 		return dao.adminCountPaging(cri);
 	}

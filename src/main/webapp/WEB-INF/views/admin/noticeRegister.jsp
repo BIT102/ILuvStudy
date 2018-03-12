@@ -29,7 +29,7 @@
         <table class="table table-hover">
             <tr>
                 <th>제목</th>
-                <td><input type="text" name="title" class="form-control"></td>
+                <td><input type="text" id="title" name="title" class="form-control"></td>
             </tr>
             <tr>
                 <th>작성자</th>
@@ -37,7 +37,7 @@
             </tr>
             <tr>
                 <th>내용</th>
-                <td><textarea name="content" class="form-control"></textarea></td>
+                <td><textarea name="content" id="content" class="form-control"></textarea></td>
             </tr>
         </table>
 	</form>
@@ -72,7 +72,11 @@
 		$("#registerBtn").on("click", function(){
 			//form 유효성 검사 추가 필요
 			
-			formObj.submit();
+			if($("#title").val().length >= 5 && $("#content").val().length >= 5){
+				formObj.submit();
+			}else{
+				alert("제목, 내용을 5자 이상 입력하세요");
+			}
 		});
 		
 		//목록 클릭 시 액션

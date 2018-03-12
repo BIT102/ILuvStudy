@@ -58,7 +58,7 @@
             			<button type="submit" id="updateBtn" class="btn btn-default btn-xs">등록</button>    	
                 	</c:if>
                 	<c:if test="${qnaVO.type eq 1}">등록&nbsp;
-            			<button type="submit" id="updateRBtn" class="btn btn-default btn-xs">미등록</button>    	
+            			<button type="submit" id="updateRBtn" class="btn btn-default btn-xs">등록취소</button>    	
                 	</c:if>
                 </td>
             </tr>
@@ -83,18 +83,18 @@
                 	<c:if test="${not doneLoop}">
                 		<!-- 댓글 작성자와 관리자 아이디가 일치할 경우 -->
                 		<c:if test="${replyVO.replyer eq login.id}">
-                			<textarea name="content" class="form-control" readonly>${replyVO.content}</textarea>
+                			<textarea id="content" name="content" class="form-control">${replyVO.content}</textarea>
                 			<c:set var="doneLoop" value="true"/>
                 		</c:if>
                 		<!-- c:foreach 반복 마지막일때, 아이디가 일치하지 않는 경우 -->
                 		<c:if test="${status.last and !(replyVO.replyer eq login.id)}">
-                			<textarea name="content" class="form-control"></textarea>
+                			<textarea id="content" name="content" class="form-control"></textarea>
                 		</c:if>
                 	</c:if>
                 </c:forEach>
                 <!-- replyVO에 데이터가 없을 경우 -->
                 <c:if test="${list.size() == 0}">
-               		<textarea name="content" class="form-control"></textarea>
+               		<textarea name="content" id="content" class="form-control"></textarea>
                 </c:if>
                 </td>
             </tr>
@@ -161,8 +161,11 @@
 		//등록 클릭 시 액션
 		$("#registerBtn").on("click", function(){
 			//form 데이터 유효성 검사 추가 필요
-			
-			formObj.submit();
+			if(document.getElementById("content").value.length >= 5){
+				formObj.submit();
+			}else{
+				alert("내용을 5자 이상 입력하세요");
+			}
 		});
 		
 		//목록 클릭 시 액션
@@ -178,7 +181,7 @@
 			formObj.submit();
 		});
 		
-		//미등록 클릭 시 액션
+		//등록취소 클릭 시 액션
 		$("#updateRBtn").on("click", function(){
 			//type 0으로 변경 처리 필요
  			formObj.attr("action", "/admin/typeRUpdate");

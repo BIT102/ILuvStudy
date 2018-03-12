@@ -79,6 +79,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		]]>
 		<include refid="adminSearch"></include>	
 	</select>
+	
+	<!-- admin 계정 아이디 중복 체크  -->
+	<select id="chkId" resultType="int">
+		select count(*)
+		from admin
+		where id=#{id}
+	</select>
 
 <!-- 회원조회 메뉴 -->
 	<!-- isdel, id, nickname 검색 SQL -->

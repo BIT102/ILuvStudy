@@ -20,6 +20,7 @@ public interface AdminDAO {
 	public void adminUpdate(AdminVO vo)throws Exception;
 	public void adminRegister(AdminVO vo)throws Exception;
 	public int adminCountPaging(Criteria cri)throws Exception;
+	public int chkId(String id)throws Exception;
 	
 	public List<UserVO> userList(Criteria cri) throws Exception;
 	public int userCountPaging(Criteria cri)throws Exception;

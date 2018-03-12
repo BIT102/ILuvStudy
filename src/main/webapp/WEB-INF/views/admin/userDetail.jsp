@@ -37,19 +37,26 @@
                 </tr>
                 <tr>
                     <th>이름</th>
-                    <td><input type="text" name="name" value="${userVO.name}" class="form-control"></td>
+                    <td><input type="text" id="name" name="name" value="${userVO.name}" class="form-control"></td>
                 </tr>
                 <tr>
                     <th>비밀번호</th>
-                    <td><input type="password" name="password" class="form-control"></td>
+                    <td>
+                    	<input id = "password" type="password" name="password" class="form-control">
+                    	<p id = "pwcheck" style = "color:red">비밀번호를 입력하세요</p>
+                    </td>
                 </tr>
                 <tr>
                     <th>닉네임</th>
-                    <td><input type="text" name="nickName" value="${userVO.nickName}" class="form-control"></td>
+                    <td>
+                    	<input type="text" id="nickName" name="nickName" value="${userVO.nickName}" class="form-control">
+                    	<button type="button" class="btn btn-default btn-xs chkNickname">중복확인</button>
+    	            	<p id = "nickNamecheck" style = "color:red"></p>
+                    </td>
                 </tr>
                 <tr>
                     <th>생년월일</th>
-                    <td><input type="text" name="birth" value="${userVO.birth}" class="form-control"></td>
+                    <td><input type="text" id="birth" name="birth" value="${userVO.birth}" class="form-control"></td>
                 </tr>
                 <tr>
                     <th>성별</th>
@@ -64,7 +71,7 @@
                 </tr>
                 <tr>
                     <th>핸드폰 번호</th>
-                    <td><input type="text" name="phoneNum" value="${userVO.phoneNum}" class="form-control"></td>
+                    <td><input type="text" id="phoneNum" name="phoneNum" value="${userVO.phoneNum}" class="form-control"></td>
                 </tr>
                 <tr>
                     <th>가입 상태</th>
@@ -213,6 +220,14 @@
 		
 		console.log(formObj);
 		
+		// 완료 유효성 검사
+		var emailV = false;
+		var nameV = false;
+		var passwordV = false;
+		var nicknameV = false;
+		var birthV = false;
+		var phoneNumV = false;
+		
 		var gender = ${userVO.gender}; //성별 db에 있는 값으로 체크
 		if(gender==1){
 			$("input:radio[value=1]").attr("checked", "checked");
@@ -224,7 +239,36 @@
 		$("#modifyBtn").on("click", function(){
 			//form 데이터 유효성 검사 추가 필요
 			
-			formObj.submit();
+			// name 유효성
+			if($("#name").val() != ""){
+				nameV = true;
+			}
+			
+			// password 유효성
+			if(document.getElementById("pwcheck").style.color == 'blue'){
+				passwordV = true;
+			}
+			
+			// 닉네임 유효성
+			if(document.getElementById("nickNamecheck").style.color == 'blue'){
+				nicknameV = true;
+			}
+			
+			// 생년월일 유효성
+			birthV = birthChk(document.getElementById("birth").value);
+			
+			// 전화번호 유효성
+			if($("#phoneNum").val() != ""){
+				phoneNumV = true;
+			}
+			
+			console.log("nameV : " + nameV + " passwordV : " + passwordV + " nicknameV : " + nicknameV + " birthV : " + birthV + " phoneNumV : "+ phoneNumV);
+			
+			if(nameV && passwordV && nicknameV && birthV && phoneNumV){
+				formObj.submit();
+			}else{
+				alert("내용을 확인하세요");	
+			}
 		});
 		
 		//목록 클릭 시 액션
@@ -239,7 +283,90 @@
  			formObj.attr("action", "/admin/isDelUpdate");
 			formObj.submit();
 		});
+		
+		//======== email 부분 ========
+		$('#email').keyup(function(){
+			var email = document.getElementById("email").value;
+			
+			if(emailValid(email)){
+				$('#emailck').html("사용가능한 이메일입니다.");
+				document.getElementById("emailck").style.color = 'blue';
+			}else{
+				$('#emailck').html("유효하지 않은 이메일입니다.");
+				document.getElementById("emailck").style.color = 'red';
+			}
+		});
+		
+		//========= Password 부분 ============
+		// 비밀번호 유효성검사 비밀번호의 경우에는 버튼을 누를때마다 변화가 생기도록 하여 keyup event를 활용함.
+		$('#password').keyup(function(){
+			var password = document.getElementById("password").value;
+			
+			// 길이, 알파벳 
+			if(password.length >= 8 && password.length <= 16 
+						&& containsCharOnly(password, charPw)){
+					
+				$('#pwcheck').html("사용가능한 비밀번호입니다.");
+				document.getElementById("pwcheck").style.color = 'blue';
+			}else{
+				$('#pwcheck').html("사용불가능한 비밀번호입니다.");
+				document.getElementById("pwcheck").style.color = 'red';
+			}
+		});
+		
+		//========= 닉네임 확인부분 ============
+		$('.chkNickname').on("click",function(){
+			
+			var nickname = document.getElementById("nickName").value;
+			console.log("chkNick......"+nickname);
+			
+			$.ajax({
+				url : "/join/nickname",
+				type: "post",
+				headers: {
+					"X-HTTP-Method-Override" : "POST"
+				},
+				data: {
+					nickname : nickname
+				},
+				success: function(result){
+					console.log(result);
+					if(result == "success"){
+						$('#nickNamecheck').html("사용가능한 닉네임입니다.");
+						document.getElementById("nickNamecheck").style.color = 'blue';
+					}else{
+						$('#nickNamecheck').html("사용불가능한 닉네임입니다.");
+						document.getElementById("nickNamecheck").style.color = 'red';
+					}
+				}
+			})
+		});
 	});
+	
+	var charDot = "@.abcdefghijklmnopqrstuvwxyz0123456789"; // dot, @ 때문에 나누어놈
+	var chars = "abcdefghijklmnopqrstuvwxyz0123456789";
+	var charPw = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"; // 비밀번호는 대소문자 구분
+	var charNum = "0123456789";
+
+		// 알파벳 소문자, 숫자로만 이루어졌는지 체크
+		function containsCharOnly(input, chars){ // input값이 chars에 있는 값인지를 체크
+			console.log(input)
+			console.log((input.charAt(2)));
+			for(var i=0; i<input.length ; i++)
+				if(chars.indexOf(input.charAt(i))==-1)
+					return false;
+					
+			return true;
+		}
+
+		//========= 생년월일 확인부분 ============ 
+		function birthChk(birth){
+			//길이확인
+			if(birth.length != 6)
+				return false;
+			
+			return containsCharOnly(birth, charNum);
+		}
 </script>
 
 </body>

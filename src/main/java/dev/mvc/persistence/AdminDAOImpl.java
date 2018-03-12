@@ -53,6 +53,11 @@ public class AdminDAOImpl implements AdminDAO{
 	}
 	
 	@Override
+	public int chkId(String id)throws Exception{
+		return session.selectOne(namespace + ".chkId", id); //어드민 계정 아이디 중복 체크
+	}
+	
+	@Override
 	public List<UserVO> userList(Criteria cri) throws Exception{
 		return session.selectList(namespace + ".userList", cri);  //사용자 계정 정보 리스트,페이징 
 	}

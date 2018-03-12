@@ -99,6 +99,28 @@ public class AdminController {
 		
 		return "redirect:/admin/adminList";
 	}
+	
+	//admin/adminRegister.jsp에서 계정 등록 시 아이디 중복확인
+	@RequestMapping(value="/id",method = RequestMethod.POST)
+	public ResponseEntity<String> chkId(@RequestParam("id") String id) throws Exception{
+		
+		System.out.println("idChk.................");
+		
+		ResponseEntity<String> entity = null;
+		
+		try{
+			if(service.chkId(id)==0){
+				entity = new ResponseEntity<String>("success", HttpStatus.OK);
+			}else{
+				entity = new ResponseEntity<String>("dup", HttpStatus.OK);
+			}
+			
+		}catch (Exception e) {
+			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		
+		return entity;
+	} 
 //admin관리 > 계정관리 끝
 
 //회원관리 > 회원조회
