@@ -55,6 +55,7 @@ public class LoginController {
 				int amount = 60 * 60 * 24 * 7; // 1林老
 				Date sessionLimit = new Date(System.currentTimeMillis()+(1000*amount));
 				System.out.println("=============技记 getid==============");
+				System.out.println(userVO.getEmail()+",,,"+ session.getId()+",,,"+ sessionLimit);
 				service.keepLogin(userVO.getEmail(), session.getId(), sessionLimit);
 			}
 		}
