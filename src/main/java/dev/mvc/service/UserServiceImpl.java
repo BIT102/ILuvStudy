@@ -146,7 +146,5 @@ public class UserServiceImpl implements UserService {
 	public int chkNickname(String nickName)throws Exception{
 		return dao.chkNickname(nickName); 
 	}
-
-	
 	
 }

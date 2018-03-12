@@ -30,6 +30,8 @@ public class SMSController {
 	private static final Logger logger = LoggerFactory.getLogger(SMSController.class);
 
 	
+	private String randomCode = "1234"; 
+	
 	  @RequestMapping(value = "/smssend" , method = RequestMethod.POST)
 	  public ResponseEntity<String> smssend(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception{
 		
@@ -48,8 +50,9 @@ public class SMSController {
 		        sms_url = "https://sslsms.cafe24.com/sms_sender.php"; // SMS 전송요청 URL
 		        String user_id = base64Encode("lswkim"); // SMS아이디
 		        String secure = base64Encode("45278fc5309389f11c297c8ad52cecb5");//인증키
-		        String msg = base64Encode("010101");
+		        String msg = base64Encode(randomCode);
 		        String rphone = base64Encode(nullcheck(request.getParameter("rphone"), ""));
+		        System.out.println(rphone);
 		        String sphone1 = base64Encode("010");
 		        String sphone2 = base64Encode("3137");
 		        String sphone3 = base64Encode("3804");
@@ -179,14 +182,30 @@ public class SMSController {
 			  entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		  }
 		  
-		  
-		  
-		  
-		  
 		  return entity;
 		  
 	  }
 	  
+	  @RequestMapping(value = "/smsConfirm", method = RequestMethod.POST)
+	  public ResponseEntity<String> smsConfirm(String code) throws Exception{
+		  
+		logger.info("smsConfirm.........");
+		System.out.println("randomCode : "+randomCode+", code : "+ code);
+		  
+		ResponseEntity<String> entity = null;
+		  
+		try{
+			if(randomCode.equals(code)){
+				entity = new ResponseEntity<String>("success",HttpStatus.OK);  
+			}else{
+				entity = new ResponseEntity<String>("fail",HttpStatus.OK);
+			}
+		}catch (Exception e) {
+			entity = new ResponseEntity<String>(e.getMessage(),HttpStatus.BAD_REQUEST);
+		}
+		  
+		  return entity;
+	  }
 	  
 	  public static String nullcheck(String str,  String Defaultvalue ) throws Exception
 	     {
