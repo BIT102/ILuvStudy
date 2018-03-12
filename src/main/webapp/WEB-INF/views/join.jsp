@@ -57,6 +57,9 @@
 			// 알파벳, 길이 검사
 			if((containsCharOnly(email1, chars)&&containsCharOnly(email2, charDot))
 					&&(6<=email1.length&&email1.length<=30)){
+				
+				emailV = true; // 최종 유효성 검사를 위함
+				document.getElementById("email").value = email1+"@"+email2;
 				return true;
 			}
 			return false;
@@ -135,9 +138,14 @@
 		}
 		
 		//========= 전화번호 ============
+		// 전화번호 입력 및 인증번호 전송하기
 		$('.smsForm').on("click",function(){
 			
-			var phoneNum = document.getElementById("phoneNum").value;
+			var phoneNum1 = document.getElementById("phoneNum1").value;
+			var phoneNum2 = document.getElementById("phoneNum2").value;
+			var phoneNum3 = document.getElementById("phoneNum3").value;
+			
+			var phoneNum = phoneNum1 +"-"+ phoneNum2 +"-"+ phoneNum3;
 			console.log("phoneNum......"+phoneNum);
 			
 			$.ajax({
@@ -152,14 +160,84 @@
 				},
 				success: function(result){
 					console.log(result);
-					if(result == "success"){
+					if(result == "success"){ // 성공시 입력란과 버튼이 생성
+						alert("인증번호를 입력하세요");
+						document.getElementById("smsText").style.visibility = "visible";
+						document.getElementById("smsConfirm").style.visibility = "visible";
 						
-						;
-					}else{
-						$('#nickNamecheck').html("사용불가능한 닉네임입니다.");
+					}else{ 
+						alert("유효한 전화번호가 아닙니다.");
 					}
 				}
 			})
+		});
+		
+		// 인증번호 일치 확인란
+		$('#smsConfirm').on("click",function(){
+			
+			$.ajax({
+				url : "/smsConfirm",
+				type : "post",
+				headers : {
+					"X-HTTP-Method-Override" : "POST"
+				},
+				data: {
+					code : document.getElementById("smsText").value
+				},
+				success: function(result){
+					if(result == "success"){
+						alert("인증번호가 확인되었습니다.");
+						phoneNumV = true;
+						
+						document.getElementById("phoneNum").value = document.getElementById("phoneNum1").value
+																	+document.getElementById("phoneNum2").value
+																	+document.getElementById("phoneNum3").value;
+					}else if(result == "fail"){
+						alert("인증번호를 다시 확인해 주세요");
+					}
+				}
+			})
+		});
+		
+		// 완료 유효성 검사
+		var emailV = false;
+		var passwordV = false;
+		var nicknameV = false;
+		var birthV = false;
+		var phoneNumV = false;
+		
+		// 회원가입 클릭
+		$('#valid').on("click", function(){
+			
+			
+			var formObj = $("form[role='form']");
+			// email 유효성
+			emailV = emailValid(document.getElementById("email1").value,document.getElementById("email2").value);
+				 		
+			// password 유효성
+			if(document.getElementById("pwcheck").style.color == 'blue' && 
+					document.getElementById("pwcheck2").style.color == 'blue'){
+				passwordV = true;
+			}
+			
+			// 닉네임 유효성
+			if(document.getElementById("nickNamecheck").style.color == 'blue'){
+				nicknameV = true;
+			}
+			
+			// 생년월일 유효성
+			birthV = birthChk(document.getElementById("birth").value);
+			
+			// 전화번호는 인증 시 변환
+			
+			console.log("emailV : " + emailV + "passwordV : " + passwordV + "nicknameV : " + nicknameV + "birthV" + birthV + "phoneNumV : "+ phoneNumV);
+			
+			if(emailV && passwordV && nicknameV && birthV && phoneNumV){
+				formObj.submit();
+			}else{
+				alert("내용을 확인하세요");	
+			}
+			
 		});
 			
 			
@@ -169,8 +247,7 @@
 
 <body>
 
-
-	<form role="form" name="joinForm" action="/join" method="post">
+	<form role="form" action="/join" method="post">
 		이메일주소<br/>
 		<input id = "email1" type="text" placeholder="아이디를 입력하세요" name="email1" /> 
 		@ 
@@ -181,7 +258,7 @@
 			<option id = "selectEmail3">daum.net</option>
 			<option id = "selectEmail4">google.com</option>
 		</select>
-		
+		<input  id = "email" type="text" name="email" />
 		<br/>
 		이름<br/>
 		<input type="text" placeholder = "실명을 입력하세요" name="name" />
@@ -205,23 +282,28 @@
 		<br/>
 		
 		생년월일<br/>
-		<input type="text" placeholder = "주민번호 앞자리를 입력하세요" name="birth"/>
+		<input type="text" id = "birth" placeholder = "주민번호 앞자리를 입력하세요" name="birth"/>
 		<br/>
 		
 		성별<br/> <!-- 남이 눌리면 여는 안눌리도록 처리필요 -->
-		남<input name = "gender" type = "radio"/>  여<input name = "gender" type = "radio" />
+		남<input name = "gender" value = "1" type = "radio" checked/>  여<input name = "gender" value = "2" type = "radio" />
 		
 		<br/>
 		전화번호<br/>
-		<input type="text" id = "phoneNum" name="phoneNum"/>
+		<input type="text" id = "phoneNum1" name="phoneNum1"/>-
+		<input type="text" id = "phoneNum2" name="phoneNum2"/>-
+		<input type="text" id = "phoneNum3" name="phoneNum3"/>
+		<input type = "text" id = "phoneNum" name = "phoneNum">
 		<br/>
 		<input type = "button" class = "smsForm" value = "인증번호 전송">
-		
+		<br/>
+		<input type = "text" id = "smsText" style = "visibility: hidden" placeholder = "인증번호를 입력하세요" >
+		<input type = "button" id = "smsConfirm" style = "visibility: hidden" value = "확인">
 		<br/>
 		<input type="checkbox" /> 서비스이용약관에 동의하시겠습니까?
 		<br/>
 		
-		<input class = "vailed" type = "button" value = "회원가입" />
+		<input id = "valid" class = "valid" type = "button" value = "회원가입" />
 		<input type="reset" value="다시입력" />
 	
 	</form>

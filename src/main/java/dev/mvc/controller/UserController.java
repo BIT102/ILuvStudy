@@ -50,6 +50,7 @@ public class UserController {
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
 	public String joinUserPOST(UserVO vo, Model model) {
 		
+		
 		try {
 			service.joinUser(vo);
 		} catch (Exception e) {
