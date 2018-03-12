@@ -50,28 +50,12 @@
 	<beans:bean id="loginInterceptor" class="dev.mvc.interceptor.LoginInterceptor"></beans:bean>
 		<interceptors>
 			<interceptor>
-				<mapping path="/adminLoginPost"/>
+				<mapping path="/loginPost"/>
 				<beans:ref bean="loginInterceptor"/>
 			</interceptor>
 			
 			<interceptor>
 				<mapping path="/admin/*"/>
-				<beans:ref bean="authInterceptor"/>
-			</interceptor>
-		</interceptors>
-
-
-	<beans:bean id="authInterceptor2" class="dev.mvc.interceptor.AuthInterceptor2"></beans:bean>
-	
-		<beans:bean id="UserloginInterceptor" class="dev.mvc.interceptor.UserLoginInterceptor"></beans:bean>
-		<interceptors>
-			<interceptor>
-				<mapping path="/loginPost"/>
-				<beans:ref bean="UserloginInterceptor"/>
-			</interceptor>
-			
-			<interceptor>
-				<!-- <mapping path="/login"/> -->
 				<mapping path="/addInfo"/>
 				<mapping path="/application"/>
 				<mapping path="/bookmark"/>
@@ -83,6 +67,30 @@
 				<beans:ref bean="authInterceptor"/>
 			</interceptor>
 		</interceptors>
+
+
+	<!-- <beans:bean id="authInterceptor2" class="dev.mvc.interceptor.AuthInterceptor"></beans:bean> -->
+	
+		<!-- <beans:bean id="UserloginInterceptor" class="dev.mvc.interceptor.UserLoginInterceptor"></beans:bean>
+		<interceptors>
+			<interceptor>
+				<mapping path="/loginPost"/>
+				<beans:ref bean="UserloginInterceptor"/>
+			</interceptor>
+			
+			<interceptor>
+				<mapping path="/login"/>
+				<mapping path="/addInfo"/>
+				<mapping path="/application"/>
+				<mapping path="/bookmark"/>
+				<mapping path="/changePw"/>
+				<mapping path="/completed"/>
+				<mapping path="/profile"/>
+				<mapping path="/quit"/>
+				<mapping path="/recurit"/>
+				<beans:ref bean="authInterceptor"/>
+			</interceptor>
+		</interceptors> -->
 		
 	<!-- 권한길, 조정인 -->	
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">

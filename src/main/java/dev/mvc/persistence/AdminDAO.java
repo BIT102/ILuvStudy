@@ -10,11 +10,10 @@ import dev.mvc.domain.ReplyStudyVO;
 import dev.mvc.domain.ReplyVO;
 import dev.mvc.domain.StudyVO;
 import dev.mvc.domain.UserVO;
-import dev.mvc.dto.AdminDTO;
+import dev.mvc.dto.LoginDTO;
 
 public interface AdminDAO {
-	public AdminVO login(AdminDTO dto)throws Exception;
-	public void loginupdate(Object adminVO)throws Exception;
+	
 	
 	public List<AdminVO> adminList(Criteria cri) throws Exception;
 	public AdminVO adminDetail(Integer bno)throws Exception;

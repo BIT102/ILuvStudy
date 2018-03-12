@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.WebUtils;
 
 import dev.mvc.domain.UserVO;
-import dev.mvc.dto.UserLoginDTO;
 import dev.mvc.persistence.UserDAO;
 import dev.mvc.service.UserService;
 
@@ -40,63 +39,6 @@ public class UserController {
 
 	@Inject
 	private UserService service;
-	
-
-	
-	
-	//로그인 컨트롤러
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public void loginGET(@ModelAttribute("dto")  UserLoginDTO dto){
-		
-	}
-	
-	@RequestMapping(value = "/loginPost", method = RequestMethod.POST)
-	public void loginPOST(UserLoginDTO dto, HttpSession session, Model model) throws Exception{
-		
-		UserVO vo = service.login(dto);
-		System.out.println("=================vovo=========");
-		System.out.println(vo);
-		System.out.println("=================vovo=========");
-		if(vo==null){
-			return ;
-		}
-		
-		model.addAttribute("userVO", vo);
-		
-		if(dto.isUseCookies()){
-			int amount = 60 * 60 * 24 * 7;
-			Date sessionLimit = new Date(System.currentTimeMillis()+(1000*amount));
-			System.out.println("=============세션 getid==============");
-			System.out.println(session.getId());
-			service.keepLogin(vo.getEmail(), session.getId(), sessionLimit);
-		}
-	}
-	
-	//로그아웃 컨트롤러
-	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public String logout(HttpServletRequest request,
-			HttpServletResponse response, HttpSession session) throws Exception{
-		
-		Object obj = session.getAttribute("login");
-		
-		if(obj != null){
-			UserVO vo = (UserVO) obj;
-			
-			session.removeAttribute("login");
-			session.invalidate();
-			
-			Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
-			
-			if(loginCookie != null){
-				loginCookie.setPath("/");
-				loginCookie.setMaxAge(0);
-				response.addCookie(loginCookie);
-				service.keepLogin(vo.getEmail(), session.getId(), new Date());
-			}
-		}
-				
-		return "/mypage/logout";
-	}
 	
 	//회원가입 컨트롤러
 	@RequestMapping(value = "/join", method = RequestMethod.GET)
@@ -271,9 +213,9 @@ public class UserController {
 			return "/mypage/completed";
 		}
 		
-		// =====================================================================================================
-		// Sangwook
-		
+// =====================================================================================================
+// Sangwook
+// =====================================================================================================
 		
 		// 회원가입
 		// 이메일테스트  Ajax 로 필요함.

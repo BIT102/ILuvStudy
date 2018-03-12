@@ -26,6 +26,15 @@
   		select * from user where email = #{email} and password = #{password}
   	</select>
   	
+  	<!-- sessionKey로 로그인 여부 판단  -->
+  	<update id="keepLogin" parameterType="map">
+  	update jjstudy.user set sessionKey = #{sessionId}, sessionLimit = #{next} where email=#{email};
+  	</update>
+  	
+  	<!-- 로그인시 사용자가 세션키를 가지고 있나 체크 (loginCookie에 기록된 값으로 사용자의 정보 조회)   -->
+  	<select id="checkUserWithSessionKey" resultType="UserVO"> 
+  	select * from jjstudy.user where sessionKey = #{value}
+  	</select>
   	
   	
   	

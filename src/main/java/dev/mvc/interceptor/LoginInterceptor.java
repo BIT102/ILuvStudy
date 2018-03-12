@@ -3,6 +3,7 @@ package dev.mvc.interceptor;
 import java.io.PrintWriter;
 
 import javax.inject.Inject;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -13,12 +14,12 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import dev.mvc.service.AdminService;
+import dev.mvc.service.LoginService;
 
 public class LoginInterceptor extends HandlerInterceptorAdapter{
 	
 	@Inject
-	private AdminService service;
+	private LoginService service;
 	
 	private static final String LOGIN = "login";
 	private static final Logger logger = LoggerFactory.getLogger(LoginInterceptor.class);
@@ -31,6 +32,8 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 		
 		ModelMap modelMap = modelAndView.getModelMap();
 		Object adminVO = modelMap.get("AdminVO");		
+		Object userVO = modelMap.get("UserVO");
+		
 		
 		if(adminVO != null){
 			logger.info("new login success");
@@ -38,8 +41,26 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 			service.loginupdate(adminVO);  //로그인 성공 시 
 			//로그인 성공 시 회원리스트로 이동
 			response.sendRedirect("/admin/userList");
+		}else if(userVO != null){
+			session.setAttribute(LOGIN, userVO); // 여기가 실질적인 세션 생성 구간
+			logger.info("===========new login success==========");
+			System.out.println(session.getAttribute(LOGIN));
+			
+			if(request.getParameter("useCookies") != null){
+				logger.info("remember me..............................");
+				Cookie loginCookie = new Cookie("loginCookie", session.getId()); // 자동 로그인시 쿠기 생성
+				loginCookie.setPath("/");
+				loginCookie.setMaxAge(60*60*24*7);
+				response.addCookie(loginCookie);
+			}
+			
+			response.sendRedirect("/study/main");
+			
+			//Object dest = session.getAttribute("dest"); //사용자가 원하는 페이지 정보를 dest에 담음
+			//response.sendRedirect(dest != null ? (String)dest:"/profile");
+			
 		} else{
-			//adminVO null인 경우 db에 없는 계정으로 로그인 시도로 판단
+			//adminVO와 userVO가 null인 경우 db에 없는 계정으로 로그인 시도로 판단
 			response.setContentType("text/html; charset=UTF-8");
 	        PrintWriter out = response.getWriter();
 	        out.println("<script>alert('로그인 정보를 확인해주세요.'); history.go(-1);</script>");

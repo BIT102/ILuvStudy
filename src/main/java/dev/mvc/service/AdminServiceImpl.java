@@ -14,7 +14,7 @@ import dev.mvc.domain.ReplyStudyVO;
 import dev.mvc.domain.ReplyVO;
 import dev.mvc.domain.StudyVO;
 import dev.mvc.domain.UserVO;
-import dev.mvc.dto.AdminDTO;
+import dev.mvc.dto.LoginDTO;
 import dev.mvc.persistence.AdminDAO;
 
 @Service
@@ -23,15 +23,6 @@ public class AdminServiceImpl implements AdminService{
 	@Inject
 	private AdminDAO dao;
 	
-	@Override
-	public AdminVO login(AdminDTO dto) throws Exception{
-		return dao.login(dto);
-	}
-	
-	@Override
-	public void loginupdate(Object adminVO) throws Exception{
-		dao.loginupdate(adminVO);
-	}
 	
 	@Override
 	public List<AdminVO> adminList(Criteria cri) throws Exception{

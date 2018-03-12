@@ -15,7 +15,7 @@ import dev.mvc.domain.ReplyStudyVO;
 import dev.mvc.domain.ReplyVO;
 import dev.mvc.domain.StudyVO;
 import dev.mvc.domain.UserVO;
-import dev.mvc.dto.AdminDTO;
+import dev.mvc.dto.LoginDTO;
 
 @Repository
 public class AdminDAOImpl implements AdminDAO{
@@ -25,15 +25,7 @@ public class AdminDAOImpl implements AdminDAO{
 	
 	private static String namespace = "dev.mvc.mapper.AdminMapper";
 	
-	@Override
-	public AdminVO login(AdminDTO dto)throws Exception{
-		return session.selectOne(namespace + ".adminLogin", dto);  //로그인 계정 정보 찾음
-	}
-	
-	@Override
-	public void loginupdate(Object adminVO)throws Exception{
-		session.update(namespace + ".adminLastLogin", adminVO);  //최근 접속일 업데이트
-	}
+
 	
 	@Override
 	public List<AdminVO> adminList(Criteria cri) throws Exception{

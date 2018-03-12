@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import dev.mvc.domain.UserVO;
-import dev.mvc.dto.UserLoginDTO;
 import dev.mvc.persistence.UserDAO;
 import dev.mvc.service.UserService;
 

@@ -11,7 +11,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import dev.mvc.domain.UserVO;
-import dev.mvc.dto.UserLoginDTO;
+import dev.mvc.dto.LoginDTO;
 import dev.mvc.persistence.UserDAO;
 
 @Service
@@ -58,23 +58,6 @@ public class UserServiceImpl implements UserService {
 		dao.quit(vo);
 	}
 	
-	// 로그인
-	@Override
-	public UserVO login(UserLoginDTO dto) throws Exception {
-		return dao.login(dto);
-	}
-
-	// 세션으로 로그인 여부 판단
-	@Override
-	public void keepLogin(String email, String sessionId, Date next) throws Exception {
-		dao.keepLogin(email, sessionId, next);
-	}
-
-	// 로그인시 사용자가 세션키를 가지고 있나 체크 (loginCookie에 기록된 값으로 사용자의 정보 조회) 
-	@Override
-	public UserVO checkLoginBefore(String value) throws Exception {
-		return dao.checkUserWithSessionKey(value);
-	}
 
 
 	// ============== sangwook ================

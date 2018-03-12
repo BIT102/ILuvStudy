@@ -12,35 +12,16 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.springframework.web.util.WebUtils;
 
 import dev.mvc.domain.UserVO;
+import dev.mvc.service.LoginService;
 import dev.mvc.service.UserService;
 
 public class AuthInterceptor extends HandlerInterceptorAdapter {
-	private static final Logger logger = LoggerFactory.getLogger(AuthInterceptor.class);
-	
-	@Override
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, 
-				Object handler) throws Exception{
-		HttpSession session = request.getSession();
-		
-		if(session.getAttribute("login") == null){
-			logger.info("current user is not logined");
-			
-			response.sendRedirect("/adminLogin");
-			return false;
-		}
-		return true;
-
-	}
-}
-
-class AuthInterceptor2 extends HandlerInterceptorAdapter {
-	
-	private static final Logger logger = LoggerFactory.getLogger(AuthInterceptor.class);
 	
 	@Inject
-	private UserService service;
+	private LoginService service;
 	
-	// 사용자가 원하는 URI가 무엇이었는지를 보관했다가, 로그인 성공 후 해당 경로로 이동 시킴
+	private static final Logger logger = LoggerFactory.getLogger(AuthInterceptor.class);
+	
 	private void saveDest(HttpServletRequest req){
 		
 		String uri = req.getRequestURI();
@@ -59,8 +40,6 @@ class AuthInterceptor2 extends HandlerInterceptorAdapter {
 		}
 	}
 	
-	
-	// 사용자 로그인 상태 유무 파악
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception{
 		logger.info("auth 인터셉터 찍히니???==========================");
@@ -92,5 +71,22 @@ class AuthInterceptor2 extends HandlerInterceptorAdapter {
 			return true;
 
 	}
+/*	
+	@Override
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, 
+				Object handler) throws Exception{
+		HttpSession session = request.getSession();
+		
+		if(session.getAttribute("login") == null){
+			logger.info("current user is not logined");
+			
+			response.sendRedirect("/login");
+			return false;
+		}
+		return true;
+
+	}
+	*/
 }
+
 

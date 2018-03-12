@@ -10,7 +10,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import dev.mvc.domain.UserVO;
-import dev.mvc.dto.UserLoginDTO;
+import dev.mvc.dto.LoginDTO;
 
 @Repository
 public class UserDAOImpl implements UserDAO {
@@ -61,29 +61,7 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	
-	// 로그인
-	@Override
-	public UserVO login(UserLoginDTO dto) throws Exception {
-		return session.selectOne(namespace + ".userDTOLogin",dto);
-	}
-
-	// 세션으로 로그인 여부 판단
-	@Override
-	public void keepLogin(String email, String sessionId, Date next) throws Exception {
-		Map<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("email", email);
-		paramMap.put("sessionId", sessionId);
-		paramMap.put("next", next);
-		
-		session.update(namespace +".keepLogin", paramMap);
-	}
-
-	// 로그인시 사용자가 세션키를 가지고 있나 체크 (loginCookie에 기록된 값으로 사용자의 정보 조회) 
-	@Override
-	public UserVO checkUserWithSessionKey(String value) throws Exception {
-		return session.selectOne(namespace +".checkUserWithSessionKey", value);
-	}
-
+	
 
 	//=================================================
 		// sangwook
