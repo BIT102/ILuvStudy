@@ -30,7 +30,7 @@
 <!--헤더-->
 <div class="navbar navbar-default navbar-fixed-top">
 			<div class="brand">
-				<a href="userList"><img src="/resources/img/logo-dark.png" alt="Iluvstudy Logo" class="img-responsive logo"></a>
+				<a href="/study/main"><img src="/resources/img/logo-dark.png" alt="Iluvstudy Logo" class="img-responsive logo"></a>
 			</div>
 			<div class="container-fluid">
 				<div class="navbar-btn">
@@ -75,7 +75,7 @@
 								</ul>
 							</div>
 						</li>
-						<li><a id="userStatisticnav" href="userStatistic" class="" style="display:hidden"><i class="lnr lnr-chart-bars"></i> <span>통계관리</span></a></li>
+						<li><a id="userStatisticnav" href="userStatistic" class="" style="display:none"><i class="lnr lnr-chart-bars"></i> <span>통계관리</span></a></li>
 						<li><a id="adminListnav" href="adminList" class=""><i class="lnr lnr-text-format"></i> <span>Admin관리</span></a></li>
 					</ul>
 				</div>

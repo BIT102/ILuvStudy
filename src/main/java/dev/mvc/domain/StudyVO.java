@@ -67,6 +67,17 @@ public class StudyVO {
 	//파일 업로드
 	private String[] files;
 
+	private String email;
+	
+	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public int getBno() {
 		return bno;
 	}
@@ -315,7 +326,7 @@ public class StudyVO {
 				+ ", vct=" + vct + ", rct=" + rct + ", regdate=" + regdate + ", enddate=" + enddate + ", rDName="
 				+ rDName + ", rSName=" + rSName + ", cDName=" + cDName + ", cSName=" + cSName + ", cSId=" + cSId
 				+ ", cDId=" + cDId + ", nickname=" + nickname + ", no=" + no + ", name=" + name + ", status=" + status
-				+ ", files=" + Arrays.toString(files) + "]";
+				+ ", files=" + Arrays.toString(files) + ", email=" + email + "]";
 	}
 	
 		
