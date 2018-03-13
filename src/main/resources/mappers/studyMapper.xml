@@ -45,7 +45,7 @@ title
 </insert>
 
 
-<insert id="createRegion">
+<insert id="createCa">
 INSERT INTO
 board_category (
 bsbno
@@ -57,6 +57,18 @@ bsbno
 , #{categoryS}
 )
 </insert>
+
+<select id="readCa" resultType="StudyVO">
+select
+bc.categoryd
+, sc.cdname
+, bc.categorys
+, sc.csname
+from
+board_category bc
+left outer join study_category sc on bc.CATEGORYD = sc.CDID and bc.CATEGORYS = sc.CSID
+where bsbno = #{bno}
+</select>
 
 <!-- 스터디 읽어오기 -->
 <select id="readStudy" resultType="StudyVO">

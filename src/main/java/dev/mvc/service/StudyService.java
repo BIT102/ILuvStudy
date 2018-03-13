@@ -8,6 +8,9 @@ import dev.mvc.domain.StudyVO;
 
 public interface StudyService {
 
+	//카테고리 불러오기
+	public List<StudyVO> readCa(Integer bno) throws Exception;
+	
 	//스터디등록   
 	public void regist(StudyVO vo) throws Exception;
 	

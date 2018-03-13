@@ -217,7 +217,9 @@ function myFunction(x) {
                 <tr>
                 <!-- 카테고리 -->
                     <td>카테고리</td>
+                   <c:forEach items="${list}" var="studyVO">
                     <td>${studyVO.cDName}, ${studyVO.cSName}</td>
+                    </c:forEach>
                 </tr>
                 <tr>
                 <!-- 현재인원 -->

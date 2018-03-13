@@ -89,18 +89,20 @@ public class StudyController {
 
 		rttr.addFlashAttribute("msg", "success");
 		
-		//return "redirect:/study/listAll";
-		return "/join";
-	
+		
+		return "redirect:/study/listAll";
 	}
 	
 	//스터디 목록 불러오기
+
 	@RequestMapping(value="/listAll", method = RequestMethod.GET)
 	public void readStudy(@ModelAttribute("cri") SearchCriteriaStudy cri, Model model) throws Exception {
 		
 		logger.info("show list..........");
 	
 		model.addAttribute("list", service.studyList());
+		
+	
 		//model.addAttribute("list", service.listCriteria(cri));
 		model.addAttribute("list", service.listSearchCriteria(cri));
 
@@ -142,8 +144,15 @@ public class StudyController {
 	public void readBoard(@RequestParam("bno") int bno,
 			              @ModelAttribute("cri") CriteriaStudy cri, 
 			              Model model) throws Exception {
+	
+
 		
+		model.addAttribute("list", service.readCa(bno));
 		model.addAttribute(service.read(bno));
+		
+		
+
+		
 	}
 	
 	//상세페이지 제거

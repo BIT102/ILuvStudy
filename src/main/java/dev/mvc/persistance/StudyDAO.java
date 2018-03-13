@@ -10,13 +10,17 @@ import dev.mvc.domain.StudyVO;
 public interface StudyDAO {
 
 	//스터디등록
-	public void createStudy(StudyVO vo);
+	public void createStudy(StudyVO vo) throws Exception;
+	
 	
 	//스터디 읽기
-	public StudyVO readStudy(Integer bno);
+	public StudyVO readStudy(Integer bno) throws Exception;
 	
 	//카테고리 등록하기
-	public void createRegion(Map<String, Object> region);
+	public void createCa(Map<String, Object> ca) throws Exception;
+	
+	//카테고리 불러오기
+	public List<StudyVO> readCa(Integer bno) throws Exception;
 
 	//전체
 	public List<StudyVO> studyList() throws Exception;

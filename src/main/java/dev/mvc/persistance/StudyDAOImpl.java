@@ -23,19 +23,25 @@ public class StudyDAOImpl implements StudyDAO {
 		
 	//스터디등록
 	@Override
-	public void createStudy(StudyVO vo) {
+	public void createStudy(StudyVO vo) throws Exception {
 		session.insert(namespace+".createStudy", vo);
 	}
 	
-	//지역등록
+	//카테고리등록
 	@Override
-	public void createRegion(Map<String, Object> region) {
-		session.insert(namespace+".createRegion", region);
+	public void createCa(Map<String, Object> ca) throws Exception {
+		session.insert(namespace+".createCa", ca);
+	}
+	
+	//카테고리 불러오기
+	@Override
+	public List<StudyVO> readCa(Integer bno) throws Exception {
+		return session.selectList(namespace+".readCa", bno);
 	}
 	
 	//스터디 불러오기
 	@Override
-	public StudyVO readStudy(Integer bno) {
+	public StudyVO readStudy(Integer bno) throws Exception {
 		
 		// 사진의 갯수때문에 리턴값이 여러개가 될수 있으므로 리턴값을 배열에 담는다.
 		List<StudyVO> vo = session.selectList(namespace+".readStudy", bno);
