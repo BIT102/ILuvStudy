@@ -16,6 +16,19 @@
 	<dependencies>
 		<!-- Spring -->
 		
+		<!-- WebSocket -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-websocket</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+		<!-- jackson mapper-->
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.4.2</version>
+		</dependency>
+		
 		<!-- 추가부분  파일업로드-->
 <!-- 		<dependency>
 			<groupId>org.imgscalr</groupId>

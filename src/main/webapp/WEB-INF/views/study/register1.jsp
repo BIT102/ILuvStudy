@@ -2,19 +2,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+        <!-- // Navigation -->
+<%@include file="../header.jsp"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<script src="http://code.jquery.com/jquery-1.7.js"></script>
-<script type="text/javascript" src="/resources/js/upload.js"></script>
-<script
-	src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+
 <title>Document</title>
 
 <style>
+
+body{margin:30px 20px;}
+
 .fileDrop {
 	width: 200px;
 	height: 200px;
@@ -56,7 +57,7 @@ small {
 			<!--제목입력-->
 			<div class="studytitle">
 				<p>스터디명</p>
-				<input type="text" placeholder="스터디명" name="title">
+				<input type="text" placeholder="스터디명" name="title" onclick="CheckForm();">
 			</div>
 
 			<!--쓴사람//value값수정-->
@@ -68,33 +69,33 @@ small {
 
 			<!--카테고리-->
 			<div class="stucycategory">
-				<!--대분류-->
-				<div id="BigCat">
-					<p>대분류 (마우스를 올리세요!)</p>
+				<!--대분류--><p>대분류 </p>
+				
+				<select id="BigCat"  name="categoryD">
 					
 					<% int cataNum = 64; %>
 					<c:forEach items="${catlist}" var="StudyVO">
 						<% cataNum++; %>
-						<button class="bigcatB" value="<%=(char)cataNum%>" id="<%=(char)cataNum%>">${StudyVO.cDName}</button>
+						<option class="bigcatB" value="<%=(char)cataNum%>" id="<%=(char)cataNum%>">${StudyVO.cDName}</option>
 					</c:forEach>
 					
-				</div>
+				</select>
 				<!--소분류 외국어-->
 				<p>소분류</p>
-				<div id="SmallCat1">
-				<input type="radio" value="1">	토익	<input type="radio" value="2">	토플	<input type="radio" value="3">	텝스	<input type="radio" value="4">	토스/오픽	<input type="radio" value="5">	회화	<input type="radio" value="6">	작문/독해	<input type="radio" value="7">	중국어	<input type="radio" value="8">	일본어	<input type="radio" value="9">	기타	
+				<select id="SmallCat1" name="categoryS">
+				<option type=radio value="1">	토익	<option type=radio value="2">	토플	<option type=radio value="3">	텝스	<option type=radio value="4">	토스/오픽	<option type=radio value="5">	회화	<option type=radio value="6">	작문/독해	<option type=radio value="7">	중국어	<option type=radio value="8">	일본어	<option type=radio value="9">	기타	
+				</select>
+				
+				<div id="SmallCat2" name="categoryS">
+				<input type=radio value="1">	컴퓨터언어	<input type=radio value="2">	웹프로그래밍	<input type=radio value="3">	모바일프로그래밍	<input type=radio value="4">	데이터베이스/서버	<input type=radio value="5">	게임프로그래밍	<input type=radio value="6">	문서작정	<input type=radio value="7">	자격증<input type=radio value="8">	기타	
 				</div>
 				
-				<div id="SmallCat2">
-				<input type="radio" value="1">	컴퓨터언어	<input type="radio" value="2">	웹프로그래밍	<input type="radio" value="3">	모바일프로그래밍	<input type="radio" value="4">	데이터베이스/서버	<input type="radio" value="5">	게임프로그래밍	<input type="radio" value="6">	문서작정	<input type="radio" value="7">	자격증	<input type="radio" value="8">	기타	
+				<div id="SmallCat3" name="categoryS">
+				<input type=radio value="1">	미술/디자인	<input type=radio value="2">	뷰티/미용	<input type=radio value="3">	스포츠	<input type=radio value="4">	음악/공연	<input type=radio value="5">	게임	<input type=radio value="6">	기타	
 				</div>
 				
-				<div id="SmallCat3">
-				<input type="radio" value="1">	미술/디자인	<input type="radio" value="2">	뷰티/미용	<input type="radio" value="3">	스포츠	<input type="radio" value="4">	음악/공연	<input type="radio" value="5">	게임	<input type="radio" value="6">	기타	
-				</div>
-				
-				<div id="SmallCat4">
-				<input type="radio" value="1">	면접	<input type="radio" value="2">	자소서	<input type="radio" value="3">	고시	<input type="radio" value="4">	기술	<input type="radio" value="5">	기타	
+				<div id="SmallCat4" name="categoryS">
+				<input type=radio value="1">	면접	<input type=radio value="2">	자소서	<input type=radio value="3">	고시	<input type=radio value="4">	기술	<input type=radio value="5">	기타	
 				</div>
 				
 				
@@ -140,12 +141,12 @@ small {
 			<!--연령-->
 			<div class="studyage">
 				<p>연령</p>
-				<input type="checkbox" name="age" value="10대">10대 <input
-					type="checkbox" name="age" value="20대">20대 <input
-					type="checkbox" name="age" value="30대">30대 <input
-					type="checkbox" name="age" value="40대">40대 <input
-					type="checkbox" name="age" value="50대">50대 <input
-					type="checkbox" name="age" value="무관">무관
+				<input type="checkbox" name="age" value="10대">10대
+				 <input type="checkbox" name="age" value="20대">20대 
+				 <input type="checkbox" name="age" value="30대">30대 
+				 <input type="checkbox" name="age" value="40대">40대
+				 <input type="checkbox" name="age" value="50대">50대 
+				<input type="checkbox" name="age" value="무관">무관
 			</div>
 
 			<!--요일별-->
@@ -255,7 +256,7 @@ small {
 			</div>
 		</div>
 
-		<button type="submit">종료</button>
+		<button type="submit">등록</button>
 	</form>
 
 	<iframe name="zeroFrame"></iframe>
@@ -353,23 +354,43 @@ small {
 			that.get(0).submit();
 
 		});
-
-	</script>
-	<script>
 		
+		//등록 버튼 클릭 후 유효성 검사
+		$("#registerForm").submit(function(event){
+			
+			event.preventDefault();
+			
+			if(title === null) {
+				alert("제목을 입력해 주세요!")
+			}
+		})
+	</script>
+		<script>
 			$(document).ready(function(){
 				
 			
-				$('#A').mouseover(function(){
+				$("#BigCat").change("change", function(){
+					
 					$("#SmallCat1").css('visibility', 'visible');
+					$("#SmallCat2").css('visibility', 'visible');
+					$("#SmallCat3").css('visibility', 'visible');
+					$("#SmallCat4").css('visibility', 'visible');
 				});
-				$("#B").mouseover(function(){
+				
+	/*function smallCat1(big)
+				
+				console.log("gigi")
+				var bigNum1 = $(this).val()
+				
+				smallCat1(bigNum1);
+				*/
+				$("#B").change(function(){
 					$("#SmallCat2").css('visibility', 'visible');
 				});
-				$("#C").mouseover(function(){
+				$("#C").change(function(){
 					$("#SmallCat3").css('visibility', 'visible');
 				});
-				$("#D").mouseover(function(){
+				$("#D").change(function(){
 					$("#SmallCat4").css('visibility', 'visible');
 				});
 			});

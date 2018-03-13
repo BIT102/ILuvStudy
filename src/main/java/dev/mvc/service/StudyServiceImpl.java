@@ -26,7 +26,7 @@ public class StudyServiceImpl implements StudyService {
 		//스터디등록, 파일등록
 		@Transactional
 		@Override
-	public void regist(StudyVO vo) throws Exception {
+		public void regist(StudyVO vo) throws Exception {
 
 			
 
@@ -39,8 +39,6 @@ public class StudyServiceImpl implements StudyService {
 			System.out.println("====================");
 
 			String[] files = vo.getFiles();
-
-			if(files == null) return;
 
 			dao.createStudy(vo);
 
