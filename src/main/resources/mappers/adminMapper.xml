@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 <!-- admin 계정 로그인 처리 -->
 	<select id="adminLogin" resultType="AdminVO">
-		select id, pw, bno from admin where id=#{id} and pw=#{pw}
+		select id, pw, bno from admin where id=#{id} and pw=#{pw} and status='V'
 	</select>
 	
 	
@@ -244,7 +244,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<include refid="studySearch"></include>
 	</select>
 	
-	<!-- study 정보 상세 -->
+ 	<!-- study 정보 상세 -->
+<!--
 	<select id="studyDetail" resultType="StudyVO">
 		select *
 		from board_study bs, region r, study_category c
@@ -253,6 +254,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		and bs.rsid = r.rsid
 		and bs.categoryD = c.CDID
 		and bs.categoryS = c.CSID
+	</select> 
+-->
+	
+	<!-- study 정보 상세 (수정중)-->
+	<select id="studyDetail" resultType="StudyVO">
+		select *
+		from board_study bs, region r
+		where bno = #{bno}
+		and bs.rdid = r.rdid
+		and bs.rsid = r.rsid
+	</select>
+	
+	<!-- study 카테고리 상세 정보 -->
+	<select id="studyDetailC" resultType="StudyVO">
+		select
+bc.categoryd
+, sc.cdname
+, bc.categorys
+, sc.csname
+from
+board_category bc
+left outer join study_category sc on bc.CATEGORYD = sc.CDID and bc.CATEGORYS = sc.CSID
+where bsbno = #{bno}
 	</select>
 
 	<!-- study 카테고리 -->

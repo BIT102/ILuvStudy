@@ -216,6 +216,12 @@
 			var nickname = document.getElementById("nickName").value;
 			console.log("chkNick......"+nickname);
 			
+			if(nickname==""){
+				$('#nickNamecheck').html("닉네임을 입력해주세요.");
+				document.getElementById("nickNamecheck").style.color = 'red';
+				return false;
+			}
+			
 			$.ajax({
 				url : "/join/nickname",
 				type: "post",

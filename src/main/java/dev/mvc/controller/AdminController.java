@@ -237,6 +237,8 @@ public class AdminController {
 		model.addAttribute("region", service.region(cri));
 		//스터디 상세 정보
 		model.addAttribute(service.studyDetail(bno));
+		//스터디 카테고리 선택 정보
+		model.addAttribute("studyDC", service.studyDetailC(bno));
 		//스터디 신청자 정보
 		model.addAttribute("applyStudy", service.applyStudy(bno));
 	}
@@ -269,22 +271,22 @@ public class AdminController {
 	@RequestMapping(value="/studyDetail", method = RequestMethod.POST)
 	public String studyDetailPOST(StudyVO vo, RedirectAttributes rttr) throws Exception{
 		logger.info("studyDetail post...");
-		/*logger.info(cri.toString());
+//		logger.info(cri.toString());
 		
 		service.studyUpdate(vo);
 		
 		//페이징 정보 유지
-		rttr.addAttribute("page", cri.getPage());
+		/*rttr.addAttribute("page", cri.getPage());
 		rttr.addAttribute("perPageNum", cri.getPerPageNum());
 		//검색 정보 유지
 		rttr.addAttribute("stStatusType", cri.getStStatusType());
 		rttr.addAttribute("titleKeyword", cri.getTitleKeyword());
-		rttr.addAttribute("writerKeyword", cri.getWriterKeyword());
+		rttr.addAttribute("writerKeyword", cri.getWriterKeyword());*/
 		
 		rttr.addFlashAttribute("msg", "SUCCESS");
 		
 		logger.info(rttr.toString());
-		*/
+		
 		return "redirect:/admin/studyList";
 	}
 

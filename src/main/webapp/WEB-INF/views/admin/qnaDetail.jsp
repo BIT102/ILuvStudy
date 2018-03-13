@@ -5,6 +5,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>QNA 관리</title>
+<style>
+form th{
+	width:30%;
+}
+.default th{
+	width:30%;
+}
+</style>
 </head>
 <body>
 <div id="wrapper">
@@ -22,7 +30,7 @@
 			<h3 class="panel-title">QNA 상세</h3>
 		</div>
 
-	<div class="panel-body">
+	<div class="panel-body default">
         <div>* 기본정보</div>
         <table class="table table-hover">
         <tbody>

@@ -9,7 +9,7 @@
 <body>
 
 	<script type="text/javascript">
-		self.location = "/adminLogin";
+		self.location = "/login";
 	</script>
 
 </body>

@@ -5,6 +5,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>회원조회 상세</title>
+<style>
+form th{
+	width:30%;
+}
+</style>
 </head>
 <body>
 <div id="wrapper">
@@ -112,7 +117,11 @@
                 </tr>
                 <tr>
                     <th>이미지</th>
-                    <td>${userVO.photo}</td>
+                    <td>
+                    	<input type="text" class="form-control">
+                    	<button type="button" class="btn btn-default btn-xs">첨부파일</button>
+                    	${userVO.photo}
+                    </td>
                 </tr>
                 </tbody>
             </table>

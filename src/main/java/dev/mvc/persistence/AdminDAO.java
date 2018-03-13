@@ -35,6 +35,7 @@ public interface AdminDAO {
 	public List<StudyVO> studyList(Criteria cri) throws Exception;
 	public int studyCountPaging(Criteria cri)throws Exception;
 	public StudyVO studyDetail(Integer bno)throws Exception;
+	public List<StudyVO> studyDetailC(Integer bno)throws Exception;
 	public List<StudyVO> studyCategory(Criteria cri) throws Exception;
 	public List<StudyVO> region(Criteria cri) throws Exception;
 	public List<StudyVO> region2(String rDId) throws Exception;

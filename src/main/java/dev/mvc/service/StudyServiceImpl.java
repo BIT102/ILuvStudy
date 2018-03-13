@@ -1,5 +1,6 @@
 package dev.mvc.service;
 
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,112 +22,138 @@ public class StudyServiceImpl implements StudyService {
 	@Inject
 	private StudyDAO dao;
 	
+	//카테고리 불러왹
+	public List<StudyVO> readCa(Integer bno) throws Exception {
+		
 	
-			
-		//스터디등록, 파일등록
-		@Transactional
-		@Override
-	public void regist(StudyVO vo) throws Exception {
+		return dao.readCa(bno);
+	}
+	
+	
+	//스터디등록, 파일등록, 지역등록
+	@Transactional
+	@Override
+public void regist(StudyVO vo) throws Exception {
 
-			
+		//파일등록하기
+		String[] files = vo.getFiles();
 
-			System.out.println("====================");
+		
+		System.out.println("====================");
+		System.out.println(vo.getFiles());
 
-			System.out.println("registService..........");
+		System.out.println("====================");
+		dao.createStudy(vo);
+		
 
-			System.out.println(vo);
+		// bno 값 가져오기
 
-			System.out.println("====================");
+		int bno = dao.getBno();
 
-			String[] files = vo.getFiles();
+		vo.setBno(bno);
+		
+		Map<String, Object> map = new HashMap<>();
 
-			if(files == null) return;
+		for(String fileName : files) {
 
-			dao.createStudy(vo);
+			if(fileName == files[0]){
 
-			// bno 값 가져오기
+				map.put("name", fileName);
 
-			int bno = dao.getBno();
+				map.put("status", "O");
 
-			vo.setBno(bno);
-			
+				map.put("bno", bno);
 
-			Map<String, Object> map = new HashMap<>();
+			} else {
 
-			for(String fileName : files) {
+				map.put("name", fileName);
 
-				if(fileName == files[0]){
+				map.put("status", "X");
 
-					map.put("name", fileName);
+				map.put("bno", bno);
 
-					map.put("status", "O");
-
-					map.put("bno", bno);
-
-				} else {
-
-					map.put("name", fileName);
-
-					map.put("status", "X");
-
-					map.put("bno", bno);
-
-				}
-				dao.addFile(map);
 			}
+			dao.addFile(map);
 		}
 		
-		//스터디 불러오기
-		@Transactional(isolation=Isolation.READ_COMMITTED)
-		@Override
-		public StudyVO read(Integer bno) throws Exception {
-			dao.upVct(bno);
-			return dao.readStudy(bno);
-		}
-		
-		//전체불러오기
-		@Override
-		public List<StudyVO> studyList() throws Exception {
-			return dao.studyList();
-		}
-		
-		//페이지당 데이터 불러오기
-		@Override
-		public List<StudyVO> listCriteria(CriteriaStudy cri) throws Exception {
-			return dao.listCriteria(cri);
-		}
-		
-		//페이진 전체수
-		@Override
-		public int listCountCriteria(CriteriaStudy cri) throws Exception {
-			return dao.countPaging(cri);
-		}
-		
-		//보드삭제하기
-		@Override
-		public void remove(Integer bno) throws Exception {
-			dao.delete(bno);
-		}
-		
-		//검색
-		@Override
-		public List<StudyVO> listSearchCriteria(SearchCriteriaStudy cri) throws Exception {
-			return dao.listSearch(cri);
-		}
-		
-		//검색수
-		@Override
-		public int listSearchCount(SearchCriteriaStudy cri) throws Exception {
-			return dao.listSearchCount(cri);
-		}
-		
-		//파일 불러오기
-		@Override
-		public List<String> getFile(Integer bsBno) throws Exception {
-			return dao.getFile(bsBno);
-	
-		}
+		//카테고리 등록하기
+			Map<String, Object> ca = new HashMap<>();
+			
 
+			String[] D = vo.getCategoryD();
+			String[] S = vo.getCategoryS();
+			
+
+		for(int i=0; i<D.length; i++) {
+				String caD = D[i];
+				for(int j=0; j<S.length; j++) {
+					String caS = S[j];
+					
+					ca.put("bno", bno);
+					ca.put("categoryD", caD);
+					ca.put("categoryS", caS);
+					
+				System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+				System.out.println(ca);
+				System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+					
+					dao.createCa(ca);
+				}
+			}
+	}
+	//스터디 불러오기
+	@Transactional(isolation=Isolation.READ_COMMITTED)
+	@Override
+	public StudyVO read(Integer bno) throws Exception {
+		
+		
+		dao.upVct(bno);
+		return dao.readStudy(bno);
+	}
+	
+	//전체불러오기
+	@Override
+	public List<StudyVO> studyList() throws Exception {
+
+		return dao.studyList();
+	}
+	
+	//페이지당 데이터 불러오기
+	@Override
+	public List<StudyVO> listCriteria(CriteriaStudy cri) throws Exception {
+		return dao.listCriteria(cri);
+	}
+	
+	//페이진 전체수
+	@Override
+	public int listCountCriteria(CriteriaStudy cri) throws Exception {
+		return dao.countPaging(cri);
+	}
+	
+	//보드삭제하기
+	@Override
+	public void remove(Integer bno) throws Exception {
+		dao.delete(bno);
+	}
+	
+	//검색
+	@Override
+	public List<StudyVO> listSearchCriteria(SearchCriteriaStudy cri) throws Exception {
+		return dao.listSearch(cri);
+	}
+	
+	//검색수
+	@Override
+	public int listSearchCount(SearchCriteriaStudy cri) throws Exception {
+		return dao.listSearchCount(cri);
+	}
+	
+	//파일 불러오기
+	@Override
+	public List<String> getFile(Integer bsBno) throws Exception {
+		return dao.getFile(bsBno);
+	}
+	
 	@Override
 	public List<StudyVO> catList() throws Exception {
 		return dao.catList();
@@ -145,25 +172,6 @@ public class StudyServiceImpl implements StudyService {
 	@Override
 	public List<StudyVO> rgList2(String rsId) throws Exception {
 		return dao.rgList2(rsId);
-	}
-	//수정
-	@Transactional
-	@Override
-	public void modify(StudyVO vo)throws Exception{
-		dao.update(vo);
-		
-		Integer bno = vo.getBno();
-		
-		dao.deleteAttach(bno);
-		
-		String[] files = vo.getFiles();
-		
-		if(files == null) {return;}
-		
-		for(String fileName : files){
-			dao.replaceAttach(fileName, bno);
-		}
-
 	}
 
 }

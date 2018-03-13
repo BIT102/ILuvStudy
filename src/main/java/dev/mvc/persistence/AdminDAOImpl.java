@@ -118,6 +118,11 @@ public class AdminDAOImpl implements AdminDAO{
 	}
 	
 	@Override
+	public List<StudyVO> studyDetailC(Integer bno)throws Exception{
+		return session.selectList(namespace + ".studyDetailC", bno); //스터디 카테고리 정보 가져옴
+	}
+	
+	@Override
 	public List<StudyVO> studyCategory(Criteria cri) throws Exception{
 		return session.selectList(namespace + ".studyCategory", cri);  //study 카테고리 정보
 	}

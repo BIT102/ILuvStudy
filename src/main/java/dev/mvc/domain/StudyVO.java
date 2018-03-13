@@ -1,18 +1,16 @@
 package dev.mvc.domain;
- 
+
 import java.util.Arrays;
 import java.util.Date;
 
-
 public class StudyVO {
-
-
 //	BS_BNO	번호
 //	BS_TITLE	제목
 //	BS_WRITER	글쓴이 (USER.EMAIL)
 //	BS_CATEGORY_D	카테고리 대분류
 //	BS_CATEGORY_S	카테고리 소분류
 //	BS_NOW	현재인원
+//	BS_MAX	최대인원
 //	BS_R_D_ID	지역(대분류)
 //	BS_R_S_ID	지역(소분류)
 //	BS_AGE	연령
@@ -25,40 +23,39 @@ public class StudyVO {
 //	BS_RCT	댓글수
 //	BS_REGDATE	올린 날짜
 //	BS_ENDDATE	스터디완료일
-
-	private int bno; 
+	//우아아앙아아아아아아아아앙
+	//우우우우우우우우우아아아아아아아아아아아아아아아아아아앙
+	private Integer bno; 
 	private String title; 
 	private String writer; 
-	private String categoryD; 
-	private String categoryS; 
+	private String[] categoryD; 
+	private String[] categoryS; 
 	private Integer now;
 	private Integer max;
 	private String rDId;
-	private String rSId;
+	private	Integer rSId;
 	private String age;
 	private String sc;
 	private String sd;
 	private String st;
 	private String et;
 	private String content;
-	private int vct;
-	private int rct;
+	private Integer vct;
+	private Integer rct;
 	private Date regdate;
 	private Date enddate;
+	
 
 	//지역이랑 카테고리는 이름으로 가져올께요
 	private String rDName;
 	private String rSName;
 	private String cDName;
 	private String cSName;
-
-	private int cSId;
-
-	private String cDId;
 	
 	// 작성자는 닉네임으로 표시
 	private String nickname;
 	
+
 	//파일을 엄로드합니다
 	private int no;
 	private String name;
@@ -67,22 +64,22 @@ public class StudyVO {
 	//파일 업로드
 	private String[] files;
 
-	private String email;
 	
 	
-	public String getEmail() {
-		return email;
+	public String getStatus() {
+		return status;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
-	public int getBno() {
+
+	public Integer getBno() {
 		return bno;
 	}
 
-	public void setBno(int bno) {
+	public void setBno(Integer bno) {
 		this.bno = bno;
 	}
 
@@ -102,19 +99,19 @@ public class StudyVO {
 		this.writer = writer;
 	}
 
-	public String getCategoryD() {
+	public String[] getCategoryD() {
 		return categoryD;
 	}
 
-	public void setCategoryD(String categoryD) {
+	public void setCategoryD(String[] categoryD) {
 		this.categoryD = categoryD;
 	}
 
-	public String getCategoryS() {
+	public String[] getCategoryS() {
 		return categoryS;
 	}
 
-	public void setCategoryS(String categoryS) {
+	public void setCategoryS(String[] categoryS) {
 		this.categoryS = categoryS;
 	}
 
@@ -142,11 +139,11 @@ public class StudyVO {
 		this.rDId = rDId;
 	}
 
-	public String getrSId() {
+	public Integer getrSId() {
 		return rSId;
 	}
 
-	public void setrSId(String rSId) {
+	public void setrSId(Integer rSId) {
 		this.rSId = rSId;
 	}
 
@@ -198,19 +195,19 @@ public class StudyVO {
 		this.content = content;
 	}
 
-	public int getVct() {
+	public Integer getVct() {
 		return vct;
 	}
 
-	public void setVct(int vct) {
+	public void setVct(Integer vct) {
 		this.vct = vct;
 	}
 
-	public int getRct() {
+	public Integer getRct() {
 		return rct;
 	}
 
-	public void setRct(int rct) {
+	public void setRct(Integer rct) {
 		this.rct = rct;
 	}
 
@@ -262,22 +259,6 @@ public class StudyVO {
 		this.cSName = cSName;
 	}
 
-	public int getcSId() {
-		return cSId;
-	}
-
-	public void setcSId(int cSId) {
-		this.cSId = cSId;
-	}
-
-	public String getcDId() {
-		return cDId;
-	}
-
-	public void setcDId(String cDId) {
-		this.cDId = cDId;
-	}
-
 	public String getNickname() {
 		return nickname;
 	}
@@ -302,14 +283,6 @@ public class StudyVO {
 		this.name = name;
 	}
 
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
 	public String[] getFiles() {
 		return files;
 	}
@@ -324,11 +297,11 @@ public class StudyVO {
 				+ ", categoryS=" + categoryS + ", now=" + now + ", max=" + max + ", rDId=" + rDId + ", rSId=" + rSId
 				+ ", age=" + age + ", sc=" + sc + ", sd=" + sd + ", st=" + st + ", et=" + et + ", content=" + content
 				+ ", vct=" + vct + ", rct=" + rct + ", regdate=" + regdate + ", enddate=" + enddate + ", rDName="
-				+ rDName + ", rSName=" + rSName + ", cDName=" + cDName + ", cSName=" + cSName + ", cSId=" + cSId
-				+ ", cDId=" + cDId + ", nickname=" + nickname + ", no=" + no + ", name=" + name + ", status=" + status
-				+ ", files=" + Arrays.toString(files) + ", email=" + email + "]";
+				+ rDName + ", rSName=" + rSName + ", cDName=" + cDName + ", cSName=" + cSName + ", nickname=" + nickname
+				+ ", no=" + no + ", name=" + name + ", status=" + status + ", files=" + Arrays.toString(files)
+				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
+				+ "]";
 	}
-	
-		
-}
 
+	
+}

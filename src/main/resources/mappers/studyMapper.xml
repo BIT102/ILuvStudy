@@ -2,9 +2,10 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
- 
+
 <!-- board_study mapper -->
 <mapper namespace="dev.mvc.mapper.StudyMapper">
+
 
 <!-- 스터디 등록 사람숫자 -->
 <update id="updateNow">
@@ -19,8 +20,6 @@ WHERE bno = #{bno}
 insert into board_study (
 title
 , writer
-, categoryD
-, categoryS
 , max
 , rDId
 , rSId
@@ -33,8 +32,6 @@ title
 ) values (
 #{title}
 , #{writer}
-, #{categoryD}
-, #{categoryS}
 , #{max}
 , #{rDId}
 , #{rSId} <!-- null허용 -->
@@ -46,9 +43,34 @@ title
 , #{content} <!-- null허용 -->
 )
 </insert>
- 
-<!-- 스터디 읽어오기 -->
 
+
+<insert id="createCa">
+INSERT INTO
+board_category (
+bsbno
+, categoryd
+, categorys
+) VALUES (
+#{bno}
+, #{categoryD}
+, #{categoryS}
+)
+</insert>
+
+<select id="readCa" resultType="StudyVO">
+select
+bc.categoryd
+, sc.cdname
+, bc.categorys
+, sc.csname
+from
+board_category bc
+left outer join study_category sc on bc.CATEGORYD = sc.CDID and bc.CATEGORYS = sc.CSID
+where bsbno = #{bno}
+</select>
+
+<!-- 스터디 읽어오기 -->
 <select id="readStudy" resultType="StudyVO">
 SELECT
 ba.name
@@ -56,8 +78,6 @@ ba.name
 , bs.title
 , bs.writer
 , u.NICKNAME
-, sc.cDName
-, sc.cSName
 , bs.now
 , bs.max
 , r.rDName
@@ -76,23 +96,19 @@ FROM
 board_study bs
 left outer join user u on bs.writer = u.EMAIL
 left outer join board_attach ba on bs.bno = ba.bsbno
-left outer join study_category sc on bs.CATEGORYD = sc.CDID and bs.CATEGORYS = sc.CSID
 left outer join region r on bs.RDID = r.RDID and bs.RSID = r.RSID
 WHERE bs.bno = #{bno}
 </select>
- 
+
 <!-- 전체불러오기 -->
 <select id="studyList" resultType="StudyVO">
 <![CDATA[
-
 SELECT
 ba.name
 , bs.bno
 , bs.title
 , bs.writer
 , u.nickname
-, sc.cDName
-, sc.cSName
 , bs.now
 , bs.max
 , r.rDName
@@ -107,12 +123,10 @@ ba.name
 , bs.rct
 , bs.regdate
 , bs.enddate
-, ba.name
 FROM 
 board_study bs
 left outer join user u on bs.writer = u.EMAIL
 left outer join (select * from board_attach where status = "O") ba on bs.bno = ba.bsbno
-left outer join study_category sc on bs.CATEGORYD = sc.CDID and bs.CATEGORYS = sc.CSID
 left outer join region r on bs.RDID = r.RDID and bs.RSID = r.RSID
 WHERE bs.bno > 0
 ORDER BY bs.bno desc, bs.regdate desc;
@@ -143,11 +157,6 @@ VALUES(
 , #{status}
 )
 </insert>
-
-
-<select id = "addFileLast" resultType="int">
-	select LAST_INSERT_ID()
-</select>
 
 <!-- 파일불러오기 -->
 <select id="getFile" resultType="string">
@@ -182,8 +191,6 @@ ba.name
 , bs.title
 , bs.writer
 , u.NICKNAME
-, sc.cDName
-, sc.cSName
 , bs.now
 , bs.max
 , r.rDName
@@ -202,7 +209,6 @@ FROM
 board_study bs
 left outer join user u on bs.writer = u.EMAIL
 left outer join (select * from board_attach where status = "O") ba on bs.bno = ba.bsbno
-left outer join study_category sc on bs.CATEGORYD = sc.CDID and bs.CATEGORYS = sc.CSID
 left outer join region r on bs.RDID = r.RDID and bs.RSID = r.RSID
 WHERE bs.bno > 0
 ORDER BY bs.bno desc
@@ -220,8 +226,6 @@ ba.name
 , bs.title
 , bs.writer
 , u.NICKNAME
-, sc.cDName
-, sc.cSName
 , bs.now
 , bs.max
 , r.rDName
@@ -240,7 +244,6 @@ FROM
 board_study bs
 left outer join user u on bs.writer = u.EMAIL
 left outer join (select * from board_attach where status = "O") ba on bs.bno = ba.bsbno
-left outer join study_category sc on bs.CATEGORYD = sc.CDID and bs.CATEGORYS = sc.CSID
 left outer join region r on bs.RDID = r.RDID and bs.RSID = r.RSID
 WHERE bs.bno > 0
 ORDER BY bs.bno desc
@@ -260,8 +263,6 @@ ba.name
 , bs.title
 , bs.writer
 , u.NICKNAME
-, sc.cDName
-, sc.cSName
 , bs.now
 , bs.max
 , r.rDName
@@ -280,7 +281,6 @@ FROM
 board_study bs
 left outer join user u on bs.writer = u.EMAIL
 left outer join (select * from board_attach where status = "O") ba on bs.bno = ba.bsbno
-left outer join study_category sc on bs.CATEGORYD = sc.CDID and bs.CATEGORYS = sc.CSID
 left outer join region r on bs.RDID = r.RDID and bs.RSID = r.RSID
 WHERE bs.bno > 0
 ]]>
@@ -294,8 +294,6 @@ ba.name
 , bs.title
 , bs.writer
 , u.NICKNAME
-, sc.cDName
-, sc.cSName
 , bs.now
 , bs.max
 , r.rDName
@@ -314,7 +312,6 @@ FROM
 board_study bs
 left outer join user u on bs.writer = u.EMAIL
 left outer join (select * from board_attach where status = "O") ba on bs.bno = ba.bsbno
-left outer join study_category sc on bs.CATEGORYD = sc.CDID and bs.CATEGORYS = sc.CSID
 left outer join region r on bs.RDID = r.RDID and bs.RSID = r.RSID
 WHERE bs.bno > 0
 ]]>
@@ -337,8 +334,6 @@ count(bs.bno)
 , bs.title
 , bs.writer
 , u.NICKNAME
-, sc.cDName
-, sc.cSName
 , bs.now
 , bs.max
 , r.rDName
@@ -357,7 +352,6 @@ FROM
 board_study bs
 left outer join user u on bs.writer = u.EMAIL
 left outer join (select * from board_attach where status = "O") ba on bs.bno = ba.bsbno
-left outer join study_category sc on bs.CATEGORYD = sc.CDID and bs.CATEGORYS = sc.CSID
 left outer join region r on bs.RDID = r.RDID and bs.RSID = r.RSID
 WHERE bs.bno > 0
 ]]>
@@ -390,21 +384,18 @@ WHERE bs.bno > 0
   		</if> 
   </sql>		
 
-  <select id="getNextBno" resultType="int">
+  	 		  <select id="getNextBno" resultType="int">
 
   select LAST_INSERT_ID();
 
   </select>
   
-
-	
   
-<!-- 카테고리 분류 SQL -->
+  <!-- 카테고리 분류 SQL -->
  <select id="catList" resultType="studyVO">
 <![CDATA[
 select DISTINCT cDName
  from study_category
-
 ]]>
 </select>
 
@@ -413,7 +404,6 @@ select DISTINCT cDName
 select cSName, csId
  from study_category
  where cdId=#{csId} 
-
 ]]>
 </select>
 
@@ -422,7 +412,6 @@ select cSName, csId
 <![CDATA[
 SELECT distinct rDName
  from region
-
 ]]>
 </select>
 
@@ -431,32 +420,7 @@ SELECT distinct rDName
 select rSName, rSId
  from region
 where rDId=#{rSId} 
-
 ]]>
 </select>
-
-<!-- 게시물 수정 -->
-<update id="update">
-update board_study
-set 
-	title =#{title},
-	content =#{content}
-where
-	bno = #{bno}
-</update>
-
-<!-- 게시물 수정 ,삭제 파일업로드 -->
-	<delete id="deleteAttach">
-	delete 
-	from tbl_attach 
-	where bno = #{bno}
-	</delete>
-	
-	<insert id="replaceAttach">
-	insert into tbl_attach(fullName, bno)
-	values (#{fullName}, #{bno})
-	</insert>
-
-
 
 </mapper>

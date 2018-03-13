@@ -30,11 +30,12 @@
 <!--헤더-->
 <div class="navbar navbar-default navbar-fixed-top">
 			<div class="brand">
-				<a href="/study/main"><img src="/resources/img/logo-dark.png" alt="Iluvstudy Logo" class="img-responsive logo"></a>
+				<a href="userList"><img src="/resources/img/logo.JPG" alt="Iluvstudy Logo" class="img-responsive logo"></a> 
 			</div>
 			<div class="container-fluid">
 				<div class="navbar-btn">
 					<button type="button" class="btn-toggle-fullwidth"><i class="lnr lnr-arrow-left-circle"></i></button>
+					<a href="/study/main"><button type="button" class="lnr lnr-home"></button></a>
 				</div>
 				<div id="navbar-menu">
 					<ul class="nav navbar-nav navbar-right">

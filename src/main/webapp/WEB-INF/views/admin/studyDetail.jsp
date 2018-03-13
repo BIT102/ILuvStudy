@@ -5,6 +5,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>스터디 상세</title>
+<style>
+form th{
+	width:30%;
+}
+#rDName, #rSName{
+	width:30%;
+	display: inline;
+}
+</style>
 </head>
 <body>
 <div id="wrapper">
@@ -35,20 +44,27 @@
             <tr>
                 <th>카테고리</th>
                 <td>
+              
                 <!-- 스터디에 등록된 카테고리 체크 표시 -->
                 <!-- 스터디 카테고리 데이터 -->
-                <c:forEach items="${studyCategory}" var="studyVO">
+<%--                 <c:forEach items="${studyCategory}" var="studyVO">
                  	<c:if test="${studyVO.cSId eq 1 and studyVO.cDName eq '외국어'}">
-                		# <a name="categoryD" value="${studyVO.cDId}">${studyVO.cDName}</a>
+                		# <input type="checkbox" name="categoryD" value="${studyVO.cDId}">${studyVO.cDName}
                 	</c:if> 
                 	<c:if test="${studyVO.cSId eq 1 and studyVO.cDName ne '외국어'}">
-                		<br><a name="categoryD" value="${studyVO.cDId}"># ${studyVO.cDName}</a>
+                		<br><input type="checkbox" name="categoryD" value="${studyVO.cDId}"># ${studyVO.cDName}
                 	</c:if>
                 	<label class="fancy-checkbox" style="display:inline-block;">
                 		<input type="checkbox" name="categoryS" id="${studyVO.cDId}${studyVO.cSId}" value="${studyVO.cSId}"><span>${studyVO.cSName}</span>
                 	</label>
-                </c:forEach>
-                </td>
+                </c:forEach> --%>
+                
+					<c:forEach items="${studyDC}" var="studyVO">
+						<input type="checkbox" name="categoryD">${studyVO.cDName}
+						<input type="checkbox" name="categoryD">${studyVO.cSName}
+					</c:forEach>
+
+				</td>
             </tr>
             <tr>
                 <th>스터디명</th>
@@ -58,15 +74,15 @@
                 <th>지역</th>
                 <td>
                 <!-- 스터디에 선택된 지역정보 셀렉트 표시 -->
-                    <select id="rDName" class="form-control">
+                <%--     <select id="rDName" class="form-control"> 
                     	<c:forEach items="${region}" var="studyVO">
                     			<c:if test="${studyVO.rSId eq 1}">
                     				<option name='rDId' value="${studyVO.rDId}">${studyVO.rDName}</option>
                     			</c:if>
                     	</c:forEach>
                     </select>
-                    <select id="rSName" class="form-control">
-                    </select>
+                    <select id="rSName" class="form-control"> 
+                    </select> --%>
                 </td>
             </tr>
             <tr>
@@ -75,7 +91,7 @@
             </tr>
             <tr>
                 <th>스터디 방장</th>
-                <td>${studyVO.writer}</td>
+                <td><input type="hidden" name="writer" value="${studyVO.writer}">${studyVO.writer}</td>
             </tr>
             <tr>
                 <th>스터디 상태</th>
@@ -129,7 +145,9 @@
             </tr>
             <tr>
                 <th>완료일</th>
-                <td><input type="text" name="enddate" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${studyVO.enddate}"/>"  class="form-control"></td>
+                <td>
+                 <fmt:formatDate pattern="yyyy-MM-dd" value="${studyVO.enddate}"/>
+                </td>
             </tr>
             <tr>
             	<th>현재인원</th>
@@ -160,6 +178,18 @@
             <tr>
                 <th>이미지</th>
                 <td>${studyVO.name}</td>
+            </tr>
+            <tr>
+            	<th>테스트</th>
+            	<td>
+            		<input type="checkbox" class="testck" id="testckp"> 부모
+            			<input type="checkbox" class="testck"> 자식1
+            			<input type="checkbox" class="testck"> 자식2
+            			<input type="checkbox" class="testck"> 자식3 <br>
+            		<input type="checkbox">	부모2 <br>
+            		<input type="checkbox">	부모3 <br>
+            		<input type="checkbox">	부모4 <br>
+            	</td>
             </tr>
         </tbody>
         </table>
@@ -210,6 +240,15 @@
 <script>
 	
 	$(document).ready(function(){
+		
+		//테스트
+		
+		$(".testck").on("click", function(){
+			$("#testckp").attr("checked",true);
+		});
+		
+		//테스트 끝
+		
 		$("#studyListsuv").attr("class", "active");
 		$("#studyListnav").attr("class", "active");
 		$("#subPages").attr("class", "in");
