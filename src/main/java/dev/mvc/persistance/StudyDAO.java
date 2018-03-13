@@ -14,8 +14,11 @@ public interface StudyDAO {
 	
 	//스터디 읽기
 	public StudyVO readStudy(Integer bno);
+	
+	//카테고리 등록하기
+	public void createRegion(Map<String, Object> region);
 
-	//전체읽기
+	//전체
 	public List<StudyVO> studyList() throws Exception;
 	
 

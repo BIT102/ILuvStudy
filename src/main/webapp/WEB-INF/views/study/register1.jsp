@@ -65,32 +65,33 @@
 		<!--카테고리-->
 			<div class="stucycategory">
 				<!--대분류-->
-				<div id="BigCat">
+			<div id="BigCat">
 					<p>대분류 (마우스를 올리세요!)</p>
 					
 					<% int cataNum = 64; %>
 					<c:forEach items="${catlist}" var="StudyVO">
 						<% cataNum++; %>
-						<button class="bigcatB" value="<%=(char)cataNum%>" id="<%=(char)cataNum%>">${StudyVO.cDName}</button>
+				
+						<input type="checkbox" class="bigcatB" name="categoryD" value="<%=(char)cataNum%>" id="<%=(char)cataNum%>">${StudyVO.cDName}
 					</c:forEach>
 					
-				</div>
+				</div> 
 				<!--소분류 외국어-->
 				<p>소분류</p>
 				<div id="SmallCat1">
-				<input type="radio" value="1">	토익	<input type="radio" value="2">	토플	<input type="radio" value="3">	텝스	<input type="radio" value="4">	토스/오픽	<input type="radio" value="5">	회화	<input type="radio" value="6">	작문/독해	<input type="radio" value="7">	중국어	<input type="radio" value="8">	일본어	<input type="radio" value="9">	기타	
+				<input type="checkbox" name="categoryS" value="1">	토익	<input type="checkbox" name="categoryS" value="2">	토플	<input type="checkbox" name="categoryS" value="3">	텝스	<input type="checkbox" name="categoryS" value="4">	토스/오픽	<input type="checkbox"  name="categoryS" value="5">	회화	<input type="checkbox"  name="categoryS" value="6">	작문/독해	<input type="checkbox" value="7">	중국어	<input type="checkbox" value="8">	일본어	<input type="checkbox" name="categoryS" value="9">	기타	
 				</div>
 				
 				<div id="SmallCat2">
-				<input type="radio" value="1">	컴퓨터언어	<input type="radio" value="2">	웹프로그래밍	<input type="radio" value="3">	모바일프로그래밍	<input type="radio" value="4">	데이터베이스/서버	<input type="radio" value="5">	게임프로그래밍	<input type="radio" value="6">	문서작정	<input type="radio" value="7">	자격증	<input type="radio" value="8">	기타	
+				<input type="checkbox" name="categoryS" value="1">	컴퓨터언어	<input type="checkbox" name="categoryS" value="2">	웹프로그래밍	<input type="checkbox" name="categoryS" value="3">	모바일프로그래밍	<input type="checkbox" name="categoryS" value="4">	데이터베이스/서버	<input type="checkbox" name="categoryS" value="5">	게임프로그래밍	<input type="checkbox" name="categoryS" value="6">	문서작정	<input type="checkbox" name="categoryS" value="7">	자격증	<input type="checkbox" name="categoryS" value="8">	기타	
 				</div>
 				
 				<div id="SmallCat3">
-				<input type="radio" value="1">	미술/디자인	<input type="radio" value="2">	뷰티/미용	<input type="radio" value="3">	스포츠	<input type="radio" value="4">	음악/공연	<input type="radio" value="5">	게임	<input type="radio" value="6">	기타	
+				<input type="checkbox" name="categoryS" value="1">	미술/디자인	<input type="checkbox" name="categoryS" value="2">	뷰티/미용	<input type="checkbox" name="categoryS" value="3">	스포츠	<input type="checkbox" name="categoryS" value="4">	음악/공연	<input type="checkbox" name="categoryS" value="5">	게임	<input type="checkbox" name="categoryS" value="6">	기타	
 				</div>
 				
 				<div id="SmallCat4">
-				<input type="radio" value="1">	면접	<input type="radio" value="2">	자소서	<input type="radio" value="3">	고시	<input type="radio" value="4">	기술	<input type="radio" value="5">	기타	
+				<input type="checkbox" name="categoryS" value="1">	면접	<input type="checkbox" name="categoryS" value="2">	자소서	<input type="checkbox" name="categoryS" value="3">	고시	<input type="checkbox" name="categoryS" value="4">	기술	<input type="checkbox" name="categoryS" value="5">	기타	
 				</div>
 				
 				
@@ -152,11 +153,8 @@
 				$("#rDId").change(function(){
 					
 					var bigNum2 = $(this).val()
-					
-					
-					console.log(bigNum2);
-					smallCat2(bigNum2);
-				})
+
+				});
 	
 				function smallCat2(bigNum2){
 					$.getJSON(
@@ -289,12 +287,9 @@
 			</div>
 		</div>
 
-		<button type="submit">종료</button>
+		<input type="submit">종료
 	</form>
 
-
-	<iframe name="zeroFrame"></iframe>
-	
 	<!-- 일등록 핸들러 -->
 	<script id="template" type="text/x-handlebars-template">
 

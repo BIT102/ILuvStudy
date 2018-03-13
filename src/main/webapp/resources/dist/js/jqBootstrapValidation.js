@@ -891,7 +891,7 @@
     if (type === "checkbox") {
       value = ($this.is(":checked") ? value : "");
     }
-    if (type === "radio") {
+    if (type === "checkbox") {
       value = ($('input[name="' + $this.attr("name") + '"]:checked').length > 0 ? value : "");
     }
     return value;

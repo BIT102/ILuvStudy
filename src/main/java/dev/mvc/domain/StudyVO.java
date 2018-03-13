@@ -28,12 +28,12 @@ public class StudyVO {
 	private Integer bno; 
 	private String title; 
 	private String writer; 
-	private String categoryD; 
-	private String categoryS; 
+	private String[] categoryD; 
+	private String[] categoryS; 
 	private Integer now;
 	private Integer max;
 	private String rDId;
-	private String rSId;
+	private	Integer rSId;
 	private String age;
 	private String sc;
 	private String sd;
@@ -99,19 +99,19 @@ public class StudyVO {
 		this.writer = writer;
 	}
 
-	public String getCategoryD() {
+	public String[] getCategoryD() {
 		return categoryD;
 	}
 
-	public void setCategoryD(String categoryD) {
+	public void setCategoryD(String[] categoryD) {
 		this.categoryD = categoryD;
 	}
 
-	public String getCategoryS() {
+	public String[] getCategoryS() {
 		return categoryS;
 	}
 
-	public void setCategoryS(String categoryS) {
+	public void setCategoryS(String[] categoryS) {
 		this.categoryS = categoryS;
 	}
 
@@ -139,11 +139,11 @@ public class StudyVO {
 		this.rDId = rDId;
 	}
 
-	public String getrSId() {
+	public Integer getrSId() {
 		return rSId;
 	}
 
-	public void setrSId(String rSId) {
+	public void setrSId(Integer rSId) {
 		this.rSId = rSId;
 	}
 

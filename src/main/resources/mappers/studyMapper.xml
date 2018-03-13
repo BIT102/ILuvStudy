@@ -20,8 +20,6 @@ WHERE bno = #{bno}
 insert into board_study (
 title
 , writer
-, categoryD
-, categoryS
 , max
 , rDId
 , rSId
@@ -34,8 +32,6 @@ title
 ) values (
 #{title}
 , #{writer}
-, #{categoryD}
-, #{categoryS}
 , #{max}
 , #{rDId}
 , #{rSId} <!-- null허용 -->
@@ -48,6 +44,20 @@ title
 )
 </insert>
 
+
+<insert id="createRegion">
+INSERT INTO
+board_category (
+bsbno
+, categoryd
+, categorys
+) VALUES (
+#{bno}
+, #{categoryD}
+, #{categoryS}
+)
+</insert>
+
 <!-- 스터디 읽어오기 -->
 <select id="readStudy" resultType="StudyVO">
 SELECT
@@ -56,8 +66,6 @@ ba.name
 , bs.title
 , bs.writer
 , u.NICKNAME
-, sc.cDName
-, sc.cSName
 , bs.now
 , bs.max
 , r.rDName
@@ -76,7 +84,6 @@ FROM
 board_study bs
 left outer join user u on bs.writer = u.EMAIL
 left outer join board_attach ba on bs.bno = ba.bsbno
-left outer join study_category sc on bs.CATEGORYD = sc.CDID and bs.CATEGORYS = sc.CSID
 left outer join region r on bs.RDID = r.RDID and bs.RSID = r.RSID
 WHERE bs.bno = #{bno}
 </select>
@@ -90,8 +97,6 @@ ba.name
 , bs.title
 , bs.writer
 , u.nickname
-, sc.cDName
-, sc.cSName
 , bs.now
 , bs.max
 , r.rDName
@@ -110,7 +115,6 @@ FROM
 board_study bs
 left outer join user u on bs.writer = u.EMAIL
 left outer join (select * from board_attach where status = "O") ba on bs.bno = ba.bsbno
-left outer join study_category sc on bs.CATEGORYD = sc.CDID and bs.CATEGORYS = sc.CSID
 left outer join region r on bs.RDID = r.RDID and bs.RSID = r.RSID
 WHERE bs.bno > 0
 ORDER BY bs.bno desc, bs.regdate desc;
@@ -175,8 +179,6 @@ ba.name
 , bs.title
 , bs.writer
 , u.NICKNAME
-, sc.cDName
-, sc.cSName
 , bs.now
 , bs.max
 , r.rDName
@@ -195,7 +197,6 @@ FROM
 board_study bs
 left outer join user u on bs.writer = u.EMAIL
 left outer join (select * from board_attach where status = "O") ba on bs.bno = ba.bsbno
-left outer join study_category sc on bs.CATEGORYD = sc.CDID and bs.CATEGORYS = sc.CSID
 left outer join region r on bs.RDID = r.RDID and bs.RSID = r.RSID
 WHERE bs.bno > 0
 ORDER BY bs.bno desc
@@ -213,8 +214,6 @@ ba.name
 , bs.title
 , bs.writer
 , u.NICKNAME
-, sc.cDName
-, sc.cSName
 , bs.now
 , bs.max
 , r.rDName
@@ -233,7 +232,6 @@ FROM
 board_study bs
 left outer join user u on bs.writer = u.EMAIL
 left outer join (select * from board_attach where status = "O") ba on bs.bno = ba.bsbno
-left outer join study_category sc on bs.CATEGORYD = sc.CDID and bs.CATEGORYS = sc.CSID
 left outer join region r on bs.RDID = r.RDID and bs.RSID = r.RSID
 WHERE bs.bno > 0
 ORDER BY bs.bno desc
@@ -253,8 +251,6 @@ ba.name
 , bs.title
 , bs.writer
 , u.NICKNAME
-, sc.cDName
-, sc.cSName
 , bs.now
 , bs.max
 , r.rDName
@@ -273,36 +269,10 @@ FROM
 board_study bs
 left outer join user u on bs.writer = u.EMAIL
 left outer join (select * from board_attach where status = "O") ba on bs.bno = ba.bsbno
-left outer join study_category sc on bs.CATEGORYD = sc.CDID and bs.CATEGORYS = sc.CSID
 left outer join region r on bs.RDID = r.RDID and bs.RSID = r.RSID
 WHERE bs.bno > 0
 ]]>
 </select>
-
-<!-- 검색 -->
-<!-- <select id="listSearch" resultType="StudyVO">
-<![CDATA[
-SELECT
-*
-FROM
-board_study
-WHERE bno > 0
-ORDER BY bno desc
-limit #{pageStart}
-, #{perPageNum}
-]]>
-</select> -->
-
-<!-- 검색수 -->
-<!-- <select id="listSearchCount" resultType="int">
-<![CDATA[
-SELECT
-COUNT(bno)
-FROM
-board_study
-WHERE bno > 0
-]]>
-</select> -->
 
 <select id="listSearch" resultType="studyVO">
 <![CDATA[
@@ -312,8 +282,6 @@ ba.name
 , bs.title
 , bs.writer
 , u.NICKNAME
-, sc.cDName
-, sc.cSName
 , bs.now
 , bs.max
 , r.rDName
@@ -332,7 +300,6 @@ FROM
 board_study bs
 left outer join user u on bs.writer = u.EMAIL
 left outer join (select * from board_attach where status = "O") ba on bs.bno = ba.bsbno
-left outer join study_category sc on bs.CATEGORYD = sc.CDID and bs.CATEGORYS = sc.CSID
 left outer join region r on bs.RDID = r.RDID and bs.RSID = r.RSID
 WHERE bs.bno > 0
 ]]>
@@ -355,8 +322,6 @@ count(bs.bno)
 , bs.title
 , bs.writer
 , u.NICKNAME
-, sc.cDName
-, sc.cSName
 , bs.now
 , bs.max
 , r.rDName
@@ -375,7 +340,6 @@ FROM
 board_study bs
 left outer join user u on bs.writer = u.EMAIL
 left outer join (select * from board_attach where status = "O") ba on bs.bno = ba.bsbno
-left outer join study_category sc on bs.CATEGORYD = sc.CDID and bs.CATEGORYS = sc.CSID
 left outer join region r on bs.RDID = r.RDID and bs.RSID = r.RSID
 WHERE bs.bno > 0
 ]]>

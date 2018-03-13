@@ -20,11 +20,17 @@ public class StudyDAOImpl implements StudyDAO {
 	private SqlSession session;
 	
 	private static final String namespace = "dev.mvc.mapper.StudyMapper";
-	
+		
 	//스터디등록
 	@Override
 	public void createStudy(StudyVO vo) {
 		session.insert(namespace+".createStudy", vo);
+	}
+	
+	//지역등록
+	@Override
+	public void createRegion(Map<String, Object> region) {
+		session.insert(namespace+".createRegion", region);
 	}
 	
 	//스터디 불러오기

@@ -1,5 +1,6 @@
 package dev.mvc.service;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,26 +22,21 @@ public class StudyServiceImpl implements StudyService {
 	@Inject
 	private StudyDAO dao;
 	
-	//스터디등록, 파일등록
+	//스터디등록, 파일등록, 지역등록
 	@Transactional
 	@Override
 public void regist(StudyVO vo) throws Exception {
 
-		
-
-		System.out.println("====================");
-
-		System.out.println("registService..........");
-
-		System.out.println(vo);
-
-		System.out.println("====================");
 
 		String[] files = vo.getFiles();
 
-		if(files == null) return;
+		
+		System.out.println("====================");
+		System.out.println(vo.getFiles());
 
+		System.out.println("====================");
 		dao.createStudy(vo);
+		
 
 		// bno 값 가져오기
 
@@ -71,8 +67,32 @@ public void regist(StudyVO vo) throws Exception {
 			}
 			dao.addFile(map);
 		}
+		
+		
+			Map<String, Object> region = new HashMap<>();
+			
+
+			String[] D = vo.getCategoryD();
+			String[] S = vo.getCategoryS();
+			
+
+		for(int i=0; i<D.length; i++) {
+				String caD = D[i];
+				for(int j=0; j<S.length; j++) {
+					String caS = S[j];
+					
+					region.put("bno", bno);
+					region.put("categoryD", caD);
+					region.put("categoryS", caS);
+					
+				System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+				System.out.println(region);
+				System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+					
+					dao.createRegion(region);
+				}
+			}
 	}
-	
 	//스터디 불러오기
 	@Transactional(isolation=Isolation.READ_COMMITTED)
 	@Override
