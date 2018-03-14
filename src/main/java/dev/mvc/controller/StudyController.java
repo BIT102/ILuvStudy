@@ -123,11 +123,13 @@ public class StudyController {
 		
 		logger.info("show list..........");
 		
-		List<StudyVO> studyList = service.studyList().subList(0, 6);
-				
+		List<StudyVO> studyList = service.studyList().subList(0, 7);
+		
 		model.addAttribute("list", studyList);
 		
-		model.addAttribute("list", service.listSearchCriteria(cri));
+		List<StudyVO> SearchList = service.listSearchCriteria(cri).subList(0, 7);
+		
+		model.addAttribute("list", SearchList);
 
 		PageMakerStudy pageMakerStudy = new PageMakerStudy();
 		
@@ -145,14 +147,16 @@ public class StudyController {
 			              @ModelAttribute("cri") CriteriaStudy cri, 
 			              Model model) throws Exception {
 	
-
+		List<StudyVO> list = service.readCa(bno);
 		
-		model.addAttribute("list", service.readCa(bno));
+		for(int i=list.size()-1; i>0; i--) {
+			if(list.get(i).getcDName().equals(list.get(i-1).getcDName())){
+			}
+		}
+		
+		model.addAttribute("list", list);
 		model.addAttribute(service.read(bno));
-		
-		
 
-		
 	}
 	
 	//상세페이지 제거

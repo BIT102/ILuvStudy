@@ -92,7 +92,7 @@
 </head>
 <body data-spy="scroll" data-target="#navbar" data-offset="30">
     
-<%@include file="../header.jsp"%>
+<%@include file="../nav.jsp"%>
 
 	<!-- 검색은 나중에 하겠습니다 -->
    <!-- 검색에 필요한 화면 구현 -->

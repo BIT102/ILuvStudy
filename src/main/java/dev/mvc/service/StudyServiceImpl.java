@@ -34,17 +34,12 @@ public class StudyServiceImpl implements StudyService {
 	@Transactional
 	@Override
 public void regist(StudyVO vo) throws Exception {
+		
+		dao.createStudy(vo);
 
+		
 		//파일등록하기
 		String[] files = vo.getFiles();
-
-		
-		System.out.println("====================");
-		System.out.println(vo.getFiles());
-
-		System.out.println("====================");
-		dao.createStudy(vo);
-		
 
 		// bno 값 가져오기
 
@@ -84,7 +79,7 @@ public void regist(StudyVO vo) throws Exception {
 			String[] S = vo.getCategoryS();
 			
 
-		for(int i=0; i<D.length; i++) {
+		for(int i=0; i<S.length; i++) {
 				String caD = D[i];
 				for(int j=0; j<S.length; j++) {
 					String caS = S[j];

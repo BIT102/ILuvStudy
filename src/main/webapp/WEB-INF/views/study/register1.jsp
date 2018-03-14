@@ -104,8 +104,10 @@
 			<!--최대인원-->
 			<div class="studymax">
 				<p>최대인원</p>
-				<input type="number" name="max">
+				<input type="number" name="max"  min="0">
 			</div>
+
+
 
 				<!--지역분류-->
 			<div id="studyRegion">

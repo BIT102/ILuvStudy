@@ -1,145 +1,147 @@
-﻿
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+﻿<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/fmt" prefix = "fmt" %>
-<!DOCTYPE html>
-<html lang="en">
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<!DOCTYPE htm>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-      <script src="http://code.jquery.com/jquery-1.7.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>I Luv Study</title>
+<!-- Bootstrap tag -->
+<link rel="stylesheet" href="/resources/bootstrap/css/bootstrap.css">
+<link rel="stylesheet" href="/resources/bootstrap/css/font-awesom.css">
 
-    <style>
-    	.table-bordered{border:1px solid grey; width:60%; margin:0 auto;}
-    	
-    </style>
+
+<!------ Include the above in your HEAD tag ---------->
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<style>\
+
+@import url('https://fonts.googleapis.com/css?family=Libre+Baskerville:400,700');
+@import url("//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css");
+.row-section{float:left; width:100%; background: #42275a;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to bottom, #734b6d, #42275a);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to bottom, #734b6d, #42275a); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.row-section h2{float:left; width:100%; color:#fff; margin-bottom:30px; font-size: 14px;}
+.row-section h2 span{font-family: 'Libre Baskerville', serif; display:block; font-size:45px; text-transform:none; margin-bottom:20px; margin-top:30px;font-weight:700;}
+.row-section h2 a{color:#d2abce;}
+.row-section .row-block{background:#fff; padding:20px; margin-bottom:50px;}
+.row-section .row-block ul{margin:0; padding:0;}
+.row-section .row-block ul li{list-style:none; margin-bottom:20px;}
+.row-section .row-block ul li:last-child{margin-bottom:0;}
+.row-section .row-block ul li:hover{cursor:grabbing;}
+.row-section .row-block .media{border:1px solid #d5dbdd; padding:5px 20px; border-radius: 5px; box-shadow:0px 2px 1px rgba(0,0,0,0.04); background:#fff;}
+.row-section .media .media-left img{width:75px;}
+.row-section .media .media-body p{padding: 0 15px; font-size:14px;}
+.row-section .media .media-body h4 {color: #6b456a; font-size: 18px; font-weight: 600; margin-bottom: 0; padding-left: 14px; margin-top:12px;}
+.btn-default{background:#6B456A; color:#fff; border-radius:30px; border:none; font-size:16px;}
+
+
+</style>
     
 </head>
-<body>
-<!-- 공지사항 페이지11111111 -->
-<h1>공지사항이다 확인좀</h1>
+<body style="background:#262626;">
 
-<!-- 나중에 수정 삭제 작업에 값을 넘겨주기 위해서 사용
-<form role="form" method="post">
-	<input type="hidden" name="bno" value="${NoticeVO.bno}">
-</form>-->
+<%@include file="../nav.jsp"%>
 
 
-<%@include file="../header.jsp"%>
+<section class="row-section" style="background:#262626;">
+    <div class="container">
+	    <div class="row">
+		    <h2 class="text-center"><span>공 지 사 항</span></h2>
+	    </div>
+	    <div class="col-md-10 offset-md-1 row-block">
+	        <ul id="sortable">
+	            <li><div class="media">
+	            <div class="media-left align-self-center">
+	                <img class="rounded-circle" src="https://randomuser.me/api/portraits/women/50.jpg">
+	            </div>
+	            <div class="media-body">
+	                <h4>Camila Terry</h4>
+	                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</p>
+	            </div>
+	            <div class="media-right align-self-center">
+	                <a href="#" class="btn btn-default">Contact Now</a>
+	            </div>
+	        </div></li>
+	            <li><div class="media">
+	            <div class="media-left align-self-center">
+	                <img class="rounded-circle" src="https://randomuser.me/api/portraits/men/42.jpg">
+	            </div>
+	            <div class="media-body">
+	                <h4>Joel Williamson</h4>
+	                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</p>
+	            </div>
+	            <div class="media-right align-self-center">
+	                <a href="#" class="btn btn-default">Contact Now</a>
+	            </div>
+	        </div></li>
+	            <li><div class="media">
+	            <div class="media-left align-self-center">
+	                <img class="rounded-circle" src="https://randomuser.me/api/portraits/women/67.jpg">
+	            </div>
+	            <div class="media-body">
+	                <h4>Deann Payne</h4>
+	                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</p>
+	            </div>
+	            <div class="media-right align-self-center">
+	                <a href="#" class="btn btn-default">Contact Now</a>
+	            </div>
+	        </div></li>
+	            <li><div class="media">
+	            <div class="media-left align-self-center">
+	                <img class="rounded-circle" src="https://randomuser.me/api/portraits/women/50.jpg">
+	            </div>
+	            <div class="media-body">
+	                <h4>Leona Hunter</h4>
+	                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</p>
+	            </div>
+	            <div class="media-right align-self-center">
+	                <a href="#" class="btn btn-default">Contact Now</a>
+	            </div>
+	        </div></li>
+	            <li><div class="media">
+	            <div class="media-left align-self-center">
+	                <img class="rounded-circle" src="https://randomuser.me/api/portraits/men/89.jpg">
+	            </div>
+	            <div class="media-body">
+	                <h4>Donald Perkins</h4>
+	                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</p>
+	            </div>
+	            <div class="media-right align-self-center">
+	                <a href="#" class="btn btn-default">Contact Now</a>
+	            </div>
+	        </div></li>
+	        
+	            
+	        
+	        </ul>
+	    </div>
+</div>
+</section>
+  <script>
+  var activeEl = 5;
+  $(function() {
+      var items = $('.btn-nav');
+      $( items[activeEl] ).addClass('active');
+      $( ".btn-nav" ).click(function() {
+          $( items[activeEl] ).removeClass('active');
+          $( this ).addClass('active');
+          activeEl = $( ".btn-nav" ).index( this );
+      });
+  });
+  
+  $( function() {
+    $( "#sortable" ).sortable();
+    $( "#sortable" ).disableSelection();
+  } );
+  </script>
+<script	  src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
 
-	<div class="box-body">
-    
-    <!-- 검색에 필요한 화면 구현 -->
-     <select name="serchType">
-       <option value="n"
-         <c:out value="${cri.searchType == null?'selected':''}"/>>
-         ---</option>
-       <option value="t"
-         <c:out value="${cri.searchType eq 't'?'selected':''}"/>>
-         Title</option>
-       <option value="c"
-         <c:out value="${cri.searchType eq 'c'?'selected':''}"/>>
-         Content</option>
-       <option value="w"
-         <c:out value="${cri.searchType eq 'w'?'selected':''}"/>>
-         Writer</option>
-       <option value="tc"
-         <c:out value="${cri.searchType eq 'tc'?'selected':''}"/>>
-         Title OR Content</option>
-       <option value="cw"
-         <c:out value="${cri.searchType eq 'cw'?'selected':''}"/>>
-         Content OR Writer</option>
-       <option value="tcw"
-         <c:out value="${cri.searchType eq 'tcw'?'selected':''}"/>>
-         Title OR Content OR Writer</option>
-     </select>
-     
-     <input type="text" name="keyword" id="keywordInput" value="${cri.keyword}">
-     <button id="searchBtn">SEARCH</button>
-     <button id="newBtn">NEW BOARD</button>
-	</div>
 
-
-
-
-
-<!-- 공지사항 내용들111111111 -->
-	<table class="table-bordered">
-
-		<tr>
-			<th style="width:10px">BNO</th>
-			<th>TITLE</th>
-			<th>WRITER</th>
-			<th>REGDATE</th>
-		</tr>
-
-<c:forEach items="${list}" var="noticeVO">
-
-
-	<!-- 처음보일 부분1 -->
-		<tr>
-			<td>${noticeVO.bno}</td>
-			<td><a href="/study/noticeDetail${pageMaker.makeQuery(pageMaker.cri.page)}&bno=${noticeVO.bno}">
-			${noticeVO.title}</a>
-			</td>
-			<td>${noticeVO.writer}</td>
-			<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${noticeVO.regdate}" /></td> <!-- VO의  regdate타입을 Date로 바꿔야함. -->
-		</tr>
-		
-</c:forEach>
-</table>
-		
-	<div class="text-center1">
-		<ul class="pagination">
-		
-		<!-- 스프링 MVC를 이용하는 방식 -->
-			<c:if test="${pageMaker.prev}">
-				<li><a href="notice${pageMaker.makeQuery(pageMaker.startPage - 1)}">&laquo;</a></li>
-			</c:if>
-			
-			<c:forEach begin="${pageMaker.startPage }"
-				end="${pageMaker.endPage}" var = "idx">
-				<li 
-					<c:out value="${pageMaker.cri.page == idx?'class=active':''}"/>>
-					<a href="notice${pageMaker.makeQuery(idx)}">${idx}</a>
-				</li>
-			</c:forEach>
-			
-			<c:if test="${pageMaker.next && pageMaker.endPage>0 }">
-				<li><a href="notice${pageMaker.makeQuery(pageMaker.endPage +1)}">&raquo;</a>
-				</li>
-			</c:if> 
-			
-		</ul>
-	</div>
-	
-	
-	<script>
-	<!-- search버튼 동작  -->
-	$(document).ready(
-			function(){
-				
-				$('#searchBtn').on(
-						"click",
-						function(event){
-							
-							self.location = "notice"
-								+ '${pageMaker.makeQuery(1)}'
-								+ "&searchType="
-								+ $("select option:selected").val()
-								+ "&keyword=" + encodeURIComponent($('#keywordInput').val());
-						});
-				
-				$('#newBtn').on("click", function(evt){
-					
-					self.location = "register";
-				});
-				
-			});
-	</script>
 </body>
 </html>
