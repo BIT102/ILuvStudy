@@ -72,7 +72,7 @@ small {
 				<!--대분류--><p>대분류 </p>
 				
 				<select id="BigCat"  name="categoryD">
-					
+					<option> --- </option>
 					<% int cataNum = 64; %>
 					<c:forEach items="${catlist}" var="StudyVO">
 						<% cataNum++; %>
@@ -82,21 +82,22 @@ small {
 				</select>
 				<!--소분류 외국어-->
 				<p>소분류</p>
+				
 				<select id="SmallCat1" name="categoryS">
-				<option type=radio value="1">	토익	<option type=radio value="2">	토플	<option type=radio value="3">	텝스	<option type=radio value="4">	토스/오픽	<option type=radio value="5">	회화	<option type=radio value="6">	작문/독해	<option type=radio value="7">	중국어	<option type=radio value="8">	일본어	<option type=radio value="9">	기타	
+				<option type=radio value="1">	토익</option>	<option type=radio value="2">	토플 </option>	<option type=radio value="3">	텝스 </option> 	<option type=radio value="4">	토스/오픽 </option>	<option type=radio value="5">	회화 </option>	<option type=radio value="6">	작문/독해 </option>	<option type=radio value="7">	중국어	 </option><option type=radio value="8">	일본어	 </option><option type=radio value="9">	기타 </option>	
 				</select>
 				
-				<div id="SmallCat2" name="categoryS">
-				<input type=radio value="1">	컴퓨터언어	<input type=radio value="2">	웹프로그래밍	<input type=radio value="3">	모바일프로그래밍	<input type=radio value="4">	데이터베이스/서버	<input type=radio value="5">	게임프로그래밍	<input type=radio value="6">	문서작정	<input type=radio value="7">	자격증<input type=radio value="8">	기타	
-				</div>
+				<select id="SmallCat2" name="categoryS">
+				<option type=radio value="1">	컴퓨터언어	<option type=radio value="2">	웹프로그래밍	<option type=radio value="3">	모바일프로그래밍	<option type=radio value="4">	데이터베이스/서버	<option type=radio value="5">	게임프로그래밍	<option type=radio value="6">	문서작정	<option type=radio value="7">	자격증<option type=radio value="8">	기타	
+				</select>
 				
-				<div id="SmallCat3" name="categoryS">
-				<input type=radio value="1">	미술/디자인	<input type=radio value="2">	뷰티/미용	<input type=radio value="3">	스포츠	<input type=radio value="4">	음악/공연	<input type=radio value="5">	게임	<input type=radio value="6">	기타	
-				</div>
+				<select id="SmallCat3" name="categoryS">
+				<option type=radio value="1">	미술/디자인	<option type=radio value="2">	뷰티/미용	<option type=radio value="3">	스포츠	<option type=radio value="4">	음악/공연	<option type=radio value="5">	게임	<option type=radio value="6">	기타	
+				</select>
 				
-				<div id="SmallCat4" name="categoryS">
-				<input type=radio value="1">	면접	<input type=radio value="2">	자소서	<input type=radio value="3">	고시	<input type=radio value="4">	기술	<input type=radio value="5">	기타	
-				</div>
+				<select id="SmallCat4" name="categoryS">
+				<option type=radio value="1">	면접	<option type=radio value="2">	자소서	<option type=radio value="3">	고시	<option type=radio value="4">	기술	<option type=radio value="5">	기타	
+				</select>
 				
 				
 			</div>
@@ -234,6 +235,14 @@ small {
 				</select>
 			</div>
 		</div>
+		
+		<script>
+		$(".st").change(function(){
+			console.log($(this).val());
+			tval = $(this).val();
+			$(".et option").remove(val="tval")
+		}); //시작시간 끝나는시간 
+		</script>
 
 		<!--3번째 페이지-->
 		<div class="register3">
@@ -371,10 +380,35 @@ small {
 			
 				$("#BigCat").change("change", function(){
 					
-					$("#SmallCat1").css('visibility', 'visible');
-					$("#SmallCat2").css('visibility', 'visible');
-					$("#SmallCat3").css('visibility', 'visible');
-					$("#SmallCat4").css('visibility', 'visible');
+					var bigNum = $(this).val()
+					
+					smallCat(bigNum);
+				});
+				function smallCat(bigNum){
+					console.log(bigNum);
+					if(bigNum == 'A'){
+						$("#SmallCat1").css('visibility', 'visible')
+						$("#SmallCat2").css('visibility', 'hidden')
+						$("#SmallCat3").css('visibility', 'hidden')
+						$("#SmallCat4").css('visibility', 'hidden')
+					}else if(bigNum == 'B'){
+						$("#SmallCat1").css('visibility', 'hidden')
+						$("#SmallCat2").css('visibility', 'visible')
+						$("#SmallCat3").css('visibility', 'hidden')
+						$("#SmallCat4").css('visibility', 'hidden')
+					}else if(bigNum == 'C'){
+						$("#SmallCat1").css('visibility', 'hidden')
+						$("#SmallCat2").css('visibility', 'hidden')
+						$("#SmallCat3").css('visibility', 'visible')
+						$("#SmallCat4").css('visibility', 'hidden')
+					}else if(bigNum == 'D'){
+						$("#SmallCat1").css('visibility', 'hidden')
+						$("#SmallCat2").css('visibility', 'hidden')
+						$("#SmallCat3").css('visibility', 'hidden')
+						$("#SmallCat4").css('visibility', 'visible')
+					}
+				}
+				//무식코드 .... 리팩토링*******
 				});
 				
 	/*function smallCat1(big)
@@ -383,7 +417,7 @@ small {
 				var bigNum1 = $(this).val()
 				
 				smallCat1(bigNum1);
-				*/
+				
 				$("#B").change(function(){
 					$("#SmallCat2").css('visibility', 'visible');
 				});
@@ -394,7 +428,7 @@ small {
 					$("#SmallCat4").css('visibility', 'visible');
 				});
 			});
-			
+			*/
 	</script>
 	
 	<!-- select지역 이벤트       -->

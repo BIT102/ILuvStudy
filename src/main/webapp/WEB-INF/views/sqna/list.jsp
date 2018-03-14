@@ -25,6 +25,77 @@
     	}
 
     </script>
+    
+    <!-- sock.js -->
+    <!--  <script type="text/javascript" src="/resources/js/sockjs.js"></script>-->
+    <script src="https://cdn.jsdelivr.net/sockjs/1/sockjs.min.js"></script>
+    <script type="text/javascript">
+    	//지정한 URL로 연결
+    	var sock = new SockJS("<c:url value="/echo"/>");
+    	
+    	//websocket 서버에서 메시지를 보내면 자동으로 실행된다.
+    	sock.onmessage = onMessage;
+    	
+    	//websocket과 연결을 끊고 싶을때 실행하는 메소드
+    	sock.onclose = onClose;
+    	
+    	$(function(){
+    		$("#sendBtn").click(function(){
+    			console.log('send message....');
+    			sendMessage();
+    		});
+    	});
+    	
+    	function sendMessage(){
+    		//websocket으로 메시지를 보내겠다.
+    		sock.send($("#message").val());
+    	}
+    	
+    	//evt 파라미터는 websocket이 보내준 데이터다.
+    	function onMessage(evt){
+    		var data = evt.data;
+    		var sessionid = null;
+    		var message = null;
+    		
+    		var strArray = data.split('|');
+    		
+    		for(var i=0; i<strArray.length; i++){
+    			console.log('str['+i+']:' + strArray[i]);
+    		}
+    		
+    		//current session id
+    		var currentuser_session = $('#sessionuserid').val();
+    		console.log('current session id: ' + currentuser_session);
+    		
+    		sessionid = strArray[0];//현재 메세지를 보낸사람의 세션 등록
+    		message = strArray[1];//현재 메세지를 저장
+    		
+    		//나와 상대방이 보낸 메시지 구분
+    		if(sessionid == currentuser_session){
+    			var printHTML = "<div class='well'>";
+    			printHTML += "<div class='alert alert-info'>";
+    			printHTML += "<strong>["+sessionid+"] -> " +message+"</strong>";
+    			printHTML += "</div>";
+    			printHTML += "</div>";
+    			
+    			$("#chatdata").append(printHTML);
+    		}else{
+    			var printHTML = "<div class='well'>";
+    			printHTML += "<div class='alert alert-info'>";
+    			printHTML += "<strong>["+sessionid+"] -> " +message+"</strong>";
+    			printHTML += "</div>";
+    			printHTML += "</div>";
+
+    			$("#chatdata").append(printHTML);
+    		}
+    		console.log('chatting data: ' + data);
+    	}
+    	
+    	function onClose(evt){
+    		$("#data").append("연결 끊김");
+    	}
+    </script>
+    
 </head>
 <body>
 
@@ -108,7 +179,13 @@
 			
 		</ul>
 	</div>
-
+	
+	<input type="text" id="message" />
+	<input type="button" id="sendBtn" value="전송"/>
+	
+	<div id="data">
+	</div>
+	
 <script>
 
 <!-- search버튼 동작  -->

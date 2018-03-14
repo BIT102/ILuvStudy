@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="2.5"  
+<web-app version="3.0"  
 		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 		 xmlns="http://java.sun.com/xml/ns/javaee" 
-		 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" 
+		 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" 
 		 > 
+		 <!-- websocket을 위한 버전 변경 -->
   <context-param>
     <param-name>contextConfigLocation</param-name>
     <param-value>/WEB-INF/spring/root-context.xml</param-value>
@@ -19,10 +20,11 @@
       <param-name>contextConfigLocation</param-name>
       <param-value>
       	/WEB-INF/spring/appServlet/servlet-context.xml
-      	/WEB-INF/spring/ws-config.xml
+      
       </param-value>
     </init-param>
     <load-on-startup>1</load-on-startup>
+    <async-supported>true</async-supported> <!-- websocket을 위한 async true -->
   </servlet>
   
   <servlet-mapping>
