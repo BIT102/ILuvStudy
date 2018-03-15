@@ -11,8 +11,9 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+   <!-- Bootstrap 3.3.4 -->
+    <link href="/resources/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 
-<link href="/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <style>
 body {margin-left:50px;}
 
@@ -70,8 +71,14 @@ body {margin-left:50px;}
 			</div>
 			
 			<!-- 댓글목록 페이징 -->
-			<ul>
-				<li id="repliesDiv"><span>Replies List(click me!)</span>
+			
+			<ul class="timeline">
+			<!-- time line label -->
+				<li class="time-label" id="repliesDiv">
+				<span class="bg-green">
+				Replies List <small id='replycntSmall'>[ ${boardVO.replycnt} ]</small>
+				</span>
+				</li>
 			</ul>
 			
 			<div>
@@ -151,6 +158,7 @@ body {margin-left:50px;}
 </li>
 {{/each}}
 </script>
+
 <!-- handlebars helper -->
 <script>
 Handlebars.registerHelper("prettifyDate", function(timeValue){
@@ -255,6 +263,7 @@ var printData = function (replyArr, target, templateObject){
 		
 		$("#replytext").val(reply.find('timeline-body').text());
 		$(".modal-title").html(reply.attr("data-rno"));
+		
 	});
 	
 	
