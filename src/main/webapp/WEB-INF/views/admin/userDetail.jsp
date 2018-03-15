@@ -28,6 +28,7 @@ form th{
 		</div>
         
         <div class="panel-body">
+        <!-- 파일 업로드 기능 추가 -->
     <form role="form" method="post">    
         <div>* 기본정보</div>
             <table class="table table-hover">
@@ -85,7 +86,7 @@ form th{
                 		<c:if test="${userVO.isDel eq 0}">회원&nbsp;
                 			<button type="submit" id="updateBtn" class="btn btn-danger btn-xs">탈퇴</button>
                 		</c:if>
-                		<c:if test="${userVO.isDel eq 1}">탈퇴</c:if>
+                		<c:if test="${userVO.isDel eq 1}"><a style="color:red">탈퇴</a></c:if>
                 	</td>
                 </tr>
                 <tr>
@@ -118,8 +119,7 @@ form th{
                 <tr>
                     <th>이미지</th>
                     <td>
-                    	<input type="text" class="form-control">
-                    	<button type="button" class="btn btn-default btn-xs">첨부파일</button>
+                    	<input type="file" id="photo" name="photo" class="form-control" event="uploadFile()">
                     	${userVO.photo}
                     </td>
                 </tr>
@@ -350,6 +350,42 @@ form th{
 				}
 			})
 		});
+		
+		//==========파일 업로드==============
+		$('#photo').on("click",function(){
+			
+			event.preventDefault();
+
+			var files = event.originalEvent.dataTransfer.files;
+
+			var file = files[0];
+
+			console.log(file);
+
+			var formData = new FormData();
+
+			formData.append("file", file);
+
+			$.ajax({
+
+				url: '/study/uploadAjax',
+				data: formData,
+				dataType: 'text',
+				processData: false,
+				contentType: false,
+				type: 'POST',
+				//파일을 드롭했을때 성공시
+				success: function(data){
+					
+					var fileInfo = getFileInfo(data);
+			
+					var html = template(fileInfo);
+
+					$(".uploadedList").append(html);
+				}
+				});
+		})
+		
 	});
 	
 	var charDot = "@.abcdefghijklmnopqrstuvwxyz0123456789"; // dot, @ 때문에 나누어놈
@@ -376,6 +412,9 @@ form th{
 			
 			return containsCharOnly(birth, charNum);
 		}
+		
+		
+
 </script>
 
 </body>

@@ -128,6 +128,11 @@ public class AdminDAOImpl implements AdminDAO{
 	}
 	
 	@Override
+	public List<StudyVO> studyCategory2(String cDId) throws Exception{
+		return session.selectList(namespace + ".studyCategory2", cDId);  //study 카테고리 소분류 가져옴
+	}
+	
+	@Override
 	public List<StudyVO> region(Criteria cri) throws Exception{
 		return session.selectList(namespace + ".region", cri);   //지역 정보 대분류 가져옴  
 	}

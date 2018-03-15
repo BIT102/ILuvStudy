@@ -64,8 +64,28 @@ public class StudyVO {
 	//파일 업로드
 	private String[] files;
 
+	//스터디 카테고리
+	private String cDId; 
+	private String cSId; 
 	
 	
+	
+	public String getcDId() {
+		return cDId;
+	}
+
+	public void setcDId(String cDId) {
+		this.cDId = cDId;
+	}
+
+	public String getcSId() {
+		return cSId;
+	}
+
+	public void setcSId(String cSId) {
+		this.cSId = cSId;
+	}
+
 	public String getStatus() {
 		return status;
 	}
@@ -293,14 +313,13 @@ public class StudyVO {
 
 	@Override
 	public String toString() {
-		return "StudyVO [bno=" + bno + ", title=" + title + ", writer=" + writer + ", categoryD=" + categoryD
-				+ ", categoryS=" + categoryS + ", now=" + now + ", max=" + max + ", rDId=" + rDId + ", rSId=" + rSId
-				+ ", age=" + age + ", sc=" + sc + ", sd=" + sd + ", st=" + st + ", et=" + et + ", content=" + content
-				+ ", vct=" + vct + ", rct=" + rct + ", regdate=" + regdate + ", enddate=" + enddate + ", rDName="
-				+ rDName + ", rSName=" + rSName + ", cDName=" + cDName + ", cSName=" + cSName + ", nickname=" + nickname
-				+ ", no=" + no + ", name=" + name + ", status=" + status + ", files=" + Arrays.toString(files)
-				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
-				+ "]";
+		return "StudyVO [bno=" + bno + ", title=" + title + ", writer=" + writer + ", categoryD="
+				+ Arrays.toString(categoryD) + ", categoryS=" + Arrays.toString(categoryS) + ", now=" + now + ", max="
+				+ max + ", rDId=" + rDId + ", rSId=" + rSId + ", age=" + age + ", sc=" + sc + ", sd=" + sd + ", st="
+				+ st + ", et=" + et + ", content=" + content + ", vct=" + vct + ", rct=" + rct + ", regdate=" + regdate
+				+ ", enddate=" + enddate + ", rDName=" + rDName + ", rSName=" + rSName + ", cDName=" + cDName
+				+ ", cSName=" + cSName + ", nickname=" + nickname + ", no=" + no + ", name=" + name + ", status="
+				+ status + ", files=" + Arrays.toString(files) + ", cDId=" + cDId + ", cSId=" + cSId + "]";
 	}
 
 	

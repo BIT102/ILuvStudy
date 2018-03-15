@@ -9,10 +9,11 @@
 form th{
 	width:30%;
 }
-#rDName, #rSName{
+#rDName, #rSName, #age, #sc, #st, #et, #catD, #catS{
 	width:30%;
 	display: inline;
 }
+
 </style>
 </head>
 <body>
@@ -47,23 +48,30 @@ form th{
               
                 <!-- 스터디에 등록된 카테고리 체크 표시 -->
                 <!-- 스터디 카테고리 데이터 -->
-<%--                 <c:forEach items="${studyCategory}" var="studyVO">
-                 	<c:if test="${studyVO.cSId eq 1 and studyVO.cDName eq '외국어'}">
-                		# <input type="checkbox" name="categoryD" value="${studyVO.cDId}">${studyVO.cDName}
-                	</c:if> 
-                	<c:if test="${studyVO.cSId eq 1 and studyVO.cDName ne '외국어'}">
-                		<br><input type="checkbox" name="categoryD" value="${studyVO.cDId}"># ${studyVO.cDName}
-                	</c:if>
-                	<label class="fancy-checkbox" style="display:inline-block;">
-                		<input type="checkbox" name="categoryS" id="${studyVO.cDId}${studyVO.cSId}" value="${studyVO.cSId}"><span>${studyVO.cSName}</span>
-                	</label>
-                </c:forEach> --%>
-                
-					<c:forEach items="${studyDC}" var="studyVO">
-						<input type="checkbox" name="categoryD">${studyVO.cDName}
-						<input type="checkbox" name="categoryD">${studyVO.cSName}
-					</c:forEach>
-
+   <%--               <c:forEach items="${studyCategory}" var="studyVO" varStatus="status">
+                 	<c:if test="${status.index eq 0 || status.index eq 9 || status.index eq 17 || status.index eq 23}">
+                 		<label class="fancy-checkbox">
+                 			<input type="checkbox" name="categoryD" class="${studyVO.cDName}" id="${studyVO.cDName}"><span><b>${studyVO.cDName}</b></span>
+                 		</label>
+                 	</c:if>
+                 	<label class="fancy-checkbox" style="display:inline-block;">
+                 		<input type="checkbox" name="categoryS" class="${studyVO.cDName}" id="${studyVO.cSName}"><span>${studyVO.cSName}</span>
+                 	</label>
+                 </c:forEach> --%>
+                 
+                 <select id="catD" class="form-control">
+                 	<c:forEach items="${studyCategory}" var="studyVO" varStatus="status">
+                 		<c:if test="${status.index eq 0 || status.index eq 9 || status.index eq 17 || status.index eq 23}">
+                 			<option value="${studyVO.cDId}">${studyVO.cDName}</option>
+                 		</c:if>
+                 	</c:forEach>
+                 </select>
+                 <select id="catS" class="form-control">
+                 	<%-- <option value="${studyVO.cSName}">${studyVO.cSName}</option> --%>
+                 </select>
+                 <button type="button" id="addCat" class="btn btn-default btn-xs">추가</button>
+                 <div id="addCatArea">
+                 </div>
 				</td>
             </tr>
             <tr>
@@ -74,15 +82,15 @@ form th{
                 <th>지역</th>
                 <td>
                 <!-- 스터디에 선택된 지역정보 셀렉트 표시 -->
-                <%--     <select id="rDName" class="form-control"> 
+                    <select id="rDName" name='rDId' class="form-control"> 
                     	<c:forEach items="${region}" var="studyVO">
                     			<c:if test="${studyVO.rSId eq 1}">
-                    				<option name='rDId' value="${studyVO.rDId}">${studyVO.rDName}</option>
+                    				<option  value="${studyVO.rDId}">${studyVO.rDName}</option>
                     			</c:if>
                     	</c:forEach>
                     </select>
-                    <select id="rSName" class="form-control"> 
-                    </select> --%>
+                    <select id="rSName" name='rSId' class="form-control"> 
+                    </select>
                 </td>
             </tr>
             <tr>
@@ -111,24 +119,14 @@ form th{
             <tr>
                 <th>연령</th>
                 <td>
-                <label class="fancy-checkbox" style="display:inline-block;">
-                	<input type="checkbox" name="age" value="10대"><span>10대</span>
-                </label>
-                <label class="fancy-checkbox" style="display:inline-block;">
-                	<input type="checkbox" name="age" value="20대"><span>20대</span>
-                </label>
-                <label class="fancy-checkbox" style="display:inline-block;">
-                	<input type="checkbox" name="age" value="30대"><span>30대</span>
-                </label>
-                <label class="fancy-checkbox" style="display:inline-block;">
-                	<input type="checkbox" name="age" value="40대"><span>40대</span>
-                </label>
-                <label class="fancy-checkbox" style="display:inline-block;">
-                	<input type="checkbox" name="age" value="50대"><span>50대</span>
-                </label>
-                <label class="fancy-checkbox" style="display:inline-block;">
-                	<input type="checkbox" name="age" value="무관"><span>무관</span>
-                </label>
+                <select name="age" id="age" class="form-control">
+                	<option value="10대">10대</option>
+                	<option value="20대">20대</option>
+                	<option value="30대">30대</option>
+                	<option value="40대">40대</option>
+                	<option value="50대">50대</option>
+                	<option value="무관">무관</option>
+                </select>
                 </td>
             </tr>
             <tr>
@@ -138,9 +136,76 @@ form th{
             <tr>
                 <th>시간</th>
                 <td>
-                	${studyVO.sc}  ${studyVO.st} ~ ${studyVO.et} <a>X</a><br>
-                    <!-- <a href="studyTime">추가</a> -->
-                    <button type="button" id="" class="btn btn-default btn-xs">추가</button>
+                	<%-- <input type="text" name="sc" value="${studyVO.sc}" style="width:30%; display: inline;" class="form-control">
+                	<input type="text" name="st" value="${studyVO.st}" style="width:30%; display: inline;" class="form-control"> ~
+                	<input type="text" name="et" value="${studyVO.et}" style="width:30%; display: inline;" class="form-control"><br> --%>
+                	<select id="sc" name="sc" class="form-control">
+						<option selected>--</option>
+						<option value="월요일">월요일</option>
+						<option value="화요일">화요일</option>
+						<option value="수요일">수요일</option>
+						<option value="목요일">목요일</option>
+						<option value="금요일">금요일</option>
+						<option value="토요일">토요일</option>
+						<option value="일요일">일요일</option>
+					</select>
+					<select id="st" name="st" class="form-control">
+						<option selected>--</option>
+						<option value="1시">1시</option>
+						<option value="2시">2시</option>
+						<option value="3시">3시</option>
+						<option value="4시">4시</option>
+						<option value="5시">5시</option>
+						<option value="6시">6시</option>
+						<option value="7시">7시</option>
+						<option value="8시">8시</option>
+						<option value="9시">9시</option>
+						<option value="10시">10시</option>
+						<option value="11시">11시</option>
+						<option value="12시">12시</option>
+						<option value="13시">13시</option>
+						<option value="14시">14시</option>
+						<option value="15시">15시</option>
+						<option value="16시">16시</option>
+						<option value="17시">17시</option>
+						<option value="18시">18시</option>
+						<option value="19시">19시</option>
+						<option value="20시">20시</option>
+						<option value="21시">21시</option>
+						<option value="22시">22시</option>
+						<option value="23시">23시</option>
+						<option value="24시">24시</option>
+					</select>
+					<select id="et" name="et" class="form-control">
+						<option selected>--</option>
+						<option value="1시">1시</option>
+						<option value="2시">2시</option>
+						<option value="3시">3시</option>
+						<option value="4시">4시</option>
+						<option value="5시">5시</option>
+						<option value="6시">6시</option>
+						<option value="7시">7시</option>
+						<option value="8시">8시</option>
+						<option value="9시">9시</option>
+						<option value="10시">10시</option>
+						<option value="11시">11시</option>
+						<option value="12시">12시</option>
+						<option value="13시">13시</option>
+						<option value="14시">14시</option>
+						<option value="15시">15시</option>
+						<option value="16시">16시</option>
+						<option value="17시">17시</option>
+						<option value="18시">18시</option>
+						<option value="19시">19시</option>
+						<option value="20시">20시</option>
+						<option value="21시">21시</option>
+						<option value="22시">22시</option>
+						<option value="23시">23시</option>
+						<option value="24시">24시</option>
+					</select>
+                <!-- <div id="addTimeArea">
+                </div>    
+                    <button type="button" id="addTime" class="btn btn-default btn-xs">추가</button> -->
                 </td>
             </tr>
             <tr>
@@ -178,18 +243,6 @@ form th{
             <tr>
                 <th>이미지</th>
                 <td>${studyVO.name}</td>
-            </tr>
-            <tr>
-            	<th>테스트</th>
-            	<td>
-            		<input type="checkbox" class="testck" id="testckp"> 부모
-            			<input type="checkbox" class="testck"> 자식1
-            			<input type="checkbox" class="testck"> 자식2
-            			<input type="checkbox" class="testck"> 자식3 <br>
-            		<input type="checkbox">	부모2 <br>
-            		<input type="checkbox">	부모3 <br>
-            		<input type="checkbox">	부모4 <br>
-            	</td>
             </tr>
         </tbody>
         </table>
@@ -236,18 +289,21 @@ form th{
 			</div>
 		<!-- END MAIN -->
 		</div>
-
+		
 <script>
 	
 	$(document).ready(function(){
 		
-		//테스트
-		
-		$(".testck").on("click", function(){
-			$("#testckp").attr("checked",true);
-		});
-		
-		//테스트 끝
+		//카테고리 소분류 체크 시 대분류 체크 되도록
+		<c:forEach items="${studyCategory}" var="studyVO" varStatus="status">
+			<c:if test="${status.index eq 0 || status.index eq 9 || status.index eq 17 || status.index eq 23}">
+				$(".${studyVO.cDName}").on("click", function(){
+					if($(this).prop("checked")){
+						$("#${studyVO.cDName}").attr("checked",true);
+					}
+				});
+			</c:if>
+        </c:forEach>
 		
 		$("#studyListsuv").attr("class", "active");
 		$("#studyListnav").attr("class", "active");
@@ -272,10 +328,39 @@ form th{
 							+"&stStatusType=${cri.stStatusType}&titleKeyword=${cri.titleKeyword}&writerKeyword=${cri.writerKeyword}";
 		});
 		
+		//지역 정보 셀렉트 박스 변경 시 액션
 		$("#rDName").on("change", function(){
 			getRegion();
 		});
 		
+		//카테고리 정보 셀렉트 박스 변경 시 액션
+		$("#catD").on("change", function(){
+			getCat();
+		});
+		
+		//카테고리 추가 버튼 클릭 시 액션
+		$("#addCat").on("click", function(){
+       		
+			var catd=$('#catD option:selected').val();
+			var cats=$('#catS option:selected').val();
+			
+			var catd2=$('#catD option:selected').text();
+			var cats2=$('#catS option:selected').text();
+			
+			var cat="<input type='hidden' name='categoryD' value="+catd+">"
+			+"<input type='hidden' name='categoryS' value="+cats+">"
+			+"<div>"+catd2 +" > "+cats2+"</div>";
+			
+       		$("#addCatArea").append(cat);
+		});
+		
+		//시간영역 추가 버튼 클릭 시 액션
+		$("#addTime").on("click", function(){
+       		
+       		var time="<input type='text' name='sc' value='' style='width:30%; display: inline;' class='form-control'> <input type='text' name='st' value='' style='width:30%; display: inline;' class='form-control'> ~ <input type='text' name='et' value='' style='width:30%; display: inline;' class='form-control'><br>";
+       	
+       		$("#addTimeArea").append(time);
+		});
 		
 	});
 	
@@ -296,18 +381,57 @@ form th{
 				success:function(result){ //반환받은 지역테이블 정보, list 배열
 					var option="";
 					for(var i=0; i<result.length;i++){
-						option += "<option name='rSId' value="+result[i].rSId+">"+result[i].rSName+" </option>"; //option에 배열값 추가
+						option += "<option value="+result[i].rSId+">"+result[i].rSName+" </option>"; //option에 배열값 추가
 					}
 					$("#rSName").append(option); //html에 뿌려줌
 				}
 			}); //$.ajax 끝
 		}
 		
+		//카테고리 대분류 선택 시 소분류 변경
+		function getCat(){
+			$("#catS").children("option").remove(); //소분류의 option 삭제
+			
+			$.ajax({ //categoryD값을 POST형식으로 category 컨트롤러에 전송
+				type:'POST',
+				url:'/admin/category/'+ $("#catD option:selected").val(),
+ 				headers : {
+					"Content-Type" : "application/json",
+					"X-HTTP-Method-Override" : "POST"}, 
+				dataType:'json',
+				data:JSON.stringify({
+					cdid : $("#catD option:selected").val()  //cdid의 값 전송
+				}),
+				success:function(result){ //반환받은 지역테이블 정보, list 배열
+					var option="";
+					for(var i=0; i<result.length;i++){
+						option += "<option value="+result[i].cSId+">"+result[i].cSName+" </option>"; //option에 배열값 추가
+					}
+					$("#catS").append(option); //html에 뿌려줌
+				}
+			}); //$.ajax 끝
+		}
+		
 		function getStudy(){
-			$("input:checkbox[id='${studyVO.categoryD}${studyVO.categoryS}']").attr("checked", "checked"); //카테고리 정보 불러옴
-			console.log("${studyVO.categoryS}");
-			$("input:checkbox[value='${studyVO.age}']").attr("checked", "checked"); //연령 정보 불러옴
+			//카테고리 정보 불러옴
+			<c:forEach items="${studyDC}" var="studyVO">
+				var recatd = ${studyVO.cDId}; 
+				var recats = ${studyVO.cSId}; 
+				var recatd2 = ${studyVO.cDName};
+				var recats2 = ${studyVO.cSName};
+				
+				var recat="<input type='hidden' name='categoryD' value="+catd+">"
+				+"<input type='hidden' name='categoryS' value="+cats+">"
+				+"<div>"+catd2 +" > "+cats2+"</div>";
+				
+				$("#addCatArea").append(recat);
+			</c:forEach>
+
+			$("option[value='${studyVO.age}']").attr("selected", "selected"); //연령 정보 불러옴
 			$("option[value='${studyVO.rDId}']").attr("selected", "selected"); //스터디 지역 정보 불러옴
+			$("option[value='${studyVO.sc}']").attr("selected", "selected"); // 시간 정보 불러옴
+			$("option[value='${studyVO.st}']").attr("selected", "selected"); // 시작 시간 정보 불러옴
+			$("option[value='${studyVO.et}']").attr("selected", "selected"); // 끝나는 시간 정보 불러옴
 			
 			$.ajax({ //rdid값을 POST형식으로 region 컨트롤러에 전송
 				type:'POST',

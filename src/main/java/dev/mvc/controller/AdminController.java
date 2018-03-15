@@ -266,6 +266,19 @@ public class AdminController {
 		return entity;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="/category/{cDId}", method = RequestMethod.POST)
+	public ResponseEntity<List<StudyVO>> studyCategory2(@PathVariable("cDId") String cDId) throws Exception{
+		logger.info("category post...");
+		
+		ResponseEntity<List<StudyVO>> entity=null;
+		
+		//지역테이블 정보
+		entity = new ResponseEntity<List<StudyVO>>(service.studyCategory2(cDId), HttpStatus.OK);
+		
+		return entity;
+	}
+	
 	
 	//admin/studyDetail.jsp 에서 스터디 정보 수정 시
 	@RequestMapping(value="/studyDetail", method = RequestMethod.POST)

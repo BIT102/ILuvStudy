@@ -176,7 +176,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update user 
 		set name=#{name}, password=#{password}, nickname=#{nickName}, 
 			birth=#{birth}, gender=#{gender}, phonenum=#{phoneNum}, homepage=#{homepage}, 
-			introduction=#{introduction}, modifyDate=now()
+			introduction=#{introduction}, modifyDate=now(), photo=#{photo}
 		where bno = #{bno}
 	</update>
 	
@@ -268,21 +268,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- study 카테고리 상세 정보 -->
 	<select id="studyDetailC" resultType="StudyVO">
-		select
-bc.categoryd
-, sc.cdname
-, bc.categorys
-, sc.csname
-from
-board_category bc
-left outer join study_category sc on bc.CATEGORYD = sc.CDID and bc.CATEGORYS = sc.CSID
-where bsbno = #{bno}
+		select bc.categoryd, sc.cdname, bc.categorys, sc.csname, sc.csid, sc.cdid
+		from board_category bc
+		left outer join study_category sc on bc.CATEGORYD = sc.CDID and bc.CATEGORYS = sc.CSID
+		where bsbno = #{bno}
 	</select>
 
 	<!-- study 카테고리 -->
 	<select id="studyCategory" resultType="StudyVO">
 		select *
 		from study_category
+		order by cdid, csid
+	</select>
+	
+	<select id="studyCategory2" resultType="StudyVO">
+		select *
+		from study_category
+		where cdid=#{cDId}
 		order by cdid, csid
 	</select>
 	
@@ -310,9 +312,15 @@ where bsbno = #{bno}
 	<!-- 스터디 정보 수정  -->
 	<update id="studyUpdate">
 		update board_study
-		set title=#{title}, writer=#{writer}, categoryd=#{categoryD}, categorys=#{categoryS}, 
+		set title=#{title}, writer=#{writer}, rdid=#{rDId}, rsid=#{rSId}, age=#{age},
 		max=#{max}, sc=#{sc}, sd=#{sd}, st=#{st}, et=#{et}, content=#{content}
 		where bno = #{bno}
+	</update>
+	
+	<!-- 스터디 카테고리 정보 업데이트 -->
+	<update id="studyCUpdate">
+		update board_category
+		set 
 	</update>
 	
 <!-- 스터디관리 > 댓글 관리 메뉴 -->

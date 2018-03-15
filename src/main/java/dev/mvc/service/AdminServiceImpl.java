@@ -6,15 +6,14 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
-import dev.mvc.domain.AdminVO;
 import dev.mvc.admin.Criteria;
+import dev.mvc.domain.AdminVO;
 import dev.mvc.domain.NoticeVO;
 import dev.mvc.domain.QnaVO;
 import dev.mvc.domain.ReplyStudyVO;
 import dev.mvc.domain.ReplyVO;
 import dev.mvc.domain.StudyVO;
 import dev.mvc.domain.UserVO;
-import dev.mvc.dto.LoginDTO;
 import dev.mvc.persistence.AdminDAO;
 
 @Service
@@ -122,6 +121,11 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public List<StudyVO> studyCategory(Criteria cri) throws Exception{
 		return dao.studyCategory(cri);
+	}
+	
+	@Override
+	public List<StudyVO> studyCategory2(String cDId) throws Exception{
+		return dao.studyCategory2(cDId);
 	}
 	
 	@Override
