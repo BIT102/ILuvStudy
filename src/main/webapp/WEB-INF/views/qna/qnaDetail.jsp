@@ -311,9 +311,12 @@ var printData = function (replyArr, target, templateObject){
 			}});
 	});
 	</script>
+	
+	<!-- Bootstrap 3.3.2 JS -->
+    <script src="/resources/js/bootstrap.min.js" type="text/javascript"></script>
 <!-- 부트스트랩 JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" ></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" ></script>
 >>>>>>> branch 'HGKWON' of https://github.com/BIT102/ILuvStudy.git
 </body>
 </html>

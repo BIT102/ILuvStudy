@@ -83,9 +83,20 @@ small {
 				<!--소분류 외국어-->
 				<p>소분류</p>
 				
+				<!-- <div id="SmallCat1" name="categoryS">
+					<input type="checkbox" value="1"> 토익
+					<input type="checkbox" value="2"> 토플
+					<input type="checkbox" value="3"> 텝스
+					<input type="checkbox" value="4"> 토스/오픽
+					<input type="checkbox" value="5"> 회화
+					<input type="checkbox" value="6"> 작문/독해 
+					<input type="checkbox" value="7"> 중국어
+					<input type="checkbox" value="8"> 일본어
+					<input type="checkbox" value="9"> 기타
+				</div>-->
 				<select id="SmallCat1" name="categoryS">
 				<option type=radio value="1">	토익</option>	<option type=radio value="2">	토플 </option>	<option type=radio value="3">	텝스 </option> 	<option type=radio value="4">	토스/오픽 </option>	<option type=radio value="5">	회화 </option>	<option type=radio value="6">	작문/독해 </option>	<option type=radio value="7">	중국어	 </option><option type=radio value="8">	일본어	 </option><option type=radio value="9">	기타 </option>	
-				</select>
+				</select> 
 				
 				<select id="SmallCat2" name="categoryS">
 				<option type=radio value="1">	컴퓨터언어	<option type=radio value="2">	웹프로그래밍	<option type=radio value="3">	모바일프로그래밍	<option type=radio value="4">	데이터베이스/서버	<option type=radio value="5">	게임프로그래밍	<option type=radio value="6">	문서작정	<option type=radio value="7">	자격증<option type=radio value="8">	기타	
@@ -99,9 +110,12 @@ small {
 				<option type=radio value="1">	면접	<option type=radio value="2">	자소서	<option type=radio value="3">	고시	<option type=radio value="4">	기술	<option type=radio value="5">	기타	
 				</select>
 				
+			</div>
+		<br>
+			<button id="catplus">+추가</button>
+			<div id="catarea">
 				
 			</div>
-
 		</div>
 
 		<!--두번째 페이지-->
@@ -374,9 +388,12 @@ small {
 			}
 		})
 	</script>
+	<!-- 대분류 셀렉트박스 선택시 소분류 셀렉트 표시 후 추가 하기 -->
 		<script>
 			$(document).ready(function(){
-				
+				$("#catplus").on("click", function(){
+					$("#catarea").html()
+				});
 			
 				$("#BigCat").change("change", function(){
 					
