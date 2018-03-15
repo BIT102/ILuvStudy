@@ -25,6 +25,7 @@
 <style>
 @import url('https://fonts.googleapis.com/css?family=Quicksand');
 
+/*메인 글씨*/
 body {
 	margin: 0;
 	padding: 0;
@@ -33,7 +34,7 @@ body {
 }
 .prakash {
 	position: absolute;
-	top: 300px;
+	top: 370px;
 	left: 50%;
 	transform:translate(-50%,-50%);
 	margin: 0;
@@ -67,99 +68,168 @@ body {
 	filter: blur(40px);
 }
 
-
-
-/*Time to apply widths for accordian to work
-Width of image = 640px
-total images = 5
-so width of hovered image = 640px
-width of un-hovered image = 40px - you can set this to anything
-so total container width = 640 + 40*4 = 800px;
-default width = 800/5 = 160px;
-*/
-
-.accordian {
-	overflow: hidden;
-	
-	/*Time for some styling*/
-	margin: 100px;
-	margin-top:400px;
-
+.row1{
+margin-top:500px;
+margin-bottom:100px;
+}
+/*최근 스터디 불러오기*/
+#wrapper {
+	width: 960px;
+	margin: 0 auto;
 }
 
-.accordian .image_title {
+#wrapper p {
 	color:white;
-	padding:10px;
-	font-size:18px;
-}
-
-.accordian h2 {
-	color:white;
-	padding:30px;
 	font-size:40px;
+	margin-bottom:40px;
 }
 
-/*A small hack to prevent flickering on some browsers*/
-.accordian ul {
-	width: 1200px;
-	/*This will give ample space to the last item to move
-	instead of falling down/flickering during hovers.*/
+#wrapper {
+  perspective: 2500;
+	-webkit-perspective: 2500;
+	width: 800px;
+	margin: 200px auto 0 auto;
+  perspective-origin: 50% 150px;
+	-webkit-perspective-origin: 50% 150px;
+  transition: perspective, 1s;
+  -o-transition: -o-perspective, 1s;
+  -moz-transition: -moz-perspective, 1s;
+	-webkit-transition: -webkit-perspective, 1s;
 }
 
-.accordian li {
-	position: relative;
-	display: block;
-	width: 160px;
-	float: left;
-	
-	border-left: 1px solid #888;
-	
-	box-shadow: 0 0 25px 10px rgba(0, 0, 0, 0.5);
-	-webkit-box-shadow: 0 0 25px 10px rgba(0, 0, 0, 0.5);
-	-moz-box-shadow: 0 0 25px 10px rgba(0, 0, 0, 0.5);
-	
-	/*Transitions to give animation effect*/
-	transition: all 0.5s;
-	-webkit-transition: all 0.5s;
-	-moz-transition: all 0.5s;
-	/*If you hover on the images now you should be able to 
-	see the basic accordian*/
+#img{
+height:
 }
 
-/*Reduce with of un-hovered elements*/
-.accordian ul:hover li {width: 40px;}
-/*Lets apply hover effects now*/
-/*The LI hover style should override the UL hover style*/
-.accordian ul li:hover {width: 640px;}
-
-
-.accordian li img {
-	display: block;
+#image:hover {
+  animation-play-state:paused;
+  -o-animation-play-state:paused;
+  -moz-animation-play-state:paused;
+	-webkit-animation-play-state:paused;
 }
 
-/*Image title styles*/
-.image_title {
-	background: rgba(0, 0, 0, 0.5);
+
+@-webkit-keyframes spin {
+	from {
+    transform: rotateY(0);
+    -o-transform: rotateY(0);
+    -ms-transform: rotateY(0);
+    -moz-transform: rotateY(0);
+		-webkit-transform: rotateY(0);
+	}
+	to {
+    transform: rotateY(-360deg);
+    -o-transform: rotateY(-360deg);
+    -ms-transform: rotateY(-360deg);
+    -moz-transform: rotateY(-360deg);
+		-webkit-transform: rotateY(-360deg);
+	}
+}
+
+#image {
+	margin: 0 auto;
+	height: 300px;
+	width: 400px;
+  transform-style: preserve-3d;
+	-webkit-transform-style: preserve-3d;
+  animation: spin 24s infinite linear;
+  -moz-animation: spin 24s infinite linear;
+  -o-animation: spin 24s infinite linear;
+	-webkit-animation: spin 24s infinite linear;
+}
+
+.image {
 	position: absolute;
-	left: 0; bottom: 0;	
-width: 640px;	
-
-}
-.image_title a {
-	display: block;
+	height: 100%;
+	width: 100%;
+	text-align: center;
+	font-size: 20em;
 	color: #fff;
-	text-decoration: none;
-	padding: 20px;
-	font-size: 16px;
 }
 
+#image > .i1 {
+  transform: translateZ(485px);
+  -moz-transform: translateZ(485px);
+  -o-transform: translateZ(485px);
+  -ms-transform: translateZ(485px);
+  -webkit-transform: translateZ(485px);
+  background-repeat:no-repeat;
+  background-size:100% 100%;
+}
+
+  #image > .i2 {
+  transform: rotateY(45deg) translateZ(485px);
+  -moz-transform: rotateY(45deg) translateZ(485px);
+  -o-transform: rotateY(45deg) translateZ(485px);
+  -ms-transform: rotateY(45deg) translateZ(485px);
+  -webkit-transform: rotateY(45deg) translateZ(485px);
+    background-repeat:no-repeat;
+  background-size:100% 100%;
+}
+#image > .i3 {
+  transform: rotateY(90deg) translateZ(485px);
+  -moz-transform: rotateY(90deg) translateZ(485px);
+  -o-transform: rotateY(90deg) translateZ(485px);
+  -ms-transform: rotateY(90deg) translateZ(485px);
+  -webkit-transform: rotateY(90deg) translateZ(485px);
+    background-repeat:no-repeat;
+  background-size:100% 100%;
+}
+#image > .i4 {
+  transform: rotateY(135deg) translateZ(485px);
+  -moz-transform: rotateY(135deg) translateZ(485px);
+  -o-transform: rotateY(135deg) translateZ(485px);
+  -ms-transform: rotateY(135deg) translateZ(485px);
+  -webkit-transform: rotateY(135deg) translateZ(485px);
+    background-repeat:no-repeat;
+  background-size:100% 100%;
+}
+#image > .i5 {
+  transform: rotateY(180deg) translateZ(485px);
+  -moz-transform: rotateY(180deg) translateZ(485px);
+  -o-transform: rotateY(180deg) translateZ(485px);
+  -ms-transform: rotateY(180deg) translateZ(485px);
+  -webkit-transform: rotateY(180deg) translateZ(485px);
+    background-repeat:no-repeat;
+  background-size:100% 100%;
+}
+#image > .i6 {
+  transform: rotateY(225deg) translateZ(485px);
+  -moz-transform: rotateY(225deg) translateZ(485px);
+  -o-transform: rotateY(225deg) translateZ(485px);
+  -ms-transform: rotateY(225deg) translateZ(485px);
+  -webkit-transform: rotateY(225deg) translateZ(485px);
+    background-repeat:no-repeat;
+  background-size:100% 100%;
+}
+#image > .i7 {
+  transform: rotateY(270deg) translateZ(485px);
+  -moz-transform: rotateY(270deg) translateZ(485px);
+  -o-transform: rotateY(270deg) translateZ(485px);
+  -ms-transform: rotateY(270deg) translateZ(485px);
+  -webkit-transform: rotateY(270deg) translateZ(485px);
+    background-repeat:no-repeat;
+  background-size:100% 100%;
+}
+#image > .i8 {
+  transform: rotateY(315deg) translateZ(485px);
+  -moz-transform: rotateY(315deg) translateZ(485px);
+  -o-transform: rotateY(315deg) translateZ(485px);
+  -ms-transform: rotateY(315deg) translateZ(485px);
+  -webkit-transform: rotateY(315deg) translateZ(485px);
+    background-repeat:no-repeat;
+ 	 background-size:100% 100%;
+} 
+
+
+/*검색 이미지 구현*/
 .search-wrapper {
                 position: absolute;
                 -webkit-transform: translate(-50%, -50%);
                 -moz-transform: translate(-50%, -50%);
                 transform: translate(-50%, -50%);
-                top:550px;
-                left:70%;
+                margin-top:65px;
+                right:21.5%;
             }
             .search-wrapper.active {}
 
@@ -221,12 +291,13 @@ width: 640px;
             }
 
             .search-wrapper .input-holder .search-icon {
-
+				
+				color:white;
                 width:70px;
                 height:70px;
                 border:none;
                 border-radius:6px;
-                background: #FFF;
+                background: #262626;
                 padding:0px;
                 outline:none;
                 position: relative;
@@ -347,6 +418,14 @@ width: 640px;
             @media screen and (max-width: 560px) {
                 .search-wrapper.active .input-holder {width:200px;}
             }
+            
+            .search p{
+            	color:white;
+            	font-size:15px;
+            }
+            
+
+            
 </style>
 
 </head>
@@ -358,9 +437,9 @@ width: 640px;
 <!-- 검색 -->
 <form onsubmit="submitFn(this, event);">
             <div class="search-wrapper">
-                <div class="input-holder">
+                 <div class="input-holder">
                     <input type="text" class="search-input" placeholder="Type to search" />
-                    <button class="search-icon" onclick="searchToggle(this, event);"><span></span></button>
+                 	<button class="search-icon" onclick="searchToggle(this, event);" ><span></span></button>
                 </div>
                 <span class="close" onclick="searchToggle(this, event);"></span>
                 <div class="result-container">
@@ -369,32 +448,49 @@ width: 640px;
             </div>
 </form>
 
+<!-- 메인글씨 -->
 <div class="container">
 	<h1 class="prakash" data-text="[ I Luv Study ]">[ I Luv Study ] </h1><br>
 	<p class="prakash" id="prakash" data-text="I Luv Study" style="font-size:20px; border:none; margin-top:80px;"> 여기는 I Luv Study 홈페이지 입니다. </p>
 </div>
 
-<!-- We will make a simple accordian with hover effects 
-The markup will have a list with images and the titles-->
-<div class="accordian">
-	<h2>New Study</h2>
-    <ul>
-    <c:forEach items="${list}" var="studyVO">
-		<li>
-			<div class="image_title">
-				${studyVO.title} / 지역 ${studyVO.rDName}(${studyVO.rSName})
-			</div> 
-			<a href="/study/board${pageMakerStudy.makeSearch(pageMakerStudy.cri.page)}&bno=${studyVO.bno}">
-				<img src="/study/displayFile?fileName=${studyVO.name}" style="width:640px; height:320px;"/>
-			</a>
-		</li>
-	</c:forEach>		
-	</ul>
-</div>
 
-<!-- 타이핑 -->
-<script language="javascript">
+	<!-- for more info please get touch with me by droping a email to me   akj114912@gmail.com -->
+	<div class="row1">
+<div id="wrapper">
+	<p>최신 스터디</p>	
+    <div id="image">
+  	  <% int car = 0; %>
+  	  <c:forEach items="${list}" var="studyVO">
+  	  <% car++; %>
+      <div class="image i<%= car %>" style="background-image:url(/study/displayFile?fileName=${studyVO.name});" >
+     
+      <div class="image-content<%= car %>" style="font-size:30px; background:gray; opacity: 0.6;">
+      ${studyVO.nickname}<br>
+      ${studyVO.rDName}/${studyVO.rSName}<br>
+      </div>
+      </div>
+     
+    </c:forEach>
+    </div>
+  </div>
+  </div>
+
+
+<script>
+
+var activeEl = 0;
+$(function() {
+    var items = $('.btn-nav');
+    $( items[activeEl] ).addClass('active');
+    $( ".btn-nav" ).click(function() {
+        $( items[activeEl] ).removeClass('active');
+        $( this ).addClass('active');
+        activeEl = $( ".btn-nav" ).index( this );
+    });
+});
 	
+//타이핑 효과
     var mess = "여기는 I Luv Study 홈페이지 입니다.";
     
 	var count=0;
@@ -413,6 +509,7 @@ The markup will have a list with images and the titles-->
 		setTimeout("gogogo()", 200);
 	}
 	
+// 검색 효과
 	function searchToggle(obj, evt){
         var container = $(obj).closest('.search-wrapper');
 
@@ -428,7 +525,7 @@ The markup will have a list with images and the titles-->
               container.find('.result-container').fadeOut(100, function(){$(this).empty();});
         }
     }
-
+    
     function submitFn(obj, evt){
         value = $(obj).find('.search-input').val().trim();
 
@@ -437,14 +534,21 @@ The markup will have a list with images and the titles-->
             _html = "Yup yup! Add some text friend :D";
         }
         else{
-            _html += "<b>" + value + "</b>";
+        	self.location = "/study/listAll"
+				+ '${pageMakerStudy.makeQuery(1)}'
+				+ "&searchType="
+				+ "tcn"
+				/* + $("select option:selected").val() */
+				+ "&keyword=" + encodeURIComponent($('.search-input').val());
         }
 
         $(obj).find('.result-container').html('<span>' + _html + '</span>');
         $(obj).find('.result-container').fadeIn(100);
 
         evt.preventDefault();
-    }	
+    }
+
 </script>
+
 </body>
 </html>

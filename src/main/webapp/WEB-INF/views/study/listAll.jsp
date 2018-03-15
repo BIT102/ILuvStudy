@@ -1,4 +1,4 @@
-﻿<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -14,36 +14,58 @@
 
 
 <!------ Include the above in your HEAD tag ---------->
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+<!-- 파일업로드 -->	
+<script type="text/javascript" src="/resources/js/upload.js"></script>
 
 <style>
 
-@import url('https://fonts.googleapis.com/css?family=Libre+Baskerville:400,700');
-@import url("//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css");
-.row-section{float:left; width:100%; background: #42275a;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to bottom, #734b6d, #42275a);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to bottom, #734b6d, #42275a); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+.container1 {
+margin-top:130px;
 }
-.row-section h2{float:left; width:100%; color:#fff; margin-bottom:30px; font-size: 14px;}
-.row-section h2 span{font-family: 'Libre Baskerville', serif; display:block; font-size:45px; text-transform:none; margin-bottom:20px; margin-top:30px;font-weight:700;}
-.row-section h2 a{color:#d2abce;}
-.row-section .row-block{background:#fff; padding:20px; margin-bottom:50px;}
-.row-section .row-block ul{margin:0; padding:0;}
-.row-section .row-block ul li{list-style:none; margin-bottom:20px;}
-.row-section .row-block ul li:last-child{margin-bottom:0;}
-.row-section .row-block ul li:hover{cursor:grabbing;}
-.row-section .row-block .media{border:1px solid #d5dbdd; padding:5px 20px; border-radius: 5px; box-shadow:0px 2px 1px rgba(0,0,0,0.04); background:#fff;}
-.row-section .media .media-left img{width:75px;}
-.row-section .media .media-body p{padding: 0 15px; font-size:14px;}
-.row-section .media .media-body h4 {color: #6b456a; font-size: 18px; font-weight: 600; margin-bottom: 0; padding-left: 14px; margin-top:12px;}
-.btn-default{background:#6B456A; color:#fff; border-radius:30px; border:none; font-size:16px;}
+
+.row {
+	text-align:center;
+}
+
+.row .responsive{
+	border:1px solid white;
+	margin:15px;
+	display:inline-block !important;
+	vertical-align:top;
+	width:350px;
+	height:450px;
+	color:white;
+	margin-bottom:15px;
+}
 
 
-.text-center{
-	margin-top:90px;
+.row .img-responsive {
+	width:350px;
+	height:227px;
 }
+
+img {
+	filter: gray; /* IE6-9 */
+	-webkit-filter: grayscale(1); /* Google Chrome, Safari 6+ & Opera 15+ */
+	-webkit-box-shadow: 0 2px 6px 2px rgba(0,0,0,0.75);
+	-moz-box-shadow: 0 2px 6px 2px rgba(0,0,0,0.75);
+	box-shadow: 0 2px 6px 2px rgba(0,0,0,0.75);
+	 margin-bottom: 20px;
+        }
+
+ img:hover {
+    filter: none; /* IE6-9 */
+    -webkit-filter: grayscale(0); /* Google Chrome, Safari 6+ & Opera 15+ */
+     mouse:pointer;
+            }
+
 
 /*검색 이미지 구현*/
 .search-wrapper {
@@ -247,8 +269,7 @@ background: linear-gradient(to bottom, #734b6d, #42275a); /* W3C, IE 10+/ Edge, 
             	font-size:15px;
             }
             
-            
-/*페이지 처리*/
+            /*페이지 처리*/
 .pagination>li>a, .pagination>li>span { 
 margin: 8px;
 color:#6b456a !important;
@@ -261,24 +282,19 @@ color:#6b456a !important;
     border-color: #6b456a !important;
     cursor: default;
 }
+            
 
 </style>
-    
 </head>
 <body style="background:#262626;">
-
+    
 <%@include file="../nav.jsp"%>
-
-
 
 <!-- 검색 -->
 <form onsubmit="submitFn(this, event);">
             <div class="search-wrapper">
                  <div class="input-holder">
-                 	
-                 	
                     <input type="text" class="search-input" placeholder="Type to search" />
-
                  	<button class="search-icon" onclick="searchToggle(this, event);" ><span></span></button>
                 </div>
                 <span class="close" onclick="searchToggle(this, event);"></span>
@@ -288,122 +304,110 @@ color:#6b456a !important;
             </div>
 </form>
 
-<section class="row-section" style="background:#262626;">
-    <div class="container">
-	    <div class="row">
-		    <h2 class="text-center"><span>공 지 사 항</span></h2>
-	    </div>
-	    <div class="col-md-10 offset-md-1 row-block">
-	        <ul id="sortable">
-	        
-	    <c:forEach items="${list}" var="noticeVO">    
-	            <li><div class="media">
-	            <div class="media-left align-self-center">
-	               ${noticeVO.bno}
-	            </div>
-	            <div class="media-body">
-	                <h4>${noticeVO.title}         ${noticeVO.writer}</h4><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${noticeVO.regdate}" />
-	                <p>${noticeVO.content}</p>
-	            </div>
-	            <div class="media-right align-self-center">
-	                <a href="/study/noticeDetail${pageMaker.makeQuery(pageMaker.cri.page)}&bno=${noticeVO.bno}" class="btn btn-default">수정하기</a>
-	            </div>
-	        </div></li>
-	        
-	     </c:forEach>
-	        
-	        </ul>
-	    </div>
-</div>
-</section>
-
-		<!-- 페이징처리 -->
+<div class="container1">
+            <div class="row">
+ <c:forEach items="${list}" var="studyVO">
+	<div class="responsive">
+	<div class="responsive-img">
+     <a href="/study/board${pageMakerStudy.makeSearch(pageMakerStudy.cri.page)}&bno=${studyVO.bno}">      
+     <img class="img-responsive" src="/study/displayFile?fileName=${studyVO.name}" />
+	</a>
+	</div>
+	<div class="responsive-content">
+ 	<h4>${studyVO.title}</h4>
+	<p class="card-writer">${studyVO.nickname}</p>
+	<!-- 현재인원/최대인원 -->
+	<p class="nowandmax">${studyVO.now}/${studyVO.max}</p>
+	<!-- 지역 -->
+	<p class="regionDS">${studyVO.rDName}/${studyVO.rSName}</p>
+	<!-- 시작일 -->
+	<p class="st">${studyVO.sd}</p>
+	<!-- 조회수 -->
+	<p class="vct"><i class="fa fa-eye"></i> ${studyVO.vct}</p>
+	</div>
+	</div>
+	 </c:forEach>       
+            </div>
+        </div>
+        
+        
 	<div class="text-center1">
 		<ul class="pagination">
 		
 		<!-- 스프링 MVC를 이용하는 방식 -->
-			<c:if test="${pageMaker.prev}">
-				<li><a href="notice${pageMaker.makeQuery(pageMaker.startPage - 1)}">&laquo;</a></li>
+			<c:if test="${pageMakerStudy.prev}">
+				<li><a href="listAll${pageMakerStudy.makeSearch(pageMakerStudy.startPage - 1)}">&laquo;</a></li>
 			</c:if>
 			
-			<c:forEach begin="${pageMaker.startPage }"
-				end="${pageMaker.endPage}" var = "idx">
+			<c:forEach begin="${pageMakerStudy.startPage }"
+				end="${pageMakerStudy.endPage}" var = "idx">
 				<li 
-					<c:out value="${pageMaker.cri.page == idx?'class=active':''}"/>>
-					<a href="notice${pageMaker.makeQuery(idx)}">${idx}</a>
+					<c:out value="${pageMakerStudy.cri.page == idx?'class=active':''}"/>>
+					<a href="listAll${pageMakerStudy.makeSearch(idx)}">${idx}</a>
 				</li>
 			</c:forEach>
 			
-			<c:if test="${pageMaker.next && pageMaker.endPage>0 }">
-				<li><a href="notice${pageMaker.makeQuery(pageMaker.endPage +1)}">&raquo;</a>
+			<c:if test="${pageMakerStudy.next && pageMakerStudy.endPage>0}">
+				<li><a href="listAll${pageMakerStudy.makeSearch(pageMakerStudy.endPage +1)}">&raquo;</a>
 				</li>
 			</c:if> 
 			
 		</ul>
 	</div>
-	
 
+<script>
 
-  <script>
-  var activeEl = 6;
-  $(function() {
-      var items = $('.btn-nav');
-      $( items[activeEl] ).addClass('active');
-      $( ".btn-nav" ).click(function() {
-          $( items[activeEl] ).removeClass('active');
-          $( this ).addClass('active');
-          activeEl = $( ".btn-nav" ).index( this );
-      });
-  });
-  
-  $( function() {
-    $( "#sortable" ).sortable();
-    $( "#sortable" ).disableSelection();
-  } );
-  
-  
-	
+var activeEl = 3;
+$(function() {
+    var items = $('.btn-nav');
+    $( items[activeEl] ).addClass('active');
+    $( ".btn-nav" ).click(function() {
+        $( items[activeEl] ).removeClass('active');
+        $( this ).addClass('active');
+        activeEl = $( ".btn-nav" ).index( this );
+    });
+});
+
 //검색 효과
-	function searchToggle(obj, evt){
-       var container = $(obj).closest('.search-wrapper');
+function searchToggle(obj, evt){
+    var container = $(obj).closest('.search-wrapper');
 
-       if(!container.hasClass('active')){
-             container.addClass('active');
-             evt.preventDefault();
-       }
-       else if(container.hasClass('active') && $(obj).closest('.input-holder').length == 0){
-             container.removeClass('active');
-             // clear input
-             container.find('.search-input').val('');
-             // clear and hide result container when we press close
-             container.find('.result-container').fadeOut(100, function(){$(this).empty();});
-       }
-   }
-   
-   function submitFn(obj, evt){
-       value = $(obj).find('.search-input').val().trim();
+    if(!container.hasClass('active')){
+          container.addClass('active');
+          evt.preventDefault();
+    }
+    else if(container.hasClass('active') && $(obj).closest('.input-holder').length == 0){
+          container.removeClass('active');
+          // clear input
+          container.find('.search-input').val('');
+          // clear and hide result container when we press close
+          container.find('.result-container').fadeOut(100, function(){$(this).empty();});
+    }
+}
 
-       _html = "Yup yup! Your search text sounds like this: ";
-       if(!value.length){
-           _html = "Yup yup! Add some text friend :D";
-       }
-       else{
-       	self.location = "notice"
-				+ '${pageMakerStudy.makeQuery(1)}'
-				+ "&searchType="
-				+ "tcn"
-				/* + $("select option:selected").val() */
-				+ "&keyword=" + encodeURIComponent($('.search-input').val());
-       }
+function submitFn(obj, evt){
+    value = $(obj).find('.search-input').val().trim();
 
-       $(obj).find('.result-container').html('<span>' + _html + '</span>');
-       $(obj).find('.result-container').fadeIn(100);
+    _html = "Yup yup! Your search text sounds like this: ";
+    if(!value.length){
+        _html = "Yup yup! Add some text friend :D";
+    }
+    else{
+    	self.location = "listAll"
+			+ '${pageMakerStudy.makeQuery(1)}'
+			+ "&searchType="
+			+ "tcn"
+			/* + $("select option:selected").val() */
+			+ "&keyword=" + encodeURIComponent($('.search-input').val());
+    }
 
-       evt.preventDefault();
-   }
+    $(obj).find('.result-container').html('<span>' + _html + '</span>');
+    $(obj).find('.result-container').fadeIn(100);
 
-  </script>
- 
-<%@include file="../footer.jsp"%> 
+    evt.preventDefault();
+	
+}
+</script>        
+<%@include file="../footer.jsp"%>
 </body>
 </html>

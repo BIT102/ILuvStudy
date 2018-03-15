@@ -123,11 +123,11 @@ public class StudyController {
 		
 		logger.info("show list..........");
 		
-		List<StudyVO> studyList = service.studyList().subList(0, 7);
+		List<StudyVO> studyList = service.studyList().subList(0, 8);
 		
 		model.addAttribute("list", studyList);
 		
-		List<StudyVO> SearchList = service.listSearchCriteria(cri).subList(0, 7);
+		List<StudyVO> SearchList = service.listSearchCriteria(cri).subList(0, 8);
 		
 		model.addAttribute("list", SearchList);
 

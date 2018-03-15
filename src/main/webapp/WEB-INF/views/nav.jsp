@@ -1,6 +1,9 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<!DOCTYPE htm>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -32,7 +35,7 @@ Inspired by http://dribbble.com/shots/890759-Ui-Kit-Metro/attachments/97174
 }
 body {
     text-align: center;
-    padding-top: 60px;
+    padding-top: 50px;
 }
 
   
@@ -52,6 +55,7 @@ body {
     border-top: 6px solid #fc0c63;
 	border-bottom: 6px solid #fc0c63;
 }
+
 .btn-nav.active {
     color: #e92d00;
     padding: 2px;
@@ -324,34 +328,51 @@ html {
     
 		<div class="btn-group btn-group-justified">
             <div class="btn-group">
+            <a href="/study/main">
+                <button type="button" class="btn btn-nav">
+                    <span class="glyphicon glyphicon-home"></span>
+    			    <p>HOME</p>
+                </button>
+             </a> 
+            </div>
+            
+            <div class="btn-group">
                 <button type="button" class="btn btn-nav" onclick="document.getElementById('id01').style.display='block'">
                     <span class="glyphicon glyphicon-log-in"></span>
     			    <p>로그인</p>
                 </button>
             </div>
             <div class="btn-group">
+            <a href="/join">
                 <button type="button" class="btn btn-nav">
                     <span class="glyphicon glyphicon-user"></span>
     			    <p>회원가입</p>
                 </button>
+            </a>    
             </div>
             <div class="btn-group">
+            <a href="/study/listAll">
                 <button type="button" class="btn btn-nav">
                     <span class="glyphicon glyphicon-eye-open"></span>
     			    <p>스터디 구경하기</p>
                 </button>
+            </a> 
             </div>
             <div class="btn-group">
+            <a href="/study/register1">
                 <button type="button" class="btn btn-nav">
                     <span class="glyphicon glyphicon-shopping-cart"></span>
     			    <p>스터디등록</p>
                 </button>
+            </a>    
             </div>
             <div class="btn-group">
+            <a href="/sqna/list">
                 <button type="button" class="btn btn-nav">
                     <span class="glyphicon glyphicon-comment"></span>
     			    <p>FAQ</p>
                 </button>
+            </a>    
             </div>
             <div class="btn-group">
             <a href="/study/notice">
@@ -391,7 +412,7 @@ html {
 
       </form>
 
-      <p class="text--center">Not a member? <a href="#">Sign up now</a> <svg class="icon"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="assets/images/icons.svg#arrow-right"></use></svg></p>
+      <p class="text--center">Not a member? <a href="#" style="color:black;">Sign up now</a> <svg class="icon"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="assets/images/icons.svg#arrow-right"></use></svg></p>
 
     </div>
     
