@@ -272,14 +272,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from board_category bc
 		left outer join study_category sc on bc.CATEGORYD = sc.CDID and bc.CATEGORYS = sc.CSID
 		where bsbno = #{bno}
+		order by bc.categoryd, bc.categorys
 	</select>
 
-	<!-- study 카테고리 -->
-<!-- 	<select id="studyCategory" resultType="StudyVO">
-		select *
-		from study_category
-		order by cdid, csid
-	</select> -->
 	<!-- study 카테고리 -->
 	<select id="studyCategory" resultType="StudyVO">
 		select *

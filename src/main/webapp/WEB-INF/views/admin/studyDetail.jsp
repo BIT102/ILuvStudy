@@ -59,12 +59,10 @@ form th{
                  	</label>
                  </c:forEach> --%>
                  
+<!-- ======== 카테고리 =========== -->       
                  <select id="catD" class="form-control">
                  	<option>--</option>
-                 	<c:forEach items="${studyCategory}" var="studyVO" varStatus="status">
-<%--                  		<c:if test="${status.index eq 0 || status.index eq 9 || status.index eq 17 || status.index eq 23}">
-                 			<option value="${studyVO.cDId}">${studyVO.cDName}</option>
-                 		</c:if> --%>
+                 	<c:forEach items="${studyCategory}" var="studyVO">
                  		<option value="${studyVO.cDId}">${studyVO.cDName}</option>
                  	</c:forEach>
                  </select>
@@ -84,6 +82,7 @@ form th{
             <tr>
                 <th>지역</th>
                 <td>
+<!-- ======== 지 역 =========== -->    
                 <!-- 스터디에 선택된 지역정보 셀렉트 표시 -->
                     <select id="rDName" name='rDId' class="form-control"> 
                     	<c:forEach items="${region}" var="studyVO">
@@ -224,7 +223,8 @@ form th{
 						<option value="23시">23시</option>
 						<option value="24시">24시</option>
 					</select>
-                <!-- <div id="addTimeArea">
+                <!-- 시간 추가 등록 가능 
+                <div id="addTimeArea">
                 </div>    
                     <button type="button" id="addTime" class="btn btn-default btn-xs">추가</button> -->
                 </td>
@@ -375,8 +375,6 @@ form th{
        		$("#addCatArea").append(cat);
 		});
 		
-
-		
 		//시간영역 추가 버튼 클릭 시 액션
 		$("#addTime").on("click", function(){
        		
@@ -386,10 +384,11 @@ form th{
 		});
 		
 	});
-	function btn_delete(x){
+		//카테고리 삭제 버튼
+		function btn_delete(x){
+			$(x).parent("div").remove();
+		}
 		
-		$(x).parent("div").remove();
-	}
 		//지역정보 2단 콤보박스 메서드
 		function getRegion(){
 			$("#rSName").children("option").remove(); //소분류의 option 삭제
