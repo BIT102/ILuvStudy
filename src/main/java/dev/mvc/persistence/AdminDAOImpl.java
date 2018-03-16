@@ -1,6 +1,7 @@
 package dev.mvc.persistence;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -150,6 +151,16 @@ public class AdminDAOImpl implements AdminDAO{
 	@Override
 	public void studyUpdate(StudyVO vo)throws Exception{	
 		session.update(namespace + ".studyUpdate", vo);   // 스터디 정보 수정
+	}
+	
+	@Override
+	public void deleteCat(StudyVO vo) throws Exception {
+		session.delete(namespace+".deleteCat", vo); //스터디 카테고리 삭제
+	}
+	
+	@Override
+	public void insertCat(Map<String, Object> ca) throws Exception{
+		session.insert(namespace+".insertCat", ca);  //스터디 카테고리 등록
 	}
 	
 	@Override

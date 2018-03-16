@@ -60,6 +60,7 @@ form th{
                  </c:forEach> --%>
                  
                  <select id="catD" class="form-control">
+                 	<option>--</option>
                  	<c:forEach items="${studyCategory}" var="studyVO" varStatus="status">
                  		<c:if test="${status.index eq 0 || status.index eq 9 || status.index eq 17 || status.index eq 23}">
                  			<option value="${studyVO.cDId}">${studyVO.cDName}</option>
@@ -67,6 +68,7 @@ form th{
                  	</c:forEach>
                  </select>
                  <select id="catS" class="form-control">
+                 	<option>--</option>
                  	<%-- <option value="${studyVO.cSName}">${studyVO.cSName}</option> --%>
                  </select>
                  <button type="button" id="addCat" class="btn btn-default btn-xs">추가</button>
@@ -119,14 +121,32 @@ form th{
             <tr>
                 <th>연령</th>
                 <td>
-                <select name="age" id="age" class="form-control">
+                <label class="fancy-checkbox" style="display:inline-block;">
+                	<input type="checkbox" class="age" name="age" value="10대"><span>10대</span>
+                </label>
+                <label class="fancy-checkbox" style="display:inline-block;">
+                	<input type="checkbox" class="age" name="age" value="20대"><span>20대</span>
+                </label>
+                <label class="fancy-checkbox" style="display:inline-block;">
+                	<input type="checkbox" class="age" name="age" value="30대"><span>30대</span>
+                </label>
+                <label class="fancy-checkbox" style="display:inline-block;">
+                	<input type="checkbox" class="age" name="age" value="40대"><span>40대</span>
+                </label>
+                <label class="fancy-checkbox" style="display:inline-block;">
+                	<input type="checkbox" class="age" name="age" value="50대"><span>50대</span>
+                </label>
+                <label class="fancy-checkbox" style="display:inline-block;">
+                	<input type="checkbox" class="age" name="age" value="무관"><span>무관</span>
+                </label>
+                <!-- <select name="age" id="age" class="form-control">
                 	<option value="10대">10대</option>
                 	<option value="20대">20대</option>
                 	<option value="30대">30대</option>
                 	<option value="40대">40대</option>
                 	<option value="50대">50대</option>
                 	<option value="무관">무관</option>
-                </select>
+                </select> -->
                 </td>
             </tr>
             <tr>
@@ -347,12 +367,14 @@ form th{
 			var catd2=$('#catD option:selected').text();
 			var cats2=$('#catS option:selected').text();
 			
-			var cat="<input type='hidden' name='categoryD' value="+catd+">"
+			var cat="<span><input type='hidden' name='categoryD' value="+catd+">"
 			+"<input type='hidden' name='categoryS' value="+cats+">"
-			+"<div>"+catd2 +" > "+cats2+"</div>";
+			+"<div>"+catd2 +" > "+cats2+"</span><button type='button' onclick = 'btn_delete(this)' class='btn btn-default btn-xs'>삭제</button></div>";
 			
        		$("#addCatArea").append(cat);
 		});
+		
+
 		
 		//시간영역 추가 버튼 클릭 시 액션
 		$("#addTime").on("click", function(){
@@ -363,7 +385,10 @@ form th{
 		});
 		
 	});
-	
+	function btn_delete(x){
+		
+		$(x).parent("div").remove();
+	}
 		//지역정보 2단 콤보박스 메서드
 		function getRegion(){
 			$("#rSName").children("option").remove(); //소분류의 option 삭제
@@ -415,23 +440,31 @@ form th{
 		function getStudy(){
 			//카테고리 정보 불러옴
 			<c:forEach items="${studyDC}" var="studyVO">
-				var recatd = ${studyVO.cDId}; 
+				var recatd = "${studyVO.cDId}"; 
 				var recats = ${studyVO.cSId}; 
-				var recatd2 = ${studyVO.cDName};
-				var recats2 = ${studyVO.cSName};
+				var recatd2 = "${studyVO.cDName}";
+				var recats2 = "${studyVO.cSName}";
 				
-				var recat="<input type='hidden' name='categoryD' value="+catd+">"
-				+"<input type='hidden' name='categoryS' value="+cats+">"
-				+"<div>"+catd2 +" > "+cats2+"</div>";
+				var recat="<span><input type='hidden' name='categoryD' value="+recatd+">"
+				+"<input type='hidden' name='categoryS' value="+recats+">"
+				+"<div>"+recatd2 +" > "+recats2+"</span><button type='button' onclick = 'btn_delete(this)' class='btn btn-default btn-xs'>삭제</button></div>";
 				
 				$("#addCatArea").append(recat);
 			</c:forEach>
-
-			$("option[value='${studyVO.age}']").attr("selected", "selected"); //연령 정보 불러옴
-			$("option[value='${studyVO.rDId}']").attr("selected", "selected"); //스터디 지역 정보 불러옴
-			$("option[value='${studyVO.sc}']").attr("selected", "selected"); // 시간 정보 불러옴
-			$("option[value='${studyVO.st}']").attr("selected", "selected"); // 시작 시간 정보 불러옴
-			$("option[value='${studyVO.et}']").attr("selected", "selected"); // 끝나는 시간 정보 불러옴
+			
+			
+			// 연령 정보 불러옴
+			var check_value="${studyVO.age}";  //연령 DB 데이터 변수에 저장
+			var check_value2=check_value.split(',');   //콤마를 구분자로 배열에 담음 
+			
+			for(var i=0;i<check_value2.length;i++){ //배열 길이만큼 반복문 처리, 연령 체크 속성 부여
+				$("input:checkbox[value="+ check_value2[i] +"]").attr("checked", "checked");
+			}
+			
+			$("#rDName").val("${studyVO.rDId}"); // 스터디 지역 정보 불러옴
+			$("#sc").val("${studyVO.sc}"); // 시간 정보 불러옴
+			$("#st").val("${studyVO.st}"); // 시작 시간 정보 불러옴
+			$("#et").val("${studyVO.et}"); // 끝나는 시간 정보 불러옴
 			
 			$.ajax({ //rdid값을 POST형식으로 region 컨트롤러에 전송
 				type:'POST',

@@ -317,11 +317,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where bno = #{bno}
 	</update>
 	
-	<!-- 스터디 카테고리 정보 업데이트 -->
-	<update id="studyCUpdate">
-		update board_category
-		set 
-	</update>
+	<!-- 스터디 카테고리 삭제 -->
+	<delete id="deleteCat">
+		delete
+		from board_category
+		where bsbno = #{bno}
+	</delete>
+	
+	<!-- 스터디 카테고리 정보 등록 -->
+	<insert id="insertCat">
+		insert into board_category
+		value (#{bno}, #{categoryD}, #{categoryS})
+	</insert>
 	
 <!-- 스터디관리 > 댓글 관리 메뉴 -->
 	<!-- 검색 SQL -->

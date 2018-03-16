@@ -1,6 +1,8 @@
 package dev.mvc.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -144,8 +146,33 @@ public class AdminServiceImpl implements AdminService{
 	}
 	
 	@Override
-	public void studyUpdate(StudyVO vo)throws Exception{
-		dao.studyUpdate(vo);
+	public void studyUpdate(Integer bno, StudyVO vo)throws Exception{
+		
+		dao.deleteCat(vo); //스터디 카테고리 삭제
+		
+		//카테고리 등록하기
+		Map<String, Object> ca = new HashMap<>();
+		
+
+		String[] D = vo.getCategoryD();
+		String[] S = vo.getCategoryS();
+		
+		for(int i=0; i<S.length; i++) {
+			String caD = D[i];
+			String caS = S[i];
+				
+			ca.put("bno", bno);
+			ca.put("categoryD", caD);
+			ca.put("categoryS", caS);
+			
+			System.out.println("========================");
+			System.out.println(ca);
+			System.out.println("========================");
+				
+			dao.insertCat(ca); //스터디 카테고리 등록 
+		}
+		
+		dao.studyUpdate(vo); //스터디 정보 업데이트
 	}
 	
 	@Override

@@ -26,6 +26,11 @@
 	<script src="/resources/vendor/bootstrap/js/bootstrap.min.js"></script>
 	<script src="/resources/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 	<script src="/resources/scripts/klorofil-common.js"></script>
+<style>
+.btn{
+text-shadow : 0 0 20px #ff005b
+}
+</style>
 <body>
 <!--헤더-->
 <div class="navbar navbar-default navbar-fixed-top">

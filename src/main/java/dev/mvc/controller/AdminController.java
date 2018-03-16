@@ -282,19 +282,19 @@ public class AdminController {
 	
 	//admin/studyDetail.jsp 에서 스터디 정보 수정 시
 	@RequestMapping(value="/studyDetail", method = RequestMethod.POST)
-	public String studyDetailPOST(StudyVO vo, RedirectAttributes rttr) throws Exception{
+	public String studyDetailPOST(@RequestParam("bno") int bno, StudyVO vo, RedirectAttributes rttr, @ModelAttribute("cri") Criteria cri) throws Exception{
 		logger.info("studyDetail post...");
 //		logger.info(cri.toString());
 		
-		service.studyUpdate(vo);
+		service.studyUpdate(bno, vo);
 		
 		//페이징 정보 유지
-		/*rttr.addAttribute("page", cri.getPage());
+		rttr.addAttribute("page", cri.getPage());
 		rttr.addAttribute("perPageNum", cri.getPerPageNum());
 		//검색 정보 유지
 		rttr.addAttribute("stStatusType", cri.getStStatusType());
 		rttr.addAttribute("titleKeyword", cri.getTitleKeyword());
-		rttr.addAttribute("writerKeyword", cri.getWriterKeyword());*/
+		rttr.addAttribute("writerKeyword", cri.getWriterKeyword());
 		
 		rttr.addFlashAttribute("msg", "SUCCESS");
 		
