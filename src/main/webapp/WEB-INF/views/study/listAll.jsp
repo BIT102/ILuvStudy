@@ -6,7 +6,7 @@
 <%@include file="../include/header.jsp"%>
 <!DOCTYPE html>
 <html>
-<<<<<<< HEAD
+
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>I Luv Study</title>
@@ -27,7 +27,9 @@
 <script type="text/javascript" src="/resources/js/upload.js"></script>
 
 <style>
-
+li{
+list-style:none;
+}
 .container1 {
 margin-top:130px;
 }
@@ -310,8 +312,11 @@ color:#6b456a !important;
 </form>
 
 <div class="container1">
-            <div class="row">
+<div class = "container2" style = "width:80%; margin: 0 auto;">
+	<div class="row">
+            
  <c:forEach items="${list}" var="studyVO">
+ <div class="col-md-4" style = "color:white;">
 	<div class="responsive">
 	<div class="responsive-img">
      <a href="/study/board${pageMakerStudy.makeSearch(pageMakerStudy.cri.page)}&bno=${studyVO.bno}">      
@@ -332,11 +337,13 @@ color:#6b456a !important;
 	<p class="vct"><i class="fa fa-eye"></i> ${studyVO.vct}</p>
 	</div>
 	</div>
+	</div>
 	 </c:forEach>       
             </div>
         </div>
+</div>
         
-	<div class="text-center1">
+	<div>
 		<ul class="pagination">
 		
 		<!-- 스프링 MVC를 이용하는 방식 -->
@@ -346,7 +353,7 @@ color:#6b456a !important;
 			
 			<c:forEach begin="${pageMakerStudy.startPage }"
 				end="${pageMakerStudy.endPage}" var = "idx">
-				<li
+				<li style = "border: 0px"
 					<c:out value="${pageMakerStudy.cri.page == idx?'class=active':''}"/>>
 					<a href="listAll${pageMakerStudy.makeSearch(idx)}">${idx}</a>
 				</li>

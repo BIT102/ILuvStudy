@@ -5,7 +5,8 @@
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-    
+
+</head>    
 <script>
 	$('document').ready(function(){
 
@@ -245,6 +246,7 @@
 
 <body>
 
+
 	<form role="form" action="/join" method="post">
 		이메일주소<br/>
 		<input id = "email1" type="text" placeholder="아이디를 입력하세요" name="email1" /> 
@@ -360,3 +362,4 @@
 	
 	</script>
 
+</html>

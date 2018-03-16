@@ -86,5 +86,4 @@
 	height: 40px;
 }
 </style>
-</head>
-</html>
+
