@@ -1,6 +1,10 @@
 eclipse.preferences.version=1
 encoding//src/main/webapp/WEB-INF/views/home.jsp=UTF-8
+<<<<<<< HEAD
 encoding//src/main/webapp/WEB-INF/views/study/board.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/study/listAll.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/study/notice.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/study/register1.jsp=UTF-8
+=======
+encoding//src/main/webapp/WEB-INF/views/main.jsp=UTF-8
+>>>>>>> branch 'HGKWON' of https://github.com/BIT102/ILuvStudy.git

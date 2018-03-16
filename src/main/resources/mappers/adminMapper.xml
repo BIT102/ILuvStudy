@@ -5,20 +5,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="dev.mvc.mapper.AdminMapper">
 	
-	<!-- admin 계정 로그인 처리 -->
+<!-- admin 계정 로그인 처리 -->
 	<select id="adminLogin" resultType="AdminVO">
-		select adminid, adminpw from admin where adminid=#{adminId} and adminpw=#{adminPw}
+		select id, pw, bno from admin where id=#{id} and pw=#{pw}
 	</select>
 	
-	<!-- 로그인 시 마지막 접속일 갱신 -->
+	
+<!-- 로그인 시 마지막 접속일 갱신 -->
 	<update id="adminLastLogin">
-		update admin set lastLoginDate=now() where adminid=#{adminId}
+		update admin set lastLoginDate=now() where id=#{id}
 	</update>
 	
-	<!-- adminid, name 검색 SQL -->
-	<sql id="adminsearch">
+<!-- Admin관리 > 계정관리 메뉴 -->
+	<!-- status, adminid, name 검색 SQL -->
+	<sql id="adminSearch">
+		<if test="statusType != null">
+			<if test="statusType == 'v'.toString()">
+				and status='V'
+			</if>
+			<if test="statusType == 'd'.toString()">
+				and status='D'
+			</if>
+		</if>
 		<if test="idKeyword != null">
-			and adminid like concat('%', #{idKeyword}, '%')
+			and id like concat('%', #{idKeyword}, '%')
 		</if>
 		<if test="nameKeyword != null">
 			and name like concat('%', #{nameKeyword}, '%')
@@ -29,11 +39,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 검색처리 -->
 	<select id="adminList" resultType="AdminVO">
 	<![CDATA[
-		select bno, adminid, name, status, lastLoginDate 
+		select bno, id, name, status, lastLoginDate 
 		from admin
 		where bno > 0
 	]]>
-		<include refid="adminsearch"></include>	
+		<include refid="adminSearch"></include>	
 	<![CDATA[
 		order by bno desc, lastLoginDate desc
 		limit #{pageStart}, #{perPageNum}
@@ -43,49 +53,37 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!--  admin 정보 상세 -->
 	<select id="adminDetail" resultType="AdminVO">
-		select bno, adminid, name, adminpw, status, lastLoginDate
+		select *
 		from admin
 		where bno = #{bno}
 	</select>
 	
 	<!-- admin 계정 정보 업데이트 -->
 	<update id="adminUpdate">
-		update admin set name=#{name}, adminpw=#{adminPw}, status=#{status}
+		update admin set name=#{name}, pw=#{pw}, status=#{status}, lastModifyDate=now()
 		where bno = #{bno}
 	</update>
 	
 	<!-- admin 계정 정보 등록 -->
 	<insert id="adminRegister">
-		insert into admin (adminid, adminpw, name, registdate, status) 
-		values(#{adminId},#{adminPw},#{name},now(),#{status})
+		insert into admin (id, pw, name, registDate, registUser, lastModifyDate,status) 
+		values(#{id}, #{pw}, #{name}, now(), #{registUser}, now(), #{status})
 	</insert>
 	
-	<!-- adminList 페이징 처리 -->
-	<select id="adminListPage" resultType="AdminVO">
-		<![CDATA[
-			select bno, adminid, name, status, lastLoginDate 
-			from admin
-			where bno > 0
-			order by bno desc, lastLoginDate desc
-			limit #{page}, 0
-		]]>
-	</select>
-	
-	<!-- totalCount 반환 -->
+	<!-- totalCount 반환 -->  
 	<select id="adminCountPaging" resultType="int">
 		<![CDATA[
 			select count(bno)
 			from admin
 			where bno > 0
 		]]>
-		<include refid="adminsearch"></include>	
+		<include refid="adminSearch"></include>	
 	</select>
 
 <!-- 회원조회 메뉴 -->
-
 	<!-- isdel, id, nickname 검색 SQL -->
-	<!-- 검색 부분 수정 필요 -->
-	<sql id="usersearch">
+	<!-- 검색 부분 수정 필요 비활성 관련-->
+	<sql id="userSearch">
 		<if test="isDelType != null">
 			<if test="isDelType == 'v'.toString()">
 				and isdel=0
@@ -109,7 +107,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from user
 		where bno > 0
 	]]>
-		<include refid="usersearch"></include>	
+		<include refid="userSearch"></include>	
 	<![CDATA[
 		order by bno desc, registdate desc
 		limit #{pageStart}, #{perPageNum}
@@ -124,7 +122,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			from user
 			where bno > 0
 		]]>
-		<include refid="usersearch"></include>
+		<include refid="userSearch"></include>
 	</select>
 	
 	<!-- user 정보 상세 -->
@@ -134,12 +132,332 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where bno = #{bno}
 	</select>
 	
+	<!-- user 상세 스터디 신청 정보 -->
+	<select id="userApply" resultType="StudyVO">
+		select b.bno, a.status, a.regdate, b.title, b.writer, r.rdname, r.rsname
+		from apply_user a, board_study b, region r, user u
+		where a.bsbno=b.bno
+		and b.rdid=r.rdid
+		and b.rsid=r.rsid
+		and a.usemail=u.email
+		and u.bno=#{bno}
+	</select>
+	
+	<!-- user 상세 스터디 모집 정보 -->
+	<select id="userStudy" resultType="StudyVO">
+		select b.bno, b.title, b.writer, r.rdname, r.rsname, b.sd
+		from user u, board_study b, region r
+		where u.email=b.writer
+		and b.rdid=r.rdid
+		and b.rsid=r.rsid
+		and u.bno = #{bno}
+	</select>
+	
+	<!-- user 상세 북마크 정보 -->
+	<select id="userBookMark" resultType="StudyVO">
+		select b.bno, b.title, b.writer, r.rdname, r.rsname, b.sd
+		from user u, bookmark bm, board_study b, region r
+		where u.email = bm.useremail
+		and bm.bsbno = b.bno
+		and b.rdid=r.rdid
+		and b.rsid=r.rsid
+		and u.bno = #{bno}
+	</select>
+	
 	<!-- user 정보 업데이트 -->
 	<update id="userUpdate">
 		update user 
 		set name=#{name}, password=#{password}, nickname=#{nickName}, 
-		birth=#{birth}, gender=#{gender}, phonenum=#{phoneNum}, homepage=#{homepage}, introduction=#{introduction}
+			birth=#{birth}, gender=#{gender}, phonenum=#{phoneNum}, homepage=#{homepage}, 
+			introduction=#{introduction}, modifyDate=now()
 		where bno = #{bno}
 	</update>
 	
+	<!-- user 탈퇴 처리 -->
+	<update id="isDelUpdate">
+		update user 
+		set isDel = 1, quitdate=now()
+		where bno = #{bno}
+	</update>
+	
+	<!-- 회원 정보 등록 -->
+	<insert id="userRegister">
+		insert into user (email, password, name, nickName, gender, phoneNum, birth, registDate, modifyDate, isDel) 
+		values(#{email}, #{password}, #{name}, #{nickName}, #{gender}, #{phoneNum}, #{birth}, now(), now(), 0)
+	</insert>
+	
+<!-- 스터디관리 > 스터디목록 메뉴 -->
+	<!-- 스터디상태, 스터디명, 작성자 검색 SQL -->
+	<sql id="studySearch">
+		<if test="stStatusType != null">
+			<if test="stStatusType == 'v'.toString()">
+				<![CDATA[
+					and sd <= now() and enddate >= now()
+				]]>
+			</if>
+			<if test="stStatusType == 'd'.toString()">
+				<![CDATA[
+					and enddate < now()
+				]]>
+			</if>
+		</if>
+		<if test="titleKeyword != null">
+			and title like concat('%', #{titleKeyword}, '%')
+		</if>
+		<if test="writerKeyword != null">
+			and writer like concat('%', #{writerKeyword}, '%')
+		</if>
+	</sql>
+	
+	<!-- 검색 추가  -->	
+	<!-- study 정보 리스트 -->
+	<select id="studyList" resultType="StudyVO">
+	<![CDATA[
+		select bs.bno, bs.title, bs.writer, r.rdname, r.rsname, bs.sd, bs.enddate, bs.regdate, bs.vct
+		from board_study bs, region r
+		where bs.bno > 0 
+		and bs.rdid = r.rdid
+		and bs.rsid = r.rsid
+	]]>
+		<include refid="studySearch"></include>	
+	<![CDATA[
+		order by bno desc
+		limit #{pageStart}, #{perPageNum}
+	]]>
+	</select>
+	
+	<!-- study 페이지 totalCount 반환 -->
+	<!-- 검색 추가 -->
+	<select id="studyCountPaging" resultType="int">
+		<![CDATA[
+			select count(bno)
+			from board_study
+			where bno > 0
+		]]>
+		<include refid="studySearch"></include>
+	</select>
+	
+	<!-- study 정보 상세 -->
+	<select id="studyDetail" resultType="StudyVO">
+		select *
+		from board_study bs, region r, study_category c
+		where bno = #{bno}
+		and bs.rdid = r.rdid
+		and bs.rsid = r.rsid
+		and bs.categoryD = c.CDID
+		and bs.categoryS = c.CSID
+	</select>
+
+	<!-- study 카테고리 -->
+	<select id="studyCategory" resultType="StudyVO">
+		select *
+		from study_category
+		order by cdid, csid
+	</select>
+	
+	<!-- 지역정보 -->
+	<select id="region" resultType="StudyVO">
+		select *
+		from region
+		order by rdid, rsid
+	</select>
+	<select id="region2" resultType="StudyVO">
+		select *
+		from region
+		where rdid=#{rDId}
+		order by rdid, rsid
+	</select>
+	
+	<!-- 스터디 신청자 정보 -->
+	<select id="applyStudy" resultType="StudyVO">
+		select u.bno, u.email, a.regdate, a.status
+		from apply_user a, user u
+		where a.usemail=u.email
+		and a.bsbno=#{bno}
+	</select>
+	
+	<!-- 스터디 정보 수정  -->
+	<update id="studyUpdate">
+		update board_study
+		set title=#{title}, writer=#{writer}, categoryd=#{categoryD}, categorys=#{categoryS}, 
+		max=#{max}, sc=#{sc}, sd=#{sd}, st=#{st}, et=#{et}, content=#{content}
+		where bno = #{bno}
+	</update>
+	
+<!-- 스터디관리 > 댓글 관리 메뉴 -->
+	<!-- 검색 SQL -->
+	<!-- 스터디번호, 작성자 검색 SQL -->
+	<sql id="studyReplySearch">
+		<if test="bsBnoKeyword != null">
+			and bsbno like concat('%', #{bsBnoKeyword}, '%')
+		</if>
+		<if test="writerKeyword != null">
+			and writer like concat('%', #{writerKeyword}, '%')
+		</if>
+	</sql>
+	<!-- 검색 추가 -->	
+	<!-- study 정보 리스트 -->
+	<select id="replyList" resultType="ReplyStudyVO">
+	<![CDATA[
+		select *
+		from reply_study
+		where rno > 0 
+	]]>
+		<include refid="studyReplySearch"></include>
+	<![CDATA[
+		order by rno desc, bsbno desc
+		limit #{pageStart}, #{perPageNum}
+	]]>
+	</select>
+	
+	<!-- study 페이지 totalCount 반환 -->
+	<!-- 검색 추가-->
+	<select id="replyCountPaging" resultType="int">
+		<![CDATA[
+			select count(rno)
+			from reply_study
+			where rno > 0
+		]]>
+		<include refid="studyReplySearch"></include>
+	</select>	
+	
+<!-- 사이트관리 > qna관리 메뉴 -->
+	<!-- 검색 SQL -->
+	<!-- SQL -->
+	<sql id="qnaSearch">
+		<if test="faqType != null">
+			<if test="faqType == 'v'.toString()">
+				<![CDATA[
+					and type=1
+				]]>
+			</if>
+			<if test="faqType == 'd'.toString()">
+				<![CDATA[
+					and type=0
+				]]>
+			</if>
+		</if>
+		<if test="emailKeyword != null">
+			and writer like concat('%', #{emailKeyword}, '%')
+		</if>
+	</sql>
+	
+	<!-- 검색 추가 필요 -->	
+	<!-- qna 정보 리스트 -->
+	<select id="qnaList" resultType="QnaVO">
+	<![CDATA[
+		select *
+		from board_qna
+		where bno > 0 
+	]]>
+		<include refid="qnaSearch"></include>
+	<![CDATA[
+		order by bno desc, regdate desc
+		limit #{pageStart}, #{perPageNum}
+	]]>
+	</select>
+	
+	<!-- qna 페이지 totalCount 반환 -->
+	<!-- 검색 추가 필요-->
+	<select id="qnaCountPaging" resultType="int">
+		<![CDATA[
+			select count(bno)
+			from board_qna
+			where bno > 0
+		]]>
+		<include refid="qnaSearch"></include>
+	</select>
+	
+	<!-- qna 정보 상세 -->
+	<select id="qnaDetail" resultType="QnaVO">
+		select *
+		from board_qna
+		where bno = #{bno}
+	</select>
+	
+	<!-- qna 댓글 내용 -->
+	<select id="qnaReply" resultType="ReplyVO">
+		select *
+		from reply_qna
+		where bqbno = #{bno}
+	</select>
+	
+	<!-- qna 댓글 정보 등록 -->
+	<insert id="qnaRegister">
+		insert into reply_qna (bqbno, content, replyer)
+		values (#{bqBno},#{content},#{replyer})
+	</insert>
+	
+	<!-- FAQ 등록 처리 -->
+	<update id="typeUpdate">
+		update board_qna
+		set type = 1
+		where bno = #{bno}
+	</update>
+	
+	<!-- FAQ 미등록 처리 -->
+	<update id="typeRUpdate">
+		update board_qna
+		set type = 0
+		where bno = #{bno}
+	</update>
+	
+	
+<!-- 사트관리 > 공지사항 등록 메뉴 -->
+	<!-- 검색 SQL -->
+	<!-- SQL -->
+	<sql id="noticeSearch">
+		<if test="titleKeyword != null">
+			and title like concat('%', #{titleKeyword}, '%')
+		</if>
+		<if test="idKeyword != null">
+			and writer like concat('%', #{idKeyword}, '%')
+		</if>
+	</sql>
+	
+	<!-- 검색 추가 필요 -->
+	<!-- 공지사항 등록 리스트 -->
+	<select id="noticeList" resultType="NoticeVO">
+	<![CDATA[
+		select *
+		from notice
+		where bno > 0 
+	]]>
+		<include refid="noticeSearch"></include>
+	<![CDATA[
+		order by bno desc, regdate desc
+		limit #{pageStart}, #{perPageNum}
+	]]>
+	</select>
+	
+	<!-- 공지사항 페이지 totalCount 반환 -->
+	<!-- 검색 추가 필요-->
+	<select id="noticeCountPaging" resultType="int">
+		<![CDATA[
+			select count(bno)
+			from notice
+			where bno > 0
+		]]>
+		<include refid="noticeSearch"></include>
+	</select>
+	
+	<!-- 공지사항 정보 상세 -->
+	<select id="noticeDetail" resultType="NoticeVO">
+		select *
+		from notice
+		where bno = #{bno}
+	</select>
+	
+	<!-- 공지사항 정보 업데이트 -->
+	<update id="noticeUpdate">
+		update notice 
+		set title=#{title}, content=#{content}, writer=#{writer}, lastModifyDate=now()
+		where bno = #{bno}
+	</update>
+	
+	<!-- 공지사항 정보 등록 -->
+	<insert id="noticeRegister">
+		insert into notice (title, content, regdate, writer)
+		values (#{title},#{content},now(), #{writer});
+	</insert>
 </mapper>

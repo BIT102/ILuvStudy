@@ -13,16 +13,21 @@
 	values(#{email}, #{name}, #{password}, #{nickName}, #{birth}, #{gender}, #{phoneNum}); 
   	</insert>
   	
-  	<!-- 로그인 -->
+<!-- 
   	<select id = "loginUser" resultType="UserVO">
   		select * from user where email = #{email} and password = #{password}
+  	</select> -->
+  	
+  	<!-- 로그인 -->
+  	<select id = "userDTOLogin" resultType="UserVO">
+  		select * from jjstudy.user where email = #{email} and password = #{password}
   	</select>
   	
   	<!-- 프로필 읽어오기 #(email)-->
   	<select id="read" resultType="UserVO">
   	select photo, email,password, name, nickname, birth, gender, phoneNum, introduction, homepage
   	from jjstudy.user 
-  	where email = "abc3@gmail.com";
+  	where email=#{email};
   	</select>
   	
   	<!-- 프로필 수정 -->
@@ -46,4 +51,32 @@
   	update jjstudy.user set isDel=1 where email=#{email};
   	</update>
   	
+
+  	
+  	
+
+  	<!-- sessionKey로 로그인 여부 판단  -->
+  	<update id="keepLogin" parameterType="map">
+  	update jjstudy.user set sessionKey = #{sessionId}, sessionLimit = #{next} where email=#{email};
+  	</update>
+  	
+  	<!-- 로그인시 사용자가 세션키를 가지고 있나 체크 (loginCookie에 기록된 값으로 사용자의 정보 조회)   -->
+  	<select id="checkUserWithSessionKey" resultType="UserVO"> 
+  	select * from jjstudy.user where sessionKey = #{value}
+  	</select>
+  	
+  	<!-- 비밀번호 체크 -->
+  	<select id="checkPw" resultType="int">
+  	select count(*) from jjstudy.user where email=#{email} and password=#{password}
+  	</select>
+  	
+  	<!-- sangwook -->
+  	<!-- 이메일중복체크 -->
+  	<select id = "chkEmail" resultType="int">
+  		select count(*) from user where email = #{email};
+  	</select>
+  	
+  	<select id = "chkNickname" resultType="int">
+  		select count(*) from user where nickname = #{nickName};
+  	</select>
   </mapper>

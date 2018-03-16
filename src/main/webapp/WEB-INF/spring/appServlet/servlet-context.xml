@@ -3,7 +3,9 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+	xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xsi:schemaLocation="http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket-4.3.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
@@ -21,6 +23,13 @@
 		</beans:constructor-arg>
 	</beans:bean> -->	
 	
+	<!-- websocket -->
+  	<websocket:handlers>
+  		<websocket:mapping handler="echoHandler" path="/echo" />
+  		<websocket:sockjs/>
+  	</websocket:handlers>
+  	
+  	<beans:bean id="echoHandler" class="dev.mvc.util.EchoHandler"/>
 
 	
 	<!-- Enables the Spring MVC @Controller programming model -->
@@ -39,17 +48,48 @@
 	
 	<!-- 에너테이션의 위치를 체크해주는 영역 -->
 	
+
 	<!-- TEST -->
 	<context:component-scan base-package="dev.mvc.controller" />
 	
 	<!-- 김상욱, 박영원 -->
 		
-	<!-- 로그인 인터셉터 설정 -->
+	<!-- 관리자 로그인 인터셉터 설정 -->
+	<beans:bean id="authInterceptor" class="dev.mvc.interceptor.AuthInterceptor"></beans:bean>
 	<beans:bean id="loginInterceptor" class="dev.mvc.interceptor.LoginInterceptor"></beans:bean>
 		<interceptors>
 			<interceptor>
-				<mapping path="/admin/adminLoginPost"/>
+				<mapping path="/adminLoginPost"/>
 				<beans:ref bean="loginInterceptor"/>
+			</interceptor>
+			
+			<interceptor>
+				<mapping path="/admin/*"/>
+				<beans:ref bean="authInterceptor"/>
+			</interceptor>
+		</interceptors>
+
+
+	<beans:bean id="authInterceptor2" class="dev.mvc.interceptor.AuthInterceptor2"></beans:bean>
+	
+		<beans:bean id="UserloginInterceptor" class="dev.mvc.interceptor.UserLoginInterceptor"></beans:bean>
+		<interceptors>
+			<interceptor>
+				<mapping path="/loginPost"/>
+				<beans:ref bean="UserloginInterceptor"/>
+			</interceptor>
+			
+			<interceptor>
+				<!-- <mapping path="/login"/> -->
+				<mapping path="/addInfo"/>
+				<mapping path="/application"/>
+				<mapping path="/bookmark"/>
+				<mapping path="/changePw"/>
+				<mapping path="/completed"/>
+				<mapping path="/profile"/>
+				<mapping path="/quit"/>
+				<mapping path="/recurit"/>
+				<beans:ref bean="authInterceptor"/>
 			</interceptor>
 		</interceptors>
 		
@@ -64,4 +104,5 @@
 	</beans:bean>
 		
 </beans:beans>
+
 

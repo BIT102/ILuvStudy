@@ -5,7 +5,8 @@
   
 	<mapper namespace="dev.mvc.mapper.replyMapper">
 	
-	<select id="list" resultType="ReplyVO">
+
+	<select id="list" resultType="dev.mvc.domain.ReplyVO">
 		select *
 		from reply_qna
 		where bqBno = #{bqBno}
@@ -13,7 +14,11 @@
 	</select>
 	
 	<insert id="create">
-		insert into reply_qna (bqBno, content, replyer)
+		insert into reply_qna (
+		bqBno
+		, content
+		, replyer
+		)
 		values (#{bqBno}, #{content}, #{replyer})
 	</insert>
 	
@@ -27,4 +32,20 @@
 		where rno = #{rno}
 	</delete>
 	
+	<!-- 댓글 페이징 -->
+	<!-- listPage와 count를 위한 SQL문 -->
+	<select id="listPage" resultType="dev.mvc.domain.ReplyVO">
+		select *
+		from reply_qna
+		where bqBno = #{bqBno}
+		order by rno desc
+		limit #{cri.pageStart}, #{cri.perPageNum}
+	</select>
+	
+	<select id="count" resultType="int">
+		select count(bqBno) 
+		from reply_qna 
+		where bqBno = #{bqBno}
+	</select>
+
 </mapper>

@@ -1,16 +1,18 @@
 package dev.mvc.domain;
-
+ 
 import java.util.Arrays;
 import java.util.Date;
 
+
 public class StudyVO {
+
+
 //	BS_BNO	번호
 //	BS_TITLE	제목
 //	BS_WRITER	글쓴이 (USER.EMAIL)
 //	BS_CATEGORY_D	카테고리 대분류
 //	BS_CATEGORY_S	카테고리 소분류
 //	BS_NOW	현재인원
-//	BS_MAX	최대인원
 //	BS_R_D_ID	지역(대분류)
 //	BS_R_S_ID	지역(소분류)
 //	BS_AGE	연령
@@ -23,9 +25,8 @@ public class StudyVO {
 //	BS_RCT	댓글수
 //	BS_REGDATE	올린 날짜
 //	BS_ENDDATE	스터디완료일
-	//우아아앙아아아아아아아아앙
-	//우우우우우우우우우아아아아아아아아아아아아아아아아아아앙
-	private Integer bno; 
+
+	private int bno; 
 	private String title; 
 	private String writer; 
 	private String[] categoryD; 
@@ -40,22 +41,24 @@ public class StudyVO {
 	private String st;
 	private String et;
 	private String content;
-	private Integer vct;
-	private Integer rct;
+	private int vct;
+	private int rct;
 	private Date regdate;
 	private Date enddate;
-	
 
 	//지역이랑 카테고리는 이름으로 가져올께요
 	private String rDName;
 	private String rSName;
 	private String cDName;
 	private String cSName;
+
+	private int cSId;
+
+	private String cDId;
 	
 	// 작성자는 닉네임으로 표시
 	private String nickname;
 	
-
 	//파일을 엄로드합니다
 	private int no;
 	private String name;
@@ -63,8 +66,6 @@ public class StudyVO {
 
 	//파일 업로드
 	private String[] files;
-
-	
 	
 	public String getStatus() {
 		return status;
@@ -305,3 +306,7 @@ public class StudyVO {
 
 	
 }
+
+		
+
+

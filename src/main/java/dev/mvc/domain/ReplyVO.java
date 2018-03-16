@@ -10,24 +10,26 @@ public class ReplyVO {
 	REPLYER 	작성자 		varchar(50)			NN
 	REGDATE		올린날짜	DATETIME			CURRENT_TIMESTAMP
 	 */
-	private Integer rno;
-	private Integer bqBno;
+
+	private int rno;
+	private int bqBno;
 	private String content;
 	private String replyer;
 	
 	private Date regdate;
 	private Date updatedate;
 	
-	public Integer getRno() {
+	
+	public int getRno() {
 		return rno;
 	}
-	public void setRno(Integer rno) {
+	public void setRno(int rno) {
 		this.rno = rno;
 	}
-	public Integer getBqBno() {
+	public int getBqBno() {
 		return bqBno;
 	}
-	public void setBqBno(Integer bqBno) {
+	public void setBqBno(int bqBno) {
 		this.bqBno = bqBno;
 	}
 	public String getContent() {
@@ -48,7 +50,6 @@ public class ReplyVO {
 	public void setRegdate(Date regdate) {
 		this.regdate = regdate;
 	}
-	
 	public Date getUpdatedate() {
 		return updatedate;
 	}
@@ -60,7 +61,5 @@ public class ReplyVO {
 		return "ReplyVO [rno=" + rno + ", bqBno=" + bqBno + ", content=" + content + ", replyer=" + replyer
 				+ ", regdate=" + regdate + ", updatedate=" + updatedate + "]";
 	}
-	
-	
 	
 }

@@ -7,56 +7,61 @@
     <title>스터디 목록</title>
 </head>
 <body>
+<div id="wrapper">
 <%@ include file="nav.jsp" %>
-    
-    <!--상세메뉴-->
-    <div id="topmenu2">
-        <div class="border">
-            <a href="studyList">스터디 목록</a>
-        </div>
-        <div class="border">
-            <a href="replyList">댓글 관리</a>
-        </div>
-    </div>
 
-    <!--내용-->
-    <div id="container">
-        <a>스터디 목록</a>
+	 <!-- MAIN -->
+		<div class="main">
+			<!-- MAIN CONTENT -->
+			<div class="main-content">
+				<div class="container-fluid">
+					<h3 class="page-title">스터디 목록</h3>
+					<div class="row">
+						<div class="col-md-12">
+    						<div class="panel">
+        <div class="panel-heading">
+			<h3 class="panel-title">스터디 목록</h3>
+		</div>
         
         <!--검색-->
-        <table>
+        <div class="panel-body">
+        <table class="table">
+        <thead>
+			<tr>
+				<th>스터디상태</th>
+				<th>스터디명</th>
+				<th>스터디방장</th>
+			</tr>
+		</thead>
+		<tbody>
             <tr>
-                <th>카테고리</th>
                 <td>
-                    <select>
-                        <option>전체</option>
-                    </select>
-                    <select>
-                        <option>전체</option>
+                    <select name="stStatusType" id="stStatusTypeSelect" class="form-control">
+                        <option value="n"
+                        	<c:out value="${cri.stStatusType == null?'selected':''}"/>>전체</option>
+ 	 	     			<option value="v"
+                        	<c:out value="${cri.stStatusType eq 'v'?'selected':''}"/>>진행중</option>
+                        <option value="d"
+                        	<c:out value="${cri.stStatusType eq 'd'?'selected':''}"/>>마감</option>             
                     </select>
                 </td>
-                <th>스터디상태</th>
-                <td>
-                    <select>
-                        <option>전체</option>
-                    </select>
-                </td>
+                <td><input type="text" name="titleKeyword" id="titleKeywordInput" value="${cri.titleKeyword}" class="form-control"></td>
+                <td><input type="text" name="writerKeyword" id="writerKeywordInput" value="${cri.writerKeyword}" class="form-control"></td>
             </tr>
-            <tr>
-                <th>스터디명</th>
-                <td><input type="text"></td>
-                <th>스터디방장</th>
-                <td><input type="text"></td>
-            </tr>
+		</tbody>
         </table>
-
-        <button>검색</button>
-        <button>초기화</button>
+		<div class="text-center">
+        	<button type="button" id="searchBtn" class="btn btn-primary">검색</button>
+        	<button type="button" id="removeBtn" class="btn btn-primary">초기화</button>
+		</div>
+		</div>
 
         <!--리스트-->
-        <div>총 2건 1/1페이지</div>
+        <!--페이징 처리 -->
+        <div class="panel-body">
+        <div style="float:right">총 ${pageMaker.totalCount}건 ${cri.page}/${pageMaker.endPage}페이지</div>
         
-        <table>
+        <table class="table table-hover">
             <tr>
                 <th>스터디 번호</th>
                 <th>스터디명</th>
@@ -64,28 +69,90 @@
                 <th>지역</th>
                 <th>스터디 상태</th>
                 <th>스터디 시작일</th>
+                <th>스터디 마감일</th>
                 <th>조회 수</th>
             </tr>
+<!-- DB데이터 가져옴 -->
+<c:forEach items="${list}" var="studyVO">
             <tr>
-                <td>1</td>
-                <td><a href="studyDetail">자바 프로그래밍 스터디 모집합니다.</a></td>
-                <td>테스터j123</td>
-                <td>서울 강남구</td>
-                <td>모집중</td>
-                <td>2018-02-25</td>
-                <td>50</td>
+                <td>${studyVO.bno}</td>
+                <td><a href="/admin/studyDetail${pageMaker.studySearch(pageMaker.cri.page)}&bno=${studyVO.bno}">${studyVO.title}</a></td>
+                <td>${studyVO.writer}</td>
+                <td>${studyVO.rDName} ${studyVO.rSName}</td>
+                <td>
+                	<!-- 시작일, 마감일과 now 비교  -->
+                	<jsp:useBean id="now" class="java.util.Date" />
+                	<c:if test="${studyVO.sd > now}">모집중</c:if>
+                	<c:if test="${studyVO.sd <= now && studyVO.enddate >= now}">진행중</c:if>
+                	<c:if test="${studyVO.enddate < now}">마감</c:if>
+                </td>
+                <td>${studyVO.sd}</td>
+                <td><fmt:formatDate pattern="yyyy-MM-dd" value="${studyVO.enddate}"/></td>
+                <td>${studyVO.vct}</td>
             </tr>
-            <tr>
-                <td>2</td>
-                <td>AWS 공부하실분</td>
-                <td>서울대생임</td>
-                <td>서울 전체</td>
-                <td>모집중</td>
-                <td>2018-03-01</td>
-                <td>10</td>
-            </tr>
+</c:forEach>
         </table>
-    </div>
+        
+        <!-- 페이징 처리 -->
+        <!-- 페이징 정보 저장 -->
+        <div class="text-center">
+        <ul class="pagination">
+        	<c:if test="${pageMaker.prev}">
+        		<li><a href="studyList${pageMaker.studySearch(pageMaker.startPage - 1)}">&laquo;</a></li>
+        	</c:if>
+        
+        	<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+        	<li
+        		<c:out value="${pageMaker.cri.page == idx?'class=active':''}"/>>
+        		<a href="studyList${pageMaker.studySearch(idx)}">${idx}</a>
+        	</li>
+        	</c:forEach>
+        
+        	<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+        		<li><a href="studyList${pageMaker.studySearch(pageMaker.endPage + 1)}">&raquo;</a></li>
+        	</c:if>
+        </ul>
+        </div>
+        </div>
+   		 					</div>
+						</div>
+					</div>
+					</div>
+				</div>
+			<!-- END MAIN CONTENT -->
+			</div>
+		<!-- END MAIN -->
+		</div>
+<script>
+	var result='${msg}';
+	
+	if(result=='SUCCESS'){
+		alert("처리가 완료되었습니다.");
+	}
+	
+	$(document).ready(function(){		
+		$("#studyListsuv").attr("class", "active");
+		$("#studyListnav").attr("class", "active");
+		$("#subPages").attr("class", "in");
+		
+		//검색 클릭 시 액션
+		$("#searchBtn").on("click", function(event){
+			self.location = "studyList" + "${pageMaker.makeQuery(1)}"
+				+"&stStatusType="
+				+$("select option:selected").val()
+				+"&titleKeyword="+encodeURIComponent($("#titleKeywordInput").val())
+				+"&writerKeyword="+encodeURIComponent($("#writerKeywordInput").val());
+		});
+		
+		//초기화 클릭 시 액션
+		$("#removeBtn").on("click", function(){
+			$("#stStatusTypeSelect").val('n');
+			$("#titleKeywordInput").val('');
+			$("#writerKeywordInput").val('');
+		});
+		
+	});
+</script>
 
 </body>
 </html>

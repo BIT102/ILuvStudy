@@ -5,7 +5,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import dev.mvc.domain.UserVO;
-import dev.mvc.persistance.LoginDAO;
+import dev.mvc.persistence.LoginDAO;
 
 @Service
 public class LoginServiceImpl implements LoginService {

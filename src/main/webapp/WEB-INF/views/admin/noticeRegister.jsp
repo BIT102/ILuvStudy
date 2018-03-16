@@ -8,44 +8,78 @@
 
 </head>
 <body>
+<div id="wrapper">
 <%@ include file="nav.jsp" %>
-    
-    <!--상세메뉴-->
-    <div id="topmenu2">
-        <div class="border">
-            <a href="qnaList">QNA 관리</a>
-        </div>
-        <div class="border">
-            <a href="noticeList">공지사항 등록</a>
-        </div>
-    </div>
 
-    <!--내용-->
-    <div id="container">
-        <a>공지사항 등록</a>
-        
-        <table>
+	 <!-- MAIN -->
+		<div class="main">
+			<!-- MAIN CONTENT -->
+			<div class="main-content">
+				<div class="container-fluid">
+					<h3 class="page-title">공지사항 등록</h3>
+					<div class="row">
+						<div class="col-md-12">
+    						<div class="panel">
+        <div class="panel-heading">
+			<h3 class="panel-title">공지사항 등록</h3>
+		</div>
+		
+    <div class="panel-body">    
+    <form role="form" method="post">    
+        <table class="table table-hover">
             <tr>
                 <th>제목</th>
-                <td><input type="text"></td>
+                <td><input type="text" name="title" class="form-control"></td>
             </tr>
             <tr>
                 <th>작성자</th>
-                <td>admin123</td>
+                <td><input type="hidden" name="writer" value="${login.id}">${login.id}</td>
             </tr>
             <tr>
                 <th>내용</th>
-                <td><textarea></textarea></td>
-            </tr>
-            <tr>
-                <th>공개여부</th>
-                <td><input type="radio" name="check">공개  <input type="radio" name="check">비공개</td>
+                <td><textarea name="content" class="form-control"></textarea></td>
             </tr>
         </table>
+	</form>
+	
+		<button type="button" id="listBtn" class="btn btn-primary">목록</button>
+		<button type="submit" id="registerBtn" class="btn btn-success" style="float:right">등록</button>
+		
+		</div>
+		<!-- panel-body end -->
+		
+							</div>
+						</div>
+					</div>
+					</div>
+				</div>
+			<!-- END MAIN CONTENT -->
+			</div>
+		<!-- END MAIN -->
+		</div>    
+<script>
 
-        <a href="noticeList">목록</a>
-        <button>등록</button>
-    </div>
-
+	$(document).ready(function(){
+		$("#qnaListsuv").attr("class", "active");
+		$("#noticeListnav").attr("class", "active");
+		$("#subPages2").attr("class", "in");
+		
+		var formObj = $("form[role='form']");
+		
+		console.log(formObj);
+		
+		//등록 클릭 시 액션
+		$("#registerBtn").on("click", function(){
+			//form 유효성 검사 추가 필요
+			
+			formObj.submit();
+		});
+		
+		//목록 클릭 시 액션
+		$("#listBtn").on("click", function(){
+			self.location = "/admin/noticeList";
+		});
+	});
+</script>
 </body>
 </html>

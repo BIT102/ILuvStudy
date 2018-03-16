@@ -1,48 +1,70 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>계정 관리</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 </head>
 <body>
+<div id="wrapper">
 <%@ include file="nav.jsp" %>
-    
-    <!--상세메뉴-->
-    <div id="topmenu2">
-        <div class="border">
-            <a href="adminList">계정관리</a>
-        </div>
-    </div>
-
-    <!--내용-->
-    <div id="container">
-        <a>계정 관리</a>
+	 <!-- MAIN -->
+		<div class="main">
+			<!-- MAIN CONTENT -->
+			<div class="main-content">
+				<div class="container-fluid">
+					<h3 class="page-title">계정관리</h3>
+					<div class="row">
+						<div class="col-md-12">
+    						<div class="panel">
+        <div class="panel-heading">
+			<h3 class="panel-title">계정관리</h3>
+		</div>
         
         <!--검색-->
-        <table>
+        <div class="panel-body">
+        <table class="table">
+        <thead>
+			<tr>
+				<th>사용여부</th>
+				<th>아이디</th>
+				<th>이름</th>
+			</tr>
+		</thead>
+		<tbody>
             <tr>
-                <th>아이디</th>
-                <td><input type="text" name="idKeyword" id="idKeywordInput" value="${cri.idKeyword}"></td>
-                <th>이름</th>
-                <td><input type="text" name="nameKeyword" id="nameKeywordInput" value="${cri.nameKeyword}"></td>
+            	<td>
+                    <select name="statusType" id="statusTypeSelect" class="form-control">
+                        <option value="n"
+                        	<c:out value="${cri.statusType == null?'selected':''}"/>>전체</option>
+ 	 	     			<option value="v"
+                        	<c:out value="${cri.statusType eq 'v'?'selected':''}"/>>사용</option>
+                        <option value="d"
+                        	<c:out value="${cri.statusType eq 'd'?'selected':''}"/>>미사용</option>             
+                    </select>
+                </td>
+                <td><input type="text" name="idKeyword" id="idKeywordInput" value="${cri.idKeyword}" class="form-control"></td>
+                <td><input type="text" name="nameKeyword" id="nameKeywordInput" value="${cri.nameKeyword}" class="form-control"></td>
             </tr>
-
+		</tbody>
         </table>
         
-        <button id="searchBtn">검색</button>
-        <button>초기화</button>
-
+        <div class="text-center">
+        	<button type="button" id="searchBtn" class="btn btn-primary">검색</button>
+        	<button type="button" id="removeBtn" class="btn btn-primary">초기화</button>
+        </div>
+        
+		</div>
+		<!-- panel-body end -->
+	
         <!--리스트 -->
         <!--페이징 처리 -->
-        <div>총 ${pageMaker.totalCount}건 ${cri.page}/${pageMaker.endPage}페이지</div>
-
-        <table>
+        <div class="panel-body">
+        <div style="float:right">총 ${pageMaker.totalCount}건 ${cri.page}/${pageMaker.endPage}페이지</div>
+        
+        <table class="table table-hover">
+        <thead>
             <tr>
                 <th>번호</th>
                 <th>아이디</th>
@@ -50,13 +72,15 @@
                 <th>사용여부</th>
                 <th>최근 접속정보</th>
             </tr>
+      	</thead>
+      	<tbody>
 <!-- DB데이터 가져옴 -->
 <c:forEach items="${list}" var="adminVO">
             <tr>
                 <td>${adminVO.bno}</td>
                 <!-- 페이징 정보 유지 -->
                 <td>
-                <a href="/admin/adminDetail${pageMaker.adminSearch(pageMaker.cri.page)}&bno=${adminVO.bno}">${adminVO.adminId}</a>
+                <a href="/admin/adminDetail${pageMaker.adminSearch(pageMaker.cri.page)}&bno=${adminVO.bno}">${adminVO.id}</a>
                 </td>
                 <td>${adminVO.name}</td>
                 <td>
@@ -68,15 +92,13 @@
                 <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${adminVO.lastLoginDate}"/></td>
             </tr>
 </c:forEach>
+</tbody>
         </table>
-
-		<!-- 계정 등록 -->
-        <!-- <a href="adminRegister">등록</a> -->
-        <button type="submit" class="registerBtn">등록</button>
         
         <!-- 페이징 처리 -->
         <!-- 페이징 정보 저장 -->
-        <ul>
+        <div class="text-center">
+        <ul class="pagination">
         	<c:if test="${pageMaker.prev}">
         		<li><a href="adminList${pageMaker.adminSearch(pageMaker.startPage - 1)}">&laquo;</a></li>
         	</c:if>
@@ -92,8 +114,24 @@
         		<li><a href="adminList${pageMaker.adminSearch(pageMaker.endPage + 1)}">&raquo;</a></li>
         	</c:if>
         </ul>
-    </div>
-
+        </div>
+        
+		<!-- 계정 등록 -->
+        <div class="text-right">
+        	<button type="button" id="registerBtn" class="btn btn-primary">등록</button>
+        </div>
+        
+        </div>
+        <!-- panel-body end -->
+							</div>
+						</div>
+					</div>
+					</div>
+				</div>
+			<!-- END MAIN CONTENT -->
+			</div>
+		<!-- END MAIN -->
+		</div>
 <script>
 	var result='${msg}';
 	
@@ -101,7 +139,8 @@
 		alert("처리가 완료되었습니다.");
 	}
 	
-	$(document).ready(function(){		
+	$(document).ready(function(){	
+		$("#adminListnav").attr("class", "active");
 		
 		//등록 클릭 시 액션
 		$("#registerBtn").on("click", function(){
@@ -111,8 +150,17 @@
 		//검색 클릭 시 액션
 		$("#searchBtn").on("click", function(event){
 			self.location = "adminList" + "${pageMaker.makeQuery(1)}"
+				+"&statusType="
+				+$("select option:selected").val()
 				+"&idKeyword="+encodeURIComponent($("#idKeywordInput").val())
 				+"&nameKeyword="+encodeURIComponent($("#nameKeywordInput").val());
+		});
+		
+		//초기화 클릭 시 액션
+		$("#removeBtn").on("click", function(){
+			$("#statusTypeSelect").val('n');
+			$("#idKeywordInput").val('');
+			$("#nameKeywordInput").val('');
 		});
 		
 	});

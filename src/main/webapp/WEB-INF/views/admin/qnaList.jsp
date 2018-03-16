@@ -7,73 +7,149 @@
     <title>QNA 관리</title>
 </head>
 <body>
+<div id="wrapper">
 <%@ include file="nav.jsp" %>
-    
-    <!--상세메뉴-->
-    <div id="topmenu2">
-        <div class="border">
-            <a href="qnaList">QNA 관리</a>
-        </div>
-        <div class="border">
-            <a href="noticeList">공지사항 등록</a>
-        </div>
-    </div>
 
-    <!--내용-->
-    <div id="container">
-        <a>QNA 관리</a>
+	 <!-- MAIN -->
+		<div class="main">
+			<!-- MAIN CONTENT -->
+			<div class="main-content">
+				<div class="container-fluid">
+					<h3 class="page-title">QNA 관리</h3>
+					<div class="row">
+						<div class="col-md-12">
+    						<div class="panel">
+        <div class="panel-heading">
+			<h3 class="panel-title">QNA 관리</h3>
+		</div>
         
         <!--검색-->
-        <table>
+        <div class="panel-body">
+        <table class="table">
+        <thead>
+			<tr>
+				<th>FAQ</th>
+				<th>아이디</th>
+			</tr>
+		</thead>
+		<tbody>
             <tr>
-                <th>아이디</th>
-                <td><input type="text"></td>
-                <th>답변여부</th>
                 <td>
-                    <select>
-                        <option>전체</option>
-                        <option>답변</option>
-                        <option>미답변</option>
+                    <select name="faqType" id="faqTypeSelect" class="form-control">
+                		<!-- 0: 미등록  1: 등록 -->
+                        <option value="n"
+                        	<c:out value="${cri.faqType == null?'selected':''}"/>>전체</option>
+                        <option value="v"
+                        	<c:out value="${cri.faqType eq 'v'?'selected':''}"/>>등록</option>
+                        <option value="d"
+                        	<c:out value="${cri.faqType eq 'd'?'selected':''}"/>>미등록</option>
                     </select>
                 </td>
+                <td><input type="text" name="emailKeyword" id="emailKeywordInput" value="${cri.emailKeyword}" class="form-control"></td>
             </tr>
-
+		</tbody>
         </table>
-        
-        <button>검색</button>
-        <button>초기화</button>
-        
+        <div class="text-center">
+        	<button type="button" id="searchBtn" class="btn btn-primary">검색</button>
+        	<button type="button" id="removeBtn" class="btn btn-primary">초기화</button>
+        </div>
+        </div>
+        <!-- panel-body end -->
 
         <!--리스트-->
-        <div>총 2건 1/1페이지</div>
-
-        <table>
+        <!--페이징 처리 -->
+        <div class="panel-body">
+        <div style="float:right">총 ${pageMaker.totalCount}건 ${cri.page}/${pageMaker.endPage}페이지</div>
+        
+        <table class="table table-hover">
+        <thead>
             <tr>
                 <th>번호</th>
                 <th>아이디</th>
                 <th>제목</th>
-                <th>공개여부</th>
-                <th>답변여부</th>
+                <th>FAQ</th>
+                <th>댓글수</th>
                 <th>작성일</th>
             </tr>
+		</thead>
+		<tbody>
+<!-- DB데이터 가져옴 -->
+<c:forEach items="${list}" var="qnaVO">
             <tr>
-                <td>1</td>
-                <td>asdf@naver.com</td>
-                <td><a href="qnaDetail">스터디 등록 문의</a></td>
-                <td>공개</td>
-                <td>답변</td>
-                <td>2018-02-18</td>
+                <td>${qnaVO.bno}</td>
+                <td>${qnaVO.writer}</td>
+                <td><a href="/admin/qnaDetail${pageMaker.qnaSearch(pageMaker.cri.page)}&bno=${qnaVO.bno}">${qnaVO.title}</a></td>
+                <!-- 0: 미등록  1: 등록 -->
+                <td>
+                	<c:if test="${qnaVO.type eq 0}">미등록 </c:if>
+                	<c:if test="${qnaVO.type eq 1}">등록</c:if>
+                </td>
+                <td>${qnaVO.rct}</td>
+                <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${qnaVO.regdate}"/></td>
             </tr>
-            <tr>
-                <td>2</td>
-                <td>asdf@naver.com</td>
-                <td>스터디 완료 문의</td>
-                <td>비공개</td>
-                <td>미답변</td>
-                <td>2018-02-20</td>
-            </tr>
+</c:forEach>
+		</tbody>
         </table>
-    </div>
+        
+        <!-- 페이징 처리 -->
+        <!-- 페이징 정보 저장 -->
+        <div class="text-center">
+        <ul class="pagination">
+        	<c:if test="${pageMaker.prev}">
+        		<li><a href="qnaList${pageMaker.qnaSearch(pageMaker.startPage - 1)}">&laquo;</a></li>
+        	</c:if>
+        
+        	<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+        	<li
+        		<c:out value="${pageMaker.cri.page == idx?'class=active':''}"/>>
+        		<a href="qnaList${pageMaker.qnaSearch(idx)}">${idx}</a>
+        	</li>
+        	</c:forEach>
+        
+        	<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+        		<li><a href="qnaList${pageMaker.qnaSearch(pageMaker.endPage + 1)}">&raquo;</a></li>
+        	</c:if>
+        </ul>
+        </div>
+        </div>
+        <!-- panel-body end -->
+        
+       		 					</div>
+						</div>
+					</div>
+					</div>
+				</div>
+			<!-- END MAIN CONTENT -->
+			</div>
+		<!-- END MAIN -->
+		</div>
+<script>
+	var result='${msg}';
 
+	if(result=='SUCCESS'){
+		alert("처리가 완료되었습니다.");
+	}
+
+	$(document).ready(function(){		
+		$("#qnaListsuv").attr("class", "active");
+		$("#qnaListnav").attr("class", "active");
+		$("#subPages2").attr("class", "in");
+		
+		//검색 클릭 시 액션
+ 		$("#searchBtn").on("click", function(event){
+			self.location = "qnaList" + "${pageMaker.makeQuery(1)}"
+				+"&faqType="
+				+$("select option:selected").val()
+				+"&emailKeyword="+encodeURIComponent($("#emailKeywordInput").val());
+		});
+		
+ 		//초기화 클릭 시 액션
+		$("#removeBtn").on("click", function(){
+			$("#faqTypeSelect").val('n');
+			$("#emailKeywordInput").val('');
+		});
+		
+	});
+</script>
 </body>
 </html>

@@ -6,4 +6,5 @@
 	<typeAliases>
 		<package name="dev.mvc.domain" />
 	</typeAliases>	
+
 </configuration>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ 
+  
+  <mapper namespace = "dev.mvc.mapper.userMapper">
+  
+  	<!-- 회원 가입 -->
+  	<insert id="joinUser">
+  	insert into jjstudy.user(email, name, password, nickName, birth, gender, phoneNum) 
+	values(#{email}, #{name}, #{password}, #{nickName}, #{birth}, #{gender}, #{phoneNum}); 
+  	</insert>
+  	
+  	<!-- 로그인 -->
+  	<select id = "loginUser" resultType="UserVO">
+  		select * from user where email = #{email} and password = #{password}
+  	</select>
+  	
+  	<!-- 프로필 읽어오기 #(email)-->
+  	<select id="read" resultType="UserVO">
+  	select photo, email,password, name, nickname, birth, gender, phoneNum, introduction, homepage
+  	from jjstudy.user 
+  	where email = "abc3@gmail.com";
+  	</select>
+  	
+  	<!-- 프로필 수정 -->
+  	<update id="update">
+  	update jjstudy.user set name=#{name}, nickname=#{nickName}, gender=#{gender}, phoneNum=#{phoneNum}, 
+  	birth=#{birth}, photo=#{photo} where email=#{email};
+  	</update>
+  	
+  	<!-- 부가정보 수정 -->
+  	<update id="updateAddInfo">
+  	update jjstudy.user set homepage=#{homepage}, introduction=#{introduction} where email=#{email}; 
+  	</update>
+  	
+  	<!-- 비밀번호 변경 -->
+  	<update id="changePw">
+  	update jjstudy.user set password=#{password} where email=#{email};
+  	</update>
+  	
+  	<!-- 회원 탈퇴 -->
+  	<update id="quit">
+  	update jjstudy.user set isDel=1 where email=#{email};
+  	</update>
+  	
+  </mapper>

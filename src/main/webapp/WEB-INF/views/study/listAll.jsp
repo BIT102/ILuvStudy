@@ -3,8 +3,10 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<!DOCTYPE htm>
+<%@include file="../include/header.jsp"%>
+<!DOCTYPE html>
 <html>
+<<<<<<< HEAD
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>I Luv Study</title>
@@ -290,13 +292,16 @@ color:#6b456a !important;
     
 <%@include file="../nav.jsp"%>
 
+
 <!-- 검색 -->
 <form onsubmit="submitFn(this, event);">
             <div class="search-wrapper">
                  <div class="input-holder">
                     <input type="text" class="search-input" placeholder="Type to search" />
                  	<button class="search-icon" onclick="searchToggle(this, event);" ><span></span></button>
+
                 </div>
+
                 <span class="close" onclick="searchToggle(this, event);"></span>
                 <div class="result-container">
 
@@ -331,7 +336,6 @@ color:#6b456a !important;
             </div>
         </div>
         
-        
 	<div class="text-center1">
 		<ul class="pagination">
 		
@@ -355,6 +359,7 @@ color:#6b456a !important;
 			
 		</ul>
 	</div>
+
 
 <script>
 
@@ -408,7 +413,9 @@ function submitFn(obj, evt){
     evt.preventDefault();
 	
 }
-</script>        
+
+</script>  
+    
 <%@include file="../footer.jsp"%>
 </body>
 </html>

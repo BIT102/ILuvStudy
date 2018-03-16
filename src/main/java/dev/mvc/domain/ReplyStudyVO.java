@@ -2,6 +2,7 @@ package dev.mvc.domain;
 
 import java.util.Date;
 
+
 //상세페이지 댓글이요
 public class ReplyStudyVO {
 
@@ -50,7 +51,5 @@ public class ReplyStudyVO {
 				+ ", regdate=" + regdate + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()="
 				+ super.toString() + "]";
 	}
-	
-	
 	
 }

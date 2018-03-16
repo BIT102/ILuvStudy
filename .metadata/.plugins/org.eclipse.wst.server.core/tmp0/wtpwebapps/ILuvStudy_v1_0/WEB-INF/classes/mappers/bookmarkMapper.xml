@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- board_study mapper -->
+<mapper namespace="dev.mvc.mapper.BookmarkMapper">
+
+<!-- 북마크 등록 등록 -->
+<insert id="createBookmark">
+INSERT 
+INTO
+bookmark (
+useremail
+, bsBno
+) VALUES (
+#{userEmail}
+, #{bsBno}
+)
+</insert>
+<!-- 북마크 불러오기 -->
+<select id="list" resultType="BookmarkVO">
+SELECT
+*
+FROM
+bookmark
+WHERE bsBno = #{bsBno}
+order by id desc
+</select>
+
+
+
+<!-- 북마크 지우기 -->
+<delete id="deleteBookmark">
+DELETE
+FROM
+bookmark
+WHERE
+useremail = #{userEmail}
+AND bsbno = #{bsBno}
+</delete>
+</mapper>

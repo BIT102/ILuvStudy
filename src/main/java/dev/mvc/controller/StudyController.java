@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import dev.mvc.domain.Criteria;
 import dev.mvc.domain.CriteriaStudy;
 import dev.mvc.domain.PageMakerStudy;
 import dev.mvc.domain.SearchCriteriaStudy;
@@ -76,7 +77,6 @@ public class StudyController {
 			return entity;
 	}
 	
-	
 	//스터디 등록건네주기
 	@RequestMapping(value = "/register1", method = RequestMethod.POST)
 	public String registPOST(StudyVO vo, RedirectAttributes rttr, Model model) throws Exception {
@@ -113,6 +113,8 @@ public class StudyController {
 		pageMakerStudy.setTotalCount(service.listSearchCount(cri));
 		
 		model.addAttribute("pageMakerStudy", pageMakerStudy);
+		
+		model.addAttribute("catlist", service.catList());
 
 		
 	}
@@ -122,7 +124,6 @@ public class StudyController {
 	public void mainStudy(@ModelAttribute("cri") SearchCriteriaStudy cri, Model model) throws Exception {
 		
 		logger.info("show list..........");
-		
 		
 		List<StudyVO> studyList = service.studyList().subList(0, 8);
 		
@@ -150,6 +151,11 @@ public class StudyController {
 	
 		List<StudyVO> list = service.readCa(bno);
 		
+		for(int i=list.size()-1; i>0; i--) {
+			if(list.get(i).getcDName().equals(list.get(i-1).getcDName())){
+			}
+		}
+		
 		model.addAttribute("list", list);
 		model.addAttribute(service.read(bno));
 
@@ -176,7 +182,51 @@ public class StudyController {
 	public List<String> getFile(@PathVariable("bsBno") Integer bsBno) throws Exception {
 		return service.getFile(bsBno);
 	}
+
+
+
+
+//JSON small카테고리
+@RequestMapping(value="/listAll/{csId}", method = RequestMethod.GET)
+public ResponseEntity<List<StudyVO>> list(@PathVariable("csId") String csId) {
+
+ResponseEntity<List<StudyVO>> entity = null;
+try {
+	
+  entity = new ResponseEntity<>(service.catList2(csId), HttpStatus.OK);
+
+} catch (Exception e) {
+  e.printStackTrace();
+  entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 }
 
+return entity;
+}
+
+
+
+//수정페이지
+@RequestMapping(value="/modifyPage", method = RequestMethod.GET)
+public void modifyPagingGET(@RequestParam("bno")int bno,
+		@ModelAttribute("cri")Criteria cri, 
+		Model model)throws Exception{
+
+model.addAttribute(service.read(bno));
+}
+
+@RequestMapping(value="/modifyPage", method = RequestMethod.POST)
+public String modifyPagingPOST(StudyVO vo, Criteria cri,
+		RedirectAttributes rttr) throws Exception{
+
+service.modify(vo);
+
+rttr.addAttribute("page", cri.getPage());
+rttr.addAttribute("perPageNum", cri.getPerPageNum());
+rttr.addFlashAttribute("msg", "SUCCESS");
+
+return "redirect:/study/listAll";
+}
+
+}
 
 

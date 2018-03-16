@@ -7,7 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import dev.mvc.domain.BookmarkVO;
-import dev.mvc.persistance.BookmarkDAO;
+import dev.mvc.persistence.BookmarkDAO;
 
 @Service
 public class BookmarkServiceImpl implements BookmarkService {

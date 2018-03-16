@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="dev.mvc.mapper.BoardMapper">
+  
+  <insert id="insertStudy">
+  insert into board_study( BSTITLE, BSWRITER, BSCATEGORYD, BSCATEGORYS, BSNOW, BSMAX, BSRDID, BSAGE, BSSC, BSSD, BSST, BSET)
+  	values( #{BSTITLE}, #{BSWRITER}, #{BSCATEGORYD}, #{BSCATEGORYS}, #{BSNOW}, #{BSMAX}, #{BSRDID}, #{BSAGE}, #{BSSC}, #{BSSD}, #{BSST}, #{BSET})
+  </insert>
+  
+  <select id="read" resultType="dev.mvc.domain.BoardVO">
+  select
+  	BSBNO, BSTITLE, BSCONTENT, BSWRITER, BSREGDATE, BSVCT
+  from
+  	board_study
+  where BSBNO = #{BSBNO}
+  </select>
+  
+  <select id="listAll" resultType="dev.mvc.domain.BoardVO">
+  <![CDATA[
+  select 
+  	BSBNO, BSTITLE, BSCONTENT, BSWRITER, BSREGDATE, BSVCT
+  from
+  	board_study
+  where BSBNO>0
+  order by BSBNO desc, BSREGDATE desc
+  ]]>
+  </select>
+  </mapper>

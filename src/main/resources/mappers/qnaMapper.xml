@@ -6,13 +6,37 @@
   <mapper namespace="dev.mvc.mapper.qnaMapper">
   
   	<insert id="create">
-  	insert into board_qna( title, writer, categoryD, categoryS, content, rct, regdate, type)
-  	values( #{title}, #{writer}, #{categoryD}, #{categoryS}, #{content}, #{rct}, #{regdate}, #{type})
+
+  	insert into board_qna( 
+  	title
+  	, writer
+  	, categoryD
+  	, categoryS
+  	, content
+  	, rct
+  	, regdate
+  	, type
+  	)
+  	values(
+  	 #{title}
+  	 , #{writer}
+  	 , #{categoryD}
+  	 , #{categoryS}
+  	 , #{content}
+  	 , #{rct}
+  	 , #{regdate}
+  	 , #{type}
+  	 )
   	</insert>
   
-  	<select id="read" resultType="QnaVO">
+  	<select id="read" resultType="dev.mvc.domain.QnaVO">
   	select
-  		bno, type, title, writer, content, regdate
+  		bno
+  		, type
+  		, title
+  		, writer
+  		, content
+  		, regdate
   	from 
   		board_qna
   	where bno = #{bno} 
@@ -28,10 +52,14 @@
   	where bno =#{bno}
   	</delete>
   	
-  	<select id="listAll" resultType="QnaVO">
+  	<select id="listAll" resultType="dev.mvc.domain.QnaVO">
   	<![CDATA[
   	select
-  		bno, title, content, writer, regdate
+  		bno
+  		, title
+  		, content
+  		, writer
+  		, regdate
   	from
   		board_qna
   	where bno > 0
@@ -40,10 +68,15 @@
   	</select>
   	
   	<!-- 페이징 SQL -->
-  	<select id="listPage" resultType="QnaVO"> <!-- alias를 하면 QnaVO만 쓸 수 있다. -->
+  	<select id="listPage" resultType="dev.mvc.domain.QnaVO"> <!-- alias를 하면 QnaVO만 쓸 수 있다. -->
   	<![CDATA[
   	select 
-  		bno, title, writer, content, regdate, type
+  		bno
+  		, title
+  		, writer
+  		, content
+  		, regdate
+  		, type
   	from
   		board_qna
   	where bno > 0
@@ -53,10 +86,15 @@
   	</select>
   	
   	<!-- listCritetia추가 -->
-  	<select id="listCriteria" resultType="QnaVO"> <!-- 까먹지말아라 -->
+  	<select id="listCriteria" resultType="dev.mvc.domain.QnaVO"> <!-- 까먹지말아라 -->
   	<![CDATA[
   	select
-  		bno, title, writer, content, regdate, type
+  		bno
+  		, title
+  		, writer
+  		, content
+  		, regdate
+  		, type
   	from
   		board_qna
   	where bno > 0
@@ -104,7 +142,7 @@
   	</sql>
   	
   	
-  	<select id="listSearch" resultType="QnaVO">
+  	<select id="listSearch" resultType="dev.mvc.domain.QnaVO">
   	<![CDATA[
   	select *
   	from
