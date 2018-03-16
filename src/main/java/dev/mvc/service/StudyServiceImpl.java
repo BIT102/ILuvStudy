@@ -22,23 +22,12 @@ public class StudyServiceImpl implements StudyService {
 	@Inject
 	private StudyDAO dao;
 	
-<<<<<<< HEAD
-	//카테고리 불러왹
-	public List<StudyVO> readCa(Integer bno) throws Exception {
-		
-	
-		return dao.readCa(bno);
-	}
-	
-	
-	//스터디등록, 파일등록, 지역등록
-=======
 	
 			
 		//스터디등록, 파일등록
 		@Transactional
 		@Override
-		public void regist(StudyVO vo) throws Exception {
+	public void regist(StudyVO vo) throws Exception {
 
 			
 
@@ -52,6 +41,8 @@ public class StudyServiceImpl implements StudyService {
 
 			String[] files = vo.getFiles();
 
+			if(files == null) return;
+
 			dao.createStudy(vo);
 
 			// bno 값 가져오기
@@ -60,6 +51,30 @@ public class StudyServiceImpl implements StudyService {
 
 			vo.setBno(bno);
 			
+			
+			//카테고리 등록하기
+			Map<String, Object> ca = new HashMap<>();
+				
+
+			String[] D = vo.getCategoryD();
+			String[] S = vo.getCategoryS();
+				
+
+			for(int i=0; i<S.length; i++) {
+					String caD = D[i];
+					
+						String caS = S[i];
+						
+						ca.put("bno", bno);
+						ca.put("categoryD", caD);
+						ca.put("categoryS", caS);
+						
+					System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+					System.out.println(ca);
+					System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+						
+					dao.createCa(ca);
+			}
 
 			Map<String, Object> map = new HashMap<>();
 
@@ -157,144 +172,23 @@ public class StudyServiceImpl implements StudyService {
 		return dao.rgList2(rsId);
 	}
 	//수정
->>>>>>> branch 'HGKWON2' of https://github.com/BIT102/ILuvStudy.git
 	@Transactional
 	@Override
-<<<<<<< HEAD
-public void regist(StudyVO vo) throws Exception {
-		
-		dao.createStudy(vo);
-
-=======
 	public void modify(StudyVO vo)throws Exception{
 		dao.update(vo);
->>>>>>> branch 'HGKWON2' of https://github.com/BIT102/ILuvStudy.git
 		
-<<<<<<< HEAD
-		//파일등록하기
-=======
 		Integer bno = vo.getBno();
 		
 		dao.deleteAttach(bno);
 		
->>>>>>> branch 'HGKWON2' of https://github.com/BIT102/ILuvStudy.git
 		String[] files = vo.getFiles();
-<<<<<<< HEAD
-
-		// bno 값 가져오기
-
-		int bno = dao.getBno();
-
-		vo.setBno(bno);
-=======
->>>>>>> branch 'HGKWON2' of https://github.com/BIT102/ILuvStudy.git
 		
 		if(files == null) {return;}
 		
 		for(String fileName : files){
 			dao.replaceAttach(fileName, bno);
 		}
-<<<<<<< HEAD
-		
-		//카테고리 등록하기
-			Map<String, Object> ca = new HashMap<>();
-			
 
-			String[] D = vo.getCategoryD();
-			String[] S = vo.getCategoryS();
-			
-
-		for(int i=0; i<S.length; i++) {
-				String caD = D[i];
-				
-					String caS = S[i];
-					
-					ca.put("bno", bno);
-					ca.put("categoryD", caD);
-					ca.put("categoryS", caS);
-					
-				System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-				System.out.println(ca);
-				System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-					
-					dao.createCa(ca);
-				
-			}
-	}
-	//스터디 불러오기
-	@Transactional(isolation=Isolation.READ_COMMITTED)
-	@Override
-	public StudyVO read(Integer bno) throws Exception {
-		
-		
-		dao.upVct(bno);
-		return dao.readStudy(bno);
-	}
-	
-	//전체불러오기
-	@Override
-	public List<StudyVO> studyList() throws Exception {
-
-		return dao.studyList();
-	}
-	
-	//페이지당 데이터 불러오기
-	@Override
-	public List<StudyVO> listCriteria(CriteriaStudy cri) throws Exception {
-		return dao.listCriteria(cri);
-	}
-	
-	//페이진 전체수
-	@Override
-	public int listCountCriteria(CriteriaStudy cri) throws Exception {
-		return dao.countPaging(cri);
-	}
-	
-	//보드삭제하기
-	@Override
-	public void remove(Integer bno) throws Exception {
-		dao.delete(bno);
-	}
-	
-	//검색
-	@Override
-	public List<StudyVO> listSearchCriteria(SearchCriteriaStudy cri) throws Exception {
-		return dao.listSearch(cri);
-	}
-	
-	//검색수
-	@Override
-	public int listSearchCount(SearchCriteriaStudy cri) throws Exception {
-		return dao.listSearchCount(cri);
-	}
-	
-	//파일 불러오기
-	@Override
-	public List<String> getFile(Integer bsBno) throws Exception {
-		return dao.getFile(bsBno);
-=======
-
->>>>>>> branch 'HGKWON2' of https://github.com/BIT102/ILuvStudy.git
-	}
-	
-	@Override
-	public List<StudyVO> catList() throws Exception {
-		return dao.catList();
-	}
-
-	@Override
-	public List<StudyVO> catList2(String csId) throws Exception {
-		return dao.catList2(csId);
-	}
-
-	@Override
-	public List<StudyVO> rgList() throws Exception {
-		return dao.rgList();
-	}
-	
-	@Override
-	public List<StudyVO> rgList2(String rsId) throws Exception {
-		return dao.rgList2(rsId);
 	}
 
 }

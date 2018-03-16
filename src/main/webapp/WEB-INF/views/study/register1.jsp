@@ -14,7 +14,7 @@
 
 <style>
 
-body{margin:30px 20px;}
+body{margin:30px 20px; color:pink;}
 
 .fileDrop {
 	width: 200px;
@@ -47,7 +47,7 @@ small {
 </style>
 </head>
 
-<body>
+<body style="background:#262626;">
 
 	<!--스터디등록-->
 	<form id="registerForm" role="form" method="post">

@@ -42,8 +42,6 @@ title
 , #{content} <!-- null허용 -->
 )
 </insert>
-<<<<<<< HEAD
-
 
 <insert id="createCa">
 INSERT INTO
@@ -58,21 +56,6 @@ bsbno
 )
 </insert>
 
-<select id="readCa" resultType="StudyVO">
-select
-bc.categoryd
-, sc.cdname
-, bc.categorys
-, sc.csname
-from
-board_category bc
-left outer join study_category sc on bc.CATEGORYD = sc.CDID and bc.CATEGORYS = sc.CSID
-where bsbno = #{bno}
-</select>
-
-=======
- 
->>>>>>> branch 'HGKWON2' of https://github.com/BIT102/ILuvStudy.git
 <!-- 스터디 읽어오기 -->
 
 <select id="readStudy" resultType="StudyVO">
@@ -401,8 +384,7 @@ WHERE bs.bno > 0
 
   </select>
   
-<<<<<<< HEAD
-  
+
   <!-- 카테고리 분류 SQL -->
  <select id="catList" resultType="studyVO">
 <![CDATA[
@@ -434,46 +416,7 @@ select rSName, rSId
 where rDId=#{rSId} 
 ]]>
 </select>
-=======
->>>>>>> branch 'HGKWON2' of https://github.com/BIT102/ILuvStudy.git
 
-	
-  
-<!-- 카테고리 분류 SQL -->
- <select id="catList" resultType="studyVO">
-<![CDATA[
-select DISTINCT cDName
- from study_category
-
-]]>
-</select>
-
-   <select id="catList2" resultType="studyVO">
-<![CDATA[
-select cSName, csId
- from study_category
- where cdId=#{csId} 
-
-]]>
-</select>
-
-<!-- region 분류 -->
- <select id="rgList" resultType="studyVO">
-<![CDATA[
-SELECT distinct rDName
- from region
-
-]]>
-</select>
-
-<select id="rgList2" resultType="studyVO">
-<![CDATA[
-select rSName, rSId
- from region
-where rDId=#{rSId} 
-
-]]>
-</select>
 
 <!-- 게시물 수정 -->
 <update id="update">

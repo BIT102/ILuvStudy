@@ -50,7 +50,7 @@
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 	
 	<!-- dev.mvc.user 패키지 인식-->
-	<context:component-scan base-package="dev.mvc.persistance" />
+	<context:component-scan base-package="dev.mvc.persistence" />
 	<context:component-scan base-package="dev.mvc.service" />
 			
 	<!-- email 인증 -->	
