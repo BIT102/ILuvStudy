@@ -39,10 +39,10 @@ small {
 }
 
 .bigcatB{background-color:red; border-radius:8px; width:120px; height:30px;}
-#SmallCat1{visibility:hidden;}
-#SmallCat2{visibility:hidden;}
-#SmallCat3{visibility:hidden;}
-#SmallCat4{visibility:hidden;}
+#SmallCat1{display:none;}
+#SmallCat2{display:none;}
+#SmallCat3{display:none;}
+#SmallCat4{display:none;}
 </style>
 </head>
 
@@ -83,36 +83,29 @@ small {
 				<!--소분류 외국어-->
 				<p>소분류</p>
 				
-				<!-- <div id="SmallCat1" name="categoryS">
-					<input type="checkbox" value="1"> 토익
-					<input type="checkbox" value="2"> 토플
-					<input type="checkbox" value="3"> 텝스
-					<input type="checkbox" value="4"> 토스/오픽
-					<input type="checkbox" value="5"> 회화
-					<input type="checkbox" value="6"> 작문/독해 
-					<input type="checkbox" value="7"> 중국어
-					<input type="checkbox" value="8"> 일본어
-					<input type="checkbox" value="9"> 기타
-				</div>-->
+				<div id="SmallCat">
 				<select id="SmallCat1" name="categoryS">
-				<option type=radio value="1">	토익</option>	<option type=radio value="2">	토플 </option>	<option type=radio value="3">	텝스 </option> 	<option type=radio value="4">	토스/오픽 </option>	<option type=radio value="5">	회화 </option>	<option type=radio value="6">	작문/독해 </option>	<option type=radio value="7">	중국어	 </option><option type=radio value="8">	일본어	 </option><option type=radio value="9">	기타 </option>	
+				<option value="1">	토익</option>	<option value="2">	토플 </option>	<option value="3">	텝스 </option> 	<option value="4">	토스/오픽 </option>	<option value="5">	회화 </option>	<option value="6">	작문/독해 </option>	<option value="7">	중국어	 </option><option value="8">	일본어	 </option><option value="9">	기타 </option>	
 				</select> 
 				
 				<select id="SmallCat2" name="categoryS">
-				<option type=radio value="1">	컴퓨터언어	<option type=radio value="2">	웹프로그래밍	<option type=radio value="3">	모바일프로그래밍	<option type=radio value="4">	데이터베이스/서버	<option type=radio value="5">	게임프로그래밍	<option type=radio value="6">	문서작정	<option type=radio value="7">	자격증<option type=radio value="8">	기타	
+				<option value="1">	컴퓨터언어	<option value="2">	웹프로그래밍	<option value="3">	모바일프로그래밍	<option value="4">	데이터베이스/서버	<option value="5">	게임프로그래밍	<option value="6">	문서작정	<option value="7">	자격증<option value="8">	기타	
 				</select>
 				
 				<select id="SmallCat3" name="categoryS">
-				<option type=radio value="1">	미술/디자인	<option type=radio value="2">	뷰티/미용	<option type=radio value="3">	스포츠	<option type=radio value="4">	음악/공연	<option type=radio value="5">	게임	<option type=radio value="6">	기타	
+				<option value="1">	미술/디자인	<option value="2">	뷰티/미용	<option value="3">	스포츠	<option value="4">	음악/공연	<option value="5">	게임	<option value="6">	기타	
 				</select>
 				
 				<select id="SmallCat4" name="categoryS">
-				<option type=radio value="1">	면접	<option type=radio value="2">	자소서	<option type=radio value="3">	고시	<option type=radio value="4">	기술	<option type=radio value="5">	기타	
+				<option value="1">	면접	<option value="2">	자소서	<option value="3">	고시	<option value="4">	기술	<option value="5">	기타	
 				</select>
+				
+				</div>
 				
 			</div>
 		<br>
-			<button id="catplus">+추가</button>
+			
+			<button type="button" id="catplus">+추가</button>
 			<div id="catarea">
 				
 			</div>
@@ -391,61 +384,58 @@ small {
 	<!-- 대분류 셀렉트박스 선택시 소분류 셀렉트 표시 후 추가 하기 -->
 		<script>
 			$(document).ready(function(){
+				
+				
 				$("#catplus").on("click", function(){
-					$("#catarea").html()
-				});
-			
+					$('#SmallCat select[style="display: inline-block;"] option:selected').clone().appendTo("#catarea")
+					
+				});  // small카테고리 셀렉트 태그중 style이 visible인것중 선택된 옵션태그를 #catarea에 클론 한다.
+						
 				$("#BigCat").change("change", function(){
 					
 					var bigNum = $(this).val()
 					
+					$("#catarea").empty();
 					smallCat(bigNum);
 				});
 				function smallCat(bigNum){
 					console.log(bigNum);
+					/*var bgArr = ['A','B','C','D'];
+					for(var i=0; i<4; i++){
+						if(bigNum == bgArr[i]){
+							var sm = '"#SmallCat'+(i+1)+'"';
+							console.log(sm);
+							$(sm).show('slow');
+						}else{
+							$('"#SmallCat'+(i+1)+'"').hide('slow');
+						}
+					}*/
 					if(bigNum == 'A'){
-						$("#SmallCat1").css('visibility', 'visible')
-						$("#SmallCat2").css('visibility', 'hidden')
-						$("#SmallCat3").css('visibility', 'hidden')
-						$("#SmallCat4").css('visibility', 'hidden')
+						$("#SmallCat1").show('slow');
+						$("#SmallCat2").hide('slow');
+						$("#SmallCat3").hide('slow');
+						$("#SmallCat4").hide('slow');
 					}else if(bigNum == 'B'){
-						$("#SmallCat1").css('visibility', 'hidden')
-						$("#SmallCat2").css('visibility', 'visible')
-						$("#SmallCat3").css('visibility', 'hidden')
-						$("#SmallCat4").css('visibility', 'hidden')
+						$("#SmallCat1").hide('slow');
+						$("#SmallCat2").show('slow');
+						$("#SmallCat3").hide('slow');
+						$("#SmallCat4").hide('slow');
 					}else if(bigNum == 'C'){
-						$("#SmallCat1").css('visibility', 'hidden')
-						$("#SmallCat2").css('visibility', 'hidden')
-						$("#SmallCat3").css('visibility', 'visible')
-						$("#SmallCat4").css('visibility', 'hidden')
+						$("#SmallCat1").hide('slow');
+						$("#SmallCat2").hide('slow');
+						$("#SmallCat3").show('slow');
+						$("#SmallCat4").hide('slow');
 					}else if(bigNum == 'D'){
-						$("#SmallCat1").css('visibility', 'hidden')
-						$("#SmallCat2").css('visibility', 'hidden')
-						$("#SmallCat3").css('visibility', 'hidden')
-						$("#SmallCat4").css('visibility', 'visible')
+						$("#SmallCat1").hide('slow');
+						$("#SmallCat2").hide('slow');
+						$("#SmallCat3").hide('slow');
+						$("#SmallCat4").show('slow');
 					}
 				}
 				//무식코드 .... 리팩토링*******
 				});
 				
-	/*function smallCat1(big)
-				
-				console.log("gigi")
-				var bigNum1 = $(this).val()
-				
-				smallCat1(bigNum1);
-				
-				$("#B").change(function(){
-					$("#SmallCat2").css('visibility', 'visible');
-				});
-				$("#C").change(function(){
-					$("#SmallCat3").css('visibility', 'visible');
-				});
-				$("#D").change(function(){
-					$("#SmallCat4").css('visibility', 'visible');
-				});
-			});
-			*/
+
 	</script>
 	
 	<!-- select지역 이벤트       -->
