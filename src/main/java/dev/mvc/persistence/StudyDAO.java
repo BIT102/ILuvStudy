@@ -15,6 +15,8 @@ public interface StudyDAO {
 	//스터디 읽기
 	public StudyVO readStudy(Integer bno);
 
+	public void createCa(Map<String, Object> map) throws Exception;
+	
 	//전체읽기
 	public List<StudyVO> studyList() throws Exception;
 	

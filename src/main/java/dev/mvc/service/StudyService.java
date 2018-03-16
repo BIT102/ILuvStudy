@@ -7,7 +7,7 @@ import dev.mvc.domain.SearchCriteriaStudy;
 import dev.mvc.domain.StudyVO;
 
 public interface StudyService {
-
+	
 	//스터디등록   
 	public void regist(StudyVO vo) throws Exception;
 	
@@ -33,6 +33,7 @@ public interface StudyService {
 	public List<StudyVO> listSearchCriteria(SearchCriteriaStudy cri) throws Exception;
 	
 	//검색수
+
 	public int listSearchCount(SearchCriteriaStudy cri) throws Exception;	
 	
 	//수정
@@ -46,4 +47,5 @@ public interface StudyService {
 	public List<StudyVO> rgList() throws Exception;
 	
 	public List<StudyVO> rgList2(String rsId) throws Exception;
+
 }

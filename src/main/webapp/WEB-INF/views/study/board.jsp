@@ -142,12 +142,13 @@ div.desc {
 					</div>
 				</c:if>
 				
-				
+				<p>${studyVO.cDName}</p>
+			
                 <!-- 스터디 제목 -->
                 <h2>${studyVO.title}</h2>
                 <!-- 작성자 -->
                 <p>${studyVO.nickname}</p>   
-   
+   				
                 <!-- 북마크 -->
                 	좋아용/나빠용
                 <i class="fa fa-heart-o" onclick="myFunction(this)"></i>
@@ -218,7 +219,9 @@ function myFunction(x) {
                 <tr>
                 <!-- 카테고리 -->
                     <td>카테고리</td>
-                    <td>${studyVO.cDName}, ${studyVO.cSName}</td>
+                   <c:forEach items="${list}" var="studyVO">
+                   ${studyVO.cDName}${studyVO.cSName}
+                    </c:forEach>
                 </tr>
                 <tr>
                 <!-- 현재인원 -->

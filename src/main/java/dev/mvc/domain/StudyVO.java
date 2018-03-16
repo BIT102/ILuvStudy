@@ -29,12 +29,12 @@ public class StudyVO {
 	private int bno; 
 	private String title; 
 	private String writer; 
-	private String categoryD; 
-	private String categoryS; 
+	private String[] categoryD; 
+	private String[] categoryS; 
 	private Integer now;
 	private Integer max;
 	private String rDId;
-	private String rSId;
+	private	Integer rSId;
 	private String age;
 	private String sc;
 	private String sd;
@@ -66,12 +66,21 @@ public class StudyVO {
 
 	//파일 업로드
 	private String[] files;
+	
+	public String getStatus() {
+		return status;
+	}
 
-	public int getBno() {
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+
+	public Integer getBno() {
 		return bno;
 	}
 
-	public void setBno(int bno) {
+	public void setBno(Integer bno) {
 		this.bno = bno;
 	}
 
@@ -91,19 +100,19 @@ public class StudyVO {
 		this.writer = writer;
 	}
 
-	public String getCategoryD() {
+	public String[] getCategoryD() {
 		return categoryD;
 	}
 
-	public void setCategoryD(String categoryD) {
+	public void setCategoryD(String[] categoryD) {
 		this.categoryD = categoryD;
 	}
 
-	public String getCategoryS() {
+	public String[] getCategoryS() {
 		return categoryS;
 	}
 
-	public void setCategoryS(String categoryS) {
+	public void setCategoryS(String[] categoryS) {
 		this.categoryS = categoryS;
 	}
 
@@ -131,11 +140,11 @@ public class StudyVO {
 		this.rDId = rDId;
 	}
 
-	public String getrSId() {
+	public Integer getrSId() {
 		return rSId;
 	}
 
-	public void setrSId(String rSId) {
+	public void setrSId(Integer rSId) {
 		this.rSId = rSId;
 	}
 
@@ -187,19 +196,19 @@ public class StudyVO {
 		this.content = content;
 	}
 
-	public int getVct() {
+	public Integer getVct() {
 		return vct;
 	}
 
-	public void setVct(int vct) {
+	public void setVct(Integer vct) {
 		this.vct = vct;
 	}
 
-	public int getRct() {
+	public Integer getRct() {
 		return rct;
 	}
 
-	public void setRct(int rct) {
+	public void setRct(Integer rct) {
 		this.rct = rct;
 	}
 
@@ -251,22 +260,6 @@ public class StudyVO {
 		this.cSName = cSName;
 	}
 
-	public int getcSId() {
-		return cSId;
-	}
-
-	public void setcSId(int cSId) {
-		this.cSId = cSId;
-	}
-
-	public String getcDId() {
-		return cDId;
-	}
-
-	public void setcDId(String cDId) {
-		this.cDId = cDId;
-	}
-
 	public String getNickname() {
 		return nickname;
 	}
@@ -291,14 +284,6 @@ public class StudyVO {
 		this.name = name;
 	}
 
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
 	public String[] getFiles() {
 		return files;
 	}
@@ -313,11 +298,15 @@ public class StudyVO {
 				+ ", categoryS=" + categoryS + ", now=" + now + ", max=" + max + ", rDId=" + rDId + ", rSId=" + rSId
 				+ ", age=" + age + ", sc=" + sc + ", sd=" + sd + ", st=" + st + ", et=" + et + ", content=" + content
 				+ ", vct=" + vct + ", rct=" + rct + ", regdate=" + regdate + ", enddate=" + enddate + ", rDName="
-				+ rDName + ", rSName=" + rSName + ", cDName=" + cDName + ", cSName=" + cSName + ", cSId=" + cSId
-				+ ", cDId=" + cDId + ", nickname=" + nickname + ", no=" + no + ", name=" + name + ", status=" + status
-				+ ", files=" + Arrays.toString(files) + "]";
+				+ rDName + ", rSName=" + rSName + ", cDName=" + cDName + ", cSName=" + cSName + ", nickname=" + nickname
+				+ ", no=" + no + ", name=" + name + ", status=" + status + ", files=" + Arrays.toString(files)
+				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
+				+ "]";
 	}
+
 	
-		
 }
+
+		
+
 

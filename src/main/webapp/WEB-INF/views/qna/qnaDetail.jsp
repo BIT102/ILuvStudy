@@ -11,8 +11,9 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+   <!-- Bootstrap 3.3.4 -->
+    <link href="/resources/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <style>
 body {margin-left:50px;}
 
@@ -70,8 +71,14 @@ body {margin-left:50px;}
 			</div>
 			
 			<!-- 댓글목록 페이징 -->
-			<ul>
-				<li id="repliesDiv"><span>Replies List(click me!)</span>
+			
+			<ul class="timeline">
+			<!-- time line label -->
+				<li class="time-label" id="repliesDiv">
+				<span class="bg-green">
+				Replies List <small id='replycntSmall'>[ ${boardVO.replycnt} ]</small>
+				</span>
+				</li>
 			</ul>
 			
 			<div>
@@ -151,6 +158,7 @@ body {margin-left:50px;}
 </li>
 {{/each}}
 </script>
+
 <!-- handlebars helper -->
 <script>
 Handlebars.registerHelper("prettifyDate", function(timeValue){
@@ -255,6 +263,7 @@ var printData = function (replyArr, target, templateObject){
 		
 		$("#replytext").val(reply.find('timeline-body').text());
 		$(".modal-title").html(reply.attr("data-rno"));
+		
 	});
 	
 	
@@ -302,9 +311,12 @@ var printData = function (replyArr, target, templateObject){
 			}});
 	});
 	</script>
+	
+	<!-- Bootstrap 3.3.2 JS -->
+    <script src="/resources/js/bootstrap.min.js" type="text/javascript"></script>
 <!-- 부트스트랩 JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" ></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" ></script>
 >>>>>>> branch 'HGKWON' of https://github.com/BIT102/ILuvStudy.git
 </body>
 </html>
