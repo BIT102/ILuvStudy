@@ -346,7 +346,7 @@ color:#6b456a !important;
 			
 			<c:forEach begin="${pageMakerStudy.startPage }"
 				end="${pageMakerStudy.endPage}" var = "idx">
-				<li 
+				<li
 					<c:out value="${pageMakerStudy.cri.page == idx?'class=active':''}"/>>
 					<a href="listAll${pageMakerStudy.makeSearch(idx)}">${idx}</a>
 				</li>
