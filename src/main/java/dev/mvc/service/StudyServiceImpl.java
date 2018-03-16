@@ -81,8 +81,8 @@ public void regist(StudyVO vo) throws Exception {
 
 		for(int i=0; i<S.length; i++) {
 				String caD = D[i];
-				for(int j=0; j<S.length; j++) {
-					String caS = S[j];
+				
+					String caS = S[i];
 					
 					ca.put("bno", bno);
 					ca.put("categoryD", caD);
@@ -93,7 +93,7 @@ public void regist(StudyVO vo) throws Exception {
 				System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 					
 					dao.createCa(ca);
-				}
+				
 			}
 	}
 	//스터디 불러오기

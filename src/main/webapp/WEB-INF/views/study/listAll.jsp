@@ -322,6 +322,7 @@ color:#6b456a !important;
 	<p class="regionDS">${studyVO.rDName}/${studyVO.rSName}</p>
 	<!-- 시작일 -->
 	<p class="st">${studyVO.sd}</p>
+	<p class="st">${studyVO.age}</p>
 	<!-- 조회수 -->
 	<p class="vct"><i class="fa fa-eye"></i> ${studyVO.vct}</p>
 	</div>

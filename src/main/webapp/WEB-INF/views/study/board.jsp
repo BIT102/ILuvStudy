@@ -141,12 +141,13 @@ div.desc {
 					</div>
 				</c:if>
 				
-				
+				<p>${studyVO.cDName}</p>
+			
                 <!-- 스터디 제목 -->
                 <h2>${studyVO.title}</h2>
                 <!-- 작성자 -->
                 <p>${studyVO.nickname}</p>   
-   
+   				
                 <!-- 북마크 -->
                 	좋아용/나빠용
                 <i class="fa fa-heart-o" onclick="myFunction(this)"></i>

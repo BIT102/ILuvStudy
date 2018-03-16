@@ -123,6 +123,7 @@ public class StudyController {
 		
 		logger.info("show list..........");
 		
+		
 		List<StudyVO> studyList = service.studyList().subList(0, 8);
 		
 		model.addAttribute("list", studyList);
@@ -148,11 +149,6 @@ public class StudyController {
 			              Model model) throws Exception {
 	
 		List<StudyVO> list = service.readCa(bno);
-		
-		for(int i=list.size()-1; i>0; i--) {
-			if(list.get(i).getcDName().equals(list.get(i-1).getcDName())){
-			}
-		}
 		
 		model.addAttribute("list", list);
 		model.addAttribute(service.read(bno));

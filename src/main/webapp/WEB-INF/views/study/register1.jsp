@@ -210,30 +210,25 @@
 				<p>시작시간</p>
 				<select class="st" name="st">
 					<option selected>--</option>
-					<option value="1시">1시</option>
-					<option value="2시">2시</option>
-					<option value="3시">3시</option>
-					<option value="4시">4시</option>
-					<option value="5시">5시</option>
-					<option value="6시">6시</option>
-					<option value="7시">7시</option>
-					<option value="8시">8시</option>
-					<option value="9시">9시</option>
-					<option value="10시">10시</option>
-					<option value="11시">11시</option>
-					<option value="12시">12시</option>
-					<option value="13시">13시</option>
-					<option value="14시">14시</option>
-					<option value="15시">15시</option>
-					<option value="16시">16시</option>
-					<option value="17시">17시</option>
-					<option value="18시">18시</option>
-					<option value="19시">19시</option>
-					<option value="20시">20시</option>
-					<option value="21시">21시</option>
-					<option value="22시">22시</option>
-					<option value="23시">23시</option>
-					<option value="24시">24시</option>
+					<option value="6">6시</option>
+					<option value="7">7시</option>
+					<option value="8">8시</option>
+					<option value="9">9시</option>
+					<option value="10">10시</option>
+					<option value="11">11시</option>
+					<option value="12">12시</option>
+		 			<option value="13">13시</option>
+					<option value="14">14시</option>
+					<option value="15">15시</option>
+					<option value="16">16시</option>
+					<option value="17">17시</option>
+					<option value="18">18시</option>
+					<option value="19">19시</option>
+					<option value="20">20시</option>
+					<option value="21">21시</option>
+					<option value="22">22시</option>
+					<option value="23">23시</option>
+					<option value="24">24시</option> 
 				</select>
 			</div>
 
@@ -241,31 +236,7 @@
 			<div class="studyet">
 				<p>끝나는시간</p>
 				<select class="et" name="et">
-					<option selected>--</option>
-					<option value="1시">1시</option>
-					<option value="2시">2시</option>
-					<option value="3시">3시</option>
-					<option value="4시">4시</option>
-					<option value="5시">5시</option>
-					<option value="6시">6시</option>
-					<option value="7시">7시</option>
-					<option value="8시">8시</option>
-					<option value="9시">9시</option>
-					<option value="10시">10시</option>
-					<option value="11시">11시</option>
-					<option value="12시">12시</option>
-					<option value="13시">13시</option>
-					<option value="14시">14시</option>
-					<option value="15시">15시</option>
-					<option value="16시">16시</option>
-					<option value="17시">17시</option>
-					<option value="18시">18시</option>
-					<option value="19시">19시</option>
-					<option value="20시">20시</option>
-					<option value="21시">21시</option>
-					<option value="22시">22시</option>
-					<option value="23시">23시</option>
-					<option value="24시">24시</option>
+				<option selected>--</option>
 				</select>
 			</div>
 		</div>
@@ -310,6 +281,30 @@
 		</span>
 
 	</div>
+</script>
+
+<!-- 시간지정 -->
+	
+<script>
+$(".st").change(function(){
+var stval = $(".st option:selected").val();
+
+var str="";
+
+	for(var i = stval; i<=24; i++){
+				
+		str += "<option value'"+i+"'>"+i+"시</option>";
+		$(".et").html(str);
+		
+	if(stval=24) {
+		
+	}	
+}
+
+});
+
+var str = "";
+
 </script>
 
 	<script>
@@ -443,6 +438,9 @@
 					)
 				}			
 			</script> 
+			
+
+	
 	
 
 </body>

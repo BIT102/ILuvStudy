@@ -140,6 +140,8 @@ body {
   max-width: 320px;
   max-width: 20rem;
   width: 90%;
+  border:2px solid #262626;
+  padding: 30px;
 }
 
 /* helpers/hidden.css */

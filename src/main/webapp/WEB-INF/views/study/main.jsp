@@ -147,7 +147,7 @@ height:
 	color: #fff;
 }
 
-#image > .i1 {
+#image a> .i1 {
   transform: translateZ(485px);
   -moz-transform: translateZ(485px);
   -o-transform: translateZ(485px);
@@ -157,7 +157,7 @@ height:
   background-size:100% 100%;
 }
 
-  #image > .i2 {
+  #image a> .i2 {
   transform: rotateY(45deg) translateZ(485px);
   -moz-transform: rotateY(45deg) translateZ(485px);
   -o-transform: rotateY(45deg) translateZ(485px);
@@ -166,7 +166,7 @@ height:
     background-repeat:no-repeat;
   background-size:100% 100%;
 }
-#image > .i3 {
+#image a> .i3 {
   transform: rotateY(90deg) translateZ(485px);
   -moz-transform: rotateY(90deg) translateZ(485px);
   -o-transform: rotateY(90deg) translateZ(485px);
@@ -175,7 +175,7 @@ height:
     background-repeat:no-repeat;
   background-size:100% 100%;
 }
-#image > .i4 {
+#image a> .i4 {
   transform: rotateY(135deg) translateZ(485px);
   -moz-transform: rotateY(135deg) translateZ(485px);
   -o-transform: rotateY(135deg) translateZ(485px);
@@ -184,7 +184,7 @@ height:
     background-repeat:no-repeat;
   background-size:100% 100%;
 }
-#image > .i5 {
+#image a> .i5 {
   transform: rotateY(180deg) translateZ(485px);
   -moz-transform: rotateY(180deg) translateZ(485px);
   -o-transform: rotateY(180deg) translateZ(485px);
@@ -193,7 +193,7 @@ height:
     background-repeat:no-repeat;
   background-size:100% 100%;
 }
-#image > .i6 {
+#image a> .i6 {
   transform: rotateY(225deg) translateZ(485px);
   -moz-transform: rotateY(225deg) translateZ(485px);
   -o-transform: rotateY(225deg) translateZ(485px);
@@ -202,7 +202,7 @@ height:
     background-repeat:no-repeat;
   background-size:100% 100%;
 }
-#image > .i7 {
+#image a> .i7 {
   transform: rotateY(270deg) translateZ(485px);
   -moz-transform: rotateY(270deg) translateZ(485px);
   -o-transform: rotateY(270deg) translateZ(485px);
@@ -211,7 +211,7 @@ height:
     background-repeat:no-repeat;
   background-size:100% 100%;
 }
-#image > .i8 {
+#image a> .i8 {
   transform: rotateY(315deg) translateZ(485px);
   -moz-transform: rotateY(315deg) translateZ(485px);
   -o-transform: rotateY(315deg) translateZ(485px);
@@ -458,21 +458,27 @@ height:
 	<!-- for more info please get touch with me by droping a email to me   akj114912@gmail.com -->
 	<div class="row1">
 <div id="wrapper">
-	<p>최신 스터디</p>	
+	<p>최신 스터디</p>
+
+	
+
     <div id="image">
   	  <% int car = 0; %>
   	  <c:forEach items="${list}" var="studyVO">
   	  <% car++; %>
+  	  <a href="/study/board${pageMakerStudy.makeSearch(pageMakerStudy.cri.page)}&bno=${studyVO.bno}">
+    
       <div class="image i<%= car %>" style="background-image:url(/study/displayFile?fileName=${studyVO.name});" >
-     
       <div class="image-content<%= car %>" style="font-size:30px; background:gray; opacity: 0.6;">
       ${studyVO.nickname}<br>
       ${studyVO.rDName}/${studyVO.rSName}<br>
       </div>
-      </div>
-     
-    </c:forEach>
+      </div>   
+      </a>
+      
+   	 </c:forEach>
     </div>
+
   </div>
   </div>
 
