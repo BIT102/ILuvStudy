@@ -257,7 +257,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select> 
 -->
 	
-	<!-- study 정보 상세 (수정중)-->
+	<!-- study 정보 상세 -->
 	<select id="studyDetail" resultType="StudyVO">
 		select *
 		from board_study bs, region r
@@ -308,6 +308,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from apply_user a, user u
 		where a.usemail=u.email
 		and a.bsbno=#{bno}
+	</select>
+	
+	<!-- 스터디 이미지 정보 -->
+	<select id="studyImage" resultType="StudyVO">
+		select *
+		from board_attach
+		where bsbno=#{bno}
 	</select>
 	
 	<!-- 스터디 정보 수정  -->

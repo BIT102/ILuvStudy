@@ -112,7 +112,7 @@ public class AdminServiceImpl implements AdminService{
 	
 	@Override
 	public StudyVO studyDetail(Integer bno)throws Exception{
-		return dao.studyDetail(bno);
+		return dao.studyDetail(bno); //스터디 정보 가져옴
 	}
 	
 	@Override

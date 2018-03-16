@@ -263,7 +263,10 @@ form th{
             </tr>
             <tr>
                 <th>이미지</th>
-                <td>${studyVO.name}</td>
+                <td>
+                	<div class="gallery">
+      		  		</div>
+                </td>
             </tr>
         </tbody>
         </table>
@@ -391,7 +394,7 @@ form th{
 		
 		//지역정보 2단 콤보박스 메서드
 		function getRegion(){
-			$("#rSName").children("option").remove(); //소분류의 option 삭제
+			//$("#rSName").children("option").remove(); //소분류의 option 삭제
 			
 			$.ajax({ //rdid값을 POST형식으로 region 컨트롤러에 전송
 				type:'POST',
@@ -408,14 +411,14 @@ form th{
 					for(var i=0; i<result.length;i++){
 						option += "<option value="+result[i].rSId+">"+result[i].rSName+" </option>"; //option에 배열값 추가
 					}
-					$("#rSName").append(option); //html에 뿌려줌
+					$("#rSName").html(option); //html에 뿌려줌
 				}
 			}); //$.ajax 끝
 		}
 		
 		//카테고리 대분류 선택 시 소분류 변경
 		function getCat(){
-			$("#catS").children("option").remove(); //소분류의 option 삭제
+			//$("#catS").children("option").remove(); //소분류의 option 삭제, append()가 아닌 html() 사용으로 주석 처리
 			
 			$.ajax({ //categoryD값을 POST형식으로 category 컨트롤러에 전송
 				type:'POST',
@@ -432,7 +435,7 @@ form th{
 					for(var i=0; i<result.length;i++){
 						option += "<option value="+result[i].cSId+">"+result[i].cSName+" </option>"; //option에 배열값 추가
 					}
-					$("#catS").append(option); //html에 뿌려줌
+					$("#catS").html(option); //html에 뿌려줌
 				}
 			}); //$.ajax 끝
 		}
@@ -487,7 +490,32 @@ form th{
 			}); //$.ajax 끝
 		} //getStudy() 끝
 		
+		
+	    //파일불러오기
+	    var bno = ${studyVO.bno};
+	    var template = Handlebars.compile($("#templateAttach").html());
+	    
+	    $.getJSON("/study/getFile/"+bno, function(list){
+	    	$(list).each(function(){
+	    		
+	    		var fileInfo = getFileInfo(this);
+	    		var html = template(fileInfo);
+	    		
+	    		$(".gallery").append(html)
+	    	})
+	    })
+		
 </script>
+
+   <!-- 파일업로드 핸들러 -->
+    <script id="templateAttach" type="text/x-handlebars-template">
+    <li data-src='{{name}}'>
+		<span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment"></span>
+  		<div class="mailbox-attachment-info">
+		</span>
+		</div>
+	</li>
+    </script>
 
 </body>
 </html>

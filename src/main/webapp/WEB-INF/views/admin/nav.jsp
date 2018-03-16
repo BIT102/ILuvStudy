@@ -23,6 +23,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 	<script src="/resources/vendor/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="/resources/js/upload.js"></script>
 	<script src="/resources/vendor/bootstrap/js/bootstrap.min.js"></script>
 	<script src="/resources/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 	<script src="/resources/scripts/klorofil-common.js"></script>

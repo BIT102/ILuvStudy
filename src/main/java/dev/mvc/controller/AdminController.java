@@ -241,6 +241,8 @@ public class AdminController {
 		model.addAttribute("studyDC", service.studyDetailC(bno));
 		//스터디 신청자 정보
 		model.addAttribute("applyStudy", service.applyStudy(bno));
+		//스터디 이미지 정보
+		//model.addAttribute("studyImage", service.studyImage(bno));
 	}
 	
 	@RequestMapping(value="/studyDetailTest", method = RequestMethod.POST)
