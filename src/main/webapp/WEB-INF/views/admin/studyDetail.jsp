@@ -62,9 +62,10 @@ form th{
                  <select id="catD" class="form-control">
                  	<option>--</option>
                  	<c:forEach items="${studyCategory}" var="studyVO" varStatus="status">
-                 		<c:if test="${status.index eq 0 || status.index eq 9 || status.index eq 17 || status.index eq 23}">
+<%--                  		<c:if test="${status.index eq 0 || status.index eq 9 || status.index eq 17 || status.index eq 23}">
                  			<option value="${studyVO.cDId}">${studyVO.cDName}</option>
-                 		</c:if>
+                 		</c:if> --%>
+                 		<option value="${studyVO.cDId}">${studyVO.cDName}</option>
                  	</c:forEach>
                  </select>
                  <select id="catS" class="form-control">
@@ -315,7 +316,7 @@ form th{
 	$(document).ready(function(){
 		
 		//카테고리 소분류 체크 시 대분류 체크 되도록
-		<c:forEach items="${studyCategory}" var="studyVO" varStatus="status">
+/* 		<c:forEach items="${studyCategory}" var="studyVO" varStatus="status">
 			<c:if test="${status.index eq 0 || status.index eq 9 || status.index eq 17 || status.index eq 23}">
 				$(".${studyVO.cDName}").on("click", function(){
 					if($(this).prop("checked")){
@@ -323,7 +324,7 @@ form th{
 					}
 				});
 			</c:if>
-        </c:forEach>
+        </c:forEach> */
 		
 		$("#studyListsuv").attr("class", "active");
 		$("#studyListnav").attr("class", "active");

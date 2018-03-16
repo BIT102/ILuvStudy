@@ -275,10 +275,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<!-- study 카테고리 -->
-	<select id="studyCategory" resultType="StudyVO">
+<!-- 	<select id="studyCategory" resultType="StudyVO">
 		select *
 		from study_category
 		order by cdid, csid
+	</select> -->
+	<!-- study 카테고리 -->
+	<select id="studyCategory" resultType="StudyVO">
+		select *
+		from study_category
+		group by cdid
 	</select>
 	
 	<select id="studyCategory2" resultType="StudyVO">
