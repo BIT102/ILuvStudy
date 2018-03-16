@@ -1,5 +1,7 @@
 package dev.mvc.controller;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.request;
+
 import java.util.Date;
 
 import javax.inject.Inject;
@@ -15,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.WebUtils;
 
 import dev.mvc.domain.AdminVO;
@@ -37,12 +40,25 @@ public class LoginController {
 	public void loginGet(HttpServletRequest request, Model model) throws Exception{
 		
 		logger.info("Login merge get.......");
+		try {
+			String rememberable = WebUtils.getCookie(request, "rememberId").getValue();
+			System.out.println(rememberable);
+			
+			if(rememberable != null){
+				model.addAttribute("id", rememberable);
+				model.addAttribute("checked", "checked");
+			}
+			
+		} catch (Exception e) {
+			
+		}
+		
 	}
 	
 	@RequestMapping(value = "loginPost", method = RequestMethod.POST)
-	public void loginPost(LoginDTO dto, HttpSession session, Model model) throws Exception{
+	public void loginPost(LoginDTO dto, HttpServletRequest request, HttpSession session, Model model) throws Exception{
 		logger.info("Login merge post.......");
-		
+
 		// 1. Interceptor prehandler O
 		
 		// 2. UserLogin
@@ -68,8 +84,34 @@ public class LoginController {
 			return;
 		}
 		
-		// 4. Interceptor posthandler O 
+		// 4. 아이디 기억하기 기능
 		
+		String rememberId = request.getParameter("rememberId");
+		
+		System.out.println("=======rememberId 값 가져오기 ========");
+		System.out.println(WebUtils.getCookie(request, "rememberId"));
+		
+		if(rememberId != null){
+			
+			Cookie cookie = new Cookie("rememberId", dto.getId());
+			cookie.setMaxAge(60*60*24*7); // 1주일
+			cookie.setPath("/");
+			model.addAttribute("cookie",cookie);
+			
+			//response.addCookie(cookie); // 로그인아이디 기억하기 쿠기의 생성
+			System.out.println("cookie : " + cookie);
+		}else if(WebUtils.getCookie(request, "rememberId")!=null){
+			
+			// 쿠키 삭제경우
+			logger.info("rememberId remove.........");
+			Cookie cookie = WebUtils.getCookie(request, "rememberId"); 
+			cookie.setMaxAge(0);
+			model.addAttribute("cookie",cookie);
+			
+		}
+
+		// 5. Interceptor posthandler O 
+
 	}
 	
 	

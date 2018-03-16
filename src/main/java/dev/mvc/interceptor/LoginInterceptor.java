@@ -1,5 +1,7 @@
 package dev.mvc.interceptor;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+
 import java.io.PrintWriter;
 
 import javax.inject.Inject;
@@ -28,23 +30,33 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView)throws Exception{
 		
+		logger.info("Login interceptor postHandle............");
 		HttpSession session = request.getSession();
 		
 		ModelMap modelMap = modelAndView.getModelMap();
 		Object adminVO = modelMap.get("AdminVO");		
 		Object userVO = modelMap.get("UserVO");
+		Cookie cookie = (Cookie)modelMap.get("cookie");
 		
+		System.out.println(cookie);
 		
 		if(adminVO != null){
 			logger.info("new login success");
 			session.setAttribute(LOGIN, adminVO);
 			service.loginupdate(adminVO);  //로그인 성공 시 
+
+			if(cookie != null)
+				response.addCookie(cookie); // 로그인아이디 기억하기 쿠기의 생성	
+			
 			//로그인 성공 시 회원리스트로 이동
 			response.sendRedirect("/admin/userList");
 		}else if(userVO != null){
 			session.setAttribute(LOGIN, userVO); // 여기가 실질적인 세션 생성 구간
 			logger.info("===========new login success==========");
 			System.out.println(session.getAttribute(LOGIN));
+			
+			if(cookie != null)
+				response.addCookie(cookie); // 로그인아이디 기억하기 쿠기의 생성
 			
 			if(request.getParameter("useCookies") != null){
 				logger.info("remember me..............................");

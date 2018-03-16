@@ -57,7 +57,7 @@ public class StudyController {
 			System.out.println("===========================");
 			
 			service.regist(vo);
-
+			
 			rttr.addFlashAttribute("msg", "success");
 			
 //			return "redirect:/study/listAll";

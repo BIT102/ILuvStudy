@@ -28,14 +28,9 @@ public class StudyServiceImpl implements StudyService {
 		@Override
 	public void regist(StudyVO vo) throws Exception {
 
-			
-
 			System.out.println("====================");
-
 			System.out.println("registService..........");
-
 			System.out.println(vo);
-
 			System.out.println("====================");
 
 			String[] files = vo.getFiles();
@@ -49,7 +44,6 @@ public class StudyServiceImpl implements StudyService {
 			int bno = dao.getBno();
 
 			vo.setBno(bno);
-			
 
 			Map<String, Object> map = new HashMap<>();
 

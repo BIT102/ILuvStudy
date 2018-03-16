@@ -78,7 +78,8 @@ public class UserController {
 			
 			UserVO vo = service.read(email);
 			model.addAttribute("vo", vo);
-			
+			model.addAttribute("gender",vo.getGender());
+			System.out.println(vo.getGender());
 			return "/mypage/profile";
 		}
 	
@@ -296,7 +297,7 @@ public class UserController {
 				if(service.chkNickname(nickname)==0){
 					entity = new ResponseEntity<String>("success", HttpStatus.OK);
 				}else{
-					entity = new ResponseEntity<String>("dup", HttpStatus.BAD_REQUEST);
+					entity = new ResponseEntity<String>("dup", HttpStatus.OK);
 				}
 				
 			}catch (Exception e) {

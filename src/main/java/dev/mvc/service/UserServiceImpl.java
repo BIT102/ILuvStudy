@@ -114,7 +114,7 @@ public class UserServiceImpl implements UserService {
 	    String tomail  = email;     // 받는 사람 이메일
 	    String title   = "[ILOVESTUDY]인증번호 발송";      // 제목
 	    
-	    String code = UUID.randomUUID().toString().replace("-", "").substring(0, 6);;
+	    String code = UUID.randomUUID().toString().replace("-", "").substring(0, 6);
 	    String content = "인증번호는 ["+code+"] 입니다. 해당 번호를 입력해 주세요.";    // 내용
 	   	    
 	    String htmltext = 
