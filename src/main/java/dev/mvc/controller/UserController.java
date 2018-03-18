@@ -296,7 +296,7 @@ public class UserController {
 				if(service.chkNickname(nickname)==0){
 					entity = new ResponseEntity<String>("success", HttpStatus.OK);
 				}else{
-					entity = new ResponseEntity<String>("dup", HttpStatus.BAD_REQUEST);
+					entity = new ResponseEntity<String>("dup", HttpStatus.OK);
 				}
 				
 			}catch (Exception e) {

@@ -23,18 +23,21 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 	<script src="/resources/vendor/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="/resources/js/upload.js"></script>
 	<script src="/resources/vendor/bootstrap/js/bootstrap.min.js"></script>
 	<script src="/resources/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 	<script src="/resources/scripts/klorofil-common.js"></script>
+
 <body>
 <!--헤더-->
 <div class="navbar navbar-default navbar-fixed-top">
 			<div class="brand">
-				<a href="userList"><img src="/resources/img/logo-dark.png" alt="Iluvstudy Logo" class="img-responsive logo"></a>
+				<a href="userList"><img src="/resources/img/logo.JPG" alt="Iluvstudy Logo" class="img-responsive logo"></a> 
 			</div>
 			<div class="container-fluid">
 				<div class="navbar-btn">
 					<button type="button" class="btn-toggle-fullwidth"><i class="lnr lnr-arrow-left-circle"></i></button>
+					<a href="/study/main"><button type="button" class="lnr lnr-home"></button></a>
 				</div>
 				<div id="navbar-menu">
 					<ul class="nav navbar-nav navbar-right">
@@ -75,7 +78,7 @@
 								</ul>
 							</div>
 						</li>
-						<li><a id="userStatisticnav" href="userStatistic" class=""><i class="lnr lnr-chart-bars"></i> <span>통계관리</span></a></li>
+						<li><a id="userStatisticnav" href="userStatistic" class="" style="display:none"><i class="lnr lnr-chart-bars"></i> <span>통계관리</span></a></li>
 						<li><a id="adminListnav" href="adminList" class=""><i class="lnr lnr-text-format"></i> <span>Admin관리</span></a></li>
 					</ul>
 				</div>

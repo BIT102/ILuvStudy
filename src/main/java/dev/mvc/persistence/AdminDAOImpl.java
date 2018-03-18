@@ -1,6 +1,7 @@
 package dev.mvc.persistence;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -50,6 +51,11 @@ public class AdminDAOImpl implements AdminDAO{
 	@Override
 	public int adminCountPaging(Criteria cri)throws Exception{
 		return session.selectOne(namespace + ".adminCountPaging", cri); // totalCount 반환
+	}
+	
+	@Override
+	public int chkId(String id)throws Exception{
+		return session.selectOne(namespace + ".chkId", id); //어드민 계정 아이디 중복 체크
 	}
 	
 	@Override
@@ -113,8 +119,18 @@ public class AdminDAOImpl implements AdminDAO{
 	}
 	
 	@Override
+	public List<StudyVO> studyDetailC(Integer bno)throws Exception{
+		return session.selectList(namespace + ".studyDetailC", bno); //스터디 카테고리 정보 가져옴
+	}
+	
+	@Override
 	public List<StudyVO> studyCategory(Criteria cri) throws Exception{
 		return session.selectList(namespace + ".studyCategory", cri);  //study 카테고리 정보
+	}
+	
+	@Override
+	public List<StudyVO> studyCategory2(String cDId) throws Exception{
+		return session.selectList(namespace + ".studyCategory2", cDId);  //study 카테고리 소분류 가져옴
 	}
 	
 	@Override
@@ -135,6 +151,16 @@ public class AdminDAOImpl implements AdminDAO{
 	@Override
 	public void studyUpdate(StudyVO vo)throws Exception{	
 		session.update(namespace + ".studyUpdate", vo);   // 스터디 정보 수정
+	}
+	
+	@Override
+	public void deleteCat(StudyVO vo) throws Exception {
+		session.delete(namespace+".deleteCat", vo); //스터디 카테고리 삭제
+	}
+	
+	@Override
+	public void insertCat(Map<String, Object> ca) throws Exception{
+		session.insert(namespace+".insertCat", ca);  //스터디 카테고리 등록
 	}
 	
 	@Override

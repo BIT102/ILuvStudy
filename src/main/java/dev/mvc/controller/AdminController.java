@@ -99,6 +99,28 @@ public class AdminController {
 		
 		return "redirect:/admin/adminList";
 	}
+	
+	//admin/adminRegister.jsp에서 계정 등록 시 아이디 중복확인
+	@RequestMapping(value="/id",method = RequestMethod.POST)
+	public ResponseEntity<String> chkId(@RequestParam("id") String id) throws Exception{
+		
+		System.out.println("idChk.................");
+		
+		ResponseEntity<String> entity = null;
+		
+		try{
+			if(service.chkId(id)==0){
+				entity = new ResponseEntity<String>("success", HttpStatus.OK);
+			}else{
+				entity = new ResponseEntity<String>("dup", HttpStatus.OK);
+			}
+			
+		}catch (Exception e) {
+			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		
+		return entity;
+	} 
 //admin관리 > 계정관리 끝
 
 //회원관리 > 회원조회
@@ -215,8 +237,12 @@ public class AdminController {
 		model.addAttribute("region", service.region(cri));
 		//스터디 상세 정보
 		model.addAttribute(service.studyDetail(bno));
+		//스터디 카테고리 선택 정보
+		model.addAttribute("studyDC", service.studyDetailC(bno));
 		//스터디 신청자 정보
 		model.addAttribute("applyStudy", service.applyStudy(bno));
+		//스터디 이미지 정보
+		//model.addAttribute("studyImage", service.studyImage(bno));
 	}
 	
 	@RequestMapping(value="/studyDetailTest", method = RequestMethod.POST)
@@ -242,14 +268,27 @@ public class AdminController {
 		return entity;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="/category/{cDId}", method = RequestMethod.POST)
+	public ResponseEntity<List<StudyVO>> studyCategory2(@PathVariable("cDId") String cDId) throws Exception{
+		logger.info("category post...");
+		
+		ResponseEntity<List<StudyVO>> entity=null;
+		
+		//지역테이블 정보
+		entity = new ResponseEntity<List<StudyVO>>(service.studyCategory2(cDId), HttpStatus.OK);
+		
+		return entity;
+	}
+	
 	
 	//admin/studyDetail.jsp 에서 스터디 정보 수정 시
 	@RequestMapping(value="/studyDetail", method = RequestMethod.POST)
-	public String studyDetailPOST(StudyVO vo, RedirectAttributes rttr) throws Exception{
+	public String studyDetailPOST(@RequestParam("bno") int bno, StudyVO vo, RedirectAttributes rttr, @ModelAttribute("cri") Criteria cri) throws Exception{
 		logger.info("studyDetail post...");
-		/*logger.info(cri.toString());
+//		logger.info(cri.toString());
 		
-		service.studyUpdate(vo);
+		service.studyUpdate(bno, vo);
 		
 		//페이징 정보 유지
 		rttr.addAttribute("page", cri.getPage());
@@ -262,7 +301,7 @@ public class AdminController {
 		rttr.addFlashAttribute("msg", "SUCCESS");
 		
 		logger.info(rttr.toString());
-		*/
+		
 		return "redirect:/admin/studyList";
 	}
 

@@ -367,8 +367,8 @@ var str = "";
 
 					$(".uploadedList").append(html);
 				}
-				});
 			});
+		});
 
 		//취소버튼
 		$(".uploadedList").on("click", "small", function(event){

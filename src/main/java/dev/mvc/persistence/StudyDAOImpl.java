@@ -7,8 +7,6 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import dev.mvc.domain.CriteriaStudy;
@@ -22,13 +20,17 @@ public class StudyDAOImpl implements StudyDAO {
 	private SqlSession session;
 	
 	private static final String namespace = "dev.mvc.mapper.StudyMapper";
-	private static final Logger logger = LoggerFactory.getLogger(StudyDAOImpl.class);
-			
-			
+		
 	//스터디등록
 	@Override
-	public void createStudy(StudyVO vo) {
+	public void createStudy(StudyVO vo) throws Exception {
 		session.insert(namespace+".createStudy", vo);
+	}
+	
+	//카테고리 불러오기
+	@Override
+	public List<StudyVO> readCa(Integer bno) throws Exception {
+		return session.selectList(namespace+".readCa", bno);
 	}
 	
 	
@@ -40,7 +42,7 @@ public class StudyDAOImpl implements StudyDAO {
 	
 	//스터디 불러오기
 	@Override
-	public StudyVO readStudy(Integer bno) {
+	public StudyVO readStudy(Integer bno) throws Exception {
 		
 		// 사진의 갯수때문에 리턴값이 여러개가 될수 있으므로 리턴값을 배열에 담는다.
 		List<StudyVO> vo = session.selectList(namespace+".readStudy", bno);
@@ -107,6 +109,30 @@ public class StudyDAOImpl implements StudyDAO {
 		return session.selectList(namespace+".listCriteria", cri);
 	}
 	
+	@Override
+	public List<StudyVO> catList() throws Exception {
+
+		return session.selectList(namespace+".catList");
+	}
+
+	
+
+	@Override
+	public List<StudyVO> catList2(String csId) throws Exception {
+		return session.selectList(namespace+".catList2", csId);
+	}
+
+	@Override
+	public List<StudyVO> rgList() throws Exception {
+		return session.selectList(namespace+".rgList");
+	}
+
+	@Override
+	public List<StudyVO> rgList2(String rsId) throws Exception {
+		return session.selectList(namespace+".rgList2", rsId);
+	}
+	
+	
 	//페이징 개수 불러오기
 	@Override
 	public int countPaging(CriteriaStudy cri) throws Exception {
@@ -147,53 +173,6 @@ public class StudyDAOImpl implements StudyDAO {
 		map.put("amount", amount);
 		
 		session.update(namespace+".updateNow", map);
-	}
-	
-	@Override
-	public List<StudyVO> catList() throws Exception {
-
-		return session.selectList(namespace+".catList");
-	}
-
-	
-
-	@Override
-	public List<StudyVO> catList2(String csId) throws Exception {
-		return session.selectList(namespace+".catList2", csId);
-	}
-
-	@Override
-	public List<StudyVO> rgList() throws Exception {
-		return session.selectList(namespace+".rgList");
-	}
-
-	@Override
-	public List<StudyVO> rgList2(String rsId) throws Exception {
-		return session.selectList(namespace+".rgList2", rsId);
-	}
-
-	@Override
-	public void update(StudyVO vo) throws Exception {
-		session.update(namespace+".update", vo);
-	}
-	
-	@Override
-	public void deleteAttach(Integer bno) throws Exception {
-
-		session.delete(namespace+".deleteAttach", bno);
-		
-	}
-
-	@Override
-	public void replaceAttach(String fullName, Integer bno) throws Exception {
-
-		Map<String, Object> paramMap = new HashMap<String, Object>();
-		
-		paramMap.put("bno", bno);
-		paramMap.put("fullName", fullName);
-		
-		session.insert(namespace+".replaceAttach", paramMap);
-		
 	}
 
 }

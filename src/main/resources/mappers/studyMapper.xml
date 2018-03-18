@@ -2,9 +2,10 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
- 
+
 <!-- board_study mapper -->
 <mapper namespace="dev.mvc.mapper.StudyMapper">
+
 
 <!-- 스터디 등록 사람숫자 -->
 <update id="updateNow">
@@ -56,8 +57,19 @@ bsbno
 )
 </insert>
 
-<!-- 스터디 읽어오기 -->
+<select id="readCa" resultType="StudyVO">
+select
+bc.categoryd
+, sc.cdname
+, bc.categorys
+, sc.csname
+from
+board_category bc
+left outer join study_category sc on bc.CATEGORYD = sc.CDID and bc.CATEGORYS = sc.CSID
+where bsbno = #{bno}
+</select>
 
+<!-- 스터디 읽어오기 -->
 <select id="readStudy" resultType="StudyVO">
 SELECT
 ba.name
@@ -86,11 +98,10 @@ left outer join board_attach ba on bs.bno = ba.bsbno
 left outer join region r on bs.RDID = r.RDID and bs.RSID = r.RSID
 WHERE bs.bno = #{bno}
 </select>
- 
+
 <!-- 전체불러오기 -->
 <select id="studyList" resultType="StudyVO">
 <![CDATA[
-
 SELECT
 ba.name
 , bs.bno
@@ -111,7 +122,6 @@ ba.name
 , bs.rct
 , bs.regdate
 , bs.enddate
-, ba.name
 FROM 
 board_study bs
 left outer join user u on bs.writer = u.EMAIL
@@ -146,11 +156,6 @@ VALUES(
 , #{status}
 )
 </insert>
-
-
-<select id = "addFileLast" resultType="int">
-	select LAST_INSERT_ID()
-</select>
 
 <!-- 파일불러오기 -->
 <select id="getFile" resultType="string">
@@ -378,13 +383,12 @@ WHERE bs.bno > 0
   		</if> 
   </sql>		
 
-  <select id="getNextBno" resultType="int">
+  	 		  <select id="getNextBno" resultType="int">
 
   select LAST_INSERT_ID();
 
   </select>
   
-
   <!-- 카테고리 분류 SQL -->
  <select id="catList" resultType="studyVO">
 <![CDATA[
@@ -416,30 +420,6 @@ select rSName, rSId
 where rDId=#{rSId} 
 ]]>
 </select>
-
-
-<!-- 게시물 수정 -->
-<update id="update">
-update board_study
-set 
-	title =#{title},
-	content =#{content}
-where
-	bno = #{bno}
-</update>
-
-<!-- 게시물 수정 ,삭제 파일업로드 -->
-	<delete id="deleteAttach">
-	delete 
-	from tbl_attach 
-	where bno = #{bno}
-	</delete>
-	
-	<insert id="replaceAttach">
-	insert into tbl_attach(fullName, bno)
-	values (#{fullName}, #{bno})
-	</insert>
-
 
 
 </mapper>

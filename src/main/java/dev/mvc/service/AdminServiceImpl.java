@@ -1,20 +1,21 @@
 package dev.mvc.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
-import dev.mvc.domain.AdminVO;
 import dev.mvc.admin.Criteria;
+import dev.mvc.domain.AdminVO;
 import dev.mvc.domain.NoticeVO;
 import dev.mvc.domain.QnaVO;
 import dev.mvc.domain.ReplyStudyVO;
 import dev.mvc.domain.ReplyVO;
 import dev.mvc.domain.StudyVO;
 import dev.mvc.domain.UserVO;
-import dev.mvc.dto.LoginDTO;
 import dev.mvc.persistence.AdminDAO;
 
 @Service
@@ -42,6 +43,11 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public void adminRegister(AdminVO vo)throws Exception{
 		dao.adminRegister(vo);
+	}
+	
+	@Override
+	public int chkId(String id)throws Exception{
+		return dao.chkId(id); 
 	}
 	
 	@Override
@@ -106,12 +112,22 @@ public class AdminServiceImpl implements AdminService{
 	
 	@Override
 	public StudyVO studyDetail(Integer bno)throws Exception{
-		return dao.studyDetail(bno);
+		return dao.studyDetail(bno); //스터디 정보 가져옴
+	}
+	
+	@Override
+	public List<StudyVO> studyDetailC(Integer bno)throws Exception{
+		return dao.studyDetailC(bno);
 	}
 
 	@Override
 	public List<StudyVO> studyCategory(Criteria cri) throws Exception{
 		return dao.studyCategory(cri);
+	}
+	
+	@Override
+	public List<StudyVO> studyCategory2(String cDId) throws Exception{
+		return dao.studyCategory2(cDId);
 	}
 	
 	@Override
@@ -130,8 +146,33 @@ public class AdminServiceImpl implements AdminService{
 	}
 	
 	@Override
-	public void studyUpdate(StudyVO vo)throws Exception{
-		dao.studyUpdate(vo);
+	public void studyUpdate(Integer bno, StudyVO vo)throws Exception{
+		
+		dao.deleteCat(vo); //스터디 카테고리 삭제
+		
+		//카테고리 등록하기
+		Map<String, Object> ca = new HashMap<>();
+		
+
+		String[] D = vo.getCategoryD();
+		String[] S = vo.getCategoryS();
+		
+		for(int i=0; i<S.length; i++) {
+			String caD = D[i];
+			String caS = S[i];
+				
+			ca.put("bno", bno);
+			ca.put("categoryD", caD);
+			ca.put("categoryS", caS);
+			
+			System.out.println("========================");
+			System.out.println(ca);
+			System.out.println("========================");
+				
+			dao.insertCat(ca); //스터디 카테고리 등록 
+		}
+		
+		dao.studyUpdate(vo); //스터디 정보 업데이트
 	}
 	
 	@Override

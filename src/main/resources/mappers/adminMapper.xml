@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 <!-- admin 계정 로그인 처리 -->
 	<select id="adminLogin" resultType="AdminVO">
-		select id, pw, bno from admin where id=#{id} and pw=#{pw}
+		select id, pw, bno from admin where id=#{id} and pw=#{pw} and status='V'
 	</select>
 	
 	
@@ -78,6 +78,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			where bno > 0
 		]]>
 		<include refid="adminSearch"></include>	
+	</select>
+	
+	<!-- admin 계정 아이디 중복 체크  -->
+	<select id="chkId" resultType="int">
+		select count(*)
+		from admin
+		where id=#{id}
 	</select>
 
 <!-- 회원조회 메뉴 -->
@@ -169,7 +176,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update user 
 		set name=#{name}, password=#{password}, nickname=#{nickName}, 
 			birth=#{birth}, gender=#{gender}, phonenum=#{phoneNum}, homepage=#{homepage}, 
-			introduction=#{introduction}, modifyDate=now()
+			introduction=#{introduction}, modifyDate=now(), photo=#{photo}
 		where bno = #{bno}
 	</update>
 	
@@ -237,7 +244,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<include refid="studySearch"></include>
 	</select>
 	
-	<!-- study 정보 상세 -->
+ 	<!-- study 정보 상세 -->
+<!--
 	<select id="studyDetail" resultType="StudyVO">
 		select *
 		from board_study bs, region r, study_category c
@@ -246,12 +254,38 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		and bs.rsid = r.rsid
 		and bs.categoryD = c.CDID
 		and bs.categoryS = c.CSID
+	</select> 
+-->
+	
+	<!-- study 정보 상세 -->
+	<select id="studyDetail" resultType="StudyVO">
+		select *
+		from board_study bs, region r
+		where bno = #{bno}
+		and bs.rdid = r.rdid
+		and bs.rsid = r.rsid
+	</select>
+	
+	<!-- study 카테고리 상세 정보 -->
+	<select id="studyDetailC" resultType="StudyVO">
+		select bc.categoryd, sc.cdname, bc.categorys, sc.csname, sc.csid, sc.cdid
+		from board_category bc
+		left outer join study_category sc on bc.CATEGORYD = sc.CDID and bc.CATEGORYS = sc.CSID
+		where bsbno = #{bno}
+		order by bc.categoryd, bc.categorys
 	</select>
 
 	<!-- study 카테고리 -->
 	<select id="studyCategory" resultType="StudyVO">
 		select *
 		from study_category
+		group by cdid
+	</select>
+	
+	<select id="studyCategory2" resultType="StudyVO">
+		select *
+		from study_category
+		where cdid=#{cDId}
 		order by cdid, csid
 	</select>
 	
@@ -276,13 +310,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		and a.bsbno=#{bno}
 	</select>
 	
+	<!-- 스터디 이미지 정보 -->
+	<select id="studyImage" resultType="StudyVO">
+		select *
+		from board_attach
+		where bsbno=#{bno}
+	</select>
+	
 	<!-- 스터디 정보 수정  -->
 	<update id="studyUpdate">
 		update board_study
-		set title=#{title}, writer=#{writer}, categoryd=#{categoryD}, categorys=#{categoryS}, 
+		set title=#{title}, writer=#{writer}, rdid=#{rDId}, rsid=#{rSId}, age=#{age},
 		max=#{max}, sc=#{sc}, sd=#{sd}, st=#{st}, et=#{et}, content=#{content}
 		where bno = #{bno}
 	</update>
+	
+	<!-- 스터디 카테고리 삭제 -->
+	<delete id="deleteCat">
+		delete
+		from board_category
+		where bsbno = #{bno}
+	</delete>
+	
+	<!-- 스터디 카테고리 정보 등록 -->
+	<insert id="insertCat">
+		insert into board_category
+		value (#{bno}, #{categoryD}, #{categoryS})
+	</insert>
 	
 <!-- 스터디관리 > 댓글 관리 메뉴 -->
 	<!-- 검색 SQL -->

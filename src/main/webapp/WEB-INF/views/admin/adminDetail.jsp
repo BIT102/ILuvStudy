@@ -5,7 +5,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>계정 관리</title>
-
 </head>
 <body>
 <div id="wrapper">
@@ -38,15 +37,14 @@
             </tr>
             <tr>
                 <th>이름</th>
-                <td><input type="text" name="name" value="${adminVO.name}" class="form-control"></td>
+                <td><input id="name" type="text" name="name" value="${adminVO.name}" class="form-control"></td>
             </tr>
             <tr>
                 <th>비밀번호</th>
-                <td><input type="password" name="pw" class="form-control"></td>
-            </tr>
-            <tr>
-                <th>비밀번호 확인</th>
-                <td><input type="password" class="form-control"></td>
+                <td>
+                	<input id="pw" type="password" name="pw" class="form-control" placeholder="8자 이상 입력하세요">
+                	<p id = "pwck" style = "color:red">비밀번호를 입력하세요</p>
+                </td>
             </tr>
             <tr>
                 <th>사용여부</th>
@@ -107,11 +105,32 @@
 			$("input:radio[value='D']").attr("checked", "checked");
 		}
 		
+		// 완료 유효성 검사
+		var nameV = false;
+		var pwV = false;
+		
 		//수정 클릭 시 액션
 		$("#modifyBtn").on("click", function(){
 			//form 데이터 유효성 검사 추가 필요
 			
-			formObj.submit();
+			// name 유효성
+			if($("#name").val() != ""){
+				nameV = true;
+			}
+			
+			// password 유효성
+			if(document.getElementById("pwck").style.color == 'blue'){
+				pwV = true;
+			}
+			
+			
+			console.log("nameV : " + nameV + " pwV : " + pwV);
+			
+			if(nameV && pwV){
+				formObj.submit();
+			}else{
+				alert("내용을 확인하세요");	
+			}
 		});
 		
 		//목록 클릭 시 액션
@@ -119,7 +138,38 @@
 			self.location = "/admin/adminList?page=${cri.page}&perPageNum=${cri.perPageNum}"
 							+"&statusType=${cri.statusType}&idKeyword=${cri.idKeyword}&nameKeyword=${cri.nameKeyword}";
 		});
+		
+		//========= Password 부분 ============
+		// 비밀번호 유효성검사 비밀번호의 경우에는 버튼을 누를때마다 변화가 생기도록 하여 keyup event를 활용함.
+		$('#pw').keyup(function(){
+			var password = document.getElementById("pw").value;
+			
+			// 길이, 알파벳 
+			if(password.length >= 8 && password.length <= 16 
+						&& containsCharOnly(password, charPw)){
+					
+				$('#pwck').html("사용가능한 비밀번호입니다.");
+				document.getElementById("pwck").style.color = 'blue';
+			}else{
+				$('#pwck').html("사용불가능한 비밀번호입니다.");
+				document.getElementById("pwck").style.color = 'red';
+			}
+		});
 	});
+	
+	var charPw = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"; // 비밀번호는 대소문자 구분
+	
+	// 알파벳 소문자, 숫자로만 이루어졌는지 체크
+	function containsCharOnly(input, chars){ // input값이 chars에 있는 값인지를 체크
+		console.log(input)
+		console.log((input.charAt(2)));
+		for(var i=0; i<input.length ; i++)
+			if(chars.indexOf(input.charAt(i))==-1)
+				return false;
+				
+		return true;
+	}
+	
 </script>
 
 </body>

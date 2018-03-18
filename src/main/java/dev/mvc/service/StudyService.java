@@ -7,11 +7,14 @@ import dev.mvc.domain.SearchCriteriaStudy;
 import dev.mvc.domain.StudyVO;
 
 public interface StudyService {
+
+	//카테고리 불러오기
+	public List<StudyVO> readCa(Integer bno) throws Exception;
 	
 	//스터디등록   
 	public void regist(StudyVO vo) throws Exception;
 	
-	//스터디 불러오기	
+	//스터디 불러오기
 	public StudyVO read(Integer bno) throws Exception;
 	
 	//파일 불러오기
@@ -33,12 +36,11 @@ public interface StudyService {
 	public List<StudyVO> listSearchCriteria(SearchCriteriaStudy cri) throws Exception;
 	
 	//검색수
-
 	public int listSearchCount(SearchCriteriaStudy cri) throws Exception;	
 	
 	//수정
 	public void modify(StudyVO vo) throws Exception;
-	
+
 	//카테고리
 	public List<StudyVO> catList() throws Exception;
 	
@@ -47,5 +49,6 @@ public interface StudyService {
 	public List<StudyVO> rgList() throws Exception;
 	
 	public List<StudyVO> rgList2(String rsId) throws Exception;
+
 
 }

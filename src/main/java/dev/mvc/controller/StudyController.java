@@ -77,6 +77,7 @@ public class StudyController {
 			return entity;
 	}
 	
+
 	//스터디 등록건네주기
 	@RequestMapping(value = "/register1", method = RequestMethod.POST)
 	public String registPOST(StudyVO vo, RedirectAttributes rttr, Model model) throws Exception {
@@ -220,5 +221,6 @@ return "redirect:/study/listAll";
 }
 
 }
+
 
 

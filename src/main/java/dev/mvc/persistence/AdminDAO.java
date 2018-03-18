@@ -1,6 +1,7 @@
 package dev.mvc.persistence;
 
 import java.util.List;
+import java.util.Map;
 
 import dev.mvc.admin.Criteria;
 import dev.mvc.domain.AdminVO;
@@ -20,6 +21,7 @@ public interface AdminDAO {
 	public void adminUpdate(AdminVO vo)throws Exception;
 	public void adminRegister(AdminVO vo)throws Exception;
 	public int adminCountPaging(Criteria cri)throws Exception;
+	public int chkId(String id)throws Exception;
 	
 	public List<UserVO> userList(Criteria cri) throws Exception;
 	public int userCountPaging(Criteria cri)throws Exception;
@@ -34,11 +36,15 @@ public interface AdminDAO {
 	public List<StudyVO> studyList(Criteria cri) throws Exception;
 	public int studyCountPaging(Criteria cri)throws Exception;
 	public StudyVO studyDetail(Integer bno)throws Exception;
+	public List<StudyVO> studyDetailC(Integer bno)throws Exception;
 	public List<StudyVO> studyCategory(Criteria cri) throws Exception;
+	public List<StudyVO> studyCategory2(String cDId) throws Exception;
 	public List<StudyVO> region(Criteria cri) throws Exception;
 	public List<StudyVO> region2(String rDId) throws Exception;
 	public List<StudyVO> applyStudy(Integer bno)throws Exception;
 	public void studyUpdate(StudyVO vo)throws Exception;
+	public void deleteCat(StudyVO vo) throws Exception;
+	public void insertCat(Map<String, Object> ca) throws Exception;
 	
 	public List<ReplyStudyVO> replyList(Criteria cri) throws Exception;
 	public int replyCountPaging(Criteria cri)throws Exception;
