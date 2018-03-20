@@ -6,7 +6,6 @@
 <%@include file="../include/header.jsp"%>
 <!DOCTYPE html>
 <html>
-<<<<<<< HEAD
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>I Luv Study</title>
@@ -16,9 +15,9 @@
 
 
 <!------ Include the above in your HEAD tag ---------->
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -27,46 +26,139 @@
 <script type="text/javascript" src="/resources/js/upload.js"></script>
 
 <style>
+@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
 
-.container1 {
-margin-top:130px;
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background-color: #108d6f;
+    border-color: #108d6f;
+    box-shadow: none;
+    outline: none;
 }
 
-.row {
-	text-align:center;
+.btn-primary {
+    color: #fff;
+    background-color: #007b5e;
+    border-color: #007b5e;
 }
 
-.row .responsive{
-	border:1px solid white;
-	margin:15px;
-	display:inline-block !important;
-	vertical-align:top;
-	width:350px;
-	height:450px;
-	color:white;
-	margin-bottom:15px;
+section {
+    padding: 60px 0;
 }
 
-
-.row .img-responsive {
-	width:350px;
-	height:227px;
+section .section-title {
+    text-align: center;
+    color: #007b5e;
+    margin-bottom: 50px;
+    text-transform: uppercase;
 }
 
-img {
-	filter: gray; /* IE6-9 */
-	-webkit-filter: grayscale(1); /* Google Chrome, Safari 6+ & Opera 15+ */
-	-webkit-box-shadow: 0 2px 6px 2px rgba(0,0,0,0.75);
-	-moz-box-shadow: 0 2px 6px 2px rgba(0,0,0,0.75);
-	box-shadow: 0 2px 6px 2px rgba(0,0,0,0.75);
-	 margin-bottom: 20px;
-        }
+#team .card {
+    border: none;
 
- img:hover {
-    filter: none; /* IE6-9 */
-    -webkit-filter: grayscale(0); /* Google Chrome, Safari 6+ & Opera 15+ */
-     mouse:pointer;
-            }
+}
+
+.card{
+opacity:0.5;
+}
+.image-flip:hover .backside,
+.image-flip.hover .backside {
+    -webkit-transform: rotateY(0deg);
+    -moz-transform: rotateY(0deg);
+    -o-transform: rotateY(0deg);
+    -ms-transform: rotateY(0deg);
+    transform: rotateY(0deg);
+    border-radius: .25rem;
+}
+
+.image-flip:hover .frontside,
+.image-flip.hover .frontside {
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    -o-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+}
+
+.mainflip {
+    -webkit-transition: 1s;
+    -webkit-transform-style: preserve-3d;
+    -ms-transition: 1s;
+    -moz-transition: 1s;
+    -moz-transform: perspective(1000px);
+    -moz-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    transition: 1s;
+    transform-style: preserve-3d;
+    position: relative;
+}
+
+.frontside {
+    position: relative;
+    -webkit-transform: rotateY(0deg);
+    -ms-transform: rotateY(0deg);
+    z-index: 2;
+    margin-bottom: 30px;
+}
+
+.backside {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: white;
+    -webkit-transform: rotateY(-180deg);
+    -moz-transform: rotateY(-180deg);
+    -o-transform: rotateY(-180deg);
+    -ms-transform: rotateY(-180deg);
+    transform: rotateY(-180deg);
+    -webkit-box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
+    -moz-box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
+    box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
+}
+
+.frontside,
+.backside {
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transition: 1s;
+    -webkit-transform-style: preserve-3d;
+    -moz-transition: 1s;
+    -moz-transform-style: preserve-3d;
+    -o-transition: 1s;
+    -o-transform-style: preserve-3d;
+    -ms-transition: 1s;
+    -ms-transform-style: preserve-3d;
+    transition: 1s;
+    transform-style: preserve-3d;
+}
+
+.frontside .card,
+.backside .card {
+    min-height: 312px;
+}
+
+.backside .card a {
+    font-size: 18px;
+    color: #007b5e !important;
+     text-decoration: none;
+}
+
+.frontside .card .card-title,
+.backside .card .card-title {
+    color: #007b5e !important;
+}
+
+.frontside .card .card-body img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+}
+
+.text-center{
+	margin-top:0;
+}
 
 
 /*검색 이미지 구현*/
@@ -278,12 +370,14 @@ color:#6b456a !important;
 }
 
 .pagination>.active>a {
-	    z-index: 2;
+	z-index: 2;
     color: white !important;
     background-color: #6b456a !important;
     border-color: #6b456a !important;
     cursor: default;
 }
+
+
             
 
 </style>
@@ -309,59 +403,103 @@ color:#6b456a !important;
             </div>
 </form>
 
-<div class="container1">
-            <div class="row">
- <c:forEach items="${list}" var="studyVO">
-	<div class="responsive">
-	<div class="responsive-img">
-     <a href="/study/board${pageMakerStudy.makeSearch(pageMakerStudy.cri.page)}&bno=${studyVO.bno}">      
-     <img class="img-responsive" src="/study/displayFile?fileName=${studyVO.name}" />
-	</a>
-	</div>
-	<div class="responsive-content">
- 	<h4>${studyVO.title}</h4>
-	<p class="card-writer">${studyVO.nickname}</p>
-	<!-- 현재인원/최대인원 -->
-	<p class="nowandmax">${studyVO.now}/${studyVO.max}</p>
-	<!-- 지역 -->
-	<p class="regionDS">${studyVO.rDName}/${studyVO.rSName}</p>
-	<!-- 시작일 -->
-	<p class="st">${studyVO.sd}</p>
-	<p class="st">${studyVO.age}</p>
-	<!-- 조회수 -->
-	<p class="vct"><i class="fa fa-eye"></i> ${studyVO.vct}</p>
-	</div>
-	</div>
-	 </c:forEach>       
-            </div>
-        </div>
+<!-- Team -->
+<section id="team" class="pb-5">
+    <div class="container" style="margin-top:60px;">
+        <h5 class="section-title h1">스터디 구경하세요</h5>
+        <div class="row">
         
-	<div class="text-center1">
+ <c:forEach items="${list}" var="studyVO">
+            <!-- Team member -->
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+                    <div class="mainflip">
+                        <div class="frontside">
+                            <div class="card" style="background-image:url(/study/displayFile?fileName=${studyVO.name});" >
+                                <div class="card-body text-center" style="filter:none;">
+                                    <p><img class=" img-fluid" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_01.png" alt="card image"></p>
+                                    <h4 class="card-title">${studyVO.title}</h4>
+                                    <p class="card-text">${studyVO.nickname}<br>${studyVO.rDName} / ${studyVO.rSName}<br>${studyVO.categoryD} / ${studyVO.categoryS}<br></p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                        
+   <a href="/study/board${pageMakerStudy.makeSearch(pageMakerStudy.cri.page)}&bno=${studyVO.bno}">
+                        <div class="backside" style="width:350px; height:312px;">
+                            <div class="card">
+                                <div class="card-body text-center mt-4">
+                                    <h4 class="card-title">${studyVO.title}</h4>
+                                    <p class="card-text">${studyVO.content}</p>
+                                    <ul class="list-inline">
+                                        <li class="list-inline-item">
+                                            <a class="social-icon text-xs-center" target="_blank" href="#">
+                                                <i class="fa fa-facebook"></i>
+                                            </a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a class="social-icon text-xs-center" target="_blank" href="#">
+                                                <i class="fa fa-twitter"></i>
+                                            </a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a class="social-icon text-xs-center" target="_blank" href="#">
+                                                <i class="fa fa-skype"></i>
+                                            </a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a class="social-icon text-xs-center" target="_blank" href="#">
+                                                <i class="fa fa-google"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+       </a>
+                    </div>
+                </div>
+            </div>
+         
+</c:forEach>
+        </div>
+    </div>
+</section>
+<!-- Team -->
+
+
+
+
+
+
+		<!-- 페이징처리 -->
+
 		<ul class="pagination">
 		
 		<!-- 스프링 MVC를 이용하는 방식 -->
 			<c:if test="${pageMakerStudy.prev}">
-				<li><a href="listAll${pageMakerStudy.makeSearch(pageMakerStudy.startPage - 1)}">&laquo;</a></li>
+				<li><a href="listAll${pageMakerStudy.makeQuery(pageMakerStudy.startPage - 1)}">&laquo;</a></li>
 			</c:if>
 			
-			<c:forEach begin="${pageMakerStudy.startPage }"
+			<c:forEach begin="${pageMakerStudy.startPage}"
 				end="${pageMakerStudy.endPage}" var = "idx">
 				<li 
 					<c:out value="${pageMakerStudy.cri.page == idx?'class=active':''}"/>>
-					<a href="listAll${pageMakerStudy.makeSearch(idx)}">${idx}</a>
+					<a href="listAll${pageMakerStudy.makeQuery(idx)}">${idx}</a>
 				</li>
 			</c:forEach>
 			
-			<c:if test="${pageMakerStudy.next && pageMakerStudy.endPage>0}">
-				<li><a href="listAll${pageMakerStudy.makeSearch(pageMakerStudy.endPage +1)}">&raquo;</a>
+			<c:if test="${pageMakerStudy.next && pageMakerStudy.endPage>0 }">
+				<li><a href="listAll${pageMakerStudy.makeQuery(pageMakerStudy.endPage +1)}">&raquo;</a>
 				</li>
 			</c:if> 
 			
 		</ul>
-	</div>
 
 
 <script>
+
 
 var activeEl = 3;
 $(function() {

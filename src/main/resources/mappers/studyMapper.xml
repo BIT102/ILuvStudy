@@ -6,6 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- board_study mapper -->
 <mapper namespace="dev.mvc.mapper.StudyMapper">
 
+
 <!-- 스터디 등록 사람숫자 -->
 <update id="updateNow">
 UPDATE 
@@ -13,6 +14,20 @@ board_study
 SET now = now + #{amount}
 WHERE bno = #{bno}
 </update>
+
+<insert id="createCa">
+insert
+into
+board_category (
+BSBNO
+, CATEGORYD
+, CATEGORYS
+) value (
+#{bno}
+, #{categoryD}
+, #{categoryS}
+)
+</insert>
 
 <!-- 스터디 등록 -->
  <insert id="createStudy">
@@ -40,19 +55,6 @@ title
 , #{st}
 , #{et}
 , #{content} <!-- null허용 -->
-)
-</insert>
-
-<insert id="createCa">
-INSERT INTO
-board_category (
-bsbno
-, categoryd
-, categorys
-) VALUES (
-#{bno}
-, #{categoryD}
-, #{categoryS}
 )
 </insert>
 
@@ -87,6 +89,7 @@ left outer join region r on bs.RDID = r.RDID and bs.RSID = r.RSID
 WHERE bs.bno = #{bno}
 </select>
  
+
 <!-- 전체불러오기 -->
 <select id="studyList" resultType="StudyVO">
 <![CDATA[

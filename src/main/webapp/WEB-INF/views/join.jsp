@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
          <!-- // Navigation -->
-<%@include file="include/header.jsp"%>
+
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -165,11 +165,14 @@
 </script>
 
 
-<body>
+<body style="background:#262626;">
 
+<%@include file="nav.jsp"%>
 
 	<form role="form" name="joinForm" action="/join" method="post">
-		이메일주소<br/>
+	
+		
+		<p style="margin-top:20px;">이메일주소</p><br/>
 		<input id = "email1" type="text" placeholder="아이디를 입력하세요" name="email1" /> 
 		@ 
 		<input  id = "email2" type="text" placeholder="주소값을 입력하세요" name="email2" /> 

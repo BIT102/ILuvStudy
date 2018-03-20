@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,6 +24,7 @@ import dev.mvc.domain.CriteriaStudy;
 import dev.mvc.domain.PageMakerStudy;
 import dev.mvc.domain.SearchCriteriaStudy;
 import dev.mvc.domain.StudyVO;
+import dev.mvc.dto.UserLoginDTO;
 import dev.mvc.service.StudyService;
   
 @Controller
@@ -33,6 +35,9 @@ public class StudyController {
 
 	@Inject
 	private StudyService service;
+	
+	
+	
 	
 	//스터디 등록화면
 	@RequestMapping(value = "/register1", method = RequestMethod.GET) 
@@ -90,7 +95,7 @@ public class StudyController {
 		rttr.addFlashAttribute("msg", "success");
 		
 		
-		return "redirect:/study/listAll";
+		return "redirect:/join";
 	}
 	
 	//스터디 목록 불러오기
@@ -100,28 +105,27 @@ public class StudyController {
 		
 		logger.info("show list..........");
 	
-		model.addAttribute("list", service.studyList());
 		
-	
-		//model.addAttribute("list", service.listCriteria(cri));
-		model.addAttribute("list", service.listSearchCriteria(cri));
+		StudyVO vo = new StudyVO();
 
 		PageMakerStudy pageMakerStudy = new PageMakerStudy();
 		
+		
 		pageMakerStudy.setCri(cri);
-		//pageMakerStudy.setTotalCount(service.listCountCriteria(cri));
+
 		pageMakerStudy.setTotalCount(service.listSearchCount(cri));
 		
 		model.addAttribute("pageMakerStudy", pageMakerStudy);
 		
-		model.addAttribute("catlist", service.catList());
-
+		model.addAttribute("list", service.studyList());
+		model.addAttribute("list", service.listSearchCriteria(cri));
 		
 	}
 	
 	//main화면 맵핑
 	@RequestMapping(value="/main", method = RequestMethod.GET)
-	public void mainStudy(@ModelAttribute("cri") SearchCriteriaStudy cri, Model model) throws Exception {
+	public void mainStudy(@ModelAttribute("cri") SearchCriteriaStudy cri
+			              , Model model) throws Exception {
 		
 		logger.info("show list..........");
 		
@@ -140,7 +144,8 @@ public class StudyController {
 		pageMakerStudy.setTotalCount(service.listSearchCount(cri));
 		
 		model.addAttribute("pageMakerStudy", pageMakerStudy);
-		
+			
+	
 	}
 
 	//상세페이지
@@ -217,6 +222,12 @@ rttr.addAttribute("perPageNum", cri.getPerPageNum());
 rttr.addFlashAttribute("msg", "SUCCESS");
 
 return "redirect:/study/listAll";
+}
+
+
+//로그인 컨트롤러
+@RequestMapping(value = "/nav", method = RequestMethod.POST)
+public void loginGET(@ModelAttribute("dto")  UserLoginDTO dto){
 }
 
 }

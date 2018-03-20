@@ -8,6 +8,8 @@ import dev.mvc.domain.StudyVO;
 
 public interface StudyService {
 	
+
+	
 	//스터디등록   
 	public void regist(StudyVO vo) throws Exception;
 	

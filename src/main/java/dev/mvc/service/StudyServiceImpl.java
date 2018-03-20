@@ -1,6 +1,7 @@
 package dev.mvc.service;
 
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,9 +22,7 @@ public class StudyServiceImpl implements StudyService {
 
 	@Inject
 	private StudyDAO dao;
-	
-	
-			
+
 		//스터디등록, 파일등록
 		@Transactional
 		@Override
@@ -56,24 +55,32 @@ public class StudyServiceImpl implements StudyService {
 			Map<String, Object> ca = new HashMap<>();
 				
 
-			String[] D = vo.getCategoryD();
+			String D = vo.getCategoryD();
 			String[] S = vo.getCategoryS();
-				
-
-			for(int i=0; i<S.length; i++) {
-					String caD = D[i];
+			
+		
+			System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+			System.out.println(S.length);
+			System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 					
-						String caS = S[i];
+			
+			
+			for(int i=0; i<S.length; i++) {
+				String caS = S[i];
+				System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+				System.out.println(Arrays.toString(S));
+				System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+				
 						
-						ca.put("bno", bno);
-						ca.put("categoryD", caD);
-						ca.put("categoryS", caS);
+				ca.put("categoryD", D);
+				ca.put("bno", bno);
+				ca.put("categoryS", caS);
 						
 					System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 					System.out.println(ca);
 					System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 						
-					dao.createCa(ca);
+				dao.createCa(ca);
 			}
 
 			Map<String, Object> map = new HashMap<>();
@@ -105,15 +112,19 @@ public class StudyServiceImpl implements StudyService {
 		@Transactional(isolation=Isolation.READ_COMMITTED)
 		@Override
 		public StudyVO read(Integer bno) throws Exception {
+			
 			dao.upVct(bno);
+			
 			return dao.readStudy(bno);
 		}
 		
 		//전체불러오기
 		@Override
 		public List<StudyVO> studyList() throws Exception {
+			
 			return dao.studyList();
 		}
+		
 		
 		//페이지당 데이터 불러오기
 		@Override

@@ -8,6 +8,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>신청 스터디</title>
 <style>
+	
+	body {
+	color:white;
+	}
+	
     .border{border:2px solid grey; }
     .basic{width:300px; height:50px; float:left; text-align: center;}
     
@@ -36,8 +41,11 @@
 </head>
 
 
-<body> 	
-	<form name="profileForm" action="/profile" method="post">
+<body style="background:#262626;"> 	
+	<!-- // Navigation -->
+	<%@include file="../nav.jsp"%>
+
+	<form name="profileForm" method="post">
 
 	<!-- 상단 메뉴바 -->
      <div id="div1"> 

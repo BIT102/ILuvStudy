@@ -29,7 +29,7 @@ public class StudyVO {
 	private int bno; 
 	private String title; 
 	private String writer; 
-	private String[] categoryD; 
+	private String categoryD; 
 	private String[] categoryS; 
 	private Integer now;
 	private Integer max;
@@ -100,11 +100,11 @@ public class StudyVO {
 		this.writer = writer;
 	}
 
-	public String[] getCategoryD() {
+	public String getCategoryD() {
 		return categoryD;
 	}
 
-	public void setCategoryD(String[] categoryD) {
+	public void setCategoryD(String categoryD) {
 		this.categoryD = categoryD;
 	}
 

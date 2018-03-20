@@ -433,7 +433,9 @@ height:
 
 <!-- // Navigation -->
 <%@include file="../nav.jsp"%>
-
+<form role="form" method="post">
+	<input type="hidden" name="bno" id="bno" value="${studyVO.bno}">
+</form>
 <!-- 검색 -->
 <form onsubmit="submitFn(this, event);">
             <div class="search-wrapper">
@@ -443,7 +445,7 @@ height:
                 </div>
                 <span class="close" onclick="searchToggle(this, event);"></span>
                 <div class="result-container">
-
+				
                 </div>
             </div>
 </form>
@@ -472,10 +474,11 @@ height:
       <div class="image-content<%= car %>" style="font-size:30px; background:gray; opacity: 0.6;">
       ${studyVO.nickname}<br>
       ${studyVO.rDName}/${studyVO.rSName}<br>
+      ${studyVO.bno}
+      ${studyVO.categoryD} / ${studyVO.categoryS}
       </div>
       </div>   
       </a>
-      
    	 </c:forEach>
     </div>
 

@@ -44,9 +44,14 @@ public class UserController {
 
 	
 	
+	
+	
 	//로그인 컨트롤러
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public void loginGET(@ModelAttribute("dto")  UserLoginDTO dto){
+	@RequestMapping(value = "/nav", method = RequestMethod.GET)
+	public void loginGET(@ModelAttribute("dto")  UserLoginDTO dto, HttpServletRequest request){
+		
+	
+		
 		
 	}
 	
@@ -79,6 +84,10 @@ public class UserController {
 		
 		Object obj = session.getAttribute("login");
 		
+		System.out.println("************************************");
+		System.out.println(obj);
+		System.out.println("************************************");
+		
 		if(obj != null){
 			UserVO vo = (UserVO) obj;
 			
@@ -95,7 +104,7 @@ public class UserController {
 			}
 		}
 				
-		return "/mypage/logout";
+		return "redirect:/study/main";
 	}
 	
 	//회원가입 컨트롤러

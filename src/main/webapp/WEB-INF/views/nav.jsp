@@ -3,6 +3,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
 <!DOCTYPE htm>
 <html>
 <head>
@@ -339,10 +340,22 @@ html {
             </div>
             
             <div class="btn-group">
-                <button type="button" class="btn btn-nav" onclick="document.getElementById('id01').style.display='block'">
-                    <span class="glyphicon glyphicon-log-in"></span>
-    			    <p>로그인</p>
-                </button>
+              		<c:choose>
+              	<c:when test="${login eq null}">
+                    <button type="button" class="btn btn-nav" onclick="document.getElementById('id01').style.display='block'">
+                    <span class="glyphicon glyphicon-log-in"></span>             
+					<p>로그인</p>
+                    </button>
+				</c:when>	
+					<c:otherwise>
+					<a href="/logout">
+                    <button type="button" class="btn btn-nav">
+                    <span class="glyphicon glyphicon-log-out"></span>             
+					<p>로그아웃</p>
+					</button>
+					</a>
+					</c:otherwise>
+					</c:choose>
             </div>
             <div class="btn-group">
             <a href="/join">
@@ -392,7 +405,7 @@ html {
 
     <div class="grid">
 
-      <form action="https://httpbin.org/post" method="POST" class="form login">
+      <form action="/loginPost" method="post" class="form login">
 
     <div class="imgcontainer">
       <img src="img_avatar2.png" alt="Avatar" class="avatar">
@@ -400,18 +413,18 @@ html {
     
         <div class="form__field">
           <label for="login__username" style="height:53px;"><svg class="icon"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#user"></use></svg><span class="hidden">Username</span></label>
-          <input id="login__username" type="text" name="username" class="form__input" placeholder="Username" style="height:53px;" required>
+          <input id="login__username" type="text" name="email" class="form__input" placeholder="UserEmail" style="height:53px;" required>
         </div>
 
         <div class="form__field">
           <label for="login__password" style="height:53px;"><svg class="icon"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#lock"></use></svg><span class="hidden">Password</span></label>
           <input id="login__password" type="password" name="password" class="form__input" placeholder="Password" style="height:53px;" required >
         </div>
-
+          <input type="checkbox" /> 아이디저장  <input type="checkbox" name="useCookies" /> 자동로그인
+	
         <div class="form__field">
-          <input type="submit" value="Sign In">
+          <input type="submit" value="로그인">
         </div>
-
       </form>
 
       <p class="text--center">Not a member? <a href="#" style="color:black;">Sign up now</a> <svg class="icon"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="assets/images/icons.svg#arrow-right"></use></svg></p>

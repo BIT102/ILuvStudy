@@ -1,4 +1,4 @@
-package dev.mvc.persistence;
+package dev.mvc.persistance;
 
 import java.util.List;
 import java.util.Map;
@@ -10,15 +10,19 @@ import dev.mvc.domain.StudyVO;
 public interface StudyDAO {
 
 	//스터디등록
-	public void createStudy(StudyVO vo);
+	public void createStudy(StudyVO vo) throws Exception;
+	
 	
 	//스터디 읽기
-	public StudyVO readStudy(Integer bno);
+	public StudyVO readStudy(Integer bno) throws Exception;
+	
+	//카테고리 등록하기
+	public void createCa(Map<String, Object> ca) throws Exception;
+	
+	//카테고리 불러오기
+	public List<StudyVO> readCa(Integer bno) throws Exception;
 
-	public void createCa(Map<String, Object> map) throws Exception;
-	
-	
-	//전체읽기
+	//전체
 	public List<StudyVO> studyList() throws Exception;
 	
 
@@ -46,6 +50,12 @@ public interface StudyDAO {
 	//검색 
 	public List<StudyVO> listSearch(SearchCriteriaStudy cri) throws Exception;
 	
+	//동적SQL을 적용하기 위한 메소드
+	public List<StudyVO> catList()throws Exception;
+	public List<StudyVO> catList2(String csId)throws Exception;
+	public List<StudyVO> rgList()throws Exception;
+	public List<StudyVO> rgList2(String rsId)throws Exception;
+	
 	//검색수
 	public int listSearchCount(SearchCriteriaStudy cri) throws Exception;
 	
@@ -53,19 +63,4 @@ public interface StudyDAO {
 
 	//참여자수
 	public void updateNow(Integer bno, int amount) throws Exception;
-	
-	
-	//동적SQL을 적용하기 위한 메소드
-		public List<StudyVO> catList()throws Exception;
-		public List<StudyVO> catList2(String csId)throws Exception;
-		public List<StudyVO> rgList()throws Exception;
-		public List<StudyVO> rgList2(String rsId)throws Exception;
-		
-		//수정
-		public void update(StudyVO vo)throws Exception;
-		
-		//게시물 수정 (기존의 첨부파일을 삭제하고 새롭게 추가)
-		public void deleteAttach(Integer bno)throws Exception;
-			
-		public void replaceAttach(String fullName, Integer bno)throws Exception;
 }

@@ -256,7 +256,7 @@ color:#6b456a !important;
 }
 
 .pagination>.active>a {
-	    z-index: 2;
+	z-index: 2;
     color: white !important;
     background-color: #6b456a !important;
     border-color: #6b456a !important;
