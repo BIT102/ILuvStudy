@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import dev.mvc.admin.Criteria;
 import dev.mvc.domain.AdminVO;
@@ -14,6 +15,7 @@ import dev.mvc.domain.NoticeVO;
 import dev.mvc.domain.QnaVO;
 import dev.mvc.domain.ReplyStudyVO;
 import dev.mvc.domain.ReplyVO;
+import dev.mvc.domain.StatisticVO;
 import dev.mvc.domain.StudyVO;
 import dev.mvc.domain.UserVO;
 import dev.mvc.persistence.AdminDAO;
@@ -116,6 +118,11 @@ public class AdminServiceImpl implements AdminService{
 	}
 	
 	@Override
+	public List<StudyVO> studyImage(Integer bno)throws Exception{
+		return dao.studyImage(bno);
+	}
+	
+	@Override
 	public List<StudyVO> studyDetailC(Integer bno)throws Exception{
 		return dao.studyDetailC(bno);
 	}
@@ -145,6 +152,7 @@ public class AdminServiceImpl implements AdminService{
 		return dao.applyStudy(bno);
 	}
 	
+	@Transactional
 	@Override
 	public void studyUpdate(Integer bno, StudyVO vo)throws Exception{
 		
@@ -243,5 +251,15 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public void noticeRegister(NoticeVO vo)throws Exception{
 		dao.noticeRegister(vo);
+	}
+	
+	
+	
+	@Override
+	public StatisticVO todayM(StatisticVO vo) throws Exception{
+		vo.setToDMember(dao.todayM());
+		vo.setYesterDMember(dao.yesterdayM());
+		
+		return vo;
 	}
 }

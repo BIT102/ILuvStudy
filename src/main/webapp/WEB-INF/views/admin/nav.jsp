@@ -78,7 +78,7 @@
 								</ul>
 							</div>
 						</li>
-						<li><a id="userStatisticnav" href="userStatistic" class="" style="display:none"><i class="lnr lnr-chart-bars"></i> <span>통계관리</span></a></li>
+						<li><a id="statisticnav" href="statistic" class=""><i class="lnr lnr-chart-bars"></i> <span>통계관리</span></a></li>
 						<li><a id="adminListnav" href="adminList" class=""><i class="lnr lnr-text-format"></i> <span>Admin관리</span></a></li>
 					</ul>
 				</div>

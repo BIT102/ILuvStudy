@@ -10,7 +10,7 @@ public class UserVO {
 	private String name;
 	private String nickName;
 	private int gender;
-	private int phoneNum;
+	private String phoneNum;
 	private int birth;
 	private String photo;
 	private String homepage;
@@ -69,11 +69,11 @@ public class UserVO {
 		this.gender = gender;
 	}
 
-	public int getPhoneNum() {
+	public String getPhoneNum() {
 		return phoneNum;
 	}
 
-	public void setPhoneNum(int phoneNum) {
+	public void setPhoneNum(String phoneNum) {
 		this.phoneNum = phoneNum;
 	}
 

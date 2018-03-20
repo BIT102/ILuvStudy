@@ -119,6 +119,8 @@ public class StudyVO {
 		this.writer = writer;
 	}
 
+
+
 	public String[] getCategoryD() {
 		return categoryD;
 	}

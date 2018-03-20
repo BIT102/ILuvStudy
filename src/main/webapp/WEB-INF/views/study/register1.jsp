@@ -56,7 +56,7 @@ small {
 			<!--제목입력-->
 			<div class="studytitle">
 				<p>스터디명</p>
-				<input type="text" placeholder="스터디명" name="title">
+				<input type="text" placeholder="스터디명" name="title" required>
 			</div>
 
 			<!--쓴사람//value값수정-->

@@ -8,9 +8,9 @@ import dev.mvc.domain.NoticeVO;
 import dev.mvc.domain.QnaVO;
 import dev.mvc.domain.ReplyStudyVO;
 import dev.mvc.domain.ReplyVO;
+import dev.mvc.domain.StatisticVO;
 import dev.mvc.domain.StudyVO;
 import dev.mvc.domain.UserVO;
-import dev.mvc.dto.LoginDTO;
 
 public interface AdminService {
 	
@@ -35,6 +35,7 @@ public interface AdminService {
 	public List<StudyVO> studyList(Criteria cri) throws Exception;
 	public int studyCountPaging(Criteria cri)throws Exception;
 	public StudyVO studyDetail(Integer bno)throws Exception;
+	public List<StudyVO> studyImage(Integer bno)throws Exception;
 	public List<StudyVO> studyDetailC(Integer bno)throws Exception;
 	public List<StudyVO> studyCategory(Criteria cri) throws Exception;
 	public List<StudyVO> studyCategory2(String cDId) throws Exception;
@@ -60,4 +61,6 @@ public interface AdminService {
 	public NoticeVO noticeDetail(Integer bno)throws Exception;
 	public void noticeUpdate(NoticeVO vo)throws Exception;
 	public void noticeRegister(NoticeVO vo)throws Exception;
+	
+	public StatisticVO todayM(StatisticVO vo) throws Exception;
 }

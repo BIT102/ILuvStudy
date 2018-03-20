@@ -245,7 +245,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
  	<!-- study 정보 상세 -->
-<!--
+<!-- 
 	<select id="studyDetail" resultType="StudyVO">
 		select *
 		from board_study bs, region r, study_category c
@@ -255,16 +255,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		and bs.categoryD = c.CDID
 		and bs.categoryS = c.CSID
 	</select> 
--->
-	
+
+	 -->
 	<!-- study 정보 상세 -->
+	
 	<select id="studyDetail" resultType="StudyVO">
 		select *
 		from board_study bs, region r
 		where bno = #{bno}
 		and bs.rdid = r.rdid
 		and bs.rsid = r.rsid
-	</select>
+	</select> 
+
 	
 	<!-- study 카테고리 상세 정보 -->
 	<select id="studyDetailC" resultType="StudyVO">
@@ -514,4 +516,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into notice (title, content, regdate, writer)
 		values (#{title},#{content},now(), #{writer});
 	</insert>
+	
+
+<!-- ======== 통계관리 ========== -->	
+	<!-- 금일 가입자수 -->
+	<select id="todayM" resultType="int">
+		select count(*) as toDMember
+		from user
+		where date_format(registdate, '%y-%m-%d') = current_date()
+	</select>
+
+	<!-- 어제 가입자수 -->
+	<select id="yesterdayM" resultType="int">
+		select count(*) as yesterDMember
+		from user
+		where date_format(registdate, '%y-%m-%d') = current_date()-interval 1 day
+	</select>
+	
 </mapper>
