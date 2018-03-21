@@ -119,6 +119,8 @@ public class StudyController {
 		
 		model.addAttribute("list", service.studyList());
 		model.addAttribute("list", service.listSearchCriteria(cri));
+
+
 		
 	}
 	
@@ -126,12 +128,13 @@ public class StudyController {
 	@RequestMapping(value="/main", method = RequestMethod.GET)
 	public void mainStudy(@ModelAttribute("cri") SearchCriteriaStudy cri
 			              , Model model) throws Exception {
+
 		
 		logger.info("show list..........");
 		
-		List<StudyVO> studyList = service.studyList().subList(0, 8);
+		/*List<StudyVO> studyList = service.studyList().subList(0, 8);*/
 		
-		model.addAttribute("list", studyList);
+		/*model.addAttribute("list", studyList)*/;
 		
 		List<StudyVO> SearchList = service.listSearchCriteria(cri).subList(0, 8);
 		
@@ -144,8 +147,12 @@ public class StudyController {
 		pageMakerStudy.setTotalCount(service.listSearchCount(cri));
 		
 		model.addAttribute("pageMakerStudy", pageMakerStudy);
+		
+		System.out.println("++++++++++++++++++++++++++++++++++++++");
+		System.out.println(SearchList);
+		System.out.println("++++++++++++++++++++++++++++++++++++++");
+		
 			
-	
 	}
 
 	//상세페이지

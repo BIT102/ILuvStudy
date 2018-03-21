@@ -8,15 +8,21 @@ import dev.mvc.domain.SearchCriteriaStudy;
 import dev.mvc.domain.StudyVO;
 
 public interface StudyDAO {
-
+	
+	//대분류
+	public String getcaD(Integer bno) throws Exception;
+	
+	//소분류
+	public List<String> getcaS(Integer bno) throws Exception;
+	
+	
 	//스터디등록
-	public void createStudy(StudyVO vo);
+	public void createStudy(StudyVO vo) throws Exception;
 	
 	//스터디 읽기
-	public StudyVO readStudy(Integer bno);
+	public StudyVO readStudy(Integer bno) throws Exception;
 
 	public void createCa(Map<String, Object> map) throws Exception;
-	
 	
 	//전체읽기
 	public List<StudyVO> studyList() throws Exception;

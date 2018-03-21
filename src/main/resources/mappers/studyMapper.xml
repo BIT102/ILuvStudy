@@ -6,6 +6,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- board_study mapper -->
 <mapper namespace="dev.mvc.mapper.StudyMapper">
 
+<!-- 대분류 -->
+<select id="getcaD" resultType="String">
+select 
+distinct
+sc.CDNAME
+from 
+board_category bc
+left outer join study_category sc on bc.categoryd = sc.cdid
+where bc.BSBNO = #{bno}
+</select>
+
+<!-- 소분류 -->
+<select id="getcaS" resultType="String">
+select
+sc.CSNAME
+from 
+board_category bc
+left outer join study_category sc on bc.CATEGORYD = sc.CDID and bc.CATEGORYS = sc.CSID
+where bc.bsbno = #{bno}
+</select>
 
 <!-- 스터디 등록 사람숫자 -->
 <update id="updateNow">

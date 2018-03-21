@@ -8,6 +8,7 @@ import dev.mvc.domain.StudyVO;
 
 public interface StudyService {
 	
+/*	public List<String> getcaD() throws Exception;*/
 
 	
 	//스터디등록   

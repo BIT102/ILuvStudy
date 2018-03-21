@@ -1,6 +1,7 @@
 package dev.mvc.service;
 
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -23,20 +24,12 @@ public class StudyServiceImpl implements StudyService {
 	@Inject
 	private StudyDAO dao;
 
+
+	
 		//스터디등록, 파일등록
 		@Transactional
 		@Override
 	public void regist(StudyVO vo) throws Exception {
-
-			
-
-			System.out.println("====================");
-
-			System.out.println("registService..........");
-
-			System.out.println(vo);
-
-			System.out.println("====================");
 
 			String[] files = vo.getFiles();
 
@@ -50,36 +43,19 @@ public class StudyServiceImpl implements StudyService {
 
 			vo.setBno(bno);
 			
-			
 			//카테고리 등록하기
 			Map<String, Object> ca = new HashMap<>();
 				
-
 			String D = vo.getCategoryD();
 			String[] S = vo.getCategoryS();
 			
-		
-			System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-			System.out.println(S.length);
-			System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-					
-			
-			
 			for(int i=0; i<S.length; i++) {
 				String caS = S[i];
-				System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-				System.out.println(Arrays.toString(S));
-				System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-				
 						
 				ca.put("categoryD", D);
 				ca.put("bno", bno);
 				ca.put("categoryS", caS);
-						
-					System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-					System.out.println(ca);
-					System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-						
+
 				dao.createCa(ca);
 			}
 
@@ -121,7 +97,7 @@ public class StudyServiceImpl implements StudyService {
 		//전체불러오기
 		@Override
 		public List<StudyVO> studyList() throws Exception {
-			
+
 			return dao.studyList();
 		}
 		
@@ -144,10 +120,44 @@ public class StudyServiceImpl implements StudyService {
 			dao.delete(bno);
 		}
 		
-		//검색
+		//검색 //대분류 //소분류
 		@Override
 		public List<StudyVO> listSearchCriteria(SearchCriteriaStudy cri) throws Exception {
-			return dao.listSearch(cri);
+			
+			//스터디 리스트 가져온다
+			List<StudyVO> list = dao.listSearch(cri);
+			//bno 값을 담자
+			int bno;
+		
+			StudyVO vo = new StudyVO();
+			
+			List<String> caS = new ArrayList<>();
+			//소분류 스트링으로 바꾼다
+
+			String getcaS = "";
+			
+			//bno 가져온다
+			for(int i=0; i<list.size(); i++){
+				
+			bno = list.get(i).getBno();
+			//bno와 비교해서 대분류 가져온다
+		    list.get(i).setcDName(dao.getcaD(bno));
+		    
+		    caS = dao.getcaS(bno);
+		    
+		    String[] arrcaS = caS.toArray(new String[caS.size()]);
+	
+		    getcaS = Arrays.toString(arrcaS);
+		    
+		    System.out.println("+++++++++++++++++++++++++++++++++++++++++++");
+		    System.out.println(getcaS);
+		    System.out.println("+++++++++++++++++++++++++++++++++++++++++++");
+		    
+			list.get(i).setcSName(getcaS);
+			}
+			
+
+			return list;
 		}
 		
 		//검색수

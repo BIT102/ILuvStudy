@@ -16,7 +16,6 @@
 <body>
 
   <script type="text/javascript">
-  	console.log("hahahahahahahahahahah")
     location = "/study/main";
   </script>
 
