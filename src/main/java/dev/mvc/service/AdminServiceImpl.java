@@ -256,9 +256,11 @@ public class AdminServiceImpl implements AdminService{
 	
 	
 	@Override
-	public StatisticVO todayM(StatisticVO vo) throws Exception{
+	public StatisticVO memberS(StatisticVO vo) throws Exception{
 		vo.setToDMember(dao.todayM());
 		vo.setYesterDMember(dao.yesterdayM());
+		vo.setDay(dao.weekM());
+		
 		
 		return vo;
 	}

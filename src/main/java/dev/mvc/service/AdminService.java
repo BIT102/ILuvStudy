@@ -62,5 +62,5 @@ public interface AdminService {
 	public void noticeUpdate(NoticeVO vo)throws Exception;
 	public void noticeRegister(NoticeVO vo)throws Exception;
 	
-	public StatisticVO todayM(StatisticVO vo) throws Exception;
+	public StatisticVO memberS(StatisticVO vo) throws Exception;
 }

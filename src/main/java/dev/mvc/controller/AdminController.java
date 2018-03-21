@@ -477,7 +477,7 @@ public class AdminController {
 	@RequestMapping(value = "/statistic", method = RequestMethod.GET)
 	public void statistic(StatisticVO vo, Model model) throws Exception{
 		logger.info("statistic get...");
-		model.addAttribute(service.todayM(vo));
+		model.addAttribute(service.memberS(vo));
 	}	
 	
 }

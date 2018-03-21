@@ -249,4 +249,9 @@ public class AdminDAOImpl implements AdminDAO{
 	public int yesterdayM() throws Exception{
 		return session.selectOne(namespace + ".yesterdayM");  //어제 가입자수
 	}
+	
+	@Override
+	public List<StatisticVO> weekM() throws Exception{
+		return session.selectList(namespace + ".weekM");  //최근 7일 가입자수
+	}
 }

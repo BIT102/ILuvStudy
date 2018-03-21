@@ -533,4 +533,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where date_format(registdate, '%y-%m-%d') = current_date()-interval 1 day
 	</select>
 	
+	<!-- 최근 7일 가입자수 -->
+	<select id="weekM" resultType="List">
+		select date_format(registdate, '%y-%m-%d') as day, count(*) as weekMember
+		from user
+		where date_format(registdate, '%y-%m-%d') between current_date()-interval 6 day and current_date()
+		group by date_format(registdate, '%y-%m-%d')
+	</select>
+	
 </mapper>

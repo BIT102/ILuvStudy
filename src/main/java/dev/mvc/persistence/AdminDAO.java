@@ -67,4 +67,5 @@ public interface AdminDAO {
 	
 	public int todayM() throws Exception;
 	public int yesterdayM() throws Exception;
+	public List<StatisticVO> weekM() throws Exception;
 }

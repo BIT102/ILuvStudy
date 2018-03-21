@@ -22,7 +22,7 @@
 					<!-- OVERVIEW -->
 					<div class="panel panel-headline">
 						<div class="panel-heading">
-							<h3 class="panel-title">Weekly Overview</h3>
+							<h3 class="panel-title">통계관리</h3>
 							<p class="panel-subtitle">Period: Oct 14, 2016 - Oct 21, 2016</p>
 						</div>
 						<div class="panel-body">
@@ -30,7 +30,7 @@
 							<div class="row">
 								<div class="col-md-3">
 									<div class="metric">
-										<span class="icon"><i class="fa fa-download"></i></span>
+										<span class="icon"><i class="fa fa-download" style="margin-top:15px"></i></span>
 										<p>
 											<span class="number">${statisticVO.toDMember}</span>
 											<span class="title">금일 가입자수</span>
@@ -39,7 +39,7 @@
 								</div>
 								<div class="col-md-3">
 									<div class="metric">
-										<span class="icon"><i class="fa fa-shopping-bag"></i></span>
+										<span class="icon"><i class="fa fa-shopping-bag" style="margin-top:15px"></i></span>
 										<p>
 											<span class="number">${statisticVO.yesterDMember}</span>
 											<span class="title">어제 가입자수</span>
@@ -48,7 +48,7 @@
 								</div>
 								<div class="col-md-3">
 									<div class="metric">
-										<span class="icon"><i class="fa fa-eye"></i></span>
+										<span class="icon"><i class="fa fa-eye" style="margin-top:15px"></i></span>
 										<p>
 											<span class="number">274,678</span>
 											<span class="title">Visits</span>
@@ -57,7 +57,7 @@
 								</div>
 								<div class="col-md-3">
 									<div class="metric">
-										<span class="icon"><i class="fa fa-bar-chart"></i></span>
+										<span class="icon"><i class="fa fa-bar-chart" style="margin-top:15px"></i></span>
 										<p>
 											<span class="number">35%</span>
 											<span class="title">Conversions</span>
