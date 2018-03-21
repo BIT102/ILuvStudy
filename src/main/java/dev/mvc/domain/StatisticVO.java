@@ -1,25 +1,26 @@
 package dev.mvc.domain;
 
-import java.util.Arrays;
 
 public class StatisticVO {
 	private int toDMember;  	//오늘 가입자수
 	private int yesterDMember;  //어제 가입자수
-	private int[] weekMember; 	//최근 7일 가입자수
-	private String[] day; 		//최근 7일 날짜
-	
+	private int weekMember; 	//최근 7일 가입자수
+	private String day; 		//최근 7일 날짜
 	
 
-	public int[] getWeekMember() {
+	
+	
+	
+	public int getWeekMember() {
 		return weekMember;
 	}
-	public void setWeekMember(int[] weekMember) {
+	public void setWeekMember(int weekMember) {
 		this.weekMember = weekMember;
 	}
-	public String[] getDay() {
+	public String getDay() {
 		return day;
 	}
-	public void setDay(String[] day) {
+	public void setDay(String day) {
 		this.day = day;
 	}
 	public int getToDMember() {
@@ -34,11 +35,10 @@ public class StatisticVO {
 	public void setYesterDMember(int yesterDMember) {
 		this.yesterDMember = yesterDMember;
 	}
-
 	@Override
 	public String toString() {
-		return "StatisticVO [toDMember=" + toDMember + ", yesterDMember=" + yesterDMember + ", weekMember="
-				+ Arrays.toString(weekMember) + ", day=" + Arrays.toString(day) + "]";
+		return "StatisticVO [toDMember=" + toDMember + ", yesterDMember=" + yesterDMember + ", weekMember=" + weekMember
+				+ ", day=" + day + "]";
 	}
 	
 }

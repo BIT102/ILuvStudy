@@ -284,6 +284,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		group by cdid
 	</select>
 	
+	<!-- ajax 사용 시 호출 -->
 	<select id="studyCategory2" resultType="StudyVO">
 		select *
 		from study_category
@@ -523,22 +524,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="todayM" resultType="int">
 		select count(*) as toDMember
 		from user
-		where date_format(registdate, '%y-%m-%d') = current_date()
+		where date_format(registdate, '%Y-%m-%d') = current_date()
 	</select>
 
 	<!-- 어제 가입자수 -->
 	<select id="yesterdayM" resultType="int">
 		select count(*) as yesterDMember
 		from user
-		where date_format(registdate, '%y-%m-%d') = current_date()-interval 1 day
+		where date_format(registdate, '%Y-%m-%d') = current_date()-interval 1 day
 	</select>
 	
 	<!-- 최근 7일 가입자수 -->
-	<select id="weekM" resultType="List">
-		select date_format(registdate, '%y-%m-%d') as day, count(*) as weekMember
+	<select id="weekM" resultType="StatisticVO">
+		select date_format(registdate, '%Y-%m-%d') as day, count(*) as weekMember
 		from user
-		where date_format(registdate, '%y-%m-%d') between current_date()-interval 6 day and current_date()
-		group by date_format(registdate, '%y-%m-%d')
+		where date_format(registdate, '%Y-%m-%d') between current_date()-interval 6 day and current_date()
+		group by date_format(registdate, '%Y-%m-%d')
 	</select>
 	
 </mapper>

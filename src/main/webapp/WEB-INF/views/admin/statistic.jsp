@@ -1,5 +1,7 @@
+<%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import = "java.util.*" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -291,20 +293,65 @@
 <script>
 	$(document).ready(function(){	
 		$("#statisticnav").attr("class", "active");
-		
-
-		
 	});
 	
 	$(function() {
 		var data, options;
-
+		
+		var week = [];	//가입자 수 저장
+		var day = [];	//날짜 저장
+		var d = new Date();  //현재 날짜 저장
+		var m = d.getMonth()+1;
+		var check_day;	//day 값 비교용 변수
+		
+		var date = d.getFullYear() +"-"+ m +"-"+ d.getDate(); //현재 날짜 형식 'yyyy-mm-dd'
+		
+		<%
+			Date today = new Date();
+			int cnt = 0;
+			SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+			
+			System.out.println(sdf1.format(today));
+			
+			Date yesterday = new Date(today.getTime()-(24*60*60*1000)*1); //하루전
+			Date yesterday2 = new Date(today.getTime()-(24*60*60*1000)*2); //2일 전
+			
+			System.out.println(sdf1.format(yesterday));
+			System.out.println(sdf1.format(yesterday2));
+		
+		%>
+		
+		//최근 7일 가입자 수 불러오기
+		<c:forEach items="${list}" var="StatisticVO">	
+			check_day = "${StatisticVO.day}";
+		
+			console.log(check_day);
+			
+			week[<%=cnt%>] = "${StatisticVO.weekMember}";
+			day[<%=cnt%>] = "${StatisticVO.day}";
+			
+<%-- 			if(check_day = <%=sdf1.format(today)%>){
+				console.log("오늘");
+				console.log(<%= sdf1.format(today) %>);
+				week[<%=cnt%>] = "${StatisticVO.weekMember}";
+				day[<%=cnt%>] = "${StatisticVO.day}";
+			}else if(check_day == <%=sdf1.format(yesterday)%>){
+				week[<%=cnt%>] = "${StatisticVO.weekMember}";
+				day[<%=cnt%>] = "${StatisticVO.day}";
+			} --%>
+			
+			<% cnt++; %>			
+		</c:forEach>
+		
+		console.log(week);
+		console.log(day);
+		
 		// headline charts
 		data = {
-			labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+			labels: day,
 			 series: [
-				[23, 29, 24, 40, 25, 24, 35],
-				[10, 20, 30, 40, 50, 60, 70],
+				week,
+				[1, 2, 3, 2, 2],
 			]
 		};
 
