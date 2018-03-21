@@ -5,6 +5,26 @@
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+
+<!-- 부트스트랩 영역 -->
+<link rel="stylesheet" href="/resources/dist/css/bootstrap.min.css">
+<link href="/resources/dist/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="/resources/dist/css/join.css">
+<title>Insert title here</title>
+
+<style>
+select.form-control:not([size]):not([multiple]) {
+    height: calc(2.25rem + 11px);
+}
+</style>
+
 
 </head>    
 <script>
@@ -35,7 +55,7 @@
 				document.getElementById('email2').value = document.getElementById('selectEmail').value;	
 			}
 		});
-		// email 유효성 검사 (길이검사, 알파벳검사, . 1개 검사)
+		// email 유효성 검사 (길이검사, 알파벳검사, . 1개 검사, 중복검사)
 		function emailValid(email1, email2){
 			
 			email1 = email1.toLowerCase(); // 소문자 변형
@@ -54,13 +74,36 @@
 			}			
 			
 			// 알파벳, 길이 검사
-			if((containsCharOnly(email1, chars)&&containsCharOnly(email2, charDot))
-					&&(6<=email1.length&&email1.length<=30)){
+			if(!((containsCharOnly(email1, chars)&&containsCharOnly(email2, charDot))
+					&&(4<=email1.length&&email1.length<=30))){
 				
-				emailV = true; // 최종 유효성 검사를 위함
 				document.getElementById("email").value = email1+"@"+email2;
-				return true;
+				return false;
 			}
+			
+			// 중복 체크
+ㅇ		$.ajax({
+				url : "/join/chkEmail",
+				type: "post",
+				headers: {
+					//"Content-Type" : "application/json",
+					"X-HTTP-Method-Override" : "POST"
+				},
+				data: {
+					email : email1+"@"+email2
+				},
+				success: function(result){
+					console.log(result);
+					if(result == "success"){
+						emailV = true;
+						return true;
+					}else{
+						alert("중복된 이메일입니다.");
+						return false;
+					}
+				}
+			})
+			
 			return false;
 		}
 		
@@ -99,7 +142,7 @@
 		
 		//========= 닉네임 확인부분 ============
 		
-		$('.chkNickname').on("click",function(){
+		$('#chkNickname').on("click",function(){
 			
 			var nickname = document.getElementById("nickName").value;
 			console.log("chkNick......"+nickname);
@@ -161,8 +204,8 @@
 					console.log(result);
 					if(result == "success"){ // 성공시 입력란과 버튼이 생성
 						alert("인증번호를 입력하세요");
-						document.getElementById("smsText").style.visibility = "visible";
-						document.getElementById("smsConfirm").style.visibility = "visible";
+						//document.getElementById("smsText").style.visibility = "visible";
+						//document.getElementById("smsConfirm").style.visibility = "visible";
 						
 					}else{ 
 						alert("유효한 전화번호가 아닙니다.");
@@ -174,6 +217,12 @@
 		// 인증번호 일치 확인란
 		$('#smsConfirm').on("click",function(){
 			
+			var phoneNum1 = document.getElementById("phoneNum1").value;
+			var phoneNum2 = document.getElementById("phoneNum2").value;
+			var phoneNum3 = document.getElementById("phoneNum3").value;
+			
+			var phoneNum = phoneNum1 +"-"+ phoneNum2 +"-"+ phoneNum3;
+			
 			$.ajax({
 				url : "/smsConfirm",
 				type : "post",
@@ -181,7 +230,8 @@
 					"X-HTTP-Method-Override" : "POST"
 				},
 				data: {
-					code : document.getElementById("smsText").value
+					code : document.getElementById("smsText").value,
+					rphone : phoneNum
 				},
 				success: function(result){
 					if(result == "success"){
@@ -209,7 +259,7 @@
 		$('#valid').on("click", function(){
 			
 			
-			var formObj = $("form[role='form']");
+			var formObj = document.getElementById("signup");
 			// email 유효성
 			emailV = emailValid(document.getElementById("email1").value,document.getElementById("email2").value);
 				 		
@@ -232,6 +282,7 @@
 			console.log("emailV : " + emailV + "passwordV : " + passwordV + "nicknameV : " + nicknameV + "birthV" + birthV + "phoneNumV : "+ phoneNumV);
 			
 			if(emailV && passwordV && nicknameV && birthV && phoneNumV){
+				alert("입력하신 이메일로 인증을 완료하세요");
 				formObj.submit();
 			}else{
 				alert("내용을 확인하세요");	
@@ -247,66 +298,120 @@
 <body>
 
 
-	<form role="form" action="/join" method="post">
-		이메일주소<br/>
-		<input id = "email1" type="text" placeholder="아이디를 입력하세요" name="email1" /> 
-		@ 
-		<input  id = "email2" type="text" placeholder="주소값을 입력하세요" name="email2" /> 
-		<select   id="selectEmail"> 
-			<option id = "selectEmail1" selected>직접입력</option>
-			<option id = "selectEmail2">naver.com</option>
-			<option id = "selectEmail3">daum.net</option>
-			<option id = "selectEmail4">google.com</option>
-		</select>
-		<input  id = "email" type="text" name="email" />
-		<br/>
-		이름<br/>
-		<input type="text" placeholder = "실명을 입력하세요" name="name" />
-		<br/>
-		
-		비밀번호<br/>
-		<input id = "password" maxlength="20" type="password" style = "width:500px" placeholder = "비밀번호 8자리 이상 20자리 이하 영문 숫자로만 입력해 주세요" name="password"/>
-		<p id = "pwcheck" style = "color:red">비밀번호를 입력하세요</p>
-		<br/>
-		
-		비밀번호 확인<br/>
-		<input id = "passwordConf" type="password" style = "width:500px" placeholder = "비밀번호를 재입력하세요" />
-		<p id = "pwcheck2" style = "color:red"></p>
-		<br/>
-		
-		닉네임<br/>
-		<input id = "nickName" type="text"  placeholder = "닉네임을 입력하세요" name="nickName"/>
-		<input type="button" class="chkNickname" value="중복체크" />
-		<br/>
-		<p id = "nickNamecheck" style = "color:red"></p>
-		<br/>
-		
-		생년월일<br/>
-		<input type="text" id = "birth" placeholder = "주민번호 앞자리를 입력하세요" name="birth"/>
-		<br/>
-		
-		성별<br/> <!-- 남이 눌리면 여는 안눌리도록 처리필요 -->
-		남<input name = "gender" value = "1" type = "radio" checked/>  여<input name = "gender" value = "2" type = "radio" />
-		
-		<br/>
-		전화번호<br/>
-		<input type="text" id = "phoneNum1" name="phoneNum1"/>-
-		<input type="text" id = "phoneNum2" name="phoneNum2"/>-
-		<input type="text" id = "phoneNum3" name="phoneNum3"/>
-		<input type = "text" id = "phoneNum" name = "phoneNum">
-		<br/>
-		<input type = "button" class = "smsForm" value = "인증번호 전송">
-		<br/>
-		<input type = "text" id = "smsText" style = "visibility: hidden" placeholder = "인증번호를 입력하세요" >
-		<input type = "button" id = "smsConfirm" style = "visibility: hidden" value = "확인">
-		<br/>
-		<input type="checkbox" /> 서비스이용약관에 동의하시겠습니까?
-		<br/>
-		
-		<input id = "valid" class = "valid" type = "button" value = "회원가입" />
-		<input type="reset" value="다시입력" />
 	
-	</form>
+
+		<div class="container">
+	            <div class="row">
+	            <div class="col-md-8">
+	              <section>      
+	                <h1 class="entry-title"><span>Sign Up</span> </h1>
+	                <hr>
+	                    <form class="form-horizontal" action="/join" method="post" name="signup" id="signup" enctype="multipart/form-data" >        
+	                <div class="form-group">
+	                  <label class="control-label col-sm-3">Email ID <span class="text-danger">*</span></label>
+	                  <div class="col-md-8 col-sm-9">
+	                    <div class="input-group">
+	                   	 	<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+	                    	<input class="form-control" style = "width:160px" id = "email1" type="text" placeholder="아이디를 입력하세요" name="email1">
+		              		<input class="form-control" style = "width:140px" id = "email2" type="text" placeholder="주소값 직접입력" name="email1">
+		              		<select   id="selectEmail" class = "form-control" style = "width:130px; height: calc(2.25rem + 11px);"> 
+								<option id = "selectEmail1" selected>직접입력</option>
+								<option id = "selectEmail2">naver.com</option>
+								<option id = "selectEmail3">daum.net</option>
+								<option id = "selectEmail4">gmail.com</option>
+							</select>
+	                 	 </div>
+	                    <small> Your Email Id is being used for ensuring the security of your account, authorization and access recovery. </small> </div>
+	                </div>
+	                <input  id = "email" type="text" name="email" style = "position: absolute; visibility: hidden;" />
+	                <div class="form-group">
+	                  <label class="control-label col-sm-3">Set Password <span class="text-danger">*</span></label>
+	                  <div class="col-md-5 col-sm-8">
+	                    <div class="input-group">
+	                      <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+	                      <input type="password" class="form-control" name="password" id="password" placeholder="Choose password (8-16 chars)" value="">
+	                   </div>
+	                  </div>
+	                  <small id = "pwcheck" style = "color:red">비밀번호를 입력하세요</small>
+	                </div>
+	                <div class="form-group">
+	                  <label class="control-label col-sm-3">Confirm Password <span class="text-danger">*</span></label>
+	                  <div class="col-md-5 col-sm-8">
+	                    <div class="input-group">
+	                      <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+	                      <input type="password" class="form-control" name="cpassword" id="passwordConf" placeholder="Confirm your password" value="">
+	                    </div>  
+	                  </div>
+	                  <small id = "pwcheck2" style = "color:red">비밀번호를 재입력하세요</small>
+	                </div>
+	                <div class="form-group">
+	                  <label class="control-label col-sm-3">Full Name <span class="text-danger">*</span></label>
+	                  <div class="col-md-8 col-sm-9">
+	                    <input type="text" id = "name" class="form-control" name="name" id="mem_name" placeholder="Enter your Name here" value="">
+	                  </div>
+	                </div>
+	                <div class="form-group">
+	                  <label class="control-label col-sm-3">Nick Name <span class="text-danger">*</span></label>
+	                  <div class="col-md-8 col-sm-9">
+	                    <input type="text" class="form-control" name="nickName" id="nickName" placeholder="Enter your NICKNAME here" value="">
+	                    <input type="button" id="chkNickname" value="중복체크" />
+	                    <p id = "nickNamecheck" style = "color:red"></p>
+	                  </div>
+	                </div>
+	                          
+	                <div class="form-group">
+	                  <label class="control-label col-sm-3">Date of Birth <span class="text-danger">*</span></label>
+	                  <div class="col-md-8 col-sm-9">
+	                    <input type="text" id = "birth" class="form-control" name="birth" placeholder="Enter Your Birth(ex.901111)" value="">
+	                  </div>
+	                </div>
+	                
+	                <div class="form-group">
+	                  <label class="control-label col-sm-3">Gender <span class="text-danger">*</span></label>
+	                  <div class="col-md-8 col-sm-9">
+	                    <label>
+	                    <input name="gender" type="radio" value="1" checked>
+	                    Male </label>
+	                       
+	                    <label>
+	                    <input name="gender" type="radio" value="2" >
+	                    Female </label>
+	                  </div>
+	                </div>
+	                <div class="form-group">
+	                  <label class="control-label col-sm-3">Contact No. <span class="text-danger">*</span></label>
+	                  <div class="col-md-5 col-sm-8">
+                      	<div class="input-group">
+	                      <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
+	                      <input type="text" class="form-control" style="width:30%" name="phoneNum1" id="phoneNum1" placeholder="" value="">
+	                      <input type="text" class="form-control" style="width:30%" name="phoneNum2" id="phoneNum2" placeholder="" value="">
+	                      <input type="text" class="form-control" style="width:30%" name="phoneNum3" id="phoneNum3" placeholder="" value="">
+	                      <input type = "button" class = "smsForm" value = "인증번호 전송">
+	                    </div>
+	                  </div>
+	                  <input type = "text" id = "phoneNum" name = "phoneNum" style="visibility: hidden; position: absolute;">
+	                </div>
+	                <div class="form-group">
+	                  <label class="control-label col-sm-3">Security Code </label>
+	                  <div class="col-md-5 col-sm-8">
+	                    <div >
+	                        <input type="text" name="smsText" id="smsText" placeholder = "인증번호를 입력하세요" class="form-control label-warning"  />
+	                        <input type = "button" id = "smsConfirm" value = "확인">                
+	                    </div>
+	                  </div>
+	                </div>
+	                <div class="form-group">
+	                  <div class="col-xs-offset-3 col-md-8 col-sm-9"><span class="text-muted"><span class="label label-danger">Note:-</span> By clicking Sign Up, you agree to our <a href="#">Terms</a> and that you have read our <a href="#">Policy</a>, including our <a href="#">Cookie Use</a>.</span> </div>
+	                </div>
+	                <div class="form-group">
+	                  <div class="col-xs-offset-3 col-xs-10">
+	                    <input id = "valid" name="valid" type="button" value="Sign Up" class="btn btn-primary">
+	                  </div>
+	                </div>
+	              </form>
+	            </div>
+	        </div>
+	        </div>
 	
 </body>
 

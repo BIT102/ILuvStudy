@@ -114,7 +114,7 @@ public class UserServiceImpl implements UserService {
 	    String tomail  = email;     // 받는 사람 이메일
 	    String title   = "[ILOVESTUDY]인증번호 발송";      // 제목
 	    
-	    String code = UUID.randomUUID().toString().replace("-", "").substring(0, 6);;
+	    String code = UUID.randomUUID().toString().replace("-", "").substring(0, 6);
 	    String content = "인증번호는 ["+code+"] 입니다. 해당 번호를 입력해 주세요.";    // 내용
 	   	    
 	    String htmltext = 
@@ -123,7 +123,7 @@ public class UserServiceImpl implements UserService {
 	    	+"<title>/</title>"
 	    	+"</head>"
 	    	+"<body>"
-	    	+"<a href = 'http://localhost:8080/link?aa=ss&&bb=aa'>인증하시려면 여기를 클릭하세요</a>"
+	    	+"<a href = 'http://localhost:8080/emailConf?email="+email+"'>인증하시려면 여기를 클릭하세요</a>"
 	    	+"</body>"
 	    +"</html>";
 	    
@@ -145,6 +145,10 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public int chkNickname(String nickName)throws Exception{
 		return dao.chkNickname(nickName); 
+	}
+	
+	public void emailConf(String email)throws Exception{
+		dao.emailConf(email);
 	}
 	
 }

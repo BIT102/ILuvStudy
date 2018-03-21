@@ -52,7 +52,9 @@ public class StudyController {
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public String registerGET(Model model, HttpServletRequest request)throws Exception{
 		
+
 		logger.info("register get..........");
+
 		
 		model.addAttribute("studyCategory", service.studyCategory());
 		

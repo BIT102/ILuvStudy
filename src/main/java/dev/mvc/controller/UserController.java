@@ -48,14 +48,12 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
-	public String joinUserPOST(UserVO vo, Model model) {
+	public String joinUserPOST(UserVO vo, Model model) throws Exception{
 		
-		
-		try {
-			service.joinUser(vo);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		logger.info("join............................");
+		service.joinUser(vo);
+		System.out.println("==========");
+		service.sendEmail(vo.getEmail());
 		
 		return "login";
 	}
@@ -78,7 +76,8 @@ public class UserController {
 			
 			UserVO vo = service.read(email);
 			model.addAttribute("vo", vo);
-			
+			model.addAttribute("gender",vo.getGender());
+			System.out.println(vo.getGender());
 			return "/mypage/profile";
 		}
 	
@@ -221,25 +220,19 @@ public class UserController {
 		// 회원가입
 		// 이메일테스트  Ajax 로 필요함.
 		@RequestMapping(value = "/chkEmail", method = RequestMethod.POST)
-		public String emailTest(HttpServletRequest request, Model model) throws Exception {
+		public ResponseEntity<String> emailTest(String email, Model model) throws Exception {
 			
 			logger.info("chkEmail.......................");
+			ResponseEntity<String> entity = null;
 			
-			String email = request.getParameter("email1")+"@"+request.getParameter("email2");
-						
-			if(service.chkEmail(email)==-1){
-				model.addAttribute("result","유효하지 않은 이메일입니다.");
-				System.out.println("유효하지 않은 이메일입니다.");
-			}else if(service.chkEmail(email)==1){
-				model.addAttribute("result","이미 가입된 이메일입니다.");
+			if(service.chkEmail(email)==1){
+				entity = new ResponseEntity<String>("fail", HttpStatus.OK);
 				System.out.println("이미가입된이메일");
 			}else{
-				model.addAttribute("result","인증번호를 입력하세요.");
-				// 인증번호 이메일 전송
-				service.sendEmail(email);
+				entity = new ResponseEntity<String>("success", HttpStatus.OK);
 			}
 			
-			return "/mypage/completed";
+			return entity;
 		}
 		
 		
@@ -274,14 +267,13 @@ public class UserController {
 			  
 		  }
 		
-		@RequestMapping(value = "link", method = RequestMethod.GET)
-		public void link(String aa, String bb, Model model)throws Exception{
+		@RequestMapping(value = "emailConf", method = RequestMethod.GET)
+		public void emailConf(String email, Model model)throws Exception{
 			
-			System.out.println("===============");
-			System.out.println(aa+bb);
-			System.out.println("===============");
+			logger.info("emailConf............");
 			
-			model.addAttribute("aa",aa);
+			service.emailConf(email);
+			
 			
 		}
 		

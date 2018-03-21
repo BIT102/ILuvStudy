@@ -13,11 +13,13 @@
 	<br/><br/>
 	
 	<form action="loginPost" method="post">
-		<input type="text" placeholder = "이메일주소" name = "id" /><br/>
-		<input type="text" placeholder = "비밀번호" name = "pw" />
+		<input type="text" placeholder = "이메일주소" name = "id" value = "${id}" /><br/>
+		<input type="password" placeholder = "비밀번호" name = "pw" />
 		
 		<br/>
-		<input type="checkbox" /> 아이디저장  <input type="checkbox" name="useCookies" /> 자동로그인
+			<input type="checkbox" name = "rememberId" value = "1" ${checked} /> 아이디저장
+		
+			<input type="checkbox" name="useCookies" /> 자동로그인
 		<br/>
 		
 		<input type="submit" value ="로그인" />

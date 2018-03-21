@@ -36,6 +36,7 @@ public class StudyServiceImpl implements StudyService {
 	@Override
 public void regist(StudyVO vo) throws Exception {
 
+
 		//파일등록하기
 		String[] files = vo.getFiles();
 
@@ -50,6 +51,7 @@ public void regist(StudyVO vo) throws Exception {
 		// bno 값 가져오기
 
 		int bno = dao.getBno();
+
 
 		vo.setBno(bno);
 		
@@ -92,9 +94,7 @@ public void regist(StudyVO vo) throws Exception {
 			} else {
 
 				map.put("name", fileName);
-
 				map.put("status", "X");
-
 				map.put("bno", bno);
 
 			}

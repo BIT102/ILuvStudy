@@ -33,7 +33,8 @@ public class UploadController {
 
 	@Resource(name="uploadPath")
 	private String uploadPath;
-
+	@Resource(name="uploadPathUser")
+	private String uploadPathUser;
 	
 	private static final Logger logger = LoggerFactory.getLogger(UploadController.class);
 
@@ -41,21 +42,34 @@ public class UploadController {
 	public void uploadAjax() {
 		
 	}
+	
 	//파일업로드
 	@ResponseBody
 	@RequestMapping(value = "/uploadAjax",
 	                method = RequestMethod.POST,
 	                produces = "text/plain;charset=UTF-8")
-	public ResponseEntity<String> uploadAjax(MultipartFile file) throws Exception {
+	public ResponseEntity<String> uploadAjax(MultipartFile file, String type) throws Exception {
 		
 		logger.info("originalName: "+file.getOriginalFilename());
 //		logger.info("size: "+file.getSize());
 //		logger.info("contentType: "+file.getContentType());
 		
-		return new ResponseEntity<>(UploadFileUtils.uploadFile(uploadPath,
-				 					file.getOriginalFilename(), 
-				 					file.getBytes()),
-									HttpStatus.CREATED);
+		ResponseEntity<String> entity = null;
+		
+		if(type.equals("user")){
+			entity = new ResponseEntity<String>(UploadFileUtils.uploadFile(uploadPathUser,
+					file.getOriginalFilename(), 
+					file.getBytes()),
+					HttpStatus.CREATED);
+		}else{
+			entity = new ResponseEntity<String>(UploadFileUtils.uploadFile(uploadPath,
+												file.getOriginalFilename(), 
+												file.getBytes()),
+												HttpStatus.CREATED);
+		}
+		
+		
+		return entity;
 		
 //		(file.getOriginalFilename(), HttpStatus.CREATED);
 	}
@@ -75,6 +89,8 @@ public class UploadController {
 			MediaType mType = MediaUtils.getMediaType(formatName);
 			
 			HttpHeaders headers = new HttpHeaders();
+			
+			
 			
 			in = new FileInputStream(uploadPath+fileName);
 			

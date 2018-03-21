@@ -9,7 +9,10 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.security.MessageDigest;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,9 +31,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class SMSController {
 
 	private static final Logger logger = LoggerFactory.getLogger(SMSController.class);
-
-	
-	private String randomCode = "1234"; 
+	Map<String, String> codeMap = new HashMap<>();
 	
 	  @RequestMapping(value = "/smssend" , method = RequestMethod.POST)
 	  public ResponseEntity<String> smssend(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception{
@@ -39,20 +40,24 @@ public class SMSController {
 		  ResponseEntity<String> entity = null;
 		  
 		  try{
-			  String charsetType = "EUC-KR"; //EUC-KR 또는 UTF-8
+          		String charsetType = "EUC-KR"; //EUC-KR 또는 UTF-8
 
 			    request.setCharacterEncoding(charsetType);
 			    response.setCharacterEncoding(charsetType);
 			    /*String  action     = nullcheck(request.getParameter("action"), "");
 			    if(action.equals("go")) {*/
-
+			    String randomCode = UUID.randomUUID().toString().replace("-", "").substring(0, 6); // 변수값 생성
 		        String sms_url = "";
 		        sms_url = "https://sslsms.cafe24.com/sms_sender.php"; // SMS 전송요청 URL
 		        String user_id = base64Encode("lswkim"); // SMS아이디
 		        String secure = base64Encode("45278fc5309389f11c297c8ad52cecb5");//인증키
 		        String msg = base64Encode(randomCode);
 		        String rphone = base64Encode(nullcheck(request.getParameter("rphone"), ""));
-		        System.out.println(rphone);
+		        System.out.println("========================================");
+		        System.out.println(rphone+"번호의 암호코드는 "+randomCode);
+		        System.out.println("========================================");
+		        codeMap.put(request.getParameter("rphone"), randomCode); //
+		        System.out.println("codeMap : " + codeMap.get("010-3137-3804"));
 		        String sphone1 = base64Encode("010");
 		        String sphone2 = base64Encode("3137");
 		        String sphone3 = base64Encode("3804");
@@ -187,15 +192,15 @@ public class SMSController {
 	  }
 	  
 	  @RequestMapping(value = "/smsConfirm", method = RequestMethod.POST)
-	  public ResponseEntity<String> smsConfirm(String code) throws Exception{
+	  public ResponseEntity<String> smsConfirm(String code, String rphone) throws Exception{
 		  
 		logger.info("smsConfirm.........");
-		System.out.println("randomCode : "+randomCode+", code : "+ code);
+		System.out.println("randomCode : "+codeMap.get(rphone)+", code : "+ code);
 		  
 		ResponseEntity<String> entity = null;
 		  
 		try{
-			if(randomCode.equals(code)){
+			if(codeMap.get(rphone).equals(code)){
 				entity = new ResponseEntity<String>("success",HttpStatus.OK);  
 			}else{
 				entity = new ResponseEntity<String>("fail",HttpStatus.OK);
