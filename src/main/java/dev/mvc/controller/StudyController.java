@@ -3,6 +3,8 @@ package dev.mvc.controller;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +25,8 @@ import dev.mvc.domain.CriteriaStudy;
 import dev.mvc.domain.PageMakerStudy;
 import dev.mvc.domain.SearchCriteriaStudy;
 import dev.mvc.domain.StudyVO;
+import dev.mvc.domain.UserVO;
+import dev.mvc.service.AdminService;
 import dev.mvc.service.StudyService;
   
 @Controller
@@ -33,7 +37,7 @@ public class StudyController {
 
 	@Inject
 	private StudyService service;
-	
+		
 	//스터디 등록화면
 	@RequestMapping(value = "/register1", method = RequestMethod.GET) 
 	public void registerGET(StudyVO vo, Model model) throws Exception {
@@ -43,6 +47,37 @@ public class StudyController {
 		model.addAttribute("catlist", service.catList()); //BigCat 
 		model.addAttribute("rglist", service.rgList()); //BigCAT(region)
 	}
+	
+	// 스터디 등록 김상욱 수정
+	@RequestMapping(value = "/register", method = RequestMethod.GET)
+	public String registerGET(Model model, HttpServletRequest request)throws Exception{
+		
+		logger.info("register get..........");
+		
+		model.addAttribute("studyCategory", service.studyCategory());
+		
+		// session 으로 email 값 보내기
+		HttpSession session = request.getSession();
+		UserVO user = (UserVO)session.getAttribute("login");
+		//model.addAttribute("email",user.getEmail());
+		
+		
+		
+		
+		return "/study/register";
+	}
+	
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	public String registerPOST(StudyVO vo, RedirectAttributes rttr)throws Exception{
+		
+		
+		
+		
+		return "redirect:/study/listAll";
+	}
+	
+	
+	
 	
 	//JSON small카테고리(study)  //URL /category/추가
 	@RequestMapping(value="/register1/category/{csId}", method = RequestMethod.GET)

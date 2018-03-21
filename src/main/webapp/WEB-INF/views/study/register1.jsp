@@ -69,7 +69,7 @@ small {
 			</div>
 
 		<!--카테고리-->
-			<div class="stucycategory">
+			<%-- <div class="stucycategory">
 
 				<!--대분류--><p>대분류 </p>
 				
@@ -105,7 +105,43 @@ small {
 				
 				</div>
 				
-			</div>
+			</div> --%>
+			
+			<!-- 카테고리 김상욱 수정 -->
+			<tr>
+                <th>카테고리</th>
+                <td>
+              
+                <!-- 스터디에 등록된 카테고리 체크 표시 -->
+                <!-- 스터디 카테고리 데이터 -->
+   <%--               <c:forEach items="${studyCategory}" var="studyVO" varStatus="status">
+                 	<c:if test="${status.index eq 0 || status.index eq 9 || status.index eq 17 || status.index eq 23}">
+                 		<label class="fancy-checkbox">
+                 			<input type="checkbox" name="categoryD" class="${studyVO.cDName}" id="${studyVO.cDName}"><span><b>${studyVO.cDName}</b></span>
+                 		</label>
+                 	</c:if>
+                 	<label class="fancy-checkbox" style="display:inline-block;">
+                 		<input type="checkbox" name="categoryS" class="${studyVO.cDName}" id="${studyVO.cSName}"><span>${studyVO.cSName}</span>
+                 	</label>
+                 </c:forEach> --%>
+                 
+<!-- ======== 카테고리 =========== -->       
+                 <select id="catD" class="form-control">
+                 	<option>--</option>
+                 	<c:forEach items="${studyCategory}" var="studyVO">
+                 		<option value="${studyVO.cDId}">${studyVO.cDName}</option>
+                 	</c:forEach>
+                 </select>
+                 <select id="catS" class="form-control">
+                 	<option>--</option>
+                 	<%-- <option value="${studyVO.cSName}">${studyVO.cSName}</option> --%>
+                 </select>
+                 <button type="button" id="addCat" class="btn btn-default btn-xs">추가</button>
+                 <div id="addCatArea">
+                 </div>
+				</td>
+            </tr>
+			
 		<br>
 			
 			<button type="button" id="catplus">+추가</button>

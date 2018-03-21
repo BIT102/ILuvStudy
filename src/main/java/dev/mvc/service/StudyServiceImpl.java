@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
+import dev.mvc.admin.Criteria;
 import dev.mvc.domain.CriteriaStudy;
 import dev.mvc.domain.SearchCriteriaStudy;
 import dev.mvc.domain.StudyVO;
@@ -59,36 +60,34 @@ public void regist(StudyVO vo) throws Exception {
 			if(fileName == files[0]){
 
 				map.put("name", fileName);
-
 				map.put("status", "O");
-
-
-			vo.setBno(bno);
-			
-			
-			//카테고리 등록하기
-			Map<String, Object> ca = new HashMap<>();
+	
+				vo.setBno(bno);
 				
-
-			String[] D = vo.getCategoryD();
-			String[] S = vo.getCategoryS();
 				
-
-			for(int i=0; i<S.length; i++) {
-					String caD = D[i];
+				//카테고리 등록하기
+				Map<String, Object> ca = new HashMap<>();
 					
-						String caS = S[i];
+	
+				String[] D = vo.getCategoryD();
+				String[] S = vo.getCategoryS();
+					
+	
+				for(int i=0; i<S.length; i++) {
 						
-						ca.put("bno", bno);
-						ca.put("categoryD", caD);
-						ca.put("categoryS", caS);
+					String caD = D[i];
+					String caS = S[i];
+					
+					ca.put("bno", bno);
+					ca.put("categoryD", caD);
+					ca.put("categoryS", caS);
 						
 					System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 					System.out.println(ca);
 					System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 						
 					dao.createCa(ca);
-			}
+				}
 
 			} else {
 
@@ -127,6 +126,22 @@ public void regist(StudyVO vo) throws Exception {
 				}
 			}
 	}
+	
+	
+	// 카테고리 김상욱 수정
+	@Override
+	public List<StudyVO> studyCategory() throws Exception{
+		return dao.studyCategory();
+	}
+	
+	@Override
+	public List<StudyVO> studyCategory2(String cDId) throws Exception{
+		return dao.studyCategory2(cDId);
+	}
+	
+	
+	
+	
 	//스터디 불러오기
 	@Transactional(isolation=Isolation.READ_COMMITTED)
 	@Override

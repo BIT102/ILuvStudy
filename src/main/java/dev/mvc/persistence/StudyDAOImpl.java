@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import dev.mvc.admin.Criteria;
 import dev.mvc.domain.CriteriaStudy;
 import dev.mvc.domain.SearchCriteriaStudy;
 import dev.mvc.domain.StudyVO;
@@ -26,6 +27,22 @@ public class StudyDAOImpl implements StudyDAO {
 	public void createStudy(StudyVO vo) throws Exception {
 		session.insert(namespace+".createStudy", vo);
 	}
+	
+	// 카테고리 김상욱 수정
+	@Override
+	public List<StudyVO> studyCategory() throws Exception{
+		return session.selectList(namespace + ".studyCategory");  //study 카테고리 정보
+	}
+	
+	@Override
+	public List<StudyVO> studyCategory2(String cDId) throws Exception{
+		return session.selectList(namespace + ".studyCategory2", cDId);  //study 카테고리 소분류 가져옴
+	}
+	
+	
+	
+	
+	
 	
 	//카테고리 불러오기
 	@Override

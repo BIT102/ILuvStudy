@@ -44,6 +44,22 @@ title
 )
 </insert>
 
+<!-- 카테고리 김상욱수정 -->
+<select id="studyCategory" resultType="StudyVO">
+		select *
+		from study_category
+		group by cdid
+</select>
+	
+<select id="studyCategory2" resultType="StudyVO">
+	select *
+	from study_category
+	where cdid=#{cDId}
+	order by cdid, csid
+</select>
+
+
+
 <insert id="createCa">
 INSERT INTO
 board_category (

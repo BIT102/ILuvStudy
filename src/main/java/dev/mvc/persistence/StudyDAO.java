@@ -3,6 +3,7 @@ package dev.mvc.persistence;
 import java.util.List;
 import java.util.Map;
 
+import dev.mvc.admin.Criteria;
 import dev.mvc.domain.CriteriaStudy;
 import dev.mvc.domain.SearchCriteriaStudy;
 import dev.mvc.domain.StudyVO;
@@ -11,6 +12,13 @@ public interface StudyDAO {
 
 	//스터디등록
 	public void createStudy(StudyVO vo) throws Exception;
+	
+	
+	// 카테고리부분 김상욱 수정
+	public List<StudyVO> studyCategory() throws Exception;
+	public List<StudyVO> studyCategory2(String cDId) throws Exception;
+	
+	
 	
 	
 	//스터디 읽기

@@ -2,6 +2,7 @@ package dev.mvc.service;
 
 import java.util.List;
 
+import dev.mvc.admin.Criteria;
 import dev.mvc.domain.CriteriaStudy;
 import dev.mvc.domain.SearchCriteriaStudy;
 import dev.mvc.domain.StudyVO;
@@ -13,6 +14,11 @@ public interface StudyService {
 	
 	//스터디등록   
 	public void regist(StudyVO vo) throws Exception;
+	
+	// 카테고리 김상욱 수정
+	public List<StudyVO> studyCategory() throws Exception;
+	public List<StudyVO> studyCategory2(String cDId) throws Exception;
+	
 	
 	//스터디 불러오기
 	public StudyVO read(Integer bno) throws Exception;
