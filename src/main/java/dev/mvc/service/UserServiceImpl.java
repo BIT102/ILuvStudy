@@ -123,7 +123,7 @@ public class UserServiceImpl implements UserService {
 	    	+"<title>/</title>"
 	    	+"</head>"
 	    	+"<body>"
-	    	+"<a href = 'http://localhost:8080/link?aa=ss&&bb=aa'>인증하시려면 여기를 클릭하세요</a>"
+	    	+"<a href = 'http://localhost:8080/emailConf?email="+email+"'>인증하시려면 여기를 클릭하세요</a>"
 	    	+"</body>"
 	    +"</html>";
 	    
@@ -145,6 +145,10 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public int chkNickname(String nickName)throws Exception{
 		return dao.chkNickname(nickName); 
+	}
+	
+	public void emailConf(String email)throws Exception{
+		dao.emailConf(email);
 	}
 	
 }

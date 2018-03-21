@@ -65,4 +65,8 @@
   	<select id = "chkNickname" resultType="int">
   		select count(*) from user where nickname = #{nickName};
   	</select>
+  	
+  	<update id = "emailConf" >
+  		update user set emailconf = 1 where email = #{email};
+  	</update>
   </mapper>

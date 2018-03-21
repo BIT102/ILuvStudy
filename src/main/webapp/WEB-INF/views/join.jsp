@@ -9,11 +9,18 @@
 <!-- 부트스트랩 영역 -->
 <link rel="stylesheet" href="/resources/dist/css/bootstrap.min.css">
 <link href="/resources/dist/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="/resources/dist/css/join.css">
+
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-
+<link rel="stylesheet" href="/resources/dist/css/join.css">
 <title>Insert title here</title>
+
+<style>
+select.form-control:not([size]):not([multiple]) {
+    height: calc(2.25rem + 11px);
+}
+</style>
+
 </head>
 
 <script>
@@ -44,7 +51,7 @@
 				document.getElementById('email2').value = document.getElementById('selectEmail').value;	
 			}
 		});
-		// email 유효성 검사 (길이검사, 알파벳검사, . 1개 검사)
+		// email 유효성 검사 (길이검사, 알파벳검사, . 1개 검사, 중복검사)
 		function emailValid(email1, email2){
 			
 			email1 = email1.toLowerCase(); // 소문자 변형
@@ -63,13 +70,36 @@
 			}			
 			
 			// 알파벳, 길이 검사
-			if((containsCharOnly(email1, chars)&&containsCharOnly(email2, charDot))
-					&&(6<=email1.length&&email1.length<=30)){
+			if(!((containsCharOnly(email1, chars)&&containsCharOnly(email2, charDot))
+					&&(4<=email1.length&&email1.length<=30))){
 				
-				emailV = true; // 최종 유효성 검사를 위함
 				document.getElementById("email").value = email1+"@"+email2;
-				return true;
+				return false;
 			}
+			
+			// 중복 체크
+ㅇ		$.ajax({
+				url : "/join/chkEmail",
+				type: "post",
+				headers: {
+					//"Content-Type" : "application/json",
+					"X-HTTP-Method-Override" : "POST"
+				},
+				data: {
+					email : email1+"@"+email2
+				},
+				success: function(result){
+					console.log(result);
+					if(result == "success"){
+						emailV = true;
+						return true;
+					}else{
+						alert("중복된 이메일입니다.");
+						return false;
+					}
+				}
+			})
+			
 			return false;
 		}
 		
@@ -108,7 +138,7 @@
 		
 		//========= 닉네임 확인부분 ============
 		
-		$('.chkNickname').on("click",function(){
+		$('#chkNickname').on("click",function(){
 			
 			var nickname = document.getElementById("nickName").value;
 			console.log("chkNick......"+nickname);
@@ -170,8 +200,8 @@
 					console.log(result);
 					if(result == "success"){ // 성공시 입력란과 버튼이 생성
 						alert("인증번호를 입력하세요");
-						document.getElementById("smsText").style.visibility = "visible";
-						document.getElementById("smsConfirm").style.visibility = "visible";
+						//document.getElementById("smsText").style.visibility = "visible";
+						//document.getElementById("smsConfirm").style.visibility = "visible";
 						
 					}else{ 
 						alert("유효한 전화번호가 아닙니다.");
@@ -183,6 +213,12 @@
 		// 인증번호 일치 확인란
 		$('#smsConfirm').on("click",function(){
 			
+			var phoneNum1 = document.getElementById("phoneNum1").value;
+			var phoneNum2 = document.getElementById("phoneNum2").value;
+			var phoneNum3 = document.getElementById("phoneNum3").value;
+			
+			var phoneNum = phoneNum1 +"-"+ phoneNum2 +"-"+ phoneNum3;
+			
 			$.ajax({
 				url : "/smsConfirm",
 				type : "post",
@@ -190,7 +226,8 @@
 					"X-HTTP-Method-Override" : "POST"
 				},
 				data: {
-					code : document.getElementById("smsText").value
+					code : document.getElementById("smsText").value,
+					rphone : phoneNum
 				},
 				success: function(result){
 					if(result == "success"){
@@ -218,7 +255,7 @@
 		$('#valid').on("click", function(){
 			
 			
-			var formObj = $("form[role='form']");
+			var formObj = document.getElementById("signup");
 			// email 유효성
 			emailV = emailValid(document.getElementById("email1").value,document.getElementById("email2").value);
 				 		
@@ -241,6 +278,7 @@
 			console.log("emailV : " + emailV + "passwordV : " + passwordV + "nicknameV : " + nicknameV + "birthV" + birthV + "phoneNumV : "+ phoneNumV);
 			
 			if(emailV && passwordV && nicknameV && birthV && phoneNumV){
+				alert("입력하신 이메일로 인증을 완료하세요");
 				formObj.submit();
 			}else{
 				alert("내용을 확인하세요");	
@@ -267,103 +305,94 @@
 	                <div class="form-group">
 	                  <label class="control-label col-sm-3">Email ID <span class="text-danger">*</span></label>
 	                  <div class="col-md-8 col-sm-9">
-	                      <div class="input-group">
-	                      <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-	                      <input class="form-control" id = "email1" type="text" placeholder="아이디를 입력하세요" name="email1">
-	                    </div>
+	                    <div class="input-group">
+	                   	 	<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+	                    	<input class="form-control" style = "width:160px" id = "email1" type="text" placeholder="아이디를 입력하세요" name="email1">
+		              		<input class="form-control" style = "width:140px" id = "email2" type="text" placeholder="주소값 직접입력" name="email1">
+		              		<select   id="selectEmail" class = "form-control" style = "width:130px; height: calc(2.25rem + 11px);"> 
+								<option id = "selectEmail1" selected>직접입력</option>
+								<option id = "selectEmail2">naver.com</option>
+								<option id = "selectEmail3">daum.net</option>
+								<option id = "selectEmail4">gmail.com</option>
+							</select>
+	                 	 </div>
 	                    <small> Your Email Id is being used for ensuring the security of your account, authorization and access recovery. </small> </div>
 	                </div>
-	                
+	                <input  id = "email" type="text" name="email" style = "position: absolute; visibility: hidden;" />
 	                <div class="form-group">
 	                  <label class="control-label col-sm-3">Set Password <span class="text-danger">*</span></label>
 	                  <div class="col-md-5 col-sm-8">
 	                    <div class="input-group">
 	                      <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-	                      <input type="password" class="form-control" name="password" id="password" placeholder="Choose password (5-15 chars)" value="">
-	                   </div>   
+	                      <input type="password" class="form-control" name="password" id="password" placeholder="Choose password (8-16 chars)" value="">
+	                   </div>
 	                  </div>
+	                  <small id = "pwcheck" style = "color:red">비밀번호를 입력하세요</small>
 	                </div>
 	                <div class="form-group">
 	                  <label class="control-label col-sm-3">Confirm Password <span class="text-danger">*</span></label>
 	                  <div class="col-md-5 col-sm-8">
 	                    <div class="input-group">
 	                      <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-	                      <input type="password" class="form-control" name="cpassword" id="cpassword" placeholder="Confirm your password" value="">
+	                      <input type="password" class="form-control" name="cpassword" id="passwordConf" placeholder="Confirm your password" value="">
 	                    </div>  
 	                  </div>
+	                  <small id = "pwcheck2" style = "color:red">비밀번호를 재입력하세요</small>
 	                </div>
 	                <div class="form-group">
 	                  <label class="control-label col-sm-3">Full Name <span class="text-danger">*</span></label>
 	                  <div class="col-md-8 col-sm-9">
-	                    <input type="text" class="form-control" name="mem_name" id="mem_name" placeholder="Enter your Name here" value="">
+	                    <input type="text" id = "name" class="form-control" name="name" id="mem_name" placeholder="Enter your Name here" value="">
 	                  </div>
 	                </div>
 	                <div class="form-group">
-	                  <label class="control-label col-sm-3">Date of Birth <span class="text-danger">*</span></label>
-	                  <div class="col-xs-8">
-	                    <div class="form-inline">
-	                      <div class="form-group">
-	                        <select name="dd" class="form-control">
-	                          <option value="">Date</option>
-	                          <option value="1" >1 </option><option value="2" >2 </option><option value="3" >3 </option><option value="4" >4 </option><option value="5" >5 </option><option value="6" >6 </option><option value="7" >7 </option><option value="8" >8 </option><option value="9" >9 </option><option value="10" >10 </option><option value="11" >11 </option><option value="12" >12 </option><option value="13" >13 </option><option value="14" >14 </option><option value="15" >15 </option><option value="16" >16 </option><option value="17" >17 </option><option value="18" >18 </option><option value="19" >19 </option><option value="20" >20 </option><option value="21" >21 </option><option value="22" >22 </option><option value="23" >23 </option><option value="24" >24 </option><option value="25" >25 </option><option value="26" >26 </option><option value="27" >27 </option><option value="28" >28 </option><option value="29" >29 </option><option value="30" >30 </option><option value="31" >31 </option>                </select>
-	                      </div>
-	                      <div class="form-group">
-	                        <select name="mm" class="form-control">
-	                          <option value="">Month</option>
-	                          <option value="1">Jan</option><option value="2">Feb</option><option value="3">Mar</option><option value="4">Apr</option><option value="5">May</option><option value="6">Jun</option><option value="7">Jul</option><option value="8">Aug</option><option value="9">Sep</option><option value="10">Oct</option><option value="11">Nov</option><option value="12">Dec</option>                </select>
-	                      </div>
-	                      <div class="form-group" >
-	                        <select name="yyyy" class="form-control">
-	                          <option value="0">Year</option>
-	                          <option value="1955" >1955 </option><option value="1956" >1956 </option><option value="1957" >1957 </option><option value="1958" >1958 </option><option value="1959" >1959 </option><option value="1960" >1960 </option><option value="1961" >1961 </option><option value="1962" >1962 </option><option value="1963" >1963 </option><option value="1964" >1964 </option><option value="1965" >1965 </option><option value="1966" >1966 </option><option value="1967" >1967 </option><option value="1968" >1968 </option><option value="1969" >1969 </option><option value="1970" >1970 </option><option value="1971" >1971 </option><option value="1972" >1972 </option><option value="1973" >1973 </option><option value="1974" >1974 </option><option value="1975" >1975 </option><option value="1976" >1976 </option><option value="1977" >1977 </option><option value="1978" >1978 </option><option value="1979" >1979 </option><option value="1980" >1980 </option><option value="1981" >1981 </option><option value="1982" >1982 </option><option value="1983" >1983 </option><option value="1984" >1984 </option><option value="1985" >1985 </option><option value="1986" >1986 </option><option value="1987" >1987 </option><option value="1988" >1988 </option><option value="1989" >1989 </option><option value="1990" >1990 </option><option value="1991" >1991 </option><option value="1992" >1992 </option><option value="1993" >1993 </option><option value="1994" >1994 </option><option value="1995" >1995 </option><option value="1996" >1996 </option><option value="1997" >1997 </option><option value="1998" >1998 </option><option value="1999" >1999 </option><option value="2000" >2000 </option><option value="2001" >2001 </option><option value="2002" >2002 </option><option value="2003" >2003 </option><option value="2004" >2004 </option><option value="2005" >2005 </option><option value="2006" >2006 </option>                </select>
-	                      </div>
-	                    </div>
+	                  <label class="control-label col-sm-3">Nick Name <span class="text-danger">*</span></label>
+	                  <div class="col-md-8 col-sm-9">
+	                    <input type="text" class="form-control" name="nickName" id="nickName" placeholder="Enter your NICKNAME here" value="">
+	                    <input type="button" id="chkNickname" value="중복체크" />
+	                    <p id = "nickNamecheck" style = "color:red"></p>
 	                  </div>
 	                </div>
+	                          
+	                <div class="form-group">
+	                  <label class="control-label col-sm-3">Date of Birth <span class="text-danger">*</span></label>
+	                  <div class="col-md-8 col-sm-9">
+	                    <input type="text" id = "birth" class="form-control" name="birth" placeholder="Enter Your Birth(ex.901111)" value="">
+	                  </div>
+	                </div>
+	                
 	                <div class="form-group">
 	                  <label class="control-label col-sm-3">Gender <span class="text-danger">*</span></label>
 	                  <div class="col-md-8 col-sm-9">
 	                    <label>
-	                    <input name="gender" type="radio" value="Male" checked>
+	                    <input name="gender" type="radio" value="1" checked>
 	                    Male </label>
 	                       
 	                    <label>
-	                    <input name="gender" type="radio" value="Female" >
+	                    <input name="gender" type="radio" value="2" >
 	                    Female </label>
 	                  </div>
 	                </div>
 	                <div class="form-group">
 	                  <label class="control-label col-sm-3">Contact No. <span class="text-danger">*</span></label>
 	                  <div class="col-md-5 col-sm-8">
-	                      <div class="input-group">
+                      	<div class="input-group">
 	                      <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
-	                    <input type="text" class="form-control" name="contactnum" id="contactnum" placeholder="Enter your Primary contact no." value="">
+	                      <input type="text" class="form-control" style="width:30%" name="phoneNum1" id="phoneNum1" placeholder="" value="">
+	                      <input type="text" class="form-control" style="width:30%" name="phoneNum2" id="phoneNum2" placeholder="" value="">
+	                      <input type="text" class="form-control" style="width:30%" name="phoneNum3" id="phoneNum3" placeholder="" value="">
+	                      <input type = "button" class = "smsForm" value = "인증번호 전송">
 	                    </div>
 	                  </div>
-	                </div>
-	                <div class="form-group">
-	                  <label class="control-label col-sm-3">Alternate No. <br>
-	                  <small>(if any)</small></label>
-	                  <div class="col-md-5 col-sm-8">
-	                    <input type="text" class="form-control" name="contactnum2" id="contactnum2" placeholder="Any other or Landline no (if any)" value="">
-	                  </div>
-	                </div>
-	                <div class="form-group">
-	                  <label class="control-label col-sm-3">Profile Photo <br>
-	                  <small>(optional)</small></label>
-	                  <div class="col-md-5 col-sm-8">
-	                    <div class="input-group"> <span class="input-group-addon" id="file_upload"><i class="glyphicon glyphicon-upload"></i></span>
-	                      <input type="file" name="file_nm" id="file_nm" class="form-control upload" placeholder="" aria-describedby="file_upload">
-	                    </div>
-	                  </div>
+	                  <input type = "text" id = "phoneNum" name = "phoneNum" style="visibility: hidden; position: absolute;">
 	                </div>
 	                <div class="form-group">
 	                  <label class="control-label col-sm-3">Security Code </label>
 	                  <div class="col-md-5 col-sm-8">
 	                    <div >
-	                        
-	                        <input type="text" name="captcha" id="captcha" class="form-control label-warning"  />                
-	                      </div>
+	                        <input type="text" name="smsText" id="smsText" placeholder = "인증번호를 입력하세요" class="form-control label-warning"  />
+	                        <input type = "button" id = "smsConfirm" value = "확인">                
+	                    </div>
 	                  </div>
 	                </div>
 	                <div class="form-group">
@@ -371,91 +400,13 @@
 	                </div>
 	                <div class="form-group">
 	                  <div class="col-xs-offset-3 col-xs-10">
-	                    <input name="Submit" type="submit" value="Sign Up" class="btn btn-primary">
+	                    <input id = "valid" name="valid" type="button" value="Sign Up" class="btn btn-primary">
 	                  </div>
 	                </div>
 	              </form>
 	            </div>
 	        </div>
 	        </div>
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	<form role="form" action="/join" method="post">
-		이메일주소<br/>
-		<input id = "email1" type="text" placeholder="아이디를 입력하세요" name="email1" /> 
-		@ 
-		<input  id = "email2" type="text" placeholder="주소값을 입력하세요" name="email2" /> 
-		<select   id="selectEmail"> 
-			<option id = "selectEmail1" selected>직접입력</option>
-			<option id = "selectEmail2">naver.com</option>
-			<option id = "selectEmail3">daum.net</option>
-			<option id = "selectEmail4">google.com</option>
-		</select>
-		<input  id = "email" type="text" name="email" />
-		<br/>
-		이름<br/>
-		<input type="text" placeholder = "실명을 입력하세요" name="name" />
-		<br/>
-		
-		비밀번호<br/>
-		<input id = "password" maxlength="20" type="password" style = "width:500px" placeholder = "비밀번호 8자리 이상 20자리 이하 영문 숫자로만 입력해 주세요" name="password"/>
-		<p id = "pwcheck" style = "color:red">비밀번호를 입력하세요</p>
-		<br/>
-		
-		비밀번호 확인<br/>
-		<input id = "passwordConf" type="password" style = "width:500px" placeholder = "비밀번호를 재입력하세요" />
-		<p id = "pwcheck2" style = "color:red"></p>
-		<br/>
-		
-		닉네임<br/>
-		<input id = "nickName" type="text"  placeholder = "닉네임을 입력하세요" name="nickName"/>
-		<input type="button" class="chkNickname" value="중복체크" />
-		<br/>
-		<p id = "nickNamecheck" style = "color:red"></p>
-		<br/>
-		
-		생년월일<br/>
-		<input type="text" id = "birth" placeholder = "주민번호 앞자리를 입력하세요" name="birth"/>
-		<br/>
-		
-		성별<br/> <!-- 남이 눌리면 여는 안눌리도록 처리필요 -->
-		남<input name = "gender" value = "1" type = "radio" checked/>  여<input name = "gender" value = "2" type = "radio" />
-		
-		<br/>
-		전화번호<br/>
-		<input type="text" id = "phoneNum1" name="phoneNum1"/>-
-		<input type="text" id = "phoneNum2" name="phoneNum2"/>-
-		<input type="text" id = "phoneNum3" name="phoneNum3"/>
-		<input type = "text" id = "phoneNum" name = "phoneNum">
-		<br/>
-		<input type = "button" class = "smsForm" value = "인증번호 전송">
-		<br/>
-		<input type = "text" id = "smsText" style = "visibility: hidden" placeholder = "인증번호를 입력하세요" >
-		<input type = "button" id = "smsConfirm" style = "visibility: hidden" value = "확인">
-		<br/>
-		<input type="checkbox" /> 서비스이용약관에 동의하시겠습니까?
-		<br/>
-		
-		<input id = "valid" class = "valid" type = "button" value = "회원가입" />
-		<input type="reset" value="다시입력" />
-	
-	</form>
 	
 </body>
 

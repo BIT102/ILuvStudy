@@ -16,6 +16,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import dev.mvc.domain.UserVO;
 import dev.mvc.service.LoginService;
 
 public class LoginInterceptor extends HandlerInterceptorAdapter{
@@ -35,7 +36,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 		
 		ModelMap modelMap = modelAndView.getModelMap();
 		Object adminVO = modelMap.get("AdminVO");		
-		Object userVO = modelMap.get("UserVO");
+		UserVO userVO = (UserVO)modelMap.get("UserVO");
 		Cookie cookie = (Cookie)modelMap.get("cookie");
 		
 		System.out.println(cookie);
@@ -51,6 +52,12 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 			//로그인 성공 시 회원리스트로 이동
 			response.sendRedirect("/admin/userList");
 		}else if(userVO != null){
+			if(userVO.getEmailConf()==0){
+				response.setContentType("text/html; charset=UTF-8");
+		        PrintWriter out = response.getWriter();
+		        out.println("<script>alert('이메일 인증을 완료하세요'); history.go(-1);</script>");
+		        out.flush();
+			}
 			session.setAttribute(LOGIN, userVO); // 여기가 실질적인 세션 생성 구간
 			logger.info("===========new login success==========");
 			System.out.println(session.getAttribute(LOGIN));
@@ -71,7 +78,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 			//Object dest = session.getAttribute("dest"); //사용자가 원하는 페이지 정보를 dest에 담음
 			//response.sendRedirect(dest != null ? (String)dest:"/profile");
 			
-		} else{
+		}else{
 			//adminVO와 userVO가 null인 경우 db에 없는 계정으로 로그인 시도로 판단
 			response.setContentType("text/html; charset=UTF-8");
 	        PrintWriter out = response.getWriter();
