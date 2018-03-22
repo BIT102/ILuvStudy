@@ -1,7 +1,6 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import = "java.util.*" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -11,6 +10,9 @@
 	<link rel="stylesheet" href="/resources/vendor/chartist/css/chartist-custom.css">
 	<!-- GOOGLE FONTS -->
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
+<style>
+
+</style>
 </head>
 <body>
 <div id="wrapper">
@@ -20,11 +22,12 @@
 			<!-- MAIN CONTENT -->
 			<div class="main-content">
 				<div class="container-fluid">
+					<h3 class="page-title">통계관리</h3>
         <div class="panel-body">
 					<!-- OVERVIEW -->
 					<div class="panel panel-headline">
 						<div class="panel-heading">
-							<h3 class="panel-title">통계관리</h3>
+							<h3 class="panel-title">회원통계</h3>
 							<p class="panel-subtitle">Period: Oct 14, 2016 - Oct 21, 2016</p>
 						</div>
 						<div class="panel-body">
@@ -52,8 +55,8 @@
 									<div class="metric">
 										<span class="icon"><i class="fa fa-eye" style="margin-top:15px"></i></span>
 										<p>
-											<span class="number">274,678</span>
-											<span class="title">Visits</span>
+											<span class="number">${statisticVO.totalMember}</span>
+											<span class="title">전체 회원수</span>
 										</p>
 									</div>
 								</div>
@@ -61,8 +64,8 @@
 									<div class="metric">
 										<span class="icon"><i class="fa fa-bar-chart" style="margin-top:15px"></i></span>
 										<p>
-											<span class="number">35%</span>
-											<span class="title">Conversions</span>
+											<span class="number">${statisticVO.totalWithdrawal}</span>
+											<span class="title">전체 탈퇴회원수</span>
 										</p>
 									</div>
 								</div>
@@ -70,7 +73,12 @@
 
 							<div class="row">
 								<div class="col-md-9">
-									<div id="headline-chart" class="ct-chart"></div>
+									<!-- <div id="headline-chart" class="ct-chart"></div> -->
+									<!-- 다른 템플릿 추가 -->
+									<!-- <div class="canvas-wrapper"> -->
+										<canvas class="main-chart" id="line-chart" height="200" width="600"></canvas>
+									<!-- </div> -->
+									<!-- 추가 끝 -->
 								</div>
 								<div class="col-md-3">
 									<div class="weekly-summary text-right">
@@ -85,11 +93,14 @@
 										<span class="number">$65,938</span> <span class="percentage"><i class="fa fa-caret-down text-danger"></i> 8%</span>
 										<span class="info-label">Total Income</span>
 									</div>
-								</div>
+								</div> 
 							</div>
 						</div>
 					</div>
 					<!-- END OVERVIEW -->
+					
+				
+					
 <!-- 					
 					<div class="row">
 						<div class="col-md-6">
@@ -289,56 +300,34 @@
 		</div>
 
 <script src="/resources/vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
-<script src="/resources/vendor/chartist/js/chartist.min.js"></script>
+<!-- <script src="/resources/vendor/chartist/js/chartist.min.js"></script> -->
+
+<!-- 추가 템플릿 -->
+<script src="/resources/js/chart.min.js"></script>
+<!-- <script src="/resources/js/chart-data.js"></script> -->
+<script src="/resources/js/easypiechart.js"></script>
+<script src="/resources/js/easypiechart-data.js"></script>
+<script src="/resources/js/bootstrap-datepicker.js"></script>
+<script src="/resources/js/custom.js"></script>
+<!-- 추가끝 -->
+
 <script>
 	$(document).ready(function(){	
 		$("#statisticnav").attr("class", "active");
 	});
 	
-	$(function() {
-		var data, options;
-		
+	// 다른 템플릿 겟 
+	window.onload = function () {
 		var week = [];	//가입자 수 저장
 		var day = [];	//날짜 저장
-		var d = new Date();  //현재 날짜 저장
-		var m = d.getMonth()+1;
-		var check_day;	//day 값 비교용 변수
 		
-		var date = d.getFullYear() +"-"+ m +"-"+ d.getDate(); //현재 날짜 형식 'yyyy-mm-dd'
+		<% int cnt = 0; %>		//배열 위치 지정 변수
 		
-		<%
-			Date today = new Date();
-			int cnt = 0;
-			SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+		//최근 8일 가입자 수 불러오기
+		<c:forEach items="${weeks}" var="StatisticVO">	
 			
-			System.out.println(sdf1.format(today));
-			
-			Date yesterday = new Date(today.getTime()-(24*60*60*1000)*1); //하루전
-			Date yesterday2 = new Date(today.getTime()-(24*60*60*1000)*2); //2일 전
-			
-			System.out.println(sdf1.format(yesterday));
-			System.out.println(sdf1.format(yesterday2));
-		
-		%>
-		
-		//최근 7일 가입자 수 불러오기
-		<c:forEach items="${list}" var="StatisticVO">	
-			check_day = "${StatisticVO.day}";
-		
-			console.log(check_day);
-			
-			week[<%=cnt%>] = "${StatisticVO.weekMember}";
-			day[<%=cnt%>] = "${StatisticVO.day}";
-			
-<%-- 			if(check_day = <%=sdf1.format(today)%>){
-				console.log("오늘");
-				console.log(<%= sdf1.format(today) %>);
-				week[<%=cnt%>] = "${StatisticVO.weekMember}";
-				day[<%=cnt%>] = "${StatisticVO.day}";
-			}else if(check_day == <%=sdf1.format(yesterday)%>){
-				week[<%=cnt%>] = "${StatisticVO.weekMember}";
-				day[<%=cnt%>] = "${StatisticVO.day}";
-			} --%>
+			day[<%=cnt%>] = "${StatisticVO.day}";		//날짜 담아줌
+			week[<%=cnt%>] = "${StatisticVO.weekMember}"; //가입자수 담아줌
 			
 			<% cnt++; %>			
 		</c:forEach>
@@ -346,7 +335,45 @@
 		console.log(week);
 		console.log(day);
 		
-		// headline charts
+		var lineChartData = {
+				labels : day,
+				datasets : [
+					{
+						label: "My First dataset",
+						fillColor : "rgba(48, 164, 255, 0.2)",
+						strokeColor : "rgba(48, 164, 255, 1)",
+						pointColor : "rgba(48, 164, 255, 1)",
+						pointStrokeColor : "#fff",
+						pointHighlightFill : "#fff",
+						pointHighlightStroke : "rgba(48, 164, 255, 1)",
+						data : week
+					},
+					{
+						label: "My Second dataset",
+						fillColor : "rgba(220,220,220,0.2)",
+						strokeColor : "rgba(220,220,220,1)",
+						pointColor : "rgba(220,220,220,1)",
+						pointStrokeColor : "#fff",
+						pointHighlightFill : "#fff",
+						pointHighlightStroke : "rgba(220,220,220,1)",
+						data : [1,2,3,4,2,1,1,0]
+					}
+				]
+			}
+		
+		var chart1 = document.getElementById("line-chart").getContext("2d");
+		window.myLine = new Chart(chart1).Line(lineChartData, {
+			responsive: true,
+			scaleLineColor: "rgba(0,0,0,.2)",
+			scaleGridLineColor: "rgba(0,0,0,.05)",
+			scaleFontColor: "#c5c7cc"
+		});
+	}
+	//끝
+	
+	$(function() {
+		
+/* 		// headline charts
 		data = {
 			labels: day,
 			 series: [
@@ -366,8 +393,9 @@
 			},
 			lineSmooth: false,
 		};
-
-		new Chartist.Line('#headline-chart', data, options);
+ */
+		//사용 시 chartist.min.js 파일 추가해야함 (현재 주석처리)
+	/* 	new Chartist.Line('#headline-chart', data, options); */
 
 
 		// visits trend charts

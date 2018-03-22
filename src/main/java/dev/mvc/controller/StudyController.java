@@ -120,7 +120,7 @@ public class StudyController {
 	//main»≠∏È ∏ «Œ
 	@RequestMapping(value="/main", method = RequestMethod.GET)
 	public void mainStudy(@ModelAttribute("cri") SearchCriteriaStudy cri, Model model) throws Exception {
-		
+
 		logger.info("show list..........");
 		
 		List<StudyVO> studyList = service.studyList().subList(0, 6);

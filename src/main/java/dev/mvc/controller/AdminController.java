@@ -478,6 +478,7 @@ public class AdminController {
 	public void statistic(StatisticVO vo, Model model) throws Exception{
 		logger.info("statistic get...");
 		model.addAttribute(service.memberS(vo));
-		model.addAttribute("list", service.weekS(vo));
+		model.addAttribute("weeks", service.weekS());
+		model.addAttribute("weekv", service.weekV());
 	}	
 }

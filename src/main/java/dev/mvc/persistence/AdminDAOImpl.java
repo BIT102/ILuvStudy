@@ -252,6 +252,37 @@ public class AdminDAOImpl implements AdminDAO{
 
 	@Override
 	public List<StatisticVO> weekM() throws Exception{
-		return session.selectList(namespace + ".weekM");  //최근 7일 가입자수
+		return session.selectList(namespace + ".weekM");  //최근 8일 가입자수
+	}
+	
+	@Override
+	public int totalM() throws Exception{
+		return session.selectOne(namespace + ".totalM");  //총 회원수
+	}
+	
+	@Override
+	public int totalW() throws Exception{
+		return session.selectOne(namespace + ".totalW");  //총 탈퇴회원수
+	}
+	
+	@Override
+	public void insertVisit() throws Exception{
+		System.out.println("여기는  다오");
+		session.insert(namespace + ".insertVisit");  //방문자 수 카운트
+	}
+	
+	@Override
+	public int totalV() throws Exception{
+		return session.selectOne(namespace + ".totalV");  //총 방문자수
+	}
+	
+	@Override
+	public int todayV() throws Exception{
+		return session.selectOne(namespace + ".todayV");  //금일 방문자수
+	}
+	
+	@Override
+	public List<StatisticVO> weekV() throws Exception{
+		return session.selectList(namespace + ".weekV");  //최근 8일 방문자수
 	}
 }

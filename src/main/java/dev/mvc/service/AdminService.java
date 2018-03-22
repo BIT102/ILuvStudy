@@ -63,5 +63,6 @@ public interface AdminService {
 	public void noticeRegister(NoticeVO vo)throws Exception;
 	
 	public StatisticVO memberS(StatisticVO vo) throws Exception;
-	public List<StatisticVO> weekS(StatisticVO vo) throws Exception;
+	public List<StatisticVO> weekS() throws Exception;
+	public List<StatisticVO> weekV() throws Exception;
 }

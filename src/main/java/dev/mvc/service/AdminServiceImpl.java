@@ -254,11 +254,15 @@ public class AdminServiceImpl implements AdminService{
 	}
 	
 	
-	
+// =========== 통계 ==========
 	@Override
 	public StatisticVO memberS(StatisticVO vo) throws Exception{
-		vo.setToDMember(dao.todayM());
-		vo.setYesterDMember(dao.yesterdayM());
+		vo.setToDMember(dao.todayM());   		//금일 가입자수
+		vo.setYesterDMember(dao.yesterdayM());	//어제 가입자수
+		vo.setTotalMember(dao.totalM());		//총 회원수
+		vo.setTotalWithdrawal(dao.totalW());	//총 탈퇴회원수
+		vo.setTotalVisit(dao.totalV());			//총 방문자수
+		vo.setTotalVisit(dao.todayV());			//금일 방문자수
 		
 		//System.out.println("===============");
 		//System.out.println(vo);
@@ -266,7 +270,13 @@ public class AdminServiceImpl implements AdminService{
 	}
 	
 	@Override
-	public List<StatisticVO> weekS(StatisticVO vo) throws Exception{
-		return dao.weekM();
+	public List<StatisticVO> weekS() throws Exception{
+		return dao.weekM();  //최근 8일 가입자 수 통계
 	}
+	
+	@Override
+	public List<StatisticVO> weekV() throws Exception{
+		return dao.weekV(); //최근 8일 방문자 수 통계
+	}
+
 }
