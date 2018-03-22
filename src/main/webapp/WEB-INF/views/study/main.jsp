@@ -69,7 +69,7 @@
                         <div class="welcome-speech">
                             <h1>Welcome to I Luv Study</h1>
                             <p id="prakash"></p>
-                            <input type="text" name="keyword" id="keywordInput" placeholder="검색어를 입력하세요"> 
+                            <input type="text" onKeyDown="onKeyDown();" name="keyword" id="keywordInput" placeholder="검색어를 입력하세요"> 
                             <button class="btn btn-white">Search</button>
                         </div><!-- /.intro -->
                         
@@ -110,11 +110,11 @@
                                             </div> <!-- end of /.about-client -->
                                             <div class="main-speech">
                                                 <p>
-                                                  <strong> ${studyVO.title}</strong>${studyVO.bno}<br>
-                                                   ${studyVO.nickname}<br>
-                                                   ${studyVO.rDName} / ${studyVO.rSName}<br>
-                                                   ${studyVO.cDName} / ${studyVO.cSName}<br>
-                                                  <fmt:formatDate pattern="yyyy-MM-dd" value="${studyVO.regdate}" />
+                                                  <strong>제목 :　${studyVO.title}</strong><br>
+                                                  	 주인 :　${studyVO.nickname}<br>
+                   	                                                                                 종류 :　${studyVO.cDName} / ${studyVO.cSName}<br>
+                                                                                                                                   지역 :　${studyVO.rDName} / ${studyVO.rSName}<br>
+                                                 	 등록 :　<fmt:formatDate pattern="yyyy-MM-dd" value="${studyVO.regdate}" />
                                                    
                                                 </p>
                                             </div> <!-- end of /.main-speech  -->                                  
@@ -132,11 +132,11 @@
                                             </div> <!-- end of /.about-client -->
                                             <div class="main-speech">
                                                 <p>
-                                                  <strong> ${test.title}</strong>${test.bno}<br>
-                                                   ${test.nickname}<br>
-                                                   ${test.rDName} / ${test.rSName}<br>
-                                                   ${test.cDName} / ${test.cSName}<br>
-                                                   <fmt:formatDate pattern="yyyy-MM-dd" value="${test.regdate}" /><br>
+                                                  <strong>제목 :　${test.title}</strong><br>
+								                                                  주인 :　${test.nickname}<br>
+								                                                  종류 :　${test.cDName} / ${test.cSName}<br>
+								                                                  지역 :　${test.rDName} / ${test.rSName}<br>        
+                                                                                                                                  등록 :　<fmt:formatDate pattern="yyyy-MM-dd" value="${test.regdate}" /><br>
                                                 </p>
                                             </div> <!-- end of /.main-speech  -->
                                         </div> <!-- end of /.client-box -->
@@ -240,21 +240,31 @@
     	}
         
         </script>
-		
-		<!-- 검색스크립 -->
-		<script>
-		$(document).ready(function(){
-			$(".btn-white").on("click", function(event){
-				
-				self.location = "/study/listAll"
-								+ '${pageMakerStudy.makeQuery(1)}'
-								+ "&searchType="
-								+ "tcn"
-					/* + $("select option:selected").val() */
-								+ "&keyword=" + encodeURIComponent($('#keywordInput').val());
-			});
-		});
-		</script>
-
+  <!-- 검색 -->
+  <script>
+  $(document).ready(function(){
+	$(".btn-white").on("click", function(event){
+		self.location = "listAll"
+			+ '${pageMakerStudy.makeQuery(1)}'
+			+ "&searchType="
+			+ "tcn"
+			/* + $("select option:selected").val() */
+			+ "&keyword=" + encodeURIComponent($('#keywordInput').val());            
+	})  
+  })
+  
+  function onKeyDown() {
+	  if(event.keyCode==13){
+		  self.location = "listAll"
+				+ '${pageMakerStudy.makeQuery(1)}'
+				+ "&searchType="
+				+ "tcn"
+				/* + $("select option:selected").val() */
+				+ "&keyword=" + encodeURIComponent($('#keywordInput').val());  
+	  }
+  }
+  
+  </script>
+  
     </body>
 </html>

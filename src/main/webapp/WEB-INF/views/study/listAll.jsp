@@ -7,188 +7,472 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> 
+<!--[if gt IE 8]><!-->
 
-<html class="no-js"> <!--<![endif]-->
-    <head>
+<html class="no-js">
+<!--<![endif]-->
+<head>
 
-        <title>I Luv Study</title>
+<title>I Luv Study</title>
 
-        <!-- meta -->
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!-- meta -->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-        
-        <!-- stylesheets -->
-        <link rel="stylesheet" href="/resources/assets/css/bootstrap.min.css">
-        <link rel="stylesheet" href="/resources/assets/css/font-awesome.min.css">
-        <link rel="stylesheet" href="/resources/assets/css/animate.css">
-        <link rel="stylesheet" href="/resources/assets/css/owl.carousel.css">
-        <link rel="stylesheet" href="/resources/assets/css/owl.theme.css">
-        <link rel="stylesheet" href="/resources/assets/css/style.css">
 
-        <!-- fonts for this template -->
-        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Kaushan+Script" type="text/css">
 
-        <!-- scripts -->
-        <script type="text/javascript" src="/resources/assets/js/modernizr.custom.97074.js"></script>
 
-	<style>
-	#keywordInput {
-		width:300px;
-		height:40px;
-		padding-left:8px;
-		margin-right:30px;
+<!-- stylesheets -->
+<link rel="stylesheet" href="/resources/assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="/resources/assets/css/font-awesome.min.css">
+<link rel="stylesheet" href="/resources/assets/css/animate.css">
+<link rel="stylesheet" href="/resources/assets/css/owl.carousel.css">
+<link rel="stylesheet" href="/resources/assets/css/owl.theme.css">
+<link rel="stylesheet" href="/resources/assets/css/style.css">
+
+<!-- fonts for this template -->
+<link rel="stylesheet"
+	href="http://fonts.googleapis.com/css?family=Kaushan+Script"
+	type="text/css">
+
+<!-- fafa img -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- scripts -->
+<script type="text/javascript"
+	src="/resources/assets/js/modernizr.custom.97074.js"></script>
+
+<style>
+.select, .download-target {
+	width: 20em;
+}
+
+.select {
+	position: relative;
+	display: block;
+	height: 3em;
+	width: 200px;
+	line-height: 3;
+	background: white;
+	overflow: hidden;
+	border-radius: .25em;
+	display: inline-block;
+	display: -webkit-inline-box;
+	border: 1px solid #667780;
+	line-height: 3;
+	background: white;
+	overflow: hidden;
+	border-radius: .25em;
+	display: inline-block;
+	display: -webkit-inline-box;
+	border: 1px solid #667780;
+	margin: 1em 5px;
+}
+
+select {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0 0 0 .5em;
+	color: #fff;
+	cursor: pointer;
+}
+
+select::-ms-expand {
+	display: none;
+}
+
+.select::after {
+	content: '\25BC';
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	padding: 0 1em;
+	background: #34495e;
+	pointer-events: none;
+}
+
+.select:hover::after {
+	color: #f39c12;
+}
+
+.select::after {
+	-webkit-transition: .25s all ease;
+	-o-transition: .25s all ease;
+	transition: .25s all ease;
+}
+
+#keywordInput {
+	width: 300px;
+	height: 40px;
+	padding-left: 8px;
+	margin-right: 30px;
+	border: none;
+	border-bottom: 2px solid black;
+	background-color: transparent;
+}
+
+#select2 {
+	display: none;
+}
+
+#select3 {
+	display: none;
+}
+</style>
+
+</head>
+
+<body>
+	<%@include file="../nav.jsp"%>
+
+	<!--  begin portfolio section  -->
+	<section class="bg-light-gray">
+		<div class="container">
+
+
+
+
+			<div class="row">
+				<form>
+					<div class="dropdown">
+						<select class="dropdown-select-version select" id="select1"
+							name="options">
+							<option value="x" selected>전체</option>
+							<option value="t"
+							<c:out value="${cri.searchType eq 't'? 'selected' : ''}"/>>제목</option>
+							<option value="n"
+							<c:out value="${cri.searchType eq 'n'? 'selected' : ''}"/>>닉네임</option>
+							<option value="cate">카테고리</option>
+							<option value="regi">지역</option>
+							<option value="c"
+							<c:out value="${cri.searchType eq 'c'? 'selected' : ''}"/>>내용</option>
+						</select> <select class="dropdown-select-version select" id="select2"
+							name="options">
+						</select> <select class="dropdown-select-version select" id="select3"
+							name="options">
+						</select>
+					</div>
+				</form>
+				<div class="welcome-speech"
+					style="float: right; margin-bottom: 30px;">
+					<input type="text" onKeyDown="onKeyDown();" name="keyword"
+						id="keywordInput" placeholder="검색어를 입력하세요" value="${cri.keyword}">
+					<button class="btn btn-white">Search</button>
+				</div>
+				<!-- /.intro -->
+			</div>
+
+
+			<div class="headline text-center">
+				<div class="row">
+					<div class="col-md-6 col-md-offset-3">
+						<h2 class="section-title">스터디를 구경하세요</h2>
+						<p class="section-sub-title">검색을 통해 원하시는 스터디를 찾아주세요 &amp; 방문을
+							원하시면 이미지를 클릭해 주세요</p>
+						<!-- /.section-sub-title -->
+					</div>
+				</div>
+			</div>
+			<!-- /.headline -->
+			<div class="portfolio-item-list">
+				<div class="row">
+
+					<c:forEach items="${list}" var="studyVO">
+						<div class="col-md-4 col-sm-6">
+							<div class="portfolio-item">
+								<div class="item-image">
+									<a
+										href="/study/board${pageMakerStudy.makeSearch(pageMakerStudy.cri.page)}&bno=${studyVO.bno}">
+										<img src="/study/displayFile?fileName=${studyVO.name}"
+										class="img-responsive center-block"
+										alt="/resources/assets/img/nologin.png"
+										style="width: 370px; height: 216px;">
+										<div>
+											<span><i class="fa fa-plus"></i></span>
+										</div>
+									</a>
+								</div>
+
+								<div class="item-description">
+									<div class="row">
+										<div class="col-xs-6">
+											<span class="item-name" style="width: 230px;">제목 :
+												${studyVO.title} </span> <span style="width: 280px;">주인 :
+												${studyVO.nickname}<br> 종류 : ${studyVO.cDName} /
+												${studyVO.cSName}<br> 지역 : ${studyVO.rDName} /
+												${studyVO.rSName}<br> 등록 : <fmt:formatDate
+													pattern="yyyy-MM-dd" value="${studyVO.regdate}" />
+											</span>
+										</div>
+										<div class="col-xs-6">
+											<span class="like"> <i class="fa fa-eercast"></i>
+												${studyVO.vct}
+											</span>
+										</div>
+									</div>
+								</div>
+								<!-- end of /.item-description -->
+							</div>
+							<!-- end of /.portfolio-item -->
+						</div>
+					</c:forEach>
+
+
+				</div>
+			</div>
+			<!-- end of portfolio-item-list -->
+
+		</div>
+	</section>
+	<!--   end of portfolio section  -->
+
+	<!-- paging -->
+
+	<ul class="pager">
+		<c:if test="${pageMakerStudy.prev}">
+			<li><a
+				href="listAll${pageMakerStudy.makeQuery(pageMakerStudy.startPage - 1)}">&laquo;</a></li>
+		</c:if>
+
+		<c:forEach begin="${pageMakerStudy.startPage}"
+			end="${pageMakerStudy.endPage}" var="idx">
+			<li
+				<c:out value="${pageMakerStudy.cri.page == idx?'class=active':''}"/>>
+				<a href="listAll${pageMakerStudy.makeQuery(idx)}">${idx}</a>
+			</li>
+		</c:forEach>
+
+		<c:if test="${pageMakerStudy.next && pageMakerStudy.endPage>0 }">
+			<li><a
+				href="listAll${pageMakerStudy.makeQuery(pageMakerStudy.endPage +1)}">&raquo;</a>
+			</li>
+		</c:if>
+	</ul>
+
+
+
+
+	<%@include file="../footer.jsp"%>
+
+
+	<script type="text/javascript"
+		src="/resources/assets/js/jquery-2.1.3.min.js"></script>
+	<script type="text/javascript"
+		src="/resources/assets/js/bootstrap.min.js"></script>
+	<script type="text/javascript"
+		src="/resources/assets/js/owl.carousel.js"></script>
+	<script type="text/javascript"
+		src="/resources/assets/js/jquery.hoverdir.js"></script>
+
+	<!-- script for portfolio section using hoverdirection -->
+	<script type="text/javascript">
+		$(function() {
+
+			$('.portfolio-item > .item-image').each(function() {
+				$(this).hoverdir({
+					hoverDelay : 75
+				});
+			});
+
+		});
+	</script>
+
+
+	<!-- search  -->
+	<script>
+		$(document).ready(function() {
+			$(".btn-select").each(function(e) {
+				var value = $(this).find("ul li.selected").html();
+				if (value != undefined) {
+					$(this).find(".btn-select-input").val(value);
+					$(this).find(".btn-select-value").html(value);
+				}
+			});
+		});
+
+		$(document).on(
+				'click',
+				'.btn-select',
+				function(e) {
+					e.preventDefault();
+					var ul = $(this).find("ul");
+					if ($(this).hasClass("active")) {
+						if (ul.find("li").is(e.target)) {
+							var target = $(e.target);
+							target.addClass("selected").siblings().removeClass(
+									"selected");
+							var value = target.html();
+							$(this).find(".btn-select-input").val(value);
+							$(this).find(".btn-select-value").html(value);
+						}
+						ul.hide();
+						$(this).removeClass("active");
+					} else {
+						$('.btn-select').not(this).each(function() {
+							$(this).removeClass("active").find("ul").hide();
+						});
+						ul.slideDown(300);
+						$(this).addClass("active");
+					}
+				});
+
+		$(document).on('click', function(e) {
+			var target = $(e.target).closest(".btn-select");
+			if (!target.length) {
+				$(".btn-select").removeClass("active").find("ul").hide();
+			}
+		});
+	</script>
+	
+	<!-- 검색카테고리 -->
+	<script>
+
+		$(document)
+				.ready(
+						function() {
+
+							//큰거 골랐을때
+							$("#select1").change(function() {
+								var big = $(this).val()
+								console.log(big)
+								mid(big);
+							})
+
+							//1.대지역이 나온다
+							//2.카테고리 큰거
+							function mid(big) {
+								var str = "<option value='x'>전체</option>";
+								var regival = [ 'A', 'B', 'C', 'D', 'E', 'F',
+										'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',
+										'O', 'P', 'Q' ];
+								//0.제목선택하면 없어진다
+								if (big === "t" || big === "n" || big === "c"
+										|| big === "x") {
+									$("#select2").hide('slow');
+									$("#select3").hide('slow');
+								}
 		
-		border:none;
-		border-bottom:2px solid black;
-		background-color:transparent;
-	}
+								//1.대지역이 나온다
+								if (big === "regi") {
+									$("#select2").hide('slow');
+									$("#select3").hide('slow');
+									$("#select2").show('slow');
+
+									<c:forEach items="${rgList}" var="rgList" varStatus="status">
+									str += '<option value='+regival["${status.index}"]
+									+'>'+ '${rgList.rDName}'+'</option>'; 
+									</c:forEach>
+
+									$("#select2").html(str);
+								}
+								
+								//2.카테고리 큰거 나온다
+								if (big === "cate") {
+									$("#select2").hide('slow');
+									$("#select3").hide('slow');
+									$("#select2").show('slow');
+
+									<c:forEach items="${catList}" var="catList" varStatus="status">
+									str += "<option value="+regival["${status.index}"]+">"
+											+ "${catList.cDName}" + "</option>";
+									</c:forEach>
+
+									$("#select2").html(str);
+								}
+							}//대지역 종료
+
+							//가운대 골랐을때
+							$("#select2").change(function() {
+								var mid = $(this).val()
+								var bigval = $("#select1").val();
+
+								//제목 내용 글쓴이 고르면 없어진다
+
+								if (bigval === "regi") {
+									$("#select3").hide('slow');
+									$("#select3").show('slow');
+									smallr(mid);
+								}
+
+								if (bigval === "cate") {
+									$("#select3").hide('slow');
+									$("#select3").show('slow');
+									smallc(mid);
+								}
+							})
+							//1.소지역이나온다
+							function smallr(mid) {
+								$
+										.getJSON(
+												"listAll/region/" + mid,
+												function(data) {
+													var str = "<option value='x'>전체</option>";
+
+													$(data)
+															.each(
+																	function() {
+																		str += "<option value="+this.rSId+">"
+																				+ this.rSName
+																				+ "</option>";
+																	});
+
+													$("#select3").html(str);
+												})
+							}
+
+							//2.작은카데고리
+							function smallc(mid) {
+								$
+										.getJSON(
+												"listAll/category/" + mid,
+												function(data) {
+													var str = "<option value='x'>전체</option>";
+
+													$(data)
+															.each(
+																	function() {
+																		str += "<option value="+this.cSId+">"
+																				+ this.cSName
+																				+ "</option>";
+																	});
+
+													$("#select3").html(str);
+												})
+							}
+						})//ready 종료
+	</script>
+
+	<!-- 검색을 위한 스크립트 -->
+	<script>
+	  $(document).ready(function(){
+			$(".btn-white").on("click", function(event){
+				self.location = "listAll"
+					+ '${pageMakerStudy.makeQuery(1)}'
+					+ "&searchType="
+					+ $("select option:selected").val();
+					/* + $("select option:selected").val() */
+					+ "&keyword=" + encodeURIComponent($('#keywordInput').val());            
+			})  
+		  })
 	
-	
-	</style>
-	
-    </head>
+	//타자누르면 검색됨
+	function onKeyDown() {
+	  if(event.keyCode==13){
+		  
+		  console.log($("select option:selected").val());
+		  
+		  self.location = "listAll"
+				+ '${pageMakerStudy.makeQuery(1)}'
+				+ "&searchType="
+				+ $("select option:selected").val();
+				/* + $("select option:selected").val() */
+				+ "&keyword=" + encodeURIComponent($('#keywordInput').val());  
+	  }
+  }
+	</script>
 
-   <body onLoad="gogogo()">
-
-        <div id="home-page">
-
-  		<!-- // Navigation -->
-		<%@include file="../nav.jsp"%>
-		
-
-
-            <!-- header start -->
-            <header id="header" class="header-wrapper home-parallax home-fade">
-                <div class="header-overlay"></div>
-                <div class="header-wrapper-inner">
-                    <div class="container">
-
-                        <div class="welcome-speech">
-                            <h1>Welcome to I Luv Study</h1>
-                            <p id="prakash"></p>
-                            <input type="text" name="keyword" id="keywordInput" placeholder="검색어를 입력하세요"> 
-                            <button class="btn btn-white">Search</button>
-                        </div><!-- /.intro -->
-                        
-                    </div><!-- /.container -->
-
-                </div><!-- /.header-wrapper-inner -->
-            </header>
-            <!-- /#header -->
-
-            <!--  begin testimonial section  -->
-            <!--  begin testimonial section  -->
-
-                <section class="bg-light-gray">
-                    <div class="container">
-
-                        <div class="headline text-center">
-                            <div class="row">
-                                <div class="col-md-6 col-md-offset-3">
-                                    <h2 class="section-title">New Study</h2>
-                                    <p class="section-sub-title">
-                                    	    최근 등록된 스터디 입니다 &amp; 방문을 원하시면 이미지를 클릭해 주세요
-                                    </p> <!-- /.section-sub-title -->
-                                </div>
-                            </div>
-                        </div> <!-- /.headline -->
-
-              <div id="client-speech" class="owl-carousel owl-theme">
-             		<c:forEach items="${list}" var="studyVO" step="2" varStatus="status">
-                            <div class="item">
-                                <div class="row">
-            		<c:if test="${staus.index%2==0}">
-                                    <div class="col-md-6">
-                                        <div class="client-box">
-                                            <div class="about-client">
-                                             <a href="/study/board${pageMakerStudy.makeSearch(pageMakerStudy.cri.page)}&bno=${studyVO.bno}">
-                                                <img src="/study/displayFile?fileName=${studyVO.name}" alt="client1">
-                                             </a>   
-                                            </div> <!-- end of /.about-client -->
-                                            <div class="main-speech">
-                                                <p>
-                                                  <strong> ${studyVO.title}</strong>${studyVO.bno}<br>
-                                                   ${studyVO.nickname}<br>
-                                                   ${studyVO.rDName} / ${studyVO.rSName}<br>
-                                                   ${studyVO.cDName} / ${studyVO.cSName}<br>
-                                                  <fmt:formatDate pattern="yyyy-MM-dd" value="${studyVO.regdate}" />
-                                                   
-                                                </p>
-                                            </div> <!-- end of /.main-speech  -->                                  
-                                        </div> <!-- end of /.client-box -->    
-                                    </div>
-                     </c:if>
-                     <c:set var="test" value="${list[status.index+1]}"/>
-						
-								   <div class="col-md-6">
-                                        <div class="client-box">
-                                            <div class="about-client">
-                                            <a href="/study/board${pageMakerStudy.makeSearch(pageMakerStudy.cri.page)}&bno=${test.bno}">
-                                                <img src="/study/displayFile?fileName=${test.name}" alt="client2">
-                                            </a>   
-                                            </div> <!-- end of /.about-client -->
-                                            <div class="main-speech">
-                                                <p>
-                                                  <strong> ${test.title}</strong>${test.bno}<br>
-                                                   ${test.nickname}<br>
-                                                   ${test.rDName} / ${test.rSName}<br>
-                                                   ${test.cDName} / ${test.cSName}<br>
-                                                   <fmt:formatDate pattern="yyyy-MM-dd" value="${test.regdate}" /><br>
-                                                </p>
-                                            </div> <!-- end of /.main-speech  -->
-                                        </div> <!-- end of /.client-box -->
-                                    </div>              
-                                </div>
-                            </div>
-					</c:forEach>	
-                        </div>
-                    </div>
-                            
-                            
-                        </div> <!-- end of /#client-speech  /.owl-carousel -->
-
-                    </div> <!-- end of .container -->
-                </section> 
-                <!--  end of testimonial  section -->
-
-            
-            
-            <!-- footer-navigation start -->  
-            <nav class="hidden-xs hidden-sm navbar footer-nav" role="navigation">
-                <div class="container">
-                    
-                    <div class="navbar-header">
-                        
-                        <!-- navbar logo -->
-                        <div class="navbar-brand">
-                            <span class="sr-only">&copy;I Luv Study</span>
-                            <a href="index.html">
-                                &copy;I Luv Study
-                            </a>
-                        </div>
-                        <!-- navbar logo -->
-
-                    </div><!-- /.navbar-header -->
-
-                    <!-- nav links -->
-					<%@include file="../footer.jsp"%>
-					
-					
-			    </div><!-- /.container -->
-            </nav>
-            <!-- footer-navigation end -->
-            
-        </div> <!-- end of /#home-page -->
-
-        <!--  Necessary scripts  -->
-
-        <script type="text/javascript" src="/resources/assets/js/jquery-2.1.3.min.js"></script>
-        <script type="text/javascript" src="/resources/assets/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="/resources/assets/js/owl.carousel.js"></script>
-        <script type="text/javascript" src="/resources/assets/js/jquery.hoverdir.js"></script>
-
-    </body>
+</body>
 </html>

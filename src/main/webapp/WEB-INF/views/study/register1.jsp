@@ -139,7 +139,7 @@ small {
 
 					<% int cataNum2 = 64; %>
 					<c:forEach items="${rglist}" var="StudyVO">
-						<% cataNum2++; %>
+					<% cataNum2++; %>
 						<option value="<%=(char)cataNum2%>">${StudyVO.rDName}</option>
 					</c:forEach>
 
@@ -445,6 +445,7 @@ var str = "";
 							$('"#SmallCat'+(i+1)+'"').hide('slow');
 						}
 					}*/
+		
 					if(bigNum == 'A'){
 						$("#SmallCat1").show('slow');
 						$("#SmallCat2").hide('slow');

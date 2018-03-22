@@ -51,7 +51,7 @@ public class UserLoginInterceptor extends HandlerInterceptorAdapter {
 			System.out.println(session.getAttribute(LOGIN));
 			
 			Object dest = session.getAttribute("dest"); //사용자가 원하는 페이지 정보를 dest에 담음
-			response.sendRedirect(dest != null ? (String)dest:"/study/listAll");
+			//response.sendRedirect(dest != null ? (String)dest:"/study/listAll");
 		
 		}
 		logger.info("==============찍히니??아래아랠애라애");

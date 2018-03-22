@@ -163,6 +163,10 @@
     cursor: pointer;
 }
 
+
+/* .texttext{
+	vertical-align:middle;
+} */
 </style>
 
 </head>
@@ -205,11 +209,14 @@
 								<input name="email" type="text" placeholder="username"> 
 								<input type="password" name="password" placeholder="password">
 								<button class="btn btn-info btn-block login" type="submit">Login</button>
-								<div class="texttext">
-								<p><input type="checkbox" style="width:20px;" id="ida"></p><label for="idaa">아이디저장</label><br>
+								<div class="texttext" style="margin-top:15px;">
+								<input type="checkbox" style="width:20px; vertical-align:middle; margin:0;" id="ida" ><label for="idaa" style="vertical-align:middle; margin:0;">　아이디저장</label><br>
 								</div>
-								<p><input type="checkbox" name="useCookies" style="width:20px;" id="idb"></p><label for="idbb">자동로그인</label>
-								
+								<div class="texttext">
+								<input type="checkbox" name="useCookies" style="width:20px; vertical-align:middle; margin:0;" id="idb"><label for="idbb" style="vertical-align:middle; margin:0;">　자동로그인</label>
+								</div><br>
+								아이디/비밀번호를 잊으셨나요?<br> 
+								<a href="">아이디찾기　 /　</a><a href="">비밀번호찾기</a>
 							</form>
 						</div>
 					</div>

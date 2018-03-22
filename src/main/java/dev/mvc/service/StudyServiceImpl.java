@@ -150,13 +150,12 @@ public class StudyServiceImpl implements StudyService {
 		    getcaS = Arrays.toString(arrcaS);
 		    
 		    System.out.println("+++++++++++++++++++++++++++++++++++++++++++");
-		    System.out.println(getcaS);
+		    System.out.println(list);
 		    System.out.println("+++++++++++++++++++++++++++++++++++++++++++");
 		    
 			list.get(i).setcSName(getcaS);
 			}
 			
-
 			return list;
 		}
 		

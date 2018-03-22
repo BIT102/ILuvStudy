@@ -41,9 +41,26 @@
 </head>
 <body>
 
+            <!-- footer-navigation start -->  
+            <nav class="hidden-xs hidden-sm navbar footer-nav" role="navigation">
+                <div class="container">
+                    
+                    <div class="navbar-header">
+                        
+                        <!-- navbar logo -->
+                        <div class="navbar-brand">
+                            <span class="sr-only">&copy;THEMEWAGON</span>
+                            <a href="index.html">
+                                &copy;THEMEWAGON
+                            </a>
+                        </div>
+                        <!-- navbar logo -->
+
+                    </div><!-- /.navbar-header -->
+
                     <!-- nav links -->
                     <div class="collapse navbar-collapse" id="main-nav-collapse">
-                        <ul class="nav navbar-nav navbar-right text-capitalize">
+                          <ul class="nav navbar-nav navbar-right text-capitalize">
                                                    <c:choose>
                         <c:when test="${login eq null}">
                             <li>
@@ -72,6 +89,10 @@
                             </li>
                         </ul>
                     </div><!-- nav links -->
-                   
+                    
+                </div><!-- /.container -->
+            </nav>
+            <!-- footer-navigation end -->
+
 </body>
 </html>

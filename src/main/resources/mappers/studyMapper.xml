@@ -398,6 +398,10 @@ WHERE bs.bno > 0
   						OR content like CONCAT('%', #{keyword}, '%') 
   						OR nickname like CONCAT('%', #{keyword}, '%') )
   			</if>
+<!--   			<if test="searchType == ''.toString()">
+  				and ( rdid like CONCAT('%', #{keyword}, '%')
+  					  	OR rsid like CONCAT('%', #{keyword}, '%'))
+  			</if> -->
   		</if> 
   </sql>		
 
