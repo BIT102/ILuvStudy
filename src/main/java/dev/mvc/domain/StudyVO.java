@@ -85,6 +85,7 @@ public class StudyVO {
 	public void setWriter(String writer) {
 		this.writer = writer;
 	}
+
 	public String[] getCategoryD() {
 		return categoryD;
 	}

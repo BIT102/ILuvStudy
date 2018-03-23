@@ -9,9 +9,9 @@ import dev.mvc.domain.NoticeVO;
 import dev.mvc.domain.QnaVO;
 import dev.mvc.domain.ReplyStudyVO;
 import dev.mvc.domain.ReplyVO;
+import dev.mvc.domain.StatisticVO;
 import dev.mvc.domain.StudyVO;
 import dev.mvc.domain.UserVO;
-import dev.mvc.dto.LoginDTO;
 
 public interface AdminDAO {
 	
@@ -37,6 +37,7 @@ public interface AdminDAO {
 	public int studyCountPaging(Criteria cri)throws Exception;
 	public StudyVO studyDetail(Integer bno)throws Exception;
 	public List<StudyVO> studyDetailC(Integer bno)throws Exception;
+	public List<StudyVO> studyImage(Integer bno)throws Exception;
 	public List<StudyVO> studyCategory(Criteria cri) throws Exception;
 	public List<StudyVO> studyCategory2(String cDId) throws Exception;
 	public List<StudyVO> region(Criteria cri) throws Exception;
@@ -63,4 +64,16 @@ public interface AdminDAO {
 	public NoticeVO noticeDetail(Integer bno)throws Exception;
 	public void noticeUpdate(NoticeVO vo)throws Exception;
 	public void noticeRegister(NoticeVO vo)throws Exception;
+	
+	public int todayM() throws Exception;
+	public int yesterdayM() throws Exception;
+	public List<StatisticVO> weekM() throws Exception;
+	public int totalM() throws Exception;
+	public int totalW() throws Exception;
+	
+	public void insertVisit() throws Exception;
+	public int totalV() throws Exception;
+	public int todayV() throws Exception;
+	public List<StatisticVO> weekV() throws Exception;
+	public int yesterdayV() throws Exception;
 }

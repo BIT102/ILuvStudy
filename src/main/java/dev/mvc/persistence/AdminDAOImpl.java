@@ -14,9 +14,9 @@ import dev.mvc.domain.NoticeVO;
 import dev.mvc.domain.QnaVO;
 import dev.mvc.domain.ReplyStudyVO;
 import dev.mvc.domain.ReplyVO;
+import dev.mvc.domain.StatisticVO;
 import dev.mvc.domain.StudyVO;
 import dev.mvc.domain.UserVO;
-import dev.mvc.dto.LoginDTO;
 
 @Repository
 public class AdminDAOImpl implements AdminDAO{
@@ -116,6 +116,11 @@ public class AdminDAOImpl implements AdminDAO{
 	@Override
 	public StudyVO studyDetail(Integer bno)throws Exception{
 		return session.selectOne(namespace + ".studyDetail", bno);  //스터디 정보 정보 상세 가져옴
+	}
+	
+	@Override
+	public List<StudyVO> studyImage(Integer bno)throws Exception{
+		return session.selectList(namespace + ".studyImage", bno); //스터디 이미지 정보 가져옴
 	}
 	
 	@Override
@@ -234,4 +239,56 @@ public class AdminDAOImpl implements AdminDAO{
 	}
 	
 		
+	
+	@Override
+	public int todayM() throws Exception{
+		return session.selectOne(namespace + ".todayM");  //금일 가입자수
+	}
+	
+	@Override
+	public int yesterdayM() throws Exception{
+		return session.selectOne(namespace + ".yesterdayM");  //어제 가입자수
+	}
+
+	@Override
+	public List<StatisticVO> weekM() throws Exception{
+		return session.selectList(namespace + ".weekM");  //최근 8일 가입자수
+	}
+	
+	@Override
+	public int totalM() throws Exception{
+		return session.selectOne(namespace + ".totalM");  //총 회원수
+	}
+	
+	@Override
+	public int totalW() throws Exception{
+		return session.selectOne(namespace + ".totalW");  //총 탈퇴회원수
+	}
+	
+	@Override
+	public void insertVisit() throws Exception{
+		System.out.println("여기는  다오");
+		session.insert(namespace + ".insertVisit");  //방문자 수 카운트
+	}
+	
+	@Override
+	public int totalV() throws Exception{
+		return session.selectOne(namespace + ".totalV");  //총 방문자수
+	}
+	
+	@Override
+	public int todayV() throws Exception{
+		return session.selectOne(namespace + ".todayV");  //금일 방문자수
+	}
+	
+	@Override
+	public int yesterdayV() throws Exception{
+		return session.selectOne(namespace + ".yesterdayV");  //어제 방문자수
+	}
+	
+	@Override
+	public List<StatisticVO> weekV() throws Exception{
+		return session.selectList(namespace + ".weekV");  //최근 8일 방문자수
+	}
+	
 }

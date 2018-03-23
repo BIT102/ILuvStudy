@@ -52,5 +52,12 @@
     <filter-name>hiddenHttpMethodFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+  
+  
+  <!-- 방문자 수 체크 -->
+   <listener>
+        <listener-class>dev.mvc.util.VisitSessionListener</listener-class>
+    </listener>
+
 
 </web-app>

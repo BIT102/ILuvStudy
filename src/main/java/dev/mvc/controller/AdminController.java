@@ -18,11 +18,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import dev.mvc.domain.AdminVO;
 import dev.mvc.admin.Criteria;
-import dev.mvc.domain.NoticeVO;
 import dev.mvc.admin.PageMaker;
+import dev.mvc.domain.AdminVO;
+import dev.mvc.domain.NoticeVO;
 import dev.mvc.domain.ReplyVO;
+import dev.mvc.domain.StatisticVO;
 import dev.mvc.domain.StudyVO;
 import dev.mvc.domain.UserVO;
 import dev.mvc.service.AdminService;
@@ -470,4 +471,14 @@ public class AdminController {
 	}
 //사이트관리 > 공지사항 등록 끝
 
+
+//통계관리
+	//admin/noticeList.jsp
+	@RequestMapping(value = "/statistic", method = RequestMethod.GET)
+	public void statistic(StatisticVO vo, Model model) throws Exception{
+		logger.info("statistic get...");
+		model.addAttribute(service.memberS(vo));
+		model.addAttribute("weeks", service.weekS());
+		model.addAttribute("weekv", service.weekV());
+	}	
 }

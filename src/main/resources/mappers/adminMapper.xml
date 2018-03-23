@@ -245,7 +245,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
  	<!-- study 정보 상세 -->
-<!--
+<!-- 
 	<select id="studyDetail" resultType="StudyVO">
 		select *
 		from board_study bs, region r, study_category c
@@ -255,16 +255,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		and bs.categoryD = c.CDID
 		and bs.categoryS = c.CSID
 	</select> 
--->
-	
+
+	 -->
 	<!-- study 정보 상세 -->
+	
 	<select id="studyDetail" resultType="StudyVO">
 		select *
 		from board_study bs, region r
 		where bno = #{bno}
 		and bs.rdid = r.rdid
 		and bs.rsid = r.rsid
-	</select>
+	</select> 
+
 	
 	<!-- study 카테고리 상세 정보 -->
 	<select id="studyDetailC" resultType="StudyVO">
@@ -282,6 +284,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		group by cdid
 	</select>
 	
+	<!-- ajax 사용 시 호출 -->
 	<select id="studyCategory2" resultType="StudyVO">
 		select *
 		from study_category
@@ -514,4 +517,97 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into notice (title, content, regdate, writer)
 		values (#{title},#{content},now(), #{writer});
 	</insert>
+	
+
+<!-- ======== 통계관리 ========== -->	
+<!-- =======가입자 수 통계 =========-->
+	<!-- 금일 가입자수 -->
+	<select id="todayM" resultType="int">
+		select count(*) as toDMember
+		from user
+		where date_format(registdate, '%Y-%m-%d') = current_date()
+	</select>
+
+	<!-- 어제 가입자수 -->
+	<select id="yesterdayM" resultType="int">
+		select count(*) as yesterDMember
+		from user
+		where date_format(registdate, '%Y-%m-%d') = current_date()-interval 1 day
+	</select>
+	
+	<!-- 최근 8일 가입자수 -->
+	<select id="weekM" resultType="StatisticVO">		
+		select t.selected_date as day
+		, count(date_format(u.registdate, '%Y-%m-%d')) as weekMember
+		from user u right outer join(
+		select * from 
+		(select adddate('1970-01-01',t4.i*10000 + t3.i*1000 + t2.i*100 + t1.i*10 + t0.i) selected_date from
+		(select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t0,
+ 		(select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t1,
+ 		(select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t2,
+ 		(select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t3,
+ 		(select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t4) v
+		where selected_date between current_date()-interval 7 day and current_date()
+		) t
+		on date_format(u.registdate, '%Y-%m-%d') = t.selected_date
+		group by date_format(u.registdate, '%Y-%m-%d'), t.selected_date
+		order by t.selected_date
+	</select>
+	
+	<!-- 총 회원수 -->
+	<select id="totalM" resultType="int">
+		select count(*)
+		from user
+		where isdel=0
+	</select>
+	
+	<!-- 총 탈퇴자수 -->
+	<select id="totalW" resultType="int">
+		select count(*)
+		from user
+		where isdel=1
+	</select>
+
+<!-- ======방문자 수 통계========= -->	
+	<!-- 방문자 수 추가 -->
+	<insert id="insertVisit">
+		insert into visit (vdate) values (date_format(now(),'%Y-%m-%d'))
+	</insert>
+	
+	<!-- 전체 방문자 수 조회 -->
+	<select id="totalV" resultType="int">
+		select count(*) as totalVisit from visit
+	</select>
+	
+	<!-- 오늘 방문자 수 조회 -->
+	<select id="todayV" resultType="int">
+		select count(*) as toDVisit from visit   
+		where vdate = date_format(now(),'%Y-%m-%d')
+	</select>
+	
+	<!-- 어제 방문자 수 조회 -->
+	<select id="yesterdayV" resultType="int">
+		select count(*) as yesterDVisit from visit   
+		where vdate = current_date()-interval 1 day
+	</select>
+	
+	<!-- 최근 8일 방문자 수 조회 -->
+	<select id="weekV" resultType="StatisticVO">
+		select t.selected_date as day
+		, count(date_format(v.vdate, '%Y-%m-%d')) as weekVisit
+		from visit v right outer join(
+		select * from 
+		(select adddate('1970-01-01',t4.i*10000 + t3.i*1000 + t2.i*100 + t1.i*10 + t0.i) selected_date from
+ 		(select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t0,
+ 		(select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t1,
+ 		(select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t2,
+ 		(select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t3,
+ 		(select 0 i union select 1 union select 2 union select 3 union select 4 union select 5 union select 6 union select 7 union select 8 union select 9) t4) v
+		where selected_date between current_date()-interval 7 day and current_date()
+		) t
+		on date_format(v.vdate, '%Y-%m-%d') = t.selected_date
+		group by date_format(v.vdate, '%Y-%m-%d'), t.selected_date
+		order by t.selected_date
+	</select>
+	
 </mapper>

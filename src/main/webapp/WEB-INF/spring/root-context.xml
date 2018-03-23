@@ -74,5 +74,6 @@
 	<context:component-scan base-package="dev.mvc.service"></context:component-scan>
 	<context:component-scan base-package="dev.mvc.domain"></context:component-scan>
 
+	
 </beans>
 

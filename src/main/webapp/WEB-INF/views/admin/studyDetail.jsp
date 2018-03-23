@@ -9,8 +9,18 @@
 form th{
 	width:30%;
 }
-#rDName, #rSName, #age, #sc, #st, #et, #catD, #catS{
+#rDName, #rSName, #age, #catD, #catS{
 	width:30%;
+	display: inline;
+}
+
+#sc{
+	width:20%;
+	display: inline;
+}
+
+#st, #et{
+	width:15%;
 	display: inline;
 }
 
@@ -71,13 +81,13 @@ form th{
                  	<%-- <option value="${studyVO.cSName}">${studyVO.cSName}</option> --%>
                  </select>
                  <button type="button" id="addCat" class="btn btn-default btn-xs">추가</button>
-                 <div id="addCatArea">
-                 </div>
+                 <div id="addCatArea"></div>
 				</td>
+<!-- ======== 카테고리 끝 =========== -->    				
             </tr>
             <tr>
                 <th>스터디명</th>
-                <td><input type="text" name="title" value="${studyVO.title}" class="form-control"></td>
+                <td><input type="text" id="title" name="title" value="${studyVO.title}" class="form-control"></td>
             </tr>
             <tr>
                 <th>지역</th>
@@ -92,7 +102,7 @@ form th{
                     	</c:forEach>
                     </select>
                     <select id="rSName" name='rSId' class="form-control"> 
-                    </select>
+                    </select> 
                 </td>
             </tr>
             <tr>
@@ -160,7 +170,6 @@ form th{
                 	<input type="text" name="st" value="${studyVO.st}" style="width:30%; display: inline;" class="form-control"> ~
                 	<input type="text" name="et" value="${studyVO.et}" style="width:30%; display: inline;" class="form-control"><br> --%>
                 	<select id="sc" name="sc" class="form-control">
-						<option selected>--</option>
 						<option value="월요일">월요일</option>
 						<option value="화요일">화요일</option>
 						<option value="수요일">수요일</option>
@@ -169,8 +178,8 @@ form th{
 						<option value="토요일">토요일</option>
 						<option value="일요일">일요일</option>
 					</select>
+					<span>&nbsp;&nbsp;시작시간 : </span> 
 					<select id="st" name="st" class="form-control">
-						<option selected>--</option>
 						<option value="1시">1시</option>
 						<option value="2시">2시</option>
 						<option value="3시">3시</option>
@@ -196,8 +205,8 @@ form th{
 						<option value="23시">23시</option>
 						<option value="24시">24시</option>
 					</select>
+					<span>&nbsp;&nbsp;끝나는 시간 : </span> 
 					<select id="et" name="et" class="form-control">
-						<option selected>--</option>
 						<option value="1시">1시</option>
 						<option value="2시">2시</option>
 						<option value="3시">3시</option>
@@ -232,7 +241,7 @@ form th{
             <tr>
                 <th>완료일</th>
                 <td>
-                 <fmt:formatDate pattern="yyyy-MM-dd" value="${studyVO.enddate}"/>
+                <fmt:formatDate pattern="yyyy-MM-dd" value="${studyVO.enddate}"/>
                 </td>
             </tr>
             <tr>
@@ -241,7 +250,7 @@ form th{
             </tr>
             <tr>
                 <th>최대인원</th>
-                <td><input type="text" name="max" value="${studyVO.max}"  class="form-control"></td>
+                <td><input type="text" id="max" name="max" value="${studyVO.max}" class="form-control"></td>
             </tr>
             <tr>
             	<th>조회수</th>
@@ -264,8 +273,10 @@ form th{
             <tr>
                 <th>이미지</th>
                 <td>
-                	<div class="gallery">
-      		  		</div>
+<!--  ====== 이미지 =========== -->
+                <c:forEach items="${studyImage}" var="studyVO">
+      		  		<img src="/study/displayFile?fileName=${studyVO.name}" alt="Attachment">
+      		  	</c:forEach>
                 </td>
             </tr>
         </tbody>
@@ -289,6 +300,7 @@ form th{
             </tr>
             </thead>
             <tbody>
+<!-- ======= 신청자 =========== -->
 <c:forEach items="${applyStudy}" var="studyVO">
             <tr>
                 <td>${studyVO.bno}</td>
@@ -339,11 +351,44 @@ form th{
 		
 		console.log(formObj);
 		
+		//유효성 검사 변수
+		categoryV = false;
+		titleV = false;
+		ageV = false;
+		maxV = false;
+		
 		//수정 클릭 시 액션
 		$("#modifyBtn").on("click", function(){
 			//form 데이터 유효성 검사 추가 필요
-			//formObj.attr("action", "/admin/studyDetail");
-			formObj.submit();
+			
+ 			//카테고리 유효성
+  			if($("#addCatArea").find("div").length){
+				categoryV = true;
+			}
+			
+			// title 유효성
+			if($("#title").val() != ""){
+				titleV = true;
+			}
+			
+			//age 유효성
+			if($(".age").val() != ""){
+				ageV = true;
+			}
+			
+			//max 유효성
+			if($("#max").val() != ""){
+				maxV = true;
+			}
+			
+			console.log("categoryV : "+categoryV+" titleV : "+titleV+" ageV : "+ageV+" maxV : "+maxV);
+			
+			if(categoryV && titleV && ageV && maxV){
+				formObj.submit();
+			}else{
+				alert("내용을 확인하세요");
+			}   
+			
 		});
 		
 		//목록 클릭 시 액션
@@ -386,10 +431,19 @@ form th{
        		$("#addTimeArea").append(time);
 		});
 		
+		//연령 체크박스 2개 초과하여 선택 시 알럿 처리
+		$(".age").on("click", function(){
+			console.log($("input:checkbox[class=age]:checked").length)
+			if($("input:checkbox[class=age]:checked").length > 2 ){
+				alert("연령은 최대 2개까지 선택가능합니다.")
+				$(this).attr("checked",false);
+			}
+		});
+		
 	});
 		//카테고리 삭제 버튼
 		function btn_delete(x){
-			$(x).parent("div").remove();
+			$(x).parent("div").parent("span").remove();
 		}
 		
 		//지역정보 2단 콤보박스 메서드
@@ -441,7 +495,7 @@ form th{
 		}
 		
 		function getStudy(){
-			//카테고리 정보 불러옴
+			//카테고리 정보 불러옴 			
 			<c:forEach items="${studyDC}" var="studyVO">
 				var recatd = "${studyVO.cDId}"; 
 				var recats = ${studyVO.cSId}; 
@@ -454,7 +508,33 @@ form th{
 				
 				$("#addCatArea").append(recat);
 			</c:forEach>
+			 
+			 
+			//카테고리 정보 불러오기 테스트
+/* 			var recatd = "${studyVO.categoryD}";
+			var recats = "${studyVO.categoryS}";
+			var recats2 = recats.split(',');
 			
+			<c:forEach items="${studyCategory}" var="studyVO">
+     			if(recatd == "${studyVO.cDId}"){
+     				var recatd2 = "${studyVO.cDName}";
+     			}
+     			for(var i=0;i<recats2.length;i++){
+     				if(${studyVO.cSId} == recats2[i]){
+     					var recats3 = "${studyVO.cSName}";
+     					
+						var recat="<span><input type='hidden' name='categoryD' value="+recatd+">"
+						+"<input type='hidden' name='categoryS' value="+recats+">"
+						+"<div>"+recatd2 +" > "+recats3+"</span><button type='button' onclick = 'btn_delete(this)' class='btn btn-default btn-xs'>삭제</button></div>";
+				
+						$("#addCatArea").append(recat);
+     				}
+     			}
+     			
+     		</c:forEach>
+			
+			 */
+			//테스트 끝
 			
 			// 연령 정보 불러옴
 			var check_value="${studyVO.age}";  //연령 DB 데이터 변수에 저장
@@ -490,32 +570,10 @@ form th{
 			}); //$.ajax 끝
 		} //getStudy() 끝
 		
-		
-	    //파일불러오기
-	    var bno = ${studyVO.bno};
-	    var template = Handlebars.compile($("#templateAttach").html());
-	    
-	    $.getJSON("/study/getFile/"+bno, function(list){
-	    	$(list).each(function(){
-	    		
-	    		var fileInfo = getFileInfo(this);
-	    		var html = template(fileInfo);
-	    		
-	    		$(".gallery").append(html)
-	    	})
-	    })
-		
+
 </script>
 
-   <!-- 파일업로드 핸들러 -->
-    <script id="templateAttach" type="text/x-handlebars-template">
-    <li data-src='{{name}}'>
-		<span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment"></span>
-  		<div class="mailbox-attachment-info">
-		</span>
-		</div>
-	</li>
-    </script>
+
 
 </body>
 </html>

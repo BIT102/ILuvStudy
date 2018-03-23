@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import dev.mvc.admin.Criteria;
 import dev.mvc.domain.AdminVO;
@@ -14,6 +15,7 @@ import dev.mvc.domain.NoticeVO;
 import dev.mvc.domain.QnaVO;
 import dev.mvc.domain.ReplyStudyVO;
 import dev.mvc.domain.ReplyVO;
+import dev.mvc.domain.StatisticVO;
 import dev.mvc.domain.StudyVO;
 import dev.mvc.domain.UserVO;
 import dev.mvc.persistence.AdminDAO;
@@ -116,6 +118,11 @@ public class AdminServiceImpl implements AdminService{
 	}
 	
 	@Override
+	public List<StudyVO> studyImage(Integer bno)throws Exception{
+		return dao.studyImage(bno);
+	}
+	
+	@Override
 	public List<StudyVO> studyDetailC(Integer bno)throws Exception{
 		return dao.studyDetailC(bno);
 	}
@@ -145,6 +152,7 @@ public class AdminServiceImpl implements AdminService{
 		return dao.applyStudy(bno);
 	}
 	
+	@Transactional
 	@Override
 	public void studyUpdate(Integer bno, StudyVO vo)throws Exception{
 		
@@ -244,4 +252,33 @@ public class AdminServiceImpl implements AdminService{
 	public void noticeRegister(NoticeVO vo)throws Exception{
 		dao.noticeRegister(vo);
 	}
+	
+	
+// =========== 통계 ==========
+	@Override
+	public StatisticVO memberS(StatisticVO vo) throws Exception{
+		vo.setToDMember(dao.todayM());   		//금일 가입자수
+		vo.setYesterDMember(dao.yesterdayM());	//어제 가입자수
+		vo.setTotalMember(dao.totalM());		//총 회원수
+		vo.setTotalWithdrawal(dao.totalW());	//총 탈퇴회원수
+		
+		vo.setTotalVisit(dao.totalV());			//총 방문자수
+		vo.setToDVisit(dao.todayV());			//오늘 방문자수
+		vo.setYesterDVisit(dao.yesterdayV());	//어제 방문자수
+		
+		//System.out.println("===============");
+		//System.out.println(vo);
+		return vo;
+	}
+	
+	@Override
+	public List<StatisticVO> weekS() throws Exception{
+		return dao.weekM();  //최근 8일 가입자 수 통계
+	}
+	
+	@Override
+	public List<StatisticVO> weekV() throws Exception{
+		return dao.weekV(); //최근 8일 방문자 수 통계
+	}
+
 }
