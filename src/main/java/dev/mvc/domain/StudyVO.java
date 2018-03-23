@@ -256,8 +256,7 @@ public class StudyVO {
 				+ ", enddate=" + enddate + ", rDName=" + rDName + ", rSName=" + rSName + ", cDName=" + cDName
 				+ ", cSName=" + cSName + ", nickname=" + nickname + ", no=" + no + ", name=" + name + ", status="
 				+ status + ", files=" + Arrays.toString(files) + ", cDId=" + cDId + ", cSId=" + cSId + "]";
-	} 
+	}
 
-	
 }
 

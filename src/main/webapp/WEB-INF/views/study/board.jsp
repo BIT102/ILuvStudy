@@ -1,4 +1,3 @@
-
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -727,6 +726,7 @@ $(document).ready(function(){
         	getPageList(replyPage);
         });
         
+
     	//댓클불러오기화면에    
 /*        $("document").ready(function getPageList(page) {       	
         	
@@ -748,5 +748,58 @@ $(document).ready(function(){
         	});
     	});	 */
         </script>    
+
+</script>
+
+<script>
+
+Handlebars.registerHelper("prettifyDate", function(timeValue){
+	var dateObj = new Date(timeValue);
+	var year = dateObj.getFullYear();
+	var month = dateObj.getMonth()+1;
+	var date = dateObj.getDate();
+	return year+"/"+month+"/"+date;
+});
+
+var printData = function(replyArr, target, templateObject) {
+	
+	var template = Handlebars.compile(templateObject.html());
+	
+	var html = template(replyArr);
+	$(".replyLi").remove();
+	target.after(html);
+}
+
+</script>
+<!-- 수정버튼 -->
+
+
+<script>
+$(document).ready(function(){
+	
+	var formObj = $("form[role='form']");
+	
+	$(".preee").on("click", function(){
+		self.location = "/study/listAll?page=${cri.page}&perPageNum=${cri.perPageNum}";
+	});
+	
+	$(".delete").on("click", function(){
+		formObj.attr("action", "/study/remove");
+		formObj.submit();
+	})
+	
+	$(".fa fa-heart-o").on("click", function(){
+		<i class="fa fa-heart" style="font-size:36px;"></i>
+	})
+	
+	$(".modifyBtn").on("click",function(){
+		formObj.attr("action", "/study/modifyPage");
+		formObj.attr("method", "get");
+		formObj.submit();
+	});
+	
+});
+</script>   
+ 
 </body>
 </html>

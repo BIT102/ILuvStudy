@@ -7,6 +7,8 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import dev.mvc.admin.Criteria;
@@ -21,7 +23,21 @@ public class StudyDAOImpl implements StudyDAO {
 	private SqlSession session;
 	
 	private static final String namespace = "dev.mvc.mapper.StudyMapper";
+
+	private static final Logger logger = LoggerFactory.getLogger(StudyDAOImpl.class);
+
+
+	@Override
+	public String getcaD(Integer bno) throws Exception {
 		
+		return session.selectOne(namespace+".getcaD", bno);
+	}
+	
+	@Override
+	public List<String> getcaS(Integer bno) throws Exception {
+		return session.selectList(namespace+".getcaS", bno);
+	}
+	
 	//스터디등록
 	@Override
 	public void createStudy(StudyVO vo) throws Exception {
@@ -48,25 +64,18 @@ public class StudyDAOImpl implements StudyDAO {
 	public List<StudyVO> region2(String rDId) throws Exception{
 		return session.selectList(namespace + ".region2", rDId);   //지역 정보 소분류 가져옴  
 	}
-	
-	
-	
-	
-	
-	
+		
 	//카테고리 불러오기
 	@Override
 	public List<StudyVO> readCa(Integer bno) throws Exception {
 		return session.selectList(namespace+".readCa", bno);
-	}
-	
+	}	
 	
 	//카테고리등록
-	public void createCa(Map<String, Object> map) throws Exception{
-		session.insert(namespace+".createCa", map);
+	public void createCa(Map<String, Object> map) throws Exception {
+		 session.insert(namespace+".createCa", map);
 	}
-	
-	
+
 	//스터디 불러오기
 	@Override
 	public StudyVO readStudy(Integer bno) throws Exception {

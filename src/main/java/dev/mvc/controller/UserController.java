@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.WebUtils;
 
 import dev.mvc.domain.UserVO;
+import dev.mvc.dto.LoginDTO;
 import dev.mvc.persistence.UserDAO;
 import dev.mvc.service.UserService;
 
@@ -39,6 +40,8 @@ public class UserController {
 
 	@Inject
 	private UserService service;
+
+	
 	
 	//회원가입 컨트롤러
 	@RequestMapping(value = "/join", method = RequestMethod.GET)

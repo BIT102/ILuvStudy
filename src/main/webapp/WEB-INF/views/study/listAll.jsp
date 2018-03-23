@@ -3,426 +3,473 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@include file="../include/header.jsp"%>
-<!DOCTYPE html>
-<html>
+<!DOCTYPE htm>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
 
+<html class="no-js">
+<!--<![endif]-->
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <title>I Luv Study</title>
-<!-- Bootstrap tag -->
-<link rel="stylesheet" href="/resources/bootstrap/css/bootstrap.css">
-<link rel="stylesheet" href="/resources/bootstrap/css/font-awesom.css">
+
+<!-- meta -->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
 
-<!------ Include the above in your HEAD tag ---------->
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
-<!-- 파일업로드 -->	
-<script type="text/javascript" src="/resources/js/upload.js"></script>
+<!-- stylesheets -->
+<link rel="stylesheet" href="/resources/assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="/resources/assets/css/font-awesome.min.css">
+<link rel="stylesheet" href="/resources/assets/css/animate.css">
+<link rel="stylesheet" href="/resources/assets/css/owl.carousel.css">
+<link rel="stylesheet" href="/resources/assets/css/owl.theme.css">
+<link rel="stylesheet" href="/resources/assets/css/style.css">
+
+<!-- fonts for this template -->
+<link rel="stylesheet"
+	href="http://fonts.googleapis.com/css?family=Kaushan+Script"
+	type="text/css">
+
+<!-- fafa img -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- scripts -->
+<script type="text/javascript"
+	src="/resources/assets/js/modernizr.custom.97074.js"></script>
 
 <style>
-li{
-list-style:none;
-}
-.container1 {
-margin-top:130px;
+.select, .download-target {
+	width: 20em;
 }
 
-.row {
-	text-align:center;
+.select {
+	position: relative;
+	display: block;
+	height: 3em;
+	width: 200px;
+	line-height: 3;
+	background: white;
+	overflow: hidden;
+	border-radius: .25em;
+	display: inline-block;
+	display: -webkit-inline-box;
+	border: 1px solid #667780;
+	line-height: 3;
+	background: white;
+	overflow: hidden;
+	border-radius: .25em;
+	display: inline-block;
+	display: -webkit-inline-box;
+	border: 1px solid #667780;
+	margin: 1em 5px;
 }
 
-.row .responsive{
-	border:1px solid white;
-	margin:15px;
-	display:inline-block !important;
-	vertical-align:top;
-	width:350px;
-	height:450px;
-	color:white;
-	margin-bottom:15px;
+select {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0 0 0 .5em;
+	color: #fff;
+	cursor: pointer;
 }
 
-
-.row .img-responsive {
-	width:350px;
-	height:227px;
+select::-ms-expand {
+	display: none;
 }
 
-img {
-	filter: gray; /* IE6-9 */
-	-webkit-filter: grayscale(1); /* Google Chrome, Safari 6+ & Opera 15+ */
-	-webkit-box-shadow: 0 2px 6px 2px rgba(0,0,0,0.75);
-	-moz-box-shadow: 0 2px 6px 2px rgba(0,0,0,0.75);
-	box-shadow: 0 2px 6px 2px rgba(0,0,0,0.75);
-	 margin-bottom: 20px;
-        }
-
- img:hover {
-    filter: none; /* IE6-9 */
-    -webkit-filter: grayscale(0); /* Google Chrome, Safari 6+ & Opera 15+ */
-     mouse:pointer;
-            }
-
-
-/*검색 이미지 구현*/
-.search-wrapper {
-                position: absolute;
-                -webkit-transform: translate(-50%, -50%);
-                -moz-transform: translate(-50%, -50%);
-                transform: translate(-50%, -50%);
-                margin-top:65px;
-                right:21.5%;
-            }
-            .search-wrapper.active {}
-
-            .search-wrapper .input-holder {
-                overflow: hidden;
-                height: 70px;
-                background: rgba(255,255,255,0);
-                border-radius:6px;
-                position: relative;
-                width:70px;
-                -webkit-transition: all 0.3s ease-in-out;
-                -moz-transition: all 0.3s ease-in-out;
-                transition: all 0.3s ease-in-out;
-            }
-            .search-wrapper.active .input-holder {
-                border-radius: 50px;
-                width:450px;
-                background: rgba(0,0,0,0.5);
-                -webkit-transition: all .5s cubic-bezier(0.000, 0.105, 0.035, 1.570);
-                -moz-transition: all .5s cubic-bezier(0.000, 0.105, 0.035, 1.570);
-                transition: all .5s cubic-bezier(0.000, 0.105, 0.035, 1.570);
-            }
-
-            .search-wrapper .input-holder .search-input {
-                width:100%;
-                height: 50px;
-                padding:0px 70px 0 20px;
-                opacity: 0;
-                position: absolute;
-                top:0px;
-                left:0px;
-                background: transparent;
-                -webkit-box-sizing: border-box;
-                -moz-box-sizing: border-box;
-                box-sizing: border-box;
-                border:none;
-                outline:none;
-                font-family:"Open Sans", Arial, Verdana;
-                font-size: 16px;
-                font-weight: 400;
-                line-height: 20px;
-                color:#FFF;
-                -webkit-transform: translate(0, 60px);
-                -moz-transform: translate(0, 60px);
-                transform: translate(0, 60px);
-                -webkit-transition: all .3s cubic-bezier(0.000, 0.105, 0.035, 1.570);
-                -moz-transition: all .3s cubic-bezier(0.000, 0.105, 0.035, 1.570);
-                transition: all .3s cubic-bezier(0.000, 0.105, 0.035, 1.570);
-
-                -webkit-transition-delay: 0.3s;
-                -moz-transition-delay: 0.3s;
-                transition-delay: 0.3s;
-            }
-            .search-wrapper.active .input-holder .search-input {
-                opacity: 1;
-                -webkit-transform: translate(0, 10px);
-                -moz-transform: translate(0, 10px);
-                transform: translate(0, 10px);
-            }
-
-            .search-wrapper .input-holder .search-icon {
-				
-				color:white;
-                width:70px;
-                height:70px;
-                border:none;
-                border-radius:6px;
-                background: #262626;
-                padding:0px;
-                outline:none;
-                position: relative;
-                z-index: 2;
-                float:right;
-                cursor: pointer;
-                -webkit-transition: all 0.3s ease-in-out;
-                -moz-transition: all 0.3s ease-in-out;
-                transition: all 0.3s ease-in-out;
-            }
-            .search-wrapper.active .input-holder .search-icon {
-                width: 50px;
-                height:50px;
-                margin: 10px;
-                border-radius: 30px;
-            }
-            .search-wrapper .input-holder .search-icon span {
-                width:22px;
-                height:22px;
-                display: inline-block;
-                vertical-align: middle;
-                position:relative;
-                -webkit-transform: rotate(45deg);
-                -moz-transform: rotate(45deg);
-                transform: rotate(45deg);
-                -webkit-transition: all .4s cubic-bezier(0.650, -0.600, 0.240, 1.650);
-                -moz-transition: all .4s cubic-bezier(0.650, -0.600, 0.240, 1.650);
-                transition: all .4s cubic-bezier(0.650, -0.600, 0.240, 1.650);
-
-            }
-            .search-wrapper.active .input-holder .search-icon span {
-                -webkit-transform: rotate(-45deg);
-                -moz-transform: rotate(-45deg);
-                transform: rotate(-45deg);
-            }
-            .search-wrapper .input-holder .search-icon span::before, .search-wrapper .input-holder .search-icon span::after {
-                position: absolute;
-                content:'';
-            }
-            .search-wrapper .input-holder .search-icon span::before {
-                width: 4px;
-                height: 11px;
-                left: 9px;
-                top: 18px;
-                border-radius: 2px;
-                background: #974BE0;
-            }
-            .search-wrapper .input-holder .search-icon span::after {
-                width: 14px;
-                height: 14px;
-                left: 0px;
-                top: 0px;
-                border-radius: 16px;
-                border: 4px solid #974BE0;
-            }
-
-            .search-wrapper .close {
-                position: absolute;
-                z-index: 1;
-                top:24px;
-                right:20px;
-                width:25px;
-                height:25px;
-                cursor: pointer;
-                -webkit-transform: rotate(-180deg);
-                -moz-transform: rotate(-180deg);
-                transform: rotate(-180deg);
-                -webkit-transition: all .3s cubic-bezier(0.285, -0.450, 0.935, 0.110);
-                -moz-transition: all .3s cubic-bezier(0.285, -0.450, 0.935, 0.110);
-                transition: all .3s cubic-bezier(0.285, -0.450, 0.935, 0.110);
-                -webkit-transition-delay: 0.2s;
-                -moz-transition-delay: 0.2s;
-                transition-delay: 0.2s;
-            }
-            .search-wrapper.active .close {
-                right:-50px;
-                -webkit-transform: rotate(45deg);
-                -moz-transform: rotate(45deg);
-                transform: rotate(45deg);
-                -webkit-transition: all .6s cubic-bezier(0.000, 0.105, 0.035, 1.570);
-                -moz-transition: all .6s cubic-bezier(0.000, 0.105, 0.035, 1.570);
-                transition: all .6s cubic-bezier(0.000, 0.105, 0.035, 1.570);
-                -webkit-transition-delay: 0.5s;
-                -moz-transition-delay: 0.5s;
-                transition-delay: 0.5s;
-            }
-            .search-wrapper .close::before, .search-wrapper .close::after {
-                position:absolute;
-                content:'';
-                background: red;
-                border-radius: 2px;
-            }
-            .search-wrapper .close::before {
-                width: 5px;
-                height: 25px;
-                left: 10px;
-                top: 0px;
-            }
-            .search-wrapper .close::after {
-                width: 25px;
-                height: 5px;
-                left: 0px;
-                top: 10px;
-            }
-            .search-wrapper .result-container {
-                width: 100%;
-                position: absolute;
-                top:80px;
-                left:0px;
-                text-align: center;
-                font-family: "Open Sans", Arial, Verdana;
-                font-size: 14px;
-                display:none;
-                color:#B7B7B7;
-            }
-
-
-            @media screen and (max-width: 560px) {
-                .search-wrapper.active .input-holder {width:200px;}
-            }
-            
-            .search p{
-            	color:white;
-            	font-size:15px;
-            }
-            
-            /*페이지 처리*/
-.pagination>li>a, .pagination>li>span { 
-margin: 8px;
-color:#6b456a !important;
+.select::after {
+	content: '\25BC';
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	padding: 0 1em;
+	background: #34495e;
+	pointer-events: none;
 }
 
-.pagination>.active>a {
-	    z-index: 2;
-    color: white !important;
-    background-color: #6b456a !important;
-    border-color: #6b456a !important;
-    cursor: default;
+.select:hover::after {
+	color: #f39c12;
 }
-            
 
+.select::after {
+	-webkit-transition: .25s all ease;
+	-o-transition: .25s all ease;
+	transition: .25s all ease;
+}
+
+#keywordInput {
+	width: 300px;
+	height: 40px;
+	padding-left: 8px;
+	margin-right: 30px;
+	border: none;
+	border-bottom: 2px solid black;
+	background-color: transparent;
+}
+
+#select2 {
+	display: none;
+}
+
+#select3 {
+	display: none;
+}
 </style>
+
 </head>
-<body style="background:#262626;">
-    
-<%@include file="../nav.jsp"%>
+
+<body>
+	<%@include file="../nav.jsp"%>
 
 
-<!-- 검색 -->
-<form onsubmit="submitFn(this, event);">
-            <div class="search-wrapper">
-                 <div class="input-holder">
-                    <input type="text" class="search-input" placeholder="Type to search" />
-                 	<button class="search-icon" onclick="searchToggle(this, event);" ><span></span></button>
-
-                </div>
-
-                <span class="close" onclick="searchToggle(this, event);"></span>
-                <div class="result-container">
-
-                </div>
-            </div>
-</form>
-
-<div class="container1">
-<div class = "container2" style = "width:80%; margin: 0 auto;">
-	<div class="row">
-            
- <c:forEach items="${list}" var="studyVO">
- <div class="col-md-4" style = "color:white;">
-	<div class="responsive">
-	<div class="responsive-img">
-     <a href="/study/board${pageMakerStudy.makeSearch(pageMakerStudy.cri.page)}&bno=${studyVO.bno}">      
-     <img class="img-responsive" src="/study/displayFile?fileName=${studyVO.name}" />
-	</a>
-	</div>
-	<div class="responsive-content">
- 	<h4>${studyVO.title}</h4>
-	<p class="card-writer">${studyVO.nickname}</p>
-	<!-- 현재인원/최대인원 -->
-	<p class="nowandmax">${studyVO.now}/${studyVO.max}</p>
-	<!-- 지역 -->
-	<p class="regionDS">${studyVO.rDName}/${studyVO.rSName}</p>
-	<!-- 시작일 -->
-	<p class="st">${studyVO.sd}</p>
-	<p class="st">${studyVO.age}</p>
-	<!-- 조회수 -->
-	<p class="vct"><i class="fa fa-eye"></i> ${studyVO.vct}</p>
-	</div>
-	</div>
-	</div>
-	 </c:forEach>       
-            </div>
-        </div>
-</div>
-        
-	<div>
-		<ul class="pagination">
-		
-		<!-- 스프링 MVC를 이용하는 방식 -->
-			<c:if test="${pageMakerStudy.prev}">
-				<li><a href="listAll${pageMakerStudy.makeSearch(pageMakerStudy.startPage - 1)}">&laquo;</a></li>
-			</c:if>
-			
-			<c:forEach begin="${pageMakerStudy.startPage }"
-				end="${pageMakerStudy.endPage}" var = "idx">
-				<li style = "border: 0px"
-					<c:out value="${pageMakerStudy.cri.page == idx?'class=active':''}"/>>
-					<a href="listAll${pageMakerStudy.makeSearch(idx)}">${idx}</a>
-				</li>
-			</c:forEach>
-			
-			<c:if test="${pageMakerStudy.next && pageMakerStudy.endPage>0}">
-				<li><a href="listAll${pageMakerStudy.makeSearch(pageMakerStudy.endPage +1)}">&raquo;</a>
-				</li>
-			</c:if> 
-			
-		</ul>
-	</div>
+	<!--  begin portfolio section  -->
+	<section class="bg-light-gray">
+		<div class="container">
+			<div class="row">
+				<form>
+					<div class="dropdown">
+						<select class="dropdown-select-version select" id="select1"
+							name="options">
+							<option value="x" selected>전체</option>
+							<option value="t"
+							<c:out value="${cri.searchType eq 't'? 'selected' : ''}"/>>제목</option>
+							<option value="n"
+							<c:out value="${cri.searchType eq 'n'? 'selected' : ''}"/>>닉네임</option>
+							<option value="cate">카테고리</option>
+							<option value="regi">지역</option>
+							<option value="c"
+							<c:out value="${cri.searchType eq 'c'? 'selected' : ''}"/>>내용</option>
+						</select> <select class="dropdown-select-version select" id="select2"
+							name="options">
+						</select> <select class="dropdown-select-version select" id="select3"
+							name="options">
+						</select>
+					</div>
+				</form>
+				<div class="welcome-speech"
+					style="float: right; margin-bottom: 30px;">
+					<input type="text" onKeyDown="onKeyDown();" name="keyword"
+						id="keywordInput" placeholder="검색어를 입력하세요" value="${cri.keyword}">
+					<button class="btn btn-white">Search</button>
+				</div>
+				<!-- /.intro -->
+			</div>
 
 
-<script>
+			<div class="headline text-center">
+				<div class="row">
+					<div class="col-md-6 col-md-offset-3">
+						<h2 class="section-title">스터디를 구경하세요</h2>
+						<p class="section-sub-title">검색을 통해 원하시는 스터디를 찾아주세요 &amp; 방문을
+							원하시면 이미지를 클릭해 주세요</p>
+						<!-- /.section-sub-title -->
+					</div>
+				</div>
+			</div>
+			<!-- /.headline -->
+			<div class="portfolio-item-list">
+				<div class="row">
 
-var activeEl = 3;
-$(function() {
-    var items = $('.btn-nav');
-    $( items[activeEl] ).addClass('active');
-    $( ".btn-nav" ).click(function() {
-        $( items[activeEl] ).removeClass('active');
-        $( this ).addClass('active');
-        activeEl = $( ".btn-nav" ).index( this );
-    });
-});
+					<c:forEach items="${list}" var="studyVO">
+						<div class="col-md-4 col-sm-6">
+							<div class="portfolio-item">
+								<div class="item-image">
+									<a
+										href="/study/board${pageMakerStudy.makeSearch(pageMakerStudy.cri.page)}&bno=${studyVO.bno}">
+										<img src="/study/displayFile?fileName=${studyVO.name}"
+										class="img-responsive center-block"
+										alt="/resources/assets/img/nologin.png"
+										style="width: 370px; height: 216px;">
+										<div>
+											<span><i class="fa fa-plus"></i></span>
+										</div>
+									</a>
+								</div>
 
-//검색 효과
-function searchToggle(obj, evt){
-    var container = $(obj).closest('.search-wrapper');
+								<div class="item-description">
+									<div class="row">
+										<div class="col-xs-6">
+											<span class="item-name" style="width: 230px;">제목 :
+												${studyVO.title} </span> <span style="width: 280px;">주인 :
+												${studyVO.nickname}<br> 종류 : ${studyVO.cDName} /
+												${studyVO.cSName}<br> 지역 : ${studyVO.rDName} /
+												${studyVO.rSName}<br> 등록 : <fmt:formatDate
+													pattern="yyyy-MM-dd" value="${studyVO.regdate}" />
+											</span>
+										</div>
+										<div class="col-xs-6">
+											<span class="like"> <i class="fa fa-eercast"></i>
+												${studyVO.vct}
+											</span>
+										</div>
+									</div>
+								</div>
+								<!-- end of /.item-description -->
+							</div>
+							<!-- end of /.portfolio-item -->
+						</div>
+					</c:forEach>
 
-    if(!container.hasClass('active')){
-          container.addClass('active');
-          evt.preventDefault();
-    }
-    else if(container.hasClass('active') && $(obj).closest('.input-holder').length == 0){
-          container.removeClass('active');
-          // clear input
-          container.find('.search-input').val('');
-          // clear and hide result container when we press close
-          container.find('.result-container').fadeOut(100, function(){$(this).empty();});
-    }
-}
 
-function submitFn(obj, evt){
-    value = $(obj).find('.search-input').val().trim();
+				</div>
+			</div>
+			<!-- end of portfolio-item-list -->
 
-    _html = "Yup yup! Your search text sounds like this: ";
-    if(!value.length){
-        _html = "Yup yup! Add some text friend :D";
-    }
-    else{
-    	self.location = "listAll"
-			+ '${pageMakerStudy.makeQuery(1)}'
-			+ "&searchType="
-			+ "tcn"
-			/* + $("select option:selected").val() */
-			+ "&keyword=" + encodeURIComponent($('.search-input').val());
-    }
+		</div>
+	</section>
+	<!--   end of portfolio section  -->
 
-    $(obj).find('.result-container').html('<span>' + _html + '</span>');
-    $(obj).find('.result-container').fadeIn(100);
+	<!-- paging -->
 
-    evt.preventDefault();
+	<ul class="pager">
+		<c:if test="${pageMakerStudy.prev}">
+			<li><a
+				href="listAll${pageMakerStudy.makeQuery(pageMakerStudy.startPage - 1)}">&laquo;</a></li>
+		</c:if>
+
+		<c:forEach begin="${pageMakerStudy.startPage}"
+			end="${pageMakerStudy.endPage}" var="idx">
+			<li
+				<c:out value="${pageMakerStudy.cri.page == idx?'class=active':''}"/>>
+				<a href="listAll${pageMakerStudy.makeQuery(idx)}">${idx}</a>
+			</li>
+		</c:forEach>
+
+		<c:if test="${pageMakerStudy.next && pageMakerStudy.endPage>0 }">
+			<li><a
+				href="listAll${pageMakerStudy.makeQuery(pageMakerStudy.endPage +1)}">&raquo;</a>
+			</li>
+		</c:if>
+	</ul>
+
+
+
+
+	<%@include file="../footer.jsp"%>
+
+
+	<script type="text/javascript"
+		src="/resources/assets/js/jquery-2.1.3.min.js"></script>
+	<script type="text/javascript"
+		src="/resources/assets/js/bootstrap.min.js"></script>
+	<script type="text/javascript"
+		src="/resources/assets/js/owl.carousel.js"></script>
+	<script type="text/javascript"
+		src="/resources/assets/js/jquery.hoverdir.js"></script>
+
+	<!-- script for portfolio section using hoverdirection -->
+	<script type="text/javascript">
+		$(function() {
+
+			$('.portfolio-item > .item-image').each(function() {
+				$(this).hoverdir({
+					hoverDelay : 75
+				});
+			});
+
+		});
+	</script>
+
+
+	<!-- search  -->
+	<script>
+		$(document).ready(function() {
+			$(".btn-select").each(function(e) {
+				var value = $(this).find("ul li.selected").html();
+				if (value != undefined) {
+					$(this).find(".btn-select-input").val(value);
+					$(this).find(".btn-select-value").html(value);
+				}
+			});
+		});
+
+		$(document).on(
+				'click',
+				'.btn-select',
+				function(e) {
+					e.preventDefault();
+					var ul = $(this).find("ul");
+					if ($(this).hasClass("active")) {
+						if (ul.find("li").is(e.target)) {
+							var target = $(e.target);
+							target.addClass("selected").siblings().removeClass(
+									"selected");
+							var value = target.html();
+							$(this).find(".btn-select-input").val(value);
+							$(this).find(".btn-select-value").html(value);
+						}
+						ul.hide();
+						$(this).removeClass("active");
+					} else {
+						$('.btn-select').not(this).each(function() {
+							$(this).removeClass("active").find("ul").hide();
+						});
+						ul.slideDown(300);
+						$(this).addClass("active");
+					}
+				});
+
+		$(document).on('click', function(e) {
+			var target = $(e.target).closest(".btn-select");
+			if (!target.length) {
+				$(".btn-select").removeClass("active").find("ul").hide();
+			}
+		});
+	</script>
 	
-}
+	<!-- 검색카테고리 -->
+	<script>
 
-</script>  
-    
-<%@include file="../footer.jsp"%>
+		$(document)
+				.ready(
+						function() {
+
+							//큰거 골랐을때
+							$("#select1").change(function() {
+								var big = $(this).val()
+								console.log(big)
+								mid(big);
+							})
+
+							//1.대지역이 나온다
+							//2.카테고리 큰거
+							function mid(big) {
+								var str = "<option value='x'>전체</option>";
+								var regival = [ 'A', 'B', 'C', 'D', 'E', 'F',
+										'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',
+										'O', 'P', 'Q' ];
+								//0.제목선택하면 없어진다
+								if (big === "t" || big === "n" || big === "c"
+										|| big === "x") {
+									$("#select2").hide('slow');
+									$("#select3").hide('slow');
+								}
+		
+								//1.대지역이 나온다
+								if (big === "regi") {
+									$("#select2").hide('slow');
+									$("#select3").hide('slow');
+									$("#select2").show('slow');
+
+									<c:forEach items="${rgList}" var="rgList" varStatus="status">
+									str += '<option value='+regival["${status.index}"]
+									+'>'+ '${rgList.rDName}'+'</option>'; 
+									</c:forEach>
+
+									$("#select2").html(str);
+								}
+								
+								//2.카테고리 큰거 나온다
+								if (big === "cate") {
+									$("#select2").hide('slow');
+									$("#select3").hide('slow');
+									$("#select2").show('slow');
+
+									<c:forEach items="${catList}" var="catList" varStatus="status">
+									str += "<option value="+regival["${status.index}"]+">"
+											+ "${catList.cDName}" + "</option>";
+									</c:forEach>
+
+									$("#select2").html(str);
+								}
+							}//대지역 종료
+
+							//가운대 골랐을때
+							$("#select2").change(function() {
+								var mid = $(this).val()
+								var bigval = $("#select1").val();
+
+								//제목 내용 글쓴이 고르면 없어진다
+
+								if (bigval === "regi") {
+									$("#select3").hide('slow');
+									$("#select3").show('slow');
+									smallr(mid);
+								}
+
+								if (bigval === "cate") {
+									$("#select3").hide('slow');
+									$("#select3").show('slow');
+									smallc(mid);
+								}
+							})
+							//1.소지역이나온다
+							function smallr(mid) {
+								$
+										.getJSON(
+												"listAll/region/" + mid,
+												function(data) {
+													var str = "<option value='x'>전체</option>";
+
+													$(data)
+															.each(
+																	function() {
+																		str += "<option value="+this.rSId+">"
+																				+ this.rSName
+																				+ "</option>";
+																	});
+
+													$("#select3").html(str);
+												})
+							}
+
+							//2.작은카데고리
+							function smallc(mid) {
+								$
+										.getJSON(
+												"listAll/category/" + mid,
+												function(data) {
+													var str = "<option value='x'>전체</option>";
+
+													$(data)
+															.each(
+																	function() {
+																		str += "<option value="+this.cSId+">"
+																				+ this.cSName
+																				+ "</option>";
+																	});
+
+													$("#select3").html(str);
+												})
+							}
+						})//ready 종료
+	</script>
+
+	<!-- 검색을 위한 스크립트 -->
+	<script>
+	  $(document).ready(function(){
+			$(".btn-white").on("click", function(event){
+				self.location = "listAll"
+					+ '${pageMakerStudy.makeQuery(1)}'
+					+ "&searchType="
+					+ $("select option:selected").val();
+					/* + $("select option:selected").val() */
+					+ "&keyword=" + encodeURIComponent($('#keywordInput').val());            
+			})  
+		  })
+	
+	//타자누르면 검색됨
+	function onKeyDown() {
+	  if(event.keyCode==13){
+		  
+		  console.log($("select option:selected").val());
+		  
+		  self.location = "listAll"
+				+ '${pageMakerStudy.makeQuery(1)}'
+				+ "&searchType="
+				+ $("select option:selected").val();
+				/* + $("select option:selected").val() */
+				+ "&keyword=" + encodeURIComponent($('#keywordInput').val());  
+	  }
+  }
+	</script>
+
 </body>
 </html>

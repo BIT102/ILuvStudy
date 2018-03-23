@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
          <!-- // Navigation -->
-<%@include file="include/header.jsp"%>
+
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -295,8 +295,7 @@ select.form-control:not([size]):not([multiple]) {
 </script>
 
 
-<body>
-
+<body style="background:#262626;">
 		<div class="container">
 	            <div class="row">
 	            <div class="col-md-8">
@@ -408,8 +407,7 @@ select.form-control:not([size]):not([multiple]) {
 	              </form>
 	            </div>
 	        </div>
-	        </div>
-	
+	        </div>	
 </body>
 
 	

@@ -12,6 +12,9 @@ public interface StudyService {
 	//카테고리 불러오기
 	public List<StudyVO> readCa(Integer bno) throws Exception;
 	
+/*	public List<String> getcaD() throws Exception;*/
+
+	
 	//스터디등록   
 	public void regist(StudyVO vo) throws Exception;
 	

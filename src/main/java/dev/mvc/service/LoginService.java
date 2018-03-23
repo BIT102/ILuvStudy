@@ -22,7 +22,5 @@ public interface LoginService {
 	
 	// 관리자 업데이트
 	public void loginupdate(Object adminVO) throws Exception;
-	
-	
-	
+
 }

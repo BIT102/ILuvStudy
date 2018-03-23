@@ -1,7 +1,5 @@
 package dev.mvc.controller;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.request;
-
 import java.util.Date;
 
 import javax.inject.Inject;
@@ -14,10 +12,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.WebUtils;
 
 import dev.mvc.domain.AdminVO;
@@ -35,8 +31,8 @@ public class LoginController {
 	private LoginService service;
 	
 	
-	// 로그인 통합
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	// 로그인 통합 모달로 수정본
+	@RequestMapping(value = "/nav", method = RequestMethod.GET)
 	public void loginGet(HttpServletRequest request, Model model) throws Exception{
 		
 		logger.info("Login merge get.......");
@@ -142,7 +138,7 @@ public class LoginController {
 			}
 		}
 				
-		return "/main";
+		return "redirect:/study/main";
 	}
 		
 	//로그아웃 처리

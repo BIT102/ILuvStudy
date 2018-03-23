@@ -3,13 +3,16 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+
         <!-- // Navigation -->
 <%@include file="../nav.jsp"%>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
+<script src="http://code/jquery.com/jquery-1.7.js"></script>
+<script type="text/javascript" src="/resources/js/upload.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 <title>Document</title>
 
 <style>
@@ -47,11 +50,12 @@ small {
 </style>
 </head>
 
-<body style="background:#262626;">
+<body>
+
 
 	<!--스터디등록-->
 	<form id="registerForm" role="form" method="post">
-
+		
 		<!--첫번째 페이지-->
 		<div class="register1">
 
@@ -87,19 +91,19 @@ small {
 				<p>소분류</p>
 				
 				<div id="SmallCat">
-				<select id="SmallCat1" name="categoryS">
+				<select id="SmallCat1">
 				<option value="1">	토익</option>	<option value="2">	토플 </option>	<option value="3">	텝스 </option> 	<option value="4">	토스/오픽 </option>	<option value="5">	회화 </option>	<option value="6">	작문/독해 </option>	<option value="7">	중국어	 </option><option value="8">	일본어	 </option><option value="9">	기타 </option>	
 				</select> 
 				
-				<select id="SmallCat2" name="categoryS">
+				<select id="SmallCat2">
 				<option value="1">	컴퓨터언어	<option value="2">	웹프로그래밍	<option value="3">	모바일프로그래밍	<option value="4">	데이터베이스/서버	<option value="5">	게임프로그래밍	<option value="6">	문서작정	<option value="7">	자격증<option value="8">	기타	
 				</select>
 				
-				<select id="SmallCat3" name="categoryS">
+				<select id="SmallCat3">
 				<option value="1">	미술/디자인	<option value="2">	뷰티/미용	<option value="3">	스포츠	<option value="4">	음악/공연	<option value="5">	게임	<option value="6">	기타	
 				</select>
 				
-				<select id="SmallCat4" name="categoryS">
+				<select id="SmallCat4">
 				<option value="1">	면접	<option value="2">	자소서	<option value="3">	고시	<option value="4">	기술	<option value="5">	기타	
 				</select>
 				
@@ -145,9 +149,8 @@ small {
 		<br>
 			
 			<button type="button" id="catplus">+추가</button>
-			<div id="catarea">
+			<select id="catarea" name="categoryS"></select>
 				
-			</div>
 		</div>
 
 		<!--두번째 페이지-->
@@ -172,7 +175,7 @@ small {
 
 					<% int cataNum2 = 64; %>
 					<c:forEach items="${rglist}" var="StudyVO">
-						<% cataNum2++; %>
+					<% cataNum2++; %>
 						<option value="<%=(char)cataNum2%>">${StudyVO.rDName}</option>
 					</c:forEach>
 
@@ -233,7 +236,7 @@ small {
 				 <input type="checkbox" name="age" value="30대">30대 
 				 <input type="checkbox" name="age" value="40대">40대
 				 <input type="checkbox" name="age" value="50대">50대 
-				<input type="checkbox" name="age" value="무관">무관
+				 <input type="checkbox" name="age" value="무관">무관
 			</div>
 
 			<!--요일별-->
@@ -349,10 +352,6 @@ var str="";
 				
 		str += "<option value'"+i+"'>"+i+"시</option>";
 		$(".et").html(str);
-		
-	if(stval=24) {
-		
-	}	
 }
 
 });
@@ -366,16 +365,16 @@ var str = "";
 		var template = Handlebars.compile($("#template").html());
 
 		$(".fileDrop").on("dragenter dragover", function(event){
-
+			console.log("1*****************");
 			event.preventDefault();
 		});
 
 		//파일을 떨구는 장소	
 
 		$(".fileDrop").on("drop", function(event){
-
+			console.log("2*****************");
 			event.preventDefault();
-
+			
 			var files = event.originalEvent.dataTransfer.files;
 
 			var file = files[0];
@@ -387,7 +386,7 @@ var str = "";
 			formData.append("file", file);
 
 			$.ajax({
-
+				
 				url: '/study/uploadAjax',
 				data: formData,
 				dataType: 'text',
@@ -396,7 +395,7 @@ var str = "";
 				type: 'POST',
 				//파일을 드롭했을때 성공시
 				success: function(data){
-					
+					console.log("3*****************");	
 					var fileInfo = getFileInfo(data);
 			
 					var html = template(fileInfo);
@@ -482,6 +481,7 @@ var str = "";
 							$('"#SmallCat'+(i+1)+'"').hide('slow');
 						}
 					}*/
+		
 					if(bigNum == 'A'){
 						$("#SmallCat1").show('slow');
 						$("#SmallCat2").hide('slow');
@@ -538,6 +538,7 @@ var str = "";
 				}			
 			</script> 
 
+<%@include file="../footer.jsp"%>
 
 </body>
 
