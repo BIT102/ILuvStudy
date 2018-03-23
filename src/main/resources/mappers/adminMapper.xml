@@ -576,13 +576,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 전체 방문자 수 조회 -->
 	<select id="totalV" resultType="int">
-		select count(*) from visit
+		select count(*) as totalVisit from visit
 	</select>
 	
 	<!-- 오늘 방문자 수 조회 -->
 	<select id="todayV" resultType="int">
-		select count(*) from visit   
+		select count(*) as toDVisit from visit   
 		where vdate = date_format(now(),'%Y-%m-%d')
+	</select>
+	
+	<!-- 어제 방문자 수 조회 -->
+	<select id="yesterdayV" resultType="int">
+		select count(*) as yesterDVisit from visit   
+		where vdate = current_date()-interval 1 day
 	</select>
 	
 	<!-- 최근 8일 방문자 수 조회 -->

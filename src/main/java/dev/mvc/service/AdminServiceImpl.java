@@ -261,8 +261,10 @@ public class AdminServiceImpl implements AdminService{
 		vo.setYesterDMember(dao.yesterdayM());	//어제 가입자수
 		vo.setTotalMember(dao.totalM());		//총 회원수
 		vo.setTotalWithdrawal(dao.totalW());	//총 탈퇴회원수
+		
 		vo.setTotalVisit(dao.totalV());			//총 방문자수
-		vo.setTotalVisit(dao.todayV());			//금일 방문자수
+		vo.setToDVisit(dao.todayV());			//오늘 방문자수
+		vo.setYesterDVisit(dao.yesterdayV());	//어제 방문자수
 		
 		//System.out.println("===============");
 		//System.out.println(vo);

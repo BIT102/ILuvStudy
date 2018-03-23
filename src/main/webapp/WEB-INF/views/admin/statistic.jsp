@@ -23,22 +23,29 @@
 			<div class="main-content">
 				<div class="container-fluid">
 					<h3 class="page-title">통계관리</h3>
-        <div class="panel-body">
+        <!-- <div class="panel-body"> -->
 					<!-- OVERVIEW -->
-					<div class="panel panel-headline">
-						<div class="panel-heading">
-							<h3 class="panel-title">회원통계</h3>
-							<p class="panel-subtitle">Period: Oct 14, 2016 - Oct 21, 2016</p>
-						</div>
-						<div class="panel-body">
+					<ul class="nav nav-tabs">
+						<li class="active"><a href="#tab1" data-toggle="tab">방문자 수</a></li>
+						<li><a href="#tab2" data-toggle="tab">가입자 수</a></li>
+						<li><a href="#tab3" data-toggle="tab">Tab 3</a></li>
+					</ul>
+					
+				 	<div class="panel">
+				 	<div class="panel-body tabs"> 
+					
+					<div class="tab-content">
+					
+					<div class="tab-pane fade in active" id="tab1">
+						<h4>방문자 통계</h4>
 						
 							<div class="row">
 								<div class="col-md-3">
 									<div class="metric">
 										<span class="icon"><i class="fa fa-download" style="margin-top:15px"></i></span>
 										<p>
-											<span class="number">${statisticVO.toDMember}</span>
-											<span class="title">금일 가입자수</span>
+											<span class="number">${statisticVO.toDVisit}</span>
+											<span class="title">오늘 방문자 수</span>
 										</p>
 									</div>
 								</div>
@@ -46,8 +53,10 @@
 									<div class="metric">
 										<span class="icon"><i class="fa fa-shopping-bag" style="margin-top:15px"></i></span>
 										<p>
-											<span class="number">${statisticVO.yesterDMember}</span>
-											<span class="title">어제 가입자수</span>
+											<%-- span class="number">${statisticVO.yesterDMember}</span>
+											<span class="title">어제 가입자수</span> --%>
+											<span class="number">${statisticVO.yesterDVisit}</span>
+											<span class="title">어제 방문자 수</span>
 										</p>
 									</div>
 								</div>
@@ -55,8 +64,8 @@
 									<div class="metric">
 										<span class="icon"><i class="fa fa-eye" style="margin-top:15px"></i></span>
 										<p>
-											<span class="number">${statisticVO.totalMember}</span>
-											<span class="title">전체 회원수</span>
+											<span class="number" id="weektv"></span>
+											<span class="title">주간 방문자 수</span> 
 										</p>
 									</div>
 								</div>
@@ -64,234 +73,127 @@
 									<div class="metric">
 										<span class="icon"><i class="fa fa-bar-chart" style="margin-top:15px"></i></span>
 										<p>
-											<span class="number">${statisticVO.totalWithdrawal}</span>
-											<span class="title">전체 탈퇴회원수</span>
+											<%-- <span class="number">${statisticVO.totalWithdrawal}</span>
+											<span class="title">전체 탈퇴회원수</span> --%>
+											<span class="number">${statisticVO.totalVisit}</span>
+											<span class="title">전체 방문자 수</span>
 										</p>
 									</div>
 								</div>
-							</div>
-
-							<div class="row">
-								<div class="col-md-9">
-									<!-- <div id="headline-chart" class="ct-chart"></div> -->
-									<!-- 다른 템플릿 추가 -->
-									<!-- <div class="canvas-wrapper"> -->
-										<canvas class="main-chart" id="line-chart" height="200" width="600"></canvas>
-									<!-- </div> -->
-									<!-- 추가 끝 -->
+								<%-- <div class="col-md-3">
+									<div class="metric">
+										<span class="icon"><i class="fa fa-bar-chart" style="margin-top:15px"></i></span>
+										<p>
+											<span class="number">${statisticVO.toDMember}</span>
+											<span class="title">오늘 가입자 수</span>
+										</p>
+									</div>
 								</div>
 								<div class="col-md-3">
-									<div class="weekly-summary text-right">
-										<span class="number">$5,758</span> <span class="percentage"><i class="fa fa-caret-up text-success"></i> 12%</span>
-										<span class="info-label">뚜루두루</span>
+									<div class="metric">
+										<span class="icon"><i class="fa fa-bar-chart" style="margin-top:15px"></i></span>
+										<p>
+											<span class="number">${statisticVO.yesterDMember}</span>
+											<span class="title">어제 가입자 수</span>
+										</p>
 									</div>
-									<div class="weekly-summary text-right">
-										<span class="number">$5,758</span> <span class="percentage"><i class="fa fa-caret-up text-success"></i> 23%</span>
-										<span class="info-label">Monthly Income</span>
+								</div>
+								<div class="col-md-3">
+									<div class="metric">
+										<span class="icon"><i class="fa fa-bar-chart" style="margin-top:15px"></i></span>
+										<p>
+											<span class="number" id="weektm"></span>
+											<span class="title">주간 가입자 수</span>
+										</p>
 									</div>
-									<div class="weekly-summary text-right">
-										<span class="number">$65,938</span> <span class="percentage"><i class="fa fa-caret-down text-danger"></i> 8%</span>
-										<span class="info-label">Total Income</span>
+								</div>
+								<div class="col-md-3">
+									<div class="metric">
+										<span class="icon"><i class="fa fa-bar-chart" style="margin-top:15px"></i></span>
+										<p>
+											<span class="number">${statisticVO.totalMember}</span>
+											<span class="title">전체 회원 수</span>
+										</p>
 									</div>
-								</div> 
+								</div> --%>
+							</div> 
+
+							<div class="row">
+<!-- 								<div class="col-md-12">
+									<span style="color:rgba(48, 164, 255, 1)">■</span>&nbsp;가입자 수&nbsp;&nbsp;
+									<span style="color:rgba(220,220,220,1)">■</span>&nbsp;방문자 수
+								</div> -->
+								<div class="col-md-12">
+									<!-- <div id="headline-chart" class="ct-chart"></div> -->
+									<!-- 다른 템플릿 추가 -->
+									<div class="canvas-wrapper"> 
+										<canvas class="main-chart" id="line-chart" height="200" width="600"></canvas>
+									</div>
+									<!-- 추가 끝 -->
+								</div>
 							</div>
-						</div>
+					</div><!-- tab1 end -->
+					
+					<div class="tab-pane fade" id="tab2">
+						<h4>가입자 통계</h4>
+							<div class="row">
+								<div class="col-md-3">
+									<div class="metric">
+										<span class="icon"><i class="fa fa-bar-chart" style="margin-top:15px"></i></span>
+										<p>
+											<span class="number">${statisticVO.toDMember}</span>
+											<span class="title">오늘 가입자 수</span>
+										</p>
+									</div>
+								</div>
+								<div class="col-md-3">
+									<div class="metric">
+										<span class="icon"><i class="fa fa-bar-chart" style="margin-top:15px"></i></span>
+										<p>
+											<span class="number">${statisticVO.yesterDMember}</span>
+											<span class="title">어제 가입자 수</span>
+										</p>
+									</div>
+								</div>
+								<div class="col-md-3">
+									<div class="metric">
+										<span class="icon"><i class="fa fa-bar-chart" style="margin-top:15px"></i></span>
+										<p>
+											<span class="number" id="weektm"></span>
+											<span class="title">주간 가입자 수</span>
+										</p>
+									</div>
+								</div>
+								<div class="col-md-3">
+									<div class="metric">
+										<span class="icon"><i class="fa fa-bar-chart" style="margin-top:15px"></i></span>
+										<p>
+											<span class="number">${statisticVO.totalMember}</span>
+											<span class="title">전체 회원 수</span>
+										</p>
+									</div>
+								</div>
+							</div> 
+
+							<div class="row">
+								<div class="col-md-12">
+									<div class="canvas-wrapper"> 
+										<canvas class="main-chart" id="line-chart2" height="200" width="600"></canvas>
+									</div>
+								</div>
+							</div>
 					</div>
+					<div class="tab-pane fade" id="tab3">
+						<h4>Tab 3</h4>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget rutrum purus. Donec hendrerit ante ac metus sagittis elementum. Mauris feugiat nisl sit amet neque luctus, a tincidunt odio auctor.</p>
+					</div>
+					
+					</div>
+					</div>
+					</div>
+					
 					<!-- END OVERVIEW -->
 					
-				
-					
-<!-- 					
-					<div class="row">
-						<div class="col-md-6">
-							RECENT PURCHASES
-							<div class="panel">
-								<div class="panel-heading">
-									<h3 class="panel-title">Recent Purchases</h3>
-									<div class="right">
-										<button type="button" class="btn-toggle-collapse"><i class="lnr lnr-chevron-up"></i></button>
-										<button type="button" class="btn-remove"><i class="lnr lnr-cross"></i></button>
-									</div>
-								</div>
-								<div class="panel-body no-padding">
-									<table class="table table-striped">
-										<thead>
-											<tr>
-												<th>Order No.</th>
-												<th>Name</th>
-												<th>Amount</th>
-												<th>Date &amp; Time</th>
-												<th>Status</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td><a href="#">763648</a></td>
-												<td>Steve</td>
-												<td>$122</td>
-												<td>Oct 21, 2016</td>
-												<td><span class="label label-success">COMPLETED</span></td>
-											</tr>
-											<tr>
-												<td><a href="#">763649</a></td>
-												<td>Amber</td>
-												<td>$62</td>
-												<td>Oct 21, 2016</td>
-												<td><span class="label label-warning">PENDING</span></td>
-											</tr>
-											<tr>
-												<td><a href="#">763650</a></td>
-												<td>Michael</td>
-												<td>$34</td>
-												<td>Oct 18, 2016</td>
-												<td><span class="label label-danger">FAILED</span></td>
-											</tr>
-											<tr>
-												<td><a href="#">763651</a></td>
-												<td>Roger</td>
-												<td>$186</td>
-												<td>Oct 17, 2016</td>
-												<td><span class="label label-success">SUCCESS</span></td>
-											</tr>
-											<tr>
-												<td><a href="#">763652</a></td>
-												<td>Smith</td>
-												<td>$362</td>
-												<td>Oct 16, 2016</td>
-												<td><span class="label label-success">SUCCESS</span></td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-								<div class="panel-footer">
-									<div class="row">
-										<div class="col-md-6"><span class="panel-note"><i class="fa fa-clock-o"></i> Last 24 hours</span></div>
-										<div class="col-md-6 text-right"><a href="#" class="btn btn-primary">View All Purchases</a></div>
-									</div>
-								</div>
-							</div>
-							END RECENT PURCHASES
-						</div>
-						<div class="col-md-6">
-							MULTI CHARTS
-							<div class="panel">
-								<div class="panel-heading">
-									<h3 class="panel-title">Projection vs. Realization</h3>
-									<div class="right">
-										<button type="button" class="btn-toggle-collapse"><i class="lnr lnr-chevron-up"></i></button>
-										<button type="button" class="btn-remove"><i class="lnr lnr-cross"></i></button>
-									</div>
-								</div>
-								<div class="panel-body">
-									<div id="visits-trends-chart" class="ct-chart"></div>
-								</div>
-							</div>
-							END MULTI CHARTS
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-4">
-							TASKS
-							<div class="panel">
-								<div class="panel-heading">
-									<h3 class="panel-title">My Tasks</h3>
-									<div class="right">
-										<button type="button" class="btn-toggle-collapse"><i class="lnr lnr-chevron-up"></i></button>
-										<button type="button" class="btn-remove"><i class="lnr lnr-cross"></i></button>
-									</div>
-								</div>
-								<div class="panel-body">
-									<ul class="list-unstyled task-list">
-										<li>
-											<p>Updating Users Settings <span class="label-percent">23%</span></p>
-											<div class="progress progress-xs">
-												<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="23" aria-valuemin="0" aria-valuemax="100" style="width:23%">
-													<span class="sr-only">23% Complete</span>
-												</div>
-											</div>
-										</li>
-										<li>
-											<p>Load &amp; Stress Test <span class="label-percent">80%</span></p>
-											<div class="progress progress-xs">
-												<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-													<span class="sr-only">80% Complete</span>
-												</div>
-											</div>
-										</li>
-										<li>
-											<p>Data Duplication Check <span class="label-percent">100%</span></p>
-											<div class="progress progress-xs">
-												<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-													<span class="sr-only">Success</span>
-												</div>
-											</div>
-										</li>
-										<li>
-											<p>Server Check <span class="label-percent">45%</span></p>
-											<div class="progress progress-xs">
-												<div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
-													<span class="sr-only">45% Complete</span>
-												</div>
-											</div>
-										</li>
-										<li>
-											<p>Mobile App Development <span class="label-percent">10%</span></p>
-											<div class="progress progress-xs">
-												<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: 10%">
-													<span class="sr-only">10% Complete</span>
-												</div>
-											</div>
-										</li>
-									</ul>
-								</div>
-							</div>
-							END TASKS
-						</div>
-						<div class="col-md-4">
-							VISIT CHART
-							<div class="panel">
-								<div class="panel-heading">
-									<h3 class="panel-title">Website Visits</h3>
-									<div class="right">
-										<button type="button" class="btn-toggle-collapse"><i class="lnr lnr-chevron-up"></i></button>
-										<button type="button" class="btn-remove"><i class="lnr lnr-cross"></i></button>
-									</div>
-								</div>
-								<div class="panel-body">
-									<div id="visits-chart" class="ct-chart"></div>
-								</div>
-							</div>
-							END VISIT CHART
-						</div>
-						<div class="col-md-4">
-							REALTIME CHART
-							<div class="panel">
-								<div class="panel-heading">
-									<h3 class="panel-title">System Load</h3>
-									<div class="right">
-										<button type="button" class="btn-toggle-collapse"><i class="lnr lnr-chevron-up"></i></button>
-										<button type="button" class="btn-remove"><i class="lnr lnr-cross"></i></button>
-									</div>
-								</div>
-								<div class="panel-body">
-									<div id="system-load" class="easy-pie-chart" data-percent="70">
-										<span class="percent">70</span>
-									</div>
-									<h4>CPU Load</h4>
-									<ul class="list-unstyled list-justify">
-										<li>High: <span>95%</span></li>
-										<li>Average: <span>87%</span></li>
-										<li>Low: <span>20%</span></li>
-										<li>Threads: <span>996</span></li>
-										<li>Processes: <span>259</span></li>
-									</ul>
-								</div>
-							</div>
-							END REALTIME CHART
-						</div>
-					</div>       
-	 -->				
-					</div>
 					</div>
 				</div>
 			<!-- END MAIN CONTENT -->
@@ -314,27 +216,89 @@
 <script>
 	$(document).ready(function(){	
 		$("#statisticnav").attr("class", "active");
+		
+ 		$('#tab2').on("click", function(){
+			var day = [];	//날짜 저장
+			var weekm = [];	//가입자 수 저장
+			var weektm = 0; //주간 총 가입자수
+			
+			<% 
+			   int cnt = 0;  %>
+			   
+			//최근 8일 가입자 수 불러오기
+			<c:forEach items="${weeks}" var="StatisticVO">	
+				
+				day[<%=cnt%>] = "${StatisticVO.day}";		//날짜 담아줌
+				weekm[<%=cnt%>] = "${StatisticVO.weekMember}"; //가입자수 담아줌
+				
+				<% cnt++; %>
+			</c:forEach>
+			
+			console.log(weekm);
+			   
+			//차트 데이터(가입자 수)
+			var lineChartData2 = {
+					labels : day,
+					datasets : [
+						{
+							label: "My First dataset",
+							fillColor : "rgba(48, 164, 255, 0.2)",
+							strokeColor : "rgba(48, 164, 255, 1)",
+							pointColor : "rgba(48, 164, 255, 1)",
+							pointStrokeColor : "#fff",
+							pointHighlightFill : "#fff",
+							pointHighlightStroke : "rgba(48, 164, 255, 1)",
+							data : weekm  //파랑색, 가입자 수
+						}
+					]
+				}
+			
+			//line-chart2 id에 차트 추가
+			var chart1 = document.getElementById("line-chart2").getContext("2d");
+			window.myLine = new Chart(chart1).Line(lineChartData2, {
+				responsive: true,
+				scaleLineColor: "rgba(0,0,0,.2)",
+				scaleGridLineColor: "rgba(0,0,0,.05)",
+				scaleFontColor: "#c5c7cc"
+			});
+		}) 
 	});
 	
 	// 다른 템플릿 겟 
 	window.onload = function () {
-		var week = [];	//가입자 수 저장
+		
 		var day = [];	//날짜 저장
+		var weekv = [];	//방문자 수 저장
+		var weektm = 0; //주간 총 가입자수
+		var weektv = 0; //주간 총 방문자수
 		
-		<% int cnt = 0; %>		//배열 위치 지정 변수
+		//배열 위치 지정 변수
+		<% int cnt2 = 0; 
+		   %>
 		
-		//최근 8일 가입자 수 불러오기
-		<c:forEach items="${weeks}" var="StatisticVO">	
-			
-			day[<%=cnt%>] = "${StatisticVO.day}";		//날짜 담아줌
-			week[<%=cnt%>] = "${StatisticVO.weekMember}"; //가입자수 담아줌
-			
-			<% cnt++; %>			
-		</c:forEach>
+
+		//최근 8일 방문자 수 불러오기
+		<c:forEach items="${weekv}" var="StatisticVO">	
+			day[<%=cnt2%>] = "${StatisticVO.day}";		//날짜 담아줌
+			weekv[<%=cnt2%>] = "${StatisticVO.weekVisit}"; //방문자수 담아줌
+				
+			<% cnt2++; %>
+		</c:forEach>	
 		
-		console.log(week);
+		for(var i=0;i<8;i++){
+			//weektm += Number(weekm[i]);	//주간 총 가입자수
+			weektv += Number(weekv[i]); //주간 총 방문자수
+		};
+		
+		$('#weektm').text(weektm);
+		$('#weektv').text(weektv);
+
+		console.log(weekv);
 		console.log(day);
+		console.log(weektm);
+		console.log(weektv);
 		
+		//차트 데이터(방문자 수)
 		var lineChartData = {
 				labels : day,
 				datasets : [
@@ -346,21 +310,12 @@
 						pointStrokeColor : "#fff",
 						pointHighlightFill : "#fff",
 						pointHighlightStroke : "rgba(48, 164, 255, 1)",
-						data : week
-					},
-					{
-						label: "My Second dataset",
-						fillColor : "rgba(220,220,220,0.2)",
-						strokeColor : "rgba(220,220,220,1)",
-						pointColor : "rgba(220,220,220,1)",
-						pointStrokeColor : "#fff",
-						pointHighlightFill : "#fff",
-						pointHighlightStroke : "rgba(220,220,220,1)",
-						data : [1,2,3,4,2,1,1,0]
+						data : weekv  //파랑색, 방문자 수
 					}
 				]
 			}
 		
+		//line-chart id에 차트 추가
 		var chart1 = document.getElementById("line-chart").getContext("2d");
 		window.myLine = new Chart(chart1).Line(lineChartData, {
 			responsive: true,
@@ -368,125 +323,11 @@
 			scaleGridLineColor: "rgba(0,0,0,.05)",
 			scaleFontColor: "#c5c7cc"
 		});
+		
+
 	}
 	//끝
 	
-	$(function() {
-		
-/* 		// headline charts
-		data = {
-			labels: day,
-			 series: [
-				week,
-				[1, 2, 3, 2, 2],
-			]
-		};
-
-		options = {
-			height: 300,
-			showArea: true,
-			showLine: false,
-			showPoint: false,
-			fullWidth: true,
-			axisX: {
-				showGrid: false
-			},
-			lineSmooth: false,
-		};
- */
-		//사용 시 chartist.min.js 파일 추가해야함 (현재 주석처리)
-	/* 	new Chartist.Line('#headline-chart', data, options); */
-
-
-		// visits trend charts
-	/* 	data = {
-			labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-			series: [{
-				name: 'series-real',
-				data: [200, 380, 350, 320, 410, 450, 570, 400, 555, 620, 750, 900],
-			}, {
-				name: 'series-projection',
-				data: [240, 350, 360, 380, 400, 450, 480, 523, 555, 600, 700, 800],
-			}]
-		};
-
-		options = {
-			fullWidth: true,
-			lineSmooth: false,
-			height: "270px",
-			low: 0,
-			high: 'auto',
-			series: {
-				'series-projection': {
-					showArea: true,
-					showPoint: false,
-					showLine: false
-				},
-			},
-			axisX: {
-				showGrid: false,
-
-			},
-			axisY: {
-				showGrid: false,
-				onlyInteger: true,
-				offset: 0,
-			},
-			chartPadding: {
-				left: 20,
-				right: 20
-			}
-		};
-
-		new Chartist.Line('#visits-trends-chart', data, options);
-
-
-		// visits chart
-		data = {
-			labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-			series: [
-				[6384, 6342, 5437, 2764, 3958, 5068, 7654]
-			]
-		};
-
-		options = {
-			height: 300,
-			axisX: {
-				showGrid: false
-			},
-		};
-
-		new Chartist.Bar('#visits-chart', data, options);
- */
-
-		// real-time pie chart
-/* 		var sysLoad = $('#system-load').easyPieChart({
-			size: 130,
-			barColor: function(percent) {
-				return "rgb(" + Math.round(200 * percent / 100) + ", " + Math.round(200 * (1.1 - percent / 100)) + ", 0)";
-			},
-			trackColor: 'rgba(245, 245, 245, 0.8)',
-			scaleColor: false,
-			lineWidth: 5,
-			lineCap: "square",
-			animate: 800
-		});
- */
-/* 		var updateInterval = 3000; // in milliseconds
-
-		setInterval(function() {
-			var randomVal;
-			randomVal = getRandomInt(0, 100);
-
-			sysLoad.data('easyPieChart').update(randomVal);
-			sysLoad.find('.percent').text(randomVal);
-		}, updateInterval);
-
-		function getRandomInt(min, max) {
-			return Math.floor(Math.random() * (max - min + 1)) + min;
-		}
- */
-	});
 </script>
 </body>
 </html>

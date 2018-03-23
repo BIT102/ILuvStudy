@@ -282,7 +282,13 @@ public class AdminDAOImpl implements AdminDAO{
 	}
 	
 	@Override
+	public int yesterdayV() throws Exception{
+		return session.selectOne(namespace + ".yesterdayV");  //어제 방문자수
+	}
+	
+	@Override
 	public List<StatisticVO> weekV() throws Exception{
 		return session.selectList(namespace + ".weekV");  //최근 8일 방문자수
 	}
+	
 }

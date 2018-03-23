@@ -12,11 +12,17 @@ public class StatisticVO {
 	
 	private int totalVisit;		//총 방문자수
 	private int toDVisit;		//오늘 방문자수
+	private int yesterDVisit;	//어제 방문자수
 	private int weekVisit;		//최근 8일 방문자 수 
 	
 	
 	
-	
+	public int getYesterDVisit() {
+		return yesterDVisit;
+	}
+	public void setYesterDVisit(int yesterDVisit) {
+		this.yesterDVisit = yesterDVisit;
+	}
 	public int getTotalVisit() {
 		return totalVisit;
 	}
@@ -75,7 +81,8 @@ public class StatisticVO {
 	public String toString() {
 		return "StatisticVO [toDMember=" + toDMember + ", yesterDMember=" + yesterDMember + ", weekMember=" + weekMember
 				+ ", day=" + day + ", totalMember=" + totalMember + ", totalWithdrawal=" + totalWithdrawal
-				+ ", totalVisit=" + totalVisit + ", toDVisit=" + toDVisit + ", weekVisit=" + weekVisit + "]";
+				+ ", totalVisit=" + totalVisit + ", toDVisit=" + toDVisit + ", yesterDVisit=" + yesterDVisit
+				+ ", weekVisit=" + weekVisit + "]";
 	}
 	
 }
