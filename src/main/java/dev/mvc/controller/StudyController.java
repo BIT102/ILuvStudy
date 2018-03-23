@@ -111,56 +111,30 @@ public class StudyController {
 	public void readStudy(@ModelAttribute("cri") SearchCriteriaStudy cri, Model model) throws Exception {
 
 		logger.info("show list..........");
-
+		System.out.println("=========================");
+		System.out.println(cri);
+		System.out.println("=========================");
 		StudyVO vo = new StudyVO();
 
+		model.addAttribute("list", service.studyList());
+		
 		PageMakerStudy pageMakerStudy = new PageMakerStudy();
 
 		pageMakerStudy.setCri(cri);
+		model.addAttribute("list", service.listSearchCriteria(cri));
+		
+		model.addAttribute("rgList", service.rgList());
+		model.addAttribute("catList", service.catList());
 
 		pageMakerStudy.setTotalCount(service.listSearchCount(cri));
 
 		model.addAttribute("pageMakerStudy", pageMakerStudy);
 
-		model.addAttribute("list", service.studyList());
-		model.addAttribute("list", service.listSearchCriteria(cri));
-		model.addAttribute("rgList", service.rgList());
-		model.addAttribute("catList", service.catList());
+		
+		
 
 	}
 
-	// JSON small카테고리(region) //URL /region/추가 (겹치지않게)
-	@RequestMapping(value = "/listAll/region/{rSId}", method = RequestMethod.GET)
-	public ResponseEntity<List<StudyVO>> getrSid(@PathVariable("rSId") String rsId) {
-
-		ResponseEntity<List<StudyVO>> entity = null;
-		try {
-			entity = new ResponseEntity<>(service.rgList2(rsId), HttpStatus.OK);
-		} catch (Exception e) {
-			e.printStackTrace();
-			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		}
-
-		return entity;
-	}
-
-	// JSON small카테고리(study) //URL /category/추가
-	@RequestMapping(value = "/listAll/category/{csId}", method = RequestMethod.GET)
-	public ResponseEntity<List<StudyVO>> getcSid(@PathVariable("csId") String csId) throws Exception {
-
-		ResponseEntity<List<StudyVO>> entity = null;
-
-		try {
-
-			entity = new ResponseEntity<>(service.catList2(csId), HttpStatus.OK);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		}
-
-		return entity;
-	}
 
 	// main화면 맵핑
 	@RequestMapping(value = "/main", method = RequestMethod.GET)

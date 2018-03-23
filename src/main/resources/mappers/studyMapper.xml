@@ -84,6 +84,7 @@ title
 	select *
 	from region
 	order by rdid, rsid
+	
 </select>
 <select id="region2" resultType="StudyVO">
 	select *
@@ -254,12 +255,17 @@ ba.name
 , bs.rct
 , bs.regdate
 , bs.enddate
+, sc.cdname
+, sc.csname
 FROM 
 board_study bs
 left outer join user u on bs.writer = u.EMAIL
 left outer join (select * from board_attach where status = "O") ba on bs.bno = ba.bsbno
 left outer join region r on bs.RDID = r.RDID and bs.RSID = r.RSID
+left outer join board_category bc on bs.bno = bc.bsbno
+, study_category scs
 WHERE bs.bno > 0
+and sc.CDID = bc.CATEGORYD and sc.CSID = bc.CATEGORYS
 ORDER BY bs.bno desc
 , bs.regdate desc
 limit #{page}, 9
@@ -289,12 +295,17 @@ ba.name
 , bs.rct
 , bs.regdate
 , bs.enddate
+, sc.cdname
+, sc.csname
 FROM 
 board_study bs
 left outer join user u on bs.writer = u.EMAIL
 left outer join (select * from board_attach where status = "O") ba on bs.bno = ba.bsbno
 left outer join region r on bs.RDID = r.RDID and bs.RSID = r.RSID
+left outer join board_category bc on bs.bno = bc.bsbno
+, study_category sc
 WHERE bs.bno > 0
+and sc.CDID = bc.CATEGORYD and sc.CSID = bc.CATEGORYS
 ORDER BY bs.bno desc
 , bs.regdate desc
 limit #{pageStart}
@@ -326,12 +337,17 @@ ba.name
 , bs.rct
 , bs.regdate
 , bs.enddate
+, sc.cdname
+, sc.csname
 FROM 
 board_study bs
 left outer join user u on bs.writer = u.EMAIL
 left outer join (select * from board_attach where status = "O") ba on bs.bno = ba.bsbno
 left outer join region r on bs.RDID = r.RDID and bs.RSID = r.RSID
+left outer join board_category bc on bs.bno = bc.bsbno
+, study_category sc
 WHERE bs.bno > 0
+and sc.CDID = bc.CATEGORYD and sc.CSID = bc.CATEGORYS
 ]]>
 </select>
 
@@ -357,14 +373,18 @@ ba.name
 , bs.rct
 , bs.regdate
 , bs.enddate
+, sc.cdname
+, sc.csname
 FROM 
 board_study bs
 left outer join user u on bs.writer = u.EMAIL
 left outer join (select * from board_attach where status = "O") ba on bs.bno = ba.bsbno
 left outer join region r on bs.RDID = r.RDID and bs.RSID = r.RSID
+left outer join board_category bc on bs.bno = bc.bsbno
+, study_category sc
 WHERE bs.bno > 0
+and sc.CDID = bc.CATEGORYD and sc.CSID = bc.CATEGORYS
 ]]>
-
 <include refid="search"></include>
 
 <![CDATA[
@@ -397,15 +417,23 @@ count(bs.bno)
 , bs.rct
 , bs.regdate
 , bs.enddate
+, sc.cdname
+, sc.csname
 FROM 
 board_study bs
 left outer join user u on bs.writer = u.EMAIL
 left outer join (select * from board_attach where status = "O") ba on bs.bno = ba.bsbno
 left outer join region r on bs.RDID = r.RDID and bs.RSID = r.RSID
+left outer join board_category bc on bs.bno = bc.bsbno
+, study_category sc
 WHERE bs.bno > 0
+and sc.CDID = bc.CATEGORYD and sc.CSID = bc.CATEGORYS
 ]]>
 <include refid="search"></include>
 </select>
+
+
+
 
 <!-- 검색에 필요한 화면구성 -->
 <sql id="search">
@@ -413,29 +441,21 @@ WHERE bs.bno > 0
   			<if test="searchType == 't'.toString()">
   				and title like CONCAT('%', #{keyword}, '%')
   			</if>
-  			<if test="searchType == 'c'.toString()">
-  				and content like CONCAT('%', #{keyword}, '%')
-  			</if>
   			<if test="searchType == 'n'.toString()">
   				and nickname like CONCAT('%', #{keyword}, '%')
   			</if>
-  			<if test="searchType == 'tc'.toString()">
-  				and ( title like CONCAT('%', #{keyword}, '%') OR content like CONCAT('%', #{keyword}, '%'))
+  			<if test="searchType == 'c'.toString()">
+  				and content like CONCAT('%', #{keyword}, '%')
   			</if>
-  			<if test="searchType == 'cn'.toString()">
-  				and ( content like CONCAT('%', #{keyword}, '%') OR nickname like CONCAT('%', #{keyword}, '%'))
-  			</if>
-  			<if test="searchType == 'tcn'.toString()">
-  				and ( title like CONCAT('%', #{keyword}, '%') 
-  						OR content like CONCAT('%', #{keyword}, '%') 
-  						OR nickname like CONCAT('%', #{keyword}, '%') )
-  			</if>
-<!--   			<if test="searchType == ''.toString()">
-  				and ( rdid like CONCAT('%', #{keyword}, '%')
-  					  	OR rsid like CONCAT('%', #{keyword}, '%'))
-  			</if> -->
+			<if test="searchType == 'r'.toString()">
+			    and r.rdname like CONCAT('%', #{keyword}, '%') or r.rsname like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'g'.toString()">
+				and sc.cdname like CONCAT('%', #{keyword}, '%') or sc.csname like CONCAT('%', #{keyword}, '%')
+			</if>
   		</if> 
-  </sql>		
+  </sql>
+	
 
   	 		  <select id="getNextBno" resultType="int">
 
