@@ -2,6 +2,7 @@ package dev.mvc.persistence;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -9,6 +10,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import dev.mvc.domain.StudyVO;
 import dev.mvc.domain.UserVO;
 import dev.mvc.dto.LoginDTO;
 
@@ -81,6 +83,6 @@ public class UserDAOImpl implements UserDAO {
 			session.update(namespace+".emailConf",email);
 			
 		}
-	
+
 	
 }

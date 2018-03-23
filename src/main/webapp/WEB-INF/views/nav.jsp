@@ -56,8 +56,6 @@
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
     padding-top: 60px;
 }
-
-
 .login-container{
     position: relative;
     width: 300px;
@@ -67,7 +65,6 @@
     background: #fff;
     border: 1px solid #ccc;
 }
-
 #output{
     position: absolute;
     width: 300px;
@@ -75,16 +72,12 @@
     left: 0;
     color: #fff;
 }
-
 #output.alert-success{
     background: rgb(25, 204, 25);
 }
-
 #output.alert-danger{
     background: rgb(228, 105, 105);
 }
-
-
 .login-container::before,.login-container::after{
     content: "";
     position: absolute;
@@ -96,18 +89,14 @@
     -moz-transform: rotateZ(4deg);
     -ms-transform: rotateZ(4deg);
     border: 1px solid #ccc;
-
 }
-
 .login-container::after{
     top: 5px;
     z-index: -2;
     -webkit-transform: rotateZ(-2deg);
      -moz-transform: rotateZ(-2deg);
       -ms-transform: rotateZ(-2deg);
-
 }
-
 .avatar{
     width: 100px;height: 100px;
     margin: 10px auto 30px;
@@ -115,7 +104,6 @@
     border: 2px solid #aaa;
     background-size: cover;
 }
-
 .form-box input{
     width: 100%;
     padding: 10px;
@@ -124,29 +112,23 @@
     border: 1px solid #ccc;;
     background: #fafafa;
     transition:0.2s ease-in-out;
-
 }
-
 .form-box input:focus{
     outline: 0;
     background: #eee;
 }
-
 .form-box input[type="text"]{
     border-radius: 5px 5px 0 0;
     text-transform: lowercase;
 }
-
 .form-box input[type="password"]{
     border-radius: 0 0 5px 5px;
     border-top: 0;
 }
-
 .form-box button.login{
     margin-top:15px;
     padding: 10px 20px;
 }
-
 /* The Close Button (x) */
 .close {
     position: absolute;
@@ -156,17 +138,11 @@
     font-size: 35px;
     font-weight: bold;
 }
-
 .close:hover,
 .close:focus {
     color: red;
     cursor: pointer;
 }
-
-
-/* .texttext{
-	vertical-align:middle;
-} */
 </style>
 
 </head>
@@ -198,7 +174,7 @@
                     
                     
 					<!-- 로그인 모달 -->
-			<div id="id01" class="modal">
+	<div id="id01" class="modal">
 				<div class="container">
 					<div class="login-container">
 						<div id="output"></div>
@@ -207,7 +183,7 @@
 						<div class="form-box">
 							<form action="/loginPost" method="post" class="form login">
 								<input name="email" type="text" placeholder="username"> 
-								<input type="password" name="password" placeholder="password">
+								<input type="password" name="password" placeho2lder="password">
 								<button class="btn btn-info btn-block login" type="submit">Login</button>
 								<div class="texttext" style="margin-top:15px;">
 								<input type="checkbox" style="width:20px; vertical-align:middle; margin:0;" id="ida" ><label for="idaa" style="vertical-align:middle; margin:0;">　아이디저장</label><br>
@@ -245,16 +221,19 @@
                             </li> <!-- end of /.dropdown -->
                             <li class="dropdown">
                             	<a href="/logout"><span>로그아웃</span></a>
+                            </li>
+                            <li class="dropdown">
+                            <a href="study/regist">스터디 등록하기</a>	
                         </c:otherwise>    
                         </c:choose>    
                             <li class="dropdown">
                                 <a href="/study/listAll"><span>스터디 구경하기</span></a>
                             </li>
                             <li class="dropdown">
-                                <a href="contact.html"><span>FAQ</span></a>
+                                <a href="/sqna/list"><span>FAQ</span></a>
                             </li>
                             <li class="dropdown">
-                                <a href="contact.html"><span>공지사항</span></a>
+                                <a href="/study/notice"><span>공지사항</span></a>
                             </li>
                         </ul>
                     </div><!-- nav links -->
@@ -266,7 +245,6 @@
 <script>
 //Get the modal
 var modal = document.getElementById('id01');
-
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
     if (event.target == modal) {

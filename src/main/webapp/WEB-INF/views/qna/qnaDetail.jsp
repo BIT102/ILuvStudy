@@ -18,10 +18,32 @@
 body {margin-left:50px;}
 
 #repliesDiv{font-size:40px; border:2px dotted black;}
+.textcenter1{text-align:center;}
 </style>
 </head>
 <body>
 	
+<%@include file="../nav.jsp"%>
+<div id="contact-page">
+ <!-- header begin -->
+            <header class="page-head">
+                <div class="header-wrapper">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+
+                                <ol class="breadcrumb">
+                                    <li><a href="index.html">Home</a></li>
+                                    <li class="active">FAQ</li>
+                                </ol> <!-- end of /.breadcrumb -->
+
+                            </div>
+                        </div>
+                    </div> <!-- /.container -->
+                </div> <!-- /.header-wrapper -->
+            </header> <!-- /.page-head (header end) -->
+	
+<div class="textcenter1">	
 	<form role="form" action="listPage" method="post">
 		<input type='hidden' name='bno' value="${qnaVO.bno}">
 		<input type='hidden' name='page' value="${cri.page}">  <!-- page, perPageNum추가 -->
@@ -70,6 +92,27 @@ body {margin-left:50px;}
 				</div>
 			</div>
 			
+							<div class="comment-post">
+                                    <h3>Post A Comment</h3>
+                                    <form method="post" >
+                                        <div class="row">
+                                           
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <input name="email" type="email" class="form-control" id="email" required="required" placeholder="Email Address">
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col-md-12">
+                                                <textarea name="message" type="text" class="form-control" id="message" rows="8" required="required" placeholder="Type here message"></textarea>
+                                            </div>
+                                        </div>
+                                        
+                                        <button type="submit" id="submit" name="submit" class="btn btn-black">post comment</button>
+                                    </form>
+                                </div>
+			
+			
 			<!-- 댓글목록 페이징 -->
 			
 			<ul class="timeline">
@@ -113,6 +156,8 @@ body {margin-left:50px;}
 		</div>
 	</div>
 	
+</div>	
+</div>
 	<script>
 	$(document).ready(function(){
 	
@@ -317,6 +362,6 @@ var printData = function (replyArr, target, templateObject){
 <!-- 부트스트랩 JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" ></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" ></script>
->>>>>>> branch 'HGKWON' of https://github.com/BIT102/ILuvStudy.git
+
 </body>
 </html>

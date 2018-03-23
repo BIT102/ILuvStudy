@@ -10,9 +10,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <script src="http://code/jquery.com/jquery-1.7.js"></script>
 <script type="text/javascript" src="/resources/js/upload.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+
 <title>Document</title>
 
 <style>
@@ -23,6 +25,7 @@ body{margin:30px 20px; color:pink;}
 	width: 200px;
 	height: 200px;
 	border: 1px dotted blue;
+	background-color:white;
 }
 
 .small {
@@ -47,6 +50,17 @@ small {
 #SmallCat3{display:none;}
 #SmallCat4{display:none;}
 
+/*#rSId{display:none;}*/
+
+#registerForm{margin:0 150px; }
+.form-control{width:300px; margin:0 auto;}
+.input-lg{width:120px;}
+.st{width:120px;}
+.et{width:120px;}
+.sc{width:100px;}
+
+.register1{width;400px;}
+.titleP{width:400px;}
 </style>
 </head>
 
@@ -54,80 +68,33 @@ small {
 
 
 	<!--스터디등록-->
-	<form id="registerForm" role="form" method="post">
-		
+
+	<form id="registerForm" role="form" method="post" class="form-group">
+
 		<!--첫번째 페이지-->
-		<div class="register1">
+		<div class="register1 ">
 
 			<!--제목입력-->
-			<div class="studytitle">
+			<div class="studytitle" >
 				<p>스터디명</p>
-				<input type="text" placeholder="스터디명" name="title" onclick="CheckForm();">
+				<input type="text" placeholder="스터디명" name="title" onclick="CheckForm();" class="form-control titleP input-sm" required>
 			</div>
 
 			<!--쓴사람//value값수정-->
 			<div class="studywriter">
 				<p>쓴사람</p>
-				<input type="text" placeholder="쓴사람" name="writer"
-					value="abc1@gmail.com">
+				<input type="email" placeholder="쓴사람" name="writer" class="form-control titleP input-sm"
+					value="abc1@gmail.com" required pattern="+.com" title="이메일 형식으로 적어주세요">
 			</div>
 
 		<!--카테고리-->
-			<%-- <div class="stucycategory">
-
-				<!--대분류--><p>대분류 </p>
-				
-				<select id="BigCat"  name="categoryD">
-					<option> --- </option>
-					<% int cataNum = 64; %>
-					<c:forEach items="${catlist}" var="StudyVO">
-						<% cataNum++; %>
-						<option class="bigcatB" value="<%=(char)cataNum%>" id="<%=(char)cataNum%>">${StudyVO.cDName}</option>
-					</c:forEach>
-					
-				</select>
-
-				<!--소분류 외국어-->
-				<p>소분류</p>
-				
-				<div id="SmallCat">
-				<select id="SmallCat1">
-				<option value="1">	토익</option>	<option value="2">	토플 </option>	<option value="3">	텝스 </option> 	<option value="4">	토스/오픽 </option>	<option value="5">	회화 </option>	<option value="6">	작문/독해 </option>	<option value="7">	중국어	 </option><option value="8">	일본어	 </option><option value="9">	기타 </option>	
-				</select> 
-				
-				<select id="SmallCat2">
-				<option value="1">	컴퓨터언어	<option value="2">	웹프로그래밍	<option value="3">	모바일프로그래밍	<option value="4">	데이터베이스/서버	<option value="5">	게임프로그래밍	<option value="6">	문서작정	<option value="7">	자격증<option value="8">	기타	
-				</select>
-				
-				<select id="SmallCat3">
-				<option value="1">	미술/디자인	<option value="2">	뷰티/미용	<option value="3">	스포츠	<option value="4">	음악/공연	<option value="5">	게임	<option value="6">	기타	
-				</select>
-				
-				<select id="SmallCat4">
-				<option value="1">	면접	<option value="2">	자소서	<option value="3">	고시	<option value="4">	기술	<option value="5">	기타	
-				</select>
-				
-				</div>
-				
-			</div> --%>
-			
-			<!-- 카테고리 김상욱 수정 -->
 			<tr>
                 <th>카테고리</th>
                 <td>
               
                 <!-- 스터디에 등록된 카테고리 체크 표시 -->
                 <!-- 스터디 카테고리 데이터 -->
-   <%--               <c:forEach items="${studyCategory}" var="studyVO" varStatus="status">
-                 	<c:if test="${status.index eq 0 || status.index eq 9 || status.index eq 17 || status.index eq 23}">
-                 		<label class="fancy-checkbox">
-                 			<input type="checkbox" name="categoryD" class="${studyVO.cDName}" id="${studyVO.cDName}"><span><b>${studyVO.cDName}</b></span>
-                 		</label>
-                 	</c:if>
-                 	<label class="fancy-checkbox" style="display:inline-block;">
-                 		<input type="checkbox" name="categoryS" class="${studyVO.cDName}" id="${studyVO.cSName}"><span>${studyVO.cSName}</span>
-                 	</label>
-                 </c:forEach> --%>
+  
                  
 <!-- ======== 카테고리 =========== -->       
                  <select id="catD" class="form-control">
@@ -138,18 +105,20 @@ small {
                  </select>
                  <select id="catS" class="form-control">
                  	<option>--</option>
-                 	<%-- <option value="${studyVO.cSName}">${studyVO.cSName}</option> --%>
+              
                  </select>
                  <button type="button" id="addCat" class="btn btn-default btn-xs">추가</button>
                  <div id="addCatArea">
                  </div>
 				</td>
             </tr>
-			
+		
 		<br>
 			
-			<button type="button" id="catplus">+추가</button>
-			<select id="catarea" name="categoryS"></select>
+
+			<button type="button" id="catplus" class="btn btn-outline-black">+추가</button>
+			<div id="catarea">
+>>>>>>> refs/remotes/origin/HGKWON2
 				
 		</div>
 
@@ -159,7 +128,7 @@ small {
 			<!--최대인원-->
 			<div class="studymax">
 				<p>최대인원</p>
-				<input type="number" name="max"  min="0">
+				<input type="number" name="max"  min="0" max="200" class="input-lg" required>
 			</div>
 
 			<!--지역분류-->
@@ -169,7 +138,7 @@ small {
 
 				<!-- 대분류 -->
 				<p>지역대분류</p>
-				<select name="rDId" id="rDId">
+				<select name="rDId" id="rDId" class="form-control">
 
 					<option value='' selected>--</option>
 
@@ -183,7 +152,7 @@ small {
 
 				<!-- 소분류 -->
 				<p>지역소분류</p>
-				<select name="rSId" id="rSId">
+				<select name="rSId" id="rSId" class="form-control">
 
 					<option selected>--</option>
 
@@ -242,7 +211,7 @@ small {
 			<!--요일별-->
 			<div class="studysc">
 				<p>요일</p>
-				<select class="sc" name="sc">
+				<select class="sc form-control" name="sc">
 					<option selected>--</option>
 					<option value="월요일">월요일</option>
 					<option value="화요일">화요일</option>
@@ -257,13 +226,13 @@ small {
 			<!-- 시작날짜 -->
 			<div class="studysd">
 				<p>시작날짜</p>
-				<input type="date" name="sd">
+				<input type="date" name="sd" class="form-control">
 			</div>
 
 			<!--시작시간//나중에추가하기-->
 			<div class="studyst">
 				<p>시작시간</p>
-				<select class="st" name="st">
+				<select class="st form-control" name="st">
 					<option selected>--</option>
 					<option value="6">6시</option>
 					<option value="7">7시</option>
@@ -290,7 +259,7 @@ small {
 			<!--끝나는시간//나중에추가하기-->
 			<div class="studyet">
 				<p>끝나는시간</p>
-				<select class="et" name="et">
+				<select class="et form-control" name="et">
 				<option selected>--</option>
 				</select>
 			</div>
@@ -310,7 +279,7 @@ small {
 			<!--내용-->
 			<div class=studycontent>
 				<p>추가글</p>
-				<textarea name="content" row="10"></textarea>
+				<textarea name="content" class="form-control"></textarea>
 			</div>
 
 			<!-- 파일업로드부분 -->
@@ -371,10 +340,19 @@ var str = "";
 
 		//파일을 떨구는 장소	
 
+<<<<<<< HEAD
 		$(".fileDrop").on("drop", function(event){
 			console.log("2*****************");
+=======
+		$(".fileDrop").on("drop", function(event){
+
+>>>>>>> refs/remotes/origin/HGKWON2
 			event.preventDefault();
+<<<<<<< HEAD
 			
+=======
+
+>>>>>>> refs/remotes/origin/HGKWON2
 			var files = event.originalEvent.dataTransfer.files;
 
 			var file = files[0];
@@ -394,8 +372,13 @@ var str = "";
 				contentType: false,
 				type: 'POST',
 				//파일을 드롭했을때 성공시
+<<<<<<< HEAD
 				success: function(data){
 					console.log("3*****************");	
+=======
+				success: function(data){
+					
+>>>>>>> refs/remotes/origin/HGKWON2
 					var fileInfo = getFileInfo(data);
 			
 					var html = template(fileInfo);
@@ -535,10 +518,15 @@ var str = "";
 							$("#rSId").html(str);
 						}
 					)
+					
 				}			
 			</script> 
+<<<<<<< HEAD
 
 <%@include file="../footer.jsp"%>
+=======
+
+>>>>>>> refs/remotes/origin/HGKWON2
 
 </body>
 
