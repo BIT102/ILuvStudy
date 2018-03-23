@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
     <title>스터디 상세</title>
 <style>
 form th{
@@ -13,7 +14,27 @@ form th{
 	width:30%;
 	display: inline;
 }
+.fileDrop {
+	width: 200px;
+	height: 200px;
+	border: 1px dotted blue;
+}
 
+.small {
+	margin-left: 3px;
+	font-weight: bold;
+	color: gray;
+}
+
+.small:hover {
+	background-color: black;
+}
+
+small {
+	margin-left: 3px;
+	font-weight: bold;
+	color: gray;
+}
 </style>
 </head>
 <body>
@@ -34,7 +55,7 @@ form th{
 		</div>
     
     <div class="panel-body">    
-	<form role="form" method="post">          
+	<form id = "registerForm" method="post" action = "/study/register">          
         <div>* 기본정보</div>
         <table class="table table-hover">
         	<tbody>
@@ -93,22 +114,12 @@ form th{
                 </td>
             </tr>
             <tr>
-                <th>등록일</th>
-                <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${studyVO.regdate}"/></td>
-            </tr>
-            <tr>
                 <th>스터디 방장</th>
-                <td><input type="hidden" name="writer" value="${studyVO.writer}">abc1@gmail.com</td>
+                <!-- 아래 방장은 나중에 세션으로 전송 -->
+                <%-- <td><input name="writer" value="${studyVO.writer}"></td> --%>
+                <td><input class="form-control" name="writer" value="abc1@gmail.com"></td>
             </tr>
-            <tr>
-                <th>스터디 상태</th>
-                <td>
-                    <jsp:useBean id="now1" class="java.util.Date" />
-                	<c:if test="${studyVO.sd > now1}">모집중</c:if>
-                	<c:if test="${studyVO.sd <= now1 && studyVO.enddate >= now1}">진행중</c:if>
-                	<c:if test="${studyVO.enddate < now1}">마감</c:if>
-                </td>
-            </tr>
+            
              </tbody>
         </table>
         
@@ -118,37 +129,34 @@ form th{
             <tr>
                 <th>연령</th>
                 <td>
-                <label class="fancy-checkbox" style="display:inline-block;">
-                	<input type="checkbox" class="age" name="age" value="10대"><span>10대</span>
-                </label>
-                <label class="fancy-checkbox" style="display:inline-block;">
-                	<input type="checkbox" class="age" name="age" value="20대"><span>20대</span>
-                </label>
-                <label class="fancy-checkbox" style="display:inline-block;">
-                	<input type="checkbox" class="age" name="age" value="30대"><span>30대</span>
-                </label>
-                <label class="fancy-checkbox" style="display:inline-block;">
-                	<input type="checkbox" class="age" name="age" value="40대"><span>40대</span>
-                </label>
-                <label class="fancy-checkbox" style="display:inline-block;">
-                	<input type="checkbox" class="age" name="age" value="50대"><span>50대</span>
-                </label>
-                <label class="fancy-checkbox" style="display:inline-block;">
-                	<input type="checkbox" class="age" name="age" value="무관"><span>무관</span>
-                </label>
-                <!-- <select name="age" id="age" class="form-control">
-                	<option value="10대">10대</option>
-                	<option value="20대">20대</option>
-                	<option value="30대">30대</option>
-                	<option value="40대">40대</option>
-                	<option value="50대">50대</option>
-                	<option value="무관">무관</option>
-                </select> -->
+	                <label class="fancy-checkbox" style="display:inline-block;">
+	                	<input type="checkbox" class="age" name="age" value="10대"><span>10대</span>
+	                </label>
+	                <label class="fancy-checkbox" style="display:inline-block;">
+	                	<input type="checkbox" class="age" name="age" value="20대"><span>20대</span>
+	                </label>
+	                <label class="fancy-checkbox" style="display:inline-block;">
+	                	<input type="checkbox" class="age" name="age" value="30대"><span>30대</span>
+	                </label>
+	                <label class="fancy-checkbox" style="display:inline-block;">
+	                	<input type="checkbox" class="age" name="age" value="40대"><span>40대</span>
+	                </label>
+	                <label class="fancy-checkbox" style="display:inline-block;">
+	                	<input type="checkbox" class="age" name="age" value="50대"><span>50대</span>
+	                </label>
+	                <label class="fancy-checkbox" style="display:inline-block;">
+	                	<input type="checkbox" class="age" name="age" value="무관"><span>무관</span>
+	                </label>
                 </td>
             </tr>
             <tr>
+            
                 <th>시작날짜</th>
-                <td><input type="text" name="sd" value="${studyVO.sd}" class="form-control"></td>
+                <td>
+                	<div class="studysd">
+						<input class="form-control" type="date" name="sd">
+					</div>
+				</td>
             </tr>
             <tr>
                 <th>시간</th>
@@ -226,28 +234,16 @@ form th{
                     <button type="button" id="addTime" class="btn btn-default btn-xs">추가</button> -->
                 </td>
             </tr>
-            <tr>
-                <th>완료일</th>
-                <td>
-                 <fmt:formatDate pattern="yyyy-MM-dd" value="${studyVO.enddate}"/>
-                </td>
-            </tr>
-            <tr>
-            	<th>현재인원</th>
-            	<td>${studyVO.now}</td>
-            </tr>
+            
             <tr>
                 <th>최대인원</th>
-                <td><input type="text" name="max" value="${studyVO.max}"  class="form-control"></td>
+                <td>
+                	<div class="studymax">
+						<input class="form-control" type="number" name="max"  min="0">
+					</div>
+                </td>
             </tr>
-            <tr>
-            	<th>조회수</th>
-            	<td>${studyVO.vct}</td>
-            </tr>
-            <tr>	
-            	<th>댓글수</th>
-            	<td>${studyVO.rct}</td>
-            </tr>
+            
             </tbody>
         </table>
 
@@ -261,45 +257,28 @@ form th{
             <tr>
                 <th>이미지</th>
                 <td>
-                	<div class="gallery">
-      		  		</div>
+                	<div class="studyfile">
+
+						<h3>첫 사진은 메인 화면에 등록됩니다.</h3>
+						<div class='fileDrop'></div>
+						<div class='uploadedList'></div>
+					</div>
                 </td>
             </tr>
         </tbody>
         </table>
-	</form>
+        <!-- 일등록 핸들러 -->
+
 		<div class="text-right">
-		<button type="submit" id="modifyBtn" class="btn btn-success">수정</button>
+			<button type="submit" class = "btn btn-success">등록</button>
+			<!-- <input type="submit" id = "insertBtn" class = "btn btn-success" value = "등록" /> -->
 		</div>
+	</form>
+		
 	</div>
 	<!-- panel-body end -->
 	
-	<div class="panel-body">   
-        <div>* 신청자</div>
-        <table class="table table-hover">
-            <thead>
-            <tr>
-                <th>번호</th>
-                <th>아이디</th>
-                <th>신청일</th>
-                <th>승인여부</th>
-            </tr>
-            </thead>
-            <tbody>
-<c:forEach items="${applyStudy}" var="studyVO">
-            <tr>
-                <td>${studyVO.bno}</td>
-                <td>${studyVO.email}</td>
-                <td><fmt:formatDate pattern="yyyy-MM-dd" value="${studyVO.regdate}"/></td>
-                <td>${studyVO.status}</td>
-            </tr>
-</c:forEach>
-            </tbody>
-        </table>
-
-        <button type="button" id="listBtn" class="btn btn-primary">목록</button>
-    
-  </div>
+	
   <!-- panel-body end -->
   							</div>
 						</div>
@@ -311,43 +290,132 @@ form th{
 		<!-- END MAIN -->
 		</div>
 		
+<script id="template" type="text/x-handlebars-template">
+	<div class="mailbox-attachment-info">
+		<span class="mailbox-attachment-icon has-img">
+			<img src="{{imgsrc}}" alt="Attachment">
+		</span>
+		<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>
+		<small class = "small" value = "{{name}}" data-src=data style="cursor:pointer">X</small>
+		</span>
+	</div>
+</script>		
+<script>
+$(".st").change(function(){
+var stval = $(".st option:selected").val();
+
+var str="";
+
+	for(var i = stval; i<=24; i++){
+				
+		str += "<option value'"+i+"'>"+i+"시</option>";
+		$(".et").html(str);
+		
+	if(stval=24) {
+		
+	}	
+}
+
+});
+
+var str = "";
+
+</script>
+<script>
+
+  var template = Handlebars.compile($("#template").html());
+
+  $(".fileDrop").on("dragenter dragover", function(event){
+   console.log("1*****************");
+   event.preventDefault();
+  });
+
+  //파일을 떨구는 장소 
+
+  $(".fileDrop").on("drop", function(event){
+   console.log("2*****************");
+   event.preventDefault();
+   
+   var files = event.originalEvent.dataTransfer.files;
+
+   var file = files[0];
+
+   console.log(file);
+
+   var formData = new FormData();
+
+   formData.append("file", file);
+
+   $.ajax({
+    
+    url: '/study/uploadAjax',
+    data: formData,
+    dataType: 'text',
+    processData: false,
+    contentType: false,
+    type: 'POST',
+    //파일을 드롭했을때 성공시
+    success: function(data){
+     console.log("3*****************"); 
+     var fileInfo = getFileInfo(data);
+   
+     var html = template(fileInfo);
+
+     $(".uploadedList").append(html);
+    }
+    });
+   });
+
+  //취소버튼
+  $(".uploadedList").on("click", "small", function(event){
+
+   var that = $(this);
+
+   $.ajax({
+    url:"deleteFile",
+    type:"post",
+    data:{fileName:$(this).attr("data-src")},
+    dataType:"text",
+    success:function(result){
+     if(result == 'deleted') {
+      alert("deleted");
+      that.parent("div").remove();
+     }
+    }
+   });
+  });
+
+  //스터디 보드 등록후 이미지 등록을 위해서
+  $("#registerForm").submit(function(event){
+
+	  console.log("ssssssssssss");
+	  
+   event.preventDefault();
+   
+   var that = $(this);
+
+   var str = "";
+
+   $(".uploadedList .small").each(function(index){
+    str += "<input type='hidden' name='files["+index+"]' value='"+$(this).attr("value")+"'>";
+   });
+   that.append(str);
+
+   that.get(0).submit();
+
+  });
+  
+</script>
 <script>
 	
 	$(document).ready(function(){
 		
 		//카테고리 소분류 체크 시 대분류 체크 되도록
-/* 		<c:forEach items="${studyCategory}" var="studyVO" varStatus="status">
-			<c:if test="${status.index eq 0 || status.index eq 9 || status.index eq 17 || status.index eq 23}">
-				$(".${studyVO.cDName}").on("click", function(){
-					if($(this).prop("checked")){
-						$("#${studyVO.cDName}").attr("checked",true);
-					}
-				});
-			</c:if>
-        </c:forEach> */
-		
-		$("#studyListsuv").attr("class", "active");
-		$("#studyListnav").attr("class", "active");
-		$("#subPages").attr("class", "in");
-		
-		getStudy(); //스터디 정보 불러옴
+	
 		
 		var formObj = $("form[role='form']");
 		
 		console.log(formObj);
-		
-		//수정 클릭 시 액션
-		$("#modifyBtn").on("click", function(){
-			//form 데이터 유효성 검사 추가 필요
-			//formObj.attr("action", "/admin/studyDetail");
-			formObj.submit();
-		});
-		
-		//목록 클릭 시 액션
-		$("#listBtn").on("click", function(){
-			self.location = "/admin/studyList?page=${cri.page}&perPageNum=${cri.perPageNum}"
-							+"&stStatusType=${cri.stStatusType}&titleKeyword=${cri.titleKeyword}&writerKeyword=${cri.writerKeyword}";
-		});
 		
 		//지역 정보 셀렉트 박스 변경 시 액션
 		$("#rDName").on("change", function(){
@@ -356,7 +424,6 @@ form th{
 		
 		//카테고리 정보 셀렉트 박스 변경 시 액션
 		$("#catD").on("change", function(){
-			alert("확인좀");
 			getCat();
 		});
 		
@@ -382,8 +449,7 @@ form th{
        		var time="<input type='text' name='sc' value='' style='width:30%; display: inline;' class='form-control'> <input type='text' name='st' value='' style='width:30%; display: inline;' class='form-control'> ~ <input type='text' name='et' value='' style='width:30%; display: inline;' class='form-control'><br>";
        	
        		$("#addTimeArea").append(time);
-		});
-		
+		});		
 	});
 		//카테고리 삭제 버튼
 		function btn_delete(x){
@@ -439,34 +505,9 @@ form th{
 		}
 		
 		function getStudy(){
-			//카테고리 정보 불러옴
-			<c:forEach items="${studyDC}" var="studyVO">
-				var recatd = "${studyVO.cDId}"; 
-				var recats = ${studyVO.cSId}; 
-				var recatd2 = "${studyVO.cDName}";
-				var recats2 = "${studyVO.cSName}";
-				
-				var recat="<span><input type='hidden' name='categoryD' value="+recatd+">"
-				+"<input type='hidden' name='categoryS' value="+recats+">"
-				+"<div>"+recatd2 +" > "+recats2+"</span><button type='button' onclick = 'btn_delete(this)' class='btn btn-default btn-xs'>삭제</button></div>";
-				
-				$("#addCatArea").append(recat);
-			</c:forEach>
-			
-			
-			// 연령 정보 불러옴
-			var check_value="${studyVO.age}";  //연령 DB 데이터 변수에 저장
-			var check_value2=check_value.split(',');   //콤마를 구분자로 배열에 담음 
-			
-			for(var i=0;i<check_value2.length;i++){ //배열 길이만큼 반복문 처리, 연령 체크 속성 부여
-				$("input:checkbox[value="+ check_value2[i] +"]").attr("checked", "checked");
-			}
 			
 			$("#rDName").val("${studyVO.rDId}"); // 스터디 지역 정보 불러옴
-			$("#sc").val("${studyVO.sc}"); // 시간 정보 불러옴
-			$("#st").val("${studyVO.st}"); // 시작 시간 정보 불러옴
-			$("#et").val("${studyVO.et}"); // 끝나는 시간 정보 불러옴
-			
+						
 			$.ajax({ //rdid값을 POST형식으로 region 컨트롤러에 전송
 				type:'POST',
 				url:'/admin/region/'+ $("#rDName option:selected").val(),
@@ -489,19 +530,7 @@ form th{
 		} //getStudy() 끝
 		
 		
-	    //파일불러오기
-	    var bno = ${studyVO.bno};
-	    var template = Handlebars.compile($("#templateAttach").html());
-	    
-	    $.getJSON("/study/getFile/"+bno, function(list){
-	    	$(list).each(function(){
-	    		
-	    		var fileInfo = getFileInfo(this);
-	    		var html = template(fileInfo);
-	    		
-	    		$(".gallery").append(html)
-	    	})
-	    })
+	  
 		
 </script>
 

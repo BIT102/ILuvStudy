@@ -328,14 +328,14 @@ small {
 	<!-- 일등록 핸들러 -->
 	<script id="template" type="text/x-handlebars-template">
 		<div class="mailbox-attachment-info">
-		<span class="mailbox-attachment-icon has-img">
-			<img src="{{imgsrc}}" alt="Attachment">
-		</span>
-		<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>
-		<small class = "small" value = "{{name}}" data-src=data style="cursor:pointer">X</small>
-		</span>
-	</div>
-</script>
+			<span class="mailbox-attachment-icon has-img">
+				<img src="{{imgsrc}}" alt="Attachment">
+			</span>
+			<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>
+			<small class = "small" value = "{{name}}" data-src=data style="cursor:pointer">X</small>
+			</span>
+		</div>
+	</script>
 
 <!-- 시간지정 -->
 	

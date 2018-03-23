@@ -58,6 +58,19 @@ title
 	order by cdid, csid
 </select>
 
+<!-- 지역정보 -->
+<select id="region" resultType="StudyVO">
+	select *
+	from region
+	order by rdid, rsid
+</select>
+<select id="region2" resultType="StudyVO">
+	select *
+	from region
+	where rdid=#{rDId}
+	order by rdid, rsid
+</select>
+
 
 
 <insert id="createCa">

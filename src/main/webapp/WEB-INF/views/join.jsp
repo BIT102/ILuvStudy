@@ -82,7 +82,7 @@ select.form-control:not([size]):not([multiple]) {
 			}
 			
 			// 중복 체크
-ㅇ		$.ajax({
+			$.ajax({
 				url : "/join/chkEmail",
 				type: "post",
 				headers: {
@@ -112,7 +112,7 @@ select.form-control:not([size]):not([multiple]) {
 		// 비밀번호 유효성검사 비밀번호의 경우에는 버튼을 누를때마다 변화가 생기도록 하여 keyup event를 활용함.
 		$('#password').keyup(function(){
 			var password = document.getElementById("password").value;
-			
+
 			// 길이, 알파벳 
 			if(password.length >= 8 && password.length <= 16 
 						&& containsCharOnly(password, charPw)){
@@ -297,9 +297,6 @@ select.form-control:not([size]):not([multiple]) {
 
 <body>
 
-
-	
-
 		<div class="container">
 	            <div class="row">
 	            <div class="col-md-8">
@@ -415,56 +412,6 @@ select.form-control:not([size]):not([multiple]) {
 	
 </body>
 
-	<script>
 	
-	$(document).ready(function(){
-		var formObj = $("form[role='form']");
-		
-		console.log(formObj);
-		
-		
-		// 인증번호 보내기 버튼
-		$(".vailed").on("click",function(){
-			
-			var email1 = $('#email1').val(); 
-			var email2 = $('#email2').val();
-			
-			console.log(email1);
-			console.log(email2);
-			
-			$.ajax({
-				type : 'POST',
-				url : '/chkEmailAjax',
-				headers : {
-					/* "Content-Type" : "application/json", */
-					"X-HTTP-Method-Override" : "POST"
-				},
-				data : {
-					email1 : email1,
-					email2 : email2
-				},
-				/* dataType: 'text', */
-				success : function(result){
-					
-					if(result == "unvaild"){
-						alert("유효하지 않은 이메일 주소입니다.");
-					}else if(result == "duplicated"){
-						alert("이미 가입된 이메일 입니다.");
-					}else{
-						alert("인증번호를 입력하세요.");
-					}	
-					
-					
-				}
-			});
-		})
-		
-	});
-	
-	
-	
-	
-	
-	</script>
 
 </html>

@@ -39,6 +39,16 @@ public class StudyDAOImpl implements StudyDAO {
 		return session.selectList(namespace + ".studyCategory2", cDId);  //study 카테고리 소분류 가져옴
 	}
 	
+	@Override
+	public List<StudyVO> region() throws Exception{
+		return session.selectList(namespace + ".region");   //지역 정보 대분류 가져옴  
+	}
+	
+	@Override
+	public List<StudyVO> region2(String rDId) throws Exception{
+		return session.selectList(namespace + ".region2", rDId);   //지역 정보 소분류 가져옴  
+	}
+	
 	
 	
 	

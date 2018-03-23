@@ -19,6 +19,9 @@ public interface StudyService {
 	public List<StudyVO> studyCategory() throws Exception;
 	public List<StudyVO> studyCategory2(String cDId) throws Exception;
 	
+	public List<StudyVO> region() throws Exception;
+	public List<StudyVO> region2(String rDId) throws Exception;
+	
 	
 	//스터디 불러오기
 	public StudyVO read(Integer bno) throws Exception;

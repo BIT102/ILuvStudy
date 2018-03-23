@@ -36,25 +36,44 @@ public class StudyServiceImpl implements StudyService {
 	@Override
 public void regist(StudyVO vo) throws Exception {
 
-
 		//파일등록하기
 		String[] files = vo.getFiles();
 
-		
 		System.out.println("====================");
 		System.out.println(vo.getFiles());
-
 		System.out.println("====================");
+
+		// 스터디 등록
 		dao.createStudy(vo);
 		
-
-		// bno 값 가져오기
-
-		int bno = dao.getBno();
-
-
-		vo.setBno(bno);
 		
+		int bno = dao.getBno();
+		vo.setBno(bno);
+		System.out.println("bno는 이거다"+bno);
+		// 카테고리 등록
+		Map<String, Object> ca = new HashMap<>();
+		String[] D = vo.getCategoryD();
+		String[] S = vo.getCategoryS();
+		
+		for(int i=0; i<S.length; i++) {
+			String caD = D[i];
+			String caS = S[i];
+				
+			ca.put("bno", bno);
+			ca.put("categoryD", caD);
+			ca.put("categoryS", caS);
+			
+			System.out.println("========================");
+			System.out.println(ca);
+			System.out.println("========================");
+				
+			dao.createCa(ca); //스터디 카테고리 등록 
+		}
+		
+		
+
+		
+		// 사진등록
 		Map<String, Object> map = new HashMap<>();
 
 		for(String fileName : files) {
@@ -63,36 +82,10 @@ public void regist(StudyVO vo) throws Exception {
 
 				map.put("name", fileName);
 				map.put("status", "O");
-	
-				vo.setBno(bno);
-				
-				
-				//카테고리 등록하기
-				Map<String, Object> ca = new HashMap<>();
-					
-	
-				String[] D = vo.getCategoryD();
-				String[] S = vo.getCategoryS();
-					
-	
-				for(int i=0; i<S.length; i++) {
-						
-					String caD = D[i];
-					String caS = S[i];
-					
-					ca.put("bno", bno);
-					ca.put("categoryD", caD);
-					ca.put("categoryS", caS);
-						
-					System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-					System.out.println(ca);
-					System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-						
-					dao.createCa(ca);
-				}
+				map.put("bno", bno);
 
 			} else {
-
+				
 				map.put("name", fileName);
 				map.put("status", "X");
 				map.put("bno", bno);
@@ -101,30 +94,7 @@ public void regist(StudyVO vo) throws Exception {
 			dao.addFile(map);
 		}
 		
-		//카테고리 등록하기
-			Map<String, Object> ca = new HashMap<>();
-			
-
-			String[] D = vo.getCategoryD();
-			String[] S = vo.getCategoryS();
-			
-
-		for(int i=0; i<D.length; i++) {
-				String caD = D[i];
-				for(int j=0; j<S.length; j++) {
-					String caS = S[j];
-					
-					ca.put("bno", bno);
-					ca.put("categoryD", caD);
-					ca.put("categoryS", caS);
-					
-				System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-				System.out.println(ca);
-				System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-					
-					dao.createCa(ca);
-				}
-			}
+		
 	}
 	
 	
@@ -139,7 +109,15 @@ public void regist(StudyVO vo) throws Exception {
 		return dao.studyCategory2(cDId);
 	}
 	
+	@Override
+	public List<StudyVO> region() throws Exception{
+		return dao.region();
+	}
 	
+	@Override
+	public List<StudyVO> region2(String rDId) throws Exception{
+		return dao.region2(rDId);
+	}
 	
 	
 	//스터디 불러오기

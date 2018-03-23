@@ -18,6 +18,9 @@ public interface StudyDAO {
 	public List<StudyVO> studyCategory() throws Exception;
 	public List<StudyVO> studyCategory2(String cDId) throws Exception;
 	
+	public List<StudyVO> region() throws Exception;
+	public List<StudyVO> region2(String rDId) throws Exception;
+	
 	
 	
 	

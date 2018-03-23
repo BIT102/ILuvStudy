@@ -48,28 +48,17 @@ public class UploadController {
 	@RequestMapping(value = "/uploadAjax",
 	                method = RequestMethod.POST,
 	                produces = "text/plain;charset=UTF-8")
-	public ResponseEntity<String> uploadAjax(MultipartFile file, String type) throws Exception {
+	public ResponseEntity<String> uploadAjax(MultipartFile file) throws Exception {
 		
 		logger.info("originalName: "+file.getOriginalFilename());
 //		logger.info("size: "+file.getSize());
 //		logger.info("contentType: "+file.getContentType());
 		
-		ResponseEntity<String> entity = null;
-		
-		if(type.equals("user")){
-			entity = new ResponseEntity<String>(UploadFileUtils.uploadFile(uploadPathUser,
-					file.getOriginalFilename(), 
-					file.getBytes()),
-					HttpStatus.CREATED);
-		}else{
-			entity = new ResponseEntity<String>(UploadFileUtils.uploadFile(uploadPath,
-												file.getOriginalFilename(), 
-												file.getBytes()),
-												HttpStatus.CREATED);
-		}
-		
-		
-		return entity;
+	
+		return new ResponseEntity<>(UploadFileUtils.uploadFile(uploadPath,
+				file.getOriginalFilename(), 
+				file.getBytes()),
+				HttpStatus.CREATED);
 		
 //		(file.getOriginalFilename(), HttpStatus.CREATED);
 	}
