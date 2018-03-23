@@ -61,6 +61,8 @@ color:#6b456a !important;
 .sectionbox{border:2px solid black;
 			border-radius:8px;
 			margin-bottom:5px;}
+			
+.time{float:right;}
 </style>
 
 </head>
@@ -115,26 +117,27 @@ color:#6b456a !important;
 	    <div class="row">
 		    <h2 class="text-center"><span>공 지 사 항</span></h2>
 	    </div>
-	    <div class="col-md-10 offset-md-1 row-block">
-	        <ul id="sortable">
+	    <div class="col-md-12 offset-md-1 row-block">
+	       <div class="panel-group" id="accordion">
 	        
-	    <c:forEach items="${list}" var="noticeVO">    
-	            <li class="sectionbox"><div class="media">
-	            <div class="media-left align-self-center">
-	               ${noticeVO.bno}
-	            </div>
-	            <div class="media-body">
-	                <h4>${noticeVO.title}         ${noticeVO.writer}</h4><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${noticeVO.regdate}" />
-	                <p>${noticeVO.content}</p>
-	            </div>
-	            <div class="media-right align-self-center">
-	                <a href="/study/noticeDetail${pageMaker.makeQuery(pageMaker.cri.page)}&bno=${noticeVO.bno}" class="btn btn-default">수정하기</a>
-	            </div>
-	        </div></li>
-	        
+	    <c:forEach items="${list}" var="QnaVO">    
+	    
+	    		<div class="panel panel-default">
+	      			<div class="panel-heading">
+	      			  <h4 class="panel-title">
+	        		  <a data-toggle="collapse" data-parent="#accordion" href="#collapse${QnaVO.bno}">${QnaVO.title}</a>
+	        		  <small>(${QnaVO.writer})</small>
+	        		  <span class="time">${QnaVO.regdate}</span>
+	       			 </h4>
+	      			</div>
+				      <div id="collapse${QnaVO.bno}" class="panel-collapse collapse">
+				        <div class="panel-body">${QnaVO.content}</div>
+				      </div>
+			    </div>
+			    
 	     </c:forEach>
 	        
-	        </ul>
+	        </div>
 	    </div>
 </div>
 </section>
