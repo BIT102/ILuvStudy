@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -22,16 +23,22 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import dev.mvc.service.LoginService;
 
 @Controller
 public class SMSController {
 
 	private static final Logger logger = LoggerFactory.getLogger(SMSController.class);
 	Map<String, String> codeMap = new HashMap<>();
+
+	@Inject
+	LoginService service;
 	
 	  @RequestMapping(value = "/smssend" , method = RequestMethod.POST)
 	  public ResponseEntity<String> smssend(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception{
@@ -51,13 +58,31 @@ public class SMSController {
 		        sms_url = "https://sslsms.cafe24.com/sms_sender.php"; // SMS 전송요청 URL
 		        String user_id = base64Encode("lswkim"); // SMS아이디
 		        String secure = base64Encode("45278fc5309389f11c297c8ad52cecb5");//인증키
-		        String msg = base64Encode(randomCode);
+		       
 		        String rphone = base64Encode(nullcheck(request.getParameter("rphone"), ""));
 		        System.out.println("========================================");
 		        System.out.println(rphone+"번호의 암호코드는 "+randomCode);
 		        System.out.println("========================================");
-		        codeMap.put(request.getParameter("rphone"), randomCode); //
-		        System.out.println("codeMap : " + codeMap.get("010-3137-3804"));
+		        
+		        String msg = "";
+		        
+		        // 전화번호 찾기 조건문
+		        if(request.getParameter("type").equals("searchId")){
+		        	String phone = request.getParameter("rphone").replaceAll("-", "");
+		        	
+		        	if(service.searchEmail(phone)==null){ // 리턴값이 없으면 미가입자
+				    	entity = new ResponseEntity<String>("fail", HttpStatus.OK);
+				    	return entity;
+				    }
+		        	msg = base64Encode(service.searchEmail(phone));
+		        }else{
+		        	msg = base64Encode(randomCode);
+		        	codeMap.put(request.getParameter("rphone"), randomCode);
+		        }
+		        
+		        
+		        
+		        
 		        String sphone1 = base64Encode("010");
 		        String sphone2 = base64Encode("3137");
 		        String sphone3 = base64Encode("3804");
@@ -183,6 +208,7 @@ public class SMSController {
 			        
 			    /*}*/
 			    entity = new ResponseEntity<String>("success", HttpStatus.OK);
+			   
 		  }catch(Exception e){
 			  entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		  }

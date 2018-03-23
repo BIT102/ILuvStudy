@@ -198,7 +198,8 @@ select.form-control:not([size]):not([multiple]) {
 					"X-HTTP-Method-Override" : "POST"
 				},
 				data: {
-					rphone : phoneNum
+					rphone : phoneNum,
+					type : join
 				},
 				success: function(result){
 					console.log(result);

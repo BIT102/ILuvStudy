@@ -23,4 +23,7 @@ public interface LoginService {
 	// 관리자 업데이트
 	public void loginupdate(Object adminVO) throws Exception;
 
+	// 전화번호로 이메일찾기
+	public String searchEmail(String phone) throws Exception;
+	
 }

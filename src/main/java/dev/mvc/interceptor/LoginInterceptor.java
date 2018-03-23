@@ -1,7 +1,5 @@
 package dev.mvc.interceptor;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-
 import java.io.PrintWriter;
 
 import javax.inject.Inject;

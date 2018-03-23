@@ -16,9 +16,12 @@ public interface LoginDAO {
 	
 	// loginCookie에 기록된 값으로 사용자의 정보 조회
 	public UserVO checkUserWithSessionKey(String value) throws Exception;
-	
-	
+
 	public AdminVO adminLogin(LoginDTO dto)throws Exception;
 	public void loginupdate(Object adminVO)throws Exception;
+	
+	
+	// 아이디 찾기(전화번호로)
+	public String searchEmail(String phone)throws Exception;
 	
 }

@@ -45,6 +45,9 @@ public class LoginServiceImpl implements LoginService {
 		return dao.checkUserWithSessionKey(value);
 	}
 
-
+	@Override
+	public String searchEmail(String phone) throws Exception{
+		return dao.searchEmail(phone);
+	}
 	
 }

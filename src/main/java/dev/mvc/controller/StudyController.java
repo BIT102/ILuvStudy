@@ -122,7 +122,7 @@ public class StudyController {
 
 		model.addAttribute("pageMakerStudy", pageMakerStudy);
 
-		model.addAttribute("list", service.studyList());
+		//model.addAttribute("list", service.studyList());
 		model.addAttribute("list", service.listSearchCriteria(cri));
 		model.addAttribute("rgList", service.rgList());
 		model.addAttribute("catList", service.catList());

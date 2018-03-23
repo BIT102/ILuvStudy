@@ -36,19 +36,14 @@ public class LoginController {
 	public void loginGet(HttpServletRequest request, Model model) throws Exception{
 		
 		logger.info("Login merge get.......");
-		try {
-			String rememberable = WebUtils.getCookie(request, "rememberId").getValue();
-			System.out.println(rememberable);
-			
-			if(rememberable != null){
-				model.addAttribute("id", rememberable);
-				model.addAttribute("checked", "checked");
-			}
-			
-		} catch (Exception e) {
-			
-		}
 		
+		String rememberable = WebUtils.getCookie(request, "rememberId").getValue();
+		System.out.println(rememberable);
+		
+		if(rememberable != null){
+			model.addAttribute("id", rememberable);
+			model.addAttribute("checked", "checked");
+		}		
 	}
 	
 	@RequestMapping(value = "loginPost", method = RequestMethod.POST)
@@ -142,20 +137,33 @@ public class LoginController {
 	}
 		
 	//로그아웃 처리
-		//adminLogout.jsp
-		@RequestMapping(value="/adminLogout", method=RequestMethod.GET)
-		public String adminlogout(HttpServletRequest request, HttpServletResponse response, 
-				HttpSession session) throws Exception {
-			logger.info("adminLogout get...");
-			
-			Object obj = session.getAttribute("login");
-			
-			if(obj != null){				
-				session.removeAttribute("login");
-				session.invalidate();
-			}
-			return "/adminLogout";	
+	//adminLogout.jsp
+	@RequestMapping(value="/adminLogout", method=RequestMethod.GET)
+	public String adminlogout(HttpServletRequest request, HttpServletResponse response, 
+			HttpSession session) throws Exception {
+		logger.info("adminLogout get...");
+		
+		Object obj = session.getAttribute("login");
+		
+		if(obj != null){				
+			session.removeAttribute("login");
+			session.invalidate();
 		}
-	
+		return "/adminLogout";	
+	}
+		
+	// 아이디 찾기
+	@RequestMapping(value="/searchEmail", method=RequestMethod.GET)
+	public void searchEmailGET()throws Exception{
+		logger.info("searchEmailGET........");
+	}
+		
+	// 비밀번호 찾기
+	@RequestMapping(value="/searchPW", method=RequestMethod.GET)
+	public void searchPWGET()throws Exception{
+		logger.info("searchPWGET........");
+		
+		
+	}
 	
 }

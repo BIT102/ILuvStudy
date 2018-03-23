@@ -74,8 +74,9 @@ public class StudyServiceImpl implements StudyService {
 	@Override
 	public List<StudyVO> listSearchCriteria(SearchCriteriaStudy cri) throws Exception {
 		
-		//스터디 리스트 가져온다
+		//검색값에 해당하는 스터디 리스트 가져온다
 		List<StudyVO> list = dao.listSearch(cri);
+		
 		//bno 값을 담자
 		int bno;
 	
@@ -86,24 +87,32 @@ public class StudyServiceImpl implements StudyService {
 
 		String getcaS = "";
 		
+		System.out.println("============================");
+		System.out.println(list);
+		System.out.println("============================");
+		
+		// 카테고리 소분류의 다중선택을 처리하기위해 스트링으로 만들어 set해준다.
 		//bno 가져온다
 		for(int i=0; i<list.size(); i++){
 			
-		bno = list.get(i).getBno();
-		//bno와 비교해서 대분류 가져온다
-	    list.get(i).setcDName(dao.getcaD(bno));
-	    
-	    caS = dao.getcaS(bno);
-	    
-	    String[] arrcaS = caS.toArray(new String[caS.size()]);
-
-	    getcaS = Arrays.toString(arrcaS);
-	    
-	    System.out.println("+++++++++++++++++++++++++++++++++++++++++++");
-	    System.out.println(list);
-	    System.out.println("+++++++++++++++++++++++++++++++++++++++++++");
-	    
-		list.get(i).setcSName(getcaS);
+			// 검색결과로 담긴 리스트의 bno 값을 추출
+			bno = list.get(i).getBno();
+			
+			//bno와 비교해서 대분류 세팅해준다.
+		    list.get(i).setcDName(dao.getcaD(bno));
+		    
+		    // 카테고리 소분류 게시글 번호로 소분류값 배열로 가져오기
+		    caS = dao.getcaS(bno);
+		    
+		    String[] arrcaS = caS.toArray(new String[caS.size()]);
+	
+		    getcaS = Arrays.toString(arrcaS);
+		    
+		    System.out.println("+++++++++++++++++++++++++++++++++++++++++++");
+		    System.out.println(list);
+		    System.out.println("+++++++++++++++++++++++++++++++++++++++++++");
+		    
+			list.get(i).setcSName(getcaS);
 		}
 		
 		return list;

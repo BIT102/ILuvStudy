@@ -206,8 +206,8 @@
 						<div class="avatar" style="background-image:url(/resources/assets/img/login.png);"></div>
 						<div class="form-box">
 							<form action="/loginPost" method="post" class="form login">
-								<input name="email" type="text" placeholder="username"> 
-								<input type="password" name="password" placeholder="password">
+								<input name="id" type="text" placeholder="username"> 
+								<input type="password" name="pw" placeholder="password">
 								<button class="btn btn-info btn-block login" type="submit">Login</button>
 								<div class="texttext" style="margin-top:15px;">
 								<input type="checkbox" style="width:20px; vertical-align:middle; margin:0;" id="ida" ><label for="idaa" style="vertical-align:middle; margin:0;">　아이디저장</label><br>

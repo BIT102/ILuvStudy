@@ -67,6 +67,10 @@ public class LoginDAOImpl implements LoginDAO{
 		session.update(namespace + ".adminLastLogin", adminVO);  //최근 접속일 업데이트
 	}
 	
-	
+	// 전화번호로 아이디 찾기
+	@Override
+	public String searchEmail(String phone)throws Exception{
+		return session.selectOne(namespace+".searchEmail",phone);
+	}
 	
 }
