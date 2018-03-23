@@ -118,6 +118,9 @@ public class LoginController {
 		Object obj = session.getAttribute("login");
 		
 		if(obj != null){
+			
+			// 관리자 로그아웃 관련해서 CASE 나누어 주자.
+			
 			UserVO vo = (UserVO) obj;
 			
 			session.removeAttribute("login");

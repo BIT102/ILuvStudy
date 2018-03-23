@@ -105,7 +105,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public String sendEmail(String email) throws Exception {
+	public void sendEmail(String email) throws Exception {
 		
 		System.out.println("==============================");
 		System.out.println("sendEmail.............");
@@ -114,8 +114,8 @@ public class UserServiceImpl implements UserService {
 	    String tomail  = email;     // 받는 사람 이메일
 	    String title   = "[ILOVESTUDY]인증번호 발송";      // 제목
 	    
-	    String code = UUID.randomUUID().toString().replace("-", "").substring(0, 6);
-	    String content = "인증번호는 ["+code+"] 입니다. 해당 번호를 입력해 주세요.";    // 내용
+	    
+	    String content = "aaa";    // 내용
 	   	    
 	    String htmltext = 
 	    "<html>"
@@ -139,7 +139,6 @@ public class UserServiceImpl implements UserService {
 	    
 	    mailSender.send(message);
 
-	    return code;  // 생성된 인증번호를 담아서 리턴시킴
 	}
 	
 	@Override

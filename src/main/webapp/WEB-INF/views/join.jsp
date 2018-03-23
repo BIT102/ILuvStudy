@@ -31,7 +31,7 @@ select.form-control:not([size]):not([multiple]) {
 	$('document').ready(function(){
 
 		var charDot = ".abcdefghijklmnopqrstuvwxyz0123456789"; // dot 때문에 나누어놈
-		var chars = "abcdefghijklmnopqrstuvwxyz0123456789";
+		var chars = "abcdefghijklmnopqrstuvwxyz0123456789_-";
 		var charPw = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"; // 비밀번호는 대소문자 구분
 		var charNum = "0123456789";
 		
@@ -40,9 +40,11 @@ select.form-control:not([size]):not([multiple]) {
 			console.log(input)
 			console.log((input.charAt(2)));
 			for(var i=0; i<input.length ; i++)
-				if(chars.indexOf(input.charAt(i))==-1)
+				if(chars.indexOf(input.charAt(i))==-1){
+					console.log("문자체크 이거안되");
 					return false;
-					
+				}
+
 			return true;
 		}
 		
@@ -61,6 +63,7 @@ select.form-control:not([size]):not([multiple]) {
 			email1 = email1.toLowerCase(); // 소문자 변형
 			email2 = email2.toLowerCase(); // 소문자 변형
 			var dotCnt = 0;
+			var resultF;
 			
 			// .1개 검사
 			for(var i = 0; i<email2.length; i++){
@@ -76,35 +79,43 @@ select.form-control:not([size]):not([multiple]) {
 			// 알파벳, 길이 검사
 			if(!((containsCharOnly(email1, chars)&&containsCharOnly(email2, charDot))
 					&&(4<=email1.length&&email1.length<=30))){
-				
-				document.getElementById("email").value = email1+"@"+email2;
 				return false;
 			}
+			return true;// 중복 체크
 			
-			// 중복 체크
+		}
+		
+		$('#chkEmail').on("click",function(){
+			
 			$.ajax({
-				url : "/join/chkEmail",
+				url : "/chkEmail",
 				type: "post",
 				headers: {
 					//"Content-Type" : "application/json",
 					"X-HTTP-Method-Override" : "POST"
 				},
 				data: {
-					email : email1+"@"+email2
+					email : document.getElementById("email1").value+"@"+document.getElementById("email2").value
 				},
 				success: function(result){
 					console.log(result);
 					if(result == "success"){
+						console.log("들어옴");
+						alert("사용가능한 이메일입니다.")
 						emailV = true;
-						return true;
+						document.getElementById("email").value = document.getElementById("email1").value+"@"+document.getElementById("email2").value;
+						
 					}else{
 						alert("중복된 이메일입니다.");
-						return false;
+						emailV = false;
 					}
 				}
 			})
+		})
+		
+		function chkEmail(email1,email2){
 			
-			return false;
+			
 		}
 		
 		//========= Password 부분 ============
@@ -199,7 +210,7 @@ select.form-control:not([size]):not([multiple]) {
 				},
 				data: {
 					rphone : phoneNum,
-					type : join
+					type : "join"
 				},
 				success: function(result){
 					console.log(result);
@@ -280,7 +291,7 @@ select.form-control:not([size]):not([multiple]) {
 			
 			// 전화번호는 인증 시 변환
 			
-			console.log("emailV : " + emailV + "passwordV : " + passwordV + "nicknameV : " + nicknameV + "birthV" + birthV + "phoneNumV : "+ phoneNumV);
+			console.log("emailV : " + emailV + " passwordV : " + passwordV + " nicknameV : " + nicknameV + " birthV" + birthV + " phoneNumV : "+ phoneNumV);
 			
 			if(emailV && passwordV && nicknameV && birthV && phoneNumV){
 				alert("입력하신 이메일로 인증을 완료하세요");
@@ -288,10 +299,7 @@ select.form-control:not([size]):not([multiple]) {
 			}else{
 				alert("내용을 확인하세요");	
 			}
-			
 		});
-			
-			
 	})
 </script>
 
@@ -317,6 +325,7 @@ select.form-control:not([size]):not([multiple]) {
 								<option id = "selectEmail3">daum.net</option>
 								<option id = "selectEmail4">gmail.com</option>
 							</select>
+							<input type="button" id="chkEmail" value="중복체크" />
 	                 	 </div>
 	                    <small> Your Email Id is being used for ensuring the security of your account, authorization and access recovery. </small> </div>
 	                </div>
