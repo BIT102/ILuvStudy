@@ -27,7 +27,7 @@
 
         <!-- scripts -->
         <script type="text/javascript" src="/resources/assets/js/modernizr.custom.97074.js"></script>
-
+        
 	<style>
 	#keywordInput {
 		width:300px;
@@ -60,6 +60,8 @@ color:#6b456a !important;
 .sectionbox{border:2px solid black;
 			border-radius:8px;
 			margin-bottom:5px;}
+			
+.time{float:right;}
 </style>
 
 </head>
@@ -114,11 +116,26 @@ color:#6b456a !important;
 	    <div class="row">
 		    <h2 class="text-center"><span>F A Q</span></h2>
 	    </div>
-	    <div class="col-md-10 offset-md-1 row-block">
-	        <ul id="sortable">
+	    <div class="col-md-12 offset-md-1 row-block">
+	        <div class="panel-group" id="accordion">
 	        
 	    <c:forEach items="${list}" var="QnaVO">    
-	            <li class="sectionbox"><div class="media">
+	    
+	    		<div class="panel panel-default">
+	      			<div class="panel-heading">
+	      			  <h4 class="panel-title">
+	        		  <a data-toggle="collapse" data-parent="#accordion" href="#collapse${QnaVO.bno}">${QnaVO.title}</a>
+	        		  <small>(${QnaVO.writer})</small>
+	        		  <span class="time">${QnaVO.regdate}</span>
+	       			 </h4>
+	      			</div>
+				      <div id="collapse${QnaVO.bno}" class="panel-collapse collapse">
+				        <div class="panel-body">${QnaVO.content}</div>
+				      </div>
+			    </div>
+			    
+	     </c:forEach>
+	        <!--     <li class="sectionbox"><div class="media">
 	            <div class="media-left align-self-center">
 	               ${QnaVO.bno}
 	            </div>
@@ -129,12 +146,11 @@ color:#6b456a !important;
 	            <div class="media-right align-self-center">
 	                <a href="/qna/qnaDetail${pageMaker.makeSearch(pageMaker.cri.page)}&bno=${QnaVO.bno}" class="btn btn-default">수정하기</a>
 	            </div>
-	        </div></li>
-	        
-	     </c:forEach>
-	        
-	        </ul>
+	        </div></li>-->
+	     
 	    </div>
+	</div>
+
 </div>
 </section>
 
