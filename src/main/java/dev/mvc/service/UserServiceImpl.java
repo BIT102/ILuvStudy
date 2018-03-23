@@ -1,6 +1,7 @@
 package dev.mvc.service;
 
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import javax.inject.Inject;
@@ -10,6 +11,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
+import dev.mvc.domain.StudyVO;
 import dev.mvc.domain.UserVO;
 import dev.mvc.dto.UserLoginDTO;
 import dev.mvc.persistence.UserDAO;
@@ -163,6 +165,19 @@ public class UserServiceImpl implements UserService {
 	public int chkNickname(String nickName)throws Exception{
 		return dao.chkNickname(nickName); 
 	}
+	
+	//===============================Gil
+	@Override
+	public List<UserVO> bmk(String email) throws Exception {
+
+		return dao.bmk(email);
+	}
+
+//	@Override
+//	public UserVO bmk(String email) throws Exception {
+//
+//		return dao.bmk(email);
+//	}
 
 	
 	

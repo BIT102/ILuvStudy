@@ -6,7 +6,7 @@
 <%@include file="../include/header.jsp"%>
 <!DOCTYPE html>
 <html>
-<<<<<<< HEAD
+
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>I Luv Study</title>

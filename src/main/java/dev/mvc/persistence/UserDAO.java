@@ -1,7 +1,9 @@
 package dev.mvc.persistence;
 
 import java.util.Date;
+import java.util.List;
 
+import dev.mvc.domain.StudyVO;
 import dev.mvc.domain.UserVO;
 import dev.mvc.dto.UserLoginDTO;
 
@@ -45,4 +47,8 @@ public interface UserDAO {
 	public int chkEmail(String email) throws Exception;
 	
 	public int chkNickname(String nickName) throws Exception;
+
+	// Gil ºÏ¸¶Å©
+	public List<UserVO> bmk(String email) throws Exception;
+//	public UserVO bmk(String email) throws Exception;
 }

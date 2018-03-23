@@ -2,6 +2,7 @@ package dev.mvc.persistence;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -9,6 +10,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import dev.mvc.domain.StudyVO;
 import dev.mvc.domain.UserVO;
 import dev.mvc.dto.UserLoginDTO;
 
@@ -97,6 +99,22 @@ public class UserDAOImpl implements UserDAO {
 		public int chkNickname(String nickName) throws Exception{
 			return session.selectOne(namespace+".chkNickname", nickName);
 		}
-	
+		
+		
+		//Gil ºÏ¸¶Å©
+		@Override
+		public List<UserVO> bmk(String email) throws Exception {
+					
+			
+			
+			return session.selectList(namespace+".listAll",email);
+			
+			
+		}
+//		@Override
+//		public UserVO bmk(String email) throws Exception {
+//					
+//			return session.selectOne(namespace+".listAll",email);
+//		}
 	
 }
