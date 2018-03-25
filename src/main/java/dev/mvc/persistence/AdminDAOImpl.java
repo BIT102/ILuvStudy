@@ -291,4 +291,29 @@ public class AdminDAOImpl implements AdminDAO{
 		return session.selectList(namespace + ".weekV");  //최근 8일 방문자수
 	}
 	
+	@Override
+	public List<StatisticVO> weekS() throws Exception{
+		return session.selectList(namespace + ".weekS");	//최근 8일 스터디 등록 수
+	}
+	
+	@Override
+	public List<StatisticVO> weekA() throws Exception{
+		return session.selectList(namespace + ".weekA");	//최근 8일 스터디 신청 수
+	}
+	
+	@Override
+	public int totalS() throws Exception{
+		return session.selectOne(namespace + ".totalS");	//총 스터디 등록 수
+	}
+	
+	@Override
+	public int totalA() throws Exception{
+		return session.selectOne(namespace + ".totalA");	//총 스터디 신청 수
+	}
+	
+	@Override
+	public List<StudyVO> studyTop() throws Exception{
+		return session.selectList(namespace+".studyTop");	//스터디 조회 수 상위 10개
+	}
+	
 }

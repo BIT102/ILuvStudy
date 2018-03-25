@@ -15,8 +15,37 @@ public class StatisticVO {
 	private int yesterDVisit;	//어제 방문자수
 	private int weekVisit;		//최근 8일 방문자 수 
 	
+	private int weekStudy;		//최근 8일 스터디 등록 수
+	private int weekApply;		//최근 8일 스터디 신청 수
+	private int totalStudy;		//총 스터디 등록 수
+	private int totalApply;		//총 스터디 신청 수
 	
 	
+	
+	public int getWeekStudy() {
+		return weekStudy;
+	}
+	public void setWeekStudy(int weekStudy) {
+		this.weekStudy = weekStudy;
+	}
+	public int getWeekApply() {
+		return weekApply;
+	}
+	public void setWeekApply(int weekApply) {
+		this.weekApply = weekApply;
+	}
+	public int getTotalStudy() {
+		return totalStudy;
+	}
+	public void setTotalStudy(int totalStudy) {
+		this.totalStudy = totalStudy;
+	}
+	public int getTotalApply() {
+		return totalApply;
+	}
+	public void setTotalApply(int totalApply) {
+		this.totalApply = totalApply;
+	}
 	public int getYesterDVisit() {
 		return yesterDVisit;
 	}
@@ -82,7 +111,8 @@ public class StatisticVO {
 		return "StatisticVO [toDMember=" + toDMember + ", yesterDMember=" + yesterDMember + ", weekMember=" + weekMember
 				+ ", day=" + day + ", totalMember=" + totalMember + ", totalWithdrawal=" + totalWithdrawal
 				+ ", totalVisit=" + totalVisit + ", toDVisit=" + toDVisit + ", yesterDVisit=" + yesterDVisit
-				+ ", weekVisit=" + weekVisit + "]";
+				+ ", weekVisit=" + weekVisit + ", weekStudy=" + weekStudy + ", weekApply=" + weekApply + ", totalStudy="
+				+ totalStudy + ", totalApply=" + totalApply + "]";
 	}
 	
 }

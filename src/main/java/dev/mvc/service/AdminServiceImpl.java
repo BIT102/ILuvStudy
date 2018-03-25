@@ -266,19 +266,37 @@ public class AdminServiceImpl implements AdminService{
 		vo.setToDVisit(dao.todayV());			//오늘 방문자수
 		vo.setYesterDVisit(dao.yesterdayV());	//어제 방문자수
 		
+		
+		vo.setTotalStudy(dao.totalS());		//총 스터디 등록 수
+		vo.setTotalApply(dao.totalA());		//총 스터디 신청 수
 		//System.out.println("===============");
 		//System.out.println(vo);
 		return vo;
 	}
 	
 	@Override
-	public List<StatisticVO> weekS() throws Exception{
+	public List<StatisticVO> weekM() throws Exception{
 		return dao.weekM();  //최근 8일 가입자 수 통계
 	}
 	
 	@Override
 	public List<StatisticVO> weekV() throws Exception{
 		return dao.weekV(); //최근 8일 방문자 수 통계
+	}
+	
+	@Override
+	public List<StatisticVO> weekS() throws Exception{
+		return dao.weekS(); //최근 8일 스터디 등록 수 통계
+	}
+	
+	@Override
+	public List<StatisticVO> weekA() throws Exception{
+		return dao.weekA(); //최근 8일 스터디 신청 수 통계
+	}
+	
+	@Override
+	public List<StudyVO> studyTop() throws Exception{
+		return dao.studyTop();	//스터디 조회 수 상위 10개
 	}
 
 }

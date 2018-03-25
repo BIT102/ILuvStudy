@@ -31,13 +31,12 @@
 <body>
 <!--헤더-->
 <div class="navbar navbar-default navbar-fixed-top">
-			<div class="brand">
-				<a href="userList"><img src="/resources/img/logo.JPG" alt="Iluvstudy Logo" class="img-responsive logo"></a> 
+			<div class="brand" style="height:80px; padding:22px 35px;">
+				<a href="userList" style="font-size:24px;">I luv Study</a> 
 			</div>
-			<div class="container-fluid">
+			<div class="container-fluid" style="height:80px;">
 				<div class="navbar-btn">
 					<button type="button" class="btn-toggle-fullwidth"><i class="lnr lnr-arrow-left-circle"></i></button>
-					<a href="/study/main"><button type="button" class="lnr lnr-home"></button></a>
 				</div>
 				<div id="navbar-menu">
 					<ul class="nav navbar-nav navbar-right">
