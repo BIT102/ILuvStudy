@@ -183,12 +183,12 @@
 						<div class="form-box">
 							<form action="/loginPost" method="post" class="form login">
 
-							<!-- 3월 25일 머지 주석 처리 	
 								<input name="id" type="text" placeholder="username"> 
-								<input type="password" name="pw" placeholder="password"> -->
-
-								<input name="email" type="text" placeholder="username"> 
-								<input type="password" name="password" placeho2lder="password">
+								<input type="password" name="pw" placeholder="password">
+							
+							<!-- 3월 25일 머지 주석 처리 	-->
+								<!-- <input name="email" type="text" placeholder="username"> 
+								<input type="password" name="password" placeho2lder="password"> -->
 
 								<button class="btn btn-info btn-block login" type="submit">Login</button>
 								<div class="texttext" style="margin-top:15px;">
