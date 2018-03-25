@@ -11,9 +11,32 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+<style>
+.text-center1{text-align:center;}
+</style>
 </head>
 <body>
+	<%@include file="../nav.jsp"%>
+<div id="single-blog-page">
+ <!-- header begin -->
+            <header class="page-head">
+                <div class="header-wrapper">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+
+                                <ol class="breadcrumb">
+                                    <li><a href="index.html">Home</a></li>
+                                    <li class="active">NOTICE</li>
+                                </ol> <!-- end of /.breadcrumb -->
+
+                            </div>
+                        </div>
+                    </div> <!-- /.container -->
+                </div> <!-- /.header-wrapper -->
+            </header> <!-- /.page-head (header end) -->
 	
+	<div class="text-center1">
 	<form role="form" method="post">
 		<input type='hidden' name='bno' value="${noticeVO.bno}">
 	</form>
@@ -41,7 +64,8 @@
 		
 		<button type="submit" class="btn-primary goListBtn">LIST ALL</button>
 	</div>
-	
+	</div>
+</div>	
 	<script>
 	$(document).ready(function(){
 	

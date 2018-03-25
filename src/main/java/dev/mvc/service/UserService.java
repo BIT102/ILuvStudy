@@ -2,6 +2,9 @@ package dev.mvc.service;
 
 
 import java.util.Date;
+import java.util.List;
+
+import dev.mvc.domain.StudyVO;
 import dev.mvc.domain.UserVO;
 import dev.mvc.dto.LoginDTO;
 
@@ -38,7 +41,9 @@ public interface UserService {
 	// 닉네임 중복처리
 	public int chkNickname(String nickName)throws Exception;
 	
+
 	// 이메일 인증 확인
 	public void emailConf(String email)throws Exception;
 	
+
 }

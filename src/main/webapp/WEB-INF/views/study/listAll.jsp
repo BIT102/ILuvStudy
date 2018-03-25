@@ -11,6 +11,7 @@
 
 <html class="no-js">
 <!--<![endif]-->
+
 <head>
 
 <title>I Luv Study</title>
@@ -134,22 +135,21 @@ select::-ms-expand {
 		<div class="container">
 			<div class="row">
 				<form>
-					<div class="dropdown">
+					<div class="dropdown"">
 						<select class="dropdown-select-version select" id="select1"
-							name="options">
-							<option value="x" selected>전체</option>
+							name="options"  style="float: right;">
+							<option value="">--</option>
+							<option value="x">전체</option>
 							<option value="t"
 							<c:out value="${cri.searchType eq 't'? 'selected' : ''}"/>>제목</option>
 							<option value="n"
 							<c:out value="${cri.searchType eq 'n'? 'selected' : ''}"/>>닉네임</option>
-							<option value="cate">카테고리</option>
-							<option value="regi">지역</option>
+							<option value="g"
+							<c:out value="${cri.searchType eq 'g'? 'selected' : ''}"/>>카테고리</option>
+							<option value="r"
+							<c:out value="${cri.searchType eq 'r'? 'selected' : ''}"/>>지역</option>
 							<option value="c"
 							<c:out value="${cri.searchType eq 'c'? 'selected' : ''}"/>>내용</option>
-						</select> <select class="dropdown-select-version select" id="select2"
-							name="options">
-						</select> <select class="dropdown-select-version select" id="select3"
-							name="options">
 						</select>
 					</div>
 				</form>
@@ -231,20 +231,20 @@ select::-ms-expand {
 	<ul class="pager">
 		<c:if test="${pageMakerStudy.prev}">
 			<li><a
-				href="listAll${pageMakerStudy.makeQuery(pageMakerStudy.startPage - 1)}">&laquo;</a></li>
+				href="listAll${pageMakerStudy.makeSearch(pageMakerStudy.startPage - 1)}">&laquo;</a></li>
 		</c:if>
 
 		<c:forEach begin="${pageMakerStudy.startPage}"
 			end="${pageMakerStudy.endPage}" var="idx">
 			<li
 				<c:out value="${pageMakerStudy.cri.page == idx?'class=active':''}"/>>
-				<a href="listAll${pageMakerStudy.makeQuery(idx)}">${idx}</a>
+				<a href="listAll${pageMakerStudy.makeSearch(idx)}">${idx}</a>
 			</li>
 		</c:forEach>
 
 		<c:if test="${pageMakerStudy.next && pageMakerStudy.endPage>0 }">
 			<li><a
-				href="listAll${pageMakerStudy.makeQuery(pageMakerStudy.endPage +1)}">&raquo;</a>
+				href="listAll${pageMakerStudy.makeSearch(pageMakerStudy.endPage +1)}">&raquo;</a>
 			</li>
 		</c:if>
 	</ul>
@@ -323,152 +323,34 @@ select::-ms-expand {
 			}
 		});
 	</script>
-	
-	<!-- 검색카테고리 -->
-	<script>
-
-		$(document)
-				.ready(
-						function() {
-
-							//큰거 골랐을때
-							$("#select1").change(function() {
-								var big = $(this).val()
-								console.log(big)
-								mid(big);
-							})
-
-							//1.대지역이 나온다
-							//2.카테고리 큰거
-							function mid(big) {
-								var str = "<option value='x'>전체</option>";
-								var regival = [ 'A', 'B', 'C', 'D', 'E', 'F',
-										'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',
-										'O', 'P', 'Q' ];
-								//0.제목선택하면 없어진다
-								if (big === "t" || big === "n" || big === "c"
-										|| big === "x") {
-									$("#select2").hide('slow');
-									$("#select3").hide('slow');
-								}
-		
-								//1.대지역이 나온다
-								if (big === "regi") {
-									$("#select2").hide('slow');
-									$("#select3").hide('slow');
-									$("#select2").show('slow');
-
-									<c:forEach items="${rgList}" var="rgList" varStatus="status">
-									str += '<option value='+regival["${status.index}"]
-									+'>'+ '${rgList.rDName}'+'</option>'; 
-									</c:forEach>
-
-									$("#select2").html(str);
-								}
-								
-								//2.카테고리 큰거 나온다
-								if (big === "cate") {
-									$("#select2").hide('slow');
-									$("#select3").hide('slow');
-									$("#select2").show('slow');
-
-									<c:forEach items="${catList}" var="catList" varStatus="status">
-									str += "<option value="+regival["${status.index}"]+">"
-											+ "${catList.cDName}" + "</option>";
-									</c:forEach>
-
-									$("#select2").html(str);
-								}
-							}//대지역 종료
-
-							//가운대 골랐을때
-							$("#select2").change(function() {
-								var mid = $(this).val()
-								var bigval = $("#select1").val();
-
-								//제목 내용 글쓴이 고르면 없어진다
-
-								if (bigval === "regi") {
-									$("#select3").hide('slow');
-									$("#select3").show('slow');
-									smallr(mid);
-								}
-
-								if (bigval === "cate") {
-									$("#select3").hide('slow');
-									$("#select3").show('slow');
-									smallc(mid);
-								}
-							})
-							//1.소지역이나온다
-							function smallr(mid) {
-								$
-										.getJSON(
-												"listAll/region/" + mid,
-												function(data) {
-													var str = "<option value='x'>전체</option>";
-
-													$(data)
-															.each(
-																	function() {
-																		str += "<option value="+this.rSId+">"
-																				+ this.rSName
-																				+ "</option>";
-																	});
-
-													$("#select3").html(str);
-												})
-							}
-
-							//2.작은카데고리
-							function smallc(mid) {
-								$
-										.getJSON(
-												"listAll/category/" + mid,
-												function(data) {
-													var str = "<option value='x'>전체</option>";
-
-													$(data)
-															.each(
-																	function() {
-																		str += "<option value="+this.cSId+">"
-																				+ this.cSName
-																				+ "</option>";
-																	});
-
-													$("#select3").html(str);
-												})
-							}
-						})//ready 종료
-	</script>
 
 	<!-- 검색을 위한 스크립트 -->
 	<script>
 	  $(document).ready(function(){
+		  
 			$(".btn-white").on("click", function(event){
+						
 				self.location = "listAll"
 					+ '${pageMakerStudy.makeQuery(1)}'
 					+ "&searchType="
-					+ $("select option:selected").val();
-					/* + $("select option:selected").val() */
+					+ $("select option:selected").val()
 					+ "&keyword=" + encodeURIComponent($('#keywordInput').val());            
 			})  
-		  })
+	  })		 
 	
 	//타자누르면 검색됨
 	function onKeyDown() {
 	  if(event.keyCode==13){
-		  
-		  console.log($("select option:selected").val());
-		  
+    	 
+			
 		  self.location = "listAll"
 				+ '${pageMakerStudy.makeQuery(1)}'
 				+ "&searchType="
-				+ $("select option:selected").val();
-				/* + $("select option:selected").val() */
+				+ $("select option:selected").val()
 				+ "&keyword=" + encodeURIComponent($('#keywordInput').val());  
 	  }
   }
+			
 	</script>
 
 </body>

@@ -7,192 +7,216 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> 
+<!--[if gt IE 8]><!-->
 
-<html class="no-js"> <!--<![endif]-->
-    <head>
+<html class="no-js">
+<!--<![endif]-->
+<head>
 
-        <title>I Luv Study</title>
+<title>I Luv Study</title>
 
-        <!-- meta -->
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!-- meta -->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-        
-        <!-- stylesheets -->
-        <link rel="stylesheet" href="/resources/assets/css/bootstrap.min.css">
-        <link rel="stylesheet" href="/resources/assets/css/font-awesome.min.css">
-        <link rel="stylesheet" href="/resources/assets/css/animate.css">
-        <link rel="stylesheet" href="/resources/assets/css/owl.carousel.css">
-        <link rel="stylesheet" href="/resources/assets/css/owl.theme.css">
-        <link rel="stylesheet" href="/resources/assets/css/style.css">
 
-        <!-- fonts for this template -->
-        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Kaushan+Script" type="text/css">
+<!-- stylesheets -->
+<link rel="stylesheet" href="/resources/assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="/resources/assets/css/font-awesome.min.css">
+<link rel="stylesheet" href="/resources/assets/css/animate.css">
+<link rel="stylesheet" href="/resources/assets/css/owl.carousel.css">
+<link rel="stylesheet" href="/resources/assets/css/owl.theme.css">
+<link rel="stylesheet" href="/resources/assets/css/style.css">
 
-        <!-- scripts -->
-        <script type="text/javascript" src="/resources/assets/js/modernizr.custom.97074.js"></script>
+<!-- fonts for this template -->
+<link rel="stylesheet"
+	href="http://fonts.googleapis.com/css?family=Kaushan+Script"
+	type="text/css">
 
-	<style>
-	#keywordInput {
-		width:300px;
-		height:40px;
-		padding-left:8px;
-		margin-right:30px;
-		
-		border:none;
-		border-bottom:2px solid black;
-		background-color:transparent;
-	}
-	
-	
-	</style>
-	
-    </head>
+<!-- scripts -->
+<script type="text/javascript"
+	src="/resources/assets/js/modernizr.custom.97074.js"></script>
 
-   <body onLoad="gogogo()">
+<style>
+#keywordInput {
+	width: 300px;
+	height: 40px;
+	padding-left: 8px;
+	margin-right: 30px;
+	border: none;
+	border-bottom: 2px solid black;
+	background-color: transparent;
+}
+</style>
 
-        <div id="home-page">
+</head>
 
-  		<!-- // Navigation -->
+<body onLoad="gogogo()">
+
+	<div id="home-page">
+
+		<!-- // Navigation -->
 		<%@include file="../nav.jsp"%>
-		
 
 
-            <!-- header start -->
-            <header id="header" class="header-wrapper home-parallax home-fade">
-                <div class="header-overlay"></div>
-                <div class="header-wrapper-inner">
-                    <div class="container">
 
-                        <div class="welcome-speech">
-                            <h1>Welcome to I Luv Study</h1>
-                            <p id="prakash"></p>
-                            <input type="text" onKeyDown="onKeyDown();" name="keyword" id="keywordInput" placeholder="검색어를 입력하세요"> 
-                            <button class="btn btn-white">Search</button>
-                        </div><!-- /.intro -->
-                        
-                    </div><!-- /.container -->
+		<!-- header start -->
+		<header id="header" class="header-wrapper home-parallax home-fade">
+			<div class="header-overlay"></div>
+			<div class="header-wrapper-inner">
+				<div class="container">
 
-                </div><!-- /.header-wrapper-inner -->
-            </header>
-            <!-- /#header -->
+					<div class="welcome-speech">
+						<h1>Welcome to I Luv Study</h1>
+						<p id="prakash"></p>
+						<input type="text" onKeyDown="onKeyDown();"
+							name="keyword" id="keywordInput" placeholder="검색어를 입력하세요">
+						<button class="btn btn-white">Search</button>
+					</div>
+					<!-- /.intro -->
 
-            <!--  begin testimonial section  -->
-            <!--  begin testimonial section  -->
+				</div>
+				<!-- /.container -->
 
-                <section class="bg-light-gray">
-                    <div class="container">
+			</div>
+			<!-- /.header-wrapper-inner -->
+		</header>
+		<!-- /#header -->
 
-                        <div class="headline text-center">
-                            <div class="row">
-                                <div class="col-md-6 col-md-offset-3">
-                                    <h2 class="section-title">New Study</h2>
-                                    <p class="section-sub-title">
-                                    	    최근 등록된 스터디 입니다 &amp; 방문을 원하시면 이미지를 클릭해 주세요
-                                    </p> <!-- /.section-sub-title -->
-                                </div>
-                            </div>
-                        </div> <!-- /.headline -->
+		<!--  begin testimonial section  -->
+		<!--  begin testimonial section  -->
 
-              <div id="client-speech" class="owl-carousel owl-theme">
-             		<c:forEach items="${list}" var="studyVO" step="2" varStatus="status">
-                            <div class="item">
-                                <div class="row">
-            		<c:if test="${staus.index%2==0}">
-                                    <div class="col-md-6">
-                                        <div class="client-box">
-                                            <div class="about-client">
-                                             <a href="/study/board${pageMakerStudy.makeSearch(pageMakerStudy.cri.page)}&bno=${studyVO.bno}">
-                                                <img src="/study/displayFile?fileName=${studyVO.name}" alt="client1">
-                                             </a>   
-                                            </div> <!-- end of /.about-client -->
-                                            <div class="main-speech">
-                                                <p>
-                                                  <strong>제목 :　${studyVO.title}</strong><br>
-                                                  	 주인 :　${studyVO.nickname}<br>
-                   	                                                                                 종류 :　${studyVO.cDName} / ${studyVO.cSName}<br>
-                                                                                                                                   지역 :　${studyVO.rDName} / ${studyVO.rSName}<br>
-                                                 	 등록 :　<fmt:formatDate pattern="yyyy-MM-dd" value="${studyVO.regdate}" />
-                                                   
-                                                </p>
-                                            </div> <!-- end of /.main-speech  -->                                  
-                                        </div> <!-- end of /.client-box -->    
-                                    </div>
-                     </c:if>
-                     <c:set var="test" value="${list[status.index+1]}"/>
-						
-								   <div class="col-md-6">
-                                        <div class="client-box">
-                                            <div class="about-client">
-                                            <a href="/study/board${pageMakerStudy.makeSearch(pageMakerStudy.cri.page)}&bno=${test.bno}">
-                                                <img src="/study/displayFile?fileName=${test.name}" alt="client2">
-                                            </a>   
-                                            </div> <!-- end of /.about-client -->
-                                            <div class="main-speech">
-                                                <p>
-                                                  <strong>제목 :　${test.title}</strong><br>
-								                                                  주인 :　${test.nickname}<br>
-								                                                  종류 :　${test.cDName} / ${test.cSName}<br>
-								                                                  지역 :　${test.rDName} / ${test.rSName}<br>        
-                                                                                                                                  등록 :　<fmt:formatDate pattern="yyyy-MM-dd" value="${test.regdate}" /><br>
-                                                </p>
-                                            </div> <!-- end of /.main-speech  -->
-                                        </div> <!-- end of /.client-box -->
-                                    </div>              
-                                </div>
-                            </div>
-					</c:forEach>	
-                        </div>
-                    </div>
-                            
-                            
-                        </div> <!-- end of /#client-speech  /.owl-carousel -->
+		<section class="bg-light-gray">
+			<div class="container">
 
-                    </div> <!-- end of .container -->
-                </section> 
-                <!--  end of testimonial  section -->
+				<div class="headline text-center">
+					<div class="row">
+						<div class="col-md-6 col-md-offset-3">
+							<h2 class="section-title">New Study</h2>
+							<p class="section-sub-title">최근 등록된 스터디 입니다 &amp; 방문을 원하시면
+								이미지를 클릭해 주세요</p>
+							<!-- /.section-sub-title -->
+						</div>
+					</div>
+				</div>
+				<!-- /.headline -->
 
-            
-            
-            <!-- footer-navigation start -->  
-            <nav class="hidden-xs hidden-sm navbar footer-nav" role="navigation">
-                <div class="container">
-                    
-                    <div class="navbar-header">
-                        
-                        <!-- navbar logo -->
-                        <div class="navbar-brand">
-                            <span class="sr-only">&copy;I Luv Study</span>
-                            <a href="index.html">
-                                &copy;I Luv Study
-                            </a>
-                        </div>
-                        <!-- navbar logo -->
+				<div id="client-speech" class="owl-carousel owl-theme">
+					<c:forEach items="${list}" var="studyVO" step="2"
+						varStatus="status">
+						<div class="item">
+							<div class="row">
+								<c:if test="${staus.index%2==0}">
+									<div class="col-md-6">
+										<div class="client-box">
+											<div class="about-client">
+												<a
+													href="/study/board${pageMakerStudy.makeSearch(pageMakerStudy.cri.page)}&bno=${studyVO.bno}">
+													<img src="/study/displayFile?fileName=${studyVO.name}"
+													alt="client1">
+												</a>
+											</div>
+											<!-- end of /.about-client -->
+											<div class="main-speech">
+												<p>
+													<strong>제목 : ${studyVO.title}</strong><br> 주인 :
+													${studyVO.nickname}<br> 종류 : ${studyVO.cDName} /
+													${studyVO.cSName}<br> 지역 : ${studyVO.rDName} /
+													${studyVO.rSName}<br> 등록 :
+													<fmt:formatDate pattern="yyyy-MM-dd"
+														value="${studyVO.regdate}" />
 
-                    </div><!-- /.navbar-header -->
+												</p>
+											</div>
+											<!-- end of /.main-speech  -->
+										</div>
+										<!-- end of /.client-box -->
+									</div>
+								</c:if>
+								<c:set var="test" value="${list[status.index+1]}" />
 
-                    <!-- nav links -->
-					<%@include file="../footer.jsp"%>
-					
-					
-			    </div><!-- /.container -->
-            </nav>
-            <!-- footer-navigation end -->
-            
-        </div> <!-- end of /#home-page -->
+								<div class="col-md-6">
+									<div class="client-box">
+										<div class="about-client">
+											<a
+												href="/study/board${pageMakerStudy.makeSearch(pageMakerStudy.cri.page)}&bno=${test.bno}">
+												<img src="/study/displayFile?fileName=${test.name}"
+												alt="client2">
+											</a>
+										</div>
+										<!-- end of /.about-client -->
+										<div class="main-speech">
+											<p>
+												<strong>제목 : ${test.title}</strong><br> 주인 :
+												${test.nickname}<br> 종류 : ${test.cDName} /
+												${test.cSName}<br> 지역 : ${test.rDName} / ${test.rSName}<br>
+												등록 :
+												<fmt:formatDate pattern="yyyy-MM-dd" value="${test.regdate}" />
+												<br>
+											</p>
+										</div>
+										<!-- end of /.main-speech  -->
+									</div>
+									<!-- end of /.client-box -->
+								</div>
+							</div>
+						</div>
+					</c:forEach>
+				</div>
+			</div>
+	</div>
+	<!-- end of /#client-speech  /.owl-carousel -->
 
-        <!--  Necessary scripts  -->
-
-        <script type="text/javascript" src="/resources/assets/js/jquery-2.1.3.min.js"></script>
-        <script type="text/javascript" src="/resources/assets/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="/resources/assets/js/owl.carousel.js"></script>
-        <script type="text/javascript" src="/resources/assets/js/jquery.hoverdir.js"></script>
+	</div>
+	<!-- end of .container -->
+	</section>
+	<!--  end of testimonial  section -->
 
 
-        <!-- script for portfolio section using hoverdirection -->
-        <script type="text/javascript">
+
+	<!-- footer-navigation start -->
+	<nav class="hidden-xs hidden-sm navbar footer-nav" role="navigation">
+		<div class="container">
+
+			<div class="navbar-header">
+
+				<!-- navbar logo -->
+				<div class="navbar-brand">
+					<span class="sr-only">&copy;I Luv Study</span> <a href="index.html">
+						&copy;I Luv Study </a>
+				</div>
+				<!-- navbar logo -->
+
+			</div>
+			<!-- /.navbar-header -->
+
+			<!-- nav links -->
+			<%@include file="../footer.jsp"%>
+
+
+		</div>
+		<!-- /.container -->
+	</nav>
+	<!-- footer-navigation end -->
+
+	</div>
+	<!-- end of /#home-page -->
+
+	<!--  Necessary scripts  -->
+
+	<script type="text/javascript"
+		src="/resources/assets/js/jquery-2.1.3.min.js"></script>
+	<script type="text/javascript"
+		src="/resources/assets/js/bootstrap.min.js"></script>
+	<script type="text/javascript"
+		src="/resources/assets/js/owl.carousel.js"></script>
+	<script type="text/javascript"
+		src="/resources/assets/js/jquery.hoverdir.js"></script>
+
+
+	<!-- script for portfolio section using hoverdirection -->
+	<script type="text/javascript">
             $(function() {
 
                 $('.portfolio-item > .item-image').each( function() { $(this).hoverdir({
@@ -204,8 +228,8 @@
 
 
 
-        <!-- script for testimonial section using owl carousel -->
-        <script type="text/javascript">
+	<!-- script for testimonial section using owl carousel -->
+	<script type="text/javascript">
             $(document).ready(function() {
  
                 $("#client-speech").owlCarousel({
@@ -217,9 +241,9 @@
  
             });
         </script>
-        
-        <!-- 타이핑 효과 -->
-        <script>
+
+	<!-- 타이핑 효과 -->
+	<script>
         
         var mess = "여기는 I Luv Study 홈페이지 입니다.";
         
@@ -240,8 +264,8 @@
     	}
         
         </script>
-  <!-- 검색 -->
-  <script>
+	<!-- 검색 -->
+	<script>
   $(document).ready(function(){
 	$(".btn-white").on("click", function(event){
 		self.location = "listAll"
@@ -265,6 +289,6 @@
   }
   
   </script>
-  
-    </body>
+
+</body>
 </html>

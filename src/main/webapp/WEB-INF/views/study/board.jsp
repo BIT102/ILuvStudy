@@ -1,10 +1,11 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/fmt" prefix = "fmt" %>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page session="false" %>
 <!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,6 +13,9 @@
     <script src="http://code.jquery.com/jquery-1.7.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
     <script type="text/javascript" src="/resources/js/upload.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+<link href="/resources/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Document</title>
     <style>
@@ -23,84 +27,34 @@
     
     #header{height: 150px;}
 
-    #brdimg{background-color:pink;}
-    .ctbutton{float:right;}
+	body {margin-left:50px;}
 
-    .brdtext{float:left; margin-right:8px;}
-
-    #grycontainer{border:2px solid red; height:300px; width:800px;}
-
-    div.gallery {
-    margin: 5px;
-    border: 1px solid #ccc;
-    float: left;
-    width: 180px;
-}
-
-div.gallery:hover {
-    border: 1px solid #777;
-}
-
-div.gallery img {
-    width: 100%;
-    height: auto;
-}
-
-div.desc {
-    padding: 15px;
-    text-align: center;
-}
-
-.fa {
-	font-size: 36px;
-	cursor: pointer;
-	user-SELECT: none;
-}
-
-.fa:hover {
- color: darkblue;
-}
-
-#modDiv {
-	width:300px;
-	height:100px;
-	background-color:gray;
-	position: absolute;
-	top:50%;
-	left:50%;
-	margin-top:5px;
-	margin-left:-150px;
-	padding:10px;
-	z-index:1000;
-
-}
-
-.applyList{
-	border : 1px solid black;
-	height:100px; 
-	width:800px;
-} 
-
-
-#amodDiv {
-	width:300px;
-	height:200px;
-	background-color:yellow;
-	position: absolute;
-	top:50%;
-	left:50%;
-	margin-top:5px;
-	margin-left:-150px;
-	padding:10px;
-	z-index:1000;
-
-}
-
-
-    </style>    
+	#repliesDiv{font-size:40px; border:2px dotted black;}
+	.textcenter1{text-align:center;}
+</style>
 </head>
 
 <body>
+
+<%@include file="../nav.jsp"%>
+<div id="multiple-blog-page">
+ <!-- header begin -->
+            <header class="page-head">
+                <div class="header-wrapper">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+
+                                <ol class="breadcrumb">
+                                    <li><a href="index.html">Home</a></li>
+                                    <li class="active">FAQ</li>
+                                </ol> <!-- end of /.breadcrumb -->
+
+                            </div>
+                        </div>
+                    </div> <!-- /.container -->
+                </div> <!-- /.header-wrapper -->
+            </header> <!-- /.page-head (header end) -->
 
 <!-- bno값 유지하자 -->
 <form role="form" method="post">
@@ -109,26 +63,134 @@ div.desc {
 	<input type="hidden" name="now" id="studyNow" value="${studyVO.now}">
 	<input type="hidden" name="max" id="studyMax" value="${studyVO.max}">
 </form>
+		
+		<section class="blog-content">
+                <div class="container">
+                    <div class="row">
+                        <main class="col-md-8 col-md-offset-2" style="display: block;">
+                            <article class="blog-item">
+                              
 
-        <header id="header">       
-            <nav id="nav1">
-                <a href="listAll.html">전체</a>
-                <a href="boarder.html">외국어</a>
-                <a href="boarder.html">IT</a>
-                <a href="boarder.html">교양</a>
-                <a href="boarder.html">공무원</a>
-            </nav>
-        
-            <nav id="nav2">
-                <a href="profile.html">마이페이지</a>
-                <a href="">로그아웃</a>
-                <a href="register1.html">스터디등록</a>
-                <a href="qna.html">QNA</a>
-                <a href="notice.html">공지사항</a>
-            </nav>
-        
-        </header>
+                                <div class="author">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="about-author">
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <img src="../../resources/assets/img/IMG_9772.JPG" class="img-responsive center-block img-circle" alt="author" style="width:130px; height:170px;">
+                                                    </div>
+                                                    <div class="col-md-9">
+                                                        <p>
+                                                            <strong>${studyVO.title}</strong>
+                                                            <span class="author-name text-uppercase">${studyVO.nickname}</span>
+                                                        </p>
+                                                        <p>
+                                                            ${studyVO.content}<br>
+                                                            Vestibulum varius fermentum risus vitae lacinia neque auctor nec. Nunc ac rutrum nulla. Nul maximus dolor in quam euismod ac viverra libero aliquet. Nunc sed nunc malesuada aliquet turpis eu dictum lectus. Cras eget sollicitudin lorem. Etiam commodo ultricies luctus.
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
 
+                                            <div class="author-contact">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <p class="pull-left">
+                                                            <span><i class="fa fa-picture-o"></i></span>
+                                                            <strong>25 Total Posts</strong>
+                                                            <i class="fa fa-heart-o" onclick="myFunction(this)"></i>
+                                                        </p>
+                                                        
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <ul class="author-contact-button pull-right">
+                                                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                                            <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                                                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                                                            <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="comments">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <h3>2 Comments</h3>
+                                            <div class="cmnt-clipboard"><span class="btn-clipboard">Reply</span></div>
+                                            <div class="well">
+                                                <div class="row">
+                                                    <div class="col-md-2">
+                                                        <img src="assets/img/commenter1.jpg" class="img-responsive center-block" alt="first-comment">
+                                                    </div>
+                                                    <div class="col-md-10">
+                                                        <p class="comment-info">
+                                                            <strong>Reena Scot</strong> <span>22 april 2015</span>
+                                                        </p>
+                                                        <p>
+                                                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since they 1500s.
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="cmnt-clipboard"><span class="btn-clipboard">Reply</span></div>
+                                            <!-- handlebar template 문법-->
+											<script id="template" type="text/x-handlebars-template">
+                                            	{{#each .}}   
+                                            <div class="well">
+                                                <div class="row">
+                                               
+                                                    <div class="col-md-2">
+                                                        <img src="assets/img/commenter2.jpg" class="img-responsive center-block" alt="second-comment">
+                                                    </div>
+                                                    <div class="col-md-10">
+                                                        <p class="comment-info">
+                                                            <strong>David Martin</strong> <span>22 april 2015</span>
+                                                        </p>
+                                                        <p>
+                                                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since they 1500s.
+                                                        </p>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+												{{/each}}
+											</script>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="comment-post">
+                                    <h3>Post A Comment</h3>
+                                    <form method="post">
+                                        <div class="row">
+                                          
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <input name="email" type="email" class="form-control" id="email" required="required" placeholder="Email Address" value="${studyVO.writer}">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <textarea name="message" type="text" class="form-control" id="message" rows="8" required="required" placeholder="Type here message"></textarea>
+                                            </div>
+                                        </div>
+                                        
+                                        <button type="submit" id="submit" name="submit" class="btn btn-black">post comment</button>
+                                    </form>
+                                </div>
+                            </article>
+                        </main>
+                    </div>
+                </div>
+            </section>
+		
+		<!-- section -->
+		
         <div style="height:700px;">
             <div id="brdimg">
                 <c:if test="${studyVO.name!=null}">
@@ -352,7 +414,7 @@ function myFunction(x) {
 
     </div>
 
-
+</div>
 <!-- 신청자목록 모달 -->
 <script>
 
@@ -746,6 +808,7 @@ $(document).ready(function(){
     		
     		printPaging(data.pageMaker);
         	});
+<<<<<<< HEAD
     	});	 */
         </script>    
 

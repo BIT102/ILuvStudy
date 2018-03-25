@@ -184,6 +184,10 @@ public class StudyDAOImpl implements StudyDAO {
 	//°Ë»ö
 	@Override
 	public List<StudyVO> listSearch(SearchCriteriaStudy cri) throws Exception {
+		System.out.println("========================================");
+		System.out.println("dbtest");
+		System.out.println(session.selectList(namespace+".listSearch", cri));
+		System.out.println("========================================");
 		return session.selectList(namespace+".listSearch", cri);
 	}
 	

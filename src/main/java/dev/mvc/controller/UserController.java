@@ -1,6 +1,7 @@
 package dev.mvc.controller;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.Cookie;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.WebUtils;
 
+import dev.mvc.domain.StudyVO;
 import dev.mvc.domain.UserVO;
 import dev.mvc.dto.LoginDTO;
 import dev.mvc.persistence.UserDAO;
@@ -181,6 +183,8 @@ public class UserController {
 	@RequestMapping(value = "/quit", method = RequestMethod.POST)
 	public String quitget(Model model, UserVO vo) throws Exception {
 		
+		
+		
 		service.quit(vo);
 
 		model.addAttribute("vo", vo);
@@ -188,9 +192,20 @@ public class UserController {
 		return "/mypage/quit";
 	}
 	
-	// 북마크 (bookmark) 컨트롤러
+	// 북마크 (bookmark) 컨트롤러  =길=
 	@RequestMapping(value = "/bookmark", method = RequestMethod.GET)
-	public String bookmark() {
+	public String bookmark(Model model, HttpServletRequest request) throws Exception {
+		
+		HttpSession session = request.getSession();
+		UserVO sUser = (UserVO)session.getAttribute("login");
+		String email = sUser.getEmail();
+		
+		UserVO vo = service.read(email);
+		
+//		List<UserVO> vo = (List<UserVO>)service.bmk(email);
+		
+//		model.addAttribute("vo", vo);
+//		model.addAttribute("bmkList", service.bmk(email));
 		
 		return "/mypage/bookmark";
 	}
