@@ -477,8 +477,13 @@ public class AdminController {
 	@RequestMapping(value = "/statistic", method = RequestMethod.GET)
 	public void statistic(StatisticVO vo, Model model) throws Exception{
 		logger.info("statistic get...");
-		model.addAttribute(service.memberS(vo));
-		model.addAttribute("weeks", service.weekS());
-		model.addAttribute("weekv", service.weekV());
+		model.addAttribute(service.memberS(vo));		// 통계
+		model.addAttribute("weekm", service.weekM());	// 최근 8일 가입자수
+		model.addAttribute("weekv", service.weekV());	// 최근 8일 방문자 수
+		model.addAttribute("weeks", service.weekS());	// 최근 8일 스터디 등록 수
+		model.addAttribute("weeka", service.weekA());	// 최근 8일 스터디 신청 수
+		model.addAttribute("studytop", service.studyTop());	// 스터디 조회 수 상위 10개
 	}	
+	
+	
 }
