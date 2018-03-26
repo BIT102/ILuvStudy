@@ -113,10 +113,7 @@ select.form-control:not([size]):not([multiple]) {
 			})
 		})
 		
-		function chkEmail(email1,email2){
-			
-			
-		}
+		
 		
 		//========= Password 부분 ============
 			

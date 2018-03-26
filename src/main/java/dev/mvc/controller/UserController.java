@@ -1,13 +1,17 @@
 package dev.mvc.controller;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 import javax.inject.Inject;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.swing.text.html.parser.Entity;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,6 +47,7 @@ public class UserController {
 	@Inject
 	private UserService service;
 
+	private Map<String, String> codeMap = new HashMap<>();
 	
 	
 	//회원가입 컨트롤러
@@ -314,6 +319,46 @@ public class UserController {
 			}
 			
 			return entity;
-		} 
+		}
+		
+		@RequestMapping(value = "/searchPWSendEmail", method = RequestMethod.POST)
+		public ResponseEntity<String> searchPWSendEmail (String email) throws Exception{
+			
+			logger.info("searchPWSendEmail............");
+			
+			String randomCode = UUID.randomUUID().toString().replace("-", "").substring(0, 6);
+			
+			codeMap.put(email, randomCode);
+			
+			ResponseEntity<String> entity = null;
+			
+			if(service.chkEmail(email)==0){
+				entity = new ResponseEntity<String>("fail", HttpStatus.OK);
+			}else{
+				service.sendEmail(email, codeMap.get(email));
+				entity = new ResponseEntity<String>("success", HttpStatus.OK);
+			}
+			
+			
+			return entity;
+		}
+		
+		@RequestMapping(value = "/compareCode", method = RequestMethod.POST)
+		public ResponseEntity<String> compareCode (String code, String email) throws Exception{
+			
+			logger.info("compareCode............");
+			
+			ResponseEntity<String> entity = null;
+			
+			if(code.equals(codeMap.get(email))){
+				entity = new ResponseEntity<String>("success", HttpStatus.OK);
+			}else{
+				entity = new ResponseEntity<String>("fail", HttpStatus.OK);
+			}
+			
+			
+			return entity;
+		}
+		
 
 }

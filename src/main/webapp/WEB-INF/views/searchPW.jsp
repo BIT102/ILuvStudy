@@ -29,6 +29,60 @@
 			}
 		});
 		
+		// 이메일로 패스워드 전송
+		$('#sendEmail').on("click",function(){
+			
+			$.ajax({
+				url : "/searchPWSendEmail",
+				type: "post",
+				headers: {
+					//"Content-Type" : "application/json",
+					"X-HTTP-Method-Override" : "POST"
+				},
+				data: {
+					email : document.getElementById("email1").value+"@"+document.getElementById("email2").value
+				},
+				success: function(result){
+					console.log(result);
+					if(result == "success"){
+					
+						alert("인증번호를 입력하세요");
+						
+					}else{
+						alert("등록되지 않은 이메일입니다.");
+					}
+				}
+			})
+		})
+		
+		// 인증번호 일치여부 확인
+		$('#emailConfBtn').on("click", function(){
+			$.ajax({
+				url : "/compareCode",
+				type: "post",
+				headers: {
+					//"Content-Type" : "application/json",
+					"X-HTTP-Method-Override" : "POST"
+				},
+				data: {
+					code : document.getElementById("emailConf").value,
+					email : document.getElementById("email1").value+"@"+document.getElementById("email2").value 
+				},
+				success: function(result){
+					console.log(result);
+					if(result == "success"){
+					
+						alert("비밀번호를 재등록하세요");
+						document.getElementById("changePW").style.visibility = 'visible';
+						
+					}else{
+						alert("인증코드가 일치하지 않습니다.");
+					}
+				}
+			})
+			
+		})
+		
 		//========= Password 부분 ============
 		
 				// 비밀번호 유효성검사 비밀번호의 경우에는 버튼을 누를때마다 변화가 생기도록 하여 keyup event를 활용함.
@@ -79,7 +133,7 @@
 	                    <div class="input-group">
 	                   	 	<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
 	                    	<input class="form-control" style = "width:160px" id = "email1" type="text" placeholder="아이디를 입력하세요" name="email1">
-		              		<input class="form-control" style = "width:140px" id = "email2" type="text" placeholder="주소값 직접입력" name="email1">
+		              		<input class="form-control" style = "width:140px" id = "email2" type="text" placeholder="주소값 직접입력" name="email2">
 		              		<select   id="selectEmail" class = "form-control" style = "width:130px; height: calc(2.25rem + 11px);"> 
 								<option id = "selectEmail1" selected>직접입력</option>
 								<option id = "selectEmail2">naver.com</option>
@@ -104,7 +158,8 @@
 		                    
 	                </div>
 	    		</div>
-		    	<div id = "changePW" style="visibility: hidden">
+		    	<div id = "changePW" style="visibility: visible">
+		    		
 		    		<div class="form-group">
 	                  <label class="control-label col-sm-3">Set Password <span class="text-danger">*</span></label>
 	                  <div class="col-md-5 col-sm-8">
@@ -114,19 +169,23 @@
 	                   </div>
 	                  </div>
 	                  <small id = "pwcheck" style = "color:red">비밀번호를 입력하세요</small>
-		            </div>
-		    	
-		    		<div class="form-group">
-		                  <label class="control-label col-sm-3">Confirm Password <span class="text-danger">*</span></label>
-		                  <div class="col-md-5 col-sm-8">
-		                    <div class="input-group">
-		                      <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-		                      <input type="password" class="form-control" name="cpassword" id="passwordConf" placeholder="Confirm your password" value="">
-		                    </div>  
-		                  </div>
-		                  <small id = "pwcheck2" style = "color:red">비밀번호를 재입력하세요</small>
-		                </div>
+	                </div>
+		    		 <div class="form-group">
+	                  <label class="control-label col-sm-3">Confirm Password <span class="text-danger">*</span></label>
+	                  <div class="col-md-5 col-sm-8">
+	                    <div class="input-group">
+	                      <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+	                      <input type="password" class="form-control" name="cpassword" id="passwordConf" placeholder="Confirm your password" value="">
+	                    </div>  
+	                  </div>
+	                  <small id = "pwcheck2" style = "color:red">비밀번호를 재입력하세요</small>
+	                </div>
+		    		
+		    		
 		    	</div>
+		    	
+		    	
+		    	
 	    	</div>
 	    </div>
 	</div>

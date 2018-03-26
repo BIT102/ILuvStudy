@@ -38,6 +38,8 @@ public interface UserService {
 	// 인증메일 보내기
 	public void sendEmail(String email) throws Exception;
 	
+	public void sendEmail(String email, String code) throws Exception;
+	
 	// 닉네임 중복처리
 	public int chkNickname(String nickName)throws Exception;
 	

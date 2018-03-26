@@ -71,7 +71,7 @@ public class UserServiceImpl implements UserService {
 		// return 값  -1:유효성오류 1:중복값발생 0:정상
 		
 		// 소문자로 변경
-		email = email.toLowerCase();
+	/*	email = email.toLowerCase();
 
 		// 길이
 		String email1 = email.substring(0,email.indexOf('@'));
@@ -100,7 +100,7 @@ public class UserServiceImpl implements UserService {
 					||email.charAt(i)=='@'||email.charAt(i)=='.')){
 				return -1;
 			}
-		}
+		}*/
 
 		// 중복체크
 		return dao.chkEmail(email); // 0 or 1 값 리턴
@@ -138,6 +138,43 @@ public class UserServiceImpl implements UserService {
 	    messageHelper.setSubject(title); // 메일제목은 생략이 가능하다
 	    //messageHelper.setText(content);  // 메일 내용
 	    messageHelper.setText(content, htmltext); 
+	    
+	    mailSender.send(message);
+
+	}
+	
+	// 이메일로 비밀번호 찾기 인증코드 보내기
+	public void sendEmail(String email, String code) throws Exception {
+		
+		System.out.println("==============================");
+		System.out.println("sendEmail.............");
+		System.out.println("==============================");
+		String setfrom = "lswkim322@gmail.com";         
+	    String tomail  = email;     // 받는 사람 이메일
+	    String title   = "[ILOVESTUDY]인증번호 발송";      // 제목
+	    
+	    
+	    String content = "다음 암호를 입력해 주세요  ["+code + "]";    // 내용
+	   	    
+	   /* String htmltext = 
+	    "<html>"
+	    	+"<head>"
+	    	+"<title>/</title>"
+	    	+"</head>"
+	    	+"<body>"
+	    	+""
+	    	+"</body>"
+	    +"</html>";
+	    */
+	    MimeMessage message = mailSender.createMimeMessage();
+	    MimeMessageHelper messageHelper 
+	                      = new MimeMessageHelper(message, true, "UTF-8");
+	 
+	    messageHelper.setFrom(setfrom);  // 보내는사람 생략하거나 하면 정상작동을 안함
+	    messageHelper.setTo(tomail);     // 받는사람 이메일
+	    messageHelper.setSubject(title); // 메일제목은 생략이 가능하다
+	    messageHelper.setText(content);  // 메일 내용
+	    //messageHelper.setText(content, htmltext); 
 	    
 	    mailSender.send(message);
 
