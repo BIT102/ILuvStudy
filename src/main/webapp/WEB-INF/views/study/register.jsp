@@ -36,6 +36,36 @@ small {
 	font-weight: bold;
 	color: gray;
 }
+
+.fileDrop{
+	border: none;
+	width:800px;
+	background-color:gray;
+}
+
+.mailbox-attachment-info{
+	display:inline
+}
+#btn-success{
+background-color:#5bc0de; 
+border:1px solid black;
+margin-right:10px;
+}
+
+
+#btn-success:hover {
+    background-color:#31b0d5;
+    border-color:#269abc;
+}
+
+.btn{
+	padding:5px 20px !important;
+	margin-left:20px !important;
+}
+
+.btn-xs{
+	margin-top:5px;
+}
 </style>
 </head>
 <body>
@@ -46,8 +76,8 @@ small {
 	 <!-- MAIN -->
 		<div class="main">
 			<!-- MAIN CONTENT -->
-			<div class="main-content">
-				<div class="container-fluid">
+			<div class="main-content" style="background-color:#f9f9f9">
+				<div class="container">
 					<h3 class="page-title">스터디 목록</h3>
 					<div class="row">
 						<div class="col-md-12">
@@ -97,7 +127,7 @@ small {
             </tr>
             <tr>
                 <th>스터디명</th>
-                <td><input type="text" name="title" value="${studyVO.title}" class="form-control"></td>
+                <td><input type="text" name="title" value="${studyVO.title}" class="form-control" style="width:550px;"></td>
             </tr>
             <tr>
                 <th>지역</th>
@@ -263,7 +293,8 @@ small {
         <!-- 일등록 핸들러 -->
 
 		<div class="text-right">
-			<button type="submit" class = "btn btn-success">등록</button>
+			<!-- <button type="submit" id="btn-success" class = "btn btn-success" style="background-color:#5bc0de; border:1px solid black;">등록</button> -->
+			<button type="submit" id="btn-success" class = "btn btn-success">등록</button>
 			<!-- <input type="submit" id = "insertBtn" class = "btn btn-success" value = "등록" /> -->
 		</div>
 	</form>

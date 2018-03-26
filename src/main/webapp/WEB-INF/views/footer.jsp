@@ -67,12 +67,12 @@
                                 <a><span onclick="document.getElementById('id01').style.display='block'" style="width:auto;">로그인</span></a>
                             </li>
                             <li class="dropdown">
-                                <a href="#"><span>회원가입</span></a>
+                                <a href="/join"><span>회원가입</span></a>
                             </li>
                         </c:when>
                         <c:otherwise>    
                             <li class="dropdown">
-                                <a href="#"><span>My page</span></a>
+                                <a href="/mypage/profile"><span>My page</span></a>
                             </li> <!-- end of /.dropdown -->
                             <li class="dropdown">
                             	<a href="/logout"><span>로그아웃</span></a>
@@ -82,10 +82,10 @@
                                 <a href="/study/listAll"><span>스터디 구경하기</span></a>
                             </li>
                             <li class="dropdown">
-                                <a href="contact.html"><span>FAQ</span></a>
+                                <a href="/sqna/list"><span>FAQ</span></a>
                             </li>
                             <li class="dropdown">
-                                <a href="contact.html"><span>공지사항</span></a>
+                                <a href="/study/notice"><span>공지사항</span></a>
                             </li>
                         </ul>
                     </div><!-- nav links -->

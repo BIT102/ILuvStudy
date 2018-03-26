@@ -374,7 +374,7 @@ ba.name
 , bs.regdate
 , bs.enddate
 , sc.cdname
-, sc.csname
+, group_concat(sc.csname) csname 
 FROM 
 board_study bs
 left outer join user u on bs.writer = u.EMAIL
@@ -384,10 +384,12 @@ left outer join board_category bc on bs.bno = bc.bsbno
 , study_category sc
 WHERE bs.bno > 0
 and sc.CDID = bc.CATEGORYD and sc.CSID = bc.CATEGORYS
+
 ]]>
 <include refid="search"></include>
 
 <![CDATA[
+group by bs.bno
 ORDER BY bno desc
 limit #{pageStart}
 , #{perPageNum}
@@ -438,6 +440,11 @@ and sc.CDID = bc.CATEGORYD and sc.CSID = bc.CATEGORYS
 <!-- 검색에 필요한 화면구성 -->
 <sql id="search">
  		<if test="searchType != null">
+ 			<if test="searchType == 'tcnrg'.toString()">
+ 				and (title like CONCAT('%', #{keyword}, '%') or nickname like CONCAT('%', #{keyword}, '%')
+ 				     and content like CONCAT('%', #{keyword}, '%') or r.rdname like CONCAT('%', #{keyword}, '%') or r.rsname like CONCAT('%', #{keyword}, '%')
+ 				     or sc.cdname like CONCAT('%', #{keyword}, '%') or csname like CONCAT('%', #{keyword}, '%'))
+ 			</if>
   			<if test="searchType == 't'.toString()">
   				and title like CONCAT('%', #{keyword}, '%')
   			</if>
@@ -451,7 +458,7 @@ and sc.CDID = bc.CATEGORYD and sc.CSID = bc.CATEGORYS
 			    and (r.rdname like CONCAT('%', #{keyword}, '%') or r.rsname like CONCAT('%', #{keyword}, '%'))
 			</if>
 			<if test="searchType == 'g'.toString()">
-				and (sc.cdname like CONCAT('%', #{keyword}, '%') or sc.csname like CONCAT('%', #{keyword}, '%'))
+				and (sc.cdname like CONCAT('%', #{keyword}, '%') or csname like CONCAT('%', #{keyword}, '%'))
 			</if>
   		</if> 
   </sql>

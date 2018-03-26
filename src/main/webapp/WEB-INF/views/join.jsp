@@ -304,7 +304,8 @@ select.form-control:not([size]):not([multiple]) {
 </script>
 
 
-<body style="background:#262626;">
+<body>
+
 		<div class="container">
 	            <div class="row">
 	            <div class="col-md-8">
@@ -419,7 +420,5 @@ select.form-control:not([size]):not([multiple]) {
 	        </div>
 	        </div>	
 </body>
-
-	
 
 </html>

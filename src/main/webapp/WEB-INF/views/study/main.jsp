@@ -282,7 +282,7 @@
 		  self.location = "listAll"
 				+ '${pageMakerStudy.makeQuery(1)}'
 				+ "&searchType="
-				+ "tcn"
+				+ "tcnrg"
 				/* + $("select option:selected").val() */
 				+ "&keyword=" + encodeURIComponent($('#keywordInput').val());  
 	  }

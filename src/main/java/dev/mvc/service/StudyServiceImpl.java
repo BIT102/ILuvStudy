@@ -70,40 +70,8 @@ public class StudyServiceImpl implements StudyService {
 	@Override
 	public List<StudyVO> listSearchCriteria(SearchCriteriaStudy cri) throws Exception {
 
-		List<StudyVO> list = dao.listSearch(cri);
-		
-		// 영어 검색하면 영어가 있는 데이터만 담긴다 양
-	
-		// 영어 list
-		int bno;
-		
-		StudyVO vo = new StudyVO();
-		List<String> caS = new ArrayList<>();
-		// 소분류 스트링으로 바꾼다
-		String getcaS = "";
-		// bno 가져온다
-		for (int i = 0; i < list.size(); i++) {
-			
-			bno = list.get(i).getBno();
-			// bno와 비교해서 대분류 가져온다
-			list.get(i).setcDName(dao.getcaD(bno));
-			caS = dao.getcaS(bno);
-			String[] arrcaS = caS.toArray(new String[caS.size()]);
-			getcaS = Arrays.toString(arrcaS);
-			// 영어 <- set getcaS
-			list.get(i).setcSName(getcaS);
-		}
-
-		//중복제거
-/*	for(int i = list.size()-1; i>0; i--){
-		if(list.get(i).getBno().equals(list.get(i-1).getBno())){
-			list.remove(i);
-			}
-		}*/
-	
-
 		// 스터디 리스트 가져온다
-		return list;
+		return dao.listSearch(cri);
 	}
 
 	// 검색수
@@ -160,7 +128,23 @@ public class StudyServiceImpl implements StudyService {
 
 		// 사진등록
 		Map<String, Object> map = new HashMap<>();
-
+		
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+		System.out.println("/////////////////////////////////////////////////");
+		System.out.println(files);
+		System.out.println("***************************************************");
+		
+		
+		
+		if(files==null) {
+			map.put("name", "/2018/03/26/S_0031eae8-0706-4dd1-9330-5300a0e77940_no.jpg");
+			map.put("status", "O");
+			map.put("bno", bno);
+			
+			dao.addFile(map);
+		} else {
+		
+		
 		for (String fileName : files) {
 
 			if (fileName == files[0]) {
@@ -172,7 +156,9 @@ public class StudyServiceImpl implements StudyService {
 				map.put("status", "X");
 				map.put("bno", bno);
 			}
+			
 			dao.addFile(map);
+			}
 		}
 	}
 

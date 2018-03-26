@@ -122,6 +122,25 @@ select::-ms-expand {
 #select3 {
 	display: none;
 }
+
+
+	.contentB{border: 1px solid #dadada;}
+	.text-center1{text-align:center;}
+/*페이지 처리*/
+.pagination>li>a, .pagination>li>span { 
+margin: 8px;
+color:#6b456a !important;
+}
+
+.pagination>.active>a {
+	z-index: 2;
+    color: white !important;
+    background-color: black !important;
+    border-color: white !important;
+    cursor: default;
+}
+
+
 </style>
 
 </head>
@@ -227,8 +246,8 @@ select::-ms-expand {
 	<!--   end of portfolio section  -->
 
 	<!-- paging -->
-
-	<ul class="pager">
+	<div class="text-center1">
+	<ul class="pagination">
 		<c:if test="${pageMakerStudy.prev}">
 			<li><a
 				href="listAll${pageMakerStudy.makeSearch(pageMakerStudy.startPage - 1)}">&laquo;</a></li>
@@ -248,7 +267,7 @@ select::-ms-expand {
 			</li>
 		</c:if>
 	</ul>
-
+</div>
 
 
 

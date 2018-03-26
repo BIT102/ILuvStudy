@@ -14,7 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,7 +26,6 @@ import dev.mvc.domain.PageMakerStudy;
 import dev.mvc.domain.SearchCriteriaStudy;
 import dev.mvc.domain.StudyVO;
 import dev.mvc.domain.UserVO;
-import dev.mvc.service.AdminService;
 import dev.mvc.service.StudyService;
 
 @Controller
@@ -69,7 +67,7 @@ public class StudyController {
 		System.out.println("vo = "+vo);
 		service.regist(vo);
 		
-		return "redirect:/login";
+		return "redirect:/study/main";
 	}
 
 	// JSON small카테고리(study) //URL /category/추가
@@ -116,18 +114,21 @@ public class StudyController {
 		System.out.println("=========================");
 		StudyVO vo = new StudyVO();
 
-		model.addAttribute("list", service.studyList());
 		
 		PageMakerStudy pageMakerStudy = new PageMakerStudy();
-
+		
+		
 		pageMakerStudy.setCri(cri);
-		model.addAttribute("rgList", service.rgList());
-		model.addAttribute("catList", service.catList());
+		
+
+				
 		model.addAttribute("pageMakerStudy", pageMakerStudy);
+		
 		
 		model.addAttribute("list", service.listSearchCriteria(cri));
 
 		pageMakerStudy.setTotalCount(service.listSearchCount(cri));
+
 
 
 //3월 25일 머지 주석 처리
