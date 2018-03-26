@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -49,7 +49,7 @@
         <!--페이징 처리 -->
         <div class="panel-body">
         <div style="float:right">총 ${pageMaker.totalCount}건 ${cri.page}/${pageMaker.endPage}페이지</div>
-        
+
         <table class="table table-hover">
             <tr>
             	<th>번호</th>
@@ -120,6 +120,7 @@
 		});
 		
 	});
+
 </script>
 </body>
 </html>

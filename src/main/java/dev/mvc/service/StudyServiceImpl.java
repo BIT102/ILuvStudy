@@ -81,46 +81,19 @@ public class StudyServiceImpl implements StudyService {
 		System.out.println(dao.studyList().size());
 		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++");
 
-/*		// 영어 list
-		int bno;
+
 
 		StudyVO vo = new StudyVO();
 
 		List<String> caS = new ArrayList<>();
 		// 소분류 스트링으로 바꾼다
-
 		String getcaS = "";
-<<<<<<< HEAD
 		
 		System.out.println("============================");
 		System.out.println(list);
 		System.out.println("============================");
 		
 		// 카테고리 소분류의 다중선택을 처리하기위해 스트링으로 만들어 set해준다.
-		//bno 가져온다
-		for(int i=0; i<list.size(); i++){
-			
-			// 검색결과로 담긴 리스트의 bno 값을 추출
-			bno = list.get(i).getBno();
-			
-			//bno와 비교해서 대분류 세팅해준다.
-		    list.get(i).setcDName(dao.getcaD(bno));
-		    
-		    // 카테고리 소분류 게시글 번호로 소분류값 배열로 가져오기
-		    caS = dao.getcaS(bno);
-		    
-		    String[] arrcaS = caS.toArray(new String[caS.size()]);
-	
-		    getcaS = Arrays.toString(arrcaS);
-		    
-		    System.out.println("+++++++++++++++++++++++++++++++++++++++++++");
-		    System.out.println(list);
-		    System.out.println("+++++++++++++++++++++++++++++++++++++++++++");
-		    
-			list.get(i).setcSName(getcaS);
-		}
-		
-=======
 
 		// bno 가져온다
 		for (int i = 0; i < list.size(); i++) {
@@ -141,7 +114,7 @@ public class StudyServiceImpl implements StudyService {
 
 			// 영어 <- set getcaS
 			list.get(i).setcSName(getcaS);
-		}*/
+		}
 
 		// 스터디 리스트 가져온다
 		return list;

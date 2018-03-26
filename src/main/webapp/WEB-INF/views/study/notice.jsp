@@ -127,7 +127,7 @@ color:#6b456a !important;
 	      			  <h4 class="panel-title">
 	        		  <a data-toggle="collapse" data-parent="#accordion" href="#collapse${QnaVO.bno}">${QnaVO.title}</a>
 	        		  <small>(${QnaVO.writer})</small>
-	        		  <span class="time">${QnaVO.regdate}</span>
+	        		  <span class="time"><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${QnaVO.regdate}"/></span>
 	       			 </h4>
 	      			</div>
 				      <div id="collapse${QnaVO.bno}" class="panel-collapse collapse">
