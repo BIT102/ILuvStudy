@@ -121,14 +121,14 @@ public class StudyController {
 		PageMakerStudy pageMakerStudy = new PageMakerStudy();
 
 		pageMakerStudy.setCri(cri);
-		model.addAttribute("list", service.listSearchCriteria(cri));
-		
 		model.addAttribute("rgList", service.rgList());
 		model.addAttribute("catList", service.catList());
+		model.addAttribute("pageMakerStudy", pageMakerStudy);
+		
+		model.addAttribute("list", service.listSearchCriteria(cri));
 
 		pageMakerStudy.setTotalCount(service.listSearchCount(cri));
 
-		model.addAttribute("pageMakerStudy", pageMakerStudy);
 
 //3岿 25老 赣瘤 林籍 贸府
 		//model.addAttribute("list", service.studyList());

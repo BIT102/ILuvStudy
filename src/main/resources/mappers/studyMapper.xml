@@ -317,8 +317,8 @@ limit #{pageStart}
 <select id="countPaging" resultType="int">
 <![CDATA[
 SELECT
-COUNT(bno)
-ba.name
+COUNT(bs.bno)
+, ba.name
 , bs.bno
 , bs.title
 , bs.writer
@@ -448,10 +448,10 @@ and sc.CDID = bc.CATEGORYD and sc.CSID = bc.CATEGORYS
   				and content like CONCAT('%', #{keyword}, '%')
   			</if>
 			<if test="searchType == 'r'.toString()">
-			    and r.rdname like CONCAT('%', #{keyword}, '%') or r.rsname like CONCAT('%', #{keyword}, '%')
+			    and (r.rdname like CONCAT('%', #{keyword}, '%') or r.rsname like CONCAT('%', #{keyword}, '%'))
 			</if>
 			<if test="searchType == 'g'.toString()">
-				and sc.cdname like CONCAT('%', #{keyword}, '%') or sc.csname like CONCAT('%', #{keyword}, '%')
+				and (sc.cdname like CONCAT('%', #{keyword}, '%') or sc.csname like CONCAT('%', #{keyword}, '%'))
 			</if>
   		</if> 
   </sql>

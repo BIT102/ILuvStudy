@@ -42,6 +42,9 @@
         
 <style>
         
+.container-fluid {
+ background-color:#f9f9f9;
+}        
         /* The Modal (background) */
 .modal {
     display: none; /* Hidden by default */
@@ -229,7 +232,7 @@
                             	<a href="/logout"><span>로그아웃</span></a>
                             </li>
                             <li class="dropdown">
-                            <a href="study/regist">스터디 등록하기</a>	
+                            <a href="/study/register">스터디 등록하기</a>	
                         </c:otherwise>    
                         </c:choose>    
                             <li class="dropdown">
