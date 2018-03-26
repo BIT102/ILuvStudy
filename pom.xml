@@ -245,7 +245,22 @@
 			<artifactId>junit</artifactId>
 			<version>4.12</version>
 			<scope>test</scope>
-		</dependency>        
+		</dependency> 
+		
+		
+		<!-- 구글 로그인 --> 
+		<dependency>
+  			<groupId>org.springframework.social</groupId>
+  			<artifactId>spring-social-google</artifactId>
+  			<version>1.0.0.RELEASE</version>
+		</dependency>
+
+		<dependency>
+  			<groupId>org.apache.httpcomponents</groupId>
+  			<artifactId>httpclient</artifactId>
+  			<version>4.5.3</version>
+		</dependency>      
+	
 	</dependencies>
     <build>
         <plugins>

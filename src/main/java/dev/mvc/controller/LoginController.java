@@ -1,5 +1,7 @@
 package dev.mvc.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Date;
 
 import javax.inject.Inject;
@@ -10,6 +12,17 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.social.connect.Connection;
+import org.springframework.social.google.api.Google;
+import org.springframework.social.google.api.impl.GoogleTemplate;
+import org.springframework.social.google.api.plus.Person;
+import org.springframework.social.google.api.plus.PlusOperations;
+import org.springframework.social.google.connect.GoogleConnectionFactory;
+import org.springframework.social.oauth2.AccessGrant;
+import org.springframework.social.oauth2.GrantType;
+import org.springframework.social.oauth2.OAuth2Operations;
+import org.springframework.social.oauth2.OAuth2Parameters;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +43,22 @@ public class LoginController {
 	@Inject
 	private LoginService service;
 	
+	
+	//구글 로그인 api
+	@Autowired
+	private GoogleConnectionFactory googleConnectionFactory;
+	
+	@Autowired
+	private OAuth2Parameters googleOAuth2Parameters;
+	
+	public void setGoogleConnectionFactory(GoogleConnectionFactory googleConnectionFactory){
+		this.googleConnectionFactory = googleConnectionFactory;
+	}
+	
+	public void setGoogleOAuth2Parameters(OAuth2Parameters googleOAuth2Parameters){
+		this.googleOAuth2Parameters = googleOAuth2Parameters;
+	}
+	//end
 	
 	// 로그인 통합 모달로 수정본
 	@RequestMapping(value = "/nav", method = RequestMethod.GET)
@@ -167,6 +196,68 @@ public class LoginController {
 		logger.info("searchPWGET........");
 		
 		
+	}
+	
+
+//==============구글 로그인 api==============
+	@RequestMapping(value = "/googleSignIn", method = RequestMethod.POST)
+	public void doGoogleSignInActionPage(HttpServletResponse response) {
+		OAuth2Operations oauthOperations = googleConnectionFactory.getOAuthOperations();
+		String url = oauthOperations.buildAuthorizeUrl(GrantType.AUTHORIZATION_CODE, googleOAuth2Parameters);
+		System.out.println("/googleSignIn, url : " + url);
+		
+		PrintWriter out;
+		try {
+			out = response.getWriter();
+			out.write(url);
+			out.flush();
+			out.close();
+		} catch (IOException e) {
+			throw new RuntimeException(e.getMessage(), e);
+		}
+	}
+	
+	@RequestMapping(value = "/googleSignInCallback", method = RequestMethod.GET)
+	public String doSessionAssignActionPage(HttpServletRequest request)throws Exception{
+		System.out.println("/googleSignInCallback");
+		
+		String code = request.getParameter("code");
+		
+		System.out.println(code);
+		
+		OAuth2Operations oauthOperations = googleConnectionFactory.getOAuthOperations();
+		AccessGrant accessGrant = oauthOperations.exchangeForAccess(code , googleOAuth2Parameters.getRedirectUri(),
+				null);
+		
+		String accessToken = accessGrant.getAccessToken();
+		Long expireTime = accessGrant.getExpireTime();
+		if (expireTime != null && expireTime < System.currentTimeMillis()) {
+			accessToken = accessGrant.getRefreshToken();
+			System.out.printf("accessToken is expired. refresh token = {}", accessToken);
+		}
+		Connection<Google> connection = googleConnectionFactory.createConnection(accessGrant);
+		Google google = connection == null ? new GoogleTemplate(accessToken) : connection.getApi();
+		
+		PlusOperations plusOperations = google.plusOperations();
+		Person person = plusOperations.getGoogleProfile();
+		
+		UserVO vo = new UserVO();
+		vo.setName(person.getDisplayName());
+
+		HttpSession session = request.getSession();
+		session.setAttribute("_USER_", vo);
+		
+		System.out.println(person.getDisplayName());
+		
+		return "redirect:/";
+		/*System.out.println(person.getAccountEmail());
+		System.out.println(person.getAboutMe());
+		System.out.println(person.getDisplayName());
+		System.out.println(person.getEtag());
+		System.out.println(person.getFamilyName());
+		System.out.println(person.getGender());
+		*/
+
 	}
 	
 }
