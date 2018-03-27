@@ -113,8 +113,15 @@
 											<div class="about-client">
 												<a
 													href="/study/board${pageMakerStudy.makeSearch(pageMakerStudy.cri.page)}&bno=${studyVO.bno}">
-													<img src="/study/displayFile?fileName=${studyVO.name}"
-													alt="client1">
+													
+													<c:choose>
+													<c:when test="${studyVO.name ne 'a'}">
+													<img src="/study/displayFile?fileName=${studyVO.name}" style="width:140px; height:120px;">
+													</c:when>
+													<c:otherwise>
+													<img src="/resources/assets/img/ha.jpg" style="width:140px; height:120px;">
+													</c:otherwise>
+													</c:choose>
 												</a>
 											</div>
 											<!-- end of /.about-client -->
@@ -141,8 +148,16 @@
 										<div class="about-client">
 											<a
 												href="/study/board${pageMakerStudy.makeSearch(pageMakerStudy.cri.page)}&bno=${test.bno}">
-												<img src="/study/displayFile?fileName=${test.name}"
-												alt="client2">
+											
+											<c:choose>
+											<c:when test="${test.name ne 'a'}">
+											<img src="/study/displayFile?fileName=${test.name}" style="width:140px; height:120px;">
+											</c:when>
+											<c:otherwise>
+											<img src="/resources/assets/img/ha.jpg" style="width:140px; height:120px;">
+											</c:otherwise>
+											</c:choose>
+				
 											</a>
 										</div>
 										<!-- end of /.about-client -->

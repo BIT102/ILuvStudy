@@ -123,30 +123,51 @@ select::-ms-expand {
 	display: none;
 }
 
+.contentB {
+	border: 1px solid #dadada;
+}
 
-	.contentB{border: 1px solid #dadada;}
-	.text-center1{text-align:center;}
+.text-center1 {
+	text-align: center;
+}
 /*페이지 처리*/
-.pagination>li>a, .pagination>li>span { 
-margin: 8px;
-color:#6b456a !important;
+.pagination>li>a, .pagination>li>span {
+	margin: 8px;
+	color: #6b456a !important;
 }
 
 .pagination>.active>a {
 	z-index: 2;
-    color: white !important;
-    background-color: black !important;
-    border-color: white !important;
-    cursor: default;
+	color: white !important;
+	background-color: black !important;
+	border-color: white !important;
+	cursor: default;
 }
-
-
 </style>
 
 </head>
 
 <body>
 	<%@include file="../nav.jsp"%>
+	
+	
+            <header class="page-head"  style="background:url(/resources/assets/img/multiple_blog-bg.jpg);">
+                <div class="header-wrapper">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+
+                                <ol class="breadcrumb">
+                                    <li><a href="/study/main">Home</a></li>
+                                    <li class="active">List All</li>
+                                </ol> <!-- end of /.breadcrumb -->
+
+                            </div>
+                        </div>
+                    </div> <!-- /.container -->
+                </div> <!-- /.header-wrapper -->
+            </header> <!-- /.page-head (header end) -->
+
 
 
 	<!--  begin portfolio section  -->
@@ -154,21 +175,21 @@ color:#6b456a !important;
 		<div class="container">
 			<div class="row">
 				<form>
-					<div class="dropdown"">
+					<div class="dropdown">
 						<select class="dropdown-select-version select" id="select1"
-							name="options"  style="float: right;">
+							name="options" style="float: right;">
 							<option value="">--</option>
 							<option value="x">전체</option>
 							<option value="t"
-							<c:out value="${cri.searchType eq 't'? 'selected' : ''}"/>>제목</option>
+								<c:out value="${cri.searchType eq 't'? 'selected' : ''}"/>>제목</option>
 							<option value="n"
-							<c:out value="${cri.searchType eq 'n'? 'selected' : ''}"/>>닉네임</option>
+								<c:out value="${cri.searchType eq 'n'? 'selected' : ''}"/>>닉네임</option>
 							<option value="g"
-							<c:out value="${cri.searchType eq 'g'? 'selected' : ''}"/>>카테고리</option>
+								<c:out value="${cri.searchType eq 'g'? 'selected' : ''}"/>>카테고리</option>
 							<option value="r"
-							<c:out value="${cri.searchType eq 'r'? 'selected' : ''}"/>>지역</option>
+								<c:out value="${cri.searchType eq 'r'? 'selected' : ''}"/>>지역</option>
 							<option value="c"
-							<c:out value="${cri.searchType eq 'c'? 'selected' : ''}"/>>내용</option>
+								<c:out value="${cri.searchType eq 'c'? 'selected' : ''}"/>>내용</option>
 						</select>
 					</div>
 				</form>
@@ -202,10 +223,21 @@ color:#6b456a !important;
 								<div class="item-image">
 									<a
 										href="/study/board${pageMakerStudy.makeSearch(pageMakerStudy.cri.page)}&bno=${studyVO.bno}">
-										<img src="/study/displayFile?fileName=${studyVO.name}"
-										class="img-responsive center-block"
-										alt="/resources/assets/img/nologin.png"
-										style="width: 370px; height: 216px;">
+
+
+										<c:choose>
+											<c:when test="${studyVO.name ne 'a'}">
+												<img src="/study/displayFile?fileName=${studyVO.name}"
+													class="img-responsive center-block"
+													style="width: 370px; height: 216px;">
+											</c:when>
+											<c:otherwise>
+												<img src="/resources/assets/img/ha.jpg"
+													class="img-responsive center-block"
+													style="width: 370px; height: 216px;">
+											</c:otherwise>
+										</c:choose>
+
 										<div>
 											<span><i class="fa fa-plus"></i></span>
 										</div>
@@ -247,27 +279,27 @@ color:#6b456a !important;
 
 	<!-- paging -->
 	<div class="text-center1">
-	<ul class="pagination">
-		<c:if test="${pageMakerStudy.prev}">
-			<li><a
-				href="listAll${pageMakerStudy.makeSearch(pageMakerStudy.startPage - 1)}">&laquo;</a></li>
-		</c:if>
+		<ul class="pagination">
+			<c:if test="${pageMakerStudy.prev}">
+				<li><a
+					href="listAll${pageMakerStudy.makeSearch(pageMakerStudy.startPage - 1)}">&laquo;</a></li>
+			</c:if>
 
-		<c:forEach begin="${pageMakerStudy.startPage}"
-			end="${pageMakerStudy.endPage}" var="idx">
-			<li
-				<c:out value="${pageMakerStudy.cri.page == idx?'class=active':''}"/>>
-				<a href="listAll${pageMakerStudy.makeSearch(idx)}">${idx}</a>
-			</li>
-		</c:forEach>
+			<c:forEach begin="${pageMakerStudy.startPage}"
+				end="${pageMakerStudy.endPage}" var="idx">
+				<li
+					<c:out value="${pageMakerStudy.cri.page == idx?'class=active':''}"/>>
+					<a href="listAll${pageMakerStudy.makeSearch(idx)}">${idx}</a>
+				</li>
+			</c:forEach>
 
-		<c:if test="${pageMakerStudy.next && pageMakerStudy.endPage>0 }">
-			<li><a
-				href="listAll${pageMakerStudy.makeSearch(pageMakerStudy.endPage +1)}">&raquo;</a>
-			</li>
-		</c:if>
-	</ul>
-</div>
+			<c:if test="${pageMakerStudy.next && pageMakerStudy.endPage>0 }">
+				<li><a
+					href="listAll${pageMakerStudy.makeSearch(pageMakerStudy.endPage +1)}">&raquo;</a>
+				</li>
+			</c:if>
+		</ul>
+	</div>
 
 
 

@@ -10,15 +10,81 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>신청 스터디</title>
 <style>
+body {
+	color: white;
+}
 
+.border {
+	border: 2px solid grey;
+}
+
+.basic {
+	width: 300px;
+	height: 50px;
+	float: left;
+	text-align: center;
+}
+
+.profile {
+	width: 150px;
+	height: 50px;
+}
+
+#div1 {
+	display: inline-block;
+}
+
+#div2 {
+	text-align: center;
+}
+
+#div2 div {
+	float: left;
+}
+
+body {
+	height: 800px;
+	width: 700px;
+}
+
+body>div>p3 {
+	text-align: left;
+	font-size: 30px;
+	border-bottom: 2px solid grey;
+}
+
+#pfimage {
+	width: 600px;
+	height: 50px;
+	display: inline-block;
+}
+
+#acinfo {
+	width: 600px;
+	height: 300px;
+	display: inline-block;
+}
+
+#actable {
+	font-size: 20px;
+	margin-top: 10px;
+}
 </style>
 
+<script>
+	$(document).ready(function(){
+		alert("${result}");
+	})
+</script>
+<script>
+	var gen = ${vo.gender};
+</script>
 </head>
 
 
-<body>
+<body style="background: #262626;">
 	<!-- // Navigation -->
-<%@include file="../nav.jsp"%>
+	<%@include file="../nav.jsp"%>
 
 	<form name="profileForm" method="post">
 
@@ -117,9 +183,6 @@
 
 
 	</form>
-
-<%@include file="../footer.jsp"%>
-	
 </body>
 
 

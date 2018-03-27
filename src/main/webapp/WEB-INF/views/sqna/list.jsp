@@ -4,30 +4,46 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE htm>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+
+<html class="no-js">
+<!--<![endif]-->
+
 <head>
 
-        <title>I Luv Study</title>
+<title>I Luv Study</title>
 
-        <!-- meta -->
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!-- meta -->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-        
-        <!-- stylesheets -->
-        <link rel="stylesheet" href="/resources/assets/css/bootstrap.min.css">
-        <link rel="stylesheet" href="/resources/assets/css/font-awesome.min.css">
-        <link rel="stylesheet" href="/resources/assets/css/animate.css">
-        <link rel="stylesheet" href="/resources/assets/css/owl.carousel.css">
-        <link rel="stylesheet" href="/resources/assets/css/owl.theme.css">
-        <link rel="stylesheet" href="/resources/assets/css/style.css">
 
-        <!-- fonts for this template -->
-        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Kaushan+Script" type="text/css">
 
-        <!-- scripts -->
-        <script type="text/javascript" src="/resources/assets/js/modernizr.custom.97074.js"></script>
-        
+
+<!-- stylesheets -->
+<link rel="stylesheet" href="/resources/assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="/resources/assets/css/font-awesome.min.css">
+<link rel="stylesheet" href="/resources/assets/css/animate.css">
+<link rel="stylesheet" href="/resources/assets/css/owl.carousel.css">
+<link rel="stylesheet" href="/resources/assets/css/owl.theme.css">
+<link rel="stylesheet" href="/resources/assets/css/style.css">
+
+<!-- fonts for this template -->
+<link rel="stylesheet"
+	href="http://fonts.googleapis.com/css?family=Kaushan+Script"
+	type="text/css">
+
+<!-- fafa img -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- scripts -->
+<script type="text/javascript"
+	src="/resources/assets/js/modernizr.custom.97074.js"></script>
+
 	<style>
 	#keywordInput {
 		width:300px;
@@ -62,12 +78,17 @@ color:#6b456a !important;
 			margin-bottom:5px;}
 			
 .time{float:right;}
+
+.page-head {
+ background:url(../img/services-bg.jpg);
+}
 </style>
 
 </head>
 <body>
 
 <%@include file="../nav.jsp"%>
+
 <div id="contact-page">
  <!-- header begin -->
             <header class="page-head">
@@ -77,7 +98,7 @@ color:#6b456a !important;
                             <div class="col-md-12">
 
                                 <ol class="breadcrumb">
-                                    <li><a href="index.html">Home</a></li>
+                                    <li><a href="/study/main">Home</a></li>
                                     <li class="active">FAQ</li>
                                 </ol> <!-- end of /.breadcrumb -->
 
@@ -87,30 +108,26 @@ color:#6b456a !important;
                 </div> <!-- /.header-wrapper -->
             </header> <!-- /.page-head (header end) -->
 
+  
+
 <!-- 검색 -->
-<form onsubmit="submitFn(this, event);">
-            <div class="search-wrapper">
-                 <div class="input-holder">
-                 	
-                 	
-                    <input type="text" class="search-input" placeholder="Type to search" />
 
-                 	<button class="search-icon" onclick="searchToggle(this, event);" ><span>검색</span></button>
-                </div>
-                <span class="close" onclick="searchToggle(this, event);"></span>
-                <div class="result-container">
-
-                </div>
-            </div>
-            
-            <br>
-          
-            <div>
+<section class="bg-light-gray" style="background:white; padding:28.981px; ">
+<div class="container">
+				<div class="welcome-speech"
+					style="float: right; margin-bottom: 30px;">
+					<input type="text" onKeyDown="onKeyDown();" name="keyword"
+						id="keywordInput" placeholder="검색어를 입력하세요" value="${cri.keyword}">
+					<button class="btn btn-white">Search</button>
+				</div>
+				<!-- /.intro -->
+			</div>
+			
+			 <div>
             	<a href="../qna/qna" type="submit" id="submit" name="submit" class="btn btn-black faqbtn">문의하기</a>
             </div>
-</form>
+</section>
 
-<br>
 <section class="row-section">
     <div class="container contentB">
 	    <div class="row">
@@ -126,7 +143,7 @@ color:#6b456a !important;
 	      			  <h4 class="panel-title">
 	        		  <a data-toggle="collapse" data-parent="#accordion" href="#collapse${QnaVO.bno}">${QnaVO.title}</a>
 	        		  <small>(${QnaVO.writer})</small>
-	        		  <span class="time">${QnaVO.regdate}</span>
+	        		  <span class="time"><fmt:formatDate pattern="yyyy-MM-dd" value="${QnaVO.regdate}"/></span>
 	       			 </h4>
 	      			</div>
 				      <div id="collapse${QnaVO.bno}" class="panel-collapse collapse">
@@ -184,4 +201,31 @@ color:#6b456a !important;
 				<%@include file="../footer.jsp"%>
 	
 </body>
+	<script>
+	  $(document).ready(function(){
+		  
+			$(".btn-white").on("click", function(event){
+						
+				self.location = "list"
+					+ '${pageMaker.makeQuery(1)}'
+					+ "&searchType="
+					+ "tcw"
+					+ "&keyword=" + encodeURIComponent($('#keywordInput').val());            
+			})  
+	  })		 
+	
+	//타자누르면 검색됨
+	function onKeyDown() {
+	  if(event.keyCode==13){
+    	 
+			
+		  self.location = "list"
+				+ '${pageMaker.makeQuery(1)}'
+				+ "&searchType="
+				+ "tcw"
+				+ "&keyword=" + encodeURIComponent($('#keywordInput').val());  
+	  }
+  }
+			
+	</script>
 </html>

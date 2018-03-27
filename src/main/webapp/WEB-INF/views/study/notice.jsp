@@ -4,29 +4,45 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE htm>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+
+<html class="no-js">
+<!--<![endif]-->
+
 <head>
 
-        <title>I Luv Study</title>
+<title>I Luv Study</title>
 
-        <!-- meta -->
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!-- meta -->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-        
-        <!-- stylesheets -->
-        <link rel="stylesheet" href="/resources/assets/css/bootstrap.min.css">
-        <link rel="stylesheet" href="/resources/assets/css/font-awesome.min.css">
-        <link rel="stylesheet" href="/resources/assets/css/animate.css">
-        <link rel="stylesheet" href="/resources/assets/css/owl.carousel.css">
-        <link rel="stylesheet" href="/resources/assets/css/owl.theme.css">
-        <link rel="stylesheet" href="/resources/assets/css/style.css">
 
-        <!-- fonts for this template -->
-        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Kaushan+Script" type="text/css">
 
-        <!-- scripts -->
-        <script type="text/javascript" src="/resources/assets/js/modernizr.custom.97074.js"></script>
+
+<!-- stylesheets -->
+<link rel="stylesheet" href="/resources/assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="/resources/assets/css/font-awesome.min.css">
+<link rel="stylesheet" href="/resources/assets/css/animate.css">
+<link rel="stylesheet" href="/resources/assets/css/owl.carousel.css">
+<link rel="stylesheet" href="/resources/assets/css/owl.theme.css">
+<link rel="stylesheet" href="/resources/assets/css/style.css">
+
+<!-- fonts for this template -->
+<link rel="stylesheet"
+	href="http://fonts.googleapis.com/css?family=Kaushan+Script"
+	type="text/css">
+
+<!-- fafa img -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- scripts -->
+<script type="text/javascript"
+	src="/resources/assets/js/modernizr.custom.97074.js"></script>
 
 	<style>
 	#keywordInput {
@@ -78,7 +94,7 @@ color:#6b456a !important;
                             <div class="col-md-12">
 
                                 <ol class="breadcrumb">
-                                    <li><a href="index.html">Home</a></li>
+                                    <li><a href="/study/main">Home</a></li>
                                     <li class="active">NOTICE</li>
                                 </ol> <!-- end of /.breadcrumb -->
 
@@ -89,29 +105,17 @@ color:#6b456a !important;
             </header> <!-- /.page-head (header end) -->
 
 <!-- 검색 -->
-<form onsubmit="submitFn(this, event);">
-            <div class="search-wrapper">
-                 <div class="input-holder">
-                 	
-                 	
-                    <input type="text" class="search-input" placeholder="Type to search" />
-
-                 	<button class="search-icon" onclick="searchToggle(this, event);" ><span>검색</span></button>
-                </div>
-                <span class="close" onclick="searchToggle(this, event);"></span>
-                <div class="result-container">
-
-                </div>
-            </div>
-            
-            <br>
-          
-            <div>
-            	
-            </div>
-</form>
-
-<br>
+<section class="bg-light-gray" style="background:white;">
+<div class="container">
+				<div class="welcome-speech"
+					style="float: right; margin-bottom: 30px;">
+					<input type="text" onKeyDown="onKeyDown();" name="keyword"
+						id="keywordInput" placeholder="검색어를 입력하세요" value="${cri.keyword}">
+					<button class="btn btn-white">Search</button>
+				</div>
+				<!-- /.intro -->
+			</div>
+</section>
 <section class="row-section">
     <div class="container contentB">
 	    <div class="row">
@@ -120,18 +124,18 @@ color:#6b456a !important;
 	    <div class="col-md-12 offset-md-1 row-block">
 	       <div class="panel-group" id="accordion">
 	        
-	    <c:forEach items="${list}" var="QnaVO">    
+	    <c:forEach items="${list}" var="noticeVO">    
 	    
 	    		<div class="panel panel-default">
 	      			<div class="panel-heading">
 	      			  <h4 class="panel-title">
-	        		  <a data-toggle="collapse" data-parent="#accordion" href="#collapse${QnaVO.bno}">${QnaVO.title}</a>
-	        		  <small>(${QnaVO.writer})</small>
-	        		  <span class="time">${QnaVO.regdate}</span>
+	        		  <a data-toggle="collapse" data-parent="#accordion" href="#collapse${noticeVO.bno}">${noticeVO.title}</a>
+	        		  <small>(${noticeVO.writer})</small>
+	        		 <span class="time"><fmt:formatDate pattern="yyyy-MM-dd" value="${noticeVO.regdate}"/></span>
 	       			 </h4>
 	      			</div>
-				      <div id="collapse${QnaVO.bno}" class="panel-collapse collapse">
-				        <div class="panel-body">${QnaVO.content}</div>
+				      <div id="collapse${noticeVO.bno}" class="panel-collapse collapse">
+				        <div class="panel-body">${noticeVO.content}</div>
 				      </div>
 			    </div>
 			    
@@ -141,6 +145,7 @@ color:#6b456a !important;
 	    </div>
 </div>
 </section>
+</div>
 
 		<!-- 페이징처리 -->
 	<div class="text-center1">
@@ -167,7 +172,34 @@ color:#6b456a !important;
 		</ul>
 	</div>
 
-	</div>
 			<%@include file="../footer.jsp"%>	
 </body>
+	<script>
+	  $(document).ready(function(){
+		  
+			$(".btn-white").on("click", function(event){
+						
+				self.location = "notice"
+					+ '${pageMaker.makeQuery(1)}'
+					+ "&searchType="
+					+ "tcw"
+					+ "&keyword=" + encodeURIComponent($('#keywordInput').val());            
+			})  
+	  })		 
+	
+	//타자누르면 검색됨
+	function onKeyDown() {
+	  if(event.keyCode==13){
+    	 
+			
+		  self.location = "notice"
+				+ '${pageMaker.makeQuery(1)}'
+				+ "&searchType="
+				+ "tcw"
+				+ "&keyword=" + encodeURIComponent($('#keywordInput').val());  
+	  }
+  }
+			
+	</script>
+
 </html>

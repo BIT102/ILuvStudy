@@ -65,8 +65,16 @@ public class StudyController {
 		
 		logger.info("register POST...........");
 		System.out.println("vo = "+vo);
-		service.regist(vo);
 		
+		
+		if(vo.getTitle()==null||vo.getNow()==null||vo.getMax()==null||vo.getrDId()==null
+				||vo.getAge()==null||vo.getSc()==null||vo.getSd()==null||vo.getSt()==null||vo.getEt()==null) {
+			
+			rttr.addFlashAttribute("msg", "no");
+			return "redirect:/study/register";
+		} else {
+			service.regist(vo);
+		}		
 		return "redirect:/study/main";
 	}
 

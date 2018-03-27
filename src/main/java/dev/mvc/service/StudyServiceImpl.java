@@ -137,14 +137,13 @@ public class StudyServiceImpl implements StudyService {
 		
 		
 		if(files==null) {
-			map.put("name", "/2018/03/26/S_0031eae8-0706-4dd1-9330-5300a0e77940_no.jpg");
+			map.put("name", "a");
 			map.put("status", "O");
 			map.put("bno", bno);
 			
 			dao.addFile(map);
 		} else {
-		
-		
+
 		for (String fileName : files) {
 
 			if (fileName == files[0]) {
