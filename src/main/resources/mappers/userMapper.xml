@@ -53,13 +53,8 @@
   
   	<!-- 비밀번호 체크 -->
   	<select id="checkPw" resultType="int">
-<<<<<<< HEAD
-  	select count(*) from user where email=#{email} and password=#{password}
+  	select count(*) from user where email=#{email} and password=#{password};
   	</select>
-=======
-  	select count(*) from user where email=#{email} and password=#{password}
-  	</select>
->>>>>>> branch 'HGKWON2' of https://github.com/BIT102/ILuvStudy.git
   	
   	<!-- 닉네임 체크 -->
   	<select id="nickCheck" resultType="int">

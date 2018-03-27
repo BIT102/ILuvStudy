@@ -225,7 +225,7 @@
                                 <a><span onclick="document.getElementById('id01').style.display='block'" style="width:auto;">로그인</span></a>
                             </li>
                             <li class="dropdown">
-                                <a href="join"><span>회원가입</span></a>
+                                <a href="/join"><span>회원가입</span></a>
                             </li>
                         </c:when>
                         <c:otherwise>    
@@ -238,7 +238,7 @@
                             	<a href="/logout"><span>로그아웃</span></a>
                             </li>
                             <li class="dropdown">
-                            <a href="/study/regist">스터디 등록하기</a>	
+                            <a href="/study/register">스터디 등록하기</a>	
                         </c:otherwise>    
                         </c:choose>    
                             <li class="dropdown">

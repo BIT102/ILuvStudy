@@ -14,7 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,7 +26,7 @@ import dev.mvc.domain.PageMakerStudy;
 import dev.mvc.domain.SearchCriteriaStudy;
 import dev.mvc.domain.StudyVO;
 import dev.mvc.domain.UserVO;
-import dev.mvc.service.AdminService;
+import dev.mvc.service.ReplyStudyService;
 import dev.mvc.service.StudyService;
 
 @Controller
@@ -39,6 +38,8 @@ public class StudyController {
 	@Inject
 	private StudyService service;
 
+	@Inject
+	private ReplyStudyService replyService;
 
 
 	
@@ -174,9 +175,9 @@ public class StudyController {
 	@RequestMapping(value = "/board", method = RequestMethod.GET)
 	public void readBoard(@RequestParam("bno") int bno, @ModelAttribute("cri") CriteriaStudy cri, Model model)
 			throws Exception {
-
+		
 		model.addAttribute(service.read(bno));
-
+		model.addAttribute("list", replyService.listReply(bno));  //댓글 정보 가져옴
 	}
 
 	// 상세페이지 제거

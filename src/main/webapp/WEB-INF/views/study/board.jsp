@@ -141,27 +141,30 @@
                                 <div class="comments">
                                     <div class="row">
                                         <div class="col-md-12" id="replies">
-                                            <h3>2 Comments</h3>
-                                            <div class="cmnt-clipboard"><span class="btn-clipboard">Reply</span></div>
+                                            <h3 id="replies2"></h3>
+                             <% int replycnt=0; %>               
+                 <!-- ===================댓글 정보 추가==================== -->                     
+                                 <c:forEach items="${list}" var="replyStudyVO">
+                                            <!-- <div class="cmnt-clipboard"><span class="btn-clipboard">Reply</span></div> -->
                                             <div class="well">
                                                 <div class="row">
-                                                    <div class="col-md-2">
+                                                   <!--  <div class="col-md-2">
                                                         <img src="assets/img/commenter1.jpg" class="img-responsive center-block" alt="first-comment">
-                                                    </div>
+                                                    </div> -->
                                                     <div class="col-md-10">
                                                         <p class="comment-info">
-                                                            <strong>Reena Scot</strong> <span>22 april 2015</span>
+                                                            <strong>${replyStudyVO.writer}</strong> <span><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${replyStudyVO.regdate}"/></span>
                                                         </p>
-                                                        <p>
-                                                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since they 1500s.
-                                                        </p>
+                                                        <p>${replyStudyVO.content}</p>
                                                     </div>
                                                 </div>
                                             </div>
-                                            
-                                            
+                                            <% replycnt++; %>
+                                  </c:forEach>
+                    <!-- ===================댓글 정보 추가 끝==================== -->
+                                                 
                                             <!-- handlebar template 문법-->
-											<script id="template" type="text/x-handlebars-template">
+										<!--	<script id="template" type="text/x-handlebars-template">
                                             	{{#each .}}   
                                             <div class="well">
                                                 <div class="row">
@@ -182,11 +185,12 @@
                                             </div>
 												{{/each}}
 											</script>
-											<script>
+										 	<script>
 												var source = $("#template").html();
 												var template = Handlebars.compile(source);
 												var data = 
-											</script>
+											</script> -->
+											
                                         </div>
                                     </div>
                                 </div>
@@ -744,7 +748,7 @@ $(document).ready(function(){
 	})
 	
 	$(".fa fa-heart-o").on("click", function(){
-		<i class="fa fa-heart" style="font-size:36px;"></i>
+		 /* <i class="fa fa-heart" style="font-size:36px;"></i> */
 	})
 	
 	$(".modifyBtn").on("click",function(){
@@ -753,7 +757,14 @@ $(document).ready(function(){
 		formObj.submit();
 	});
 	
+	
+//=========댓글 수 추가=============
+	$('#replies2').text("<%=replycnt%> Comments");
+
 });
+
+
+
 </script>   
  
 </body>
