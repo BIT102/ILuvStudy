@@ -1,11 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>	
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script type="text/javascript"
-	src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+<!-- include libraries(jQuery, bootstrap) -->
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
+
+<!-- include summernote css/js-->
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
+
+
 
 <!-- 마이페이지-부가정보 수정 -->
 
@@ -173,23 +184,67 @@ body>div>p3 {
 		<br> <br>
 
 		<p>관심 지역</p>
-		<!--대분류  -->
-		<select name="RGD">
-			<option value="서울">서울</option>
-			<option value="경기">경기</option>
-			<option value="강원">강원</option>
-		</select>
+				<div class="register2">
+			<!--지역분류-->
+			<div id="studyRegion">
 
-		<!--소분류  -->
-		<select name="RGS">
-			<option value="강남구">강남구</option>
-			<option value="서초구">서초구</option>
-			<option value="광진구">광진구</option>
-		</select>
+				<!-- 대분류 -->
+				<p>지역대분류</p>
+				<select name="rDId" id="rDId">
+
+					<option value='' selected>--</option>
+
+					<% int cataNum2 = 64; %>
+					<c:forEach items="${rglist}" var="StudyVO">
+						<% cataNum2++; %>
+						<option value="<%=(char)cataNum2%>">${StudyVO.rDName}</option>
+					</c:forEach>
+				</select>
+
+				<!-- 소분류 -->
+				<p>지역소분류</p>
+				<select name="rSId" id="rSId">
+					<option selected>--</option>
+				</select>
+			</div>
+		
+			<!-- select지역 이벤트       -->
+		 	<script>
+				$("#rDId").change(function(){
+				
+					var bigNum2 = $(this).val()
+					
+					console.log(bigNum2);
+					smallCat2(bigNum2);
+				})
+	
+				function smallCat2(bigNum2){
+					$.getJSON(
+						"register1/region/"+bigNum2,
+						function(data){
+							var str = "";
+
+							$(data).each(function(){
+								str += "<option value="+this.rSId+">"+this.rSName+"</option>";							
+							});
+							
+							$("#rSId").html(str);
+						}
+					)
+				}			
+			</script> 
 
 
 		<h3>자기소개</h3>
-		<textarea row="5" cols="50" name="introduction">${vo.introduction}</textarea>
+		<%-- <textarea row="5" cols="50" name="introduction">${vo.introduction}</textarea> --%>
+		<textarea id="summernote" name="introduction">${vo.introduction}</textarea>
+
+		<script>
+		$(document).ready(function() {
+			  $('#summernote').summernote();
+			});
+		</script>
+
 
 		<h3>홈페이지</h3>
 		<input type="url" name="homepage" value="${vo.homepage}"> <br>

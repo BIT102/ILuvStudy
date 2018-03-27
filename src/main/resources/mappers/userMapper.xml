@@ -33,7 +33,7 @@
   	<!-- 프로필 수정 -->
   	<update id="update">
   	update user set name=#{name}, nickname=#{nickName}, gender=#{gender}, phoneNum=#{phoneNum}, 
-  	birth=#{birth}, photo=#{photo} where email=#{email};
+  	birth=#{birth} where email=#{email};
   	</update>
   	
   	<!-- 부가정보 수정 -->
@@ -45,7 +45,7 @@
   	<update id="changePw">
   	update user set password=#{password} where email=#{email};
   	</update>
-  	
+  	 
   	<!-- 회원 탈퇴 -->
   	<update id="quit">
   	update user set isDel=1 where email=#{email};
@@ -56,6 +56,93 @@
   	select count(*) from user where email=#{email} and password=#{password}
   	</select>
   	
+  	<!-- 닉네임 체크 -->
+  	<select id="nickCheck" resultType="int">
+  	select count(*) from user where nickname = #{nickName};
+  	</select>
+  	
+  	<!-- 프로필 사진 수정 -->
+  	<update id="insertImg">
+  	update user set photo=#{photo} where email=#{email};
+  	</update>
+  	
+  	<!-- 북마크 불러오기 -->
+  	<select id="bookmarkList" resultType="studyVO">
+  	SELECT
+		ba.name
+		, bs.bno
+		, bs.title
+		, bs.writer
+		, u.NICKNAME
+		, sc.cDName
+		, sc.cSName
+		, bs.now
+		, bs.max
+		, r.rDName
+		, r.rSName
+		, bs.age
+		, bs.sc
+		, bs.sd
+		, bs.st
+		, bs.et
+		, bs.content
+		, bs.vct
+		, bs.rct
+		, bs.regdate
+		, bs.enddate
+		FROM 
+		board_study bs
+		left outer join user u on bs.writer = u.EMAIL
+		left outer join (select * from board_attach where status = "O") ba on bs.bno = ba.bsbno
+		left outer join study_category sc on bs.CATEGORYD = sc.CDID and bs.CATEGORYS = sc.CSID
+		left outer join region r on bs.RDID = r.RDID and bs.RSID = r.RSID
+		WHERE 
+		bs.bno > 0 and bs.bno in (select bookmark.bsbno
+		from bookmark
+		where useremail = #{email});
+  	</select>
+  	
+  	<!-- 북마크 즐겨찾기 수 -->
+	<select id="bookmarkCount" resultType="int">
+  		select count(*) from bookmark where bsbno = #{bno};
+  	</select>
+  	
+  	<!-- 모집 스터디 불러오기 -->
+  	<select id="recruitList" resultType="studyVO">
+  	  	SELECT
+		ba.name
+		, bs.bno
+		, bs.title
+		, bs.writer
+		, u.NICKNAME
+		, sc.cDName
+		, sc.cSName
+		, bs.now
+		, bs.max
+		, r.rDName
+		, r.rSName
+		, bs.age
+		, bs.sc
+		, bs.sd
+		, bs.st
+		, bs.et
+		, bs.content
+		, bs.vct
+		, bs.rct
+		, bs.regdate
+		, bs.enddate
+		FROM 
+		board_study bs
+		left outer join user u on bs.writer = u.EMAIL
+		left outer join (select * from board_attach where status = "O") ba on bs.bno = ba.bsbno
+		left outer join study_category sc on bs.CATEGORYD = sc.CDID and bs.CATEGORYS = sc.CSID
+		left outer join region r on bs.RDID = r.RDID and bs.RSID = r.RSID
+		WHERE 
+		bs.bno > 0 and bs.bno in (select bookmark.bsbno
+		from bookmark
+		where useremail = #{email});
+	</select>	
+
   	<!-- sangwook -->
   	<!-- 이메일중복체크 -->
   	<select id = "chkEmail" resultType="int">

@@ -1,11 +1,20 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>   
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<!-- include libraries(jQuery, bootstrap) -->
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
+
+<!-- include summernote css/js-->
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
+
 <title>북마크 스터디</title>
  <style>
     .border{border:2px solid grey; }
@@ -83,8 +92,8 @@
 
     <table id="table1">
             <tr>
-                <th> 번호</th>
                 <th> 북마크 관리 </th>
+                <th> 스터디 넘버 </th>
                 <th> 스터디명 </th>
                 <th> 사진 </th>
                 <th> 주최자 </th>
@@ -93,20 +102,20 @@
                 <th> 즐겨찾기 수</th>
                 <th> 조회수</th>
             </tr>
-       
-            
+            <c:forEach items="${bookmarkList}" var="bookmarkList">
             <tr>
-                <td>1</td>
                 <td>□</td>
-                <td><a href="#">JAVA 스터디 모집해요</a></td>
-                <td><img src="/resources/dist/img/th.jpg" alt="김태희" width="100" height="100"></td>
-                <td>김태희</td>
-                <td>서울시 강남구</td>
-                <td>2018-02-21</td>
-                <td> 5 </td>
-                <td> 70 </td>
+                <td>${bookmarkList.bno}</td>
+                <td>${bookmarkList.title}</td>
+                <td><img src="/study/displayFile?fileName=${bookmarkList.name}"></td>
+                <td>${bookmarkList.writer}</td>
+                <td>${bookmarkList.rDName} ${bookmarkList.rSName}</td>
+                <td>${bookmarkList.sd}</td>
+                <td>${bookmarkList.bookmarkCount}</td>
+                <td>${bookmarkList.vct}</td>
             </tr>
-            <tr>
+            </c:forEach>
+<!--             <tr>
                 <td>2</td>
                 <td>■</td>
                 <td><a href="#">SPRING 스터디 모집해요</a></td>
@@ -116,22 +125,8 @@
                 <td>2018-04-21</td>
                 <td> 7 </td>
                 <td> 150 </td>
-            </tr>
-            
-            <!-- db에서 불러오기 -->
-            <c:forEach items="${bmkList}" var="bmkList">
-    		<tr>
-    			<td>${bmkList.bno}</td>
-    			<td></td>
-    			<td>${bmkList.title}</td>
-    			<td><img src="/study/displayFile?fileName=${bmkList.name}"></a></td>
-    			<td>${bmkList.writer}</td>
-    			<td>${bmkList.rDName}${bmkList.rSName}</td>
-    			<td>${bmkList.sd}</td>
-    			<td></td>
-    			<td></td>
-    		</tr>
-    		</c:forEach> 
+            </tr> -->
+    
     </table>   
    
     
