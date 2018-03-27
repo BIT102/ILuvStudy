@@ -130,7 +130,7 @@ color:#6b456a !important;
 	      			<div class="panel-heading">
 	      			  <h4 class="panel-title">
 	        		  <a data-toggle="collapse" data-parent="#accordion" href="#collapse${noticeVO.bno}">${noticeVO.title}</a>
-	        		  <small>(${noticeVO.writer})</small>
+	        		  <small>(admin)</small>
 	        		 <span class="time"><fmt:formatDate pattern="yyyy-MM-dd" value="${noticeVO.regdate}"/></span>
 	       			 </h4>
 	      			</div>

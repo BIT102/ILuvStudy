@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import dev.mvc.domain.BookmarkVO;
+import dev.mvc.domain.StudyVO;
 import dev.mvc.service.BookmarkService;
 
 @Controller
@@ -29,9 +30,9 @@ public class BookmarkController {
 	private BookmarkService service;
 	
 	
-	//ºÏ¸¶Å©µî·Ï
+/*	//ºÏ¸¶Å©µî·Ï
 	@RequestMapping(value="/a", method=RequestMethod.POST)
-	public ResponseEntity<String> register(@RequestBody BookmarkVO vo) {
+	public ResponseEntity<String> register(@RequestBody StudyVO vo) {
 	
 		ResponseEntity<String> entity = null;
 		
@@ -44,7 +45,7 @@ public class BookmarkController {
 		return entity;
 		
 	}
-	
+	*/
 /*	@RequestMapping(value="/b", method=RequestMethod.POST)
 	public ResponseEntity<String> remove(@RequestBody BookmarkVO vo) {
 	
@@ -67,7 +68,7 @@ public class BookmarkController {
 		
 	}*/
 	
-	//ºÏ¸¶Å© ºÒ·¯¿À±â
+/*	//ºÏ¸¶Å© ºÒ·¯¿À±â
 	@RequestMapping(value="/all/{bsBno}", method=RequestMethod.GET)
 	public ResponseEntity<List<BookmarkVO>> list(@PathVariable("bsBno") Integer bsBno) {
 		
@@ -101,7 +102,7 @@ public class BookmarkController {
 			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 		return entity;
-	}
+	}*/
 	
 	
 }

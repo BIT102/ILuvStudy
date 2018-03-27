@@ -19,8 +19,14 @@ useremail
 , #{bsBno}
 )
 </insert>
+
+<select id="list" resultType="StudyVO">
+
+</select>
+
+
 <!-- 북마크 불러오기 -->
-<select id="list" resultType="BookmarkVO">
+<!-- <select id="list" resultType="BookmarkVO">
 SELECT
 *
 FROM
@@ -28,16 +34,16 @@ bookmark
 WHERE bsBno = #{bsBno}
 order by id desc
 </select>
-
+ -->
 
 
 <!-- 북마크 지우기 -->
-<delete id="deleteBookmark">
+<!-- <delete id="deleteBookmark">
 DELETE
 FROM
 bookmark
 WHERE
 useremail = #{userEmail}
 AND bsbno = #{bsBno}
-</delete>
+</delete> -->
 </mapper>

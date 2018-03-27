@@ -1,15 +1,15 @@
 package dev.mvc.persistence;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import dev.mvc.domain.BookmarkVO;
+import dev.mvc.domain.StudyVO;
+
+
 
 @Repository
 public class BookmarkDAOImpl implements BookmarkDAO {
@@ -21,11 +21,19 @@ public class BookmarkDAOImpl implements BookmarkDAO {
 	
 	//북마크 등록
 	@Override
-	public void create(BookmarkVO vo) throws Exception {
+	public void create(StudyVO vo) throws Exception {
 		session.insert(namespace+".createBookmark", vo);
 	}
 	
-	//북마크 불러오기
+	@Override
+	public List<StudyVO> list(Integer bsbno) throws Exception {
+		return session.selectList(namespace+".list", bsbno);
+	}
+	
+	
+	
+	
+/*	//북마크 불러오기
 	public List<BookmarkVO> list(Integer bsBno) throws Exception {
 		return session.selectList(namespace+".list");
 	}
@@ -39,6 +47,6 @@ public class BookmarkDAOImpl implements BookmarkDAO {
 		map.put("userEmail", userEmail);
 		
 		session.insert(namespace+".deleteBookmark", map);
-	}
+	}*/
 	
 }

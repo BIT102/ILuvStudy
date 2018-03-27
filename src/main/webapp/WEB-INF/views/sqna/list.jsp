@@ -121,11 +121,7 @@ color:#6b456a !important;
 					<button class="btn btn-white">Search</button>
 				</div>
 				<!-- /.intro -->
-			</div>
-			
-			 <div>
-            	<a href="../qna/qna" type="submit" id="submit" name="submit" class="btn btn-black faqbtn">문의하기</a>
-            </div>
+
 </section>
 
 <section class="row-section">
@@ -142,7 +138,7 @@ color:#6b456a !important;
 	      			<div class="panel-heading">
 	      			  <h4 class="panel-title">
 	        		  <a data-toggle="collapse" data-parent="#accordion" href="#collapse${QnaVO.bno}">${QnaVO.title}</a>
-	        		  <small>(${QnaVO.writer})</small>
+	        		  <small>(admin)</small>
 	        		  <span class="time"><fmt:formatDate pattern="yyyy-MM-dd" value="${QnaVO.regdate}"/></span>
 	       			 </h4>
 	      			</div>
