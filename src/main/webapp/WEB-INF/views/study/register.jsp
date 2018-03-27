@@ -39,7 +39,11 @@ small {
 </head>
 <body>
 <div id="wrapper">
+<<<<<<< HEAD
 <%@ include file="../nav.jsp" %>
+=======
+<%@include file="../nav.jsp"%>
+>>>>>>> branch 'HGKWON2' of https://github.com/BIT102/ILuvStudy.git
 
 	 <!-- MAIN -->
 		<div class="main">

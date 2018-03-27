@@ -37,27 +37,28 @@
                     </div> <!-- /.container -->
                 </div> <!-- /.header-wrapper -->
             </header> <!-- /.page-head (header end) -->
-
+            
+	
 	<!-- qna등록 -->
-	<form role="form" method="post" class="textcenter1">
+	<form role="form" method="post" class="form-group">
 	
 	 <!--첫번째 페이지-->
-        <div class="register1">
+        <div class="register1 col-md-8 col-sm-9">
             <!--제목입력-->
-            <div class="studytitle"></div>
+            <div class="studytitle">
                 <p>qna제목</p>
-                <input type="text" placeholder="질문제목" name="title" required>
+                <input type="text" class="form-control" placeholder="질문제목" name="title" required>
             </div>
 
               <!--쓴사람//value값수정-->
             <div class="studywriter">
                 <p>쓴사람</p>
-                <input type="text" placeholder="쓴사람" name="writer" value="abc1@gmail.com" required>
+                <input type="text" class="form-control" placeholder="쓴사람" name="writer" value="abc1@gmail.com" required>
             </div>
             
             <div class="studywriter">
                 <p>내용</p>
-                <textarea name="content" rows="12" required>내용</textarea>
+                <textarea name="content" class="form-control" rows="12" required>내용</textarea>
             </div>
             
             <div class="studywriter">
@@ -70,8 +71,9 @@
             <div>
 				<button type="submit">Submit</button>
             </div>
-            
+          </div>  
 	</form>
+	
 	
 </div>	
 </body>

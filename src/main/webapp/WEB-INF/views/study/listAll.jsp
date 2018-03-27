@@ -128,6 +128,24 @@ select::-ms-expand {
 
 <body>
 	<%@include file="../nav.jsp"%>
+<div id="gallery-page">
+<!-- header begin -->
+            <header class="page-head">
+                <div class="header-wrapper">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+
+                                <ol class="breadcrumb">
+                                    <li><a href="main">Home</a></li>
+                                    <li class="active">listAll</li>
+                                </ol> <!-- end of /.breadcrumb -->
+
+                            </div>
+                        </div>
+                    </div> <!-- /.container -->
+                </div> <!-- /.header-wrapper -->
+            </header> <!-- /.page-head (header end) -->
 
 
 	<!--  begin portfolio section  -->
@@ -221,7 +239,7 @@ select::-ms-expand {
 				</div>
 			</div>
 			<!-- end of portfolio-item-list -->
-
+</div>
 		</div>
 	</section>
 	<!--   end of portfolio section  -->

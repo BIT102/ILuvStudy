@@ -17,6 +17,7 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 		
+
 	<!-- AWS 연동 -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 	  	<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
