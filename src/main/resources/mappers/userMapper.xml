@@ -9,7 +9,7 @@
   
   	<!-- 회원 가입 -->
   	<insert id="joinUser">
-  	insert into jjstudy.user(email, name, password, nickName, birth, gender, phoneNum) 
+  	insert into user(email, name, password, nickName, birth, gender, phoneNum) 
 	values(#{email}, #{name}, #{password}, #{nickName}, #{birth}, #{gender}, #{phoneNum}); 
   	</insert>
   	
@@ -20,50 +20,50 @@
   	
   	<!-- 로그인 -->
   	<select id = "userDTOLogin" resultType="UserVO">
-  		select * from jjstudy.user where email = #{email} and password = #{password}
+  		select * from user where email = #{email} and password = #{password}
   	</select>
   	
   	<!-- 프로필 읽어오기 #(email)-->
   	<select id="read" resultType="UserVO">
   	select photo, email,password, name, nickname, birth, gender, phoneNum, introduction, homepage
-  	from jjstudy.user 
+  	from user 
   	where email=#{email};
   	</select>
   	
   	<!-- 프로필 수정 -->
   	<update id="update">
-  	update jjstudy.user set name=#{name}, nickname=#{nickName}, gender=#{gender}, phoneNum=#{phoneNum}, 
+  	update user set name=#{name}, nickname=#{nickName}, gender=#{gender}, phoneNum=#{phoneNum}, 
   	birth=#{birth} where email=#{email};
   	</update>
   	
   	<!-- 부가정보 수정 -->
   	<update id="updateAddInfo">
-  	update jjstudy.user set homepage=#{homepage}, introduction=#{introduction} where email=#{email}; 
+  	update user set homepage=#{homepage}, introduction=#{introduction} where email=#{email}; 
   	</update>
   	
   	<!-- 비밀번호 변경 -->
   	<update id="changePw">
-  	update jjstudy.user set password=#{password} where email=#{email};
+  	update user set password=#{password} where email=#{email};
   	</update>
   	 
   	<!-- 회원 탈퇴 -->
   	<update id="quit">
-  	update jjstudy.user set isDel=1 where email=#{email};
+  	update user set isDel=1 where email=#{email};
   	</update>
   
   	<!-- 비밀번호 체크 -->
   	<select id="checkPw" resultType="int">
-  	select count(*) from jjstudy.user where email=#{email} and password=#{password}
+  	select count(*) from user where email=#{email} and password=#{password}
   	</select>
   	
   	<!-- 닉네임 체크 -->
   	<select id="nickCheck" resultType="int">
-  	select count(*) from jjstudy.user where nickname = #{nickName};
+  	select count(*) from user where nickname = #{nickName};
   	</select>
   	
   	<!-- 프로필 사진 수정 -->
   	<update id="insertImg">
-  	update jjstudy.user set photo=#{photo} where email=#{email};
+  	update user set photo=#{photo} where email=#{email};
   	</update>
   	
   	<!-- 북마크 불러오기 -->

@@ -6,7 +6,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<!-- <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>신청 스터디</title>
@@ -42,22 +42,14 @@
 	color: gray;
 	}
     
-</style> -->
-<!-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> -->
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>프로필</title>
-<link href="/resources/css/bootstrap.css" rel="stylesheet">
-<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> --> 
-<link rel="stylesheet" href="/resources/css/join.css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+</style>
+
 <script>
 	$(document).ready(function(){
 		alert("${result}");
 	})
 </script>
+
 </head>
 
 
@@ -89,47 +81,164 @@
    </div>
 
 
+	<!-- 프로필 사진 -->
+   	<div class="fileDrop"></div>
+	<div class="uploadedList"></div>
 	
-<!-- 개인 프로필 정보 보기 &수정 -->
-<div class="container">
-	<div class="row">
-    <div class="col-md-8">
-      <section>      
-        <h1 class="entry-title"><span>계정 정보</span> </h1>
-        <hr>
-            <form class="form-horizontal" role="form" action="/profile" method="post" name="profileForm" id="profileForm" enctype="multipart/form-data" >
-                 
-       <div class="form-group">
-          <label class="control-label col-sm-3">프로필 사진<br>
-          <small>(optional)</small></label>
-          <div class="col-md-5 col-sm-8">
-            <div class="input-group"> <span class="input-group-addon" id="file_upload"><i class="glyphicon glyphicon-upload"></i></span>
-              <input type="file" name="file_nm" id="file_nm" class="form-control upload" style="width:100%" placeholder="" aria-describedby="file_upload">
-            </div>
-          </div>
-       </div>             
-       <div class="form-group">
-          <label class="control-label col-sm-3">이메일 ID <span class="text-danger">*</span></label>
-          <div class="col-md-8 col-sm-9">
-              <div class="input-group idgroup">
-              <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-              <input type="email" class="form-control col" name=email id="email" placeholder="아이디를 입력하세요." value="${login.email}" style="width: 100%" required readonly>
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="control-label col-sm-3">이름 <span class="text-danger">*</span></label>
-          <div class="col-md-8 col-sm-9">
-            <input type="text" class="form-control" name="name" id="name" placeholder="실명을 입력하세요." value="${vo.name}" required>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="control-label col-sm-3">닉네임 <span class="text-danger">*</span></label>
-          <div class="col-md-8 col-sm-9">
-            <input type="text" class="form-control" name="nickName" id="nickName" placeholder="닉네임을 입력하세요." value="${vo.nickName}" required>
-            <input type="button" value="중복 확인" id="nickCheck" class="btn btn-primary">
-          </div>
-        </div>
+	    <p3>프로필 사진</p3>
+
+	<img id="changeImg" src="pDisplayFile?fileName=${vo.photo}"> <!-- DB에서 담긴 이미지 -->
+
+	<script>
+		$(".fileDrop").on("dragenter dragover", function(event){
+			event.preventDefault();  // dragenter, dragover, drop시 기본 동작을 막도록 작성
+		});
+		
+		$(".fileDrop").on("drop", function(event){
+			event.preventDefault();
+			
+			var files = event.originalEvent.dataTransfer.files; // 전달된 파일 데이터를 가져오는 부분(dataTransfer.files)
+			var file = files[0];
+			console.log(file);
+		
+			var formData = new FormData();
+			formData.append("file", file);
+			
+			
+			//Ajax 활용
+			$.ajax({
+				url: "/pUploadAjax",
+				data: formData,
+				dataType: 'text',
+				processData: false,
+				contentType: false,
+				type : 'POST',
+				success : function(data){ // 파일명(스트링)이 담김
+					alert(data);
+					
+					console.log(data);
+					console.log(checkImageType(data));
+					
+					var str = "";
+					
+					if(checkImageType(data)){
+						  str ="<div><a href=pDisplayFile?fileName="+getImageLink(data)+">"
+								  +"<img src='pDisplayFile?fileName="+data+"'/>"
+								  +"</a><small data-src="+data+">X</small></div>";
+					  }else{
+						  str = "<div><a href='displayFile?fileName="+data+"'>" 
+								  + getOriginalName(data)+"</a>"
+								  +"<small data-src="+data+">X</small></div></div>";
+					  }
+					
+	        	$.ajax({
+	        		url : "/insertImgUrl",
+	        		type : "post",
+	        		headers : {
+	        			"X-HTTP-Method-Override" : "POST"
+	        		},
+	        	data:{
+	    //    		imgAddrParam : imgAddr
+	        		photo : data,
+	        		email : document.getElementById("email").value 
+	        	},
+	        	success:function(result){
+	        		alert(result);
+	        	}
+		        	})
+		        	
+		        
+		        //photo에 담긴 스트링값(이름)을 vo.photo에 보내고 싶어요.
+		       	// 그러려면 어떻게 해야 할까요?
+		       	// 이러지말고 src전체를 		
+		        
+//		    	document.getElementById("changeImg").src = "pDisplayFile?fileName="+data;
+	        	document.getElementById("changeImg").setAttribute("src","pDisplayFile?fileName="+data);
+	        						
+//				$(".uploadedList").append(str);
+					
+//					imgAddr = data; //data를 imgAddr에 담아 둠
+				}
+			});
+			
+		});
+		
+
+	
+		
+		// jsp에서 파일 출력하기
+		function checkImageType(fileName){
+			
+			var pattern  = /jpg$|gif$|png$|jpeg$/i; 	//마지막 i는 대,소문자 구분 없음
+			
+			return fileName.match(pattern);
+		}
+		
+		
+		//파일 링크 처리(파일의 이름이 길게 출력되는 걸 줄여주는 기능)
+		function getOriginalName(fileName){
+			
+			if(checkImageType(fileName)){
+				return;
+			}
+			
+			var idx = fileName.indexOf("_") + 1;
+			return fileName.substr(idx);
+		}
+		
+		
+		//이미지 파일의 원본 파일 찾기
+		function getImageLink(fileName){
+			
+			if(!checkImageType(fileName)){
+				return;
+			}
+			var front = fileName.substr(0,12); //년/월/일 경로를 추출하는 용도
+			var end = fileName.substr(14);		// 파일 이름 앞의 's_'를 제거하는 용도
+			
+			return front + end;
+		}
+		
+		// 첨부파일 삭제 처리
+ 		$(".uploadedList").on("click", "small", function(event){
+			
+			var that = $(this);
+			
+			$.ajax({
+				url:"deleteFile",
+				type:"post",
+				data:{fileName:$(this).attr("data-src")},
+				dataType:"text",
+				success:function(result){
+					if(result == 'deleted'){
+						alert("deleted");
+						that.parent("div").remove(); // 파일 삭제 후 브라우져 화면에서 썸네일 삭제
+					}
+				}
+			}); 
+		});
+	</script>
+   
+  
+	<form name="profileForm" action="/profile" method="post" enctype="multipart/form-data">
+    <br><br><br><br><br>
+
+	<!-- 개인 프로필 정보 보기 &수정 -->
+   <div id="acinfo">
+        <p3>계정 정보</p3>
+        <table id="actable">
+            <tr>
+                <td><label for="email">이메일</label></td>
+          		<td><input id="email" type="email" value="${login.email}" readonly name="email"></td>
+            </tr>
+            <tr>
+                <td><label for="name">이름</label></td>
+                <td><input id="name" type="text" value="${vo.name}" name="name"></td>
+            </tr>
+            <tr>
+                <td><label for="nickName">닉네임</label></td>
+                <td><input id="nickName" type="text" value="${vo.nickName}" name="nickName"></td>
+                <td><input type="button" id="nickCheck" value="중복확인"></input></td>
         <script>
 		    $(document).ready(function(){
 		        $("#nickCheck").click(function(){
@@ -152,43 +261,32 @@
 		        });
 		    });
 	    </script>
-        <div class="form-group">
-          <label class="control-label col-sm-3">생년월일 <span class="text-danger">*</span></label>
-          <div class="col-md-8 col-sm-9">
-            <input type="text" class="form-control" name="birth" id="birth" pattern="[0-9]{6}" title="생년월일 6자리를 입력해주세요." placeholder="생년월일을 입력해주세요. ex) 850401" value="${vo.birth}" required>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="control-label col-sm-3">성별 <span class="text-danger">*</span></label>
-          <div class="col-md-8 col-sm-9">
-            <label>
-            <input type="radio" id="userWoman" name="gender" value="1"  <c:if test="${vo.gender eq '1'}">checked</c:if>> 남성 </label>   
-            <label>
-            <input type="radio" id="userWoman" name="gender" value="2"  <c:if test="${vo.gender eq '2'}">checked</c:if>> 여성  </label>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="control-label col-sm-3">핸드폰 번호 <span class="text-danger">*</span></label>
-          <div class="col-md-5 col-sm-8">
-          	<div class="input-group">
-              <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
-            <!-- <input type="text" class="form-control" name="phoneNum1" id="phoneNum1" placeholder="010" value="" pattern="[0-9]{3}" title="숫자 3자리를 입력해주세요." required>
-            <input type="text" class="form-control" name="phoneNum2" id="phoneNum2" placeholder="1234" value="" pattern="[0-9]{3,4}" title="숫자 3~4자리를 입력해주세요." required>
-            <input type="text" class="form-control" name="phoneNum3" id="phoneNum3" placeholder="5678" value="" pattern="[0-9]{4}" title="숫자 4자리를 입력해주세요." required>
-            <input type="text" class="form-control" name="phoneNum" style="position: absolute; visibility: hidden;" id="phoneNum" placeholder="Enter your Primary contact no." value=""> -->
-            <input type="text" class="form-control" name="phoneNum" id="phone" placeholder="전화번호를 입력해주세요." value="${vo.phoneNum}" pattern="[0-9]{10,11}" title="핸드폰 번호를 입력해주세요." style="width: 100%" required>
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="col-xs-offset-3 col-xs-10">
-            <input name="Submit" type="submit" value="저장하기" class="btn btn-primary">
-          </div>
-        </div>
-      </form>
-    </div>
+	    
+                
+                
+            </tr>
+            <tr>
+                <td><label for="birth">생년월일</label></td>
+                <td><input id="birth" type="text" value="${vo.birth}" name="birth"></td>
+            </tr>
+            <tr>
+                <td>성별</td>
+           		<td><input type="radio" id="userWoman" name="gender" value="1"  <c:if test="${vo.gender eq '1'}">checked</c:if>> 남성 </td>
+                <td><input type="radio" id="userWoman" name="gender" value="2"  <c:if test="${vo.gender eq '2'}">checked</c:if>> 여성 </td>
+            </tr>
+            <tr>
+                <td><label for="phone">전화번호</label></td>
+                <td><input id="phone" type="text" value="${vo.phoneNum}" name="phoneNum"></td>
+                <td><input type="button" value="인증하기"></input></td>
+            </tr>
+        </table>
+   </div>
+<div>
+   <input type="submit" value="저장하기"> 
 </div>
-</div>
+
+	
+</form>
 </body>
 
 
