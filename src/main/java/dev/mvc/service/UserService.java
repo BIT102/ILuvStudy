@@ -61,5 +61,7 @@ public interface UserService {
 	// 이메일 인증 확인
 	public void emailConf(String email)throws Exception;
 	
+	
+
 
 }

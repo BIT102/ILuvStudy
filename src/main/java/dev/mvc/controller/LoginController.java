@@ -250,18 +250,21 @@ public class LoginController {
 		System.out.println(person.getDisplayName());
 		System.out.println(person.getGender());
 		
-		vo.setName(person.getDisplayName()); //이름
 		vo.setEmail(person.getAccountEmail()); //이메일
+		vo.setNickName(person.getDisplayName()); //닉네임
+		vo.setName(person.getDisplayName()); //이름
+
 		if(person.getGender().equals("female")){ //성별
 			vo.setGender(2);
 		}else{
 			vo.setGender(1);
 		}
 		
-		//비번, 닉네임, 핸드폰번호, 생년월일 우째
-		
 		System.out.println(vo);
 
+		//구글 아이디 user 테이블에 있는지 보고 없으면 insert 시킴
+		service.googleLogin(vo);
+		
 		HttpSession session = request.getSession();
 		session.setAttribute("login",vo);
 		

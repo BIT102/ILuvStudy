@@ -143,6 +143,10 @@
     color: red;
     cursor: pointer;
 }
+#googleimg{
+	width:30px;
+	float:left;
+}
 </style>
 
 </head>
@@ -192,7 +196,7 @@
 
 								<button class="btn btn-info btn-block login" type="submit">Login</button>
 			<!--======== 구글 로그인 api========== -->
-								<a class="btn btn-info btn-block login"  href="../googleLogin">구글로그인</a>
+								<a class="btn btn-block login"  href="../googleLogin"><img id="googleimg" src="/resources/img/google.png">구글 로그인</a>
 			<!--======== end ==================-->		
 								<div class="texttext" style="margin-top:15px;">
 								<input type="checkbox" style="width:20px; vertical-align:middle; margin:0;" id="ida" ><label for="idaa" style="vertical-align:middle; margin:0;">　아이디저장</label><br>
@@ -232,7 +236,7 @@
                             	<a href="/logout"><span>로그아웃</span></a>
                             </li>
                             <li class="dropdown">
-                            <a href="study/regist">스터디 등록하기</a>	
+                            <a href="/study/regist">스터디 등록하기</a>	
                         </c:otherwise>    
                         </c:choose>    
                             <li class="dropdown">

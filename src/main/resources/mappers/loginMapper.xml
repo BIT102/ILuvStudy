@@ -41,4 +41,15 @@
   		select email from user where phonenum = #{phone}
   	</select>
   	
+  	<!-- 구글 로그인 api 가입 -->
+  	<insert id="googleLogin">
+  		insert into user(email, name, nickName, gender) 
+		values(#{email}, #{name}, #{nickName}, #{gender}); 
+  	</insert>
+  	
+  	<!-- 구글 로그인을 위한 아이디 찾기 -->
+  	<select id="googleSelect" resultType="int">
+		select count(email) from user where email=#{email}
+	</select>
+  	
   </mapper>

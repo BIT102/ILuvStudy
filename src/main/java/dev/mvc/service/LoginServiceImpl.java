@@ -50,4 +50,18 @@ public class LoginServiceImpl implements LoginService {
 		return dao.searchEmail(phone);
 	}
 	
+	
+	//구글 로그인
+	@Override
+	public void googleLogin(UserVO vo)throws Exception{
+		
+		//vo의 이메일 정보와 user 테이블의 email 정보 비교
+		//user 테이블에 email 정보가 있으면 join 안시킴
+		//user 테이블에 email 정보가 있으면 join
+		
+		if(dao.googleSelect(vo)==0){
+			System.out.println("=====없음 등록한다요==========");
+			dao.googleLogin(vo);			
+		}
+	}
 }

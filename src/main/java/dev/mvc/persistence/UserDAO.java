@@ -58,4 +58,8 @@ public interface UserDAO {
 
 	
 	public void emailConf(String email) throws Exception;
+	
+	
+	
+
 }
