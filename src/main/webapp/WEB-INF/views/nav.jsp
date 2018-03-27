@@ -191,9 +191,9 @@
 								<input type="password" name="password" placeho2lder="password"> -->
 
 								<button class="btn btn-info btn-block login" type="submit">Login</button>
-								<!-- 구글 로그인 api -->
-								<a class="btn btn-info btn-block login" onclick="login()"> 
-								구글 로그인</a>
+			<!--======== 구글 로그인 api========== -->
+								<a class="btn btn-info btn-block login"  href="../googleLogin">구글로그인</a>
+			<!--======== end ==================-->		
 								<div class="texttext" style="margin-top:15px;">
 								<input type="checkbox" style="width:20px; vertical-align:middle; margin:0;" id="ida" ><label for="idaa" style="vertical-align:middle; margin:0;">　아이디저장</label><br>
 								</div>
@@ -226,7 +226,7 @@
                         </c:when>
                         <c:otherwise>    
                             <li class="dropdown">
-                                <a href="#"><span>My page</span></a>
+                                <a href="/profile"><span>My page</span></a>
                             </li> <!-- end of /.dropdown -->
                             <li class="dropdown">
                             	<a href="/logout"><span>로그아웃</span></a>
@@ -250,7 +250,7 @@
                 </div><!-- /.container -->
             </nav>
             <!-- site-navigation end -->
-            
+
 <script>
 //Get the modal
 var modal = document.getElementById('id01');
@@ -259,10 +259,6 @@ window.onclick = function(event) {
     if (event.target == modal) {
         modal.style.display = "none";
     }
-}
-
-function login(){
-	self.location="/googleSignInCallback";
 }
 
 </script>

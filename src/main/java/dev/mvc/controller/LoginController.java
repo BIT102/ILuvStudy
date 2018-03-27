@@ -27,12 +27,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.WebUtils;
 
 import dev.mvc.domain.AdminVO;
 import dev.mvc.domain.UserVO;
 import dev.mvc.dto.LoginDTO;
 import dev.mvc.service.LoginService;
+import dev.mvc.service.UserService;
 
 @Controller
 //@RequestMapping(value = "/mypage/")
@@ -43,6 +45,8 @@ public class LoginController {
 	@Inject
 	private LoginService service;
 	
+	@Inject
+	private UserService userService;
 	
 	//구글 로그인 api
 	@Autowired
@@ -51,13 +55,13 @@ public class LoginController {
 	@Autowired
 	private OAuth2Parameters googleOAuth2Parameters;
 	
-	public void setGoogleConnectionFactory(GoogleConnectionFactory googleConnectionFactory){
+/*	public void setGoogleConnectionFactory(GoogleConnectionFactory googleConnectionFactory){
 		this.googleConnectionFactory = googleConnectionFactory;
 	}
 	
 	public void setGoogleOAuth2Parameters(OAuth2Parameters googleOAuth2Parameters){
 		this.googleOAuth2Parameters = googleOAuth2Parameters;
-	}
+	}*/
 	//end
 	
 	// 로그인 통합 모달로 수정본
@@ -72,7 +76,8 @@ public class LoginController {
 		if(rememberable != null){
 			model.addAttribute("id", rememberable);
 			model.addAttribute("checked", "checked");
-		}		
+		}
+
 	}
 	
 	@RequestMapping(value = "loginPost", method = RequestMethod.POST)
@@ -200,30 +205,27 @@ public class LoginController {
 	
 
 //==============구글 로그인 api==============
-	@RequestMapping(value = "/googleSignIn", method = RequestMethod.POST)
-	public void doGoogleSignInActionPage(HttpServletResponse response) {
+	@RequestMapping(value = "/googleLogin", method = RequestMethod.GET)
+	public String googleCall(HttpServletRequest request, Model model) throws Exception{
+		
+		logger.info("googleLogin get.......");
+		
+		/* 구글code 발행 */
 		OAuth2Operations oauthOperations = googleConnectionFactory.getOAuthOperations();
 		String url = oauthOperations.buildAuthorizeUrl(GrantType.AUTHORIZATION_CODE, googleOAuth2Parameters);
-		System.out.println("/googleSignIn, url : " + url);
-		
-		PrintWriter out;
-		try {
-			out = response.getWriter();
-			out.write(url);
-			out.flush();
-			out.close();
-		} catch (IOException e) {
-			throw new RuntimeException(e.getMessage(), e);
-		}
+
+		System.out.println("구글:" + url);
+
+		model.addAttribute("url", url);
+
+		/* 생성한 인증 URL을 View로 전달 */
+		return "googleLogin";
 	}
 	
-	@RequestMapping(value = "/googleSignInCallback", method = RequestMethod.GET)
-	public String doSessionAssignActionPage(HttpServletRequest request)throws Exception{
-		System.out.println("/googleSignInCallback");
-		
-		String code = request.getParameter("code");
-		
-		System.out.println(code);
+	
+	@RequestMapping(value = "/googleSignInCallback", method = { RequestMethod.GET, RequestMethod.POST })
+	public String googleCallback(@RequestParam String code, HttpServletRequest request) throws Exception {
+		System.out.println("여기는 googleCallback");
 		
 		OAuth2Operations oauthOperations = googleConnectionFactory.getOAuthOperations();
 		AccessGrant accessGrant = oauthOperations.exchangeForAccess(code , googleOAuth2Parameters.getRedirectUri(),
@@ -235,6 +237,7 @@ public class LoginController {
 			accessToken = accessGrant.getRefreshToken();
 			System.out.printf("accessToken is expired. refresh token = {}", accessToken);
 		}
+		
 		Connection<Google> connection = googleConnectionFactory.createConnection(accessGrant);
 		Google google = connection == null ? new GoogleTemplate(accessToken) : connection.getApi();
 		
@@ -242,22 +245,26 @@ public class LoginController {
 		Person person = plusOperations.getGoogleProfile();
 		
 		UserVO vo = new UserVO();
-		vo.setName(person.getDisplayName());
+		System.out.println(person.getAccountEmail());
+		System.out.println(person.getBirthday());		
+		System.out.println(person.getDisplayName());
+		System.out.println(person.getGender());
+		
+		vo.setName(person.getDisplayName()); //이름
+		vo.setEmail(person.getAccountEmail()); //이메일
+		if(person.getGender().equals("female")){ //성별
+			vo.setGender(2);
+		}else{
+			vo.setGender(1);
+		}
+		
+		//비번, 닉네임, 핸드폰번호, 생년월일 우째
+		
+		System.out.println(vo);
 
 		HttpSession session = request.getSession();
-		session.setAttribute("_USER_", vo);
+		session.setAttribute("login",vo);
 		
-		System.out.println(person.getDisplayName());
-		
-		return "redirect:/";
-		/*System.out.println(person.getAccountEmail());
-		System.out.println(person.getAboutMe());
-		System.out.println(person.getDisplayName());
-		System.out.println(person.getEtag());
-		System.out.println(person.getFamilyName());
-		System.out.println(person.getGender());
-		*/
-
+		return "study/main";
 	}
-	
 }

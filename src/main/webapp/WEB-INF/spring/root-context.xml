@@ -19,11 +19,19 @@
 		
 
 		<!-- DB위치 및 접근 설정 -->	
-	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+<!-- 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 	  	<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
 	  	<property name="url" value="jdbc:log4jdbc:mysql://192.168.0.12:3306/jjstudy?useSSL=false&amp;serverTimezone=UTC"></property>
 		<property name="username" value="root"></property>
 	  	<property name="password" value="1234"></property>
+	</bean>	 -->
+	
+	<!-- AWS 연동 -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	  	<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
+	  	<property name="url" value="jdbc:log4jdbc:mysql://iluvstudy.cbcc3lju935r.ap-northeast-2.rds.amazonaws.com:3306/ILuvStudy?useSSL=false&amp;serverTimezone=UTC&amp;characterEncoding=utf-8"></property>
+		<property name="username" value="ILuvStudy"></property>
+	  	<property name="password" value="bitcamp504"></property>
 	</bean>	
 	
 	<!-- sessionFactory 설정 JDBC connection -->	
@@ -84,8 +92,9 @@
 	</bean>
 	<!-- 승인된 자바스크립트 원본과 승인된 리디렉션 URI -->
 	<bean id="googleOAuth2Parameters" class="org.springframework.social.oauth2.OAuth2Parameters">
-  	<property name="scope" value="https://www.googleapis.com/auth/plus.login" />
-  	<property name="redirectUri" value="http://localhost/googleSignInCallback" />
+  	<property name="scope" value="https://www.googleapis.com/auth/plus.login
+  		https://www.googleapis.com/auth/userinfo.email"/>
+  	<property name="redirectUri" value="http://localhost:8888/googleSignInCallback" />
 	</bean>
 
 </beans>
