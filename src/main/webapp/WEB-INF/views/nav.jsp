@@ -46,7 +46,7 @@
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+    z-index: 999; /* Sit on top */
     left: 0;
     top: 0;
     width: 100%; /* Full width */
@@ -218,12 +218,12 @@
                                 <a><span onclick="document.getElementById('id01').style.display='block'" style="width:auto;">로그인</span></a>
                             </li>
                             <li class="dropdown">
-                                <a href="#"><span>회원가입</span></a>
+                                <a href="join"><span>회원가입</span></a>
                             </li>
                         </c:when>
                         <c:otherwise>    
                             <li class="dropdown">
-                                <a href="#"><span>My page</span></a>
+                                <a href="/join"><span>My page</span></a>
                             </li> <!-- end of /.dropdown -->
                             <li class="dropdown">
                             	<a href="/logout"><span>로그아웃</span></a>

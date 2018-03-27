@@ -88,7 +88,15 @@ color:#6b456a !important;
                 </div> <!-- /.header-wrapper -->
             </header> <!-- /.page-head (header end) -->
 
-<!-- 검색 -->
+
+
+<br>
+<section class="row-section">
+    <div class="container contentB">
+	    <div class="row">
+		    <h2 class="text-center"><span>공 지 사 항</span></h2>
+	    </div>
+	    <!-- 검색 -->
 <form onsubmit="submitFn(this, event);">
             <div class="search-wrapper">
                  <div class="input-holder">
@@ -110,13 +118,6 @@ color:#6b456a !important;
             	
             </div>
 </form>
-
-<br>
-<section class="row-section">
-    <div class="container contentB">
-	    <div class="row">
-		    <h2 class="text-center"><span>공 지 사 항</span></h2>
-	    </div>
 	    <div class="col-md-12 offset-md-1 row-block">
 	       <div class="panel-group" id="accordion">
 	        
@@ -169,5 +170,7 @@ color:#6b456a !important;
 	
 
 	</div>
+	
+	<%@include file="../footer.jsp"%>
 </body>
 </html>

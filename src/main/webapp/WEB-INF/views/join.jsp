@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
          <!-- // Navigation -->
 
+
+
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -9,21 +11,18 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-
-<!-- 부트스트랩 영역 -->
-<link rel="stylesheet" href="/resources/dist/css/bootstrap.min.css">
-<link href="/resources/dist/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="/resources/dist/css/join.css">
 <title>Insert title here</title>
+
+
 
 <style>
 select.form-control:not([size]):not([multiple]) {
     height: calc(2.25rem + 11px);
 }
+
 </style>
+
+<%@ include file="nav.jsp"%>
 
 
 </head>    
@@ -303,12 +302,11 @@ select.form-control:not([size]):not([multiple]) {
 	})
 </script>
 
-
-<body style="background:#262626;">
+<body>
 		<div class="container">
 	            <div class="row">
 	            <div class="col-md-8">
-	              <section>      
+	                   
 	                <h1 class="entry-title"><span>Sign Up</span> </h1>
 	                <hr>
 	                    <form class="form-horizontal" action="/join" method="post" name="signup" id="signup" enctype="multipart/form-data" >        
@@ -319,14 +317,15 @@ select.form-control:not([size]):not([multiple]) {
 	                   	 	<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
 	                    	<input class="form-control" style = "width:160px" id = "email1" type="text" placeholder="아이디를 입력하세요" name="email1">
 		              		<input class="form-control" style = "width:140px" id = "email2" type="text" placeholder="주소값 직접입력" name="email1">
-		              		<select   id="selectEmail" class = "form-control" style = "width:130px; height: calc(2.25rem + 11px);"> 
+		              		<select id="selectEmail" class = "form-control" style = "width:130px;"> 
 								<option id = "selectEmail1" selected>직접입력</option>
 								<option id = "selectEmail2">naver.com</option>
 								<option id = "selectEmail3">daum.net</option>
 								<option id = "selectEmail4">gmail.com</option>
 							</select>
-							<input type="button" id="chkEmail" value="중복체크" />
+							
 	                 	 </div>
+	                 	 <input type="button" id="chkEmail" value="중복체크" />
 	                    <small> Your Email Id is being used for ensuring the security of your account, authorization and access recovery. </small> </div>
 	                </div>
 	                <input  id = "email" type="text" name="email" style = "position: absolute; visibility: hidden;" />
@@ -392,8 +391,9 @@ select.form-control:not([size]):not([multiple]) {
 	                      <input type="text" class="form-control" style="width:30%" name="phoneNum1" id="phoneNum1" placeholder="" value="">
 	                      <input type="text" class="form-control" style="width:30%" name="phoneNum2" id="phoneNum2" placeholder="" value="">
 	                      <input type="text" class="form-control" style="width:30%" name="phoneNum3" id="phoneNum3" placeholder="" value="">
-	                      <input type = "button" class = "smsForm" value = "인증번호 전송">
+	                      
 	                    </div>
+	                    <input type = "button" class = "smsForm" value = "인증번호 전송">
 	                  </div>
 	                  <input type = "text" id = "phoneNum" name = "phoneNum" style="visibility: hidden; position: absolute;">
 	                </div>

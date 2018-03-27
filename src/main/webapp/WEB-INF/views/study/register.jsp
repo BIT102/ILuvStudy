@@ -39,7 +39,7 @@ small {
 </head>
 <body>
 <div id="wrapper">
-<%@ include file="nav.jsp" %>
+<%@include file="../nav.jsp"%>
 
 	 <!-- MAIN -->
 		<div class="main">

@@ -18,12 +18,12 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 		
 
-		<!-- DB위치 및 접근 설정 -->	
+			<!-- DB위치 및 접근 설정 -->	
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 	  	<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
-	  	<property name="url" value="jdbc:log4jdbc:mysql://192.168.0.12:3306/jjstudy?useSSL=false&amp;serverTimezone=UTC"></property>
-		<property name="username" value="root"></property>
-	  	<property name="password" value="1234"></property>
+	  	<property name="url" value="jdbc:log4jdbc:mysql://iluvstudy.cbcc3lju935r.ap-northeast-2.rds.amazonaws.com:3306/ILuvStudy?useSSL=false&amp;serverTimezone=UTC&amp;characterEncoding=utf-8"></property>
+		<property name="username" value="ILuvStudy"></property>
+	  	<property name="password" value="bitcamp504"></property>
 	</bean>	
 	
 	<!-- sessionFactory 설정 JDBC connection -->	

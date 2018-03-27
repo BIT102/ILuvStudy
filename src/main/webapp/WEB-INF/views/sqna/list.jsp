@@ -87,12 +87,17 @@ color:#6b456a !important;
                 </div> <!-- /.header-wrapper -->
             </header> <!-- /.page-head (header end) -->
 
-<!-- 검색 -->
+<br>
+<section class="row-section">
+
+    <div class="container contentB">
+	    <div class="row">
+		    <h2 class="text-center"><span>F A Q</span></h2>
+	    </div>
+	    	<!-- 검색 -->
 <form onsubmit="submitFn(this, event);">
             <div class="search-wrapper">
                  <div class="input-holder">
-                 	
-                 	
                     <input type="text" class="search-input" placeholder="Type to search" />
 
                  	<button class="search-icon" onclick="searchToggle(this, event);" ><span>검색</span></button>
@@ -104,18 +109,7 @@ color:#6b456a !important;
             </div>
             
             <br>
-          
-            <div>
-            	<a href="../qna/qna" type="submit" id="submit" name="submit" class="btn btn-black faqbtn">문의하기</a>
-            </div>
 </form>
-
-<br>
-<section class="row-section">
-    <div class="container contentB">
-	    <div class="row">
-		    <h2 class="text-center"><span>F A Q</span></h2>
-	    </div>
 	    <div class="col-md-12 offset-md-1 row-block">
 	        <div class="panel-group" id="accordion">
 	        
@@ -150,10 +144,14 @@ color:#6b456a !important;
 	     
 	    </div>
 	</div>
-
+	
+	<div>
+        <a href="../qna/qna" type="submit" id="submit" name="submit" class="btn btn-black faqbtn">문의하기</a>
+    </div>
+	
 </div>
 </section>
-
+		
 		<!-- 페이징처리 -->
 	<div class="text-center1">
 		<ul class="pagination">
@@ -181,5 +179,7 @@ color:#6b456a !important;
 	
 
 	</div>
+	
+	<%@include file="../footer.jsp"%>
 </body>
 </html>
