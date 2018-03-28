@@ -90,6 +90,10 @@ form th{
                 	</td>
                 </tr>
                 <tr>
+                	<th>소셜 로그인 여부</th>
+                	<td>${userVO.social}</td>
+                </tr>
+                <tr>
                     <th>가입일</th>
                     <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${userVO.registDate}"/></td>
                 </tr>

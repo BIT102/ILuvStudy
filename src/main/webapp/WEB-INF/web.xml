@@ -20,7 +20,7 @@
       <param-name>contextConfigLocation</param-name>
       <param-value>
       	/WEB-INF/spring/appServlet/servlet-context.xml
-      
+      	/WEB-INF/spring/ws-config.xml  <!-- 소켓 xml 추가 -->
       </param-value>
     </init-param>
     <load-on-startup>1</load-on-startup>
@@ -57,7 +57,7 @@
   <!-- 방문자 수 체크 -->
    <listener>
         <listener-class>dev.mvc.util.VisitSessionListener</listener-class>
-    </listener>
+   </listener>
 
 
 </web-app>

@@ -45,9 +45,7 @@ public class LoginController {
 	@Inject
 	private LoginService service;
 	
-	@Inject
-	private UserService userService;
-	
+
 	//구글 로그인 api
 	@Autowired
 	private GoogleConnectionFactory googleConnectionFactory;
@@ -253,6 +251,7 @@ public class LoginController {
 		vo.setEmail(person.getAccountEmail()); //이메일
 		vo.setNickName(person.getDisplayName()); //닉네임
 		vo.setName(person.getDisplayName()); //이름
+		vo.setSocial("google");	//소셜
 
 		if(person.getGender().equals("female")){ //성별
 			vo.setGender(2);
@@ -268,6 +267,6 @@ public class LoginController {
 		HttpSession session = request.getSession();
 		session.setAttribute("login",vo);
 		
-		return "study/main";
+		return "redirect:/study/main";
 	}
 }

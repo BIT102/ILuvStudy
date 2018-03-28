@@ -88,6 +88,8 @@
   		https://www.googleapis.com/auth/userinfo.email"/>
   	<property name="redirectUri" value="http://localhost:8888/googleSignInCallback" />
 	</bean>
-
+	
+	<!-- 소켓 -->
+	<bean id="socketController" class="dev.mvc.controller.SocketController"/>
 </beans>
 

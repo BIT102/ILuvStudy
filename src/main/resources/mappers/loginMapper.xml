@@ -43,8 +43,8 @@
   	
   	<!-- 구글 로그인 api 가입 -->
   	<insert id="googleLogin">
-  		insert into user(email, name, nickName, gender) 
-		values(#{email}, #{name}, #{nickName}, #{gender}); 
+  		insert into user(email, name, nickName, gender, social) 
+		values(#{email}, #{name}, #{nickName}, #{gender}, #{social}); 
   	</insert>
   	
   	<!-- 구글 로그인을 위한 아이디 찾기 -->

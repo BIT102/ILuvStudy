@@ -24,12 +24,12 @@
 	</beans:bean> -->	
 	
 	<!-- websocket -->
-  	<websocket:handlers>
+<!--   	<websocket:handlers>
   		<websocket:mapping handler="echoHandler" path="/echo" />
   		<websocket:sockjs/>
   	</websocket:handlers>
   	
-  	<beans:bean id="echoHandler" class="dev.mvc.util.EchoHandler"/>
+  	<beans:bean id="echoHandler" class="dev.mvc.util.EchoHandler"/>  -->
 
 	
 	<!-- Enables the Spring MVC @Controller programming model -->
@@ -113,7 +113,8 @@
 	<beans:bean id="uploadPathUser" class="java.lang.String">
 		<beans:constructor-arg value="C:\\zzz\\user"></beans:constructor-arg>
 	</beans:bean>
-		
+	
+
 </beans:beans>
 
 

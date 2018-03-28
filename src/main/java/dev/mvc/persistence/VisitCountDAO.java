@@ -33,9 +33,9 @@ public class VisitCountDAO
         
         try {
             
-        	String jdbcDriver="jdbc:log4jdbc:mysql://192.168.0.12:3306/jjstudy?useSSL=false&amp;serverTimezone=UTC";
-			String dbUser="root";
-			String dbPass="1234";
+        	String jdbcDriver="jdbc:log4jdbc:mysql://iluvstudy.cbcc3lju935r.ap-northeast-2.rds.amazonaws.com:3306/ILuvStudy?useSSL=false&amp;serverTimezone=UTC&amp;characterEncoding=utf-8";
+			String dbUser="ILuvStudy";
+			String dbPass="bitcamp504";
         	
             // 쿼리생성
             // 총 방문자수를 증가시키기 위해 테이블에 현재 날짜 값을 추가시킨다.

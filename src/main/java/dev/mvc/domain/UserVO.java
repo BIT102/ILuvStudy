@@ -21,7 +21,15 @@ public class UserVO {
 	private int isDel;					// 탈퇴값 (0: 사용회원, 1: 탈퇴회원)
 	private int bno;					// 번호
 	private int emailConf;				// 이메일 인증 (0 : 미인증 , 1: 인증)
+	private String social;				// 소셜 로그인인 경우
 	
+	
+	public String getSocial() {
+		return social;
+	}
+	public void setSocial(String social) {
+		this.social = social;
+	}
 	public String getEmail() {
 		return email;
 	}
@@ -124,7 +132,7 @@ public class UserVO {
 				+ ", gender=" + gender + ", phoneNum=" + phoneNum + ", birth=" + birth + ", photo=" + photo
 				+ ", homepage=" + homepage + ", introduction=" + introduction + ", registDate=" + registDate
 				+ ", modifyDate=" + modifyDate + ", quitDate=" + quitDate + ", isDel=" + isDel + ", bno=" + bno
-				+ ", emailConf=" + emailConf + "]";
+				+ ", emailConf=" + emailConf + ", social=" + social + "]";
 	}
 	
 	

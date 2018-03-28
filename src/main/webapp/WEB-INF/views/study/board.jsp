@@ -3,7 +3,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page session="false" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -142,6 +141,7 @@
                                     <div class="row">
                                         <div class="col-md-12" id="replies">
                                             <h3 id="replies2"></h3>
+                                       
                              <% int replycnt=0; %>               
                  <!-- ===================댓글 정보 추가==================== -->                     
                                  <c:forEach items="${list}" var="replyStudyVO">

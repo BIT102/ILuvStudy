@@ -146,6 +146,8 @@
 #googleimg{
 	width:30px;
 	float:left;
+	padding-top:7px;
+	margin-left:10px;
 }
 </style>
 
@@ -195,9 +197,12 @@
 								<input type="password" name="password" placeho2lder="password"> -->
 
 								<button class="btn btn-info btn-block login" type="submit">Login</button>
-			<!--======== 구글 로그인 api========== -->
-								<a class="btn btn-block login"  href="../googleLogin"><img id="googleimg" src="/resources/img/google.png">구글 로그인</a>
-			<!--======== end ==================-->		
+							
+			<!-- ======== 구글 로그인 api========== -->
+								<img id="googleimg" src="/resources/img/google.png">
+								<a class="btn btn-block login"  href="../googleLogin">구글 로그인&nbsp;&nbsp;&nbsp;</a>
+			<!-- ======== end ================= -->
+					
 								<div class="texttext" style="margin-top:15px;">
 								<input type="checkbox" style="width:20px; vertical-align:middle; margin:0;" id="ida" ><label for="idaa" style="vertical-align:middle; margin:0;">　아이디저장</label><br>
 								</div>
