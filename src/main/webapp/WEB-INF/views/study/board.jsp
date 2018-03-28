@@ -386,14 +386,15 @@ function myFunction(x) {
         </div>  
         
     <br><br>
-    
+    	<c:if test="${empty login}">
     	신청하는 사람
     	<!-- 신청하면 이미지와 닉네임 만들기 -->
         <input type="submit" class="apply" value="신청하기">
         <input type="submit" class="deapply" value="신청취소">
         <input type="submit" class="preee" value="목록으로">
         <!-- 로그인시 --> <br><br>
-        
+        </c:if>
+        <c:if test="${not empty login}">
                      등록한 사람
         <input type="submit" class="aList" value="신청자목록" onclick="wait();">
         <div id='amodDiv' style="display:none;">
@@ -405,7 +406,8 @@ function myFunction(x) {
         <input type="submit" class="preee" value="목록">
         <input type="submit" value="수정">
         <input type="submit" class="delete" value="스터디완료">
-
+        </c:if>
+		
     </div>
 
 </div>
