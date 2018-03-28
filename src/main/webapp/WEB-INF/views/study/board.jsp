@@ -3,7 +3,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page session="false" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -102,11 +102,10 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         <ul class="author-contact-button pull-right">
-                                                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                                            <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                                                            <li><a href="https://iluvstd.slack.com"><i class="fa fa-slack"></i></a></li>
+                                                            <li><a href="https://www.facebook.com/I-luv-study-2067683313502302/"><i class="fa fa-facebook"></i></a></li>
                                                             <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                                                            <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                                                            <li><a href="https://www.youtube.com/channel/UCNBQowU3R1wQYQ0zz8Gt7Lw/videos?view_as=subscriber"><i class="fa fa-youtube"></i></a></li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -114,8 +113,43 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="comments">
+								
+								<div>
+										 <p>현재 인원:${studyVO.now}</p>
+										 <p>최대 인원:${studyVO.max}</p>
+										 <p>${studyVO.rDName}/${studyVO.rSName}</p>
+										 <p>시작날짜 : ${studyVO.sd}</p>
+										 <p>시작시간 : ${studyVO.st}</p>
+										 <p>끝나는시간 : ${studyVO.et}</p>
+										 <p>요일 : ${studyVO.sc}</p>
+								</div>
+								<!-- 로그인했는데 로그인아이디가 글작성자와 같지않을때. -->
+						  	<c:if test="${login.email ne studyVO.writer }">
+						   	<c:if test="${not empty login}"> 
+								<button type="submit" id="submit" name="submit" class="btn btn-black apply">신청하기</button>
+								<button type="submit" id="submit" name="submit" class="btn btn-black deapply">신청취소</button>
+								<button type="submit" id="submit" name="submit" class="btn btn-black preee">목록으로</button>
+							</c:if>
+							</c:if>	
+							
+							<!-- 로그인한아이디가 글쓴이일때. -->
+        					<c:if test="${login.email eq studyVO.writer}">
+							<br>
+							<br>
+						        <input type="submit" class="aList btn btn-black" value="신청자목록" onclick="wait();">
+						        <div id='amodDiv' style="display:none;">
+						        	<div class='modal-applyList'>
+						        	</div>
+						        <button type="button" id="applyclose">없어져요</button>	
+						        </div>
+						    <br>
+						    <br>    
+						        <input type="submit" class="preee btn btn-black" value="목록">
+						        <input type="submit" class="btn btn-black" value="수정">
+						        <input type="submit" class="delete btn btn-black" value="스터디완료">
+							</c:if>
+							
+                                 <div class="comments">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <h3>2 Comments</h3>
@@ -174,7 +208,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
-                                                <textarea name="message" type="text" class="form-control" id="message" rows="8" required="required" placeholder="Type here message"></textarea>
+                                                <textarea name="message" class="form-control" id="message" rows="8" required="required" placeholder="Type here message"></textarea>
                                             </div>
                                         </div>
                                         
@@ -386,7 +420,10 @@ function myFunction(x) {
         </div>  
         
     <br><br>
-    	<c:if test="${empty login}">
+    	<!-- 로그인했는데 로그인아이디가 글작성자와 같지않을때. -->
+    	<c:if test="${login.email ne studyVO.writer }">
+    	<c:if test="${not empty login}"> 
+    
     	신청하는 사람
     	<!-- 신청하면 이미지와 닉네임 만들기 -->
         <input type="submit" class="apply" value="신청하기">
@@ -394,8 +431,12 @@ function myFunction(x) {
         <input type="submit" class="preee" value="목록으로">
         <!-- 로그인시 --> <br><br>
         </c:if>
-        <c:if test="${not empty login}">
-                     등록한 사람
+        </c:if>
+        
+        <!-- 로그인한아이디가 글쓴이일때. -->
+        <c:if test="${login.email eq studyVO.writer}">
+                     등록한 사람  
+        <br>
         <input type="submit" class="aList" value="신청자목록" onclick="wait();">
         <div id='amodDiv' style="display:none;">
         	<div class='modal-applyList'>
