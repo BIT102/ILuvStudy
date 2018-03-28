@@ -1,6 +1,8 @@
 package dev.mvc.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +28,7 @@ import dev.mvc.domain.PageMakerStudy;
 import dev.mvc.domain.SearchCriteriaStudy;
 import dev.mvc.domain.StudyVO;
 import dev.mvc.domain.UserVO;
+import dev.mvc.service.BookmarkService;
 import dev.mvc.service.StudyService;
 
 @Controller
@@ -38,7 +41,8 @@ public class StudyController {
 	private StudyService service;
 
 
-
+	@Inject
+	private BookmarkService bookservice;
 	
 	// 스터디 등록 김상욱 수정
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
@@ -181,11 +185,31 @@ public class StudyController {
 
 	// 상세페이지
 	@RequestMapping(value = "/board", method = RequestMethod.GET)
-	public void readBoard(@RequestParam("bno") int bno, @ModelAttribute("cri") CriteriaStudy cri, Model model)
+	public void readBoard(@RequestParam("bno") int bno, Model model, HttpServletRequest request)
 			throws Exception {
-
+		
+		HttpSession session = request.getSession();
+		UserVO sUser = (UserVO)session.getAttribute("login");
+		
+		if(sUser == null) {
 		model.addAttribute(service.read(bno));
-
+		} else {
+		
+		String email = sUser.getEmail();
+		
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("writer", email);
+		map.put("bsbno", bno);
+		
+		System.out.println("!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		System.out.println(map);
+		System.out.println(bookservice.bolist(map));
+		System.out.println("!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		
+		model.addAttribute(service.read(bno));
+		model.addAttribute("bolist", bookservice.bolist(map));
+		}
 	}
 
 	// 상세페이지 제거

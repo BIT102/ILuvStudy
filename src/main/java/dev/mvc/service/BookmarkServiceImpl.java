@@ -1,11 +1,13 @@
 package dev.mvc.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import dev.mvc.domain.BookmarkVO;
 import dev.mvc.domain.StudyVO;
 import dev.mvc.persistence.BookmarkDAO;
 
@@ -15,22 +17,29 @@ public class BookmarkServiceImpl implements BookmarkService {
 	@Inject
 	private BookmarkDAO dao;
 	
+	
+	@Override
+	public List<BookmarkVO> bolist(Map<String, Object>map) throws Exception {
+		
+		return dao.bolist(map);
+	}
+	
 	//ºÏ¸¶Å©µî·Ï
 	@Override
-	public void addBookmark(StudyVO vo) throws Exception {
+	public void addBookmark(BookmarkVO vo) throws Exception {
 		
 		dao.create(vo);
 	}
 	
 	//ºÏ¸¶Å© ºÒ·¯¿À±â
 	@Override
-	public List<StudyVO> listBookmark(Integer bsBno) throws Exception {
-		return dao.list(bsBno);
+	public List<StudyVO> listBookmark(String writer) throws Exception {
+		return dao.list(writer);
 	}
 	
-	/*	//ºÏ¸¶Å© Ãë¼Ò
+		//ºÏ¸¶Å© Ãë¼Ò
 	@Override
 	public void removeBookmark(Integer bsBno, String userEmail) throws Exception {
 		dao.delete(bsBno, userEmail);
-	}*/
+	}
 }

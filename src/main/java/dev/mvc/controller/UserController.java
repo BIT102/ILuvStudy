@@ -1,12 +1,7 @@
 package dev.mvc.controller;
 
-import java.util.Date;
-import java.util.List;
-
 import javax.inject.Inject;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -19,12 +14,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.util.WebUtils;
 
-import dev.mvc.domain.StudyVO;
+import dev.mvc.domain.PageMakerStudy;
+import dev.mvc.domain.SearchCriteriaStudy;
 import dev.mvc.domain.UserVO;
-import dev.mvc.dto.LoginDTO;
 import dev.mvc.persistence.UserDAO;
+import dev.mvc.service.BookmarkService;
 import dev.mvc.service.UserService;
 
 
@@ -43,7 +38,8 @@ public class UserController {
 	@Inject
 	private UserService service;
 
-	
+	@Inject
+	private BookmarkService bookservice;
 	
 	//회원가입 컨트롤러
 	@RequestMapping(value = "/join", method = RequestMethod.GET)
@@ -194,18 +190,19 @@ public class UserController {
 	
 	// 북마크 (bookmark) 컨트롤러  =길=
 	@RequestMapping(value = "/bookmark", method = RequestMethod.GET)
-	public String bookmark(Model model, HttpServletRequest request) throws Exception {
+	public String bookmark(@ModelAttribute("cri") SearchCriteriaStudy cri, Model model, HttpServletRequest request) throws Exception {
 		
 		HttpSession session = request.getSession();
 		UserVO sUser = (UserVO)session.getAttribute("login");
 		String email = sUser.getEmail();
+		model.addAttribute("list", bookservice.listBookmark(email));
 		
-		UserVO vo = service.read(email);
+		PageMakerStudy pageMakerStudy = new PageMakerStudy();
 		
-//		List<UserVO> vo = (List<UserVO>)service.bmk(email);
+		pageMakerStudy.setCri(cri);
 		
-//		model.addAttribute("vo", vo);
-//		model.addAttribute("bmkList", service.bmk(email));
+		model.addAttribute("pageMakerStudy", pageMakerStudy);
+		
 		
 		return "/mypage/bookmark";
 	}
