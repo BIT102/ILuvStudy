@@ -204,11 +204,11 @@ public class StudyController {
 		
 		System.out.println("!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		System.out.println(map);
-		System.out.println(bookservice.bolist(map));
+		System.out.println(bookservice.bolist());
 		System.out.println("!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		
 		model.addAttribute(service.read(bno));
-		model.addAttribute("bolist", bookservice.bolist(map));
+		model.addAttribute("bolist", bookservice.bolist());
 		}
 	}
 

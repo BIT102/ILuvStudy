@@ -332,7 +332,7 @@ select.form-control:not([size]):not([multiple]) {
 
                                 <ol class="breadcrumb">
                                     <li><a href="/study/main">Home</a></li>
-                                    <li class="active">List All</li>
+                                    <li class="active">Sign Up</li>
                                 </ol> <!-- end of /.breadcrumb -->
 
                             </div>

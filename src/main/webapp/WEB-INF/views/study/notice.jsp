@@ -171,8 +171,8 @@ color:#6b456a !important;
 			
 		</ul>
 	</div>
-
 			<%@include file="../footer.jsp"%>	
+
 </body>
 	<script>
 	  $(document).ready(function(){

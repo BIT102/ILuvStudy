@@ -19,6 +19,26 @@
 <body>
 	<!-- // Navigation -->
 <%@include file="../nav.jsp"%>
+<!-- header begin -->
+<div id="about-page">
+            <header class="page-head">
+                <div class="header-wrapper">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+
+                                <ol class="breadcrumb">
+                                    <li><a href="/study/main">Home</a></li>
+                                    <li class="active">Profile</li>
+                                </ol> <!-- end of /.breadcrumb -->
+
+                            </div>
+                        </div>
+                    </div> <!-- /.container -->
+                </div> <!-- /.header-wrapper -->
+            </header> <!-- /.page-head (header end) -->
+</div>
+
 
 	<form name="profileForm" method="post">
 

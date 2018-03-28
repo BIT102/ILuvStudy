@@ -208,29 +208,34 @@
                 <h2>${studyVO.title}</h2>
                 <!-- 작성자 -->
                 <p>${studyVO.nickname}</p>   
-   				${studyVO.bno}
+   				
                 <!-- 북마크 -->
+				
                 	좋아용/나빠용
-           		<c:forEach items="${bolist}" var="book"> 	
-			
-                <script>
-                ${login.email}
-           		${book.userEmail}
-           		${book.bsBno}
-           		${studyVO.bno}
-           		</script>
-           		 <c:if test="${not empty login}">
-					<c:if test="${studyVO.bno eq book.bsBno}">
-					 	<c:if test="${login.email eq book.userEmail}">
-					<i class="fa fa-heartbeat" onclick="myFunction(this)"></i>	
-						</c:if>
-					</c:if>
-						<c:if test="${login.email ne book.userEmail}">
-					<i class="fa fa-heart-o" onclick="myFunction(this)"></i>
-					</c:if>
-           		 </c:if>
-           			</c:forEach>	
-           		
+               <!-- 로그인 했을때 -->
+ 
+           		<c:forEach items="${bolist}" var="book" varStatus="status">
+           		<c:if test="${not empty login}">
+					<script>
+					${book}
+					${studyVO.bno}
+					${book.bsBno}
+					${book.userEmail}
+					${login.email}
+					</script>
+	
+				<c:if test="${(studyVO.bno eq book.bsBno) and (book.userEmail eq login.email)}">
+				<i class="fa fa-heartbeat" onclick="myFunction(this)"></i>
+				</c:if>
+				<c:if test="${(studyVO.bno ne book.bsBno) and (book.userEmail ne login.email) and (status.first)}">
+				 
+				<i class="fa fa-heart-o" onclick="myFunction(this)"></i>
+				</c:if>
+				</c:if>
+				</c:forEach>
+		
+           			
+  		
            		
            		
         <%--    		<c:choose>
