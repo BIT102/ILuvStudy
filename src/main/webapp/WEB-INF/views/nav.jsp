@@ -218,7 +218,7 @@
                                 <a><span onclick="document.getElementById('id01').style.display='block'" style="width:auto;">로그인</span></a>
                             </li>
                             <li class="dropdown">
-                                <a href="join"><span>회원가입</span></a>
+                                <a href="/join"><span>회원가입</span></a>
                             </li>
                         </c:when>
                         <c:otherwise>    
