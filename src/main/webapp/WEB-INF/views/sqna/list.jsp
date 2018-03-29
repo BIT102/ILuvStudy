@@ -145,9 +145,7 @@ color:#6b456a !important;
 	    </div>
 	</div>
 	
-	<div>
-        <a href="../qna/qna" type="submit" id="submit" name="submit" class="btn btn-black faqbtn">문의하기</a>
-    </div>
+	
 	
 </div>
 </section>

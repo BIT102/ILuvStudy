@@ -173,11 +173,16 @@ public class StudyController {
 
 	// 상세페이지
 	@RequestMapping(value = "/board", method = RequestMethod.GET)
-	public void readBoard(@RequestParam("bno") int bno, @ModelAttribute("cri") CriteriaStudy cri, Model model)
+	public void readBoard(@RequestParam("bno") int bno, @ModelAttribute("cri") CriteriaStudy cri, Model model,
+			HttpServletRequest request)
 			throws Exception {
 		
 		model.addAttribute(service.read(bno));
+
 		model.addAttribute("list", replyService.listReply(bno));  //댓글 정보 가져옴
+
+		HttpSession session = request.getSession();
+		UserVO user = (UserVO)session.getAttribute("login");
 	}
 
 	// 상세페이지 제거
