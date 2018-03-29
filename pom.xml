@@ -227,7 +227,7 @@
 		    <version>2.8.4</version>
 		</dependency>
 		
-			<!-- mail -->
+		<!-- mail -->
 	 	<dependency>
   		   <groupId>javax.mail</groupId>
   		   <artifactId>mail</artifactId>
@@ -246,7 +246,6 @@
 			<version>4.12</version>
 			<scope>test</scope>
 		</dependency> 
-		
 		
 		<!-- 구글 로그인 --> 
 		<dependency>
@@ -280,6 +279,12 @@
 
 	<!-- 웹 소켓 end -->
 
+		<!-- AWS S3 라이브러리 -->
+		<dependency>
+		    <groupId>com.amazonaws</groupId>
+		    <artifactId>aws-java-sdk</artifactId>
+		    <version>1.11.301</version>
+		</dependency>    
 	</dependencies>
     <build>
         <plugins>

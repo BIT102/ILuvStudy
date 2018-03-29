@@ -19,9 +19,9 @@ import org.springframework.util.FileCopyUtils;
 
 
 //우선연습할께용
-public class UploadFileUtils {
+public class UploadFileUtils_PYW {
 
-	private static final Logger logger = LoggerFactory.getLogger(UploadFileUtils.class);
+	private static final Logger logger = LoggerFactory.getLogger(UploadFileUtils_PYW.class);
 	
 	public static String uploadFile(String uploadPath,
 			                        String originalName,
@@ -55,7 +55,6 @@ public class UploadFileUtils {
 		// s3 추가 시작
 		uploadedFileName = (savedPath + saverDName).replace(File.separatorChar, '/');
 		//S3Util 의 fileUpload 메서드로 파일을 업로드한다.
-		
 		s3.fileUpload(bucketName, uploadPath+uploadedFileName, fileData);		
 		logger.info("업로드 파일명:"+ uploadedFileName);
 		// s3 추가 끝
