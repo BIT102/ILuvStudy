@@ -10,12 +10,12 @@
 </head>
 
 <body>
-<%@ include file="nav.jsp" %>
+<%@ include file="../nav.jsp" %>
 
 <h4>chatting page</h4>
-<input type="text" id="message">
+메시지 내용 : <input type="text" id="message">
+귓속말 대상 : <input type="text" id="to">
 <input type="button" id="sendMessage" value="메시지 보내기">
-<input type="button" id="chatClose" value="닫기">
 
 <div id="chatMessage" style="overFlow: auto; max-height:500px;"></div>
 
@@ -25,14 +25,23 @@
 <script>
 
 var sock = null;
+var message = {};
 
 $(document).ready(function(){
 	
+	
+	//웹 소켓을 지정한 url로 연결
 	sock = new SockJS("/chat");
 	
 	//웹 소켓이 열리면 호출
 	sock.onopen = function(){
-		alert("하이 하이");
+		message = {};
+		message.message = "반갑습니다.";
+		message.type="all";
+		message.to = "all";
+		
+		//메시지 전송
+		sock.send(JSON.stringify(message));
 	}
 	
 	//메시지가 도착하면 호출
@@ -43,28 +52,41 @@ $(document).ready(function(){
 	//웹 소켓이 닫히면 호출
 	sock.onclose = function(){
 		//메시지 전송
-		sock.send('10.225.152.165 퇴장');
+		sock.send('채팅을 종료합니다.');
 	}
 	
+	$("#message").keydown(function (key) {
+        if (key.keyCode == 13) {
+           $("#sendMessage").click();
+        }
+    });
+
 	$('#sendMessage').click(function(){
 		
 		if($('#message').val() != ""){
+			console.log($('#message').val());
+			
+			message = {};
+			message.message = $('#message').val();
+			message.type = "all";
+			message.to = "all";
+			
+			var to = $('#to').val();
+			
+			if(to!=""){
+				message.type="one";
+				message.to = to;
+			}
 			
 			//메시지 전송
-			sock.send("하이하이하이");
-			$('#chatMessage').append('나 -> ' + $('#message').val() + '<br/>');
+			sock.send(JSON.stringify(message));
 			
+			$('#chatMessage').append('나 -> ' + $('#message').val() + '<br/>');
 			$('#message').val("");
 		}
 		
 	})
 	
-	$('#chatClose').click(function(){
-		//웹 소켓 닫기
-		alert("바이");
-		sock.close();
-		
-	})
 })
 </script>  
 </body>

@@ -13,7 +13,7 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
-import dev.mvc.domain.UserVO;
+import dev.mvc.domain.MessageVO;
 
 public class ChatWebSocketHandler extends TextWebSocketHandler {
 
@@ -65,21 +65,35 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		//payload = 사용자가 보낸 메시지
-		logger.info(session.getId()+ " 님이 메시지 전송"+message.getPayload());
+		logger.info(session.getId()+ " 님이 메시지 전송 "+message.getPayload());
 		
-		//연결된 모든 클라이언트에게 메시지 전송
-		for(WebSocketSession webSocketSession : connectedUsers){
-			//보낸 사용자는 받지 않기 위한 조건문
-			if(!session.getId().equals(webSocketSession)){
-				webSocketSession.sendMessage(new TextMessage(session.getRemoteAddress().getHostName() + "-> "+ message.getPayload()));
-			}
-		}
-		
-		logger.info(message.getPayload());
+		 MessageVO messageVO = MessageVO.converMessage(message.getPayload());
+	     String hostName = "";
+	     
+	   //연결된 모든 클라이언트에게 메시지 전송
+	     for (WebSocketSession webSocketSession : connectedUsers) {
+	         if (messageVO.getType().equals("all")) {
+	        	//보낸 사용자는 받지 않기 위한 조건문
+	             if (!session.getId().equals(webSocketSession.getId())) {
+	                 webSocketSession.sendMessage(
+	                         new TextMessage(session.getRemoteAddress().getHostName() + " ▶ " + messageVO.getMessage()));
+	             }
+	         } else {
+	             hostName = webSocketSession.getRemoteAddress().getHostName();
+	             if (messageVO.getTo().equals(hostName)) {
+	                 webSocketSession.sendMessage(
+	                         new TextMessage(
+	                                 "<span style='color:red; font-weight: bold;' >"
+	                                 + session.getRemoteAddress().getHostName() + "▶ " + messageVO.getMessage()
+	                                 + "</span>") );
+	                 break;
+	              }
+	          }
+	      }
+
+
 		
 /*
-		System.out.println(message.getPayload());
-
 		  Map<String, Object> map = null;
 
 	      MessageVO messageVO = MessageVO.convertMessage(message.getPayload());
