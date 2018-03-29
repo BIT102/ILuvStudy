@@ -369,7 +369,7 @@ public class UserController {
 		return "/mypage/bookmark";
 	}
 	
-	// 모집 (recruit) 컨트롤러
+	// 모집 (recruit) 컨트롤러 내가했습니다
 	@RequestMapping(value = "/recruit", method = RequestMethod.GET)
 	public String recruit(@ModelAttribute("cri") SearchCriteriaStudy cri, Model model, HttpServletRequest request) throws Exception {
 		
