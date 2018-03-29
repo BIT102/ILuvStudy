@@ -234,6 +234,7 @@ public class StudyServiceImpl implements StudyService {
 	}
 
 	@Override
+	
 	public List<StudyVO> region2(String rDId) throws Exception {
 		return dao.region2(rDId);
 	}

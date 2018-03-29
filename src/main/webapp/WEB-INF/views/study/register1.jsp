@@ -1,519 +1,587 @@
-﻿<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
-
-        <!-- // Navigation -->
-<%@include file="../nav.jsp"%>
-
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
 <head>
-
-<script src="http://code/jquery.com/jquery-1.7.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript" src="/resources/js/upload.js"></script>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+<script
+	src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+<title>스터디 상세</title>
 
-<title>Document</title>
-
+<script>
+var result = '${msg}';
+if(result == 'no'){
+	
+	alert("모든 항목을 입력해 주세요.")
+}
+</script>
 <style>
-
-body{margin:30px 20px; color:pink;}
-
+form th {
+	width: 30%;
+}
+#rDName, #rSName, #age, #sc, #st, #et, #catD, #catS {
+	width: 30%;
+	display: inline;
+}
 .fileDrop {
 	width: 200px;
 	height: 200px;
 	border: 1px dotted blue;
-	background-color:white;
 }
-
 .small {
 	margin-left: 3px;
 	font-weight: bold;
 	color: gray;
 }
-
 .small:hover {
 	background-color: black;
 }
-
 small {
 	margin-left: 3px;
 	font-weight: bold;
 	color: gray;
 }
-
-.bigcatB{background-color:red; border-radius:8px; width:120px; height:30px;}
-#SmallCat1{display:none;}
-#SmallCat2{display:none;}
-#SmallCat3{display:none;}
-#SmallCat4{display:none;}
-
-/*#rSId{display:none;}*/
-
-#registerForm{margin:0 150px; }
-.form-control{width:300px; margin:0 auto;}
-.input-lg{width:120px;}
-.st{width:120px;}
-.et{width:120px;}
-.sc{width:100px;}
-
-.register1{width;400px;}
-.titleP{width:400px;}
+.fileDrop {
+	border: none;
+	width: 800px;
+	background-color: gray;
+}
+.mailbox-attachment-info {
+	display: inline
+}
+#btn-success {
+	background-color: #5bc0de;
+	border: 1px solid black;
+	margin-right: 10px;
+}
+#btn-success:hover {
+	background-color: #31b0d5;
+	border-color: #269abc;
+}
+.btn {
+	padding: 5px 20px !important;
+	margin-left: 20px !important;
+}
+.btn-xs {
+	margin-top: 5px;
+}
 </style>
 </head>
-
 <body>
+	<div id="wrapper">
+
+		<%@include file="../nav.jsp"%>
+
+            <header class="page-head" style="background:url(/resources/assets/img/twitter-feed-bg.jpg);">
+                <div class="header-wrapper">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+
+                                <ol class="breadcrumb">
+                                    <li><a href="/study/main">Home</a></li>
+                                    <li class="active">Regist</li>
+                                </ol> <!-- end of /.breadcrumb -->
+
+                            </div>
+                        </div>
+                    </div> <!-- /.container -->
+                </div> <!-- /.header-wrapper -->
+            </header> <!-- /.page-head (header end) -->
 
 
-	<!--스터디등록-->
 
-	<form id="registerForm" role="form" method="post" class="form-group">
+		<!-- MAIN -->
+		<div class="main">
+			<!-- MAIN CONTENT -->
+			<div class="main-content" style="background-color: #f9f9f9">
+				<div class="container">
+					<h3 class="page-title">스터디 등록하기</h3>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="panel">
+								<div class="panel-heading">
+									<h3 class="panel-title">스터디 상세</h3>
+								</div>
 
-		<!--첫번째 페이지-->
-		<div class="register1 ">
+								<div class="panel-body">
+									<form id="registerForm" method="post" action="/study/register">
+										<div>* 기본정보</div>
+										<table class="table table-hover">
+											<tbody>
 
-			<!--제목입력-->
-			<div class="studytitle" >
-				<p>스터디명</p>
-				<input type="text" placeholder="스터디명" name="title" onclick="CheckForm();" class="form-control titleP input-sm" required>
+												<tr>
+													<th>카테고리</th>
+													<td>
+														<!-- 스터디에 등록된 카테고리 체크 표시 --> <!-- 스터디 카테고리 데이터 --> <%--               <c:forEach items="${studyCategory}" var="studyVO" varStatus="status">
+                 	<c:if test="${status.index eq 0 || status.index eq 9 || status.index eq 17 || status.index eq 23}">
+                 		<label class="fancy-checkbox">
+                 			<input type="checkbox" name="categoryD" class="${studyVO.cDName}" id="${studyVO.cDName}"><span><b>${studyVO.cDName}</b></span>
+                 		</label>
+                 	</c:if>
+                 	<label class="fancy-checkbox" style="display:inline-block;">
+                 		<input type="checkbox" name="categoryS" class="${studyVO.cDName}" id="${studyVO.cSName}"><span>${studyVO.cSName}</span>
+                 	</label>
+                 </c:forEach> --%> <!-- ======== 카테고리 =========== --> <select
+														id="catD" class="form-control">
+															<option>--</option>
+															<c:forEach items="${studyCategory}" var="studyVO">
+																<option value="${studyVO.cDId}">${studyVO.cDName}</option>
+															</c:forEach>
+													</select> <select id="catS" class="form-control">
+															<option value="">--</option>
+															<%-- <option value="${studyVO.cSName}">${studyVO.cSName}</option> --%>
+													</select>
+														<button type="button" id="addCat"
+															class="btn btn-default btn-xs">추가</button>
+														<div id="addCatArea"></div>
+													</td>
+												</tr>
+												<tr>
+													<th>스터디명</th>
+													<td><input type="text" name="title"
+														value="${studyVO.title}" class="form-control"
+														style="width: 550px;"></td>
+												</tr>
+												<tr>
+													<th>지역</th>
+													<td>
+														<!-- ======== 지 역 =========== --> <!-- 스터디에 선택된 지역정보 셀렉트 표시 -->
+														<select id="rDName" name='rDId' class="form-control">
+															<option>--</option>
+															<c:forEach items="${region}" var="studyVO">
+																<c:if test="${studyVO.rSId eq 1}">
+																	<option value="${studyVO.rDId}">${studyVO.rDName}</option>
+																</c:if>
+															</c:forEach>
+													</select> <select id="rSName" name='rSId' class="form-control">
+															<option value="">--</option>
+													</select>
+													</td>
+												</tr>
+												<tr>
+													<th>스터디 방장</th>
+													<!-- 아래 방장은 나중에 세션으로 전송 -->
+													<%-- <td><input name="writer" value="${studyVO.writer}"></td> --%>
+													<td><input class="form-control" name="writer"
+														value="abc1@gmail.com" style="width: 460px;"></td>
+												</tr>
+
+											</tbody>
+										</table>
+
+										<div>* 상세정보</div>
+										<table class="table table-hover">
+											<tbody>
+												<tr>
+													<th>연령</th>
+													<td><label class="fancy-checkbox"
+														style="display: inline-block;"> <input
+															type="checkbox" class="age" name="age" value="10대"><span>10대
+														</span>
+													</label> <label class="fancy-checkbox"
+														style="display: inline-block;"> <input
+															type="checkbox" class="age" name="age" value="20대"><span>20대
+														</span>
+													</label> <label class="fancy-checkbox"
+														style="display: inline-block;"> <input
+															type="checkbox" class="age" name="age" value="30대"><span>30대
+														</span>
+													</label> <label class="fancy-checkbox"
+														style="display: inline-block;"> <input
+															type="checkbox" class="age" name="age" value="40대"><span>40대
+														</span>
+													</label> <label class="fancy-checkbox"
+														style="display: inline-block;"> <input
+															type="checkbox" class="age" name="age" value="50대"><span>50대
+														</span>
+													</label> <label class="fancy-checkbox"
+														style="display: inline-block;"> <input
+															type="checkbox" class="age" name="age" value="무관"><span>무관
+														</span>
+													</label></td>
+												</tr>
+												<tr>
+													<th>최대인원</th>
+													<td>
+														<div class="studymax">
+															<input class="form-control" type="number" name="max"
+																min="0" style="width: 345px;">
+														</div>
+													</td>
+												</tr>
+												<tr>
+
+													<th>시작날짜</th>
+													<td>
+														<div class="studysd">
+															<input class="form-control" type="date" name="sd"
+																style="width: 345px;">
+														</div>
+													</td>
+												</tr>
+												<tr>
+													<th>시간</th>
+													<td>
+														<%-- <input type="text" name="sc" value="${studyVO.sc}" style="width:30%; display: inline;" class="form-control">
+                	<input type="text" name="st" value="${studyVO.st}" style="width:30%; display: inline;" class="form-control"> ~
+                	<input type="text" name="et" value="${studyVO.et}" style="width:30%; display: inline;" class="form-control"><br> --%>
+														<select id="sc" name="sc" class="form-control">
+															<option selected>--</option>
+															<option value="월요일">월요일</option>
+															<option value="화요일">화요일</option>
+															<option value="수요일">수요일</option>
+															<option value="목요일">목요일</option>
+															<option value="금요일">금요일</option>
+															<option value="토요일">토요일</option>
+															<option value="일요일">일요일</option>
+													</select> <select id="st" name="st" class="form-control">
+															<option selected>--</option>
+															<option value="6">6시</option>
+															<option value="7">7시</option>
+															<option value="8">8시</option>
+															<option value="9">9시</option>
+															<option value="10">10시</option>
+															<option value="11">11시</option>
+															<option value="12">12시</option>
+															<option value="13">13시</option>
+															<option value="14">14시</option>
+															<option value="15">15시</option>
+															<option value="16">16시</option>
+															<option value="17">17시</option>
+															<option value="18">18시</option>
+															<option value="19">19시</option>
+															<option value="20">20시</option>
+															<option value="21">21시</option>
+															<option value="22">22시</option>
+															<option value="23">23시</option>
+															<option value="24">24시</option>
+													</select> <select id="et" name="et" class="form-control">
+															<option selected>--</option>
+													</select> <script>
+														/* 		$("#st").change(function(){
+														 console.log($(this).val());
+														 var tval = $(this).val();
+														 $("#et option").remove(val="tval")
+														 }); //시작시간 끝나는시간  */
+														$("#st")
+																.change(
+																		function() {
+																			var stval = $(
+																					"#st option:selected")
+																					.val();
+																			console
+																					.log("str="
+																							+ stval);
+																			var str = "";
+																			for (var i = stval; i <= 24; i++) {
+																				str += "<option value'"+i+"'>"
+																						+ i
+																						+ "시</option>";
+																				$(
+																						"#et")
+																						.html(
+																								str);
+																			}
+																		});
+													</script> <!-- 시간 추가 등록 가능 
+                <div id="addTimeArea">
+                </div>    
+                    <button type="button" id="addTime" class="btn btn-default btn-xs">추가</button> -->
+													</td>
+												</tr>
+
+											</tbody>
+										</table>
+
+										<div>* 소개</div>
+										<table class="table table-hover">
+											<tbody>
+												<tr>
+													<th>스터디 소개</th>
+													<td><textarea name="content" class="form-control"
+															style="height: 140px;">${studyVO.content}</textarea></td>
+												</tr>
+												<tr>
+													<th>이미지</th>
+													<td>
+														<div class="studyfile">
+
+															<h3>첫 사진은 메인 화면에 등록됩니다.</h3>
+															<div class='fileDrop'></div>
+															<div class='uploadedList'></div>
+														</div>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+										<!-- 일등록 핸들러 -->
+
+										<div class="text-right">
+											<!-- <button type="submit" id="btn-success" class = "btn btn-success" style="background-color:#5bc0de; border:1px solid black;">등록</button> -->
+											<button type="submit" id="btn-success"
+												class="btn btn-success">등록</button>
+											<!-- <input type="submit" id = "insertBtn" class = "btn btn-success" value = "등록" /> -->
+										</div>
+									</form>
+
+								</div>
+								<!-- panel-body end -->
+
+
+								<!-- panel-body end -->
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
-
-			<!--쓴사람//value값수정-->
-			<div class="studywriter">
-				<p>쓴사람</p>
-				<input type="email" placeholder="쓴사람" name="writer" class="form-control titleP input-sm"
-					value="abc1@gmail.com" required pattern="+.com" title="이메일 형식으로 적어주세요">
-			</div>
-
-		<!--카테고리-->
-			<tr>
-                <th>카테고리</th>
-                <td>
-              
-                <!-- 스터디에 등록된 카테고리 체크 표시 -->
-                <!-- 스터디 카테고리 데이터 -->
-  
-                 
-<!-- ======== 카테고리 =========== -->       
-                 <select id="catD" class="form-control">
-                 	<option>--</option>
-                 	<c:forEach items="${studyCategory}" var="studyVO">
-                 		<option value="${studyVO.cDId}">${studyVO.cDName}</option>
-                 	</c:forEach>
-                 </select>
-                 <select id="catS" class="form-control">
-                 	<option>--</option>
-              
-                 </select>
-                 <button type="button" id="addCat" class="btn btn-default btn-xs">추가</button>
-                 <div id="addCatArea">
-                 </div>
-				</td>
-            </tr>
-		
-		<br>
-			
-
-			<button type="button" id="catplus" class="btn btn-outline-black">+추가</button>
-			<div id="catarea">
-				
+			<!-- END MAIN CONTENT -->
 		</div>
+		<!-- END MAIN -->
+	</div>
 
-		<!--두번째 페이지-->
-		<div class="register2">
-
-			<!--최대인원-->
-			<div class="studymax">
-				<p>최대인원</p>
-				<input type="number" name="max"  min="0" max="200" class="input-lg" required>
-			</div>
-
-			<!--지역분류-->
-			<div id="studyRegion">
-
-
-
-				<!-- 대분류 -->
-				<p>지역대분류</p>
-				<select name="rDId" id="rDId" class="form-control">
-
-					<option value='' selected>--</option>
-
-					<% int cataNum2 = 64; %>
-					<c:forEach items="${rglist}" var="StudyVO">
-					<% cataNum2++; %>
-						<option value="<%=(char)cataNum2%>">${StudyVO.rDName}</option>
-					</c:forEach>
-
-				</select>
-
-				<!-- 소분류 -->
-				<p>지역소분류</p>
-				<select name="rSId" id="rSId" class="form-control">
-
-					<option selected>--</option>
-
-				</select>
-			</div>
-			
-			
-			<!-- 유효성검사 -->
-			<script>
-			/*	function checkForm(){
-					var max = document.register2.max;
-					
-					if(max.value)
-					
-					if(user) 
-				}
-				                      
-				console.log(max.value);*/
-			</script>
-			
-			
-			<!-- select지역 이벤트       -->
-		 	<script>
-				$("#rDId").change(function(){
-					
-					var bigNum2 = $(this).val()
-
-				});
-	
-				function smallCat2(bigNum2){
-					$.getJSON(
-						"register1/region/"+bigNum2,
-						function(data){
-							var str = "";
-							$(data).each(function(){
-								str += "<option value="+this.rSId+">"+this.rSName+"</option>";							
-							});
-							
-							$("#rSId").html(str);
-						}
-					)
-				}			
-			</script> 
-
-			<!--연령-->
-			<div class="studyage">
-				<p>연령</p>
-				<input type="checkbox" name="age" value="10대">10대
-				 <input type="checkbox" name="age" value="20대">20대 
-				 <input type="checkbox" name="age" value="30대">30대 
-				 <input type="checkbox" name="age" value="40대">40대
-				 <input type="checkbox" name="age" value="50대">50대 
-				 <input type="checkbox" name="age" value="무관">무관
-			</div>
-
-			<!--요일별-->
-			<div class="studysc">
-				<p>요일</p>
-				<select class="sc form-control" name="sc">
-					<option selected>--</option>
-					<option value="월요일">월요일</option>
-					<option value="화요일">화요일</option>
-					<option value="수요일">수요일</option>
-					<option value="목요일">목요일</option>
-					<option value="금요일">금요일</option>
-					<option value="토요일">토요일</option>
-					<option value="일요일">일요일</option>
-				</select>
-			</div>
-
-			<!-- 시작날짜 -->
-			<div class="studysd">
-				<p>시작날짜</p>
-				<input type="date" name="sd" class="form-control">
-			</div>
-
-			<!--시작시간//나중에추가하기-->
-			<div class="studyst">
-				<p>시작시간</p>
-				<select class="st form-control" name="st">
-					<option selected>--</option>
-					<option value="6">6시</option>
-					<option value="7">7시</option>
-					<option value="8">8시</option>
-					<option value="9">9시</option>
-					<option value="10">10시</option>
-					<option value="11">11시</option>
-					<option value="12">12시</option>
-		 			<option value="13">13시</option>
-					<option value="14">14시</option>
-					<option value="15">15시</option>
-					<option value="16">16시</option>
-					<option value="17">17시</option>
-					<option value="18">18시</option>
-					<option value="19">19시</option>
-					<option value="20">20시</option>
-					<option value="21">21시</option>
-					<option value="22">22시</option>
-					<option value="23">23시</option>
-					<option value="24">24시</option> 
-				</select>
-			</div>
-
-			<!--끝나는시간//나중에추가하기-->
-			<div class="studyet">
-				<p>끝나는시간</p>
-				<select class="et form-control" name="et">
-				<option selected>--</option>
-				</select>
-			</div>
-		</div>
-		
-		<script>
-		$(".st").change(function(){
-			console.log($(this).val());
-			tval = $(this).val();
-			$(".et option").remove(val="tval")
-		}); //시작시간 끝나는시간 
-		</script>
-
-		<!--3번째 페이지-->
-		<div class="register3">
-		
-			<!--내용-->
-			<div class=studycontent>
-				<p>추가글</p>
-				<textarea name="content" class="form-control"></textarea>
-			</div>
-
-			<!-- 파일업로드부분 -->
-			<div class="studyfile">
-
-				<h3>Ajax File upload</h3>
-				<div class='fileDrop'></div>
-				
-				<div class='uploadedList'></div>
-			</div>
-		</div>
-
-
-		<button type="submit">등록</button>
-
-	</form>
-
-	<!-- 일등록 핸들러 -->
 	<script id="template" type="text/x-handlebars-template">
-		<div class="mailbox-attachment-info">
-			<span class="mailbox-attachment-icon has-img">
-				<img src="{{imgsrc}}" alt="Attachment">
-			</span>
-			<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>
-			<small class = "small" value = "{{name}}" data-src=data style="cursor:pointer">X</small>
-			</span>
-		</div>
-	</script>
-
-<!-- 시간지정 -->
-	
-<script>
-$(".st").change(function(){
-var stval = $(".st option:selected").val();
-
-var str="";
-
-	for(var i = stval; i<=24; i++){
-				
-		str += "<option value'"+i+"'>"+i+"시</option>";
-		$(".et").html(str);
-}
-
-});
-
-var str = "";
-
+	<div class="mailbox-attachment-info">
+		<span class="mailbox-attachment-icon has-img">
+			<img src="{{imgsrc}}" alt="Attachment">
+		</span>
+		<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>
+		<small class = "small" value = "{{name}}" data-src=data style="cursor:pointer">X</small>
+		</span>
+	</div>
 </script>
-
 	<script>
-
+		$(".st").change(function() {
+			var stval = $(".st option:selected").val();
+			var str = "";
+			for (var i = stval; i <= 24; i++) {
+				str += "<option value'"+i+"'>" + i + "시</option>";
+				$(".et").html(str);
+				if (stval = 24) {
+				}
+			}
+		});
+		var str = "";
+	</script>
+	<script>
 		var template = Handlebars.compile($("#template").html());
-
-		$(".fileDrop").on("dragenter dragover", function(event){
+		$(".fileDrop").on("dragenter dragover", function(event) {
 			console.log("1*****************");
 			event.preventDefault();
 		});
-
-		//파일을 떨구는 장소	
-
-		$(".fileDrop").on("drop", function(event){
-
-
+		//파일을 떨구는 장소 
+		$(".fileDrop").on("drop", function(event) {
+			console.log("2*****************");
 			event.preventDefault();
-
 			var files = event.originalEvent.dataTransfer.files;
-
 			var file = files[0];
-
 			console.log(file);
-
 			var formData = new FormData();
-
 			formData.append("file", file);
-
 			$.ajax({
-				
-				url: '/study/uploadAjax',
-				data: formData,
-				dataType: 'text',
-				processData: false,
-				contentType: false,
-				type: 'POST',
+				url : '/study/uploadAjax',
+				data : formData,
+				dataType : 'text',
+				processData : false,
+				contentType : false,
+				type : 'POST',
 				//파일을 드롭했을때 성공시
-
-
-				success: function(data){
-					
-
+				success : function(data) {
+					console.log("3*****************");
 					var fileInfo = getFileInfo(data);
-			
 					var html = template(fileInfo);
-
 					$(".uploadedList").append(html);
 				}
 			});
 		});
-
 		//취소버튼
-		$(".uploadedList").on("click", "small", function(event){
-
+		$(".uploadedList").on("click", "small", function(event) {
 			var that = $(this);
-
 			$.ajax({
-				url:"deleteFile",
-				type:"post",
-				data:{fileName:$(this).attr("data-src")},
-				dataType:"text",
-				success:function(result){
-					if(result == 'deleted') {
+				url : "deleteFile",
+				type : "post",
+				data : {
+					fileName : $(this).attr("data-src")
+				},
+				dataType : "text",
+				success : function(result) {
+					if (result == 'deleted') {
 						alert("deleted");
 						that.parent("div").remove();
 					}
 				}
 			});
 		});
-
 		//스터디 보드 등록후 이미지 등록을 위해서
-		$("#registerForm").submit(function(event){
-
-			event.preventDefault();
-			
-			var that = $(this);
-
-			var str = "";
-
-			$(".uploadedList .small").each(function(index){
-				str += "<input type='hidden' name='files["+index+"]' value='"+$(this).attr("value")+"'>";
-			});
-			that.append(str);
-
-			that.get(0).submit();
-
-		});
-		
-		//등록 버튼 클릭 후 유효성 검사
-		$("#registerForm").submit(function(event){
-			
-			event.preventDefault();
-			
-			if(title === null) {
-				alert("제목을 입력해 주세요!")
-			}
-		})
-	</script>
-	<!-- 대분류 셀렉트박스 선택시 소분류 셀렉트 표시 후 추가 하기 -->
-		<script>
-			$(document).ready(function(){
-				
-				
-				$("#catplus").on("click", function(){
-					$('#SmallCat select[style="display: inline-block;"] option:selected').clone().appendTo("#catarea")
-					
-				});  // small카테고리 셀렉트 태그중 style이 visible인것중 선택된 옵션태그를 #catarea에 클론 한다.
-						
-				$("#BigCat").change("change", function(){
-					
-					var bigNum = $(this).val()
-					
-					$("#catarea").empty();
-					smallCat(bigNum);
-				});
-				function smallCat(bigNum){
-					console.log(bigNum);
-					/*var bgArr = ['A','B','C','D'];
-					for(var i=0; i<4; i++){
-						if(bigNum == bgArr[i]){
-							var sm = '"#SmallCat'+(i+1)+'"';
-							console.log(sm);
-							$(sm).show('slow');
-						}else{
-							$('"#SmallCat'+(i+1)+'"').hide('slow');
-						}
-					}*/
-		
-					if(bigNum == 'A'){
-						$("#SmallCat1").show('slow');
-						$("#SmallCat2").hide('slow');
-						$("#SmallCat3").hide('slow');
-						$("#SmallCat4").hide('slow');
-					}else if(bigNum == 'B'){
-						$("#SmallCat1").hide('slow');
-						$("#SmallCat2").show('slow');
-						$("#SmallCat3").hide('slow');
-						$("#SmallCat4").hide('slow');
-					}else if(bigNum == 'C'){
-						$("#SmallCat1").hide('slow');
-						$("#SmallCat2").hide('slow');
-						$("#SmallCat3").show('slow');
-						$("#SmallCat4").hide('slow');
-					}else if(bigNum == 'D'){
-						$("#SmallCat1").hide('slow');
-						$("#SmallCat2").hide('slow');
-						$("#SmallCat3").hide('slow');
-						$("#SmallCat4").show('slow');
-					}
-				}
-				//무식코드 .... 리팩토링*******
-				});
-				
-
-
-	</script>
-	
-	<!-- select지역 이벤트       -->
-		 	<script>
-				$("#rDId").change(function(){
-					
-					var bigNum2 = $(this).val()
-					
-					
-					console.log(bigNum2);
-					smallCat2(bigNum2);
-				})
-	
-				function smallCat2(bigNum2){
-					$.getJSON(
-						"register1/region/"+bigNum2,
-						function(data){
-							var str = "";
-
-							$(data).each(function(){
-								str += "<option value="+this.rSId+">"+this.rSName+"</option>";							
+		$("#registerForm").submit(
+				function(event) {
+					console.log("ssssssssssss");
+					event.preventDefault();
+					var that = $(this);
+					var str = "";
+					$(".uploadedList .small").each(
+							function(index) {
+								str += "<input type='hidden' name='files["
+										+ index + "]' value='"
+										+ $(this).attr("value") + "'>";
 							});
-							
-							$("#rSId").html(str);
+					that.append(str);
+					that.get(0).submit();
+				});
+	</script>
+	<script>
+		$(document)
+				.ready(
+						function() {
+							//카테고리 소분류 체크 시 대분류 체크 되도록
+							var formObj = $("form[role='form']");
+							console.log(formObj);
+							//지역 정보 셀렉트 박스 변경 시 액션
+							$("#rDName").on("change", function() {
+								getRegion();
+							});
+							//카테고리 정보 셀렉트 박스 변경 시 액션
+							$("#catD").on("change", function() {
+								getCat();
+							});
+							//카테고리 추가 버튼 클릭 시 액션
+							$("#addCat")
+									.on(
+											"click",
+											function() {
+												var catd = $(
+														'#catD option:selected')
+														.val();
+												var cats = $(
+														'#catS option:selected')
+														.val();
+												var catd2 = $(
+														'#catD option:selected')
+														.text();
+												var cats2 = $(
+														'#catS option:selected')
+														.text();
+												var cat = "<span><input type='hidden' name='categoryD' value="+catd+">"
+														+ "<input type='hidden' name='categoryS' value="+cats+">"
+														+ "<div>"
+														+ catd2
+														+ " > "
+														+ cats2
+														+ "</span><button type='button' onclick = 'btn_delete(this)' class='btn btn-default btn-xs'>삭제</button></div>";
+												$("#addCatArea").append(cat);
+											});
+							//시간영역 추가 버튼 클릭 시 액션
+							$("#addTime")
+									.on(
+											"click",
+											function() {
+												var time = "<input type='text' name='sc' value='' style='width:30%; display: inline;' class='form-control'> <input type='text' name='st' value='' style='width:30%; display: inline;' class='form-control'> ~ <input type='text' name='et' value='' style='width:30%; display: inline;' class='form-control'><br>";
+												$("#addTimeArea").append(time);
+											});
+						});
+		//카테고리 삭제 버튼
+		function btn_delete(x) {
+			$(x).parent("div").remove();
+		}
+		//지역정보 2단 콤보박스 메서드
+		function getRegion() {
+			//$("#rSName").children("option").remove(); //소분류의 option 삭제
+			$.ajax({ //rdid값을 POST형식으로 region 컨트롤러에 전송
+				type : 'POST',
+				url : '/admin/region/' + $("#rDName option:selected").val(),
+				headers : {
+					"Content-Type" : "application/json",
+					"X-HTTP-Method-Override" : "POST"
+				},
+				dataType : 'json',
+				data : JSON.stringify({
+					rDId : $("#rDName option:selected").val()
+				//rdid의 값 전송
+				}),
+				success : function(result) { //반환받은 지역테이블 정보, list 배열
+					var option = "";
+					if (result.length < 2) {
+						option = "<option>--</option>"
+					} else {
+						for (var i = 0; i < result.length; i++) {
+							option += "<option value="+result[i].rSId+">"
+									+ result[i].rSName + " </option>"; //option에 배열값 추가
 						}
-					)
-					
-				}			
-			</script> 
+					}
+					$("#rSName").html(option); //html에 뿌려줌
+				}
+			}); //$.ajax 끝
+		}
+		//카테고리 대분류 선택 시 소분류 변경
+		function getCat() {
+			//$("#catS").children("option").remove(); //소분류의 option 삭제, append()가 아닌 html() 사용으로 주석 처리
+			$.ajax({ //categoryD값을 POST형식으로 category 컨트롤러에 전송
+				type : 'POST',
+				url : '/admin/category/' + $("#catD option:selected").val(),
+				headers : {
+					"Content-Type" : "application/json",
+					"X-HTTP-Method-Override" : "POST"
+				},
+				dataType : 'json',
+				data : JSON.stringify({
+					cdid : $("#catD option:selected").val()
+				//cdid의 값 전송
+				}),
+				success : function(result) { //반환받은 지역테이블 정보, list 배열
+					var option = "";
+					var str = $("#catD option:selected").val();
+					if (result.length == 0) {
+						option = "<option>--</option>";
+					} else {
+						for (var i = 0; i < result.length; i++) {
+							option += "<option value="+result[i].cSId+">"
+									+ result[i].cSName + " </option>"; //option에 배열값 추가
+						}
+					}
+					$("#catS").html(option); //html에 뿌려줌
+				}
+			}); //$.ajax 끝
+		}
+		function getStudy() {
+			$("#rDName").val("${studyVO.rDId}"); // 스터디 지역 정보 불러옴
+			$
+					.ajax({ //rdid값을 POST형식으로 region 컨트롤러에 전송
+						type : 'POST',
+						url : '/admin/region/'
+								+ $("#rDName option:selected").val(),
+						headers : {
+							"Content-Type" : "application/json",
+							"X-HTTP-Method-Override" : "POST"
+						},
+						dataType : 'json',
+						data : JSON.stringify({
+							rDId : $("#rDName option:selected").val()
+						//rdid의 값 전송
+						}),
+						success : function(result) { //반환받은 지역테이블 정보, list 배열
+							var option = "";
+							for (var i = 0; i < result.length; i++) {
+								option += "<option name='rSId' value="+result[i].rSId+">"
+										+ result[i].rSName + " </option>"; //option에 배열값 추가
+							}
+							$("#rSName").append(option); //html에 뿌려줌
+							$("option[value='${studyVO.rSId}']").attr(
+									"selected", "selected"); //소분류 지역 정보 불러옴
+						}
+					}); //$.ajax 끝
+		} //getStudy() 끝
+	</script>
 
-<%@include file="../footer.jsp"%>
-
+	<!-- 파일업로드 핸들러 -->
+	<script id="templateAttach" type="text/x-handlebars-template">
+    <li data-src='{{name}}'>
+		<span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment"></span>
+  		<div class="mailbox-attachment-info">
+		</span>
+		</div>
+	</li>
+    </script>
 
 </body>
-
 </html>
