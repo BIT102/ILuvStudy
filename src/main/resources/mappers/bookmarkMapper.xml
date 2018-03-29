@@ -33,7 +33,7 @@ right outer join board_study bs on bs.bno = bo.bsbno
 
 <select id="list" resultType="StudyVO">
 SELECT
-, bo.ID
+bo.ID
 , bo.BSBNO
 , bo.USEREMAIL
 , ba.name

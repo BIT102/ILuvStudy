@@ -71,7 +71,7 @@ public class UserServiceImpl implements UserService {
 		public void insertImg(UserVO vo) throws Exception { // data = 값이. 단순히 변수명인데 헷갈려함. 바보바보. 기대값은 이미지 이름
 			dao.insertImg(vo);
 		}
-		
+	/*	
 		// 북마크 불러오기
 		@Override
 		public List<StudyVO> bookmarkList(String email) throws Exception {
@@ -97,7 +97,7 @@ public class UserServiceImpl implements UserService {
 			return dao.bookmarkList(email);
 			
 		}
-		
+		*/
 		
 		// 북마크 즐겨찾기 숫자
 		@Override

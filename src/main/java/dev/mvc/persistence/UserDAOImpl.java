@@ -74,11 +74,11 @@ public class UserDAOImpl implements UserDAO {
 		session.update(namespace+".insertImg", vo);
 	}
 	
-	//북마크 리스트 불러오기
+/*	//북마크 리스트 불러오기
 	@Override
 	public List<StudyVO> bookmarkList(String email) throws Exception {
 		return session.selectList(namespace+".bookmarkList", email);
-	}
+	}*/
 	
 	// 북마크 즐겨찾기 숫자
 	@Override

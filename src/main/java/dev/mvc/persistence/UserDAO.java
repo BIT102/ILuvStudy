@@ -33,8 +33,8 @@ public interface UserDAO {
 	//프로필 사진 수정
 	public void insertImg(UserVO vo) throws Exception;
 	
-	//북마크 리스트 불러오기
-	public List<StudyVO> bookmarkList(String email) throws Exception;
+	/*//북마크 리스트 불러오기
+	public List<StudyVO> bookmarkList(String email) throws Exception;*/
 	
 	//북마크 즐겨찾기 숫자
 	public int bookmarkCount(int bno) throws Exception;

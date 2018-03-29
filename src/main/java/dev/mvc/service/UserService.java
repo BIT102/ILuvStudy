@@ -35,8 +35,8 @@ public interface UserService {
 	public void insertImg(UserVO vo) throws Exception;
 	
 	//북마크 불러오기
-	public List<StudyVO> bookmarkList(String email) throws Exception;
-	
+	/*public List<StudyVO> bookmarkList(String email) throws Exception;
+	*/
 	//북마크 즐겨찾기 숫자
 	public int bookmarkCount(int bno) throws Exception;
 	public StudyVO bookmarkCount2(int bno) throws Exception;

@@ -350,49 +350,23 @@ public class UserController {
 		return "/mypage/quit";
 	}
 	
-	// 북마크 (bookmark) 컨트롤러
+	// 북마크 (bookmark) 컨트롤러  =길=
 	@RequestMapping(value = "/bookmark", method = RequestMethod.GET)
 	public String bookmark(@ModelAttribute("cri") SearchCriteriaStudy cri, Model model, HttpServletRequest request) throws Exception {
-		
-		System.out.println("::북마크겟::");
 			
 		HttpSession session = request.getSession();
 		UserVO sUser = (UserVO)session.getAttribute("login");
 		String email = sUser.getEmail();
 		model.addAttribute("list", bookservice.listBookmark(email));
-		
-		model.addAttribute("bookmarkList", service.bookmarkList(email));
-		System.out.println("이메일:"+service.bookmarkList(email));
+			
 		PageMakerStudy pageMakerStudy = new PageMakerStudy();
-		
-
-//		StudyVO vo2 = new StudyVO();
-//		System.out.println("브비오33="+vo2.getBookmarkCount());
-
+			
 		pageMakerStudy.setCri(cri);
-
-		
-//		model.addAttribute("bookmarkCount", service.bookmarkCount2(0));
-//		System.out.println("카운트33="+service.bookmarkCount2(0));
-		
-	
-		//model.addAttribute("bookmarkList", service.bookmarkList(email));
-		
-		//int bno = sUser.getBno();
-		//System.out.println("비엔요-:"+bno);
-		//model.addAttribute("bookmarkList", service.bookmarkCount(bno));
-		
-		
-//		List<StudyVO> list = dao.bookmarkList(email);
-//		model.addAttribute("bookmarkList", service.bookmarkCount(list.get(4).getBno()));
-//		System.out.println("북마크카운트333="+service.bookmarkCount(list.get(4).getBno()));
-		
-		
-//		model.addAttribute("bookmarkCount", service.bookmarkCount(bno));
+			
 		model.addAttribute("pageMakerStudy", pageMakerStudy);
-		
+			
+			
 		return "/mypage/bookmark";
-		
 	}
 	
 	// 모집 (recruit) 컨트롤러

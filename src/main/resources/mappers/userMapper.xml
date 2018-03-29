@@ -66,7 +66,7 @@
   	update user set photo=#{photo} where email=#{email};
   	</update>
   	
-  	<!-- 북마크 불러오기 -->
+  	<!--  북마크 불러오기
   	<select id="bookmarkList" resultType="studyVO">
   	SELECT
 		ba.name
@@ -100,7 +100,7 @@
 		bs.bno > 0 and bs.bno in (select bookmark.bsbno
 		from bookmark
 		where useremail = #{email});
-  	</select>
+  	</select> -->
   	
   	<!-- 북마크 즐겨찾기 수 -->
 	<select id="bookmarkCount" resultType="int">
