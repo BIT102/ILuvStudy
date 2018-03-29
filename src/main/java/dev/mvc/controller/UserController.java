@@ -12,14 +12,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import dev.mvc.domain.PageMakerStudy;
+import dev.mvc.domain.SearchCriteriaStudy;
 import dev.mvc.domain.StudyVO;
 import dev.mvc.domain.UserVO;
 import dev.mvc.persistence.UserDAO;
+import dev.mvc.service.BookmarkService;
 import dev.mvc.service.StudyService;
 import dev.mvc.service.UserService;
 
@@ -42,7 +46,8 @@ public class UserController {
 	@Inject
 	private StudyService studyService;
 
-	
+	@Inject
+	private BookmarkService bookservice;
 	
 	//회원가입 컨트롤러
 	@RequestMapping(value = "/join", method = RequestMethod.GET)
@@ -347,19 +352,25 @@ public class UserController {
 	
 	// 북마크 (bookmark) 컨트롤러
 	@RequestMapping(value = "/bookmark", method = RequestMethod.GET)
-	public String bookmark(Model model, StudyVO vo, HttpServletRequest request) throws Exception {
+	public String bookmark(@ModelAttribute("cri") SearchCriteriaStudy cri, Model model, HttpServletRequest request) throws Exception {
 		
 		System.out.println("::북마크겟::");
 			
 		HttpSession session = request.getSession();
 		UserVO sUser = (UserVO)session.getAttribute("login");
 		String email = sUser.getEmail();
+		model.addAttribute("list", bookservice.listBookmark(email));
 		
 		model.addAttribute("bookmarkList", service.bookmarkList(email));
 		System.out.println("이메일:"+service.bookmarkList(email));
+		PageMakerStudy pageMakerStudy = new PageMakerStudy();
 		
+
 //		StudyVO vo2 = new StudyVO();
 //		System.out.println("브비오33="+vo2.getBookmarkCount());
+
+		pageMakerStudy.setCri(cri);
+
 		
 //		model.addAttribute("bookmarkCount", service.bookmarkCount2(0));
 //		System.out.println("카운트33="+service.bookmarkCount2(0));
@@ -378,6 +389,7 @@ public class UserController {
 		
 		
 //		model.addAttribute("bookmarkCount", service.bookmarkCount(bno));
+		model.addAttribute("pageMakerStudy", pageMakerStudy);
 		
 		return "/mypage/bookmark";
 		

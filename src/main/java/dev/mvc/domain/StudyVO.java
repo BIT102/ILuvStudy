@@ -62,6 +62,8 @@ public class StudyVO {
 	private String name;
 	private String status;
 
+	private String userEmail;
+	
 	//파일 업로드
 	private String[] files;
 
@@ -95,7 +97,7 @@ public class StudyVO {
 	public void setWriter(String writer) {
 		this.writer = writer;
 	}
-
+	
 	public String[] getCategoryD() {
 		return categoryD;
 	}
@@ -287,7 +289,12 @@ public class StudyVO {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-
+	public String getUserEmail() {
+		return userEmail;
+	}
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
+	}
 	public String[] getFiles() {
 		return files;
 	}
@@ -328,10 +335,9 @@ public class StudyVO {
 				+ st + ", et=" + et + ", content=" + content + ", vct=" + vct + ", rct=" + rct + ", regdate=" + regdate
 				+ ", enddate=" + enddate + ", rDName=" + rDName + ", rSName=" + rSName + ", cDName=" + cDName
 				+ ", cSName=" + cSName + ", nickname=" + nickname + ", no=" + no + ", name=" + name + ", status="
-				+ status + ", files=" + Arrays.toString(files) + ", cDId=" + cDId + ", cSId=" + cSId
-				+ ", bookmarkCount=" + bookmarkCount + "]";
+				+ status + ", userEmail=" + userEmail + ", files=" + Arrays.toString(files) + ", cDId=" + cDId
+				+ ", cSId=" + cSId + ", bookmarkCount=" + bookmarkCount + "]";
 	}
-	
 	
 }
 

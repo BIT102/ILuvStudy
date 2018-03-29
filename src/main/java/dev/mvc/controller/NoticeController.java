@@ -35,17 +35,16 @@ public class NoticeController {
 						 Model model) throws Exception{
 		
 		logger.info(cri.toString());
-		logger.info("notice..........");
-		
+
 		model.addAttribute("list", service.noticeList());
-		logger.info("notice2..........");
+
 		model.addAttribute("list", service.listSearchCriteria(cri));
-		logger.info("notice3..........");
+
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
-		logger.info("notice4..........");
+
 		pageMaker.setTotalCount(service.listSearchCount(cri));
-		logger.info("notice5..........");
+
 		model.addAttribute("pageMaker", pageMaker);
 	}
 	

@@ -1,5 +1,6 @@
 package dev.mvc.service;
 
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -7,12 +8,12 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.swing.plaf.synth.SynthSeparatorUI;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
-import dev.mvc.admin.Criteria;
 import dev.mvc.domain.CriteriaStudy;
 import dev.mvc.domain.SearchCriteriaStudy;
 import dev.mvc.domain.StudyVO;
@@ -117,7 +118,7 @@ public class StudyServiceImpl implements StudyService {
 		}
 
 		// 스터디 리스트 가져온다
-		return list;
+		return dao.listSearch(cri);
 	}
 
 	// 검색수
@@ -174,6 +175,21 @@ public class StudyServiceImpl implements StudyService {
 
 		// 사진등록
 		Map<String, Object> map = new HashMap<>();
+		
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+		System.out.println("/////////////////////////////////////////////////");
+		System.out.println(files);
+		System.out.println("***************************************************");
+		
+		
+		
+		if(files==null) {
+			map.put("name", "a");
+			map.put("status", "O");
+			map.put("bno", bno);
+			
+			dao.addFile(map);
+		} else {
 
 		for (String fileName : files) {
 
@@ -186,7 +202,9 @@ public class StudyServiceImpl implements StudyService {
 				map.put("status", "X");
 				map.put("bno", bno);
 			}
+			
 			dao.addFile(map);
+			}
 		}
 	}
 

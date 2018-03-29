@@ -69,7 +69,6 @@ small {
 </style>
 </head>
 <body>
-
 	<div id="wrapper">
 
 		<%@include file="../nav.jsp"%>

@@ -156,6 +156,4 @@
   	<update id = "emailConf" >
   		update user set emailconf = 1 where email = #{email};
   	</update>
-
-
   </mapper>

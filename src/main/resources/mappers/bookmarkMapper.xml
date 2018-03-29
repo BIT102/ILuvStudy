@@ -19,25 +19,66 @@ useremail
 , #{bsBno}
 )
 </insert>
-<!-- 북마크 불러오기 -->
-<select id="list" resultType="BookmarkVO">
-SELECT
-*
+
+<select id="bolist" resultType="BookmarkVO">
+SELECT 
+bo.ID
+, bo.USEREMAIL
+, bo.BSBNO
+, bs.bno
 FROM
-bookmark
-WHERE bsBno = #{bsBno}
-order by id desc
+bookmark bo
+right outer join board_study bs on bs.bno = bo.bsbno
+</select>
+
+<select id="list" resultType="StudyVO">
+SELECT
+, bo.ID
+, bo.BSBNO
+, bo.USEREMAIL
+, ba.name
+, bs.bno
+, bs.title
+, bs.writer
+, u.NICKNAME
+, bs.now
+, bs.max
+, r.rDName
+, r.rSName
+, bs.age
+, bs.sc
+, bs.sd
+, bs.st
+, bs.et
+, bs.content
+, bs.vct
+, bs.rct
+, bs.regdate
+, bs.enddate
+, sc.cdname
+, group_concat(sc.csname) csname 
+FROM 
+board_study bs
+left outer join user u on bs.writer = u.EMAIL
+left outer join (select * from board_attach where status = "O") ba on bs.bno = ba.bsbno
+left outer join region r on bs.RDID = r.RDID and bs.RSID = r.RSID
+left outer join board_category bc on bs.bno = bc.bsbno
+right outer join bookmark bo on bs.bno = bo.bsbno
+, study_category sc
+WHERE bs.bno > 0
+and sc.CDID = bc.CATEGORYD and sc.CSID = bc.CATEGORYS
+and bo.USEREMAIL = #{writer}
+group by bs.bno
 </select>
 
 
-
 <!-- 북마크 지우기 -->
-<delete id="deleteBookmark">
+ <delete id="deleteBookmark">
 DELETE
 FROM
 bookmark
 WHERE
-useremail = #{userEmail}
+useremail = #{email}
 AND bsbno = #{bsBno}
-</delete>
+</delete> 
 </mapper>

@@ -1,16 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
          <!-- // Navigation -->
-
-
-
-    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
+
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="/resources/js/upload.js"></script>
+<script
+	src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+<link rel="stylesheet" href="/resources/dist/css/join.css">
 <title>Insert title here</title>
 
 
@@ -18,6 +19,25 @@
 <style>
 select.form-control:not([size]):not([multiple]) {
     height: calc(2.25rem + 11px);
+}
+#valid {
+	background-color: #5bc0de;
+	border: 1px solid black;
+	margin-right: 10px;
+}
+
+#valid:hover {
+	background-color: #31b0d5;
+	border-color: #269abc;
+}
+
+.btn {
+	padding: 5px 20px !important;
+	margin-left: 20px !important;
+}
+
+.btn-xs {
+	margin-top: 5px;
 }
 
 </style>
@@ -302,22 +322,50 @@ select.form-control:not([size]):not([multiple]) {
 	})
 </script>
 
+
 <body>
-		<div class="container">
-	            <div class="row">
-	            <div class="col-md-8">
-	                   
-	                <h1 class="entry-title"><span>Sign Up</span> </h1>
-	                <hr>
-	                    <form class="form-horizontal" action="/join" method="post" name="signup" id="signup" enctype="multipart/form-data" >        
-	                <div class="form-group">
-	                  <label class="control-label col-sm-3">Email ID <span class="text-danger">*</span></label>
+
+<%@include file="nav.jsp"%>
+
+            <header class="page-head" style="background:url(/resources/assets/img/portfolio-bg.jpg);">
+                <div class="header-wrapper">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+
+                                <ol class="breadcrumb">
+                                    <li><a href="/study/main">Home</a></li>
+                                    <li class="active">Sign Up</li>
+                                </ol> <!-- end of /.breadcrumb -->
+
+                            </div>
+                        </div>
+                    </div> <!-- /.container -->
+                </div> <!-- /.header-wrapper -->
+            </header> <!-- /.page-head (header end) -->
+
+	<div class="main">
+			<!-- MAIN CONTENT -->
+			<div class="main-content" style="background-color: #f9f9f9">
+				<div class="container">
+					<h3 class="page-title">가입하기</h3>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="panel">
+								<div class="panel-body">
+									 <form class="form-horizontal" action="/join" method="post" name="signup" id="signup" enctype="multipart/form-data" >
+										<table class="table table-hover">
+						
+												<tr>
+													<th>Email ID </th>
+													<td>
+			                <div class="form-group">
 	                  <div class="col-md-8 col-sm-9">
 	                    <div class="input-group">
 	                   	 	<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
 	                    	<input class="form-control" style = "width:160px" id = "email1" type="text" placeholder="아이디를 입력하세요" name="email1">
-		              		<input class="form-control" style = "width:140px" id = "email2" type="text" placeholder="주소값 직접입력" name="email1">
-		              		<select id="selectEmail" class = "form-control" style = "width:130px;"> 
+		              		<input class="form-control" style = "width:140px; margin-left:5px;" id = "email2" type="text" placeholder="주소값 직접입력" name="email1">
+		              		<select   id="selectEmail" class = "form-control" style = "width:130px; height: calc(2.25rem + 11px);"> 
 								<option id = "selectEmail1" selected>직접입력</option>
 								<option id = "selectEmail2">naver.com</option>
 								<option id = "selectEmail3">daum.net</option>
@@ -329,8 +377,16 @@ select.form-control:not([size]):not([multiple]) {
 	                    <small> Your Email Id is being used for ensuring the security of your account, authorization and access recovery. </small> </div>
 	                </div>
 	                <input  id = "email" type="text" name="email" style = "position: absolute; visibility: hidden;" />
-	                <div class="form-group">
-	                  <label class="control-label col-sm-3">Set Password <span class="text-danger">*</span></label>
+	                
+	                
+					</td>
+					</tr>
+					</table>
+					<table class="table table-hover">
+					<tr>
+					<th>Set Password</th>
+					<td>
+					<div class="form-group">   
 	                  <div class="col-md-5 col-sm-8">
 	                    <div class="input-group">
 	                      <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
@@ -339,8 +395,7 @@ select.form-control:not([size]):not([multiple]) {
 	                  </div>
 	                  <small id = "pwcheck" style = "color:red">비밀번호를 입력하세요</small>
 	                </div>
-	                <div class="form-group">
-	                  <label class="control-label col-sm-3">Confirm Password <span class="text-danger">*</span></label>
+	                <div class="form-group">          
 	                  <div class="col-md-5 col-sm-8">
 	                    <div class="input-group">
 	                      <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
@@ -349,30 +404,47 @@ select.form-control:not([size]):not([multiple]) {
 	                  </div>
 	                  <small id = "pwcheck2" style = "color:red">비밀번호를 재입력하세요</small>
 	                </div>
-	                <div class="form-group">
-	                  <label class="control-label col-sm-3">Full Name <span class="text-danger">*</span></label>
+			</tr>										
+												<tr>
+													<th>Name</th>
+													<td>
+													  <div class="form-group">
+	                
 	                  <div class="col-md-8 col-sm-9">
 	                    <input type="text" id = "name" class="form-control" name="name" id="mem_name" placeholder="Enter your Name here" value="">
 	                  </div>
 	                </div>
 	                <div class="form-group">
-	                  <label class="control-label col-sm-3">Nick Name <span class="text-danger">*</span></label>
+	                  
 	                  <div class="col-md-8 col-sm-9">
 	                    <input type="text" class="form-control" name="nickName" id="nickName" placeholder="Enter your NICKNAME here" value="">
 	                    <input type="button" id="chkNickname" value="중복체크" />
 	                    <p id = "nickNamecheck" style = "color:red"></p>
 	                  </div>
 	                </div>
-	                          
-	                <div class="form-group">
-	                  <label class="control-label col-sm-3">Date of Birth <span class="text-danger">*</span></label>
+													</td>
+												</tr>
+												<tr>
+													<th>Date of Birth</th>
+													<!-- 아래 방장은 나중에 세션으로 전송 -->
+													<%-- <td><input name="writer" value="${studyVO.writer}"></td> --%>
+													<td>
+													
+													 <div class="form-group">
+	                  
 	                  <div class="col-md-8 col-sm-9">
 	                    <input type="text" id = "birth" class="form-control" name="birth" placeholder="Enter Your Birth(ex.901111)" value="">
 	                  </div>
 	                </div>
-	                
-	                <div class="form-group">
-	                  <label class="control-label col-sm-3">Gender <span class="text-danger">*</span></label>
+													
+													</td>
+												</tr>
+	
+												<tr>
+													<th>Gender</th>
+													<td>
+													  <div class="form-group">
+	                  
 	                  <div class="col-md-8 col-sm-9">
 	                    <label>
 	                    <input name="gender" type="radio" value="1" checked>
@@ -383,8 +455,14 @@ select.form-control:not([size]):not([multiple]) {
 	                    Female </label>
 	                  </div>
 	                </div>
-	                <div class="form-group">
-	                  <label class="control-label col-sm-3">Contact No. <span class="text-danger">*</span></label>
+													</td>
+												</tr>
+												<tr>
+
+													<th>Contact No.</th>
+													<td>
+														                <div class="form-group">
+	                  
 	                  <div class="col-md-5 col-sm-8">
                       	<div class="input-group">
 	                      <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
@@ -398,7 +476,7 @@ select.form-control:not([size]):not([multiple]) {
 	                  <input type = "text" id = "phoneNum" name = "phoneNum" style="visibility: hidden; position: absolute;">
 	                </div>
 	                <div class="form-group">
-	                  <label class="control-label col-sm-3">Security Code </label>
+	               
 	                  <div class="col-md-5 col-sm-8">
 	                    <div >
 	                        <input type="text" name="smsText" id="smsText" placeholder = "인증번호를 입력하세요" class="form-control label-warning"  />
@@ -409,17 +487,37 @@ select.form-control:not([size]):not([multiple]) {
 	                <div class="form-group">
 	                  <div class="col-xs-offset-3 col-md-8 col-sm-9"><span class="text-muted"><span class="label label-danger">Note:-</span> By clicking Sign Up, you agree to our <a href="#">Terms</a> and that you have read our <a href="#">Policy</a>, including our <a href="#">Cookie Use</a>.</span> </div>
 	                </div>
-	                <div class="form-group">
-	                  <div class="col-xs-offset-3 col-xs-10">
-	                    <input id = "valid" name="valid" type="button" value="Sign Up" class="btn btn-primary">
-	                  </div>
-	                </div>
-	              </form>
-	            </div>
-	        </div>
-	        </div>	
-</body>
+													</td>
+												</tr>
+		
+										</table>
+										<!-- 일등록 핸들러 -->
 
+										<div class="text-right">
+											<!-- <button type="submit" id="btn-success" class = "btn btn-success" style="background-color:#5bc0de; border:1px solid black;">등록</button> -->
+											<input id = "valid" name="valid" type="button" value="등록" class="btn btn-primary">
+											<!-- <input type="submit" id = "insertBtn" class = "btn btn-success" value = "등록" /> -->
+										</div>
+									</form>
+
+								</div>
+								<!-- panel-body end -->
+
+
+								<!-- panel-body end -->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- END MAIN CONTENT -->
+		</div>
+		<!-- END MAIN -->
+	</div>	
 	
+	        
+<%@include file="footer.jsp"%>	        
+	        
+</body>
 
 </html>

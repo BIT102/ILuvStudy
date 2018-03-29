@@ -55,8 +55,8 @@
 
 <!-- bno값 유지하자 -->
 <form role="form" method="post">
-	<input type="hidden" name="bno" id="bno" value="${studyVO.bno}">
-	<input type="hidden" name="writer" id="writer" value="${studyVO.writer}">
+ 	<input type="hidden" name="bno" id="bno" value="${studyVO.bno}">
+	<%-- <input type="hidden" name="writer" id="writer" value="${studyVO.writer}" --%>>
 	<input type="hidden" name="now" id="studyNow" value="${studyVO.now}">
 	<input type="hidden" name="max" id="studyMax" value="${studyVO.max}">
 </form>
@@ -246,10 +246,65 @@
                 <p>${studyVO.nickname}</p>   
    				
                 <!-- 북마크 -->
+				
                 	좋아용/나빠용
-                <i class="fa fa-heart-o" onclick="myFunction(this)"></i>
-
-<script>
+               <!-- 로그인 했을때 -->
+ 
+           		<c:forEach items="${bolist}" var="book" varStatus="status">
+           		<c:if test="${not empty login}">
+					<script>
+					${book}
+					${studyVO.bno}
+					${book.bsBno}
+					${book.userEmail}
+					${login.email}
+					</script>
+	
+				<c:if test="${(studyVO.bno eq book.bsBno) and (book.userEmail eq login.email)}">
+				<i class="fa fa-heartbeat" onclick="myFunction(this)"></i>
+				</c:if>
+				<c:if test="${(studyVO.bno ne book.bsBno) and (book.userEmail ne login.email) and (status.first)}">
+				 
+				<i class="fa fa-heart-o" onclick="myFunction(this)"></i>
+				</c:if>
+				</c:if>
+				</c:forEach>
+		
+           			
+  		
+           		
+           		
+        <%--    		<c:choose>
+   				<c:when test="${empty login}">
+   					<c:if test="${login.email ne book.userEmail}">
+               	 <i class="fa fa-heart-o" onclick="myFunction(this)"></i>
+                	</c:if>
+                	</c:when>
+                <c:otherwise>
+        
+                	<c:if test="${login.email eq book.userEmail}">
+               		<i class="fa fa-heartbeat" onclick="myFunction(this)"></i>	
+                 	</c:if>
+                 	<i class="fa fa-heart-o" onclick="myFunction(this)"></i>
+                </c:otherwise>
+                </c:choose> --%>
+<%-- 
+				<c:if test="${login.email eq book.userEmail}">
+				<i class="fa fa-heartbeat" onclick="myFunction(this)"></i>
+				</c:if>   	
+    --%>
+   		
+ <%--          		<c:choose>
+           		
+            		
+           		<c:when test="${login.email ne book.userEmail}">
+				</c:when>
+				<c:otherwise>				
+                <i class="fa fa-heartbeat" onclick="myFunction(this)"></i>
+                </c:otherwise>
+                </c:choose>
+           		</c:forEach> --%>
+ <script>
 	//북마크
 	//홀수이면 등록 짝수이면 삭제
 	var count = 0;
@@ -304,7 +359,7 @@ function myFunction(x) {
 }	
 	
 </script>               
- 
+
             </div>
 
             <table>

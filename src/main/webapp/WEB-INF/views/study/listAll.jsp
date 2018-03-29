@@ -48,7 +48,6 @@
 .select, .download-target {
 	width: 20em;
 }
-
 .select {
 	position: relative;
 	display: block;
@@ -70,7 +69,6 @@
 	border: 1px solid #667780;
 	margin: 1em 5px;
 }
-
 select {
 	width: 100%;
 	height: 100%;
@@ -79,11 +77,9 @@ select {
 	color: #fff;
 	cursor: pointer;
 }
-
 select::-ms-expand {
 	display: none;
 }
-
 .select::after {
 	content: '\25BC';
 	position: absolute;
@@ -94,17 +90,14 @@ select::-ms-expand {
 	background: #34495e;
 	pointer-events: none;
 }
-
 .select:hover::after {
 	color: #f39c12;
 }
-
 .select::after {
 	-webkit-transition: .25s all ease;
 	-o-transition: .25s all ease;
 	transition: .25s all ease;
 }
-
 #keywordInput {
 	width: 300px;
 	height: 40px;
@@ -114,13 +107,29 @@ select::-ms-expand {
 	border-bottom: 2px solid black;
 	background-color: transparent;
 }
-
 #select2 {
 	display: none;
 }
-
 #select3 {
 	display: none;
+}
+.contentB {
+	border: 1px solid #dadada;
+}
+.text-center1 {
+	text-align: center;
+}
+/*페이지 처리*/
+.pagination>li>a, .pagination>li>span {
+	margin: 8px;
+	color: #6b456a !important;
+}
+.pagination>.active>a {
+	z-index: 2;
+	color: white !important;
+	background-color: black !important;
+	border-color: white !important;
+	cursor: default;
 }
 </style>
 
@@ -128,17 +137,17 @@ select::-ms-expand {
 
 <body>
 	<%@include file="../nav.jsp"%>
-<div id="gallery-page">
-<!-- header begin -->
-            <header class="page-head">
+	
+	
+            <header class="page-head"  style="background:url(/resources/assets/img/multiple_blog-bg.jpg);">
                 <div class="header-wrapper">
                     <div class="container">
                         <div class="row">
                             <div class="col-md-12">
 
                                 <ol class="breadcrumb">
-                                    <li><a href="main">Home</a></li>
-                                    <li class="active">listAll</li>
+                                    <li><a href="/study/main">Home</a></li>
+                                    <li class="active">List All</li>
                                 </ol> <!-- end of /.breadcrumb -->
 
                             </div>
@@ -148,26 +157,27 @@ select::-ms-expand {
             </header> <!-- /.page-head (header end) -->
 
 
+
 	<!--  begin portfolio section  -->
 	<section class="bg-light-gray">
 		<div class="container">
 			<div class="row">
 				<form>
-					<div class="dropdown"">
+					<div class="dropdown">
 						<select class="dropdown-select-version select" id="select1"
-							name="options"  style="float: right;">
+							name="options" style="float: right;">
 							<option value="">--</option>
 							<option value="x">전체</option>
 							<option value="t"
-							<c:out value="${cri.searchType eq 't'? 'selected' : ''}"/>>제목</option>
+								<c:out value="${cri.searchType eq 't'? 'selected' : ''}"/>>제목</option>
 							<option value="n"
-							<c:out value="${cri.searchType eq 'n'? 'selected' : ''}"/>>닉네임</option>
+								<c:out value="${cri.searchType eq 'n'? 'selected' : ''}"/>>닉네임</option>
 							<option value="g"
-							<c:out value="${cri.searchType eq 'g'? 'selected' : ''}"/>>카테고리</option>
+								<c:out value="${cri.searchType eq 'g'? 'selected' : ''}"/>>카테고리</option>
 							<option value="r"
-							<c:out value="${cri.searchType eq 'r'? 'selected' : ''}"/>>지역</option>
+								<c:out value="${cri.searchType eq 'r'? 'selected' : ''}"/>>지역</option>
 							<option value="c"
-							<c:out value="${cri.searchType eq 'c'? 'selected' : ''}"/>>내용</option>
+								<c:out value="${cri.searchType eq 'c'? 'selected' : ''}"/>>내용</option>
 						</select>
 					</div>
 				</form>
@@ -201,10 +211,21 @@ select::-ms-expand {
 								<div class="item-image">
 									<a
 										href="/study/board${pageMakerStudy.makeSearch(pageMakerStudy.cri.page)}&bno=${studyVO.bno}">
-										<img src="/study/displayFile?fileName=${studyVO.name}"
-										class="img-responsive center-block"
-										alt="/resources/assets/img/nologin.png"
-										style="width: 370px; height: 216px;">
+
+
+										<c:choose>
+											<c:when test="${studyVO.name ne 'a'}">
+												<img src="/study/displayFile?fileName=${studyVO.name}"
+													class="img-responsive center-block"
+													style="width: 370px; height: 216px;">
+											</c:when>
+											<c:otherwise>
+												<img src="/resources/assets/img/ha.jpg"
+													class="img-responsive center-block"
+													style="width: 370px; height: 216px;">
+											</c:otherwise>
+										</c:choose>
+
 										<div>
 											<span><i class="fa fa-plus"></i></span>
 										</div>
@@ -239,34 +260,34 @@ select::-ms-expand {
 				</div>
 			</div>
 			<!-- end of portfolio-item-list -->
-</div>
+
 		</div>
 	</section>
 	<!--   end of portfolio section  -->
 
 	<!-- paging -->
+	<div class="text-center1">
+		<ul class="pagination">
+			<c:if test="${pageMakerStudy.prev}">
+				<li><a
+					href="listAll${pageMakerStudy.makeSearch(pageMakerStudy.startPage - 1)}">&laquo;</a></li>
+			</c:if>
 
-	<ul class="pager">
-		<c:if test="${pageMakerStudy.prev}">
-			<li><a
-				href="listAll${pageMakerStudy.makeSearch(pageMakerStudy.startPage - 1)}">&laquo;</a></li>
-		</c:if>
+			<c:forEach begin="${pageMakerStudy.startPage}"
+				end="${pageMakerStudy.endPage}" var="idx">
+				<li
+					<c:out value="${pageMakerStudy.cri.page == idx?'class=active':''}"/>>
+					<a href="listAll${pageMakerStudy.makeSearch(idx)}">${idx}</a>
+				</li>
+			</c:forEach>
 
-		<c:forEach begin="${pageMakerStudy.startPage}"
-			end="${pageMakerStudy.endPage}" var="idx">
-			<li
-				<c:out value="${pageMakerStudy.cri.page == idx?'class=active':''}"/>>
-				<a href="listAll${pageMakerStudy.makeSearch(idx)}">${idx}</a>
-			</li>
-		</c:forEach>
-
-		<c:if test="${pageMakerStudy.next && pageMakerStudy.endPage>0 }">
-			<li><a
-				href="listAll${pageMakerStudy.makeSearch(pageMakerStudy.endPage +1)}">&raquo;</a>
-			</li>
-		</c:if>
-	</ul>
-
+			<c:if test="${pageMakerStudy.next && pageMakerStudy.endPage>0 }">
+				<li><a
+					href="listAll${pageMakerStudy.makeSearch(pageMakerStudy.endPage +1)}">&raquo;</a>
+				</li>
+			</c:if>
+		</ul>
+	</div>
 
 
 
@@ -285,13 +306,11 @@ select::-ms-expand {
 	<!-- script for portfolio section using hoverdirection -->
 	<script type="text/javascript">
 		$(function() {
-
 			$('.portfolio-item > .item-image').each(function() {
 				$(this).hoverdir({
 					hoverDelay : 75
 				});
 			});
-
 		});
 	</script>
 
@@ -307,7 +326,6 @@ select::-ms-expand {
 				}
 			});
 		});
-
 		$(document).on(
 				'click',
 				'.btn-select',
@@ -333,7 +351,6 @@ select::-ms-expand {
 						$(this).addClass("active");
 					}
 				});
-
 		$(document).on('click', function(e) {
 			var target = $(e.target).closest(".btn-select");
 			if (!target.length) {

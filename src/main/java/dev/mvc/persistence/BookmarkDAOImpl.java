@@ -10,6 +10,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import dev.mvc.domain.BookmarkVO;
+import dev.mvc.domain.StudyVO;
+
+
 
 @Repository
 public class BookmarkDAOImpl implements BookmarkDAO {
@@ -25,10 +28,17 @@ public class BookmarkDAOImpl implements BookmarkDAO {
 		session.insert(namespace+".createBookmark", vo);
 	}
 	
-	//북마크 불러오기
-	public List<BookmarkVO> list(Integer bsBno) throws Exception {
-		return session.selectList(namespace+".list");
+	@Override
+	public List<StudyVO> list(String writer) throws Exception {
+		return session.selectList(namespace+".list", writer);
 	}
+	
+	@Override
+	public List<BookmarkVO> bolist() throws Exception {
+		return session.selectList(namespace+".bolist");
+	}
+	
+	
 	//북마크 취소하기
 	@Override
 	public void delete(Integer bsBno, String userEmail) throws Exception {
