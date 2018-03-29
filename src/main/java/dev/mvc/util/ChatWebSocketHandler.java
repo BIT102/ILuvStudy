@@ -36,12 +36,12 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 	// @param websocketsession 접속 사용자
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-		logger.info(session.getId()+"님 접속");
-		logger.info("연결 ip : "+session.getRemoteAddress().getHostName());
-
+		
 		users.put(session.getId(), session);
 		connectedUsers.add(session);
-		
+
+		logger.info(session.getId()+"님 접속");
+		logger.info("연결 ip : "+session.getRemoteAddress().getHostName());
 	}
 	
 	// 클라이언트가 서버와 연결 종료
@@ -67,6 +67,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 		//payload = 사용자가 보낸 메시지
 		logger.info(session.getId()+ " 님이 메시지 전송"+message.getPayload());
 		
+		//연결된 모든 클라이언트에게 메시지 전송
 		for(WebSocketSession webSocketSession : connectedUsers){
 			//보낸 사용자는 받지 않기 위한 조건문
 			if(!session.getId().equals(webSocketSession)){

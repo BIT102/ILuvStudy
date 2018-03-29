@@ -324,9 +324,6 @@ select.form-control:not([size]):not([multiple]) {
 
 
 <body>
-
-<%@include file="nav.jsp"%>
-
             <header class="page-head" style="background:url(/resources/assets/img/portfolio-bg.jpg);">
                 <div class="header-wrapper">
                     <div class="container">
