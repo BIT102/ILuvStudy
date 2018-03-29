@@ -14,9 +14,9 @@
     .profile{width:150px; height:50px;}
    
     #div1{display:inline-block;}    
-    #div2{text-align: center;}
+    #div2{display:inline-block;}
     #div2 div{float:left; }
-    body{height:800px; width:1000px;}
+  /*   body{height:800px; width:1000px;} */
     body > div > p3 {text-align:left; font-size:30px; border-bottom:2px solid grey;  }
 
     #pfimage{  width:600px; height:50px; display:inline-block;
@@ -53,6 +53,29 @@
 
 
 <body>
+	<!-- // Navigation -->
+<%@include file="../nav.jsp"%>
+<!-- header begin -->
+<div id="about-page">
+            <header class="page-head">
+                <div class="header-wrapper">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+
+                                <ol class="breadcrumb">
+                                    <li><a href="/study/main">Home</a></li>
+                                    <li class="active">Profile</li>
+                                </ol> <!-- end of /.breadcrumb -->
+
+                            </div>
+                        </div>
+                    </div> <!-- /.container -->
+                </div> <!-- /.header-wrapper -->
+            </header> <!-- /.page-head (header end) -->
+</div>
+
+	<div class="text-center">
     <div id="div1"> 
         <div class="basic border">
             <a href="profile">기본정보 관리</a>
@@ -62,7 +85,9 @@
             <a href="bookmark">스터디 관리</a>
         </div>
        </div>
-
+       
+		<br>
+		
        <div id="div2">
             <div class="profile border">
                     <a href="bookmark">북마크</a></div>
@@ -74,6 +99,7 @@
                     <a href="completed">완료</a></div>
     
         </div>   
+    </div>
     <br>
     <br>
     <br>     
