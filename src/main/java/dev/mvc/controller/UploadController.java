@@ -106,6 +106,7 @@ public class UploadController {
 		return entity;
 		}
 	//데이터삭제
+	//허ㅏ하하하하
 	@ResponseBody
 	@RequestMapping(value="/deleteFile", method=RequestMethod.POST)
 	public ResponseEntity<String> deleteFile(String fileName) {
