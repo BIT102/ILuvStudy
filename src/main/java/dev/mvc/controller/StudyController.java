@@ -75,14 +75,14 @@ public class StudyController {
 		System.out.println("vo = "+vo);
 		
 		
-		if(vo.getTitle()==null||vo.getNow()==null||vo.getMax()==null||vo.getrDId()==null
+/*		if(vo.getTitle()==null||vo.getNow()==null||vo.getMax()==null||vo.getrDId()==null
 				||vo.getAge()==null||vo.getSc()==null||vo.getSd()==null||vo.getSt()==null||vo.getEt()==null) {
 			
 			rttr.addFlashAttribute("msg", "no");
 			return "redirect:/study/register";
 		} else {
-			service.regist(vo);
-		}		
+		}		*/
+		service.regist(vo);
 		return "redirect:/study/main";
 	}
 
@@ -210,23 +210,11 @@ public class StudyController {
 		map.put("writer", email);
 		map.put("bsbno", bno);
 		
-		List<BookmarkVO> vo = bookservice.bolist(map);
+
+		bookservice.bolist(map);
 		
-		System.out.println("!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-		System.out.println(vo);
-		System.out.println("!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-		
-		int result;
-		
-		
-		
-		if(vo!=null){
-			result = 1;
-		} else {
-			result = 0;
-		} 
-		
-		model.addAttribute("bolist", result);
+		//북마크 넘긴다요 
+		model.addAttribute("bolist",bookservice.bolist(map));
 		
 		model.addAttribute(service.read(bno));
 		

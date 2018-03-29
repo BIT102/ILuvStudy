@@ -14,7 +14,10 @@ public interface BookmarkService {
 	
 	
 	//북마크vo에 북마크
-	public List<BookmarkVO> bolist(Map<String, Object> map) throws Exception;
+	/*public List<BookmarkVO> bolist(Map<String, Object> map) throws Exception;*/
+	
+	//sohee 수정
+	public BookmarkVO bolist(Map<String, Object> map) throws Exception;
 	
 	//북마크 불러오기
 	public List<StudyVO> listBookmark(String writer) throws Exception;

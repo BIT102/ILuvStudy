@@ -18,11 +18,19 @@ public class BookmarkServiceImpl implements BookmarkService {
 	private BookmarkDAO dao;
 	
 	
-	@Override
+/*	@Override
 	public List<BookmarkVO> bolist(Map<String, Object> map) throws Exception {
 		
 		return dao.bolist(map);
+	}*/
+	
+	//sohee 수정
+	@Override
+	public BookmarkVO bolist(Map<String, Object> map) throws Exception {
+		
+		return dao.bolist(map);
 	}
+	
 	
 	//북마크등록
 	@Override

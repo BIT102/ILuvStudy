@@ -33,11 +33,15 @@ public class BookmarkDAOImpl implements BookmarkDAO {
 		return session.selectList(namespace+".list", writer);
 	}
 	
-	@Override
+/*	@Override
 	public List<BookmarkVO> bolist(Map<String, Object> map) throws Exception {
 		return session.selectList(namespace+".bolist", map);
-	}
+	}*/
 	
+	@Override
+	public BookmarkVO bolist(Map<String, Object> map) throws Exception{
+		return session.selectOne(namespace+".bolist",map);
+	}
 	
 	//북마크 취소하기
 	@Override
