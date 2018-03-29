@@ -18,7 +18,7 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 		
 
-			<!-- DB위치 및 접근 설정 -->	
+	<!-- AWS 연동 -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 	  	<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
 	  	<property name="url" value="jdbc:log4jdbc:mysql://iluvstudy.cbcc3lju935r.ap-northeast-2.rds.amazonaws.com:3306/ILuvStudy?useSSL=false&amp;serverTimezone=UTC&amp;characterEncoding=utf-8"></property>
@@ -74,6 +74,22 @@
 	<context:component-scan base-package="dev.mvc.service"></context:component-scan>
 	<context:component-scan base-package="dev.mvc.domain"></context:component-scan>
 
+
+	<!-- 구글 로그인 api -->
+	<!-- google Class Bean설정 추가 -->
+	<bean id="googleConnectionFactory" class="org.springframework.social.google.connect.GoogleConnectionFactory">
+	<!-- 클라이언트ID와 보안비밀 세팅 -->
+  	<constructor-arg value="310175204484-mmp30972ck0e5jba6cdsr9vof5qutjqi.apps.googleusercontent.com" />
+  	<constructor-arg value="KlsL7JXg1efJvKygPDU_q_ad" />
+	</bean>
+	<!-- 승인된 자바스크립트 원본과 승인된 리디렉션 URI -->
+	<bean id="googleOAuth2Parameters" class="org.springframework.social.oauth2.OAuth2Parameters">
+  	<property name="scope" value="https://www.googleapis.com/auth/plus.login
+  		https://www.googleapis.com/auth/userinfo.email"/>
+  	<property name="redirectUri" value="http://localhost:8888/googleSignInCallback" />
+	</bean>
 	
+	<!-- 소켓 -->
+	<bean id="socketController" class="dev.mvc.controller.SocketController"/>
 </beans>
 

@@ -25,40 +25,102 @@ public class UserServiceImpl implements UserService {
 	private JavaMailSender mailSender;
 	
 	//회원가입
-	@Override
-	public void joinUser(UserVO vo) throws Exception {
-		dao.joinUser(vo);
-	}
+		@Override
+		public void joinUser(UserVO vo) throws Exception {
+			dao.joinUser(vo);
+		}
 
-	// 프로필 회원정보 읽어오기
-	@Override
-	public UserVO read(String email) throws Exception {
-		return dao.read(email);
-	}
+		// 프로필 회원정보 읽어오기
+		@Override
+		public UserVO read(String email) throws Exception {
+			return dao.read(email);
+		}
 
-	// 프로필 회원 정보 수정
-	@Override
-	public void update(UserVO vo) throws Exception {
-		dao.update(vo);
-	}
+		// 프로필 회원 정보 수정
+		@Override
+		public void update(UserVO vo) throws Exception {
+			dao.update(vo);
+		}
 
-	// 개인 부가 정보 수정
-	@Override
-	public void updateAddInfo(UserVO vo) throws Exception {
-		dao.updateAddInfo(vo);
-	}
+		// 개인 부가 정보 수정
+		@Override
+		public void updateAddInfo(UserVO vo) throws Exception {
+			dao.updateAddInfo(vo);
+		}
 
-	// 비밀번호 변경
-	@Override
-	public void changePw(UserVO vo) throws Exception {
-		dao.changePw(vo);
-	}
+		// 비밀번호 변경
+		@Override
+		public void changePw(UserVO vo) throws Exception {
+			dao.changePw(vo);
+		}
 
-	// 사용자 탈퇴
-	@Override
-	public void quit(UserVO vo) throws Exception {
-		dao.quit(vo);
-	}
+		// 사용자 탈퇴
+		@Override
+		public void quit(UserVO vo) throws Exception {
+			dao.quit(vo);
+		}
+		
+		// 닉네임 중복 체크
+		@Override
+		public int nickCheck(String nickName) throws Exception {
+			return dao.nickCheck(nickName);
+		}
+		
+		// 프로필 사진 수정
+		@Override
+		public void insertImg(UserVO vo) throws Exception { // data = 값이. 단순히 변수명인데 헷갈려함. 바보바보. 기대값은 이미지 이름
+			dao.insertImg(vo);
+		}
+	/*	
+		// 북마크 불러오기
+		@Override
+		public List<StudyVO> bookmarkList(String email) throws Exception {
+			
+			dao.bookmarkList(email); // 이게 리스트고
+//			System.out.println("북마크리스트:"+dao.bookmarkList(email));
+//			
+//			List<StudyVO> list = dao.bookmarkList(email); 
+//			list.get(0);
+//			System.out.println("리스트:"+list);
+//			System.out.println("리스트0번째-"+list.get(0));
+//			System.out.println("북마크리스트22:"+list.get(0).getBno());
+//			
+//			dao.bookmarkCount(list.get(0).getBno());
+//			System.out.println("북마크개수:"+dao.bookmarkCount(list.get(0).getBno()));
+
+			List<StudyVO> list = dao.bookmarkList(email);
+			System.out.println("리스트-"+list);
+			System.out.println("리스트0="+list.get(0));
+			
+			dao.bookmarkCount(list.get(0).getBno());
+			
+			return dao.bookmarkList(email);
+			
+		}
+		*/
+		
+		// 북마크 즐겨찾기 숫자
+		@Override
+		public int bookmarkCount(int bno) throws Exception {
+			return dao.bookmarkCount(bno);	
+		}
+		
+		@Override
+		public StudyVO bookmarkCount2(int bno) throws Exception {
+			
+			StudyVO vo = new StudyVO();
+			
+			System.out.println("브이오="+vo);
+			System.out.println(dao.bookmarkCount2(bno));
+			return dao.bookmarkCount2(bno);
+		
+		}
+		
+		//모집 스터디 불러오기
+		@Override
+		public List<StudyVO> recruitList(String email) throws Exception {
+			return dao.recruitList(email);
+		}
 	
 
 
@@ -152,5 +214,6 @@ public class UserServiceImpl implements UserService {
 	public void emailConf(String email)throws Exception{
 		dao.emailConf(email);
 	}
+	
 	
 }

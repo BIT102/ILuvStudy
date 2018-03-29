@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
@@ -56,8 +55,8 @@
 
 <!-- bno값 유지하자 -->
 <form role="form" method="post">
-	<input type="hidden" name="bno" id="bno" value="${studyVO.bno}">
-	<input type="hidden" name="writer" id="writer" value="${studyVO.writer}">
+ 	<input type="hidden" name="bno" id="bno" value="${studyVO.bno}">
+	<%-- <input type="hidden" name="writer" id="writer" value="${studyVO.writer}" --%>>
 	<input type="hidden" name="now" id="studyNow" value="${studyVO.now}">
 	<input type="hidden" name="max" id="studyMax" value="${studyVO.max}">
 </form>
@@ -152,25 +151,30 @@
                                  <div class="comments">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <h3>2 Comments</h3>
-                                            <div class="cmnt-clipboard"><span class="btn-clipboard">Reply</span></div>
+                                             <h3 id="replies2"></h3>
+                                       
+                             <% int replycnt=0; %>               
+                 <!-- ===================SOHEE 댓글 정보 추가==================== -->                     
+                                 <c:forEach items="${list}" var="replyStudyVO">
+                                            <!-- <div class="cmnt-clipboard"><span class="btn-clipboard">Reply</span></div> -->
                                             <div class="well">
                                                 <div class="row">
-                                                    <div class="col-md-2">
+                                                   <!--  <div class="col-md-2">
                                                         <img src="assets/img/commenter1.jpg" class="img-responsive center-block" alt="first-comment">
-                                                    </div>
+                                                    </div> -->
                                                     <div class="col-md-10">
                                                         <p class="comment-info">
-                                                            <strong>Reena Scot</strong> <span>22 april 2015</span>
+                                                            <strong>${replyStudyVO.writer}</strong> <span><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${replyStudyVO.regdate}"/></span>
                                                         </p>
-                                                        <p>
-                                                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since they 1500s.
-                                                        </p>
+                                                        <p>${replyStudyVO.content}</p>
                                                     </div>
                                                 </div>
                                             </div>
+                                            <% replycnt++; %>
+                                  </c:forEach>
+                    <!-- ===================댓글 정보 추가 끝==================== -->
                                             
-                                            <div class="cmnt-clipboard"><span class="btn-clipboard">Reply</span></div>
+                                            
                                             <!-- handlebar template 문법-->
 											<script id="template" type="text/x-handlebars-template">
                                             	{{#each .}}   
@@ -242,10 +246,65 @@
                 <p>${studyVO.nickname}</p>   
    				
                 <!-- 북마크 -->
+				
                 	좋아용/나빠용
-                <i class="fa fa-heart-o" onclick="myFunction(this)"></i>
-
-<script>
+               <!-- 로그인 했을때 -->
+ 
+           		<c:forEach items="${bolist}" var="book" varStatus="status">
+           		<c:if test="${not empty login}">
+					<script>
+					${book}
+					${studyVO.bno}
+					${book.bsBno}
+					${book.userEmail}
+					${login.email}
+					</script>
+	
+				<c:if test="${(studyVO.bno eq book.bsBno) and (book.userEmail eq login.email)}">
+				<i class="fa fa-heartbeat" onclick="myFunction(this)"></i>
+				</c:if>
+				<c:if test="${(studyVO.bno ne book.bsBno) and (book.userEmail ne login.email) and (status.first)}">
+				 
+				<i class="fa fa-heart-o" onclick="myFunction(this)"></i>
+				</c:if>
+				</c:if>
+				</c:forEach>
+		
+           			
+  		
+           		
+           		
+        <%--    		<c:choose>
+   				<c:when test="${empty login}">
+   					<c:if test="${login.email ne book.userEmail}">
+               	 <i class="fa fa-heart-o" onclick="myFunction(this)"></i>
+                	</c:if>
+                	</c:when>
+                <c:otherwise>
+        
+                	<c:if test="${login.email eq book.userEmail}">
+               		<i class="fa fa-heartbeat" onclick="myFunction(this)"></i>	
+                 	</c:if>
+                 	<i class="fa fa-heart-o" onclick="myFunction(this)"></i>
+                </c:otherwise>
+                </c:choose> --%>
+<%-- 
+				<c:if test="${login.email eq book.userEmail}">
+				<i class="fa fa-heartbeat" onclick="myFunction(this)"></i>
+				</c:if>   	
+    --%>
+   		
+ <%--          		<c:choose>
+           		
+            		
+           		<c:when test="${login.email ne book.userEmail}">
+				</c:when>
+				<c:otherwise>				
+                <i class="fa fa-heartbeat" onclick="myFunction(this)"></i>
+                </c:otherwise>
+                </c:choose>
+           		</c:forEach> --%>
+ <script>
 	//북마크
 	//홀수이면 등록 짝수이면 삭제
 	var count = 0;
@@ -300,7 +359,7 @@ function myFunction(x) {
 }	
 	
 </script>               
- 
+
             </div>
 
             <table>
@@ -848,6 +907,10 @@ $(document).ready(function(){
 		formObj.attr("method", "get");
 		formObj.submit();
 	});
+	
+	
+	//=========SOHEE 댓글 수 추가=============
+	$('#replies2').text("<%=replycnt%> Comments");
 	
 });
 </script>   

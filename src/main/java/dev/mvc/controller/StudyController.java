@@ -1,6 +1,8 @@
 package dev.mvc.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -14,7 +16,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,7 +28,8 @@ import dev.mvc.domain.PageMakerStudy;
 import dev.mvc.domain.SearchCriteriaStudy;
 import dev.mvc.domain.StudyVO;
 import dev.mvc.domain.UserVO;
-import dev.mvc.service.AdminService;
+import dev.mvc.service.ReplyStudyService;
+import dev.mvc.service.BookmarkService;
 import dev.mvc.service.StudyService;
 
 @Controller
@@ -39,8 +41,11 @@ public class StudyController {
 	@Inject
 	private StudyService service;
 
+	@Inject
+	private ReplyStudyService replyService;
 
-
+	@Inject
+	private BookmarkService bookservice;
 	
 	// 스터디 등록 김상욱 수정
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
@@ -67,9 +72,17 @@ public class StudyController {
 		
 		logger.info("register POST...........");
 		System.out.println("vo = "+vo);
-		service.regist(vo);
 		
-		return "redirect:/login";
+		
+		if(vo.getTitle()==null||vo.getNow()==null||vo.getMax()==null||vo.getrDId()==null
+				||vo.getAge()==null||vo.getSc()==null||vo.getSd()==null||vo.getSt()==null||vo.getEt()==null) {
+			
+			rttr.addFlashAttribute("msg", "no");
+			return "redirect:/study/register";
+		} else {
+			service.regist(vo);
+		}		
+		return "redirect:/study/main";
 	}
 
 	// JSON small카테고리(study) //URL /category/추가
@@ -116,19 +129,22 @@ public class StudyController {
 		System.out.println("=========================");
 		StudyVO vo = new StudyVO();
 
-		model.addAttribute("list", service.studyList());
 		
 		PageMakerStudy pageMakerStudy = new PageMakerStudy();
-
-		pageMakerStudy.setCri(cri);
-		model.addAttribute("list", service.listSearchCriteria(cri));
 		
-		model.addAttribute("rgList", service.rgList());
-		model.addAttribute("catList", service.catList());
+		
+		pageMakerStudy.setCri(cri);
+		
+
+				
+		model.addAttribute("pageMakerStudy", pageMakerStudy);
+		
+		
+		model.addAttribute("list", service.listSearchCriteria(cri));
 
 		pageMakerStudy.setTotalCount(service.listSearchCount(cri));
 
-		model.addAttribute("pageMakerStudy", pageMakerStudy);
+
 
 //3월 25일 머지 주석 처리
 		//model.addAttribute("list", service.studyList());
@@ -173,12 +189,34 @@ public class StudyController {
 	// 상세페이지
 	@RequestMapping(value = "/board", method = RequestMethod.GET)
 	public void readBoard(@RequestParam("bno") int bno, @ModelAttribute("cri") CriteriaStudy cri, Model model,
-			HttpServletRequest request)
-			throws Exception {
-
-		model.addAttribute(service.read(bno));
+			HttpServletRequest request) throws Exception {
+		
 		HttpSession session = request.getSession();
-		UserVO user = (UserVO)session.getAttribute("login");
+		UserVO sUser = (UserVO)session.getAttribute("login");
+		
+		if(sUser == null) {
+		model.addAttribute(service.read(bno));
+
+		model.addAttribute("list", replyService.listReply(bno));  //댓글 정보 가져옴
+
+		
+		} else {
+		
+		String email = sUser.getEmail();
+		
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("writer", email);
+		map.put("bsbno", bno);
+		
+		System.out.println("!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		System.out.println(map);
+		System.out.println(bookservice.bolist());
+		System.out.println("!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		
+		model.addAttribute(service.read(bno));
+		model.addAttribute("bolist", bookservice.bolist());
+		}
 	}
 
 	// 상세페이지 제거

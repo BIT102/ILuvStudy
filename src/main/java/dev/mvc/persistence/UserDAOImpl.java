@@ -62,6 +62,41 @@ public class UserDAOImpl implements UserDAO {
 		session.update(namespace+".quit", vo);
 	}
 
+	// 닉네임 중복 체크
+	@Override
+	public int nickCheck(String nickName) throws Exception {
+		return session.selectOne(namespace+".nickCheck", nickName);
+	}
+	
+	//프로필 사진 수정
+	@Override
+	public void insertImg(UserVO vo) throws Exception { //data가 여기서만
+		session.update(namespace+".insertImg", vo);
+	}
+	
+/*	//북마크 리스트 불러오기
+	@Override
+	public List<StudyVO> bookmarkList(String email) throws Exception {
+		return session.selectList(namespace+".bookmarkList", email);
+	}*/
+	
+	// 북마크 즐겨찾기 숫자
+	@Override
+	public int bookmarkCount(int bno) throws Exception {
+		return session.selectOne(namespace +".bookmarkCount", bno);
+	}
+	
+	@Override
+	public StudyVO bookmarkCount2(int bno) throws Exception {
+		return session.selectOne(namespace+".bookmarkCount", bno);
+	}
+	
+	//모집 스터디 불러오기
+	@Override
+	public List<StudyVO> recruitList(String email) throws Exception {
+		return session.selectList(namespace +".recruitList", email);
+	}
+
 	
 	
 
@@ -83,6 +118,7 @@ public class UserDAOImpl implements UserDAO {
 			session.update(namespace+".emailConf",email);
 			
 		}
+
 
 	
 }

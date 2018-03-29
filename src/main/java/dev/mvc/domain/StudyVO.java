@@ -23,8 +23,9 @@ public class StudyVO {
 //	BS_RCT	댓글수
 //	BS_REGDATE	올린 날짜
 //	BS_ENDDATE	스터디완료일
-	//우아아앙아아아아아아아아앙
-	//우우우우우우우우우아아아아아아아아아아아아아아아아아아앙
+// 	bookmarkCount	북마크(즐겨찾기 개수)		
+
+	
 	private Integer bno; 
 	private String title; 
 	private String writer; 
@@ -61,193 +62,271 @@ public class StudyVO {
 	private String name;
 	private String status;
 
+	private String userEmail;
+	
 	//파일 업로드
 	private String[] files;
 
 	//스터디 카테고리
 	private String cDId; 
 	private String cSId;
+	
+	// 북마크 카운트 수(영원)
+	private int bookmarkCount;
+
 	public Integer getBno() {
 		return bno;
 	}
+
 	public void setBno(Integer bno) {
 		this.bno = bno;
 	}
+
 	public String getTitle() {
 		return title;
 	}
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
+
 	public String getWriter() {
 		return writer;
 	}
+
 	public void setWriter(String writer) {
 		this.writer = writer;
 	}
-
+	
 	public String[] getCategoryD() {
 		return categoryD;
 	}
+
 	public void setCategoryD(String[] categoryD) {
 		this.categoryD = categoryD;
 	}
+
 	public String[] getCategoryS() {
 		return categoryS;
 	}
+
 	public void setCategoryS(String[] categoryS) {
 		this.categoryS = categoryS;
 	}
+
 	public Integer getNow() {
 		return now;
 	}
+
 	public void setNow(Integer now) {
 		this.now = now;
 	}
+
 	public Integer getMax() {
 		return max;
 	}
+
 	public void setMax(Integer max) {
 		this.max = max;
 	}
+
 	public String getrDId() {
 		return rDId;
 	}
+
 	public void setrDId(String rDId) {
 		this.rDId = rDId;
 	}
+
 	public Integer getrSId() {
 		return rSId;
 	}
+
 	public void setrSId(Integer rSId) {
 		this.rSId = rSId;
 	}
+
 	public String getAge() {
 		return age;
 	}
+
 	public void setAge(String age) {
 		this.age = age;
 	}
+
 	public String getSc() {
 		return sc;
 	}
+
 	public void setSc(String sc) {
 		this.sc = sc;
 	}
+
 	public String getSd() {
 		return sd;
 	}
+
 	public void setSd(String sd) {
 		this.sd = sd;
 	}
+
 	public String getSt() {
 		return st;
 	}
+
 	public void setSt(String st) {
 		this.st = st;
 	}
+
 	public String getEt() {
 		return et;
 	}
+
 	public void setEt(String et) {
 		this.et = et;
 	}
+
 	public String getContent() {
 		return content;
 	}
+
 	public void setContent(String content) {
 		this.content = content;
 	}
+
 	public Integer getVct() {
 		return vct;
 	}
+
 	public void setVct(Integer vct) {
 		this.vct = vct;
 	}
+
 	public Integer getRct() {
 		return rct;
 	}
+
 	public void setRct(Integer rct) {
 		this.rct = rct;
 	}
+
 	public Date getRegdate() {
 		return regdate;
 	}
+
 	public void setRegdate(Date regdate) {
 		this.regdate = regdate;
 	}
+
 	public Date getEnddate() {
 		return enddate;
 	}
+
 	public void setEnddate(Date enddate) {
 		this.enddate = enddate;
 	}
+
 	public String getrDName() {
 		return rDName;
 	}
+
 	public void setrDName(String rDName) {
 		this.rDName = rDName;
 	}
+
 	public String getrSName() {
 		return rSName;
 	}
+
 	public void setrSName(String rSName) {
 		this.rSName = rSName;
 	}
+
 	public String getcDName() {
 		return cDName;
 	}
+
 	public void setcDName(String cDName) {
 		this.cDName = cDName;
 	}
+
 	public String getcSName() {
 		return cSName;
 	}
+
 	public void setcSName(String cSName) {
 		this.cSName = cSName;
 	}
+
 	public String getNickname() {
 		return nickname;
 	}
+
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
+
 	public int getNo() {
 		return no;
 	}
+
 	public void setNo(int no) {
 		this.no = no;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public String getStatus() {
 		return status;
 	}
+
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	public String getUserEmail() {
+		return userEmail;
+	}
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
 	}
 	public String[] getFiles() {
 		return files;
 	}
+
 	public void setFiles(String[] files) {
 		this.files = files;
 	}
+
 	public String getcDId() {
 		return cDId;
 	}
+
 	public void setcDId(String cDId) {
 		this.cDId = cDId;
 	}
+
 	public String getcSId() {
 		return cSId;
 	}
+
 	public void setcSId(String cSId) {
 		this.cSId = cSId;
 	}
+
+	public int getBookmarkCount() {
+		return bookmarkCount;
+	}
+
+	public void setBookmarkCount(int bookmarkCount) {
+		this.bookmarkCount = bookmarkCount;
+	}
+
 	@Override
 	public String toString() {
 		return "StudyVO [bno=" + bno + ", title=" + title + ", writer=" + writer + ", categoryD="
@@ -256,8 +335,9 @@ public class StudyVO {
 				+ st + ", et=" + et + ", content=" + content + ", vct=" + vct + ", rct=" + rct + ", regdate=" + regdate
 				+ ", enddate=" + enddate + ", rDName=" + rDName + ", rSName=" + rSName + ", cDName=" + cDName
 				+ ", cSName=" + cSName + ", nickname=" + nickname + ", no=" + no + ", name=" + name + ", status="
-				+ status + ", files=" + Arrays.toString(files) + ", cDId=" + cDId + ", cSId=" + cSId + "]";
+				+ status + ", userEmail=" + userEmail + ", files=" + Arrays.toString(files) + ", cDId=" + cDId
+				+ ", cSId=" + cSId + ", bookmarkCount=" + bookmarkCount + "]";
 	}
-
+	
 }
 

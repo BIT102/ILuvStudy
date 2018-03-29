@@ -24,4 +24,9 @@ public interface LoginDAO {
 	// 아이디 찾기(전화번호로)
 	public String searchEmail(String phone)throws Exception;
 	
+	
+	//구글 로그인
+	public void googleLogin(UserVO vo)throws Exception;
+	//구글 로그인을 위한 아이디 찾기
+	public int googleSelect(UserVO vo)throws Exception;
 }

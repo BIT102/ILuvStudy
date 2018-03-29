@@ -5,23 +5,31 @@ import java.util.Date;
 //User테이블 VO
 public class UserVO {
 
-	private String email;
-	private String password;
-	private String name;
-	private String nickName;
-	private int gender;
-	private String phoneNum;
-	private int birth;
-	private String photo;
-	private String homepage;
-	private String introduction;
-	private Date registDate;
-	private Date modifyDate;
-	private Date quitDate;
-	private int isDel;
-	private int bno;
-	private int emailConf;
+	private String email; 				// 이메일
+	private String password;			 // 비밀번호
+	private String name; 				// 이름
+	private String nickName;			 // 닉네임
+	private int gender; 				// 성별 (1: 남자, 2: 여자)
+	private String phoneNum;			 // 전화번호
+	private int birth;  				// 생년월일
+	private String photo; 				// 사용자 사진
+	private String homepage;			// 사용자 홈페이지
+	private String introduction;		// 자기소개
+	private Date registDate;			// 회원가입일
+	private Date modifyDate;			// 회원 정보 수정일
+	private Date quitDate;				// 회원 탈퇴일
+	private int isDel;					// 탈퇴값 (0: 사용회원, 1: 탈퇴회원)
+	private int bno;					// 번호
+	private int emailConf;				// 이메일 인증 (0 : 미인증 , 1: 인증)
+	private String social;				// 소셜 로그인인 경우
 	
+	
+	public String getSocial() {
+		return social;
+	}
+	public void setSocial(String social) {
+		this.social = social;
+	}
 	public String getEmail() {
 		return email;
 	}
@@ -124,7 +132,7 @@ public class UserVO {
 				+ ", gender=" + gender + ", phoneNum=" + phoneNum + ", birth=" + birth + ", photo=" + photo
 				+ ", homepage=" + homepage + ", introduction=" + introduction + ", registDate=" + registDate
 				+ ", modifyDate=" + modifyDate + ", quitDate=" + quitDate + ", isDel=" + isDel + ", bno=" + bno
-				+ ", emailConf=" + emailConf + "]";
+				+ ", emailConf=" + emailConf + ", social=" + social + "]";
 	}
 	
 	

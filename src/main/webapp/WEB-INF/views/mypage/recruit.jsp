@@ -1,10 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>   
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<!-- include libraries(jQuery, bootstrap) -->
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
+
+<!-- include summernote css/js-->
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
 <title>모집 스터디</title>
     <style>
     .border{border:2px solid grey; }
@@ -93,17 +102,19 @@
                 <th> 조회수</th>
             </tr>
             <tr>
-                <td>1</td>
-                <td><a href="#">JAVA 스터디 모집해요</a></td>
+            <c:forEach items="{recruitList}" var="recruitList">
+                <td>{recruitList.bno}</td>
+                <td><a href="#">{recruitList.title}</a></td>
                 <td><button type="button">신청자 보기 </button></td>
-                <td><img src="/resources/dist/img/th.jpg" alt="김태희" width="100" height="100"></td>
-                <td>김태희</td>
-                <td>서울시 강남구</td>
-                <td>2018-02-21</td>
-                <td> 5 </td>
-                <td> 70 </td>
+                <td><img src="/study/displayFile?fileName=${recruitList.name}"></td>
+                <td>${bookmarkList.writer}</td>
+                <td>${bookmarkList.rDName} ${bookmarkList.rSName}</td>
+                <td>${bookmarkList.sd}</td>
+                <td>${bookmarkList.bookmarkCount}</td>
+                <td>${bookmarkList.vct}</td>
             </tr>
-            <tr>
+            </c:forEach>
+<!--             <tr>
                 <td>2</td>
                 <td><a href="#">SPRING 스터디 모집해요</a></td>
                 <td><button type="button">신청자 보기 </button></td>
@@ -113,7 +124,7 @@
                 <td>2018-04-21</td>
                 <td> 7 </td>
                 <td> 150 </td>
-            </tr>
+            </tr> -->
 
     </table>        
     

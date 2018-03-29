@@ -29,7 +29,7 @@ public class CriteriaStudy {
 		this.page = page;
 	}
 	public void setPerPageNum(int perPageNum){
-		if(perPageNum <= 0 || perPageNum > 99){
+		if(perPageNum <= 0 || perPageNum > 9){
 			this.perPageNum = 9;
 			return;
 		}

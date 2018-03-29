@@ -73,4 +73,17 @@ public class LoginDAOImpl implements LoginDAO{
 		return session.selectOne(namespace+".searchEmail",phone);
 	}
 	
+	
+	
+	//구글 로그인 api	
+	@Override
+	public void googleLogin(UserVO vo)throws Exception{
+		session.insert(namespace+".googleLogin", vo);
+	}
+	
+	//구글 로그인을 위한 아이디 찾기
+	@Override
+	public int googleSelect(UserVO vo)throws Exception{
+		return session.selectOne(namespace + ".googleSelect", vo);
+	}
 }

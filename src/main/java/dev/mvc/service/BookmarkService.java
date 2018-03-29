@@ -1,18 +1,25 @@
 package dev.mvc.service;
 
 import java.util.List;
+import java.util.Map;
 
 import dev.mvc.domain.BookmarkVO;
+import dev.mvc.domain.StudyVO;
+
 
 public interface BookmarkService {
 
 	//ºÏ¸¶Å© µî·Ï
 	public void addBookmark(BookmarkVO vo) throws Exception;
 	
-	//ºÏ¸¶Å© ºÒ·¯¿À±â
-	public List<BookmarkVO> listBookmark(Integer bsBno) throws Exception;
 	
-	//ºÏ¸¶Å© Ãë¼Ò
+	//ºÏ¸¶Å©vo¿¡ ºÏ¸¶Å©
+	public List<BookmarkVO> bolist() throws Exception;
+	
+	//ºÏ¸¶Å© ºÒ·¯¿À±â
+	public List<StudyVO> listBookmark(String writer) throws Exception;
+	
+			//ºÏ¸¶Å© Ãë¼Ò
 	public void removeBookmark(Integer bsBno, String userEmail) throws Exception;
 	
 }

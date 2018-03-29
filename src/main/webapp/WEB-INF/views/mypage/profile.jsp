@@ -17,6 +17,7 @@
  .border{border:1px solid grey; border-radius:5px;}
  .border h3{margin-top:5px;}
  
+
 </style>
 
 </head>
@@ -33,6 +34,7 @@
                         <div class="row">
                             <div class="col-md-12">
 
+
                                 <ol class="breadcrumb">
                                     <li><a href="/study/main">Home</a></li>
                                     <li class="active">Profile</li>
@@ -44,7 +46,6 @@
                 </div> <!-- /.header-wrapper -->
             </header> <!-- /.page-head (header end) -->
 </div>
-
 
 
 		<!-- 상단 메뉴바 -->
@@ -248,10 +249,11 @@
 				</div>
 			</div>
 
-	
 
 <%@include file="../footer.jsp"%>
-	
+
+
+
 </body>
 
 
