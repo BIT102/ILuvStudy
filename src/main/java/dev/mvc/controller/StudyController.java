@@ -22,14 +22,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import dev.mvc.domain.BookmarkVO;
 import dev.mvc.domain.Criteria;
 import dev.mvc.domain.CriteriaStudy;
 import dev.mvc.domain.PageMakerStudy;
 import dev.mvc.domain.SearchCriteriaStudy;
 import dev.mvc.domain.StudyVO;
 import dev.mvc.domain.UserVO;
-import dev.mvc.service.ReplyStudyService;
 import dev.mvc.service.BookmarkService;
+import dev.mvc.service.ReplyStudyService;
 import dev.mvc.service.StudyService;
 
 @Controller
@@ -209,13 +210,26 @@ public class StudyController {
 		map.put("writer", email);
 		map.put("bsbno", bno);
 		
+		List<BookmarkVO> vo = bookservice.bolist(map);
+		
 		System.out.println("!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-		System.out.println(map);
-		System.out.println(bookservice.bolist());
+		System.out.println(vo);
 		System.out.println("!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		
+		int result;
+		
+		
+		
+		if(vo!=null){
+			result = 1;
+		} else {
+			result = 0;
+		} 
+		
+		model.addAttribute("bolist", result);
+		
 		model.addAttribute(service.read(bno));
-		model.addAttribute("bolist", bookservice.bolist());
+		
 		}
 	}
 

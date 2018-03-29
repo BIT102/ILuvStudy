@@ -250,26 +250,19 @@
                 	좋아용/나빠용
                <!-- 로그인 했을때 -->
  
-           		<c:forEach items="${bolist}" var="book" varStatus="status">
-           		<c:if test="${not empty login}">
+
 					<script>
-					${book}
+					${bolist}
 					${studyVO.bno}
-					${book.bsBno}
-					${book.userEmail}
 					${login.email}
 					</script>
-	
-				<c:if test="${(studyVO.bno eq book.bsBno) and (book.userEmail eq login.email)}">
-				<i class="fa fa-heartbeat" onclick="myFunction(this)"></i>
-				</c:if>
-				<c:if test="${(studyVO.bno ne book.bsBno) and (book.userEmail ne login.email) and (status.first)}">
-				 
-				<i class="fa fa-heart-o" onclick="myFunction(this)"></i>
-				</c:if>
-				</c:if>
-				</c:forEach>
-		
+					
+ 					<c:if test="${bolist == 1}">
+					<i class="fa fa-heartbeat" onclick="myFunction(this)"></i>	
+					</c:if>
+					<c:if test="${bolist == 0}">
+					<i class="fa fa-heart-o" onclick="myFunction(this)"></i>
+					</c:if>  
            			
   		
            		
@@ -914,6 +907,5 @@ $(document).ready(function(){
 	
 });
 </script>   
- 
 </body>
 </html>

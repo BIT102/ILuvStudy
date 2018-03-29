@@ -38,6 +38,9 @@
 <script type="text/javascript"
 	src="/resources/assets/js/modernizr.custom.97074.js"></script>
 
+<!-- Loading -->
+
+
 <style>
 #keywordInput {
 	width: 300px;
@@ -48,18 +51,44 @@
 	border-bottom: 2px solid black;
 	background-color: transparent;
 }
+
+/*  #load {
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	position: fixed;
+	display: block;
+	opacity: 0.8;
+	background: white;
+	z-index: 99;
+	text-align: center;
+}
+
+#load > img {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	z-index: 100;
+}  */
 </style>
 
 </head>
 
-<body onLoad="gogogo()">
+
+
+<body>
+<!-- 
+<div id="load">
+	<img src="/resources/assets/img/loader.gif" alt="loading">
+</div>
+ -->
+
 
 	<div id="home-page">
-
+		
 		<!-- // Navigation -->
 		<%@include file="../nav.jsp"%>
-
-
 
 		<!-- header start -->
 		<header id="header" class="header-wrapper home-parallax home-fade">
@@ -304,6 +333,15 @@
   }
   
   </script>
+  
+<!-- <script>
 
+$(document).ready(function() {
+
+	$("#load").hide();
+	
+});
+
+</script> -->
 </body>
 </html>

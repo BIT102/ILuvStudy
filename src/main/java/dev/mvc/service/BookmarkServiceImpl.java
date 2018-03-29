@@ -19,9 +19,9 @@ public class BookmarkServiceImpl implements BookmarkService {
 	
 	
 	@Override
-	public List<BookmarkVO> bolist() throws Exception {
+	public List<BookmarkVO> bolist(Map<String, Object> map) throws Exception {
 		
-		return dao.bolist();
+		return dao.bolist(map);
 	}
 	
 	//ºÏ¸¶Å©µî·Ï

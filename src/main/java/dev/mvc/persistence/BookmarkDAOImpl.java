@@ -34,8 +34,8 @@ public class BookmarkDAOImpl implements BookmarkDAO {
 	}
 	
 	@Override
-	public List<BookmarkVO> bolist() throws Exception {
-		return session.selectList(namespace+".bolist");
+	public List<BookmarkVO> bolist(Map<String, Object> map) throws Exception {
+		return session.selectList(namespace+".bolist", map);
 	}
 	
 	

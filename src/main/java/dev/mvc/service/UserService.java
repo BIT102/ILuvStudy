@@ -1,12 +1,12 @@
 package dev.mvc.service;
 
 
-import java.util.Date;
+
 import java.util.List;
 
 import dev.mvc.domain.StudyVO;
 import dev.mvc.domain.UserVO;
-import dev.mvc.dto.LoginDTO;
+
 
 public interface UserService {
 
@@ -35,8 +35,8 @@ public interface UserService {
 	public void insertImg(UserVO vo) throws Exception;
 	
 	//북마크 불러오기
-	public List<StudyVO> bookmarkList(String email) throws Exception;
-	
+/*	public List<StudyVO> bookmarkList(String email) throws Exception;
+	*/
 	//북마크 즐겨찾기 숫자
 	public int bookmarkCount(int bno) throws Exception;
 	public StudyVO bookmarkCount2(int bno) throws Exception;

@@ -75,10 +75,10 @@ public class UserDAOImpl implements UserDAO {
 	}
 	
 	//북마크 리스트 불러오기
-	@Override
+/*	@Override
 	public List<StudyVO> bookmarkList(String email) throws Exception {
 		return session.selectList(namespace+".bookmarkList", email);
-	}
+	}*/
 	
 	// 북마크 즐겨찾기 숫자
 	@Override

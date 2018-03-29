@@ -40,7 +40,7 @@ public class VisitCountDAO
             // 쿼리생성
             // 총 방문자수를 증가시키기 위해 테이블에 현재 날짜 값을 추가시킨다.
             StringBuffer sql = new StringBuffer();
-            sql.append("INSERT INTO VISIT (VDATE) VALUES (date_format(now(),'%Y-%m-%d'))");
+            sql.append("INSERT INTO visit (VDATE) VALUES (date_format(now(),'%Y-%m-%d'))");
             
             // 커넥션을 가져온다.
             conn = DriverManager.getConnection(jdbcDriver,dbUser, dbPass);

@@ -22,18 +22,18 @@ useremail
 
 <select id="bolist" resultType="BookmarkVO">
 SELECT 
-bo.ID
-, bo.USEREMAIL
-, bo.BSBNO
-, bs.bno
+ID
+, USEREMAIL
+, BSBNO
 FROM
-bookmark bo
-right outer join board_study bs on bs.bno = bo.bsbno
+bookmark
+WHERE bsbno = #{bsbno}
+AND USEREMAIL = #{writer};
 </select>
 
 <select id="list" resultType="StudyVO">
 SELECT
-, bo.ID
+bo.ID
 , bo.BSBNO
 , bo.USEREMAIL
 , ba.name

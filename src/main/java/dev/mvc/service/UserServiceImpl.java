@@ -73,7 +73,7 @@ public class UserServiceImpl implements UserService {
 		}
 		
 		// 북마크 불러오기
-		@Override
+/*		@Override
 		public List<StudyVO> bookmarkList(String email) throws Exception {
 			
 			dao.bookmarkList(email); // 이게 리스트고
@@ -97,7 +97,7 @@ public class UserServiceImpl implements UserService {
 			return dao.bookmarkList(email);
 			
 		}
-		
+		*/
 		
 		// 북마크 즐겨찾기 숫자
 		@Override

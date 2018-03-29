@@ -67,7 +67,7 @@
   	</update>
   	
   	<!-- 북마크 불러오기 -->
-  	<select id="bookmarkList" resultType="studyVO">
+<!--   	<select id="bookmarkList" resultType="studyVO">
   	SELECT
 		ba.name
 		, bs.bno
@@ -101,7 +101,7 @@
 		from bookmark
 		where useremail = #{email});
   	</select>
-  	
+  	 -->
   	<!-- 북마크 즐겨찾기 수 -->
 	<select id="bookmarkCount" resultType="int">
   		select count(*) from bookmark where bsbno = #{bno};
