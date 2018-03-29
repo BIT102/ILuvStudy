@@ -139,33 +139,11 @@
 							<form name="addInfoForm" action="/addInfo" method="post">
 
 								<!-- 부가정보  -->
-								<p>관심 카테고리</p>
-						
-								<!-- 카테고리 대/소분류 메소드 -->
-							
-						
-								<br> <br>
-						
-								<p>관심 지역</p>
-								<!--대분류  -->
-								<select name="RGD">
-									<option value="서울">서울</option>
-									<option value="경기">경기</option>
-									<option value="강원">강원</option>
-								</select>
-						
-								<!--소분류  -->
-								<select name="RGS">
-									<option value="강남구">강남구</option>
-									<option value="서초구">서초구</option>
-									<option value="광진구">광진구</option>
-								</select>
-						
-						
-								<h3>자기소개</h3>
+								
+								<h4>자기소개</h4>
 								<textarea row="5" cols="50" name="introduction">${vo.introduction}</textarea>
 						
-								<h3>홈페이지</h3>
+								<h4>홈페이지</h4>
 								<input type="url" name="homepage" value="${vo.homepage}"> <br>
 						
 						

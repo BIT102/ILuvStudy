@@ -260,13 +260,13 @@
 					${login.email}
 					</script>
 	
-				<c:if test="${(studyVO.bno eq book.bsBno) and (book.userEmail eq login.email)}">
-				<i class="fa fa-heartbeat" onclick="myFunction(this)"></i>
-				</c:if>
-				<c:if test="${(studyVO.bno ne book.bsBno) and (book.userEmail ne login.email) and (status.first)}">
-				 
-				<i class="fa fa-heart-o" onclick="myFunction(this)"></i>
-				</c:if>
+					<c:if test="${(studyVO.bno eq book.bsBno) and (book.userEmail eq login.email)}">
+						<i class="fa fa-heartbeat" onclick="myFunction(this)"></i>
+					</c:if>
+					
+					<c:if test="${(studyVO.bno ne book.bsBno) and (book.userEmail ne login.email) and (status.first)}"> 
+						<i class="fa fa-heart-o" onclick="myFunction(this)"></i>
+					</c:if>
 				</c:if>
 				</c:forEach>
 		
