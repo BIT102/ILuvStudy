@@ -51,6 +51,7 @@ public class UploadController {
 		
 	}
 	
+	
 	//파일업로드
 	@ResponseBody
 	@RequestMapping(value = "/uploadAjax",
