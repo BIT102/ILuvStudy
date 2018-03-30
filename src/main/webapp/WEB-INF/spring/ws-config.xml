@@ -3,12 +3,14 @@
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
  xmlns:websocket="http://www.springframework.org/schema/websocket"
  xmlns:mvc="http://www.springframework.org/schema/mvc"
- xsi:schemaLocation="http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket-4.0.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+ xsi:schemaLocation="http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket-4.3.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+ 
  <bean id="chatHandler" class="dev.mvc.util.ChatWebSocketHandler" />
 
  <websocket:handlers>
 
   <websocket:mapping handler="chatHandler" path="/chat" />
+  	<!-- WebSocketHandler에 접근하기 전에 HttpSession에 접근하여 저장된 값을 읽어 들려 WebSocketHandler에서 사용가능하도록 처리 -->
 	  <websocket:handshake-interceptors>
          <bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor" />
       </websocket:handshake-interceptors>

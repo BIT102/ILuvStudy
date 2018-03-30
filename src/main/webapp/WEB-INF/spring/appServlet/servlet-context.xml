@@ -122,7 +122,6 @@
 		<beans:constructor-arg value="user"></beans:constructor-arg>
 	</beans:bean>
 	
-
 </beans:beans>
 
 

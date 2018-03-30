@@ -36,9 +36,10 @@ $(document).ready(function(){
 	//웹 소켓이 열리면 호출
 	sock.onopen = function(){
 		message = {};
-		message.message = "반갑습니다.";
+		message.message = "접속하였습니다.";
 		message.type="all";
 		message.to = "all";
+		message.email = "${login.email}";
 		
 		//메시지 전송
 		sock.send(JSON.stringify(message));
@@ -64,12 +65,12 @@ $(document).ready(function(){
 	$('#sendMessage').click(function(){
 		
 		if($('#message').val() != ""){
-			console.log($('#message').val());
 			
 			message = {};
 			message.message = $('#message').val();
 			message.type = "all";
 			message.to = "all";
+			message.email = "${login.email}";
 			
 			var to = $('#to').val();
 			
@@ -78,14 +79,15 @@ $(document).ready(function(){
 				message.to = to;
 			}
 			
+			console.log(to);
 			//메시지 전송
 			sock.send(JSON.stringify(message));
 			
-			$('#chatMessage').append('나 -> ' + $('#message').val() + '<br/>');
+			$('#chatMessage').append(message.type + ' / 나 -> ' + $('#message').val() + '<br/>');
 			$('#message').val("");
 		}
 		
-	})
+	});
 	
 })
 </script>  

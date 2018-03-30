@@ -14,6 +14,7 @@ import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import dev.mvc.domain.MessageVO;
+import dev.mvc.domain.UserVO;
 
 public class ChatWebSocketHandler extends TextWebSocketHandler {
 
@@ -26,7 +27,6 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 
 	private Map<String, WebSocketSession> users = new ConcurrentHashMap<String, WebSocketSession>();
 	
-	
 	//서버에 연결한 사용자들 저장
 	public ChatWebSocketHandler() {
 		connectedUsers = new ArrayList<WebSocketSession>();
@@ -37,10 +37,13 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		
+		Map<String, Object> map = session.getAttributes(); 	
+		UserVO login = (UserVO) map.get("login");
+			
 		users.put(session.getId(), session);
 		connectedUsers.add(session);
 
-		logger.info(session.getId()+"님 접속");
+		logger.info(login.getEmail() +"님 접속");
 		logger.info("연결 ip : "+session.getRemoteAddress().getHostName());
 	}
 	
@@ -64,35 +67,52 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 	// @param textmessage 메시지의 내용
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-		//payload = 사용자가 보낸 메시지
-		logger.info(session.getId()+ " 님이 메시지 전송 "+message.getPayload());
 		
-		 MessageVO messageVO = MessageVO.converMessage(message.getPayload());
-	     String hostName = "";
+    	//HttpSession에 저장된 정보 가져옴
+ 		Map<String, Object> map = null;
+		
+		//payload = 사용자가 보낸 메시지
+		//logger.info(session.getId()+ " 님이 메시지 전송 "+message.getPayload());
+		
+		MessageVO messageVO = MessageVO.converMessage(message.getPayload());
+	    String hostName = "";
 	     
 	   //연결된 모든 클라이언트에게 메시지 전송
 	     for (WebSocketSession webSocketSession : connectedUsers) {
+	    	 
+	    	//HttpSession에 저장된 정보 가져옴 
+	    	map = session.getAttributes(); 	
+	    	UserVO login = (UserVO) map.get("login");
+	 						
+	 		//logger.info("로그인 한 아이디 : "+ login.getEmail());
+	 		
+	 		//전체 보내기인 경우
 	         if (messageVO.getType().equals("all")) {
+	        	 
 	        	//보낸 사용자는 받지 않기 위한 조건문
-	             if (!session.getId().equals(webSocketSession.getId())) {
-	                 webSocketSession.sendMessage(
-	                         new TextMessage(session.getRemoteAddress().getHostName() + " ▶ " + messageVO.getMessage()));
-	             }
-	         } else {
-	             hostName = webSocketSession.getRemoteAddress().getHostName();
-	             if (messageVO.getTo().equals(hostName)) {
+	            if (!session.getId().equals(webSocketSession.getId())) {
 	                 webSocketSession.sendMessage(
 	                         new TextMessage(
-	                                 "<span style='color:red; font-weight: bold;' >"
-	                                 + session.getRemoteAddress().getHostName() + "▶ " + messageVO.getMessage()
-	                                 + "</span>") );
+	                        		 "<span style='color:green;'> 전체 : "
+	                        		+ login.getEmail() + " ▶ " + messageVO.getMessage()
+	                        		+ "</span>"));
+	            }
+	             
+	         } else { //귓속말인 경우
+	             hostName = webSocketSession.getRemoteAddress().getHostName();
+	             
+	             //to에 입력한 텍스트와 이메일이 같은 경우 전송
+	             if (login.getEmail().equals(messageVO.getTo())) {
+	            	 webSocketSession.sendMessage(
+	                         new TextMessage(
+	                                 "<span style='color:red; font-weight: bold;' > 귓속말 : "
+	                                 + messageVO.getEmail() + "▶ " + messageVO.getMessage()
+	                                 + "</span>"));
 	                 break;
 	              }
 	          }
 	      }
 
-
-		
 /*
 		  Map<String, Object> map = null;
 
@@ -108,18 +128,14 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 
 	      ChatRoomVO croom =null;
 	      if(!messageVO.getUSER_user_id().equals(messageVO.getTUTOR_USER_user_id())) {
-	    	  System.out.println("a");
 
 
 
 	    	  if(dao.isRoom(roomVO) == null ) {
-	    		  System.out.println("b");
 	    		  dao.createRoom(roomVO);
-	    		  System.out.println("d");
 	    		  croom = dao.isRoom(roomVO);
 
 	    	  }else {
-	    		  System.out.println("C");
 	    		  croom = dao.isRoom(roomVO);
 	    	  }
 	      }else {
