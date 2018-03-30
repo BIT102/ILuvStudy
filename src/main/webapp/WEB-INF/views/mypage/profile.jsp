@@ -16,8 +16,8 @@
  .profile{min-height:185px; padding-left: 5px; margin:25px;}
  .border{border:1px solid grey; border-radius:5px;}
  .border h3{margin-top:5px;}
- 
-
+ .basic{padding:15px;}	
+ .bmk{margin-left:9px;}
 </style>
 
 </head>
@@ -52,10 +52,8 @@
 		<div id="div1">
 			<div class="basic border">
 				<a href="profile">기본정보 관리</a>
-			</div>
-
-			<div class="basic border">
-				<a href="bookmark">스터디 관리</a>
+			
+				<a href="bookmark" class="bmk">스터디 관리</a>
 			</div>
 		</div>
 
@@ -73,8 +71,8 @@
 								<p>
 									회원님의 정면 사진을 올려주세요! <br> 상대방이 신뢰를 갖고 연락 할 확률이 높아져요!
 								</p>
-								<input type='file' name='file' value=${login.photo } /> <input
-								type="submit" value="사진업로드">
+								<input type='file' name='file' value=${login.photo } >
+								<input class="btn btn-xs btn-default" type="submit" value="사진업로드">
 							</div>
 							
 						</div>
@@ -83,27 +81,27 @@
 							<!-- 개인 프로필 정보 보기 &수정 -->
 							<div id="acinfo">
 								
-								<table id="actable">
+								<table id="actable" class="input-group">
 									<tr>
 										<td><label for="email">이메일</label></td>
 										<td><input id="email" type="email" value="${login.email}"
-											readonly name="email"></td>
+											readonly name="email" class="form-control"></td>
 									</tr>
 									<tr>
 										<td><label for="name">이름</label></td>
 										<td><input id="name" type="text" value="${vo.name}"
-											name="name"></td>
+											name="name" class="form-control"></td>
 									</tr>
 									<tr>
 										<td><label for="nickname">닉네임</label></td>
 										<td><input id="nickname" type="text" value="${vo.nickName}"
-											name="nickName"></td>
-										<td><input type="button" value="중복확인"></input></td>
+											name="nickName" class="form-control"></td>
+										<td><input class="btn-default" type="button" value="중복확인"></input></td>
 									</tr>
 									<tr>
 										<td><label for="birth">생년월일</label></td>
 										<td><input id="birth" type="text" value="${vo.birth}"
-											name="birth"></td>
+											name="birth" class="form-control"></td>
 									</tr>
 									<tr>
 										<td>성별</td>
@@ -121,13 +119,13 @@
 									<tr>
 										<td><label for="phone">전화번호</label></td>
 										<td><input id="phone" type="text" value="${vo.phoneNum}"
-											name="phoneNum"></td>
-										<td><input type="button" value="인증하기"></input></td>
+											name="phoneNum" class="form-control"></td>
+										<td><input class="btn-default" type="button" value="인증하기"></input></td>
 									</tr>
 								</table>
 							</div>
 							<div>
-								<input type="submit" value="저장하기">
+								<input class="btn-default" type="submit" value="저장하기">
 							</div>
 						</div>
 					</div>
@@ -143,14 +141,14 @@
 								<h4>자기소개</h4>
 								<textarea row="5" cols="50" name="introduction">${vo.introduction}</textarea>
 						
-								<h4>홈페이지</h4>
-								<input type="url" name="homepage" value="${vo.homepage}"> <br>
+								<h4 class="input-group">홈페이지</h4>
+								<input type="url" name="homepage" value="${vo.homepage}" class="form-control"> <br>
 						
 						
 								<input type="hidden" value="${login.email}" name="email" readonly>
 						
 								<div>
-									<a class="btn-black" href="addInfo">수정하기</a>
+									<a class="btn-default" href="addInfo">수정하기</a>
 								</div>
 						
 							</form>
@@ -161,32 +159,32 @@
 							
 							<div id="acinfo">
 						        
-						        <table id="actable">
+						        <table id="actable" class="input-group">
 						            <tr>
 						                <td><label for="nowPw">기존 비밀번호</label></td>
-						                <td><input id="nowPw" type="password" name="nowPw"></td>
+						                <td><input id="nowPw" type="password" name="nowPw" class="form-control"></td>
 						              
 						                	
 						            </tr>
 						            <tr>
 						                <td><label for="newPw1">새 비밀번호</label></td>
-						                <td><input id="newPw1" type="password" name="newPw1" placeholder="8자리에서 20자리 이하 영문, 숫자로만 설정해 주세요."></td>
+						                <td><input id="newPw1" type="password" name="newPw1" placeholder="8자리에서 20자리 이하 영문, 숫자로만 설정해 주세요." class="form-control"></td>
 						            </tr>
 						            <tr>
 						                <td><label for="newPw2">비밀번호 확인</label></td>
-						                <td><input id="newPw2" type="password" name="newPw2" placeholder="비밀번호를 한번 더 입력해주세요." ></td>
+						                <td><input id="newPw2" type="password" name="newPw2" placeholder="비밀번호를 한번 더 입력해주세요." class="form-control" ></td>
 						             
 						        </table>
 						        <input type="hidden" value="${login.email}" name="email" readonly> 
 						   </div>
 						<div>
-						   <input class="changePw" type="button" value="변경하기">
+						   <input class="changePw btn-default" type="button" value="변경하기">
 						</div>
 						
 						<!-- 탈퇴하기  -->
 						 <form name="quitForm" action="/quit" method="post">
 						
-						<input type="submit" value="탈퇴하기">
+						<input type="submit" class="btn-default" value="탈퇴하기">
 						<input type="hidden" value="${login.email}" name="email" readonly> 
 					
 						</form>

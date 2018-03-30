@@ -324,10 +324,9 @@ select.form-control:not([size]):not([multiple]) {
 
 
 <body>
-
-<%@include file="nav.jsp"%>
-
-            <header class="page-head" style="background:url(/resources/assets/img/portfolio-bg.jpg);">
+		<!-- 한길쓰 추가 03/30-->
+		<div id="portfolio-page">
+            <header class="page-head">
                 <div class="header-wrapper">
                     <div class="container">
                         <div class="row">
@@ -343,7 +342,7 @@ select.form-control:not([size]):not([multiple]) {
                     </div> <!-- /.container -->
                 </div> <!-- /.header-wrapper -->
             </header> <!-- /.page-head (header end) -->
-
+		</div>
 	<div class="main">
 			<!-- MAIN CONTENT -->
 			<div class="main-content" style="background-color: #f9f9f9">

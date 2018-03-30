@@ -138,8 +138,9 @@ select::-ms-expand {
 <body>
 	<%@include file="../nav.jsp"%>
 	
-	
-            <header class="page-head"  style="background:url(/resources/assets/img/multiple_blog-bg.jpg);">
+			<!-- 한길쓰 추가 03/30 -->
+			<div id="multiple-blog-page">
+            <header class="page-head">
                 <div class="header-wrapper">
                     <div class="container">
                         <div class="row">
@@ -155,7 +156,7 @@ select::-ms-expand {
                     </div> <!-- /.container -->
                 </div> <!-- /.header-wrapper -->
             </header> <!-- /.page-head (header end) -->
-
+			</div>
 
 
 	<!--  begin portfolio section  -->
