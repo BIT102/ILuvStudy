@@ -52,18 +52,28 @@ public class StudyController {
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public String registerGET(Model model, HttpServletRequest request)throws Exception{
 		
+		
 		logger.info("register get..........");
 
 		// 카테고리 대분류값 보내기
 		model.addAttribute("studyCategory", service.studyCategory());
-		
 		// 지역대분류값 보내기
 		model.addAttribute("region", service.region());
+				
 		
 		// session 으로 email 값 보내기
+		//쓰는 사람을 로그인한 사람으로 바꿀껍니다.
 		HttpSession session = request.getSession();
-		UserVO user = (UserVO)session.getAttribute("login");
-		//model.addAttribute("email",user.getEmail());
+		UserVO sUser = (UserVO)session.getAttribute("login");
+		String email = sUser.getEmail();
+		
+		
+		
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		System.out.println(email);
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		
+		model.addAttribute("email", email);
 		
 		return "/study/register";
 	}
@@ -74,7 +84,6 @@ public class StudyController {
 		logger.info("register POST...........");
 		System.out.println("vo = "+vo);
 		
-		
 /*		if(vo.getTitle()==null||vo.getNow()==null||vo.getMax()==null||vo.getrDId()==null
 				||vo.getAge()==null||vo.getSc()==null||vo.getSd()==null||vo.getSt()==null||vo.getEt()==null) {
 			
@@ -83,6 +92,7 @@ public class StudyController {
 		} else {
 		}		*/
 		service.regist(vo);
+		
 		return "redirect:/study/main";
 	}
 

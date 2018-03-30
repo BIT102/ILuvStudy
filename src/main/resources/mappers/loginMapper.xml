@@ -51,5 +51,5 @@
   	<select id="googleSelect" resultType="int">
 		select count(email) from user where email=#{email}
 	</select>
-  	
+  		
   </mapper>

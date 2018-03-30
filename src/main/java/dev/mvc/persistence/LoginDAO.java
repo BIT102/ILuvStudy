@@ -29,4 +29,5 @@ public interface LoginDAO {
 	public void googleLogin(UserVO vo)throws Exception;
 	//구글 로그인을 위한 아이디 찾기
 	public int googleSelect(UserVO vo)throws Exception;
+	
 }

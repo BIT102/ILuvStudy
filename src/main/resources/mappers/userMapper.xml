@@ -140,7 +140,8 @@ left outer join board_category bc on bs.bno = bc.bsbno
 , study_category sc
 WHERE bs.bno > 0
 and sc.CDID = bc.CATEGORYD and sc.CSID = bc.CATEGORYS
-and writer = #{email}
+and bs.writer = #{email}
+group by bs.bno
 	</select>	
 
   	<!-- sangwook -->

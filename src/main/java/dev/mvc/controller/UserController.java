@@ -357,6 +357,7 @@ public class UserController {
 		HttpSession session = request.getSession();
 		UserVO sUser = (UserVO)session.getAttribute("login");
 		String email = sUser.getEmail();
+		
 		model.addAttribute("list", bookservice.listBookmark(email));
 		
 		PageMakerStudy pageMakerStudy = new PageMakerStudy();
@@ -373,18 +374,25 @@ public class UserController {
 	@RequestMapping(value = "/recruit", method = RequestMethod.GET)
 	public String recruit(@ModelAttribute("cri") SearchCriteriaStudy cri, Model model, HttpServletRequest request) throws Exception {
 		
+		
 		HttpSession session = request.getSession();
 		UserVO sUser = (UserVO)session.getAttribute("login");
 		String email = sUser.getEmail();
+		
 		model.addAttribute("list", service.recruitList(email));
 		
 		PageMakerStudy pageMakerStudy = new PageMakerStudy();
 		
 		pageMakerStudy.setCri(cri);
-		
+			
 		model.addAttribute("pageMakerStudy", pageMakerStudy);
 		
+			
 		return "/mypage/recruit";
+		
+		
+		
+		
 	}
 	
 	// 신청 (application) 컨트롤러

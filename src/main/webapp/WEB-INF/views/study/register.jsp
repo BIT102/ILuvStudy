@@ -9,13 +9,6 @@
 	src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 <title>스터디 상세</title>
 
-<script>
-var result = '${msg}';
-if(result == 'no'){
-	
-	alert("모든 항목을 입력해 주세요.")
-}
-</script>
 <style>
 form th {
 	width: 30%;
@@ -65,6 +58,12 @@ small {
 }
 .btn-xs {
 	margin-top: 5px;
+}
+
+/*지도스타일입니다*/
+#map {
+	height: 300px;
+	margin-top:15px;
 }
 </style>
 </head>
@@ -141,7 +140,7 @@ small {
 												<tr>
 													<th>스터디명</th>
 													<td><input type="text" name="title"
-														value="${studyVO.title}" class="form-control"
+														value="${studyVO.title}" class="form-control" id="studyTitle"
 														style="width: 550px;"></td>
 												</tr>
 												<tr>
@@ -158,14 +157,16 @@ small {
 													</select> <select id="rSName" name='rSId' class="form-control">
 															<option value="">--</option>
 													</select>
+													<!-- 지도입니다. -->
+													 <div id="map"></div>
 													</td>
 												</tr>
 												<tr>
 													<th>스터디 방장</th>
-													<!-- 아래 방장은 나중에 세션으로 전송 -->
+													<!--  세션으로 전송 -->
 													<%-- <td><input name="writer" value="${studyVO.writer}"></td> --%>
 													<td><input class="form-control" name="writer"
-														value="abc1@gmail.com" style="width: 460px;"></td>
+														value="${email}" style="width: 460px;"></td>
 												</tr>
 
 											</tbody>
@@ -582,6 +583,91 @@ small {
 		</div>
 	</li>
     </script>
+    
+    <!-- 유효성 검사 스크립트 -->
+    <script>
+    // 카테고리 대 소 , 스터디명, 지역 대, 연력, 최대인원, 시작날짜, 요일, 시간
+    $(".btn-success").on("click", function(e){
+    	
+    	//카테고리 대소 
+    	if($("#addCatArea").html()==""){
+    		
+    		alert("카테고리를 입력하세요")
+    		$("#catD").focus();
+    		return false;
+    	//스터디명	
+    	} else if($("#studyTitle").val() == "") {
+    		
+    		alert("스터디명을 입력하세요")
+    		$("#studyTitle").focus();
+    		return false;
+    	//지역 대 
+    	} else if($("#rDName option").is(':checked')==false){
+    		
+    		alert("지역을 입력하세요")
+    		$("#rDName").focus();
+    		return false;
+    	//연령	
+    	} else if($(".fancy-checkbox").is(':checked')==false){
+    		
+    		alert("원하시는 나이대를 입력하세요")
+    		$(".fancy-checkbox").focus();
+    		return false;
+    	//최대인원	
+    	} else if($(".studymax").val()=="") {
+    		
+    		alert("최대인원을 입력하세요")
+    		$(".studymax").focus();
+    		return false;
+    	//시작날짜		
+    	} else if($(".studysd").val()==""){
+    		
+    		alert("시작날짜를 입력하세요")
+    		$(".studysd").focus();
+    		return false;
+    	//요일	
+    	} else if($("#sc").is(':checked')==false){
+    		
+    		alert("요일을 입력하세요")
+    		$("#sc").focus();
+    		return false;
+    	//시작시간	
+    	} else if($("#st").is(':checked')==false){
+    		
+    		alert("시작시간을 입력하세요")
+    		$("#st").focus();
+    		return false;
+    	} else if($("#et").is(':checked')==false){
+    		
+    		alert("시작시간을 입력하세요")
+    		$("#et").focus();
+    		return false;
+    		
+    	} else {
+    		alert("등록이 완료되었습니다")
+    	}
+    	
+    })
 
+    </script>
+    
+   <!--지도 크르깁트 -->
+   <script>
+
+   function initMap() {
+   		var uluru = {lat:37.5663797, lng:126.9777154};
+   	    var map = new google.maps.Map(document.getElementById('map'),{
+   		zoom: 16,
+   		center:uluru
+   	});
+   	var marker = new google.maps.Marker({
+   		position:uluru,
+   		map:map
+   	});
+   }
+   </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAiNU7soIIqpN1Jdu0tV1CWBb6u1jJAH5o&callback=initMap"
+    async defer></script>
+    
 </body>
 </html>

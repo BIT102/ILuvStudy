@@ -86,50 +86,64 @@
     <br>
     <br>     
     
-    <h4>북마크</h4>
+    <h4>등록스터디</h4>
 
 
-    <table id="table1">
-            <tr>
-                <th> 번호</th>
-                <th> 스터디명 </th>
-                <th> 신청자 목록</th>
-                <th> 사진 </th>
-                <th> 주최자 </th>
-                <th> 지역 </th>
-                <th> 스터디 시작일</th>
-                <th> 즐겨찾기 수</th>
-                <th> 조회수</th>
-            </tr>
-            <tr>
-            <c:forEach items="{recruitList}" var="recruitList">
-                <td>{recruitList.bno}</td>
-                <td><a href="#">{recruitList.title}</a></td>
-                <td><button type="button">신청자 보기 </button></td>
-                <td>${bookmarkList.writer}</td>
-                <td>${bookmarkList.rDName} ${bookmarkList.rSName}</td>
-                <td>${bookmarkList.sd}</td>
-                <td>${bookmarkList.bookmarkCount}</td>
-                <td>${bookmarkList.vct}</td>
-            </tr>
-            </c:forEach>
-<!--             <tr>
-                <td>2</td>
-                <td><a href="#">SPRING 스터디 모집해요</a></td>
-                <td><button type="button">신청자 보기 </button></td>
-                <td><img src="/resources/dist/img/yj.png" alt="손예진" width="100"></td>
-                <td>손예진</td>
-                <td>서울시 서초구</td>
-                <td>2018-04-21</td>
-                <td> 7 </td>
-                <td> 150 </td>
-            </tr> -->
-
-    </table>        
-    
+   
    
    <!-- 다시 하겠습니다 모집 --> 
     
+    
+					<c:forEach items="${list}" var="studyVO">
+						<div class="col-md-4 col-sm-6">
+							<div class="portfolio-item">
+								<div class="item-image">
+									<a
+										href="/study/board${pageMakerStudy.makeSearch(pageMakerStudy.cri.page)}&bno=${studyVO.bno}">
+
+
+										<c:choose>
+											<c:when test="${studyVO.name ne 'a'}">
+												<img src="/study/displayFile?fileName=${studyVO.name}"
+													class="img-responsive center-block"
+													style="width: 370px; height: 216px;">
+											</c:when>
+											<c:otherwise>
+												<img src="/resources/assets/img/ha.jpg"
+													class="img-responsive center-block"
+													style="width: 370px; height: 216px;">
+											</c:otherwise>
+										</c:choose>
+
+										<div>
+											<span><i class="fa fa-plus"></i></span>
+										</div>
+									</a>
+								</div>
+
+								<div class="item-description">
+									<div class="row">
+										<div class="col-xs-6">
+											<span class="item-name" style="width: 230px;">제목 :
+												${studyVO.title} </span> <span style="width: 280px;">주인 :
+												${studyVO.nickname}<br> 종류 : ${studyVO.cDName} /
+												${studyVO.cSName}<br> 지역 : ${studyVO.rDName} /
+												${studyVO.rSName}<br> 등록 : <fmt:formatDate
+													pattern="yyyy-MM-dd" value="${studyVO.regdate}" />
+											</span>
+										</div>
+										<div class="col-xs-6">
+											<span class="like"> <i class="fa fa-eercast"></i>
+												${studyVO.vct}
+											</span>
+										</div>
+									</div>
+								</div>
+								<!-- end of /.item-description -->
+							</div>
+							<!-- end of /.portfolio-item -->
+						</div>
+					</c:forEach>
     
     
     

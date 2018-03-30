@@ -386,7 +386,6 @@ select::-ms-expand {
 	  }
   }
 			
-	</script>
-
+</script>
 </body>
 </html>

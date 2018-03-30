@@ -47,7 +47,8 @@
 <script type="text/javascript"
 	src="/resources/assets/js/jquery.hoverdir.js"></script>
 
-
+	
+	
 <style>
 .container-fluid {
 	background-color: #f9f9f9;
@@ -234,6 +235,7 @@
 			<!-- ======== 구글 로그인 api========== -->
 								<img id="googleimg" src="/resources/img/google.png">
 								<a class="btn btn-block login"  href="../googleLogin">구글 로그인&nbsp;&nbsp;&nbsp;</a>
+								<!-- ===========카카오톡 ================-->
 			<!-- ======== end ================= -->
 					
 								<div class="texttext" style="margin-top: 15px;">

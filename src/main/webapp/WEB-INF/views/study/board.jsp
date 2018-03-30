@@ -28,6 +28,8 @@
 	body {margin-left:50px;}
 	#repliesDiv{font-size:40px; border:2px dotted black;}
 	.textcenter1{text-align:center;}
+	
+	
 </style>
 </head>
 
@@ -257,22 +259,36 @@
 					${login.email}
 					</script>
 					
- 					<c:if test="${bolist.checked == 1}">
-					<i class="fa fa-heartbeat" onclick="myFunction2(this)" style="font-size:0px;">저장됨</i>	
-					</c:if> 
-					<c:if test="${bolist.checked == 0}">
-					<i class="fa fa-heart-o" onclick="myFunction1(this)" value="saved"></i>
-					</c:if>  
+					<!-- 북마크등록 // 로그인한 사람만 -->
+ 					<c:if test="${not empty login}">
+ 					<!-- 등록 안되어있을때 -->
+ 					<c:if test="${bolist.checked == 0}">
+					<i class="fa fa-heart-o" id="heart" onclick="myFunction1(this)"></i>
+					</c:if>
+					<!-- 북마크 등록되어있을때 -->
+					<c:if test="${bolist.checked == 1}">
+					<span id="delete">
+				 	<i class="fa fa-heartbeat" id="heart" onclick="myFunction1(this)" ></i>
+				 	</span>
+				 	</c:if> 
+					</c:if>
+		
+	
 
  <script>
-
 //북마크를 등록합니다	
+
 function myFunction1(x) {
 
 	var bno = $("#bno").val();
-		
 	var writer = $("#writer").val();
 	
+	//클래스이름으로 구별
+	var heart = $("#heart").attr('class');
+	
+	//만약에 등록이 안되어 있으면
+	if(heart==="fa fa-heart-o") {
+		//데이터등록
 		$.ajax({
 			type:"post",
 			url:"/study/bookmark/a",
@@ -287,37 +303,37 @@ function myFunction1(x) {
 			}),
 			success : function(result) {
 				if(result=='success') {
-					alert("등록됨");
-					x.classList.toggle("fa-heartbeat");
+					alert("등록되었습니다");
+					//클래스 변경하면서 이미지 변경
+					$("#heart").removeClass('fa fa-heart-o');
+					$("#heart").addClass('fa fa-heartbeat');
 				}
 			}
 		});
-}
-	// 취소
-	
-function myFunction2(x) {	
-	
-	var bno = $("#bno").val();
-	
-	var writer = $("#writer").val();
-	
-			$.ajax({
-				type:"post",
-				url:"/study/bookmark/dee",
-				dataType:'text',
-				data : {
-					bsBno : bno,
-					userEmail : writer
-				},
-				success : function(result) {
-					if(result=='success') {
-						alert("삭제욤 ");
-						x.classList.toggle("fa-heartbeat");
-					}
+	//북마크가 등록되어있으면
+	} else if(heart==="fa fa-heartbeat") {
+		//삭제
+		$.ajax({
+			type:"post",
+			url:"/study/bookmark/dee",
+			dataType:'text',
+			data : {
+				bsBno : bno,
+				userEmail : writer
+			},
+			success : function(result) {
+				if(result=='success') {
+					alert("삭제되었습니다 ");
+					//클래스 변경하면서 이미지 변경
+					$("#heart").removeClass('fa fa-heartbeat');
+					$("#heart").addClass('fa fa-heart-o');
 				}
-			});
-		}	
-
+			}
+		});
+	} else {
+		alert("이미 처리되었습니다");
+	}
+}
 </script>               
 
             </div>
@@ -858,10 +874,6 @@ $(document).ready(function(){
 		formObj.submit();
 	})
 	
-	$(".fa fa-heart-o").on("click", function(){
-		<i class="fa fa-heart" style="font-size:36px;"></i>
-	})
-	
 	$(".modifyBtn").on("click",function(){
 		formObj.attr("action", "/study/modifyPage");
 		formObj.attr("method", "get");
@@ -874,5 +886,6 @@ $(document).ready(function(){
 	
 });
 </script>   
+
 </body>
 </html>
