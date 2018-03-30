@@ -25,11 +25,14 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 
 	private List<WebSocketSession> connectedUsers;
 
+	private List<String> loginList;
+	
 	private Map<String, WebSocketSession> users = new ConcurrentHashMap<String, WebSocketSession>();
 	
 	//서버에 연결한 사용자들 저장
 	public ChatWebSocketHandler() {
 		connectedUsers = new ArrayList<WebSocketSession>();
+		loginList = new ArrayList<String>();
 	}
 
 	// 접속 관련 이벤트 메소드 
@@ -42,7 +45,12 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 			
 		users.put(session.getId(), session);
 		connectedUsers.add(session);
-
+		logger.info("1");
+		
+		loginList.add(login.getEmail());
+		
+		logger.info("2");
+		
 		logger.info(login.getEmail() +"님 접속");
 		logger.info("연결 ip : "+session.getRemoteAddress().getHostName());
 	}
@@ -81,11 +89,21 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 	     for (WebSocketSession webSocketSession : connectedUsers) {
 	    	 
 	    	//HttpSession에 저장된 정보 가져옴 
-	    	map = session.getAttributes(); 	
-	    	UserVO login = (UserVO) map.get("login");
-	 						
+	    	map = session.getAttributes();
+			UserVO login = (UserVO) map.get("login");
+	 		
+			//UserVO vo = new UserVO();
+			
+			System.out.println("1---------");
+			System.out.println(loginList);
+			System.out.println("2-----------");
+			System.out.println(connectedUsers);
+			System.out.println();
+			
 	 		//logger.info("로그인 한 아이디 : "+ login.getEmail());
 	 		
+	    	//logger.info(login.getEmail()+ " 님이 메시지 전송 "+messageVO.getMessage());
+	    	
 	 		//전체 보내기인 경우
 	         if (messageVO.getType().equals("all")) {
 	        	 
@@ -94,22 +112,44 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 	                 webSocketSession.sendMessage(
 	                         new TextMessage(
 	                        		 "<span style='color:green;'> 전체 : "
-	                        		+ login.getEmail() + " ▶ " + messageVO.getMessage()
+	                        		+ messageVO.getEmail() + " ▶ " + messageVO.getMessage()
 	                        		+ "</span>"));
 	            }
 	             
 	         } else { //귓속말인 경우
 	             hostName = webSocketSession.getRemoteAddress().getHostName();
-	             
+	        	 
+	        	 //logger.info(login.getEmail());
+	             //logger.info(messageVO.getTo());
 	             //to에 입력한 텍스트와 이메일이 같은 경우 전송
-	             if (login.getEmail().equals(messageVO.getTo())) {
-	            	 webSocketSession.sendMessage(
-	                         new TextMessage(
-	                                 "<span style='color:red; font-weight: bold;' > 귓속말 : "
-	                                 + messageVO.getEmail() + "▶ " + messageVO.getMessage()
-	                                 + "</span>"));
-	                 break;
-	              }
+	             //System.out.println("1111111111111111111111");
+	             //System.out.println(loginList);
+	             
+	             for(int i=0;i<loginList.size();i++){
+	            	 logger.info("2222222222222222222");
+	            	 logger.info(loginList.get(i));
+	            	 logger.info(messageVO.getTo());
+	            	 logger.info(login.getEmail());
+	            	 logger.info("======================");
+	            	 //to에 담김 대상과 loginList에 있는 대상이 같은 경우
+	            	 if (messageVO.getTo().equals(loginList.get(i).equals(login.getEmail()))) {
+	            		 logger.info("33333333333");
+	            		 logger.info(messageVO.getTo());
+	            		 logger.info(loginList.get(i));
+	            		 logger.info("------------------------");
+	            		 
+	            		 //to에 작성한 사람한테만 메시지 전송되도록 처리 필요
+	            		 
+	            		 webSocketSession.sendMessage(
+	            				 new TextMessage(
+	            						 "<span style='color:red; font-weight: bold;' > 귓속말 : "
+	            								 + messageVO.getEmail() + "▶ " + messageVO.getMessage()
+	            								 + "</span>"));
+	            		 break;
+	            	 }
+	             }
+	             
+	            
 	          }
 	      }
 
