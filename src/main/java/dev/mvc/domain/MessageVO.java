@@ -5,7 +5,7 @@ import com.google.gson.Gson;
 public class MessageVO {
 	private String message;		//메시지 내용
 	private String type;		//all, to 전체, 귓속말
-	private String to;			//귓속말 대상
+	private String receiver;			//귓속말 대상 (기본 : admin)
 	private String email;		//메시지 보낸 이메일
 	
 	
@@ -41,17 +41,18 @@ public class MessageVO {
 		this.type = type;
 	}
 
-	public String getTo() {
-		return to;
+	public String getReceiver() {
+		return receiver;
 	}
 
-	public void setTo(String to) {
-		this.to = to;
+	public void setReceiver(String receiver) {
+		this.receiver = receiver;
 	}
 
 	@Override
 	public String toString() {
-		return "MessageVO [message=" + message + ", type=" + type + ", to=" + to + ", email=" + email + "]";
+		return "MessageVO [message=" + message + ", type=" + type + ", receiver=" + receiver + ", email=" + email + "]";
 	}
+
 
 }

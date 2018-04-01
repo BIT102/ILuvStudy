@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import javax.inject.Inject;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.socket.CloseStatus;
@@ -15,6 +17,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import dev.mvc.domain.MessageVO;
 import dev.mvc.domain.UserVO;
+import dev.mvc.persistence.MessageDAO;
 
 public class ChatWebSocketHandler extends TextWebSocketHandler {
 
@@ -23,6 +26,9 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 	private List<WebSocketSession> connectedUsers;
 
 	private Map<String, String> users = new ConcurrentHashMap<String, String>();
+	
+	@Inject
+	private MessageDAO dao;
 	
 	//서버에 연결한 사용자들 저장
 	public ChatWebSocketHandler() {
@@ -69,7 +75,20 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 		
 		//payload = 사용자가 보낸 메시지
 		MessageVO messageVO = MessageVO.converMessage(message.getPayload());
-	     
+		
+		logger.info("0");
+		
+		messageVO.setEmail(users.get(session.getId()));
+		messageVO.setMessage(messageVO.getMessage());
+		messageVO.setReceiver(messageVO.getReceiver());
+		
+		logger.info("1");
+		
+		//메시지 내역 DB 저장
+		dao.send(messageVO);
+	    
+		logger.info("2");
+		
 	    //연결된 모든 클라이언트에게 메시지 전송
 	     for (WebSocketSession webSocketSession : connectedUsers) {
 	    	 
@@ -89,7 +108,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 	        //귓속말인 경우===============================================
 	         } else { 
 	        	 	//to의 대상과 users의 웹소켓아이디와 매칭된 이메일 정보 가져와서 비교
-	        	 	if (messageVO.getTo().equals(users.get(webSocketSession.getId()))) {
+	        	 	if (messageVO.getReceiver().equals(users.get(webSocketSession.getId()))) {
 	            		 webSocketSession.sendMessage(
 	            				 new TextMessage(
 	            						 "<span style='color:red; font-weight: bold;' > 귓속말 : "

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dev.mvc.mapper.MessageMapper">
+	
+	<!-- 메시지 등록 -->
+	<insert id="send">
+		insert into message (email, message, receiver) 
+		values(#{email}, #{message}, #{receiver});
+	</insert>
+	
+</mapper>

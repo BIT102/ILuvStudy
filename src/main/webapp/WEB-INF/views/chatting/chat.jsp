@@ -35,14 +35,14 @@ $(document).ready(function(){
 	
 	//웹 소켓이 열리면 호출
 	sock.onopen = function(){
-		message = {};
+		/* message = {};
 		message.message = "접속하였습니다.";
 		message.type="all";
-		message.to = "all";
+		message.receiver = "all";
 		message.email = "${login.email}";
 		
 		//메시지 전송
-		sock.send(JSON.stringify(message));
+		sock.send(JSON.stringify(message)); */
 	}
 	
 	//메시지가 도착하면 호출
@@ -69,14 +69,14 @@ $(document).ready(function(){
 			message = {};
 			message.message = $('#message').val();
 			message.type = "all";
-			message.to = "all";
+			message.receiver = "all";
 			message.email = "${login.email}";
 			
 			var to = $('#to').val();
 			
 			if(to!=""){
 				message.type="one";
-				message.to = to;
+				message.receiver = to;
 			}
 			
 			console.log(to);
