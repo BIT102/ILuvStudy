@@ -26,8 +26,8 @@ public class S3Util {
 	
 	private static final Logger logger = LoggerFactory.getLogger(S3Util.class);
 	
-	private String accessKey = "AKIAITHB7I532AQ4IYNA"; // ¿¢¼¼½º Å°
-	private String secretKey = "Foafxlpk20rDlNT4jB3Lk+gIh7g6VMAcjzpJMtd+"; // º¸¾È ¿¢¼¼½º Å°
+	private String accessKey = "ë³´ì•ˆë³´ì•ˆë³´ì•ˆ"; // ì—‘ì„¸ìŠ¤ í‚¤
+	private String secretKey = "ë³´ì•ˆë³´ì•ˆë³´ì•ˆ"; // ë³´ì•ˆ ì—‘ì„¸ìŠ¤ í‚¤
 
 	private AmazonS3 conn;
 
@@ -36,60 +36,60 @@ public class S3Util {
 		ClientConfiguration clientConfig = new ClientConfiguration();
 		clientConfig.setProtocol(Protocol.HTTP);
 		this.conn = new AmazonS3Client(credentials, clientConfig);
-		conn.setEndpoint("s3.ap-northeast-2.amazonaws.com"); // ¿£µåÆ÷ÀÎÆ® ¼³Á¤ [ ¾Æ½Ã¾Æ ÅÂÆò¾ç ¼­¿ï ]
+		conn.setEndpoint("s3.ap-northeast-2.amazonaws.com"); // ì—”ë“œí¬ì¸íŠ¸ ì„¤ì • [ ì•„ì‹œì•„ íƒœí‰ì–‘ ì„œìš¸ ]
 	}
 
-	// ¹öÅ¶ ¸®½ºÆ®¸¦ °¡Á®¿À´Â ¸Ş¼­µåÀÌ´Ù.
+	// ë²„í‚· ë¦¬ìŠ¤íŠ¸ë¥¼ ê°€ì ¸ì˜¤ëŠ” ë©”ì„œë“œì´ë‹¤.
 	public List<Bucket> getBucketList() {
 		return conn.listBuckets();
 	}
 
-	// ¹öÅ¶À» »ı¼ºÇÏ´Â ¸Ş¼­µåÀÌ´Ù.
+	// ë²„í‚·ì„ ìƒì„±í•˜ëŠ” ë©”ì„œë“œì´ë‹¤.
 	public Bucket createBucket(String bucketName) {
 		return conn.createBucket(bucketName);
 	}
 
-	// Æú´õ »ı¼º (Æú´õ´Â ÆÄÀÏ¸í µÚ¿¡ "/"¸¦ ºÙ¿©¾ßÇÑ´Ù.)
+	// í´ë” ìƒì„± (í´ë”ëŠ” íŒŒì¼ëª… ë’¤ì— "/"ë¥¼ ë¶™ì—¬ì•¼í•œë‹¤.)
 	public void createFolder(String bucketName, String folderName) {
 		conn.putObject(bucketName, folderName + "/", new ByteArrayInputStream(new byte[0]), new ObjectMetadata());
 	}
 
-	// ÆÄÀÏ ¾÷·Îµå
+	// íŒŒì¼ ì—…ë¡œë“œ
 	public void fileUpload(String bucketName, String fileName, byte[] fileData) throws FileNotFoundException {
 
-		String filePath = (fileName).replace(File.separatorChar, '/'); // ÆÄÀÏ ±¸º°ÀÚ¸¦ `/`·Î ¼³Á¤(\->/) ÀÌ°Ô ±âÁ¸¿¡ / ¿´¾îµµ ³Ñ¾î¿À¸é¼­ \·Î ¹Ù²î´Â °Å°°´Ù.
-		logger.info("ÆÄÀÏ °æ·Î : "+filePath);
+		String filePath = (fileName).replace(File.separatorChar, '/'); // íŒŒì¼ êµ¬ë³„ìë¥¼ `/`ë¡œ ì„¤ì •(\->/) ì´ê²Œ ê¸°ì¡´ì— / ì˜€ì–´ë„ ë„˜ì–´ì˜¤ë©´ì„œ \ë¡œ ë°”ë€ŒëŠ” ê±°ê°™ë‹¤.
+		logger.info("íŒŒì¼ ê²½ë¡œ : "+filePath);
 		
 		ObjectMetadata metaData = new ObjectMetadata();
-		metaData.setContentLength(fileData.length);   //¸ŞÅ¸µ¥ÀÌÅÍ ¼³Á¤ -->¿ø·¡´Â 128kB±îÁö ¾÷·Îµå °¡´ÉÇßÀ¸³ª ÆÄÀÏÅ©±â¸¸Å­ ¹öÆÛ¸¦ ¼³Á¤½ÃÄ×´Ù.
-	    logger.info("¸ŞÅ¸ µ¥ÀÌÅÍ : " + metaData);
+		metaData.setContentLength(fileData.length);   //ë©”íƒ€ë°ì´í„° ì„¤ì • -->ì›ë˜ëŠ” 128kBê¹Œì§€ ì—…ë¡œë“œ ê°€ëŠ¥í–ˆìœ¼ë‚˜ íŒŒì¼í¬ê¸°ë§Œí¼ ë²„í¼ë¥¼ ì„¤ì •ì‹œì¼°ë‹¤.
+	    logger.info("ë©”íƒ€ ë°ì´í„° : " + metaData);
 		
-	    ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(fileData); //ÆÄÀÏ ³ÖÀ½
+	    ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(fileData); //íŒŒì¼ ë„£ìŒ
 	    
 		conn.putObject(bucketName, filePath, byteArrayInputStream, metaData);
-		System.out.println("³Í¹»±î???????????????/"+filePath);
+		System.out.println("ë„Œë­˜ê¹Œ???????????????/"+filePath);
 	}
 
-	// ÆÄÀÏ »èÁ¦
+	// íŒŒì¼ ì‚­ì œ
 	public void fileDelete(String bucketName, String fileName) {
 		String imgName = (fileName).replace(File.separatorChar, '/');
 		conn.deleteObject(bucketName, imgName);
-		System.out.println("»èÁ¦¼º°ø");
+		System.out.println("ì‚­ì œì„±ê³µ");
 	}
 
-	// ÆÄÀÏ URL
+	// íŒŒì¼ URL
 	public String getFileURL(String bucketName, String fileName) {
-		System.out.println("³Ñ¾î¿À´Â ÆÄÀÏ¸í111 : "+fileName);
+		System.out.println("ë„˜ì–´ì˜¤ëŠ” íŒŒì¼ëª…111 : "+fileName);
 		String imgName = (fileName).replace(File.separatorChar, '/');
 		return conn.generatePresignedUrl(new GeneratePresignedUrlRequest(bucketName, imgName)).toString();
 	}
 	
-	// srcÆÄÀÏ ÀĞ¾î¿À±â
+	// srcíŒŒì¼ ì½ì–´ì˜¤ê¸°
     public S3ObjectInputStream getSrcFile(String bucketName, String fileName) throws IOException{
-        System.out.println("³Ñ¾î¿À´Â ÆÄÀÏ¸í222 : "+fileName);
+        System.out.println("ë„˜ì–´ì˜¤ëŠ” íŒŒì¼ëª…222 : "+fileName);
         fileName = (fileName).replace(File.separatorChar, '/');
-        S3Object s3object = conn.getObject(new GetObjectRequest(bucketName, fileName)); //ÇØ´ç ÆÄÀÏ s3°´Ã¼¿¡ ´ã±â
-        S3ObjectInputStream objectInputStream = s3object.getObjectContent();    //s3°´Ã¼¸¦ ½ºÆ®¸²À¸·Î º¯È¯
+        S3Object s3object = conn.getObject(new GetObjectRequest(bucketName, fileName)); //í•´ë‹¹ íŒŒì¼ s3ê°ì²´ì— ë‹´ê¸°
+        S3ObjectInputStream objectInputStream = s3object.getObjectContent();    //s3ê°ì²´ë¥¼ ìŠ¤íŠ¸ë¦¼ìœ¼ë¡œ ë³€í™˜
 
         return objectInputStream;
     }
