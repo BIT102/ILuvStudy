@@ -10,6 +10,9 @@ import dev.mvc.domain.StudyVO;
 
 public interface StudyDAO {
 	
+	//스터디 수정
+	public void update(StudyVO vo) throws Exception;
+	
 	//대분류
 	public String getcaD(Integer bno) throws Exception;
 	

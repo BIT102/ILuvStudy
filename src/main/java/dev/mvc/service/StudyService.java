@@ -13,7 +13,9 @@ public interface StudyService {
 	public List<StudyVO> readCa(Integer bno) throws Exception;
 	
 /*	public List<String> getcaD() throws Exception;*/
-
+	
+	//스터디 수정부분
+	public void update(StudyVO vo) throws Exception;
 	
 	//스터디등록   
 	public void regist(StudyVO vo) throws Exception;

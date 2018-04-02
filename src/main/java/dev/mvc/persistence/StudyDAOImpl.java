@@ -27,6 +27,12 @@ public class StudyDAOImpl implements StudyDAO {
 	private static final Logger logger = LoggerFactory.getLogger(StudyDAOImpl.class);
 
 
+	//스터디 수정
+	@Override
+	public void update(StudyVO vo) throws Exception {
+		session.update(namespace+".update");
+	}
+	 
 	@Override
 	public String getcaD(Integer bno) throws Exception {
 		

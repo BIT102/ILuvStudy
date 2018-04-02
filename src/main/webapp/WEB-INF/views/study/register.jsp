@@ -59,7 +59,6 @@ small {
 .btn-xs {
 	margin-top: 5px;
 }
-
 /*지도스타일입니다*/
 #map {
 	height: 300px;
@@ -177,7 +176,8 @@ small {
 											<tbody>
 												<tr>
 													<th>연령</th>
-													<td><label class="fancy-checkbox"
+													<td>
+													<label class="fancy-checkbox"
 														style="display: inline-block;"> <input
 															type="checkbox" class="age" name="age" value="10대"><span>10대
 														</span>
@@ -201,7 +201,8 @@ small {
 														style="display: inline-block;"> <input
 															type="checkbox" class="age" name="age" value="무관"><span>무관
 														</span>
-													</label></td>
+													</label>
+													</td>
 												</tr>
 												<tr>
 													<th>최대인원</th>
@@ -586,8 +587,22 @@ small {
     
     <!-- 유효성 검사 스크립트 -->
     <script>
+    
+    
     // 카테고리 대 소 , 스터디명, 지역 대, 연력, 최대인원, 시작날짜, 요일, 시간
     $(".btn-success").on("click", function(e){
+    	//연령
+	    var chk = false;
+ 	   	
+    	for(var i=0; document.myform.age.length; i++) {
+    		if(document.myfrom.car[i].checked) {chk = ture} {
+    		}
+    		//체크가 안되었을 때
+    		if(!chk){
+    			alert("원하는 나이대를 입력하세요")
+    		}
+    	}
+    	
     	
     	//카테고리 대소 
     	if($("#addCatArea").html()==""){
@@ -607,13 +622,7 @@ small {
     		alert("지역을 입력하세요")
     		$("#rDName").focus();
     		return false;
-    	//연령	
-    	} else if($(".fancy-checkbox").is(':checked')==false){
-    		
-    		alert("원하시는 나이대를 입력하세요")
-    		$(".fancy-checkbox").focus();
-    		return false;
-    	//최대인원	
+    	
     	} else if($(".studymax").val()=="") {
     		
     		alert("최대인원을 입력하세요")
@@ -648,12 +657,10 @@ small {
     	}
     	
     })
-
     </script>
     
    <!--지도 크르깁트 -->
    <script>
-
    function initMap() {
    		var uluru = {lat:37.5663797, lng:126.9777154};
    	    var map = new google.maps.Map(document.getElementById('map'),{

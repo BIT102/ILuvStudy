@@ -1,339 +1,119 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+    pageEncoding="UTF-8"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<script src="http://code.jquery.com/jquery-1.7.js"></script>
-<script
-	src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
-<script type="text/javascript" src="/resources/js/upload.js"></script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="http://code.jquery.com/jquery-1.7.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+    <script type="text/javascript" src="/resources/js/upload.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 
-<link href="/resources/css/bootstrap.min.css" rel="stylesheet"
-	type="text/css" />
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<title>Document</title>
-<style>
-h1 {
-	float: left;
-}
-
-#nav1 {
-	float: left;
-	height: 40px;
-}
-
-#nav1>a {
-	text-decoration-line: none;
-}
-
-#nav2 {
-	float: right;
-}
-
-#nav2>a {
-	text-decoration-line: none;
-}
-
-#header {
-	height: 150px;
-}
-
-body {
-	margin-left: 50px;
-}
-
-#repliesDiv {
-	font-size: 40px;
-	border: 2px dotted black;
-}
-
-.textcenter1 {
-	text-align: center;
-}
-
-.btn-black:hover {
-	background-color: gray !important;
-}
-
-/*지도스타일입니다*/
-#map {
-	width: 60%;
-	height: 442px;
-	display: inline-block;
-	margin-left: 30px;
-	float: right;
-}
-
-.gallery {
-	margin-top: 25px;
-	margin-bottom: 25px;
-}
-
-.gallery li {
-	display: inline-block;
-	margin-left: 15px;
-}
-
-.imgstyle {
-	border: 1px solid #f1f1f1;
-	width: 1170px;
-	margin-top: 25px;
-}
-
-.app {
-	border: 1px solid #f1f1f1;
-	width: 1170px;
-	margin-top: 25px;
-}
-
-.applyList {
-	margin: 15px 25px;
-}
+<link href="/resources/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Document</title>
+    <style>
+    h1 {float:left;}
+    #nav1{float:left; height:40px;}
+    #nav1 > a {text-decoration-line: none;}
+    #nav2{float:right;}    
+    #nav2 > a {text-decoration-line: none;}
+    
+    #header{height: 150px;}
+	body {margin-left:50px;}
+	#repliesDiv{font-size:40px; border:2px dotted black;}
+	.textcenter1{text-align:center;}
+	
+	
 </style>
 </head>
 
 <body>
 
-	<%@include file="../nav.jsp"%>
-	<div id="multiple-blog-page">
-		<!-- header begin -->
-		<header class="page-head">
-			<div class="header-wrapper">
-				<div class="container">
-					<div class="row">
-						<div class="col-md-12">
+<%@include file="../nav.jsp"%>
+<div id="multiple-blog-page">
+ <!-- header begin -->
+            <header class="page-head">
+                <div class="header-wrapper">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
 
-							<ol class="breadcrumb">
-								<li><a href="index.html">Home</a></li>
-								<li class="active">Board</li>
-							</ol>
-							<!-- end of /.breadcrumb -->
+                                <ol class="breadcrumb">
+                                    <li><a href="index.html">Home</a></li>
+                                    <li class="active">FAQ</li>
+                                </ol> <!-- end of /.breadcrumb -->
 
-						</div>
+                            </div>
+                        </div>
+                    </div> <!-- /.container -->
+                </div> <!-- /.header-wrapper -->
+            </header> <!-- /.page-head (header end) -->
+
+<!-- bno값 유지하자 -->
+<form role="form" method="post">
+ 	<input type="hidden" name="bno" id="bno" value="${studyVO.bno}">
+	<%-- <input type="hidden" name="writer" id="writer" value="${studyVO.writer}" --%>
+	<input type="hidden" name="now" id="studyNow" value="${studyVO.now}">
+	<input type="hidden" name="max" id="studyMax" value="${studyVO.max}">
+</form>
+		
+	
+		
+		<!-- section -->
+	<div class="container">
+        <div style="height:700px;">
+            <div id="brdimg">
+                <c:if test="${studyVO.name!=null}">
+					<div class='uploadedList'>
+						<span class="mailbox-attachment-icon has-img"><img
+						
+							src="/study/displayFile?fileName=${studyVO.name}"
+							alt="Attachment"></span>
 					</div>
-				</div>
-				<!-- /.container -->
-			</div>
-			<!-- /.header-wrapper -->
-		</header>
-		<!-- /.page-head (header end) -->
+				</c:if>
+				
+				<p>${studyVO.cDName}</p>
+			
+                <!-- 스터디 제목 -->
+                <h2>${studyVO.title}</h2>
+                <!-- 작성자 -->
+                <p>${studyVO.nickname}</p>   
+   				
+                <!-- 북마크 -->
+				
+                	좋아용/나빠용
+               <!-- 로그인 했을때 -->
+ 
 
-		<!-- bno값 유지하자 -->
-		<form role="form" method="post">
-			<input type="hidden" name="bno" id="bno" value="${studyVO.bno}">
-		</form>
+					<script>
+					${bolist}
+					${studyVO.bno}
+					${login.email}
+					</script>
+					
+					<!-- 북마크등록 // 로그인한 사람만 -->
+ 					<c:if test="${not empty login}">
+ 					<!-- 등록 안되어있을때 -->
+ 					<c:if test="${bolist.checked == 0}">
+					<i class="fa fa-heart-o" id="heart" onclick="myFunction1(this)"></i>
+					</c:if>
+					<!-- 북마크 등록되어있을때 -->
+					<c:if test="${bolist.checked == 1}">
+					<span id="delete">
+				 	<i class="fa fa-heartbeat" id="heart" onclick="myFunction1(this)" ></i>
+				 	</span>
+				 	</c:if> 
+					</c:if>
+		
+	
 
-
-		<div class="container">
-			<div class="row">
-
-				<article class="blog-item">
-
-					<c:choose>
-						<c:when test="${studyVO.name ne 'a'}">
-							<img src="/study/displayFile?fileName=${studyVO.name}"
-								class="img-responsive center-block"
-								style="width: 1170px; height: 380px;">
-						</c:when>
-						<c:otherwise>
-							<img src="/resources/assets/img/ha.jpg"
-								class="img-responsive center-block"
-								style="width: 1170px; height: 380px;">
-						</c:otherwise>
-					</c:choose>
-
-					<div class="author">
-						<div class="row">
-							<div class="col-md-12">
-								<div class="about-author" style="margin-top: 20px;">
-									<div class="row">
-										<div class="col-md-3">
-											<img src="assets/img/commenter2.jpg"
-												class="img-responsive center-block img-circle">
-										</div>
-										<div class="col-md-9">
-											<p>
-												<strong>주인 :</strong> <span
-													class="author-name text-uppercase">${studyVO.nickname}</span>
-											</p>
-											<p>${studyVO.content}</p>
-										</div>
-									</div>
-								</div>
-
-								<div class="author-contact">
-									<div class="row">
-										<div class="col-md-6">
-											<p class="pull-left">
-
-
-												<!-- 북마크등록 // 로그인한 사람만 -->
-												<span><c:if test="${not empty login}">
-														<!-- 등록 안되어있을때 -->
-														<c:if test="${bolist.checked == 0}">
-															<i class="fa fa-heart-o" id="heart"
-																onclick="myFunction1(this)" style="font-size: 20px;"></i>
-														</c:if>
-														<!-- 북마크 등록되어있을때 -->
-														<c:if test="${bolist.checked == 1}">
-															<span id="delete"> <i class="fa fa-heartbeat"
-																id="heart" onclick="myFunction1(this)"
-																style="font-size: 20px;"></i>
-															</span>
-														</c:if>
-														<strong> 즐겨찾기에 추가해 주세요 </strong>
-													</c:if> </span> <span class="like"> <i class="fa fa-eercast"></i>${studyVO.vct}</span>
-											</p>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-
-					<div class="blog-heading">
-						<h2 class="text-capitalize">
-							<strong>${studyVO.title}</strong>
-						</h2>
-						<span class="date"><fmt:formatDate pattern="yyyy-MM-dd"
-								value="${studyVO.regdate}" /></span>
-
-					</div>
-					<div class="bodycontent">
-						<div class="nicecontent" style="float: top; margin-top: 25px;">
-							<p
-								style="display: inline-block; vertical-align: top; font-size: 20px;">
-								종류 : ${studyVO.cDName} / ${studyVO.cSName}<br> <br> 지역
-								:${studyVO.rDName} / ${studyVO.rSName}<br> <br> 참여인원 :
-								${studyVO.now} / ${studyVO.max}<br> <br> 선호나이 :
-								${studyVO.age}<br> <br> 요일 : ${studyVO.sc}<br> <br>
-								날짜 : ${studyVO.sd}<br> <br> 시간 : ${studyVO.st} /
-								${studyVO.et}
-							</p>
-							<div id="map"></div>
-						</div>
-						<!-- 지도입니다. -->
-
-					</div>
-					<!-- 콘덴트바디바디 -->
-
-
-					<div class="imgstyle">
-						<p>스터디 이미지</p>
-						<div class="gallery"></div>
-					</div>
-
-
-					<!-- 신청한 사람 목록 -->
-					<div class="app">
-						<p>신청자목록</p>
-						<div class="applyList"></div>
-					</div>
-			</div>
-			<!-- end grycontainer -->
-
-
-
-
-			<div class="comments">
-				<div class="row">
-					<div class="col-md-12">
-
-			<div class="comment-post">
-				<h3>댓글을 달아주세요</h3>
-				<div class="row">
-					<div class="col-md-4">
-						<div class="form-group">
-							<input name="writer" id="writer" type="text" class="form-control"
-								value="${login.email}">
-						</div>
-					</div>
-
-					<div class="col-md-12">
-						<textarea name="content" type="text" class="form-control"
-							id="content" rows="8" required="required"
-							placeholder="댓글을 입력해 주세요"></textarea>
-					</div>
-				</div>
-
-				<button type="button" id="addBtn" class="btn btn-black"
-					style="color: white;">댓글 추가하기</button>
-				<button type="button" id="seeBtn" class="btn btn-black"
-					style="color: white;">댓글 보기</button>
-			</div>
-			</article>
-
-
-
-			<div id="replies" style="margin-top:15px;"></div>
-							<!-- 댓글 수정 삭제 부분 -->
-						<div id="modDiv" style="display: none">
-							<div class="modal-title"></div>
-							<div>
-								<input type="text" id="recon">
-							</div>
-							<div>
-								<button type="button" id="remodify">Modify</button>
-								<button type="button" id="redelege">Delete</button>
-								<button type="button" id="reclose">Close</button>
-							</div>
-						</div>
-			<ul class="replypage"></ul>
-		</div>
-	</div>
-	</div>
-
-
-
-
-
-
-
-
-	<div>
-
-
-		<br> <br>
-		<!-- 로그인했는데 로그인아이디가 글작성자와 같지않을때. -->
-
-
-		신청하는 사람
-		<!-- 신청하면 이미지와 닉네임 만들기 -->
-		<input type="submit" class="apply" value="신청하기"> <input
-			type="submit" class="deapply" value="신청취소"> <input
-			type="submit" class="preee" value="목록으로">
-		<!-- 로그인시 -->
-		<br> <br>
-
-		<!-- 로그인한아이디가 글쓴이일때. -->
-
-		등록한 사람 <br> <input type="submit" class="aList" value="신청자목록"
-			onclick="wait();">
-		<div id='amodDiv' style="display: none;">
-			<div class='modal-applyList'></div>
-			<button type="button" id="applyclose">없어져요</button>
-
-		</div>
-		<input type="submit" class="preee" value="목록"> <input
-			type="submit" value="수정"> <input type="submit" class="delete"
-			value="스터디완료">
-
-	</div>
-</div>
-
-
-
-	<script>
+ <script>
 //북마크를 등록합니다	
 
 function myFunction1(x) {
@@ -392,10 +172,76 @@ function myFunction1(x) {
 		alert("이미 처리되었습니다");
 	}
 }
-</script>
+</script>               
 
-	<!-- 파일업로드 핸들러 -->
-	<script id="templateAttach" type="text/x-handlebars-template">
+            </div>
+
+            <table>
+                <tr>
+                <!-- 카테고리 -->
+                    <td>카테고리</td>
+                   <c:forEach items="${list}" var="studyVO">
+
+                   ${studyVO.cDName}${studyVO.cSName}
+
+                    </c:forEach>
+                </tr>
+                <tr>
+                <!-- 현재인원 -->
+                    <td>현재인원</td>
+                    <td>${studyVO.now}</td>
+                </tr>
+                <tr>
+                <!-- 최대인원 -->
+                    <td>최대인원</td>
+                    <td>${studyVO.max}</td>
+                </tr>
+                <tr>
+                <!-- 지역 -->
+                    <td>지역</td>
+                    <td>${studyVO.rDName}/${studyVO.rSName}</td>
+                </tr>
+                <tr>
+                <!-- 시작날짜 -->
+                    <td>시작날짜</td>
+                    <td>${studyVO.sd}</td>
+                    <!-- 시작시간 -->
+                    <td>시작시간</td>
+                    <td>${studyVO.st}</td>
+                    <!-- 끝나는시간 -->
+                    <td>끝나는시간</td>
+                    <td>${studyVO.et}</td>
+                </tr>
+            </table>
+            <!-- 요일별 -->
+            <div>요일별 스터디 시간 <p>${studyVO.sc}</p></div>
+            <!-- 스터디내용 -->
+            <div class="brdtext"><p>소개글</p></div>
+            <div class="brdtext"><p>${studyVO.content}</p></div>
+
+
+        </div>
+        
+		<!-- 신청한 사람 목록 -->
+			<div class ="applyList">
+			</div>
+        
+        
+        
+        
+        
+        <!-- 첨부파일 나중에 합시다 -->
+    <div id="grycontainer">  
+    	
+    	<!-- 이미지 상태가 x인 이미지 -->
+
+        <div class="gallery">
+        </div>
+	
+    </div><!-- end grycontainer -->
+    
+    <!-- 파일업로드 핸들러 -->
+    <script id="templateAttach" type="text/x-handlebars-template">
     <li data-src='{{name}}'>
 		<span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment"></span>
   		<div class="mailbox-attachment-info">
@@ -403,8 +249,8 @@ function myFunction1(x) {
 		</div>
 	</li>
     </script>
-
-	<script>
+    
+    <script>
     
     //파일불러오기
     var bno = ${studyVO.bno};
@@ -421,11 +267,67 @@ function myFunction1(x) {
     })
     
     </script>
-	<script>
+
+    <div>
+
+        <span>작성자</span>
+        <input type="text" name="writer" id="writer" value="${studyVO.writer}">
+        <span><input type="text" name="content" id="content" value="댓글을 입력해 주세요."></span>
+        <input type="checkbox" >비밀글 <input type="button" id="addBtn" value="댓글작성"><br>
+        
+                      댓글 테스트
+        <ul id="replies"></ul>
+        <ul class="replypage"></ul>
+        
+        <!-- 댓글 수정 삭제 부분 -->
+       <div id="modDiv" style="display:none">
+         	<div class="modal-title"></div>
+         	<div>
+        		<input type="text" id="recon">
+			</div>
+        	<div>
+        	<button type="button" id="remodify">Modify</button>
+        	<button type="button" id="redelege">Delete</button>
+        	<button type="button" id="reclose">Close</button>
+        	</div>
+        </div>  
+        
+    <br><br>
+    	<!-- 로그인했는데 로그인아이디가 글작성자와 같지않을때. -->
+
+    
+    	신청하는 사람
+    	<!-- 신청하면 이미지와 닉네임 만들기 -->
+        <input type="submit" class="apply" value="신청하기">
+        <input type="submit" class="deapply" value="신청취소">
+        <input type="submit" class="preee" value="목록으로">
+        <!-- 로그인시 --> <br><br>
+        
+        <!-- 로그인한아이디가 글쓴이일때. -->
+
+                     등록한 사람  
+        <br>
+        <input type="submit" class="aList" value="신청자목록" onclick="wait();">
+        <div id='amodDiv' style="display:none;">
+        	<div class='modal-applyList'>
+        	</div>
+        <button type="button" id="applyclose">없어져요</button>	
+        	
+        </div>
+        <input type="submit" class="preee" value="목록">
+        <input type="submit" value="수정">
+        <input type="submit" class="delete" value="스터디완료">
+
+    </div>
+
+</div>
+</div>
+<!-- 신청자목록 모달 -->
+<script>
 var applyEmail = $("#writer").val();
 var applybsBno = $("#bno").val();
-var now = ${studyVO.now};
-var max = ${studyVO.max}
+var now = $("#studyNow").val();
+var max = $("#studyMax").val();
 var bno = ${studyVO.bno};
 //스터디 등록
 $(".apply").on("click", function(){
@@ -458,9 +360,6 @@ $(".apply").on("click", function(){
 	})
 	}
 })
-
-
-
 //스터디 취소하기
 $(".deapply").on("click", function(){
 $.ajax({
@@ -605,8 +504,8 @@ $.getJSON("/study/apply/"+bno, function(data){
 </script>
 
 
-	<!-- 상세페이지 -->
-	<script>
+<!-- 상세페이지 -->
+<script>
 $(document).ready(function(){
 	
 	var formObj = $("form[role='form']");
@@ -620,12 +519,12 @@ $(document).ready(function(){
 		formObj.submit();
 	})
 });
-</script>
+</script>   
 
 
-	<!--  댓글 -->
+<!--  댓글 -->
 
-	<script>
+        <script>
     
     	var bno = $("#bno").val(); 
         
@@ -657,25 +556,20 @@ $(document).ready(function(){
         	});
         });
         
-        $("#seeBtn").on("click", function(){
-        	getPageList(replyPage);
-        });
-	
-	
 	//상세 리플
-        $("#replies").on("click",".replyLi .cmnt-clipboard button", function(){
+        $("#replies").on("click", ".replyLi button", function(){
         	
-       // 	var reply = $(".replyLi").val();
-       var rno = $(this).val();
-       
-       var retext = $(this).parent().next().children().children(".col-md-10").children(".contentre").text();
-
+        	var reply = $(this).parent();
+        	
+        	var rno = reply.attr("data-rno");
+        	var retext = reply.text();
+        	alert(rno +":" + retext)
+        	
         	$(".modal-title").html(rno);
         	$("#recon").val(retext);
         	$("#modDiv").show("slow");
         	 
         });
-
         //삭제
         $("#redelege").on("click", function(){
         	
@@ -725,12 +619,7 @@ $(document).ready(function(){
         			}
         		}
         	});
-        });
-        
-        $("#reclose").on("click", function(){
-        	$("#modDiv").hide("slow");
-        })
-        
+        }); 
         
         //댓글페이지
         function getPageList(page) {
@@ -741,14 +630,9 @@ $(document).ready(function(){
         		
         		$(data.list).each(function(){
         			
-        			
-        			str += "<div class='replyLi' ><div class='cmnt-clipboard'><button class='btn-clipboard' value='"+this.rno+"'>수정하기</button></div>"
-        			    +  "<div class='well'>"+this.rno+"<div class='row'><div class='col-md-2'>"
-        			    +  "<img src='assets/img/commenter2.jpg' class='img-responsive center-block'></div>"
-                        +  "<div class='col-md-10'><p class='comment-info'>"
-                        +  "<strong>" + this.writer + "</strong>" + "<span>" + this.regdate + "</span>"
-                        + "</p><div class='contentre'>" + this.content + "</div></div></div></div></div>"
-        			
+        			str += "<li data-rno='" + this.rno + "' class='replyLi'>"
+        			    + this.rno + ":" + this.content
+        			    + "<button>MOD</button></li>";
         		});
         		$("#replies").html(str);
         		
@@ -788,10 +672,10 @@ $(document).ready(function(){
         });
         
   
-        </script>
+        </script>    
 
 
-	<script>
+<script>
 Handlebars.registerHelper("prettifyDate", function(timeValue){
 	var dateObj = new Date(timeValue);
 	var year = dateObj.getFullYear();
@@ -808,10 +692,10 @@ var printData = function(replyArr, target, templateObject) {
 	target.after(html);
 }
 </script>
-	<!-- 수정버튼 -->
+<!-- 수정버튼 -->
 
 
-	<script>
+<script>
 $(document).ready(function(){
 	
 	var formObj = $("form[role='form']");
@@ -825,33 +709,45 @@ $(document).ready(function(){
 		formObj.submit();
 	})
 	
-	$(".modify").on("click",function(){
+	$(".btn-black").on("click",function(){
 		formObj.attr("action", "/study/update");
 		formObj.attr("method", "get");
 		formObj.submit();
 	});
-});
+	
 	
 <%-- 	//=========SOHEE 댓글 수 추가=============
 	$('#replies2').text("<%= replycnt %> Comments");
 	 --%>
-</script>
-	<!--지도 크르깁트 -->
-	<script>
-   function initMap() {
-   		var uluru = {lat:37.5663797, lng:126.9777154};
-   	    var map = new google.maps.Map(document.getElementById('map'),{
-   		zoom: 16,
-   		center:uluru
-   	});
-   	var marker = new google.maps.Marker({
-   		position:uluru,
-   		map:map
-   	});
-   }
-   </script>
-	<script
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAiNU7soIIqpN1Jdu0tV1CWBb6u1jJAH5o&callback=initMap"
-		async defer></script>
+});
+</script>   
+
 </body>
 </html>
+
+
+								<div class="cmnt-clipboard">
+									<span class="btn-clipboard">Reply</span>
+								</div>
+								<div class="well">
+									<div class="row">
+										<div class="col-md-2">
+											<img src="assets/img/commenter2.jpg"
+												class="img-responsive center-block">
+										</div>
+										<div class="col-md-10">
+											<p class="comment-info">
+												<strong>David Martin</strong> <span>22 april 2015</span>
+											</p>
+											<p>Lorem Ipsum is simply dummy text of the printing and
+												typesetting industry. Lorem Ipsum has been the industry's
+												standard dummy text ever since they 1500s.</p>
+										</div>
+									</div>
+								</div>
+
+
+
+
+
+

@@ -25,7 +25,13 @@ public class StudyServiceImpl implements StudyService {
 	@Inject
 	private StudyDAO dao;
 
+	//스터디 수정부분
+	public void update(StudyVO vo ) throws Exception {
+		dao.update(vo);
+	}
+	
 	// 카테고리 불러왹
+	@Override
 	public List<StudyVO> readCa(Integer bno) throws Exception {
 
 		return dao.readCa(bno);

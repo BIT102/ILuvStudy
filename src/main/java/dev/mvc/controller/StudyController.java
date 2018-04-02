@@ -48,6 +48,31 @@ public class StudyController {
 	@Inject
 	private BookmarkService bookservice;
 	
+	
+	//스터디 수정
+	@RequestMapping(value="/update", method = RequestMethod.GET)
+	public void updateGET(int bno, Model model) throws Exception {
+		
+		
+		model.addAttribute(service.read(bno));		
+		// 카테고리 대분류값 보내기
+		model.addAttribute("studyCategory", service.studyCategory());
+		// 지역대분류값 보내기
+		model.addAttribute("region", service.region());
+		
+		
+	}
+	
+	@RequestMapping(value="/update", method=RequestMethod.POST)
+	public String updatePOST(StudyVO board, RedirectAttributes rttr) throws Exception {
+		
+		service.update(board);
+		rttr.addFlashAttribute("msg", "success");
+		
+		return "redirect:/study/listAll";
+	}
+	
+	
 	// 스터디 등록 김상욱 수정
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public String registerGET(Model model, HttpServletRequest request)throws Exception{
@@ -84,50 +109,11 @@ public class StudyController {
 		logger.info("register POST...........");
 		System.out.println("vo = "+vo);
 		
-/*		if(vo.getTitle()==null||vo.getNow()==null||vo.getMax()==null||vo.getrDId()==null
-				||vo.getAge()==null||vo.getSc()==null||vo.getSd()==null||vo.getSt()==null||vo.getEt()==null) {
-			
-			rttr.addFlashAttribute("msg", "no");
-			return "redirect:/study/register";
-		} else {
-		}		*/
 		service.regist(vo);
 		
 		return "redirect:/study/main";
 	}
 
-	// JSON small카테고리(study) //URL /category/추가
-	@RequestMapping(value = "/register1/category/{csId}", method = RequestMethod.GET)
-	public ResponseEntity<List<StudyVO>> list2(@PathVariable("csId") String csId) throws Exception {
-
-		ResponseEntity<List<StudyVO>> entity = null;
-
-		try {
-
-			entity = new ResponseEntity<>(service.catList2(csId), HttpStatus.OK);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		}
-
-		return entity;
-	}
-
-	// JSON small카테고리(region) //URL /region/추가 (겹치지않게)
-	@RequestMapping(value = "/register1/region/{rSId}", method = RequestMethod.GET)
-	public ResponseEntity<List<StudyVO>> rglist(@PathVariable("rSId") String rsId) {
-
-		ResponseEntity<List<StudyVO>> entity = null;
-		try {
-			entity = new ResponseEntity<>(service.rgList2(rsId), HttpStatus.OK);
-		} catch (Exception e) {
-			e.printStackTrace();
-			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		}
-
-		return entity;
-	}
 
 	// 스터디 목록 불러오기
 
