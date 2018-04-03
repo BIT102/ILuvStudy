@@ -15,6 +15,7 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import dev.mvc.domain.AdminVO;
 import dev.mvc.domain.MessageVO;
 import dev.mvc.domain.UserVO;
 import dev.mvc.persistence.MessageDAO;
@@ -42,13 +43,24 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 		
 		//HttpSession 정보를 가져온다
 		Map<String, Object> map = session.getAttributes(); 	
-		UserVO login = (UserVO) map.get("login");
+
+		//유저와 관리자의 경우 분할
+		if(map.get("login") instanceof UserVO){
+			System.out.println("user==========");
+			UserVO login = (UserVO) map.get("login");
+			users.put(session.getId(), login.getEmail());			
+			logger.info(login.getEmail() +"님 접속");
+		}else{
+			AdminVO admin = (AdminVO) map.get("login");
+			System.out.println("admin=========================");
+			System.out.println(admin);
+			users.put(session.getId(), admin.getId());
+			logger.info(admin.getId() +"님 접속");
+		}
 		
 		//웹 소켓 세션의 아이디, 로그인한 사용자 아이디를 담아준다
-		users.put(session.getId(), login.getEmail());
 		connectedUsers.add(session);
 		
-		logger.info(login.getEmail() +"님 접속");
 	//	logger.info("연결 ip : "+session.getRemoteAddress().getHostName());
 	}
 	
@@ -111,9 +123,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 	        	 	if (messageVO.getReceiver().equals(users.get(webSocketSession.getId()))) {
 	            		 webSocketSession.sendMessage(
 	            				 new TextMessage(
-	            						 "<span style='color:red; font-weight: bold;' > 귓속말 : "
-	            								 + messageVO.getEmail() + "▶ " + messageVO.getMessage()
-	            								 + "</span>"));
+	            						 "<div>" + messageVO.getMessage() + "</div>"));
 	            		 break;
 	            	 }
 	          }

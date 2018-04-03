@@ -1,12 +1,18 @@
 package dev.mvc.domain;
 
+import java.util.Date;
+
 import com.google.gson.Gson;
 
 public class MessageVO {
+	
+	private int bno;			//메시지 번호
 	private String message;		//메시지 내용
 	private String type;		//all, to 전체, 귓속말
-	private String receiver;			//귓속말 대상 (기본 : admin)
+	private String receiver;	//귓속말 대상 (기본 : admin)
 	private String email;		//메시지 보낸 이메일
+	private Date registDate;	//메시지 전송일
+	
 	
 	
 	public static MessageVO converMessage(String source){
@@ -17,6 +23,22 @@ public class MessageVO {
 		return message;
 	}
 	
+	public int getBno() {
+		return bno;
+	}
+
+	public void setBno(int bno) {
+		this.bno = bno;
+	}
+
+	public Date getRegistDate() {
+		return registDate;
+	}
+
+	public void setRegistDate(Date registDate) {
+		this.registDate = registDate;
+	}
+
 	public String getEmail() {
 		return email;
 	}
@@ -51,7 +73,8 @@ public class MessageVO {
 
 	@Override
 	public String toString() {
-		return "MessageVO [message=" + message + ", type=" + type + ", receiver=" + receiver + ", email=" + email + "]";
+		return "MessageVO [bno=" + bno + ", message=" + message + ", type=" + type + ", receiver=" + receiver
+				+ ", email=" + email + ", registDate=" + registDate + "]";
 	}
 
 

@@ -12,7 +12,17 @@ public class AdminVO {
 	private	Date	lastLoginDate;		//	마지막 접속일
 	private	String status;				//	상태(V:활성, D:사용안함)
 	private int bno;					// 번호
+	
+	private String email;			//채팅
 
+	
+	
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	public int getBno() {
 		return bno;
 	}
@@ -71,6 +81,6 @@ public class AdminVO {
 	public String toString() {
 		return "AdminVO [id=" + id + ", pw=" + pw + ", name=" + name + ", registDate=" + registDate + ", registUser="
 				+ registUser + ", lastModifyDate=" + lastModifyDate + ", lastLoginDate=" + lastLoginDate + ", status="
-				+ status + ", bno=" + bno + "]";
+				+ status + ", bno=" + bno + ", email=" + email + "]";
 	}
 }

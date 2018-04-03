@@ -2,6 +2,7 @@
 <<<<<<<=HEAD
 >>>>>>>=branch 'HGKWON' of https\://github.com/BIT102/ILuvStudy.git
 eclipse.preferences.version=1
+encoding//src/main/webapp/WEB-INF/views/chatting/test.html=UTF-8
 encoding//src/main/webapp/WEB-INF/views/home.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/study/board.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/study/listAll.jsp=UTF-8
