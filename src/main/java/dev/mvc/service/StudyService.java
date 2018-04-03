@@ -34,6 +34,13 @@ public interface StudyService {
 	//파일 불러오기
 	public List<String> getFile(Integer bsBno) throws Exception;
 	
+	//파일 삭제하기
+	public void deleteFile(Integer bsBno, String fileName) throws Exception;
+	
+	//업데이트를 위한 파일 불러오기
+	public List<String> getFileup(Integer bsBno) throws Exception;
+	
+	
 	//전체불러오기
 	public List<StudyVO> studyList() throws Exception;
 

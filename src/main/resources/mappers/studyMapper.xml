@@ -6,6 +6,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- board_study mapper -->
 <mapper namespace="dev.mvc.mapper.StudyMapper">
 
+<!-- 카테고리 수정부분 -->
+<!-- 우선다지워 -->
+<delete id="caDelete">
+select
+from
+board_category
+where
+bsbno = #{bsBno}
+</delete>
 
 <!-- 스터디 수정 -->
 <update id="update">
@@ -150,6 +159,8 @@ ba.name
 , bs.max
 , r.rDName
 , r.rSName
+, bs.RDID
+, bs.RSID
 , bs.age
 , bs.sc
 , bs.sd
@@ -161,7 +172,9 @@ ba.name
 , bs.regdate
 , bs.enddate
 , sc.cdname
-, group_concat(sc.csname) csname 
+, sc.csname
+, sc.CDID
+, sc.CSID 
 FROM 
 board_study bs
 left outer join user u on bs.writer = u.EMAIL
@@ -169,9 +182,9 @@ left outer join (select * from board_attach where status = "O") ba on bs.bno = b
 left outer join region r on bs.RDID = r.RDID and bs.RSID = r.RSID
 left outer join board_category bc on bs.bno = bc.bsbno
 , study_category sc
-WHERE bs.bno = #{bno}
+WHERE bs.bno > 0
+and bs.bno = #{bno}
 and sc.CDID = bc.CATEGORYD and sc.CSID = bc.CATEGORYS
-group by bs.bno
 </select>
 
 <!-- 전체불러오기 -->
@@ -244,6 +257,25 @@ bsbno = #{bsBno}
 AND status = 'X'
 ORDER BY regdate
 </select>
+
+<!-- 업데이트를 위한 파일 불러오기 -->
+<select id="getFileup" resultType="string">
+select
+name
+from
+board_attach
+where
+bsbno = #{bsBno}
+order by regdate
+</select>
+
+<delete id="deleteFile">
+delete from
+board_attach
+where bsbno = #{bsBno}
+and name = #{fileName}
+</delete>
+
 
 <!-- 게시물 조회수 -->
 <update id="upVct">

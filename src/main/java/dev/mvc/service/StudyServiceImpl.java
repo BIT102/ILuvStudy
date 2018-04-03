@@ -26,7 +26,11 @@ public class StudyServiceImpl implements StudyService {
 	private StudyDAO dao;
 
 	//스터디 수정부분
-	public void update(StudyVO vo ) throws Exception {
+	@Transactional
+	@Override
+	public void update(StudyVO vo) throws Exception {	
+
+		
 		dao.update(vo);
 	}
 	
@@ -140,14 +144,24 @@ public class StudyServiceImpl implements StudyService {
 		return dao.getFile(bsBno);
 
 	}
+	
+	@Override
+	public void deleteFile(Integer bsBno, String fileName) throws Exception {
+		
+		dao.deleteFile(bsBno, fileName);
+	}
+	
+	
+	//업데이트를 위한 파일 불러오기
+	public List<String> getFileup(Integer bsBno) throws Exception {
+		return dao.getFileup(bsBno);
+	}
 
 	// 스터디등록, 파일등록, 지역등록
 	@Transactional
 	@Override
 	public void regist(StudyVO vo) throws Exception {
 
-		// 파일등록하기
-		String[] files = vo.getFiles();
 
 		System.out.println("====================");
 		System.out.println(vo.getFiles());
@@ -179,6 +193,8 @@ public class StudyServiceImpl implements StudyService {
 			dao.createCa(ca); // 스터디 카테고리 등록
 		}
 
+		// 파일등록하기
+		String[] files = vo.getFiles();
 		// 사진등록
 		Map<String, Object> map = new HashMap<>();
 		

@@ -324,9 +324,9 @@ body {
 			<button type="button" id="applyclose">없어져요</button>
 
 		</div>
-		<input type="submit" class="preee" value="목록"> <input
-			type="submit" value="수정"> <input type="submit" class="delete"
-			value="스터디완료">
+		<input type="submit" class="preee" value="목록"> 
+		<input type="submit" class="modifybo" value="수정"> 
+		<input type="submit" class="delete" value="스터디완료">
 
 	</div>
 </div>
@@ -825,7 +825,7 @@ $(document).ready(function(){
 		formObj.submit();
 	})
 	
-	$(".modify").on("click",function(){
+	$(".modifybo").on("click",function(){
 		formObj.attr("action", "/study/update");
 		formObj.attr("method", "get");
 		formObj.submit();

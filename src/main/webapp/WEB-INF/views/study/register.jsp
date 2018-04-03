@@ -433,9 +433,7 @@ small {
 				});
 	</script>
 	<script>
-		$(document)
-				.ready(
-						function() {
+		$(document).ready(function() {
 							//카테고리 소분류 체크 시 대분류 체크 되도록
 							var formObj = $("form[role='form']");
 							console.log(formObj);
@@ -448,22 +446,11 @@ small {
 								getCat();
 							});
 							//카테고리 추가 버튼 클릭 시 액션
-							$("#addCat")
-									.on(
-											"click",
-											function() {
-												var catd = $(
-														'#catD option:selected')
-														.val();
-												var cats = $(
-														'#catS option:selected')
-														.val();
-												var catd2 = $(
-														'#catD option:selected')
-														.text();
-												var cats2 = $(
-														'#catS option:selected')
-														.text();
+							$("#addCat").on("click", function() {
+												var catd = $('#catD option:selected').val();
+												var cats = $('#catS option:selected').val();
+												var catd2 = $('#catD option:selected').text();
+												var cats2 = $('#catS option:selected').text();
 												var cat = "<span><input type='hidden' name='categoryD' value="+catd+">"
 														+ "<input type='hidden' name='categoryS' value="+cats+">"
 														+ "<div>"
@@ -473,6 +460,8 @@ small {
 														+ "</span><button type='button' onclick = 'btn_delete(this)' class='btn btn-default btn-xs'>삭제</button></div>";
 												$("#addCatArea").append(cat);
 											});
+							
+							
 							//시간영역 추가 버튼 클릭 시 액션
 							$("#addTime")
 									.on(
@@ -587,8 +576,7 @@ small {
     
     <!-- 유효성 검사 스크립트 -->
     <script>
-    
-    
+
     // 카테고리 대 소 , 스터디명, 지역 대, 연력, 최대인원, 시작날짜, 요일, 시간
     $(".btn-success").on("click", function(e){
     	//연령
@@ -602,7 +590,6 @@ small {
     			alert("원하는 나이대를 입력하세요")
     		}
     	}
-    	
     	
     	//카테고리 대소 
     	if($("#addCatArea").html()==""){

@@ -22,13 +22,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import dev.mvc.domain.BookmarkVO;
 import dev.mvc.domain.Criteria;
 import dev.mvc.domain.CriteriaStudy;
 import dev.mvc.domain.PageMakerStudy;
 import dev.mvc.domain.SearchCriteriaStudy;
 import dev.mvc.domain.StudyVO;
 import dev.mvc.domain.UserVO;
+import dev.mvc.service.AdminService;
 import dev.mvc.service.BookmarkService;
 import dev.mvc.service.ReplyStudyService;
 import dev.mvc.service.StudyService;
@@ -48,25 +48,36 @@ public class StudyController {
 	@Inject
 	private BookmarkService bookservice;
 	
+	@Inject
+	private AdminService adservice;
+	
 	
 	//스터디 수정
 	@RequestMapping(value="/update", method = RequestMethod.GET)
 	public void updateGET(int bno, Model model) throws Exception {
 		
 		
-		model.addAttribute(service.read(bno));		
-		// 카테고리 대분류값 보내기
+		//스터디 카테고리 정보 가져옴
 		model.addAttribute("studyCategory", service.studyCategory());
-		// 지역대분류값 보내기
+		//지역테이블 정보
 		model.addAttribute("region", service.region());
-		
-		
+		//스터디 상세 정보
+		model.addAttribute(adservice.studyDetail(bno));
+		//스터디 카테고리 선택 정보
+		model.addAttribute("studyDC", adservice.studyDetailC(bno));
+
 	}
 	
 	@RequestMapping(value="/update", method=RequestMethod.POST)
-	public String updatePOST(StudyVO board, RedirectAttributes rttr) throws Exception {
+	public String updatePOST(StudyVO vo, RedirectAttributes rttr) throws Exception {
+	
 		
-		service.update(board);
+		service.update(vo);
+		
+		System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+		System.out.println(vo);
+		System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");	
+	
 		rttr.addFlashAttribute("msg", "success");
 		
 		return "redirect:/study/listAll";
@@ -235,6 +246,13 @@ public class StudyController {
 	@ResponseBody
 	public List<String> getFile(@PathVariable("bsBno") Integer bsBno) throws Exception {
 		return service.getFile(bsBno);
+	}
+	
+	//업데이트를 위한 파일가져오기
+	@RequestMapping("getFileup/{bsBno}")
+	@ResponseBody
+	public List<String> getFileup(@PathVariable("bsBno") Integer bsBno) throws Exception {
+		return service.getFileup(bsBno);
 	}
 
 	// JSON small카테고리
