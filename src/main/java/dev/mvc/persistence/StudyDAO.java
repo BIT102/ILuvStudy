@@ -10,11 +10,11 @@ import dev.mvc.domain.StudyVO;
 
 public interface StudyDAO {
 	
+	//카테고리 지우기
+	public void caDelete(Integer bsBno) throws Exception;
+	
 	//스터디 수정
 	public void update(StudyVO vo) throws Exception;
-	
-	//카테고리 삭제
-	public void caDelete(Integer bsBno) throws Exception;
 	
 	//대분류
 	public String getcaD(Integer bno) throws Exception;

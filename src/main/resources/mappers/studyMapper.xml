@@ -7,14 +7,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="dev.mvc.mapper.StudyMapper">
 
 <!-- 카테고리 수정부분 -->
-<!-- 우선다지워 -->
 <delete id="caDelete">
-select
+delete 
 from
 board_category
 where
 bsbno = #{bsBno}
 </delete>
+
 
 <!-- 스터디 수정 -->
 <update id="update">

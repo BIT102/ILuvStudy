@@ -26,17 +26,19 @@ public class StudyDAOImpl implements StudyDAO {
 
 	private static final Logger logger = LoggerFactory.getLogger(StudyDAOImpl.class);
 
-
-	//카테고리 수정
-	@Override
-	public void caDelete(Integer bsBno) throws Exception {
-		session.delete(namespace+".caDelete", bsBno);
-	}
+	
 	
 	//카테고리등록
 		public void createCa(Map<String, Object> map) throws Exception {
 			 session.insert(namespace+".createCa", map);
 		}
+		
+	//카테고리 다지워버려
+		@Override
+		public void caDelete(Integer bsBno) throws Exception {
+			session.delete(namespace+".caDelete", bsBno); 
+		}
+		
 	//스터디 수정
 	@Override
 	public void update(StudyVO vo) throws Exception {

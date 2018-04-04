@@ -594,6 +594,7 @@ small {
 		//카테고리 삭제 버튼
 		function btn_delete(x){
 			$(x).parent("div").parent("span").remove();
+			
 		}
 		
 		//지역정보 2단 콤보박스 메서드

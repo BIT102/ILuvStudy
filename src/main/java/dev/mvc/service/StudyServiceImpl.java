@@ -29,7 +29,28 @@ public class StudyServiceImpl implements StudyService {
 	@Transactional
 	@Override
 	public void update(StudyVO vo) throws Exception {	
+		
+		int bsBno = vo.getBno();
+		
+		//카테고리 다지워 다시 등록해
+		dao.caDelete(bsBno);
+		
+		// 카테고리 등록
+		Map<String, Object> ca = new HashMap<>();
+		String[] D = vo.getCategoryD();
+		String[] S = vo.getCategoryS();
 
+		for (int i = 0; i < S.length; i++) {
+			String caD = D[i];
+			String caS = S[i];
+
+			ca.put("bno", bsBno);
+			ca.put("categoryD", caD);
+			ca.put("categoryS", caS);
+
+
+		dao.createCa(ca); // 스터디 카테고리 등록
+		}	
 		
 		dao.update(vo);
 	}
