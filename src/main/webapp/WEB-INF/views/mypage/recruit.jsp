@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>   
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -128,8 +129,8 @@
 												${studyVO.title} </span> <span style="width: 280px;">주인 :
 												${studyVO.nickname}<br> 종류 : ${studyVO.cDName} /
 												${studyVO.cSName}<br> 지역 : ${studyVO.rDName} /
-												${studyVO.rSName}<br> 등록 : <fmt:formatDate
-													pattern="yyyy-MM-dd" value="${studyVO.regdate}" />
+												${studyVO.rSName}<br> 
+												등록 : <fmt:formatDate pattern="yyyy-MM-dd" value="${studyVO.regdate}" />
 											</span>
 										</div>
 										<div class="col-xs-6">

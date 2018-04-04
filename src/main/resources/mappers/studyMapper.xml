@@ -15,6 +15,14 @@ where
 bsbno = #{bsBno}
 </delete>
 
+<!-- 파일삭제 -->
+<delete id="atDelete">
+delete
+from
+board_attach
+where
+bsbno = #{bsBno}
+</delete>
 
 <!-- 스터디 수정 -->
 <update id="update">
@@ -172,9 +180,7 @@ ba.name
 , bs.regdate
 , bs.enddate
 , sc.cdname
-, sc.csname
-, sc.CDID
-, sc.CSID 
+, group_concat(sc.csname) csname 
 FROM 
 board_study bs
 left outer join user u on bs.writer = u.EMAIL
@@ -185,6 +191,7 @@ left outer join board_category bc on bs.bno = bc.bsbno
 WHERE bs.bno > 0
 and bs.bno = #{bno}
 and sc.CDID = bc.CATEGORYD and sc.CSID = bc.CATEGORYS
+group by bs.bno
 </select>
 
 <!-- 전체불러오기 -->

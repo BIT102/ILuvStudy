@@ -98,6 +98,58 @@ body {
 .applyList {
 	margin: 15px 25px;
 }
+
+.replypage li{
+	border:1px solid black;
+	width:20px;
+	text-align:center;
+	background-color:black;
+	margin-left:10px;
+}
+
+.replypage a {
+	color:white;
+}
+
+.btn {
+	background-color:black;
+	color:white;
+
+}
+
+.aplist {
+	float:right;
+}
+.reglist{
+	float:right;
+}
+
+
+#modDiv{
+	width:450px;
+	height:200px;
+	background-color:gray;
+	position:absolute;
+	top:50%;
+	left:50%;
+	margin-top:-50px;
+	margin-left:-150px;
+	paddiong:10px;
+	z-index:1000;
+}
+
+#amodDiv {
+	width:450px;
+	height:200px;
+	background-color:gray;
+	position:absolute;
+	top:200%;
+	left:50%;
+	margin-top:-50px;
+	margin-left:-150px;
+	paddiong:10px;
+	z-index:1000;
+}
 </style>
 </head>
 
@@ -244,7 +296,7 @@ body {
 
 
 
-
+         <c:if test="${not empty login}">
 			<div class="comments">
 				<div class="row">
 					<div class="col-md-12">
@@ -255,7 +307,7 @@ body {
 					<div class="col-md-4">
 						<div class="form-group">
 							<input name="writer" id="writer" type="text" class="form-control"
-								value="${login.email}">
+								value="${login.email}" readonly>
 						</div>
 					</div>
 
@@ -277,21 +329,24 @@ body {
 
 			<div id="replies" style="margin-top:15px;"></div>
 							<!-- 댓글 수정 삭제 부분 -->
-						<div id="modDiv" style="display: none">
-							<div class="modal-title"></div>
-							<div>
-								<input type="text" id="recon">
+						<div id="modDiv" style="display: none ">
+				<div class="modal-title"></div>
+				
+							<div style="text-align:center; margin-bottom:30px; margin-top:30px;">
+							
+								<input type="text" id="recon" style="width:350px; height:70px; padding-left:15px;">
 							</div>
-							<div>
-								<button type="button" id="remodify">Modify</button>
-								<button type="button" id="redelege">Delete</button>
-								<button type="button" id="reclose">Close</button>
+							<div style="text-align:center;">
+								<button type="button" id="remodify" class="btn">수정하기</button>
+								<button type="button" id="redelege" class="btn">지우기</button>
+								<button type="button" id="reclose" class="btn">닫기</button>
 							</div>
 						</div>
 			<ul class="replypage"></ul>
 		</div>
 	</div>
 	</div>
+</c:if>
 
 
 
@@ -300,37 +355,54 @@ body {
 
 
 
-	<div>
 
 
 		<br> <br>
 		<!-- 로그인했는데 로그인아이디가 글작성자와 같지않을때. -->
 
-
-		신청하는 사람
+<div>
 		<!-- 신청하면 이미지와 닉네임 만들기 -->
-		<input type="submit" class="apply" value="신청하기"> <input
-			type="submit" class="deapply" value="신청취소"> <input
-			type="submit" class="preee" value="목록으로">
+		<div class="aplist">
+<c:if test="${empty login}">
+ <input type="submit" class="btn preee" value="목록으로" style="float:right;">
+</c:if>
+
+		<c:if test="${not empty login}">
+		 <c:if test="${login.email != studyVO.writer}">
+		 
+			<c:if test="${ap.checked == 0 }">
+				<input type="submit" class="btn apply" id="apap" value="신청하기">
+				<input type="submit" class="btn deapply" id="apap" value="신청취소" style="display:none;">
+			</c:if>
+			
+			<c:if test="${ap.checked == 1 }">
+				<input type="submit" class="btn apply" id="apap" value="신청하기" style="display:none;">
+				<input type="submit" class="btn deapply" id="apap" value="신청취소">
+			</c:if>
+				<input type="submit" class="btn preee" value="목록으로">
+		</c:if>		
 		<!-- 로그인시 -->
 		<br> <br>
 
 		<!-- 로그인한아이디가 글쓴이일때. -->
-
-		등록한 사람 <br> <input type="submit" class="aList" value="신청자목록"
+		
+		<c:if test="${login.email == studyVO.writer}">
+		<br> <input type="submit" class="btn aList" value="신청자목록"
 			onclick="wait();">
 		<div id='amodDiv' style="display: none;">
 			<div class='modal-applyList'></div>
-			<button type="button" id="applyclose">없어져요</button>
+			<button type="button" id="applyclose" class="btn">닫기</button>
 
 		</div>
-		<input type="submit" class="preee" value="목록"> 
-		<input type="submit" class="modifybo" value="수정"> 
-		<input type="submit" class="delete" value="스터디완료">
-
+		<input type="submit" class="btn preee" value="목록으로"> 
+		<input type="submit" class="btn modifybo" value="스터디 수정"> 
+		<input type="submit" class="btn delete" value="스터디 지우기">
+	</c:if>
+	</c:if>
 	</div>
+	
+	
 </div>
-
 
 
 	<script>
@@ -453,13 +525,13 @@ $(".apply").on("click", function(){
 		success : function(result){
 		wait();
 		alert("완전등록됨");
+		$(".apply").hide();
+		$(".deapply").show();
 		}
 	
 	})
 	}
-})
-
-
+});
 
 //스터디 취소하기
 $(".deapply").on("click", function(){
@@ -480,6 +552,8 @@ $.ajax({
  			apply();
 			wait();
  			alert("삭제되었네");
+ 			$(".deapply").hide();
+ 			$(".apply").show();
  		}
  	}
 })
@@ -495,7 +569,15 @@ $("#applyclose").on("click", function(){
 //신청자 수락 거절 status 바꾸자
 //수락지 o
 //거절시 x
+
+
 function okstudy(event) {
+	
+	var applyEmail = $(".applyLi").attr("data-usemail"); //잘못됬음
+	
+	console.log(applyEmail)
+	
+	var applybsBno = $("#bno").val();
 	
 	var kk = event.parentElement;
 	
@@ -515,6 +597,7 @@ function okstudy(event) {
 				kk.remove();
 				apply();
 				alert("수락했승ㅁ");
+
 			}
 		 }
 	});
@@ -550,13 +633,17 @@ $.getJSON("/study/apply/"+bno, function(data){
 	
 	var str="";
 	$(data).each(function(){
+		
+		if(this.status=='D'){
+		
 		str +="<div class='applyLi' data-usEmail='"+this.usEmail+"'>"
 			+ "<span class='mailbox-attachment-icon has-img'><img src='/study/displayFile?fileName="+this.photo+"'"
 			+ "alt=Attachment></span>"
 		    + this.usEmail
-		    + "<button type='button' onclick='okstudy(this);'>수락</button>"
-		    + "<button type='button' onclick='nostudy(this);'>거절</button>"
+		    + "<button type='button' onclick='okstudy(this);' class='btn'>수락</button>"
+		    + "<button type='button' onclick='nostudy(this);' class='btn'>거절</button>"
 		    +"</div>";   
+		}
 	});
 	$(".modal-applyList").html(str);
 });
@@ -597,7 +684,7 @@ $.getJSON("/study/apply/"+bno, function(data){
 		    + this.usEmail
 		    +"</div>";
 		    
-	$(".applyList").html(str);
+	$(".app .applyList").html(str);
 		}
 	})
 })
@@ -741,13 +828,22 @@ $(document).ready(function(){
         		
         		$(data.list).each(function(){
         			
-        			
-        			str += "<div class='replyLi' ><div class='cmnt-clipboard'><button class='btn-clipboard' value='"+this.rno+"'>수정하기</button></div>"
-        			    +  "<div class='well'>"+this.rno+"<div class='row'><div class='col-md-2'>"
+        			if(this.writer == '${login.email}'){
+        			str += "<div class='replyLi' ><div class='cmnt-clipboard'>"
+        			    +  "<button class='btn-clipboard' value='"+this.rno+"'>수정하기</button></div>"
+        			    +  "<div class='well'><div class='row'><div class='col-md-2'>"
         			    +  "<img src='assets/img/commenter2.jpg' class='img-responsive center-block'></div>"
                         +  "<div class='col-md-10'><p class='comment-info'>"
                         +  "<strong>" + this.writer + "</strong>" + "<span>" + this.regdate + "</span>"
                         + "</p><div class='contentre'>" + this.content + "</div></div></div></div></div>"
+        			} else {
+        				str += "<div class='replyLi' ><div class='cmnt-clipboard'>"
+            			    +  "<div class='well'><div class='row'><div class='col-md-2'>"
+            			    +  "<img src='assets/img/commenter2.jpg' class='img-responsive center-block'></div>"
+                            +  "<div class='col-md-10'><p class='comment-info'>"
+                            +  "<strong>" + this.writer + "</strong>" 
+                            + "</p><div class='contentre'>" + this.content + "</div></div></div></div></div>"	
+        			}
         			
         		});
         		$("#replies").html(str);
@@ -848,10 +944,16 @@ $(document).ready(function(){
    		position:uluru,
    		map:map
    	});
+   	
    }
    </script>
 	<script
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAiNU7soIIqpN1Jdu0tV1CWBb6u1jJAH5o&callback=initMap"
 		async defer></script>
+	
+	
+<script>
+'${ap.checked}'
+</script>		
 </body>
 </html>

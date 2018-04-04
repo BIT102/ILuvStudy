@@ -13,6 +13,10 @@ public interface StudyDAO {
 	//카테고리 지우기
 	public void caDelete(Integer bsBno) throws Exception;
 	
+	//사진 삭제하기
+	public void atDelete(Integer bsBno) throws Exception;
+	
+	
 	//스터디 수정
 	public void update(StudyVO vo) throws Exception;
 	

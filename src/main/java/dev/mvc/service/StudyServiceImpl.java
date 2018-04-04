@@ -52,6 +52,48 @@ public class StudyServiceImpl implements StudyService {
 		dao.createCa(ca); // 스터디 카테고리 등록
 		}	
 		
+		//사진도 지웠다가 다시다 등록할꺼야
+		dao.atDelete(bsBno);
+		
+		// 파일등록하기
+		String[] files = vo.getFiles();
+		
+		
+		
+		
+		// 사진등록
+		Map<String, Object> map = new HashMap<>();
+		
+		
+		
+		if(files==null) {
+			map.put("name", "a");
+			map.put("status", "O");
+			map.put("bno", bsBno);
+			
+			dao.addFile(map);
+		} else {
+
+		for (String fileName : files) {
+
+			if (fileName == files[0]) {
+				map.put("name", fileName);
+				map.put("status", "O");
+				map.put("bno", bsBno);
+			} else {
+				map.put("name", fileName);
+				map.put("status", "X");
+				map.put("bno", bsBno);
+			}
+			
+			System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+			System.out.println("/////////////////////////////////////////////////");
+			System.out.println(map);
+			System.out.println("***************************************************");
+			dao.addFile(map);
+			}
+		}
+		
 		dao.update(vo);
 	}
 	
@@ -68,7 +110,14 @@ public class StudyServiceImpl implements StudyService {
 	public StudyVO read(Integer bno) throws Exception {
 
 		dao.upVct(bno);
+		
+	
+		StudyVO vo = dao.readStudy(bno);
 
+		System.out.println("************************************************");
+		System.out.println(vo);
+		System.out.println("************************************************");
+		
 		return dao.readStudy(bno);
 	}
 

@@ -21,6 +21,22 @@ apply_user
 )
 </insert>
 
+
+<!-- 신청했나 않했나 -->
+<select id="apList" resultType="ApplyVO">
+select
+count(*) as checked
+, usemail
+, bsbno
+, status
+, regdate
+from
+apply_user
+where
+usemail = #{writer}
+and bsbno = #{bsBno}
+</select>
+
 <!-- 신청자 불러오기 -->
 <select id="listApply" resultType="ApplyVO">
 SELECT

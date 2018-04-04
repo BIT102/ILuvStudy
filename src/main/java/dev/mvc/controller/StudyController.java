@@ -29,6 +29,7 @@ import dev.mvc.domain.SearchCriteriaStudy;
 import dev.mvc.domain.StudyVO;
 import dev.mvc.domain.UserVO;
 import dev.mvc.service.AdminService;
+import dev.mvc.service.ApplyService;
 import dev.mvc.service.BookmarkService;
 import dev.mvc.service.ReplyStudyService;
 import dev.mvc.service.StudyService;
@@ -50,6 +51,9 @@ public class StudyController {
 	
 	@Inject
 	private AdminService adservice;
+	
+	@Inject
+	private ApplyService apservice;
 	
 	
 	//스터디 수정
@@ -207,10 +211,14 @@ public class StudyController {
 
 		model.addAttribute("list", replyService.listReply(bno));  //댓글 정보 가져옴
 
+		model.addAttribute("aplist", apservice.list(bno));
 		
 		} else {
 		
 		String email = sUser.getEmail();
+		
+	
+		
 		
 		Map<String, Object> map = new HashMap<>();
 		
@@ -218,13 +226,22 @@ public class StudyController {
 		map.put("bsbno", bno);
 		
 
-		bookservice.bolist(map);
 		
+		bookservice.bolist(map);
+	
 		//북마크 넘긴다요 
 		model.addAttribute("bolist",bookservice.bolist(map));
 		
+		model.addAttribute("aplist", apservice.list(bno));
+		
 		model.addAttribute(service.read(bno));
 		
+		Map<String, Object> apmap = new HashMap<>();
+		
+		apmap.put("writer", email);
+		apmap.put("bsBno", bno);
+		
+		model.addAttribute("ap", apservice.apList(apmap));
 		}
 	}
 

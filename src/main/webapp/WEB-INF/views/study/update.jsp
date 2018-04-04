@@ -47,6 +47,7 @@ small {
 	background-color: #5bc0de;
 	border: 1px solid black;
 	margin-right: 10px;
+	float:right;
 }
 #btn-success:hover {
 	background-color: #31b0d5;
@@ -165,7 +166,7 @@ small {
 													<!--  세션으로 전송 -->
 													<%-- <td><input name="writer" value="${studyVO.writer}"></td> --%>
 													<td><input class="form-control" name="writer"
-														value="${studyVO.writer}" style="width: 460px;"></td>
+														value="${studyVO.writer}" style="width: 460px;" readonly></td>
 												</tr>
 
 											</tbody>
@@ -325,11 +326,11 @@ small {
 
 										<div class="text-right">
 											<!-- <button type="submit" id="btn-success" class = "btn btn-success" style="background-color:#5bc0de; border:1px solid black;">등록</button> -->
-											<button type="submit" id="btn-success"
-												class="btn btn-success">등록</button>
 											<!-- <input type="submit" id = "insertBtn" class = "btn btn-success" value = "등록" /> -->
 										</div>
 									</form>
+											<button type="submit" id="btn-success"
+												class="btn btn-success">등록</button>
 
 								</div>
 								<!-- panel-body end -->
@@ -447,7 +448,7 @@ small {
 			});
 		});
 		//스터디 보드 등록후 이미지 등록을 위해서
-		$("#registerForm").submit(
+	 	$("#registerForm").submit(
 				function(event) {
 					console.log("ssssssssssss");
 					event.preventDefault();
@@ -459,9 +460,10 @@ small {
 										+ index + "]' value='"
 										+ $(this).attr("value") + "'>";
 							});
+					console.log(str)
 					that.append(str);
 					that.get(0).submit();
-				});
+				}); 
 	</script>
 	
 	<script>
@@ -508,7 +510,7 @@ small {
 		maxV = false;
 		
 		//수정 클릭 시 액션
-		$("#modifyBtn").on("click", function(){
+	/* 	$("#modifyBtn").on("click", function(){
 			//form 데이터 유효성 검사 추가 필요
 			
  			//카테고리 유효성
@@ -539,14 +541,14 @@ small {
 				alert("내용을 확인하세요");
 			}   
 			
-		});
+		}); */
 		
 		//목록 클릭 시 액션
-		$("#listBtn").on("click", function(){
+/* 		$("#listBtn").on("click", function(){
 			self.location = "/admin/studyList?page=${cri.page}&perPageNum=${cri.perPageNum}"
 							+"&stStatusType=${cri.stStatusType}&titleKeyword=${cri.titleKeyword}&writerKeyword=${cri.writerKeyword}";
 		});
-		
+		 */
 		//지역 정보 셀렉트 박스 변경 시 액션
 		$("#rDName").on("change", function(){
 			getRegion();
@@ -741,7 +743,8 @@ small {
 	   
 	   var formObj = $("form[role='form']");
 	   
-	   $(".btn-success").on("click", function(){
+	   $("#btn-success").on("click", function(){
+	
 		   formObj.submit();
 	   })
 	   
