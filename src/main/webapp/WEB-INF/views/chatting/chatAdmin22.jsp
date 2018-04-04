@@ -3,9 +3,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <style>
 .col-md-2, .col-md-10{
     padding:0;
@@ -21,6 +22,7 @@
 }
 .chat-window > div > .panel{
     border-radius: 5px 5px 0 0;
+    width:350px;
 }
 .icon_minim{
     padding:2px 10px;
@@ -29,7 +31,7 @@
   background: #e5e5e5;
   margin: 0;
   padding: 0 10px 10px;
-  max-height:300px;
+  max-height:400px;
   overflow-x:hidden;
 }
 .top-bar {
@@ -54,9 +56,8 @@
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
   max-width:100%;
 }
-.messages > p {
+.messages {
     font-size: 13px;
-    margin: 0 0 0.2rem 0;
   }
 .messages > time {
     font-size: 11px;
@@ -67,14 +68,37 @@
     overflow: hidden;
     display: flex;
 }
-img {
-    display: block;
-    width: 100%;
+
+.avatar {
+    position: relative;
+}
+.base_receive > .avatar:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border: 5px solid #FFF;
+    border-left-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
 }
 
 .base_sent {
   justify-content: flex-end;
   align-items: flex-end;
+}
+.base_sent > .avatar:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border: 5px solid white;
+    border-right-color: transparent;
+    border-top-color: transparent;
+    box-shadow: 1px 1px 2px rgba(black, 0.2); 
 }
 
 .msg_sent > time{
@@ -104,53 +128,121 @@ img {
     left:0px;
     bottom:0;
 }
+.input-group > textarea {
+	padding:5px;
+	resize:none;
+	height:70px;
+	background-color:white;
+}   
+.input-group > span,button {
+	height:50px;
+}   
+
+/*---*CHAT*-----*/
+#chat .panel-heading{
+    background-image: url(http://www.caixa.gov.br/Style%20Library/images/bg_destaqueInternas.jpg);
+    background-position: center 30%;
+}
+#chat .panel-heading, #chat .panel-heading a {
+    color:#fff ;
+}
+#chat .messages{
+    box-shadow:none;
+    background: #f3f5f9;
+    
+}
+#chat .base_sent .messages{
+    background: #2DADB0;
+    border-radius: 8px 8px 0px 8px;
+    -webkit-border-radius: 8px 8px 0px 8px;
+    color: #fff;
+    border-bottom:1px solid #108BB4;
+}
+#chat .base_sent::after{
+    top:0px;
+    width: 0;
+    height: 0;
+    border-top:10px solid transparent;
+    border-left: 10px solid #2DADB0;
+    border-bottom: 0px solid transparent;
+    
+}
+#chat .base_receive .messages{
+    background: #f3f5f9;
+    border-radius: 0 8px 8px 8px;
+    border-bottom:1px solid #ccc;
+    
+}
+#chat .base_receive::before{
+    width: 0;
+    height: 0;
+    border-top: 0px solid transparent;
+    border-right: 10px solid #f3f5f9;
+    border-bottom: 10px solid transparent;
+}
+
+#chat .msg_container_base{
+    background:#fff;
+}
+#chat time{ color:#fff; font-style: italic; }
+
+
+.chatBlock{
+display:block;
+}
+
+.chatNone{
+display:none;
+}
+
 </style>
 </head>
 
 <body>
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 
-<%@ include file="../nav.jsp" %>
+<%-- <%@ include file="../nav.jsp"%>
 
-<div class="container" style="width:1500px;">      
-    <div class="row chat-window col-xs-5 col-md-3" id="chat_window_1">
-        <div>
-        	<div class="panel panel-default">
+<div id="chatClick"><img src="/resources/img/chatchat.png"></div> --%>
+
+<div class="chatNone" id="chat">      
+    <div class="row chat-window col-xs-5 col-md-3" id="chat_window_1" style="margin-left:10px;">
+        <div class="col-xs-12 col-md-12">
+         	<div class="panel panel-default">
                 <div class="panel-heading top-bar">
                 
-                	<div>
-                		<h3 class="panel-title"><span class="glyphicon glyphicon-comment"></span>&nbsp;1:1 문의하기</h3>
+                	<div style="display:inline;">
+                		<h4 class="panel-title" style="display:inline;"><span class="glyphicon glyphicon-comment"></span>&nbsp;1:1 문의하기</h4>
                 	</div>
                 
-                	<div style="display:inline; float: right;">
-                		<a href="#"><span id="minim_chat_window" class="glyphicon glyphicon-minus icon_minim"></span></a>
+          <!--       	<div style="display:inline; float: right;">
+                		<a href="#"><span class="glyphicon glyphicon-minus icon_minim"></span></a>
                 		<a href="#"><span class="glyphicon glyphicon-remove icon_close" data-id="chat_window_1"></span></a>
-                	</div>
+                	</div> -->
             	</div>
             	
             	<!-- 내용이당 -->
-            	<div class="panel-body msg_container_base" style="height:400px;">
+            	<div class="panel-body msg_container_base">
           <!-- ===========예전 내용 가져온당 ============ -->  		
             	<c:forEach items="${list}" var="messageVO">	
             		<!-- 보냈당 -->
             	  <c:if test="${messageVO.email ne 'admin'}">
                     <div class="row msg_container base_sent">
-                    	<div class="col-md-10 col-xs-10">
+                    	<div class="col-md-10 col-xs-10" style="padding:0;">
                             <div class="messages msg_sent">
                                 ${messageVO.message}<br>
-                                <fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${messageVO.registDate}"/>
+                                <time><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${messageVO.registDate}"/></time>
                             </div>
-                        </div>
+                       </div>
                     </div>
                   </c:if>
-                     
+                  
                      <!-- 받았당 -->   
                  <c:if test="${messageVO.email eq 'admin'}"> 
                     <div class="row msg_container base_receive">
-                        <div class="col-md-10 col-xs-10">
+                        <div class="col-md-10 col-xs-10" style="padding:0;">
                             <div class="messages msg_receive">
                                 ${messageVO.message}<br>
-                                <fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${messageVO.registDate}"/>
+                                <time style="color:black;"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${messageVO.registDate}"/></time>
                             </div>
                         </div>
                     </div>
@@ -163,33 +255,13 @@ img {
                 <!-- 메시지 작성부분이당 -->
                 <div class="panel-footer">
                     <div class="input-group">
-                        <input id="btn-input" type="text" class="form-control input-sm chat_input" />
+<!--                         <input id="btn-input" type="text" class="form-control input-sm chat_input" /> -->
+                        <textarea id="btn-input" class="form-control input-sm chat_input"></textarea>
                         <span class="input-group-btn">
                         <button class="btn btn-primary btn-sm" id="btn-chat">Send</button>
                         </span>
                     </div>
                 </div>
-<%--                 
-<h4>chatting page</h4>
-메시지 내용 : <input type="text" id="message">
-<input type="button" id="sendMessage" value="메시지 보내기">
-
-<c:forEach items="${list}" var="messageVO">
-	<c:if test="${messageVO.email ne 'admin'}">
-		<div class="chatadmin">${messageVO.message}</div>
-		<div class="chatadmin"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${messageVO.registDate}"/></div>
-	</c:if>
-	
-	<c:if test="${messageVO.email eq 'admin'}">
-		<div>${messageVO.message}</div>
-		<div><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${messageVO.registDate}"/></div>
-	</c:if>
-</c:forEach>
-
-<div id="chatMessage" style="overFlow: auto; max-height:500px;"></div>
-
- --%>
-				
 			</div>
 		</div>
 	</div>
@@ -197,8 +269,8 @@ img {
 
 
 
-<script type="text/javascript" src="/resources/js/sockjs.js"></script>
-<script type="text/javascript" src="/resources/js/sockjs.min.js"></script>
+<script src="/resources/js/sockjs.js"></script>
+<script src="/resources/js/sockjs.min.js"></script>
 <script>
 
 var sock = null;
@@ -235,7 +307,7 @@ $(document).ready(function(){
 	
 	$("#btn-input").keydown(function (key) {
         if (key.keyCode == 13) {
-           $("#sendMessage").click();
+           $("#btn-chat").click();
         }
     });
 
@@ -255,18 +327,33 @@ $(document).ready(function(){
 			sock.send(JSON.stringify(message));
 			
 			$('.msg_container_base').append(
-					'<div class="row msg_container base_sent"> <div class="col-md-10 col-xs-10"><div class="messages msg_sent">'
-					+  $('#btn-input').val() +'<br>' + time.getHours() + ":" + time.getMinutes() +'</div></div></div>');
+					'<div class="row msg_container base_sent"> <div class="col-md-10 col-xs-10" style="padding:0;"><div class="messages msg_sent">'
+					+  $('#btn-input').val() +'<br><time>' + time.getHours() + ":" + time.getMinutes() +'</time></div></div></div>');
 			$('#btn-input').val("");
+			$('.msg_container_base').scrollTop(9999);
 		}
 		
 	});
+	
+	$('#chatClick').click(function(){
+		if($('#chat').hasClass('chatNone')){
+			$('#chat').removeClass('chatNone');
+			$('#chat').addClass('chatBlock');	
+			$('.msg_container_base').scrollTop(9999);
+		}else{
+			$('#chat').removeClass('chatBlock');
+			$('#chat').addClass('chatNone');	
+		}
+		
+	});
+	
 	
 })
 
 
 //밑에서부터 테마테마테마
-$(document).on('click', '.panel-heading span.icon_minim', function (e) {
+/* $(document).on('click', '.panel-heading span.icon_minim', function (e) { */
+/* $(document).on('click', '.icon_minim', function (e) {
     var $this = $(this);
     if (!$this.hasClass('panel-collapsed')) {
         $this.parents('.panel').find('.panel-body').slideUp();
@@ -277,7 +364,7 @@ $(document).on('click', '.panel-heading span.icon_minim', function (e) {
         $this.removeClass('panel-collapsed');
         $this.removeClass('glyphicon-plus').addClass('glyphicon-minus');
     }
-});
+}); */
 $(document).on('focus', '.panel-footer input.chat_input', function (e) {
     var $this = $(this);
     if ($('#minim_chat_window').hasClass('panel-collapsed')) {
@@ -293,10 +380,13 @@ $(document).on('click', '#new_chat', function (e) {
     var clone = $( "#chat_window_1" ).clone().appendTo( ".container" );
     clone.css("margin-left", size_total);
 });
-$(document).on('click', '.icon_close', function (e) {
+/* $(document).on('click', '.icon_close', function (e) {
     //$(this).parent().parent().parent().parent().remove();
     $( "#chat_window_1" ).remove();
-});
+}); */
+
+
+
 
 
 </script>  

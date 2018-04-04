@@ -174,6 +174,12 @@
 	padding-top:7px;
 	margin-left:10px;
 }
+#chatClick{
+	position:fixed;
+	bottom:100;
+	right:50;
+	z-index:999;
+}
 </style>
 
 </head>
@@ -294,6 +300,9 @@
 	</nav>
 	<!-- site-navigation end -->
 
+<%-- <div id="chatClick"><img src="/resources/img/chatchat.png"></div> 
+<%@ include file="../chatting/chatAdmin22.jsp"%>
+ --%>
 	<script>
 //Get the modal
 var modal = document.getElementById('id01');
