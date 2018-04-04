@@ -26,8 +26,8 @@ public class S3Util {
 	
 	private static final Logger logger = LoggerFactory.getLogger(S3Util.class);
 	
-	private String accessKey = "AKIAITHB7I532AQ4IYNA"; // ¿¢¼¼½º Å°
-	private String secretKey = "Foafxlpk20rDlNT4jB3Lk+gIh7g6VMAcjzpJMtd+"; // º¸¾È ¿¢¼¼½º Å°
+	private String accessKey = "AKIAIHQVIF2GWKIE6ADQ"; // ¿¢¼¼½º Å°
+	private String secretKey = "IOEpMgiPnEHraX0022LY8ev88gRHe4v+P9vQGrfO"; // º¸¾È ¿¢¼¼½º Å°
 
 	private AmazonS3 conn;
 
