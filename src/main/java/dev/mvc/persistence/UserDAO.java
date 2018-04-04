@@ -46,6 +46,9 @@ public interface UserDAO {
 	//모집 스터디 불러오기
 	public List<StudyVO> recruitList(String email) throws Exception;
 	
+	//신청 스터디 불러오기
+	public List<StudyVO> applyList(String email) throws Exception;
+	
 	
 /*	//회원 전체 리스트 조회
 	public List<UserVO> listAll() throws Exception;*/

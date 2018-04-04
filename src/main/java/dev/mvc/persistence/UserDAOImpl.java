@@ -96,6 +96,12 @@ public class UserDAOImpl implements UserDAO {
 	public List<StudyVO> recruitList(String email) throws Exception {
 		return session.selectList(namespace +".recruitList", email);
 	}
+	
+	//신청 스터디 불러오기
+	@Override
+	public List<StudyVO> applyList(String email) throws Exception {
+		return session.selectList(namespace +".applyList", email);
+	}
 
 	
 	

@@ -11,7 +11,7 @@ import dev.mvc.domain.UserVO;
 public interface UserService {
 
 	//회원 가입 메소드
-		public void joinUser(UserVO vo) throws Exception;
+	public void joinUser(UserVO vo) throws Exception;
 		
 	//프로필 개인정보 조회
 	public UserVO read(String email) throws Exception;
@@ -43,6 +43,9 @@ public interface UserService {
 	
 	//모집 스터디 불러오기
 	public List<StudyVO> recruitList(String email) throws Exception;
+	
+	//신청 스터디 불러오기
+	public List<StudyVO> applyList(String email) throws Exception;
 	
 	
 	
