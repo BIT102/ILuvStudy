@@ -13,14 +13,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 관리자에게 문의 메시지 전송 -->
 	<select id="adminMessage" resultType="MessageVO">
-		select * from message
+		select bno,email, message, type, receiver, date_format(msgregist,'%Y-%m-%d %h:%m') as msgRegist
+		from message
 		where (email = 'admin' and receiver = #{email})
 		or (receiver = 'admin' and email = #{email});
 	</select>
 	
 	<!-- 관리자 문의 메시지 조회 -->
 	<select id="adminMessageView" resultType="MessageVO">
-		select * from message
+		select bno,email, message, type, receiver, date_format(msgregist,'%Y-%m-%d %h:%m') as msgRegist
+		from message
 		where (email = 'admin')
 		or (receiver = 'admin');
 	</select>

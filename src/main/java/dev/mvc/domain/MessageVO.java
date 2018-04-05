@@ -1,7 +1,5 @@
 package dev.mvc.domain;
 
-import java.util.Date;
-
 import com.google.gson.Gson;
 
 public class MessageVO {
@@ -11,7 +9,7 @@ public class MessageVO {
 	private String type;		//all, to 전체, 귓속말
 	private String receiver;	//귓속말 대상 (기본 : admin)
 	private String email;		//메시지 보낸 이메일
-	private Date registDate;	//메시지 전송일
+	private String msgRegist;	//메시지 전송일
 	
 	
 	
@@ -31,12 +29,12 @@ public class MessageVO {
 		this.bno = bno;
 	}
 
-	public Date getRegistDate() {
-		return registDate;
+	public String getMsgRegist() {
+		return msgRegist;
 	}
 
-	public void setRegistDate(Date registDate) {
-		this.registDate = registDate;
+	public void setMsgRegist(String msgRegist) {
+		this.msgRegist = msgRegist;
 	}
 
 	public String getEmail() {
@@ -74,7 +72,7 @@ public class MessageVO {
 	@Override
 	public String toString() {
 		return "MessageVO [bno=" + bno + ", message=" + message + ", type=" + type + ", receiver=" + receiver
-				+ ", email=" + email + ", registDate=" + registDate + "]";
+				+ ", email=" + email + ", msgRegist=" + msgRegist + "]";
 	}
 
 

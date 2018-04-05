@@ -24,13 +24,13 @@ margin-left:200px;
 <c:forEach items="${list}" var="messageVO">
 	<c:if test="${messageVO.email ne 'admin'}">
 		<div>${messageVO.message}</div>
-		<div><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${messageVO.registDate}"/></div>
+		<div>${messageVO.msgRegist}</div>
 	<c:set var = "receiver" value="${messageVO.email}" />
 	</c:if>
 	
 	<c:if test="${messageVO.email eq 'admin'}">
 		<div class="chatadmin">${messageVO.message}</div>
-		<div class="chatadmin"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${messageVO.registDate}"/></div>
+		<div class="chatadmin">${messageVO.msgRegist}</div>
 	</c:if>
 	
 </c:forEach>

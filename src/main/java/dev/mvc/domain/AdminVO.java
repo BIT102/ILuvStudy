@@ -14,9 +14,15 @@ public class AdminVO {
 	private int bno;					// 번호
 	
 	private String email;			//채팅
-
+	private String msgRegist;		//채팅 등록일
 	
 	
+	public String getMsgRegist() {
+		return msgRegist;
+	}
+	public void setMsgRegist(String msgRegist) {
+		this.msgRegist = msgRegist;
+	}
 	public String getEmail() {
 		return email;
 	}
@@ -81,6 +87,6 @@ public class AdminVO {
 	public String toString() {
 		return "AdminVO [id=" + id + ", pw=" + pw + ", name=" + name + ", registDate=" + registDate + ", registUser="
 				+ registUser + ", lastModifyDate=" + lastModifyDate + ", lastLoginDate=" + lastLoginDate + ", status="
-				+ status + ", bno=" + bno + ", email=" + email + "]";
+				+ status + ", bno=" + bno + ", email=" + email + ", msgRegist=" + msgRegist + "]";
 	}
 }

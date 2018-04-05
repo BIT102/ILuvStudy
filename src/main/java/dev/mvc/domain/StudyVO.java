@@ -74,6 +74,17 @@ public class StudyVO {
 	// 북마크 카운트 수(영원)
 	private int bookmarkCount;
 
+	private String msgRegist; //채팅
+	
+	
+	public String getMsgRegist() {
+		return msgRegist;
+	}
+
+	public void setMsgRegist(String msgRegist) {
+		this.msgRegist = msgRegist;
+	}
+
 	public Integer getBno() {
 		return bno;
 	}
@@ -336,7 +347,7 @@ public class StudyVO {
 				+ ", enddate=" + enddate + ", rDName=" + rDName + ", rSName=" + rSName + ", cDName=" + cDName
 				+ ", cSName=" + cSName + ", nickname=" + nickname + ", no=" + no + ", name=" + name + ", status="
 				+ status + ", userEmail=" + userEmail + ", files=" + Arrays.toString(files) + ", cDId=" + cDId
-				+ ", cSId=" + cSId + ", bookmarkCount=" + bookmarkCount + "]";
+				+ ", cSId=" + cSId + ", bookmarkCount=" + bookmarkCount + ", msgRegist=" + msgRegist + "]";
 	}
 	
 }

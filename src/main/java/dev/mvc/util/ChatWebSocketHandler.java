@@ -119,11 +119,16 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 	            }
 	        //귓속말인 경우===============================================
 	         } else { 
+	        	 String inTime   = new java.text.SimpleDateFormat("HH:mm").format(new java.util.Date());
+	        	 
 	        	 	//to의 대상과 users의 웹소켓아이디와 매칭된 이메일 정보 가져와서 비교
 	        	 	if (messageVO.getReceiver().equals(users.get(webSocketSession.getId()))) {
 	            		 webSocketSession.sendMessage(
 	            				 new TextMessage(
-	            						 "<div>" + messageVO.getMessage() + "</div>"));
+	            						 "<div class='row msg_container base_receive'><div class='col-md-10 col-xs-10' style='padding:0;'><div class='messages msg_receive'>"
+	            							+ messageVO.getMessage() + "<br><time>"
+	            							+ inTime + "</time></div></div></div>"	 
+	            						 ));
 	            		 break;
 	            	 }
 	          }

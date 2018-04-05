@@ -59,8 +59,6 @@
 		<!-- // Navigation -->
 		<%@include file="../nav.jsp"%>
 
-
-
 		<!-- header start -->
 		<header id="header" class="header-wrapper home-parallax home-fade">
 			<div class="header-overlay"></div>

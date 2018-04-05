@@ -1,11 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
+<html> --%>
+<head> 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <style>
 .col-md-2, .col-md-10{
@@ -195,14 +195,15 @@ display:block;
 display:none;
 }
 
+
 </style>
 </head>
 
 <body>
+<%-- 
+<%@ include file="../nav.jsp"%> --%>
 
-<%-- <%@ include file="../nav.jsp"%>
-
-<div id="chatClick"><img src="/resources/img/chatchat.png"></div> --%>
+<!-- <div id="chatClick"><img src="/resources/img/chatchat.png"></div>  -->
 
 <div class="chatNone" id="chat">      
     <div class="row chat-window col-xs-5 col-md-3" id="chat_window_1" style="margin-left:10px;">
@@ -266,8 +267,6 @@ display:none;
 		</div>
 	</div>
 </div>
-
-
 
 <script src="/resources/js/sockjs.js"></script>
 <script src="/resources/js/sockjs.min.js"></script>
@@ -391,4 +390,4 @@ $(document).on('click', '#new_chat', function (e) {
 
 </script>  
 </body>
-</html>
+<!-- </html> -->
