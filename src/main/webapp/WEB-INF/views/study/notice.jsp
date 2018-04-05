@@ -82,7 +82,8 @@ color:#6b456a !important;
 <body>
 
 <%@include file="../nav.jsp"%>
-<div id="single-blog-page">
+
+<div id="contact-page">
  <!-- header begin -->
             <header class="page-head">
                 <div class="header-wrapper">
@@ -102,19 +103,21 @@ color:#6b456a !important;
             </header> <!-- /.page-head (header end) -->
 
 <!-- 검색 -->
-<section class="bg-light-gray" style="background:white;">
-<div class="container">
+
+<div class="container" style="margin-top:30px;">
 				<div class="welcome-speech"
-					style="float: right; margin-bottom: 30px;">
+					style="float: right; margin-bottom: 30px; " >
 					<input type="text" onKeyDown="onKeyDown();" name="keyword"
 						id="keywordInput" placeholder="검색어를 입력하세요" value="${cri.keyword}">
 					<button class="btn btn-white">Search</button>
 				</div>
 				<!-- /.intro -->
 			</div>
-</section>
+
+
+<section class="bg-light-gray" style="padding-top:50px;">
 <section class="row-section">
-    <div class="container contentB">
+    <div class="container contentB" >
 	    <div class="row">
 		    <h2 class="text-center"><span>공 지 사 항</span></h2>
 	    </div>
@@ -142,6 +145,7 @@ color:#6b456a !important;
 	    </div>
 </div>
 </section>
+</section> 
 </div>
 
 		<!-- 페이징처리 -->

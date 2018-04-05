@@ -347,7 +347,7 @@ public class UserController {
 
 		model.addAttribute("vo", vo);
 		
-		return "/mypage/quit";
+		return "redirect:/mypage/quit";
 	}
 	
 	// 북마크 (bookmark) 컨트롤러  =길=
@@ -360,6 +360,9 @@ public class UserController {
 		
 		model.addAttribute("list", bookservice.listBookmark(email));
 		
+		model.addAttribute("relist", service.recruitList(email));
+		
+		
 		PageMakerStudy pageMakerStudy = new PageMakerStudy();
 		
 		pageMakerStudy.setCri(cri);
@@ -370,7 +373,7 @@ public class UserController {
 		return "/mypage/bookmark";
 	}
 	
-	// 모집 (recruit) 컨트롤러 내가했습니다
+/*	// 모집 (recruit) 컨트롤러 내가했습니다
 	@RequestMapping(value = "/recruit", method = RequestMethod.GET)
 	public String recruit(@ModelAttribute("cri") SearchCriteriaStudy cri, Model model, HttpServletRequest request) throws Exception {
 		
@@ -379,7 +382,7 @@ public class UserController {
 		UserVO sUser = (UserVO)session.getAttribute("login");
 		String email = sUser.getEmail();
 		
-		model.addAttribute("list", service.recruitList(email));
+		
 		
 		PageMakerStudy pageMakerStudy = new PageMakerStudy();
 		
@@ -389,11 +392,8 @@ public class UserController {
 		
 			
 		return "/mypage/recruit";
-		
-		
-		
-		
-	}
+
+	}*/
 	
 	// 신청 (application) 컨트롤러
 		@RequestMapping(value = "/application", method = RequestMethod.GET)

@@ -67,9 +67,9 @@ small {
 </style>
 </head>
 <body>
+		<%@include file="../nav.jsp"%>
 	<div id="wrapper">
 
-		<%@include file="../nav.jsp"%>
 
             <header class="page-head" style="background:url(/resources/assets/img/twitter-feed-bg.jpg);">
                 <div class="header-wrapper">
@@ -587,14 +587,7 @@ small {
     	$("input[name=age]:checked").each(function(e){
     		age += $(this).val();
     	})
-    	
-    	if(age == "") {
-			alert("원하는 나이대를 입력하세요");
-			$("#age").focus();
-			return false;
-    	}
-     	
-    	
+
     	//카테고리 대소
     	if($("#addCatArea").html() == "") {
     		
@@ -614,7 +607,13 @@ small {
     		$("#rDName").focus();
     		return false;
     		
-    		//최대인원
+    		//나이대
+    	} else if(age == ""){
+    		
+			alert("원하는 나이대를 입력하세요");
+			$("#age").focus();
+			return false;
+    		//최대인원	
     	} else if($("#studymax").val()=="") {
     		
     		alert("최대인원을 입력하세요")
@@ -711,5 +710,7 @@ small {
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAiNU7soIIqpN1Jdu0tV1CWBb6u1jJAH5o&callback=initMap"
     async defer></script>
     
+    
+    		<%@include file="../footer.jsp"%>
 </body>
 </html>

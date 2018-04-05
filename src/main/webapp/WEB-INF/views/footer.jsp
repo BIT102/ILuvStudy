@@ -47,9 +47,16 @@
 <script type="text/javascript"
 	src="/resources/assets/js/jquery.hoverdir.js"></script>
 </head>
+
+<style>
+footer{
+height: 50px;
+}
+</style>
 <body>
 
 	<!-- footer-navigation start -->
+	<footer style="padding:0 !important">
 	<nav class="hidden-xs hidden-sm navbar footer-nav" role="navigation">
 		<div class="container">
 
@@ -57,8 +64,8 @@
 
 				<!-- navbar logo -->
 				<div class="navbar-brand">
-					<span class="sr-only">&copy;THEMEWAGON</span> <a href="index.html">
-						&copy;THEMEWAGON </a>
+					<span class="sr-only">&copy;ILuvStudy</span> <a href="/study/main">
+						&copy;ILuvStudy </a>
 				</div>
 				<!-- navbar logo -->
 
@@ -80,6 +87,8 @@
 										page</span></a></li>
 							<!-- end of /.dropdown -->
 							<li class="dropdown"><a href="/logout"><span>로그아웃</span></a>
+							</li>
+							<li class="dropdown"><a href="/study/register">스터디 등록하기</a>
 						</c:otherwise>
 					</c:choose>
 					<li class="dropdown"><a href="/study/listAll"><span>스터디
@@ -96,6 +105,7 @@
 		<!-- /.container -->
 	</nav>
 	<!-- footer-navigation end -->
+</footer>
 
 </body>
 </html>

@@ -109,18 +109,19 @@ color:#6b456a !important;
 
 <!-- 검색 -->
 
-<section class="bg-light-gray" style="background:white; padding:28.981px; ">
-<div class="container">
+
+<div class="container" style="margin-top:30px;">
 				<div class="welcome-speech"
-					style="float: right; margin-bottom: 30px;">
+					style="float: right; margin-bottom:30px;">
 					<input type="text" onKeyDown="onKeyDown();" name="keyword"
 						id="keywordInput" placeholder="검색어를 입력하세요" value="${cri.keyword}">
 					<button class="btn btn-white">Search</button>
 				</div>
 				<!-- /.intro -->
+			</div>
 
-</section>
 
+<section class="bg-light-gray" style="padding-top:50px;">
 <section class="row-section">
     <div class="container contentB">
 	    <div class="row">
@@ -145,25 +146,14 @@ color:#6b456a !important;
 			    </div>
 			    
 	     </c:forEach>
-	        <!--     <li class="sectionbox"><div class="media">
-	            <div class="media-left align-self-center">
-	               ${QnaVO.bno}
-	            </div>
-	            <div class="media-body">
-	                <h4>${QnaVO.title}        ${QnaVO.writer}</h4><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${QnaVO.regdate}" />
-	                <p>${QnaVO.content}</p>
-	            </div>
-	            <div class="media-right align-self-center">
-	                <a href="/qna/qnaDetail${pageMaker.makeSearch(pageMaker.cri.page)}&bno=${QnaVO.bno}" class="btn btn-default">수정하기</a>
-	            </div>
-	        </div></li>-->
 	     
 	    </div>
 	</div>
 
 </div>
 </section>
-
+</section>
+</div>
 		<!-- 페이징처리 -->
 	<div class="text-center1">
 		<ul class="pagination">
@@ -190,8 +180,7 @@ color:#6b456a !important;
 	</div>
 	
 
-	</div>
-				<%@include file="../footer.jsp"%>
+
 	
 </body>
 	<script>
@@ -221,4 +210,5 @@ color:#6b456a !important;
   }
 			
 	</script>
+	<%@include file="../footer.jsp"%>
 </html>

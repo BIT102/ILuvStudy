@@ -202,7 +202,7 @@ select::-ms-expand {
 				</div>
 			</div>
 			<!-- /.headline -->
-			<div class="portfolio-item-list">
+			<div class="portfolio-item-list" style="background-color:#f9f9f9;">
 				<div class="row">
 
 					<c:forEach items="${list}" var="studyVO">

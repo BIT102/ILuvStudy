@@ -504,11 +504,11 @@ small {
 		console.log(formObj);
 		
 		//유효성 검사 변수
-		categoryV = false;
+/* 		categoryV = false;
 		titleV = false;
 		ageV = false;
 		maxV = false;
-		
+		 */
 		//수정 클릭 시 액션
 	/* 	$("#modifyBtn").on("click", function(){
 			//form 데이터 유효성 검사 추가 필요
@@ -738,21 +738,133 @@ small {
    	});
    }
    </script>
-   <script>
-   $(document).ready(function(){
-	   
-	   var formObj = $("form[role='form']");
-	   
-	   $("#btn-success").on("click", function(){
-	
-		   formObj.submit();
-	   })
-	   
-   })
-   </script>
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAiNU7soIIqpN1Jdu0tV1CWBb6u1jJAH5o&callback=initMap"
     async defer></script>
+
+<!-- 우효성 검사 -->
+    <!-- 유효성 검사 스크립트 -->
+    <script>
     
+    
+  // 카테고리 대 소 , 스터디명, 지역 대, 연력, 최대인원, 시작날짜, 요일, 시간
+    $("#btn-success").on("click", function(e){
+    	console.log("등록등록등록등록등록등록등록등록등록등록등록등록등록등록등록등록")
+
+    	 var formObj = $("form[role='form']");
+	   
+    	 var age = "";	
+    	
+    	$("input[name=age]:checked").each(function(e){
+    		age += $(this).val();
+    	})
+
+    	//카테고리 대소
+    	if($("#addCatArea").html() == "") {
+    		
+    		alert("카테고리를 입력하세요");
+    		$("#catD").focus();
+    		return false;
+    		//스터디명		
+    	} else if($("#studyTitle").val() == "") {
+    		
+    		alert("스터디명을 입력하세요");
+    		$("#studyTitle").focus();
+    		return false;
+    		//지역 대 
+    	} else if($("#rDName option:selected").val()=="") {
+    		
+       		alert("지역을 입력하세요")
+    		$("#rDName").focus();
+    		return false;
+    		
+    		//나이대
+    	} else if(age == ""){
+    		
+			alert("원하는 나이대를 입력하세요");
+			$("#age").focus();
+			return false;
+    		//최대인원	
+    	} else if($("#studymax").val()=="") {
+    		
+    		alert("최대인원을 입력하세요")
+    		$(".studymax").focus();
+    		return false;
+    		
+    		//시작날짜
+    	} else if($("#studysd").val()=="") {
+    		
+    		alert("시작날짜를 입력하세요")
+    		$(".studysd").focus();
+    		return false;
+    	//요일	
+		} else if($("#sc option:selected").val()==""){
+		
+			alert("요일을 입력하세요")
+			$("#sc").focus();
+			return false;
+	//시작시간	
+		} else if($("#st option:selected").val()==""){
+		
+			alert("시작시간을 입력하세요")
+			$("#st").focus();
+			return false;
+	//끝시간		
+		} else if($("#et option:selected").val()==""){
+		
+			alert("시작시간을 입력하세요")
+			$("#et").focus();
+			return false;
+		
+		} else {
+			alert("등록이 완료되었습니다");
+			   formObj.submit();
+		} 
+    		
+    		
+    /* 	//연령
+	    var chk = false;
+ 	   	
+    	for(var i=0; document.myform.age.length; i++) {
+    		if(document.myfrom.car[i].checked) {chk = ture} {
+    		}
+    		//체크가 안되었을 때
+    		if(!chk){
+    			alert("원하는 나이대를 입력하세요")
+    		}
+   
+    
+    	//시작날짜		
+    	} else if($(".studysd").val()==""){
+    		
+    		alert("시작날짜를 입력하세요")
+    		$(".studysd").focus();
+    		return false;
+    	//요일	
+    	} else if($("#sc").is(':checked')==false){
+    		
+    		alert("요일을 입력하세요") 
+    		$("#sc").focus();
+    		return false;
+    	//시작시간	
+    	} else if($("#st").is(':checked')==false){
+    		
+    		alert("시작시간을 입력하세요")
+    		$("#st").focus();
+    		return false;
+    	} else if($("#et").is(':checked')==false){
+    		
+    		alert("시작시간을 입력하세요")
+    		$("#et").focus();
+    		return false;
+    		
+    	} else {
+    		alert("등록이 완료되었습니다")
+    	} */
+    	
+    }) 
+    </script>
+
+   
 </body>
 </html>

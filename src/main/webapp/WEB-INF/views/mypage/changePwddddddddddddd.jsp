@@ -87,7 +87,7 @@
 	
 	<script>
 	
-	$(".changePw").on("click", function(){
+	$("#changePw").on("click", function(){
 		
 		var nowPw = $('#nowPw').val();			//화면에서 입력된 내용은 변수 처리
 		var newPw1 = $('#newPw1').val();

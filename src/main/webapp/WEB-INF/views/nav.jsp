@@ -229,7 +229,7 @@
 								<!-- 3월 25일 머지 주석 처리 	-->
 								<!-- <input name="email" type="text" placeholder="username"> 
 								<input type="password" name="password" placeho2lder="password"> -->
-
+								<div class="btttt">
 								<button class="btn btn-info btn-block login" type="submit">Login</button>
 							
 			<!-- ======== 구글 로그인 api========== -->
@@ -237,7 +237,7 @@
 								<a class="btn btn-block login"  href="../googleLogin">구글 로그인&nbsp;&nbsp;&nbsp;</a>
 								<!-- ===========카카오톡 ================-->
 			<!-- ======== end ================= -->
-					
+								</div>
 								<div class="texttext" style="margin-top: 15px;">
 									<input type="checkbox"
 										style="width: 20px; vertical-align: middle; margin: 0;"
