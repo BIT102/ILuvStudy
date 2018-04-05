@@ -216,7 +216,7 @@ public class UserServiceImpl implements UserService {
 		return dao.chkNickname(nickName); 
 	}
 
-	
+	@Override
 	public void emailConf(String email)throws Exception{
 		dao.emailConf(email);
 	}

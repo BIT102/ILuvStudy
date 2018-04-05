@@ -2,10 +2,13 @@ package dev.mvc.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -20,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.util.WebUtils;
 
 import dev.mvc.domain.PageMakerStudy;
 import dev.mvc.domain.SearchCriteriaStudy;
@@ -27,6 +31,7 @@ import dev.mvc.domain.StudyVO;
 import dev.mvc.domain.UserVO;
 import dev.mvc.persistence.UserDAO;
 import dev.mvc.service.BookmarkService;
+import dev.mvc.service.LoginService;
 import dev.mvc.service.StudyService;
 import dev.mvc.service.UserService;
 
@@ -51,6 +56,9 @@ public class UserController {
 
 	@Inject
 	private BookmarkService bookservice;
+	
+	@Inject
+	private LoginService lservice;
 	
 	//회원가입 컨트롤러
 	@RequestMapping(value = "/join", method = RequestMethod.GET)
@@ -341,16 +349,36 @@ public class UserController {
 		model.addAttribute("vo", vo);
 		
 		return "/mypage/quit";
+		
 	}
 	
 	@RequestMapping(value = "/quit", method = RequestMethod.POST)
-	public String quitget(Model model, UserVO vo) throws Exception {
+	public String quitPost(HttpServletRequest request,
+			HttpServletResponse response, HttpSession session) throws Exception{
 		
-		service.quit(vo);
-
-		model.addAttribute("vo", vo);
+		logger.info("logout..........");
+		Object obj = session.getAttribute("login");
 		
-		return "/mypage/quit";
+		if(obj != null){
+			
+			UserVO vo = (UserVO) obj;
+			
+			session.removeAttribute("login");
+			session.invalidate();
+			
+			Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
+			
+			if(loginCookie != null){
+				loginCookie.setPath("/");
+				loginCookie.setMaxAge(0);
+				response.addCookie(loginCookie);
+				lservice.keepLogin(vo.getEmail(), session.getId(), new Date());
+			}
+			
+			service.quit(vo);
+		}
+				
+		return "redirect:/study/main";
 	}
 	
 	// 북마크 (bookmark) 컨트롤러  =길=

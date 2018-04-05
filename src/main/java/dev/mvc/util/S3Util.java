@@ -9,12 +9,9 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.amazonaws.ClientConfiguration;
-import com.amazonaws.Protocol;
-import com.amazonaws.auth.AWSCredentials;
-import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.Bucket;
 import com.amazonaws.services.s3.model.GeneratePresignedUrlRequest;
 import com.amazonaws.services.s3.model.GetObjectRequest;
@@ -26,17 +23,19 @@ public class S3Util {
 	
 	private static final Logger logger = LoggerFactory.getLogger(S3Util.class);
 	
-	private String accessKey = "AKIAIHQVIF2GWKIE6ADQ"; // 엑세스 키
-	private String secretKey = "IOEpMgiPnEHraX0022LY8ev88gRHe4v+P9vQGrfO"; // 보안 엑세스 키
 
 	private AmazonS3 conn;
 
 	public S3Util() {
-		AWSCredentials credentials = new BasicAWSCredentials(accessKey, secretKey);
+		/*AWSCredentials credentials = new BasicAWSCredentials(accessKey, secretKey);
 		ClientConfiguration clientConfig = new ClientConfiguration();
 		clientConfig.setProtocol(Protocol.HTTP);
 		this.conn = new AmazonS3Client(credentials, clientConfig);
 		conn.setEndpoint("s3.ap-northeast-2.amazonaws.com"); // 엔드포인트 설정 [ 아시아 태평양 서울 ]
+*/	
+		this.conn=AmazonS3ClientBuilder.standard()
+				.withRegion(Regions.AP_NORTHEAST_2)
+				.build();
 	}
 
 	// 버킷 리스트를 가져오는 메서드이다.
