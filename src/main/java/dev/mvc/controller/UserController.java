@@ -393,6 +393,8 @@ public class UserController {
 		
 		model.addAttribute("relist", service.recruitList(email));
 		
+		model.addAttribute("aplist", service.applyList(email));
+		
 		PageMakerStudy pageMakerStudy = new PageMakerStudy();
 
 		pageMakerStudy.setCri(cri);
@@ -401,6 +403,29 @@ public class UserController {
 
 		return "/mypage/bookmark";
 	}
+
+	
+/*	// 신청 (application) 컨트롤러
+	@RequestMapping(value = "/application", method = RequestMethod.GET)
+	public String application(@ModelAttribute("cri") SearchCriteriaStudy cri, Model model, HttpServletRequest request) throws Exception {
+		
+		HttpSession session = request.getSession();
+		UserVO sUser = (UserVO)session.getAttribute("login");
+		String email = sUser.getEmail();
+		
+		model.addAttribute("list", service.applyList(email));
+		
+		System.out.println("신청신청 : " + service.applyList(email));
+		
+		PageMakerStudy pageMakerStudy = new PageMakerStudy();
+		
+		pageMakerStudy.setCri(cri);
+			
+		model.addAttribute("pageMakerStudy", pageMakerStudy);
+		
+		return "/mypage/application";
+	
+	}*/
 	
 /*	// 모집 (recruit) 컨트롤러 내가했습니다
 	@RequestMapping(value = "/recruit", method = RequestMethod.GET)
@@ -424,27 +449,7 @@ public class UserController {
 
 	}*/
 	
-	// 신청 (application) 컨트롤러
-	@RequestMapping(value = "/application", method = RequestMethod.GET)
-	public String application(@ModelAttribute("cri") SearchCriteriaStudy cri, Model model, HttpServletRequest request) throws Exception {
-		
-		HttpSession session = request.getSession();
-		UserVO sUser = (UserVO)session.getAttribute("login");
-		String email = sUser.getEmail();
-		
-		model.addAttribute("list", service.applyList(email));
-		
-		System.out.println("신청신청 : " + service.applyList(email));
-		
-		PageMakerStudy pageMakerStudy = new PageMakerStudy();
-		
-		pageMakerStudy.setCri(cri);
-			
-		model.addAttribute("pageMakerStudy", pageMakerStudy);
-		
-		return "/mypage/application";
-	
-	}
+
 		
 	// 	완료(completed) 컨트롤러
 		@RequestMapping(value = "/completed", method = RequestMethod.GET)
