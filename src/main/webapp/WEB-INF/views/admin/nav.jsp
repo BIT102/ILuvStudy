@@ -263,7 +263,7 @@ display:none;
          	<div class="panel panel-default">
                 <div class="panel-heading top-bar" style="padding:0;">
                 	<div style="height:40px; line-height:40px;padding-left:20px;">
-                		<h4 class="panel-title" style="display:inline;"><span class="glyphicon glyphicon-comment"></span>&nbsp;1:1 문의하기</h4>
+                		<h4 class="panel-title" style="height:40px; line-height:40px;"><span class="glyphicon glyphicon-comment"></span>&nbsp;1:1 문의하기</h4>
                 	</div>
             	</div>
             	

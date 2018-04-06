@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="java.io.File" %>
+<%@ page import="java.io.FileOutputStream" %>
+<%@ page import="java.awt.Graphics" %>
+<%@ page import="java.awt.Image" %>
+<%@ page import="java.awt.image.BufferedImage" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -343,14 +348,15 @@ small {
 		<!-- END MAIN -->
 	</div>
 
-	<script id="template" type="text/x-handlebars-template">
+<script id="template" type="text/x-handlebars-template">
 	<div class="mailbox-attachment-info">
 		<span class="mailbox-attachment-icon has-img">
-			<img src="{{imgsrc}}" alt="Attachment">
+			<img src="{{imgsrc}}" style="height:200px;" alt="Attachment">
 		</span>
-		<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>
-		<small class = "small" value = "{{name}}" data-src=data style="cursor:pointer">X</small>
-		</span>
+		<div>
+			<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>
+			<small class = "small" value = "{{name}}" data-src=data style="cursor:pointer">X</small>
+		</div>
 	</div>
 </script>
 	<script>
@@ -361,6 +367,7 @@ small {
 				str += "<option value'"+i+"'>" + i + "시</option>";
 				$(".et").html(str);
 				if (stval = 24) {
+					
 				}
 			}
 		});
@@ -564,7 +571,9 @@ small {
 		} //getStudy() 끝
 	</script>
 
-	<!-- 파일업로드 핸들러 -->
+<!-- 
+S3 수정 (파일 업로드 2개가 되어서 주석 처리)
+파일업로드 핸들러 
 	<script id="templateAttach" type="text/x-handlebars-template">
     <li data-src='{{name}}'>
 		<span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment"></span>
@@ -573,7 +582,7 @@ small {
 		</div>
 	</li>
     </script>
-    
+-->
     <!-- 유효성 검사 스크립트 -->
     <script>
     
