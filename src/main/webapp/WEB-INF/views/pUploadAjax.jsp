@@ -131,8 +131,6 @@ small{
 			});
 		});
 		
-		
-		
 	</script>
 
 </body>

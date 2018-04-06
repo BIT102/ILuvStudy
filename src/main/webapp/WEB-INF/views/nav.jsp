@@ -462,7 +462,7 @@ display:none;
 										id="idb"><label for="idbb"
 										style="vertical-align: middle; margin: 0;"> 자동로그인</label>
 								</div>
-								<br> 아이디/비밀번호를 잊으셨나요?<br> <a href="/searchEmail.jsp">아이디찾기 / </a><a
+								<br> 아이디/비밀번호를 잊으셨나요?<br> <a href="/searchEmail">아이디찾기 / </a><a
 									href="/searchPW">비밀번호찾기</a>
 							</form>
 						</div>
