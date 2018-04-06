@@ -1,278 +1,424 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="http://code.jquery.com/jquery-1.7.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
-    <script type="text/javascript" src="/resources/js/upload.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<script src="http://code.jquery.com/jquery-1.7.js"></script>
+<script
+	src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+<script type="text/javascript" src="/resources/js/upload.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 
-<link href="/resources/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>Document</title>
-    <style>
-    h1 {float:left;}
-    #nav1{float:left; height:40px;}
-    #nav1 > a {text-decoration-line: none;}
-    #nav2{float:right;}    
-    #nav2 > a {text-decoration-line: none;}
-    
-    #header{height: 150px;}
-	body {margin-left:50px;}
-	#repliesDiv{font-size:40px; border:2px dotted black;}
-	.textcenter1{text-align:center;}
+<link href="/resources/css/bootstrap.min.css" rel="stylesheet"
+	type="text/css" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<title>Document</title>
+<style>
+h1 {
+	float: left;
+}
+
+#nav1 {
+	float: left;
+	height: 40px;
+}
+
+#nav1>a {
+	text-decoration-line: none;
+}
+
+#nav2 {
+	float: right;
+}
+
+#nav2>a {
+	text-decoration-line: none;
+}
+
+#header {
+	height: 150px;
+}
+
+body {
+	margin-left: 50px;
+}
+
+#repliesDiv {
+	font-size: 40px;
+	border: 2px dotted black;
+}
+
+.textcenter1 {
+	text-align: center;
+}
+
+.btn-black:hover {
+	background-color: gray !important;
+}
+
+/*지도스타일입니다*/
+#map {
+	width: 60%;
+	height: 442px;
+	display: inline-block;
+	margin-left: 30px;
+	float: right;
+}
+
+.gallery {
+	margin-top: 25px;
+	margin-bottom: 25px;
+}
+
+.gallery li {
+	display: inline-block;
+	margin-left: 15px;
+}
+
+.imgstyle {
+	border: 1px solid #f1f1f1;
+	width: 1170px;
+	margin-top: 25px;
+}
+
+.app {
+	border: 1px solid #f1f1f1;
+	width: 1170px;
+	margin-top: 25px;
+}
+
+.applyList {
+	margin: 15px 25px;
+}
+
+.replypage li{
+	border:1px solid black;
+	width:20px;
+	text-align:center;
+	background-color:black;
+	margin-left:10px;
+}
+
+.replypage a {
+	color:white;
+}
+
+.btn {
+	background-color:black;
+	color:white;
+
+}
+
+.aplist {
+	float:right;
+}
+.reglist{
+	float:right;
+}
+
+
+#modDiv{
+	width:450px;
+	height:200px;
+	background-color:gray;
+	position:absolute;
+	top:50%;
+	left:50%;
+	margin-top:-50px;
+	margin-left:-150px;
+	paddiong:10px;
+	z-index:1000;
+}
+
+#amodDiv {
+	width:450px;
+	height:200px;
+	background-color:gray;
+	position:absolute;
+	top:200%;
+	left:50%;
+	margin-top:-50px;
+	margin-left:-150px;
+	paddiong:10px;
+	z-index:1000;
+}
 </style>
 </head>
 
 <body>
 
-<%@include file="../nav.jsp"%>
-<div id="multiple-blog-page">
- <!-- header begin -->
-            <header class="page-head">
-                <div class="header-wrapper">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-12">
+	<%@include file="../nav.jsp"%>
+	<div id="multiple-blog-page">
+		<!-- header begin -->
+		<header class="page-head">
+			<div class="header-wrapper">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12">
 
-                                <ol class="breadcrumb">
-                                    <li><a href="index.html">Home</a></li>
-                                    <li class="active">FAQ</li>
-                                </ol> <!-- end of /.breadcrumb -->
+							<ol class="breadcrumb">
+								<li><a href="index.html">Home</a></li>
+								<li class="active">Board</li>
+							</ol>
+							<!-- end of /.breadcrumb -->
 
-                            </div>
-                        </div>
-                    </div> <!-- /.container -->
-                </div> <!-- /.header-wrapper -->
-            </header> <!-- /.page-head (header end) -->
-
-<!-- bno값 유지하자 -->
-<form role="form" method="post">
- 	<input type="hidden" name="bno" id="bno" value="${studyVO.bno}">
-	<%-- <input type="hidden" name="writer" id="writer" value="${studyVO.writer}" --%>>
-	<input type="hidden" name="now" id="studyNow" value="${studyVO.now}">
-	<input type="hidden" name="max" id="studyMax" value="${studyVO.max}">
-</form>
-		
-		<section class="blog-content">
-                <div class="container">
-                    <div class="row">
-                        <main class="col-md-8 col-md-offset-2" style="display: block;">
-                            <article class="blog-item">
-                              
-
-                                <div class="author">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="about-author">
-                                                <div class="row">
-                                                    <div class="col-md-3">
-                                                        <img src="../../resources/assets/img/IMG_9772.JPG" class="img-responsive center-block img-circle" alt="author" style="width:130px; height:170px;">
-                                                    </div>
-                                                    <div class="col-md-9">
-                                                        <p>
-                                                            <strong>${studyVO.title}</strong>
-                                                            <span class="author-name text-uppercase">${studyVO.nickname}</span>
-                                                        </p>
-                                                        <p>
-                                                            ${studyVO.content}<br>
-                                                            Vestibulum varius fermentum risus vitae lacinia neque auctor nec. Nunc ac rutrum nulla. Nul maximus dolor in quam euismod ac viverra libero aliquet. Nunc sed nunc malesuada aliquet turpis eu dictum lectus. Cras eget sollicitudin lorem. Etiam commodo ultricies luctus.
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="author-contact">
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <p class="pull-left">
-                                                            <span><i class="fa fa-picture-o"></i></span>
-                                                            <strong>25 Total Posts</strong>
-                                                            <i class="fa fa-heart-o" onclick="myFunction(this)"></i>
-                                                        </p>
-                                                        
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <ul class="author-contact-button pull-right">
-                                                            <li><a href="https://iluvstd.slack.com"><i class="fa fa-slack"></i></a></li>
-                                                            <li><a href="https://www.facebook.com/I-luv-study-2067683313502302/"><i class="fa fa-facebook"></i></a></li>
-                                                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                                                            <li><a href="https://www.youtube.com/channel/UCNBQowU3R1wQYQ0zz8Gt7Lw/videos?view_as=subscriber"><i class="fa fa-youtube"></i></a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-								
-								<div>
-										 <p>현재 인원:${studyVO.now}</p>
-										 <p>최대 인원:${studyVO.max}</p>
-										 <p>${studyVO.rDName}/${studyVO.rSName}</p>
-										 <p>시작날짜 : ${studyVO.sd}</p>
-										 <p>시작시간 : ${studyVO.st}</p>
-										 <p>끝나는시간 : ${studyVO.et}</p>
-										 <p>요일 : ${studyVO.sc}</p>
-								</div>
-								<!-- 로그인했는데 로그인아이디가 글작성자와 같지않을때. -->
-						  	<c:if test="${login.email ne studyVO.writer }">
-						   	<c:if test="${not empty login}"> 
-								<button type="submit" id="submit" name="submit" class="btn btn-black apply">신청하기</button>
-								<button type="submit" id="submit" name="submit" class="btn btn-black deapply">신청취소</button>
-								<button type="submit" id="submit" name="submit" class="btn btn-black preee">목록으로</button>
-							</c:if>
-							</c:if>	
-							
-							<!-- 로그인한아이디가 글쓴이일때. -->
-        					<c:if test="${login.email eq studyVO.writer}">
-							<br>
-							<br>
-						        <input type="submit" class="aList btn btn-black" value="신청자목록" onclick="wait();">
-						        <div id='amodDiv' style="display:none;">
-						        	<div class='modal-applyList'>
-						        	</div>
-						        <button type="button" id="applyclose">없어져요</button>	
-						        </div>
-						    <br>
-						    <br>    
-						        <input type="submit" class="preee btn btn-black" value="목록">
-						        <input type="submit" class="btn btn-black" value="수정">
-						        <input type="submit" class="delete btn btn-black" value="스터디완료">
-							</c:if>
-							
-                                 <div class="comments">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                             <h3 id="replies2"></h3>
-                                       
-                             <% int replycnt=0; %>               
-                 <!-- ===================SOHEE 댓글 정보 추가==================== -->                     
-                                 <c:forEach items="${list}" var="replyStudyVO">
-                                            <!-- <div class="cmnt-clipboard"><span class="btn-clipboard">Reply</span></div> -->
-                                            <div class="well">
-                                                <div class="row">
-                                                   <!--  <div class="col-md-2">
-                                                        <img src="assets/img/commenter1.jpg" class="img-responsive center-block" alt="first-comment">
-                                                    </div> -->
-                                                    <div class="col-md-10">
-                                                        <p class="comment-info">
-                                                            <strong>${replyStudyVO.writer}</strong> <span><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${replyStudyVO.regdate}"/></span>
-                                                        </p>
-                                                        <p>${replyStudyVO.content}</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <% replycnt++; %>
-                                  </c:forEach>
-                    <!-- ===================댓글 정보 추가 끝==================== -->
-                                            
-                                            
-                                            <!-- handlebar template 문법-->
-											<script id="template" type="text/x-handlebars-template">
-                                            	{{#each .}}   
-                                            <div class="well">
-                                                <div class="row">
-                                               
-                                                    <div class="col-md-2">
-                                                        <img src="assets/img/commenter2.jpg" class="img-responsive center-block" alt="second-comment">
-                                                    </div>
-                                                    <div class="col-md-10">
-                                                        <p class="comment-info">
-                                                            <strong>David Martin</strong> <span>22 april 2015</span>
-                                                        </p>
-                                                        <p>
-                                                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since they 1500s.
-                                                        </p>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-												{{/each}}
-											</script>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="comment-post">
-                                    <h3>Post A Comment</h3>
-                                    <form method="post">
-                                        <div class="row">
-                                          
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <input name="email" type="email" class="form-control" id="email" required="required" placeholder="Email Address" value="${studyVO.writer}">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <textarea name="message" class="form-control" id="message" rows="8" required="required" placeholder="Type here message"></textarea>
-                                            </div>
-                                        </div>
-                                        
-                                        <button type="submit" id="submit" name="submit" class="btn btn-black">post comment</button>
-                                    </form>
-                                </div>
-                            </article>
-                        </main>
-                    </div>
-                </div>
-            </section>
-		
-		<!-- section -->
-		
-        <div style="height:700px;">
-            <div id="brdimg">
-                <c:if test="${studyVO.name!=null}">
-					<div class='uploadedList'>
-						<span class="mailbox-attachment-icon has-img"><img
-						
-							src="/study/displayFile?fileName=${studyVO.name}"
-							alt="Attachment"></span>
+						</div>
 					</div>
-				</c:if>
+				</div>
+				<!-- /.container -->
+			</div>
+			<!-- /.header-wrapper -->
+		</header>
+		<!-- /.page-head (header end) -->
+
+		<!-- bno값 유지하자 -->
+		<form role="form" method="post">
+			<input type="hidden" name="bno" id="bno" value="${studyVO.bno}">
+		</form>
+
+
+		<div class="container">
+			<div class="row">
+
+				<article class="blog-item">
+
+					<c:choose>
+						<c:when test="${studyVO.name ne 'a'}">
+							<img src="/study/displayFile?fileName=${studyVO.name}"
+								class="img-responsive center-block"
+								style="width: 1170px; height: 380px;">
+						</c:when>
+						<c:otherwise>
+							<img src="/resources/assets/img/ha.jpg"
+								class="img-responsive center-block"
+								style="width: 1170px; height: 380px;">
+						</c:otherwise>
+					</c:choose>
+
+					<div class="author">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="about-author" style="margin-top: 20px;">
+									<div class="row">
+										<div class="col-md-3">
+											<img src="assets/img/commenter2.jpg"
+												class="img-responsive center-block img-circle">
+										</div>
+										<div class="col-md-9">
+											<p>
+												<strong>주인 :</strong> <span
+													class="author-name text-uppercase">${studyVO.nickname}</span>
+											</p>
+											<p>${studyVO.content}</p>
+										</div>
+									</div>
+								</div>
+
+								<div class="author-contact">
+									<div class="row">
+										<div class="col-md-6">
+											<p class="pull-left">
+
+
+												<!-- 북마크등록 // 로그인한 사람만 -->
+												<span><c:if test="${not empty login}">
+														<!-- 등록 안되어있을때 -->
+														<c:if test="${bolist.checked == 0}">
+															<i class="fa fa-heart-o" id="heart"
+																onclick="myFunction1(this)" style="font-size: 20px;"></i>
+														</c:if>
+														<!-- 북마크 등록되어있을때 -->
+														<c:if test="${bolist.checked == 1}">
+															<span id="delete"> <i class="fa fa-heartbeat"
+																id="heart" onclick="myFunction1(this)"
+																style="font-size: 20px;"></i>
+															</span>
+														</c:if>
+														<strong> 즐겨찾기에 추가해 주세요 </strong>
+													</c:if> </span> <span class="like"> <i class="fa fa-eercast"></i>${studyVO.vct}</span>
+											</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+					<div class="blog-heading">
+						<h2 class="text-capitalize">
+							<strong>${studyVO.title}</strong>
+						</h2>
+						<span class="date"><fmt:formatDate pattern="yyyy-MM-dd"
+								value="${studyVO.regdate}" /></span>
+
+					</div>
+					<div class="bodycontent">
+						<div class="nicecontent" style="float: top; margin-top: 25px;">
+							<p
+								style="display: inline-block; vertical-align: top; font-size: 20px;">
+								종류 : ${studyVO.cDName} / ${studyVO.cSName}<br> <br> 지역
+								:${studyVO.rDName} / ${studyVO.rSName}<br> <br> 참여인원 :
+								${studyVO.now} / ${studyVO.max}<br> <br> 선호나이 :
+								${studyVO.age}<br> <br> 요일 : ${studyVO.sc}<br> <br>
+								날짜 : ${studyVO.sd}<br> <br> 시간 : ${studyVO.st} /
+								${studyVO.et}
+							</p>
+							<div id="map"></div>
+						</div>
+						<!-- 지도입니다. -->
+
+					</div>
+					<!-- 콘덴트바디바디 -->
+
+
+					<div class="imgstyle">
+						<p>스터디 이미지</p>
+						<div class="gallery"></div>
+					</div>
+
+
+					<!-- 신청한 사람 목록 -->
+					<div class="app">
+						<p>신청자목록</p>
+						<div class="applyList"></div>
+					</div>
+			</div>
+			<!-- end grycontainer -->
+
+
+
+         <c:if test="${not empty login}">
+			<div class="comments">
+				<div class="row">
+					<div class="col-md-12">
+
+			<div class="comment-post">
+				<h3>댓글을 달아주세요</h3>
+				<div class="row">
+					<div class="col-md-4">
+						<div class="form-group">
+							<input name="writer" id="writer" type="text" class="form-control"
+								value="${login.email}" readonly>
+						</div>
+					</div>
+
+					<div class="col-md-12">
+						<textarea name="content" type="text" class="form-control"
+							id="content" rows="8" required="required"
+							placeholder="댓글을 입력해 주세요"></textarea>
+					</div>
+				</div>
+
+				<button type="button" id="addBtn" class="btn btn-black"
+					style="color: white;">댓글 추가하기</button>
+				<button type="button" id="seeBtn" class="btn btn-black"
+					style="color: white;">댓글 보기</button>
+			</div>
+			</article>
+
+
+
+			<div id="replies" style="margin-top:15px;"></div>
+							<!-- 댓글 수정 삭제 부분 -->
+						<div id="modDiv" style="display: none ">
+				<div class="modal-title"></div>
 				
-				<p>${studyVO.cDName}</p>
+							<div style="text-align:center; margin-bottom:30px; margin-top:30px;">
+							
+								<input type="text" id="recon" style="width:350px; height:70px; padding-left:15px;">
+							</div>
+							<div style="text-align:center;">
+								<button type="button" id="remodify" class="btn">수정하기</button>
+								<button type="button" id="redelege" class="btn">지우기</button>
+								<button type="button" id="reclose" class="btn">닫기</button>
+							</div>
+						</div>
+			<ul class="replypage"></ul>
+		</div>
+	</div>
+	</div>
+</c:if>
+
+
+
+
+
+
+
+
+
+
+		<br> <br>
+		<!-- 로그인했는데 로그인아이디가 글작성자와 같지않을때. -->
+
+<div>
+		<!-- 신청하면 이미지와 닉네임 만들기 -->
+		<div class="aplist">
+<c:if test="${empty login}">
+ <input type="submit" class="btn preee" value="목록으로" style="float:right;">
+</c:if>
+
+		<c:if test="${not empty login}">
+		 <c:if test="${login.email != studyVO.writer}">
+		 
+			<c:if test="${ap.checked == 0 }">
+				<input type="submit" class="btn apply" id="apap" value="신청하기">
+				<input type="submit" class="btn deapply" id="apap" value="신청취소" style="display:none;">
+			</c:if>
 			
-                <!-- 스터디 제목 -->
-                <h2>${studyVO.title}</h2>
-                <!-- 작성자 -->
-                <p>${studyVO.nickname}</p>   
-   				
-                <!-- 북마크 -->
-				
-                	좋아용/나빠용
-               <!-- 로그인 했을때 -->
- 
+			<c:if test="${ap.checked == 1 }">
+				<input type="submit" class="btn apply" id="apap" value="신청하기" style="display:none;">
+				<input type="submit" class="btn deapply" id="apap" value="신청취소">
+			</c:if>
+				<input type="submit" class="btn preee" value="목록으로">
+		</c:if>		
+		<!-- 로그인시 -->
+		<br> <br>
 
-					<script>
-					${bolist}
-					${studyVO.bno}
-					${login.email}
-					</script>
-					
- 					<c:if test="${bolist.checked == 1}">
-					<i class="fa fa-heartbeat" onclick="myFunction2(this)" style="font-size:0px;">저장됨</i>	
-					</c:if> 
-					<c:if test="${bolist.checked == 0}">
-					<i class="fa fa-heart-o" onclick="myFunction1(this)" value="saved"></i>
-					</c:if>  
+		<!-- 로그인한아이디가 글쓴이일때. -->
+		
+		<c:if test="${login.email == studyVO.writer}">
+		<br> <input type="submit" class="btn aList" value="신청자목록"
+			onclick="wait();">
+		<div id='amodDiv' style="display: none;">
+			<div class='modal-applyList'></div>
+			<button type="button" id="applyclose" class="btn">닫기</button>
 
- <script>
+		</div>
+		<input type="submit" class="btn preee" value="목록으로"> 
+		<input type="submit" class="btn modifybo" value="스터디 수정"> 
+		<input type="submit" class="btn delete" value="스터디 지우기">
+	</c:if>
+	</c:if>
+	</div>
+	
+	
+</div>
 
+
+	<script>
 //북마크를 등록합니다	
+
 function myFunction1(x) {
 
 	var bno = $("#bno").val();
-		
 	var writer = $("#writer").val();
 	
+	//클래스이름으로 구별
+	var heart = $("#heart").attr('class');
+	
+	//만약에 등록이 안되어 있으면
+	if(heart==="fa fa-heart-o") {
+		//데이터등록
 		$.ajax({
 			type:"post",
 			url:"/study/bookmark/a",
@@ -287,107 +433,41 @@ function myFunction1(x) {
 			}),
 			success : function(result) {
 				if(result=='success') {
-					alert("등록됨");
-					x.classList.toggle("fa-heartbeat");
+					alert("등록되었습니다");
+					//클래스 변경하면서 이미지 변경
+					$("#heart").removeClass('fa fa-heart-o');
+					$("#heart").addClass('fa fa-heartbeat');
 				}
 			}
 		});
-}
-	// 취소
-	
-function myFunction2(x) {	
-	
-	var bno = $("#bno").val();
-	
-	var writer = $("#writer").val();
-	
-			$.ajax({
-				type:"post",
-				url:"/study/bookmark/dee",
-				dataType:'text',
-				data : {
-					bsBno : bno,
-					userEmail : writer
-				},
-				success : function(result) {
-					if(result=='success') {
-						alert("삭제욤 ");
-						x.classList.toggle("fa-heartbeat");
-					}
+	//북마크가 등록되어있으면
+	} else if(heart==="fa fa-heartbeat") {
+		//삭제
+		$.ajax({
+			type:"post",
+			url:"/study/bookmark/dee",
+			dataType:'text',
+			data : {
+				bsBno : bno,
+				userEmail : writer
+			},
+			success : function(result) {
+				if(result=='success') {
+					alert("삭제되었습니다 ");
+					//클래스 변경하면서 이미지 변경
+					$("#heart").removeClass('fa fa-heartbeat');
+					$("#heart").addClass('fa fa-heart-o');
 				}
-			});
-		}	
+			}
+		});
+	} else {
+		alert("이미 처리되었습니다");
+	}
+}
+</script>
 
-</script>               
-
-            </div>
-
-            <table>
-                <tr>
-                <!-- 카테고리 -->
-                    <td>카테고리</td>
-                   <c:forEach items="${list}" var="studyVO">
-
-                   ${studyVO.cDName}${studyVO.cSName}
-
-                    </c:forEach>
-                </tr>
-                <tr>
-                <!-- 현재인원 -->
-                    <td>현재인원</td>
-                    <td>${studyVO.now}</td>
-                </tr>
-                <tr>
-                <!-- 최대인원 -->
-                    <td>최대인원</td>
-                    <td>${studyVO.max}</td>
-                </tr>
-                <tr>
-                <!-- 지역 -->
-                    <td>지역</td>
-                    <td>${studyVO.rDName}/${studyVO.rSName}</td>
-                </tr>
-                <tr>
-                <!-- 시작날짜 -->
-                    <td>시작날짜</td>
-                    <td>${studyVO.sd}</td>
-                    <!-- 시작시간 -->
-                    <td>시작시간</td>
-                    <td>${studyVO.st}</td>
-                    <!-- 끝나는시간 -->
-                    <td>끝나는시간</td>
-                    <td>${studyVO.et}</td>
-                </tr>
-            </table>
-            <!-- 요일별 -->
-            <div>요일별 스터디 시간 <p>${studyVO.sc}</p></div>
-            <!-- 스터디내용 -->
-            <div class="brdtext"><p>소개글</p></div>
-            <div class="brdtext"><p>${studyVO.content}</p></div>
-
-
-        </div>
-        
-		<!-- 신청한 사람 목록 -->
-			<div class ="applyList">
-			</div>
-        
-        
-        
-        
-        
-        <!-- 첨부파일 나중에 합시다 -->
-    <div id="grycontainer">  
-    	
-    	<!-- 이미지 상태가 x인 이미지 -->
-
-        <div class="gallery">
-        </div>
-	
-    </div><!-- end grycontainer -->
-    
-    <!-- 파일업로드 핸들러 -->
-    <script id="templateAttach" type="text/x-handlebars-template">
+	<!-- 파일업로드 핸들러 -->
+	<script id="templateAttach" type="text/x-handlebars-template">
     <li data-src='{{name}}'>
 		<span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment"></span>
   		<div class="mailbox-attachment-info">
@@ -395,8 +475,8 @@ function myFunction2(x) {
 		</div>
 	</li>
     </script>
-    
-    <script>
+
+	<script>
     
     //파일불러오기
     var bno = ${studyVO.bno};
@@ -413,70 +493,11 @@ function myFunction2(x) {
     })
     
     </script>
-
-    <div>
-
-        <span>작성자</span>
-        <input type="text" name="writer" id="writer" value="${studyVO.writer}">
-        <span><input type="text" name="content" id="content" value="댓글을 입력해 주세요."></span>
-        <input type="checkbox" >비밀글 <input type="button" id="addBtn" value="댓글작성"><br>
-        
-                      댓글 테스트
-        <ul id="replies"></ul>
-        <ul class="replypage"></ul>
-        
-        <!-- 댓글 수정 삭제 부분 -->
-       <div id="modDiv" style="display:none">
-         	<div class="modal-title"></div>
-         	<div>
-        		<input type="text" id="recon">
-			</div>
-        	<div>
-        	<button type="button" id="remodify">Modify</button>
-        	<button type="button" id="redelege">Delete</button>
-        	<button type="button" id="reclose">Close</button>
-        	</div>
-        </div>  
-        
-    <br><br>
-    	<!-- 로그인했는데 로그인아이디가 글작성자와 같지않을때. -->
-    	<c:if test="${login.email ne studyVO.writer }">
-    	<c:if test="${not empty login}"> 
-    
-    	신청하는 사람
-    	<!-- 신청하면 이미지와 닉네임 만들기 -->
-        <input type="submit" class="apply" value="신청하기">
-        <input type="submit" class="deapply" value="신청취소">
-        <input type="submit" class="preee" value="목록으로">
-        <!-- 로그인시 --> <br><br>
-        </c:if>
-        </c:if>
-        
-        <!-- 로그인한아이디가 글쓴이일때. -->
-        <c:if test="${login.email eq studyVO.writer}">
-                     등록한 사람  
-        <br>
-        <input type="submit" class="aList" value="신청자목록" onclick="wait();">
-        <div id='amodDiv' style="display:none;">
-        	<div class='modal-applyList'>
-        	</div>
-        <button type="button" id="applyclose">없어져요</button>	
-        	
-        </div>
-        <input type="submit" class="preee" value="목록">
-        <input type="submit" value="수정">
-        <input type="submit" class="delete" value="스터디완료">
-        </c:if>
-		
-    </div>
-
-</div>
-<!-- 신청자목록 모달 -->
-<script>
+	<script>
 var applyEmail = $("#writer").val();
 var applybsBno = $("#bno").val();
-var now = $("#studyNow").val();
-var max = $("#studyMax").val();
+var now = ${studyVO.now};
+var max = ${studyVO.max}
 var bno = ${studyVO.bno};
 //스터디 등록
 $(".apply").on("click", function(){
@@ -504,11 +525,14 @@ $(".apply").on("click", function(){
 		success : function(result){
 		wait();
 		alert("완전등록됨");
+		$(".apply").hide();
+		$(".deapply").show();
 		}
 	
 	})
 	}
-})
+});
+
 //스터디 취소하기
 $(".deapply").on("click", function(){
 $.ajax({
@@ -528,6 +552,8 @@ $.ajax({
  			apply();
 			wait();
  			alert("삭제되었네");
+ 			$(".deapply").hide();
+ 			$(".apply").show();
  		}
  	}
 })
@@ -543,7 +569,15 @@ $("#applyclose").on("click", function(){
 //신청자 수락 거절 status 바꾸자
 //수락지 o
 //거절시 x
+
+
 function okstudy(event) {
+	
+	var applyEmail = $(".applyLi").attr("data-usemail"); //잘못됬음
+	
+	console.log(applyEmail)
+	
+	var applybsBno = $("#bno").val();
 	
 	var kk = event.parentElement;
 	
@@ -563,6 +597,7 @@ function okstudy(event) {
 				kk.remove();
 				apply();
 				alert("수락했승ㅁ");
+
 			}
 		 }
 	});
@@ -598,13 +633,17 @@ $.getJSON("/study/apply/"+bno, function(data){
 	
 	var str="";
 	$(data).each(function(){
+		
+		if(this.status=='D'){
+		
 		str +="<div class='applyLi' data-usEmail='"+this.usEmail+"'>"
 			+ "<span class='mailbox-attachment-icon has-img'><img src='/study/displayFile?fileName="+this.photo+"'"
 			+ "alt=Attachment></span>"
 		    + this.usEmail
-		    + "<button type='button' onclick='okstudy(this);'>수락</button>"
-		    + "<button type='button' onclick='nostudy(this);'>거절</button>"
+		    + "<button type='button' onclick='okstudy(this);' class='btn'>수락</button>"
+		    + "<button type='button' onclick='nostudy(this);' class='btn'>거절</button>"
 		    +"</div>";   
+		}
 	});
 	$(".modal-applyList").html(str);
 });
@@ -645,7 +684,7 @@ $.getJSON("/study/apply/"+bno, function(data){
 		    + this.usEmail
 		    +"</div>";
 		    
-	$(".applyList").html(str);
+	$(".app .applyList").html(str);
 		}
 	})
 })
@@ -653,8 +692,8 @@ $.getJSON("/study/apply/"+bno, function(data){
 </script>
 
 
-<!-- 상세페이지 -->
-<script>
+	<!-- 상세페이지 -->
+	<script>
 $(document).ready(function(){
 	
 	var formObj = $("form[role='form']");
@@ -668,12 +707,12 @@ $(document).ready(function(){
 		formObj.submit();
 	})
 });
-</script>   
+</script>
 
 
-<!--  댓글 -->
+	<!--  댓글 -->
 
-        <script>
+	<script>
     
     	var bno = $("#bno").val(); 
         
@@ -705,20 +744,25 @@ $(document).ready(function(){
         	});
         });
         
+        $("#seeBtn").on("click", function(){
+        	getPageList(replyPage);
+        });
+	
+	
 	//상세 리플
-        $("#replies").on("click", ".replyLi button", function(){
+        $("#replies").on("click",".replyLi .cmnt-clipboard button", function(){
         	
-        	var reply = $(this).parent();
-        	
-        	var rno = reply.attr("data-rno");
-        	var retext = reply.text();
-        	alert(rno +":" + retext)
-        	
+       // 	var reply = $(".replyLi").val();
+       var rno = $(this).val();
+       
+       var retext = $(this).parent().next().children().children(".col-md-10").children(".contentre").text();
+
         	$(".modal-title").html(rno);
         	$("#recon").val(retext);
         	$("#modDiv").show("slow");
         	 
         });
+
         //삭제
         $("#redelege").on("click", function(){
         	
@@ -768,7 +812,12 @@ $(document).ready(function(){
         			}
         		}
         	});
-        }); 
+        });
+        
+        $("#reclose").on("click", function(){
+        	$("#modDiv").hide("slow");
+        })
+        
         
         //댓글페이지
         function getPageList(page) {
@@ -779,9 +828,23 @@ $(document).ready(function(){
         		
         		$(data.list).each(function(){
         			
-        			str += "<li data-rno='" + this.rno + "' class='replyLi'>"
-        			    + this.rno + ":" + this.content
-        			    + "<button>MOD</button></li>";
+        			if(this.writer == '${login.email}'){
+        			str += "<div class='replyLi' ><div class='cmnt-clipboard'>"
+        			    +  "<button class='btn-clipboard' value='"+this.rno+"'>수정하기</button></div>"
+        			    +  "<div class='well'><div class='row'><div class='col-md-2'>"
+        			    +  "<img src='assets/img/commenter2.jpg' class='img-responsive center-block'></div>"
+                        +  "<div class='col-md-10'><p class='comment-info'>"
+                        +  "<strong>" + this.writer + "</strong>" + "<span>" + this.regdate + "</span>"
+                        + "</p><div class='contentre'>" + this.content + "</div></div></div></div></div>"
+        			} else {
+        				str += "<div class='replyLi' ><div class='cmnt-clipboard'>"
+            			    +  "<div class='well'><div class='row'><div class='col-md-2'>"
+            			    +  "<img src='assets/img/commenter2.jpg' class='img-responsive center-block'></div>"
+                            +  "<div class='col-md-10'><p class='comment-info'>"
+                            +  "<strong>" + this.writer + "</strong>" 
+                            + "</p><div class='contentre'>" + this.content + "</div></div></div></div></div>"	
+        			}
+        			
         		});
         		$("#replies").html(str);
         		
@@ -821,10 +884,10 @@ $(document).ready(function(){
         });
         
   
-        </script>    
+        </script>
 
 
-<script>
+	<script>
 Handlebars.registerHelper("prettifyDate", function(timeValue){
 	var dateObj = new Date(timeValue);
 	var year = dateObj.getFullYear();
@@ -841,10 +904,10 @@ var printData = function(replyArr, target, templateObject) {
 	target.after(html);
 }
 </script>
-<!-- 수정버튼 -->
+	<!-- 수정버튼 -->
 
 
-<script>
+	<script>
 $(document).ready(function(){
 	
 	var formObj = $("form[role='form']");
@@ -858,21 +921,39 @@ $(document).ready(function(){
 		formObj.submit();
 	})
 	
-	$(".fa fa-heart-o").on("click", function(){
-		<i class="fa fa-heart" style="font-size:36px;"></i>
-	})
-	
-	$(".modifyBtn").on("click",function(){
-		formObj.attr("action", "/study/modifyPage");
+	$(".modifybo").on("click",function(){
+		formObj.attr("action", "/study/update");
 		formObj.attr("method", "get");
 		formObj.submit();
 	});
-	
-	
-	//=========SOHEE 댓글 수 추가=============
-	$('#replies2').text("<%=replycnt%> Comments");
-	
 });
-</script>   
+	
+<%-- 	//=========SOHEE 댓글 수 추가=============
+	$('#replies2').text("<%= replycnt %> Comments");
+	 --%>
+</script>
+	<!--지도 크르깁트 -->
+	<script>
+   function initMap() {
+   		var uluru = {lat:37.5663797, lng:126.9777154};
+   	    var map = new google.maps.Map(document.getElementById('map'),{
+   		zoom: 16,
+   		center:uluru
+   	});
+   	var marker = new google.maps.Marker({
+   		position:uluru,
+   		map:map
+   	});
+   	
+   }
+   </script>
+	<script
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAiNU7soIIqpN1Jdu0tV1CWBb6u1jJAH5o&callback=initMap"
+		async defer></script>
+	
+	
+<script>
+'${ap.checked}'
+</script>		
 </body>
 </html>

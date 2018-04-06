@@ -119,24 +119,136 @@
 <section class="bg-light-gray">
 		<div class="container" style="top:30%; background-color: #f9f9f9;">
 
+<<<<<<< HEAD
 
+	<!-- <form name="profileForm" action="/profile" method="post" enctype="multipart/form-data"> -->
+
+	<!-- 상단 메뉴바 -->
+     <div id="div1"> 
+        <div class="basic border"/>
+            <a href="profile">기본정보 관리</a>
+        </div>
+    
+        <div class="basic border"/>
+            <a href="bookmark">스터디 관리</a>
+        </div>
+       </div>
+
+   <div id="div2">
+    <div class="profile border">
+            <a href="profile">프로필</a></div>
+    <div class="profile border">
+            <a href="addInfo">부가 정보</a></div>
+    <div class="profile border">
+            <a href="changePw">비밀번호 변경</a></div>
+    <div class="profile border">
+            <a href="quit">회원탈퇴</a></div>
+   </div>
+=======
       <div id="service-page">
      
                 <!--  begin services section -->
+>>>>>>> branch 'JIJO2' of https://github.com/BIT102/ILuvStudy.git
 
 
+<<<<<<< HEAD
+	<!-- 프로필 사진 -->
+   	<div class="fileDrop"></div>
+	<div class="uploadedList"></div>
+	
+	    <p3>프로필 사진</p3>
+=======
                         <div class="headline text-center">
                         
                             <div class="row">
+>>>>>>> branch 'JIJO2' of https://github.com/BIT102/ILuvStudy.git
 
+<<<<<<< HEAD
+	<img id="changeImg" src="pDisplayFile?fileName=${vo.photo}"> <!-- DB에서 담긴 이미지 -->
+=======
                                 <div class="col-md-6 col-md-offset-3">
                                     <h2 class="section-title">My page</h2>
                                 </div>
                             </div>
                         </div> <!-- /.headline -->
+>>>>>>> branch 'JIJO2' of https://github.com/BIT102/ILuvStudy.git
 
-
+<<<<<<< HEAD
+	<script>
+		$(".fileDrop").on("dragenter dragover", function(event){
+			event.preventDefault();  // dragenter, dragover, drop시 기본 동작을 막도록 작성
+		});
 		
+		$(".fileDrop").on("drop", function(event){
+			event.preventDefault();
+			
+			var files = event.originalEvent.dataTransfer.files; // 전달된 파일 데이터를 가져오는 부분(dataTransfer.files)
+			var file = files[0];
+			console.log(file);
+		
+			var formData = new FormData();
+			formData.append("file", file);
+			
+			
+			//Ajax 활용
+			$.ajax({
+				url: "/pUploadAjax",
+				data: formData,
+				dataType: 'text',
+				processData: false,
+				contentType: false,
+				type : 'POST',
+				success : function(data){ // 파일명(스트링)이 담김
+//					alert(data);
+					
+					console.log(data);
+					console.log(checkImageType(data));
+					
+					var str = "";
+					
+					if(checkImageType(data)){
+						  str ="<div><a href=pDisplayFile?fileName="+getImageLink(data)+">"
+								  +"<img src='pDisplayFile?fileName="+data+"'/>"
+								  +"</a><small data-src="+data+">X</small></div>";
+					  }else{
+						  str = "<div><a href='displayFile?fileName="+data+"'>" 
+								  + getOriginalName(data)+"</a>"
+								  +"<small data-src="+data+">X</small></div></div>";
+					  }
+					
+	        	$.ajax({
+	        		url : "/insertImgUrl",
+	        		type : "post",
+	        		headers : {
+	        			"X-HTTP-Method-Override" : "POST"
+	        		},
+	        	data:{
+	    //    		imgAddrParam : imgAddr
+	        		photo : data,
+	        		email : document.getElementById("email").value 
+	        	},
+	        	success:function(result){
+//	        		alert(result);
+	        	}
+		        	})
+		        	
+		        
+		        //photo에 담긴 스트링값(이름)을 vo.photo에 보내고 싶어요.
+		       	// 그러려면 어떻게 해야 할까요?
+		       	// 이러지말고 src전체를 		
+		        
+//		    	document.getElementById("changeImg").src = "pDisplayFile?fileName="+data;
+	        	document.getElementById("changeImg").setAttribute("src","pDisplayFile?fileName="+data);
+	        						
+//				$(".uploadedList").append(str);
+					
+//					imgAddr = data; //data를 imgAddr에 담아 둠
+				}
+			});
+			
+		});
+		
+=======
                         <div class="service-list">
                             <div class="row">
                             
@@ -236,7 +348,7 @@
 								<td><input type="text" name="nickName"
 									value="${vo.nickName}" class="form-control" id="nickName"
 									style="width: 550px; display:inline-block;">
-									<input type="button" id="nickCheck" value="중복확인" class="btn btn-black"></input>
+									<input type="button" value="중복확인" class="btn btn-black"></input>
 								</td>
 							</tr>		
 							
@@ -251,16 +363,22 @@
 							
 						<tr>
 							<th>성별</th>
-							<td>
-								<input type="radio" id="userWoman" name="gender" value="1"  <c:if test="${vo.gender eq '1'}">checked</c:if>> 남성 
-                				<input type="radio" id="userWoman" name="gender" value="2"  <c:if test="${vo.gender eq '2'}">checked</c:if>> 여성 
-                			</td>
+								<td><input type="radio" id="userMan" name="gender" value="1"
+								<%if("1".equals(request.getParameter("gender"))){System.out.println("sss");}else{System.out.println(request.getParameter("gender"));} %>>
+								남성
+								<script>
+                				console.log("sss")
+                				console.log(<% request.getParameter("gender"); %>);
+                				onsole.log("${gender}");
+               					 </script>
+								<input type="radio" id="userWoman" name="gender" value="2"
+								<c:if test="${vo.gender eq '2'}">checked</c:if>> 여성</td>
 					   </tr>
 					   
 					   	<tr>
 								
 							<th>전화번호</th>
-								<td style="width:550px"><input type="text" name="phoneNum"
+								<td style="width:550px"><input type="text" name="phone"
 									value="${vo.phoneNum}" class="form-control" id="phone"
 									style="width: 550px; display:inline-block">
 								<input type="button" value="인증하기" class="btn btn-black"></input>
@@ -288,109 +406,10 @@
 					
                  </div> <!-- end of .container -->
         </div> <!--  end of #service-page  -->
+>>>>>>> branch 'JIJO2' of https://github.com/BIT102/ILuvStudy.git
 
-</section>
-	</form>
-<%@include file="../footer.jsp"%>
-</body>
-
-
-<script>
+<<<<<<< HEAD
 	
-	 $(document).ready(function(){
-	        $("#nickCheck").click(function(){
-
-	        	$.ajax({
-	        		url : "/nickCheck",
-	        		type : "post",
-	        		headers : {
-	        			"X-HTTP-Method-Override" : "POST"
-	        		},
-	        		data:{
-	        			nickName : document.getElementById("nickName").value // id가 nickCheck인 value값(중복확인)을 가지고 오겠다.
-	        		},
-	        		success:function(result){
-	        		alert(result);
-	        	}
-	        	
-	        	})	 
-	        	 
-	        });
-	    });
-	 
-	 
-		$(".fileDrop").on("dragenter dragover", function(event){
-			event.preventDefault();  // dragenter, dragover, drop시 기본 동작을 막도록 작성
-		});
-		
-		$(".fileDrop").on("drop", function(event){
-			event.preventDefault();
-			
-			var files = event.originalEvent.dataTransfer.files; // 전달된 파일 데이터를 가져오는 부분(dataTransfer.files)
-			var file = files[0];
-			console.log(file);
-		
-			var formData = new FormData();
-			formData.append("file", file);
-			
-			
-			//Ajax 활용
-			$.ajax({
-				url: "/pUploadAjax",
-				data: formData,
-				dataType: 'text',
-				processData: false,
-				contentType: false,
-				type : 'POST',
-				success : function(data){ // 파일명(스트링)이 담김
-//					alert(data);
-					
-					console.log(data);
-					console.log(checkImageType(data));
-					
-					var str = "";
-					
-					if(checkImageType(data)){
-						  str ="<div><a href=pDisplayFile?fileName="+getImageLink(data)+">"
-								  +"<img src='pDisplayFile?fileName="+data+"'/>"
-								  +"</a><small data-src="+data+">X</small></div>";
-					  }else{
-						  str = "<div><a href='displayFile?fileName="+data+"'>" 
-								  + getOriginalName(data)+"</a>"
-								  +"<small data-src="+data+">X</small></div></div>";
-					  }
-					
-	        	$.ajax({
-	        		url : "/insertImgUrl",
-	        		type : "post",
-	        		headers : {
-	        			"X-HTTP-Method-Override" : "POST"
-	        		},
-	        	data:{
-	    //    		imgAddrParam : imgAddr
-	        		photo : data,
-	        		email : document.getElementById("email").value 
-	        	},
-	        	success:function(result){
-//	        		alert(result);
-	        	}
-		        	})
-		        	
-		        
-		        //photo에 담긴 스트링값(이름)을 vo.photo에 보내고 싶어요.
-		       	// 그러려면 어떻게 해야 할까요?
-		       	// 이러지말고 src전체를 		
-		        
-//		    	document.getElementById("changeImg").src = "pDisplayFile?fileName="+data;
-	        	document.getElementById("changeImg").setAttribute("src","pDisplayFile?fileName="+data);
-	        						
-//				$(".uploadedList").append(str);
-					
-//					imgAddr = data; //data를 imgAddr에 담아 둠
-				}
-			});
-			
-		});
 		
 		// jsp에서 파일 출력하기
 		function checkImageType(fileName){
@@ -443,7 +462,85 @@
 				}
 			}); 
 		});
+	</script>
+   
+  
+	<form name="profileForm" action="/profile" method="post" enctype="multipart/form-data">
+    <br><br><br><br><br>
+	
+	<!-- 개인 프로필 정보 보기 &수정 -->
+   <div id="acinfo">
+        <p3>계정 정보</p3>
+        <table id="actable">
+            <tr>
+                <td><label for="email">이메일</label></td>
+          		<td><input id="email" type="email" value="${login.email}" readonly name="email"></td>
+            </tr>
+            <tr>
+                <td><label for="name">이름</label></td>
+                <td><input id="name" type="text" value="${vo.name}" name="name"></td>
+            </tr>
+            <tr>
+                <td><label for="nickName">닉네임</label></td>
+                <td><input id="nickName" type="text" value="${vo.nickName}" name="nickName"></td>
+                <td><input type="button" id="nickCheck" value="중복확인"></input></td>
+        <script>
+		    $(document).ready(function(){
+		        $("#nickCheck").click(function(){
 
+		        	$.ajax({
+		        		url : "/nickCheck",
+		        		type : "post",
+		        		headers : {
+		        			"X-HTTP-Method-Override" : "POST"
+		        		},
+		        		data:{
+		        			nickName : document.getElementById("nickName").value // id가 nickCheck인 value값(중복확인)을 가지고 오겠다.
+		        		},
+		        		success:function(result){
+		        		alert(result);
+		        	}
+		        	
+		        	})	 
+		        	 
+		        });
+		    });
+	    </script>
+	    
+                
+                
+            </tr>
+            <tr>
+                <td><label for="birth">생년월일</label></td>
+                <td><input id="birth" type="text" value="${vo.birth}" name="birth"></td>
+            </tr>
+            <tr>
+                <td>성별</td>
+           		<td><input type="radio" id="userWoman" name="gender" value="1"  <c:if test="${vo.gender eq '1'}">checked</c:if>> 남성 </td>
+                <td><input type="radio" id="userWoman" name="gender" value="2"  <c:if test="${vo.gender eq '2'}">checked</c:if>> 여성 </td>
+            </tr>
+            <tr>
+                <td><label for="phone">전화번호</label></td>
+                <td><input id="phone" type="text" value="${vo.phoneNum}" name="phoneNum"></td>
+                <td><input type="button" value="인증하기"></input></td>
+            </tr>
+        </table>
+   </div>
+<div>
+   <input type="submit" value="저장하기"> 
+</div>
+
+	
+</form>
+
+=======
+</section>
+	</form>
+>>>>>>> branch 'JIJO2' of https://github.com/BIT102/ILuvStudy.git
+<%@include file="../footer.jsp"%>
+</body>
+
+<script>
 function quit() {
 	var msg = "정말 탈퇴하시겠습니까?"
 	var flag = confirm(msg);

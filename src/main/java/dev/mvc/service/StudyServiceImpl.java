@@ -25,7 +25,80 @@ public class StudyServiceImpl implements StudyService {
 	@Inject
 	private StudyDAO dao;
 
+	//스터디 수정부분
+	@Transactional
+	@Override
+	public void update(StudyVO vo) throws Exception {	
+		
+		int bsBno = vo.getBno();
+		
+		//카테고리 다지워 다시 등록해
+		dao.caDelete(bsBno);
+		
+		// 카테고리 등록
+		Map<String, Object> ca = new HashMap<>();
+		String[] D = vo.getCategoryD();
+		String[] S = vo.getCategoryS();
+
+		for (int i = 0; i < S.length; i++) {
+			String caD = D[i];
+			String caS = S[i];
+
+			ca.put("bno", bsBno);
+			ca.put("categoryD", caD);
+			ca.put("categoryS", caS);
+
+
+		dao.createCa(ca); // 스터디 카테고리 등록
+		}	
+		
+		//사진도 지웠다가 다시다 등록할꺼야
+		dao.atDelete(bsBno);
+		
+		// 파일등록하기
+		String[] files = vo.getFiles();
+		
+		
+		
+		
+		// 사진등록
+		Map<String, Object> map = new HashMap<>();
+		
+		
+		
+		if(files==null) {
+			map.put("name", "a");
+			map.put("status", "O");
+			map.put("bno", bsBno);
+			
+			dao.addFile(map);
+		} else {
+
+		for (String fileName : files) {
+
+			if (fileName == files[0]) {
+				map.put("name", fileName);
+				map.put("status", "O");
+				map.put("bno", bsBno);
+			} else {
+				map.put("name", fileName);
+				map.put("status", "X");
+				map.put("bno", bsBno);
+			}
+			
+			System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+			System.out.println("/////////////////////////////////////////////////");
+			System.out.println(map);
+			System.out.println("***************************************************");
+			dao.addFile(map);
+			}
+		}
+		
+		dao.update(vo);
+	}
+	
 	// 카테고리 불러왹
+	@Override
 	public List<StudyVO> readCa(Integer bno) throws Exception {
 
 		return dao.readCa(bno);
@@ -37,7 +110,14 @@ public class StudyServiceImpl implements StudyService {
 	public StudyVO read(Integer bno) throws Exception {
 
 		dao.upVct(bno);
+		
+	
+		StudyVO vo = dao.readStudy(bno);
 
+		System.out.println("************************************************");
+		System.out.println(vo);
+		System.out.println("************************************************");
+		
 		return dao.readStudy(bno);
 	}
 
@@ -134,14 +214,24 @@ public class StudyServiceImpl implements StudyService {
 		return dao.getFile(bsBno);
 
 	}
+	
+	@Override
+	public void deleteFile(Integer bsBno, String fileName) throws Exception {
+		
+		dao.deleteFile(bsBno, fileName);
+	}
+	
+	
+	//업데이트를 위한 파일 불러오기
+	public List<String> getFileup(Integer bsBno) throws Exception {
+		return dao.getFileup(bsBno);
+	}
 
 	// 스터디등록, 파일등록, 지역등록
 	@Transactional
 	@Override
 	public void regist(StudyVO vo) throws Exception {
 
-		// 파일등록하기
-		String[] files = vo.getFiles();
 
 		System.out.println("====================");
 		System.out.println(vo.getFiles());
@@ -173,6 +263,8 @@ public class StudyServiceImpl implements StudyService {
 			dao.createCa(ca); // 스터디 카테고리 등록
 		}
 
+		// 파일등록하기
+		String[] files = vo.getFiles();
 		// 사진등록
 		Map<String, Object> map = new HashMap<>();
 		

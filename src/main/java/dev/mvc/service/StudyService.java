@@ -9,11 +9,14 @@ import dev.mvc.domain.StudyVO;
 
 public interface StudyService {
 
+
 	//카테고리 불러오기
 	public List<StudyVO> readCa(Integer bno) throws Exception;
 	
 /*	public List<String> getcaD() throws Exception;*/
-
+	
+	//스터디 수정부분
+	public void update(StudyVO vo) throws Exception;
 	
 	//스터디등록   
 	public void regist(StudyVO vo) throws Exception;
@@ -31,6 +34,13 @@ public interface StudyService {
 	
 	//파일 불러오기
 	public List<String> getFile(Integer bsBno) throws Exception;
+	
+	//파일 삭제하기
+	public void deleteFile(Integer bsBno, String fileName) throws Exception;
+	
+	//업데이트를 위한 파일 불러오기
+	public List<String> getFileup(Integer bsBno) throws Exception;
+	
 	
 	//전체불러오기
 	public List<StudyVO> studyList() throws Exception;

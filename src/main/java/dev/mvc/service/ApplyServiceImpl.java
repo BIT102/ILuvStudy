@@ -1,6 +1,7 @@
 package dev.mvc.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -34,6 +35,16 @@ public class ApplyServiceImpl implements ApplyService {
 		return dao.list(bsBno);
 	}
 	
+	//스터디 불러오기 있나없나
+	public ApplyVO apList(Map<String, Object> apmap) throws Exception {
+		
+		System.out.println("<><><><><><><><><><><><><><><><><><><><><><>");
+		System.out.println(dao.apList(apmap));
+		System.out.println("<><><><><><><><><><><><><><><><><><><><><><>");
+		
+		return dao.apList(apmap);
+	}
+	
 	//상태값 업데이드
 	@Transactional
 	@Override
@@ -43,7 +54,7 @@ public class ApplyServiceImpl implements ApplyService {
 			
 			studyDAO.updateNow(vo.getBsBno(), 1);
 		}
-		
+
 			dao.update(vo);
 	}
 	

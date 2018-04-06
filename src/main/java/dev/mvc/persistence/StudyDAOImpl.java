@@ -26,7 +26,31 @@ public class StudyDAOImpl implements StudyDAO {
 
 	private static final Logger logger = LoggerFactory.getLogger(StudyDAOImpl.class);
 
+	
+	//카테고리등록
+		public void createCa(Map<String, Object> map) throws Exception {
+			 session.insert(namespace+".createCa", map);
+		}
+		
+	//카테고리 다지워버려
+		@Override
+		public void caDelete(Integer bsBno) throws Exception {
+			session.delete(namespace+".caDelete", bsBno); 
+		}
+		
+		//파일도 다지워버려
+		@Override
+		public void atDelete(Integer bsBno) throws Exception {
+			session.delete(namespace+".atDelete", bsBno);
+		}
+		
+	//스터디 수정
+	@Override
+	public void update(StudyVO vo) throws Exception {
 
+		session.update(namespace+".update", vo);
+	}
+	 
 	@Override
 	public String getcaD(Integer bno) throws Exception {
 		
@@ -70,11 +94,7 @@ public class StudyDAOImpl implements StudyDAO {
 	public List<StudyVO> readCa(Integer bno) throws Exception {
 		return session.selectList(namespace+".readCa", bno);
 	}	
-	
-	//카테고리등록
-	public void createCa(Map<String, Object> map) throws Exception {
-		 session.insert(namespace+".createCa", map);
-	}
+
 
 	//스터디 불러오기
 	@Override
@@ -117,6 +137,25 @@ public class StudyDAOImpl implements StudyDAO {
 	public List<String> getFile(Integer bsBno) throws Exception {
 		
 		return session.selectList(namespace+".getFile", bsBno);
+	}
+	
+	@Override
+	public void deleteFile(Integer bsBno, String fileName) throws Exception {
+		
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("bsBno", bsBno);
+		map.put("fileName", fileName);
+		
+		session.delete(namespace+".deleteFile", map);
+	}
+	
+	
+	//업로드를 위한 파일 불러오기
+	@Override
+	public List<String> getFileup(Integer bsBno) throws Exception {
+		
+		return session.selectList(namespace+".getFileup", bsBno);
 	}
 	
 

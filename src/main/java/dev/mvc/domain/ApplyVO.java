@@ -8,18 +8,8 @@ public class ApplyVO {
 	private Integer bsBno; // 스터디 bno
 	private String status;
 	private Date regdate;
-
 	
-	//프로필 사진불러옴
-	private String photo;
-	
-	public String getPhoto() {
-		return photo;
-	}
-
-	public void setPhoto(String photo) {
-		this.photo = photo;
-	}
+	private int checked;
 
 	public String getUsEmail() {
 		return usEmail;
@@ -53,10 +43,19 @@ public class ApplyVO {
 		this.regdate = regdate;
 	}
 
+	public int getChecked() {
+		return checked;
+	}
+
+	public void setChecked(int checked) {
+		this.checked = checked;
+	}
+
 	@Override
 	public String toString() {
 		return "ApplyVO [usEmail=" + usEmail + ", bsBno=" + bsBno + ", status=" + status + ", regdate=" + regdate
-				+ ", photo=" + photo + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()="
+				+ ", checked=" + checked + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()="
 				+ super.toString() + "]";
 	}
+	
 }

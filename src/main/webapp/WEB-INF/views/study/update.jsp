@@ -9,13 +9,6 @@
 	src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 <title>스터디 상세</title>
 
-<script>
-var result = '${msg}';
-if(result == 'no'){
-	
-	alert("모든 항목을 입력해 주세요.")
-}
-</script>
 <style>
 form th {
 	width: 30%;
@@ -54,6 +47,7 @@ small {
 	background-color: #5bc0de;
 	border: 1px solid black;
 	margin-right: 10px;
+	float:right;
 }
 #btn-success:hover {
 	background-color: #31b0d5;
@@ -65,6 +59,11 @@ small {
 }
 .btn-xs {
 	margin-top: 5px;
+}
+/*지도스타일입니다*/
+#map {
+	height: 300px;
+	margin-top:15px;
 }
 </style>
 </head>
@@ -106,7 +105,7 @@ small {
 								</div>
 
 								<div class="panel-body">
-									<form id="registerForm" method="post" action="/study/register">
+									<form role="form" method="post" id="registerForm">
 										<div>* 기본정보</div>
 										<table class="table table-hover">
 											<tbody>
@@ -141,7 +140,7 @@ small {
 												<tr>
 													<th>스터디명</th>
 													<td><input type="text" name="title"
-														value="${studyVO.title}" class="form-control"
+														value="${studyVO.title}" class="form-control" id="studyTitle"
 														style="width: 550px;"></td>
 												</tr>
 												<tr>
@@ -158,14 +157,16 @@ small {
 													</select> <select id="rSName" name='rSId' class="form-control">
 															<option value="">--</option>
 													</select>
+													<!-- 지도입니다. -->
+													 <div id="map"></div>
 													</td>
 												</tr>
 												<tr>
 													<th>스터디 방장</th>
-													<!-- 아래 방장은 나중에 세션으로 전송 -->
+													<!--  세션으로 전송 -->
 													<%-- <td><input name="writer" value="${studyVO.writer}"></td> --%>
 													<td><input class="form-control" name="writer"
-														value="abc1@gmail.com" style="width: 460px;"></td>
+														value="${studyVO.writer}" style="width: 460px;" readonly></td>
 												</tr>
 
 											</tbody>
@@ -176,7 +177,8 @@ small {
 											<tbody>
 												<tr>
 													<th>연령</th>
-													<td><label class="fancy-checkbox"
+													<td>
+													<label class="fancy-checkbox"
 														style="display: inline-block;"> <input
 															type="checkbox" class="age" name="age" value="10대"><span>10대
 														</span>
@@ -200,14 +202,15 @@ small {
 														style="display: inline-block;"> <input
 															type="checkbox" class="age" name="age" value="무관"><span>무관
 														</span>
-													</label></td>
+													</label>
+													</td>
 												</tr>
 												<tr>
 													<th>최대인원</th>
 													<td>
 														<div class="studymax">
 															<input class="form-control" type="number" name="max"
-																min="0" style="width: 345px;">
+																min="0" style="width: 345px;" value="${studyVO.max}">
 														</div>
 													</td>
 												</tr>
@@ -217,7 +220,7 @@ small {
 													<td>
 														<div class="studysd">
 															<input class="form-control" type="date" name="sd"
-																style="width: 345px;">
+																style="width: 345px;" value="${studyVO.sd}">
 														</div>
 													</td>
 												</tr>
@@ -301,7 +304,7 @@ small {
 												<tr>
 													<th>스터디 소개</th>
 													<td><textarea name="content" class="form-control"
-															style="height: 140px;">${studyVO.content}</textarea></td>
+															style="height:140px;">${studyVO.content}</textarea></td>
 												</tr>
 												<tr>
 													<th>이미지</th>
@@ -310,7 +313,10 @@ small {
 
 															<h3>첫 사진은 메인 화면에 등록됩니다.</h3>
 															<div class='fileDrop'></div>
+																				<div class="imgstyle">
+													<p>스터디 이미지</p>
 															<div class='uploadedList'></div>
+														</div>
 														</div>
 													</td>
 												</tr>
@@ -320,11 +326,11 @@ small {
 
 										<div class="text-right">
 											<!-- <button type="submit" id="btn-success" class = "btn btn-success" style="background-color:#5bc0de; border:1px solid black;">등록</button> -->
-											<button type="submit" id="btn-success"
-												class="btn btn-success">등록</button>
 											<!-- <input type="submit" id = "insertBtn" class = "btn btn-success" value = "등록" /> -->
 										</div>
 									</form>
+											<button type="submit" id="btn-success"
+												class="btn btn-success">등록</button>
 
 								</div>
 								<!-- panel-body end -->
@@ -351,6 +357,31 @@ small {
 		</span>
 	</div>
 </script>
+	<!-- 파일업로드 핸들러 -->
+	<script id="templateAttach" type="text/x-handlebars-template">
+    <li data-src='{{name}}'>
+		<span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment"></span>
+  		<div class="mailbox-attachment-info">
+		</span>
+		</div>
+	</li>
+    </script>
+	<script>
+    
+    //파일불러오기
+    var bno = ${studyVO.bno};
+    var template = Handlebars.compile($("#templateAttach").html());
+    
+    $.getJSON("/study/getFileup/"+bno, function(list){
+    	$(list).each(function(){
+    		
+    		var fileInfo = getFileInfo(this);
+    		var html = template(fileInfo);
+    		
+    		$(".uploadedList").append(html)
+    	})
+    })
+    </script>
 	<script>
 		$(".st").change(function() {
 			var stval = $(".st option:selected").val();
@@ -395,6 +426,8 @@ small {
 				}
 			});
 		});
+		
+		var bno = ${studyVO.bno};
 		//취소버튼
 		$(".uploadedList").on("click", "small", function(event) {
 			var that = $(this);
@@ -402,7 +435,8 @@ small {
 				url : "deleteFile",
 				type : "post",
 				data : {
-					fileName : $(this).attr("data-src")
+					fileName : $(this).attr("value"),
+					bsBno : bno
 				},
 				dataType : "text",
 				success : function(result) {
@@ -414,7 +448,7 @@ small {
 			});
 		});
 		//스터디 보드 등록후 이미지 등록을 위해서
-		$("#registerForm").submit(
+	 	$("#registerForm").submit(
 				function(event) {
 					console.log("ssssssssssss");
 					event.preventDefault();
@@ -426,162 +460,411 @@ small {
 										+ index + "]' value='"
 										+ $(this).attr("value") + "'>";
 							});
+					console.log(str)
 					that.append(str);
 					that.get(0).submit();
-				});
+				}); 
 	</script>
+	
 	<script>
-		$(document)
-				.ready(
-						function() {
-							//카테고리 소분류 체크 시 대분류 체크 되도록
-							var formObj = $("form[role='form']");
-							console.log(formObj);
-							//지역 정보 셀렉트 박스 변경 시 액션
-							$("#rDName").on("change", function() {
-								getRegion();
-							});
-							//카테고리 정보 셀렉트 박스 변경 시 액션
-							$("#catD").on("change", function() {
-								getCat();
-							});
-							//카테고리 추가 버튼 클릭 시 액션
-							$("#addCat")
-									.on(
-											"click",
-											function() {
-												var catd = $(
-														'#catD option:selected')
-														.val();
-												var cats = $(
-														'#catS option:selected')
-														.val();
-												var catd2 = $(
-														'#catD option:selected')
-														.text();
-												var cats2 = $(
-														'#catS option:selected')
-														.text();
-												var cat = "<span><input type='hidden' name='categoryD' value="+catd+">"
-														+ "<input type='hidden' name='categoryS' value="+cats+">"
-														+ "<div>"
-														+ catd2
-														+ " > "
-														+ cats2
-														+ "</span><button type='button' onclick = 'btn_delete(this)' class='btn btn-default btn-xs'>삭제</button></div>";
-												$("#addCatArea").append(cat);
-											});
-							//시간영역 추가 버튼 클릭 시 액션
-							$("#addTime")
-									.on(
-											"click",
-											function() {
-												var time = "<input type='text' name='sc' value='' style='width:30%; display: inline;' class='form-control'> <input type='text' name='st' value='' style='width:30%; display: inline;' class='form-control'> ~ <input type='text' name='et' value='' style='width:30%; display: inline;' class='form-control'><br>";
-												$("#addTimeArea").append(time);
-											});
-						});
-		//카테고리 삭제 버튼
-		function btn_delete(x) {
-			$(x).parent("div").remove();
+	
+	$(document).ready(function(){
+		
+		$("select option[value='${studyVO.st}']").attr("selected", true);
+		
+		var stval = $("#st option:selected").val();
+		
+		console.log("str="+stval);
+		var str = "";
+		
+		for (var i = stval; i <= 24; i++) {
+			
+			if(i == '${studyVO.et}'){
+			str += "<option value'"+i+"' selected>"
+					+ i
+					+ "시</option>";
+			$("#et").html(str);
+			} else {
+				str += "<option value'"+i+"'>"
+				+ i
+				+ "시</option>";
+		$("#et").html(str);
+			}
 		}
+		
+		
+		$("#studyListsuv").attr("class", "active");
+		$("#studyListnav").attr("class", "active");
+		$("#subPages").attr("class", "in");
+		
+		getStudy(); //스터디 정보 불러옴
+		
+		var formObj = $("form[role='form']");
+		
+		console.log(formObj);
+		
+		//유효성 검사 변수
+/* 		categoryV = false;
+		titleV = false;
+		ageV = false;
+		maxV = false;
+		 */
+		//수정 클릭 시 액션
+	/* 	$("#modifyBtn").on("click", function(){
+			//form 데이터 유효성 검사 추가 필요
+			
+ 			//카테고리 유효성
+  			if($("#addCatArea").find("div").length){
+				categoryV = true;
+			}
+			
+			// title 유효성
+			if($("#title").val() != ""){
+				titleV = true;
+			}
+			
+			//age 유효성
+			if($(".age").val() != ""){
+				ageV = true;
+			}
+			
+			//max 유효성
+			if($("#max").val() != ""){
+				maxV = true;
+			}
+			
+			console.log("categoryV : "+categoryV+" titleV : "+titleV+" ageV : "+ageV+" maxV : "+maxV);
+			
+			if(categoryV && titleV && ageV && maxV){
+				formObj.submit();
+			}else{
+				alert("내용을 확인하세요");
+			}   
+			
+		}); */
+		
+		//목록 클릭 시 액션
+/* 		$("#listBtn").on("click", function(){
+			self.location = "/admin/studyList?page=${cri.page}&perPageNum=${cri.perPageNum}"
+							+"&stStatusType=${cri.stStatusType}&titleKeyword=${cri.titleKeyword}&writerKeyword=${cri.writerKeyword}";
+		});
+		 */
+		//지역 정보 셀렉트 박스 변경 시 액션
+		$("#rDName").on("change", function(){
+			getRegion();
+		});
+		
+		//카테고리 정보 셀렉트 박스 변경 시 액션
+		$("#catD").on("change", function(){
+			getCat();
+		});
+		
+		//카테고리 추가 버튼 클릭 시 액션
+		$("#addCat").on("click", function(){
+       		
+			var catd=$('#catD option:selected').val();
+			var cats=$('#catS option:selected').val();
+			
+			var catd2=$('#catD option:selected').text();
+			var cats2=$('#catS option:selected').text();
+			
+			var cat="<span><input type='hidden' name='categoryD' value="+catd+">"
+			+"<input type='hidden' name='categoryS' value="+cats+">"
+			+"<div>"+catd2 +" > "+cats2+"</span><button type='button' onclick = 'btn_delete(this)' class='btn btn-default btn-xs'>삭제</button></div>";
+			
+       		$("#addCatArea").append(cat);
+		});
+		
+		//시간영역 추가 버튼 클릭 시 액션
+		$("#addTime").on("click", function(){
+       		
+       		var time="<input type='text' name='sc' value='' style='width:30%; display: inline;' class='form-control'> <input type='text' name='st' value='' style='width:30%; display: inline;' class='form-control'> ~ <input type='text' name='et' value='' style='width:30%; display: inline;' class='form-control'><br>";
+       	
+       		$("#addTimeArea").append(time);
+		});
+		
+		//연령 체크박스 2개 초과하여 선택 시 알럿 처리
+		$(".age").on("click", function(){
+			console.log($("input:checkbox[class=age]:checked").length)
+			if($("input:checkbox[class=age]:checked").length > 2 ){
+				alert("연령은 최대 2개까지 선택가능합니다.")
+				$(this).attr("checked",false);
+			}
+		});
+		
+	});
+		//카테고리 삭제 버튼
+		function btn_delete(x){
+			$(x).parent("div").parent("span").remove();
+			
+		}
+		
 		//지역정보 2단 콤보박스 메서드
-		function getRegion() {
+		function getRegion(){
 			//$("#rSName").children("option").remove(); //소분류의 option 삭제
+			
 			$.ajax({ //rdid값을 POST형식으로 region 컨트롤러에 전송
-				type : 'POST',
-				url : '/admin/region/' + $("#rDName option:selected").val(),
-				headers : {
+				type:'POST',
+				url:'/admin/region/'+ $("#rDName option:selected").val(),
+ 				headers : {
 					"Content-Type" : "application/json",
-					"X-HTTP-Method-Override" : "POST"
-				},
-				dataType : 'json',
-				data : JSON.stringify({
-					rDId : $("#rDName option:selected").val()
-				//rdid의 값 전송
+					"X-HTTP-Method-Override" : "POST"}, 
+				dataType:'json',
+				data:JSON.stringify({
+					rDId : $("#rDName option:selected").val()  //rdid의 값 전송
 				}),
-				success : function(result) { //반환받은 지역테이블 정보, list 배열
-					var option = "";
-					if (result.length < 2) {
-						option = "<option>--</option>"
-					} else {
-						for (var i = 0; i < result.length; i++) {
-							option += "<option value="+result[i].rSId+">"
-									+ result[i].rSName + " </option>"; //option에 배열값 추가
-						}
+				success:function(result){ //반환받은 지역테이블 정보, list 배열
+					var option="";
+					for(var i=0; i<result.length;i++){
+						option += "<option value="+result[i].rSId+">"+result[i].rSName+" </option>"; //option에 배열값 추가
 					}
 					$("#rSName").html(option); //html에 뿌려줌
 				}
 			}); //$.ajax 끝
 		}
+		
 		//카테고리 대분류 선택 시 소분류 변경
-		function getCat() {
+		function getCat(){
 			//$("#catS").children("option").remove(); //소분류의 option 삭제, append()가 아닌 html() 사용으로 주석 처리
+			
 			$.ajax({ //categoryD값을 POST형식으로 category 컨트롤러에 전송
-				type : 'POST',
-				url : '/admin/category/' + $("#catD option:selected").val(),
-				headers : {
+				type:'POST',
+				url:'/admin/category/'+ $("#catD option:selected").val(),
+ 				headers : {
 					"Content-Type" : "application/json",
-					"X-HTTP-Method-Override" : "POST"
-				},
-				dataType : 'json',
-				data : JSON.stringify({
-					cdid : $("#catD option:selected").val()
-				//cdid의 값 전송
+					"X-HTTP-Method-Override" : "POST"}, 
+				dataType:'json',
+				data:JSON.stringify({
+					cdid : $("#catD option:selected").val()  //cdid의 값 전송
 				}),
-				success : function(result) { //반환받은 지역테이블 정보, list 배열
-					var option = "";
-					var str = $("#catD option:selected").val();
-					if (result.length == 0) {
-						option = "<option>--</option>";
-					} else {
-						for (var i = 0; i < result.length; i++) {
-							option += "<option value="+result[i].cSId+">"
-									+ result[i].cSName + " </option>"; //option에 배열값 추가
-						}
+				success:function(result){ //반환받은 지역테이블 정보, list 배열
+					var option="";
+					for(var i=0; i<result.length;i++){
+						option += "<option value="+result[i].cSId+">"+result[i].cSName+" </option>"; //option에 배열값 추가
 					}
 					$("#catS").html(option); //html에 뿌려줌
 				}
 			}); //$.ajax 끝
 		}
-		function getStudy() {
+		
+		function getStudy(){
+			//카테고리 정보 불러옴 			
+			<c:forEach items="${studyDC}" var="studyVO">
+				var recatd = "${studyVO.cDId}"; 
+				var recats = ${studyVO.cSId}; 
+				var recatd2 = "${studyVO.cDName}";
+				var recats2 = "${studyVO.cSName}";
+				
+				var recat="<span><input type='hidden' name='categoryD' value="+recatd+">"
+				+"<input type='hidden' name='categoryS' value="+recats+">"
+				+"<div>"+recatd2 +" > "+recats2+"</span><button type='button' onclick = 'btn_delete(this)' class='btn btn-default btn-xs'>삭제</button></div>";
+				
+				$("#addCatArea").append(recat);
+			</c:forEach>
+			 
+			 
+			//카테고리 정보 불러오기 테스트
+/* 			var recatd = "${studyVO.categoryD}";
+			var recats = "${studyVO.categoryS}";
+			var recats2 = recats.split(',');
+			
+			<c:forEach items="${studyCategory}" var="studyVO">
+     			if(recatd == "${studyVO.cDId}"){
+     				var recatd2 = "${studyVO.cDName}";
+     			}
+     			for(var i=0;i<recats2.length;i++){
+     				if(${studyVO.cSId} == recats2[i]){
+     					var recats3 = "${studyVO.cSName}";
+     					
+						var recat="<span><input type='hidden' name='categoryD' value="+recatd+">"
+						+"<input type='hidden' name='categoryS' value="+recats+">"
+						+"<div>"+recatd2 +" > "+recats3+"</span><button type='button' onclick = 'btn_delete(this)' class='btn btn-default btn-xs'>삭제</button></div>";
+				
+						$("#addCatArea").append(recat);
+     				}
+     			}
+     			
+     		</c:forEach>
+			
+			 */
+			//테스트 끝
+			
+			// 연령 정보 불러옴
+			var check_value="${studyVO.age}";  //연령 DB 데이터 변수에 저장
+			var check_value2=check_value.split(',');   //콤마를 구분자로 배열에 담음 
+			
+			for(var i=0;i<check_value2.length;i++){ //배열 길이만큼 반복문 처리, 연령 체크 속성 부여
+				$("input:checkbox[value="+ check_value2[i] +"]").attr("checked", "checked");
+			}
+			
 			$("#rDName").val("${studyVO.rDId}"); // 스터디 지역 정보 불러옴
-			$
-					.ajax({ //rdid값을 POST형식으로 region 컨트롤러에 전송
-						type : 'POST',
-						url : '/admin/region/'
-								+ $("#rDName option:selected").val(),
-						headers : {
-							"Content-Type" : "application/json",
-							"X-HTTP-Method-Override" : "POST"
-						},
-						dataType : 'json',
-						data : JSON.stringify({
-							rDId : $("#rDName option:selected").val()
-						//rdid의 값 전송
-						}),
-						success : function(result) { //반환받은 지역테이블 정보, list 배열
-							var option = "";
-							for (var i = 0; i < result.length; i++) {
-								option += "<option name='rSId' value="+result[i].rSId+">"
-										+ result[i].rSName + " </option>"; //option에 배열값 추가
-							}
-							$("#rSName").append(option); //html에 뿌려줌
-							$("option[value='${studyVO.rSId}']").attr(
-									"selected", "selected"); //소분류 지역 정보 불러옴
-						}
-					}); //$.ajax 끝
+			$("#sc").val("${studyVO.sc}"); // 시간 정보 불러옴
+			
+			$.ajax({ //rdid값을 POST형식으로 region 컨트롤러에 전송
+				type:'POST',
+				url:'/admin/region/'+ $("#rDName option:selected").val(),
+ 				headers : {
+					"Content-Type" : "application/json",
+					"X-HTTP-Method-Override" : "POST"}, 
+				dataType:'json',
+				data:JSON.stringify({
+					rDId : $("#rDName option:selected").val()  //rdid의 값 전송
+				}),
+				success:function(result){ //반환받은 지역테이블 정보, list 배열
+					var option="";
+					for(var i=0; i<result.length;i++){
+						option += "<option name='rSId' value="+result[i].rSId+">"+result[i].rSName+" </option>"; //option에 배열값 추가
+					}
+					$("#rSName").append(option); //html에 뿌려줌
+					$("option[value='${studyVO.rSId}']").attr("selected", "selected"); //소분류 지역 정보 불러옴
+				}
+			}); //$.ajax 끝
 		} //getStudy() 끝
-	</script>
+</script>
+	
+	
 
-	<!-- 파일업로드 핸들러 -->
-	<script id="templateAttach" type="text/x-handlebars-template">
-    <li data-src='{{name}}'>
-		<span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment"></span>
-  		<div class="mailbox-attachment-info">
-		</span>
-		</div>
-	</li>
+   <!--지도 크르깁트 -->
+   <script>
+   function initMap() {
+   		var uluru = {lat:37.5663797, lng:126.9777154};
+   	    var map = new google.maps.Map(document.getElementById('map'),{
+   		zoom: 16,
+   		center:uluru
+   	});
+   	var marker = new google.maps.Marker({
+   		position:uluru,
+   		map:map
+   	});
+   }
+   </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAiNU7soIIqpN1Jdu0tV1CWBb6u1jJAH5o&callback=initMap"
+    async defer></script>
+
+<!-- 우효성 검사 -->
+    <!-- 유효성 검사 스크립트 -->
+    <script>
+    
+    
+  // 카테고리 대 소 , 스터디명, 지역 대, 연력, 최대인원, 시작날짜, 요일, 시간
+    $("#btn-success").on("click", function(e){
+    	console.log("등록등록등록등록등록등록등록등록등록등록등록등록등록등록등록등록")
+
+    	 var formObj = $("form[role='form']");
+	   
+    	 var age = "";	
+    	
+    	$("input[name=age]:checked").each(function(e){
+    		age += $(this).val();
+    	})
+
+    	//카테고리 대소
+    	if($("#addCatArea").html() == "") {
+    		
+    		alert("카테고리를 입력하세요");
+    		$("#catD").focus();
+    		return false;
+    		//스터디명		
+    	} else if($("#studyTitle").val() == "") {
+    		
+    		alert("스터디명을 입력하세요");
+    		$("#studyTitle").focus();
+    		return false;
+    		//지역 대 
+    	} else if($("#rDName option:selected").val()=="") {
+    		
+       		alert("지역을 입력하세요")
+    		$("#rDName").focus();
+    		return false;
+    		
+    		//나이대
+    	} else if(age == ""){
+    		
+			alert("원하는 나이대를 입력하세요");
+			$("#age").focus();
+			return false;
+    		//최대인원	
+    	} else if($("#studymax").val()=="") {
+    		
+    		alert("최대인원을 입력하세요")
+    		$(".studymax").focus();
+    		return false;
+    		
+    		//시작날짜
+    	} else if($("#studysd").val()=="") {
+    		
+    		alert("시작날짜를 입력하세요")
+    		$(".studysd").focus();
+    		return false;
+    	//요일	
+		} else if($("#sc option:selected").val()==""){
+		
+			alert("요일을 입력하세요")
+			$("#sc").focus();
+			return false;
+	//시작시간	
+		} else if($("#st option:selected").val()==""){
+		
+			alert("시작시간을 입력하세요")
+			$("#st").focus();
+			return false;
+	//끝시간		
+		} else if($("#et option:selected").val()==""){
+		
+			alert("시작시간을 입력하세요")
+			$("#et").focus();
+			return false;
+		
+		} else {
+			alert("등록이 완료되었습니다");
+			   formObj.submit();
+		} 
+    		
+    		
+    /* 	//연령
+	    var chk = false;
+ 	   	
+    	for(var i=0; document.myform.age.length; i++) {
+    		if(document.myfrom.car[i].checked) {chk = ture} {
+    		}
+    		//체크가 안되었을 때
+    		if(!chk){
+    			alert("원하는 나이대를 입력하세요")
+    		}
+   
+    
+    	//시작날짜		
+    	} else if($(".studysd").val()==""){
+    		
+    		alert("시작날짜를 입력하세요")
+    		$(".studysd").focus();
+    		return false;
+    	//요일	
+    	} else if($("#sc").is(':checked')==false){
+    		
+    		alert("요일을 입력하세요") 
+    		$("#sc").focus();
+    		return false;
+    	//시작시간	
+    	} else if($("#st").is(':checked')==false){
+    		
+    		alert("시작시간을 입력하세요")
+    		$("#st").focus();
+    		return false;
+    	} else if($("#et").is(':checked')==false){
+    		
+    		alert("시작시간을 입력하세요")
+    		$("#et").focus();
+    		return false;
+    		
+    	} else {
+    		alert("등록이 완료되었습니다")
+    	} */
+    	
+    }) 
     </script>
 
+   
 </body>
 </html>

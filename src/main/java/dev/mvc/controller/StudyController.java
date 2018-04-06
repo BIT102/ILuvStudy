@@ -22,13 +22,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import dev.mvc.domain.BookmarkVO;
 import dev.mvc.domain.Criteria;
 import dev.mvc.domain.CriteriaStudy;
 import dev.mvc.domain.PageMakerStudy;
 import dev.mvc.domain.SearchCriteriaStudy;
 import dev.mvc.domain.StudyVO;
 import dev.mvc.domain.UserVO;
+import dev.mvc.service.AdminService;
+import dev.mvc.service.ApplyService;
 import dev.mvc.service.BookmarkService;
 import dev.mvc.service.ReplyStudyService;
 import dev.mvc.service.StudyService;
@@ -48,22 +49,71 @@ public class StudyController {
 	@Inject
 	private BookmarkService bookservice;
 	
+	@Inject
+	private AdminService adservice;
+	
+	@Inject
+	private ApplyService apservice;
+	
+	
+	//스터디 수정
+	@RequestMapping(value="/update", method = RequestMethod.GET)
+	public void updateGET(int bno, Model model) throws Exception {
+		
+		
+		//스터디 카테고리 정보 가져옴
+		model.addAttribute("studyCategory", service.studyCategory());
+		//지역테이블 정보
+		model.addAttribute("region", service.region());
+		//스터디 상세 정보
+		model.addAttribute(adservice.studyDetail(bno));
+		//스터디 카테고리 선택 정보
+		model.addAttribute("studyDC", adservice.studyDetailC(bno));
+
+	}
+	
+	@RequestMapping(value="/update", method=RequestMethod.POST)
+	public String updatePOST(StudyVO vo, RedirectAttributes rttr) throws Exception {
+	
+		
+		service.update(vo);
+		
+		System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+		System.out.println(vo);
+		System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");	
+	
+		rttr.addFlashAttribute("msg", "success");
+		
+		return "redirect:/study/listAll";
+	}
+	
+	
 	// 스터디 등록 김상욱 수정
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public String registerGET(Model model, HttpServletRequest request)throws Exception{
+		
 		
 		logger.info("register get..........");
 
 		// 카테고리 대분류값 보내기
 		model.addAttribute("studyCategory", service.studyCategory());
-		
 		// 지역대분류값 보내기
 		model.addAttribute("region", service.region());
+				
 		
 		// session 으로 email 값 보내기
+		//쓰는 사람을 로그인한 사람으로 바꿀껍니다.
 		HttpSession session = request.getSession();
-		UserVO user = (UserVO)session.getAttribute("login");
-		//model.addAttribute("email",user.getEmail());
+		UserVO sUser = (UserVO)session.getAttribute("login");
+		String email = sUser.getEmail();
+		
+		
+		
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		System.out.println(email);
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		
+		model.addAttribute("email", email);
 		
 		return "/study/register";
 	}
@@ -74,50 +124,11 @@ public class StudyController {
 		logger.info("register POST...........");
 		System.out.println("vo = "+vo);
 		
-		
-/*		if(vo.getTitle()==null||vo.getNow()==null||vo.getMax()==null||vo.getrDId()==null
-				||vo.getAge()==null||vo.getSc()==null||vo.getSd()==null||vo.getSt()==null||vo.getEt()==null) {
-			
-			rttr.addFlashAttribute("msg", "no");
-			return "redirect:/study/register";
-		} else {
-		}		*/
 		service.regist(vo);
+		
 		return "redirect:/study/main";
 	}
 
-	// JSON small카테고리(study) //URL /category/추가
-	@RequestMapping(value = "/register1/category/{csId}", method = RequestMethod.GET)
-	public ResponseEntity<List<StudyVO>> list2(@PathVariable("csId") String csId) throws Exception {
-
-		ResponseEntity<List<StudyVO>> entity = null;
-
-		try {
-
-			entity = new ResponseEntity<>(service.catList2(csId), HttpStatus.OK);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		}
-
-		return entity;
-	}
-
-	// JSON small카테고리(region) //URL /region/추가 (겹치지않게)
-	@RequestMapping(value = "/register1/region/{rSId}", method = RequestMethod.GET)
-	public ResponseEntity<List<StudyVO>> rglist(@PathVariable("rSId") String rsId) {
-
-		ResponseEntity<List<StudyVO>> entity = null;
-		try {
-			entity = new ResponseEntity<>(service.rgList2(rsId), HttpStatus.OK);
-		} catch (Exception e) {
-			e.printStackTrace();
-			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		}
-
-		return entity;
-	}
 
 	// 스터디 목록 불러오기
 
@@ -200,10 +211,14 @@ public class StudyController {
 
 		model.addAttribute("list", replyService.listReply(bno));  //댓글 정보 가져옴
 
+		model.addAttribute("aplist", apservice.list(bno));
 		
 		} else {
 		
 		String email = sUser.getEmail();
+		
+	
+		
 		
 		Map<String, Object> map = new HashMap<>();
 		
@@ -211,13 +226,22 @@ public class StudyController {
 		map.put("bsbno", bno);
 		
 
-		bookservice.bolist(map);
 		
+		bookservice.bolist(map);
+	
 		//북마크 넘긴다요 
 		model.addAttribute("bolist",bookservice.bolist(map));
 		
+		model.addAttribute("aplist", apservice.list(bno));
+		
 		model.addAttribute(service.read(bno));
 		
+		Map<String, Object> apmap = new HashMap<>();
+		
+		apmap.put("writer", email);
+		apmap.put("bsBno", bno);
+		
+		model.addAttribute("ap", apservice.apList(apmap));
 		}
 	}
 
@@ -239,6 +263,13 @@ public class StudyController {
 	@ResponseBody
 	public List<String> getFile(@PathVariable("bsBno") Integer bsBno) throws Exception {
 		return service.getFile(bsBno);
+	}
+	
+	//업데이트를 위한 파일가져오기
+	@RequestMapping("getFileup/{bsBno}")
+	@ResponseBody
+	public List<String> getFileup(@PathVariable("bsBno") Integer bsBno) throws Exception {
+		return service.getFileup(bsBno);
 	}
 
 	// JSON small카테고리

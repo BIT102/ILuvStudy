@@ -1,6 +1,7 @@
 package dev.mvc.persistence;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -27,6 +28,12 @@ public class ApplyDAOImpl implements ApplyDAO {
 	@Override
 	public List<ApplyVO> list(Integer bsBno) throws Exception {
 		return session.selectList(namespace+".listApply", bsBno);
+	}
+	
+	//신청했나 않했나
+	public ApplyVO apList(Map<String, Object> apmap) throws Exception {
+
+		return session.selectOne(namespace+".apList", apmap);
 	}
 	
 	//상태값 업데이트

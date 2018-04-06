@@ -10,6 +10,16 @@ import dev.mvc.domain.StudyVO;
 
 public interface StudyDAO {
 	
+	//카테고리 지우기
+	public void caDelete(Integer bsBno) throws Exception;
+	
+	//사진 삭제하기
+	public void atDelete(Integer bsBno) throws Exception;
+	
+	
+	//스터디 수정
+	public void update(StudyVO vo) throws Exception;
+	
 	//대분류
 	public String getcaD(Integer bno) throws Exception;
 	
@@ -44,6 +54,12 @@ public interface StudyDAO {
 	
 	//파일 불러오기
 	public List<String> getFile(Integer bsBno) throws Exception;
+	
+	//업데이트를 위한 파일 불러오기
+	public List<String> getFileup(Integer bsBno) throws Exception;
+	
+	//파일 삭제
+	public void  deleteFile(Integer bsBno, String fileName) throws Exception;
 	
 	//조회수 처리
 	public void upVct(Integer bno) throws Exception;

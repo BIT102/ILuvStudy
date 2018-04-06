@@ -9,13 +9,6 @@
 	src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 <title>스터디 상세</title>
 
-<script>
-var result = '${msg}';
-if(result == 'no'){
-	
-	alert("모든 항목을 입력해 주세요.")
-}
-</script>
 <style>
 form th {
 	width: 30%;
@@ -66,12 +59,17 @@ small {
 .btn-xs {
 	margin-top: 5px;
 }
+/*지도스타일입니다*/
+#map {
+	height: 300px;
+	margin-top:15px;
+}
 </style>
 </head>
 <body>
+		<%@include file="../nav.jsp"%>
 	<div id="wrapper">
 
-		<%@include file="../nav.jsp"%>
 
             <header class="page-head" style="background:url(/resources/assets/img/twitter-feed-bg.jpg);">
                 <div class="header-wrapper">
@@ -130,7 +128,7 @@ small {
 																<option value="${studyVO.cDId}">${studyVO.cDName}</option>
 															</c:forEach>
 													</select> <select id="catS" class="form-control">
-															<option value="">--</option>
+															<option>--</option>
 															<%-- <option value="${studyVO.cSName}">${studyVO.cSName}</option> --%>
 													</select>
 														<button type="button" id="addCat"
@@ -141,7 +139,7 @@ small {
 												<tr>
 													<th>스터디명</th>
 													<td><input type="text" name="title"
-														value="${studyVO.title}" class="form-control"
+														value="${studyVO.title}" class="form-control" id="studyTitle"
 														style="width: 550px;"></td>
 												</tr>
 												<tr>
@@ -149,7 +147,7 @@ small {
 													<td>
 														<!-- ======== 지 역 =========== --> <!-- 스터디에 선택된 지역정보 셀렉트 표시 -->
 														<select id="rDName" name='rDId' class="form-control">
-															<option>--</option>
+															<option value="">--</option>
 															<c:forEach items="${region}" var="studyVO">
 																<c:if test="${studyVO.rSId eq 1}">
 																	<option value="${studyVO.rDId}">${studyVO.rDName}</option>
@@ -158,14 +156,16 @@ small {
 													</select> <select id="rSName" name='rSId' class="form-control">
 															<option value="">--</option>
 													</select>
+													<!-- 지도입니다. -->
+													 <div id="map"></div>
 													</td>
 												</tr>
 												<tr>
 													<th>스터디 방장</th>
-													<!-- 아래 방장은 나중에 세션으로 전송 -->
+													<!--  세션으로 전송 -->
 													<%-- <td><input name="writer" value="${studyVO.writer}"></td> --%>
 													<td><input class="form-control" name="writer"
-														value="abc1@gmail.com" style="width: 460px;"></td>
+														value="${email}" style="width: 460px;"></td>
 												</tr>
 
 											</tbody>
@@ -176,7 +176,8 @@ small {
 											<tbody>
 												<tr>
 													<th>연령</th>
-													<td><label class="fancy-checkbox"
+													<td>
+													<label class="fancy-checkbox"
 														style="display: inline-block;"> <input
 															type="checkbox" class="age" name="age" value="10대"><span>10대
 														</span>
@@ -200,14 +201,15 @@ small {
 														style="display: inline-block;"> <input
 															type="checkbox" class="age" name="age" value="무관"><span>무관
 														</span>
-													</label></td>
+													</label>
+													</td>
 												</tr>
 												<tr>
 													<th>최대인원</th>
 													<td>
 														<div class="studymax">
 															<input class="form-control" type="number" name="max"
-																min="0" style="width: 345px;">
+																min="0" style="width: 345px;" id="studymax">
 														</div>
 													</td>
 												</tr>
@@ -217,7 +219,7 @@ small {
 													<td>
 														<div class="studysd">
 															<input class="form-control" type="date" name="sd"
-																style="width: 345px;">
+																style="width: 345px;" id="studysd">
 														</div>
 													</td>
 												</tr>
@@ -228,7 +230,7 @@ small {
                 	<input type="text" name="st" value="${studyVO.st}" style="width:30%; display: inline;" class="form-control"> ~
                 	<input type="text" name="et" value="${studyVO.et}" style="width:30%; display: inline;" class="form-control"><br> --%>
 														<select id="sc" name="sc" class="form-control">
-															<option selected>--</option>
+															<option value="" selected>--</option>
 															<option value="월요일">월요일</option>
 															<option value="화요일">화요일</option>
 															<option value="수요일">수요일</option>
@@ -237,7 +239,7 @@ small {
 															<option value="토요일">토요일</option>
 															<option value="일요일">일요일</option>
 													</select> <select id="st" name="st" class="form-control">
-															<option selected>--</option>
+															<option value="" selected>--</option>
 															<option value="6">6시</option>
 															<option value="7">7시</option>
 															<option value="8">8시</option>
@@ -258,7 +260,7 @@ small {
 															<option value="23">23시</option>
 															<option value="24">24시</option>
 													</select> <select id="et" name="et" class="form-control">
-															<option selected>--</option>
+															<option value="" selected>--</option>
 													</select> <script>
 														/* 		$("#st").change(function(){
 														 console.log($(this).val());
@@ -431,9 +433,7 @@ small {
 				});
 	</script>
 	<script>
-		$(document)
-				.ready(
-						function() {
+		$(document).ready(function() {
 							//카테고리 소분류 체크 시 대분류 체크 되도록
 							var formObj = $("form[role='form']");
 							console.log(formObj);
@@ -446,22 +446,11 @@ small {
 								getCat();
 							});
 							//카테고리 추가 버튼 클릭 시 액션
-							$("#addCat")
-									.on(
-											"click",
-											function() {
-												var catd = $(
-														'#catD option:selected')
-														.val();
-												var cats = $(
-														'#catS option:selected')
-														.val();
-												var catd2 = $(
-														'#catD option:selected')
-														.text();
-												var cats2 = $(
-														'#catS option:selected')
-														.text();
+							$("#addCat").on("click", function() {
+												var catd = $('#catD option:selected').val();
+												var cats = $('#catS option:selected').val();
+												var catd2 = $('#catD option:selected').text();
+												var cats2 = $('#catS option:selected').text();
 												var cat = "<span><input type='hidden' name='categoryD' value="+catd+">"
 														+ "<input type='hidden' name='categoryS' value="+cats+">"
 														+ "<div>"
@@ -471,6 +460,8 @@ small {
 														+ "</span><button type='button' onclick = 'btn_delete(this)' class='btn btn-default btn-xs'>삭제</button></div>";
 												$("#addCatArea").append(cat);
 											});
+							
+							
 							//시간영역 추가 버튼 클릭 시 액션
 							$("#addTime")
 									.on(
@@ -582,6 +573,144 @@ small {
 		</div>
 	</li>
     </script>
+    
+    <!-- 유효성 검사 스크립트 -->
+    <script>
+    
+    
+  // 카테고리 대 소 , 스터디명, 지역 대, 연력, 최대인원, 시작날짜, 요일, 시간
+    $("#btn-success").on("click", function(e){
+    	console.log("등록등록등록등록등록등록등록등록등록등록등록등록등록등록등록등록")
+    	
+    	var age = "";	
+    	
+    	$("input[name=age]:checked").each(function(e){
+    		age += $(this).val();
+    	})
 
+    	//카테고리 대소
+    	if($("#addCatArea").html() == "") {
+    		
+    		alert("카테고리를 입력하세요");
+    		$("#catD").focus();
+    		return false;
+    		//스터디명		
+    	} else if($("#studyTitle").val() == "") {
+    		
+    		alert("스터디명을 입력하세요");
+    		$("#studyTitle").focus();
+    		return false;
+    		//지역 대 
+    	} else if($("#rDName option:selected").val()=="") {
+    		
+       		alert("지역을 입력하세요")
+    		$("#rDName").focus();
+    		return false;
+    		
+    		//나이대
+    	} else if(age == ""){
+    		
+			alert("원하는 나이대를 입력하세요");
+			$("#age").focus();
+			return false;
+    		//최대인원	
+    	} else if($("#studymax").val()=="") {
+    		
+    		alert("최대인원을 입력하세요")
+    		$(".studymax").focus();
+    		return false;
+    		
+    		//시작날짜
+    	} else if($("#studysd").val()=="") {
+    		
+    		alert("시작날짜를 입력하세요")
+    		$(".studysd").focus();
+    		return false;
+    	//요일	
+		} else if($("#sc option:selected").val()==""){
+		
+			alert("요일을 입력하세요")
+			$("#sc").focus();
+			return false;
+	//시작시간	
+		} else if($("#st option:selected").val()==""){
+		
+			alert("시작시간을 입력하세요")
+			$("#st").focus();
+			return false;
+	//끝시간		
+		} else if($("#et option:selected").val()==""){
+		
+			alert("시작시간을 입력하세요")
+			$("#et").focus();
+			return false;
+		
+		} else {
+			alert("등록이 완료되었습니다")
+		} 
+    		
+    		
+    /* 	//연령
+	    var chk = false;
+ 	   	
+    	for(var i=0; document.myform.age.length; i++) {
+    		if(document.myfrom.car[i].checked) {chk = ture} {
+    		}
+    		//체크가 안되었을 때
+    		if(!chk){
+    			alert("원하는 나이대를 입력하세요")
+    		}
+   
+    
+    	//시작날짜		
+    	} else if($(".studysd").val()==""){
+    		
+    		alert("시작날짜를 입력하세요")
+    		$(".studysd").focus();
+    		return false;
+    	//요일	
+    	} else if($("#sc").is(':checked')==false){
+    		
+    		alert("요일을 입력하세요") 
+    		$("#sc").focus();
+    		return false;
+    	//시작시간	
+    	} else if($("#st").is(':checked')==false){
+    		
+    		alert("시작시간을 입력하세요")
+    		$("#st").focus();
+    		return false;
+    	} else if($("#et").is(':checked')==false){
+    		
+    		alert("시작시간을 입력하세요")
+    		$("#et").focus();
+    		return false;
+    		
+    	} else {
+    		alert("등록이 완료되었습니다")
+    	} */
+    	
+    }) 
+    </script>
+    
+   <!--지도 크르깁트 -->
+   <script>
+   function initMap() {
+   		var uluru = {lat:37.5663797, lng:126.9777154};
+   	    var map = new google.maps.Map(document.getElementById('map'),{
+   		zoom: 16,
+   		center:uluru
+   	});
+   	var marker = new google.maps.Marker({
+   		position:uluru,
+   		map:map
+   	});
+   }
+   </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAiNU7soIIqpN1Jdu0tV1CWBb6u1jJAH5o&callback=initMap"
+    async defer></script>
+    
+    
+    		<%@include file="../footer.jsp"%>
 </body>
 </html>

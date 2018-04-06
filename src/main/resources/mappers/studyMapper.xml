@@ -6,6 +6,41 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- board_study mapper -->
 <mapper namespace="dev.mvc.mapper.StudyMapper">
 
+<!-- 카테고리 수정부분 -->
+<delete id="caDelete">
+delete 
+from
+board_category
+where
+bsbno = #{bsBno}
+</delete>
+
+<!-- 파일삭제 -->
+<delete id="atDelete">
+delete
+from
+board_attach
+where
+bsbno = #{bsBno}
+</delete>
+
+<!-- 스터디 수정 -->
+<update id="update">
+update 
+board_study 
+set
+title = #{title}
+, max = #{max}
+, rdid = #{rDId}
+, rsid = #{rSId} <!-- null허용 -->
+, age = #{age}
+, sc = #{sc}
+, sd = #{sd}
+, st = #{st}
+, et = #{et}
+, content = #{content} <!-- null허용 -->
+where bno = #{bno}
+</update>
 
 <!-- 대분류 -->
 <select id="getcaD" resultType="String">
@@ -132,6 +167,8 @@ ba.name
 , bs.max
 , r.rDName
 , r.rSName
+, bs.RDID
+, bs.RSID
 , bs.age
 , bs.sc
 , bs.sd
@@ -142,12 +179,19 @@ ba.name
 , bs.rct
 , bs.regdate
 , bs.enddate
+, sc.cdname
+, group_concat(sc.csname) csname 
 FROM 
 board_study bs
 left outer join user u on bs.writer = u.EMAIL
-left outer join board_attach ba on bs.bno = ba.bsbno
+left outer join (select * from board_attach where status = "O") ba on bs.bno = ba.bsbno
 left outer join region r on bs.RDID = r.RDID and bs.RSID = r.RSID
-WHERE bs.bno = #{bno}
+left outer join board_category bc on bs.bno = bc.bsbno
+, study_category sc
+WHERE bs.bno > 0
+and bs.bno = #{bno}
+and sc.CDID = bc.CATEGORYD and sc.CSID = bc.CATEGORYS
+group by bs.bno
 </select>
 
 <!-- 전체불러오기 -->
@@ -220,6 +264,25 @@ bsbno = #{bsBno}
 AND status = 'X'
 ORDER BY regdate
 </select>
+
+<!-- 업데이트를 위한 파일 불러오기 -->
+<select id="getFileup" resultType="string">
+select
+name
+from
+board_attach
+where
+bsbno = #{bsBno}
+order by regdate
+</select>
+
+<delete id="deleteFile">
+delete from
+board_attach
+where bsbno = #{bsBno}
+and name = #{fileName}
+</delete>
+
 
 <!-- 게시물 조회수 -->
 <update id="upVct">

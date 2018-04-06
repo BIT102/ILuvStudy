@@ -77,7 +77,7 @@
 
 
 
-<body>
+<body onload="gogogo();">
 <!-- 
 <div id="load">
 	<img src="/resources/assets/img/loader.gif" alt="loading">

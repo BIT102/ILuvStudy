@@ -3,9 +3,9 @@ package dev.mvc.controller;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
-import java.util.List;
 
 import javax.annotation.Resource;
+import javax.inject.Inject;
 
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
@@ -15,12 +15,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import dev.mvc.service.StudyService;
 import dev.mvc.util.MediaUtils;
 import dev.mvc.util.UploadFileUtils;
 
@@ -37,7 +38,10 @@ public class UploadController {
 	private String uploadPathUser;
 	
 	private static final Logger logger = LoggerFactory.getLogger(UploadController.class);
-
+	
+	@Inject 
+	private StudyService service;
+	
 	@RequestMapping(value="/uploadAjax", method=RequestMethod.GET)
 	public void uploadAjax() {
 		
@@ -109,21 +113,29 @@ public class UploadController {
 	//買た馬馬馬馬
 	@ResponseBody
 	@RequestMapping(value="/deleteFile", method=RequestMethod.POST)
-	public ResponseEntity<String> deleteFile(String fileName) {
+	public ResponseEntity<String> deleteFile(@RequestParam("bsBno") Integer bsBno, String fileName) throws Exception {
+		
+		System.out.println("***********************************************");
+		System.out.println(fileName);
+		System.out.println("***********************************************");
 		
 		logger.info("delete file: "+fileName);
 		
 		String formatName = fileName.substring(fileName.lastIndexOf(".")+1);
 		
 		MediaType mType = MediaUtils.getMediaType(formatName);
-		
+	
+
 		if(mType != null) {
 			
 			String front = fileName.substring(0, 12);
 			String end = fileName.substring(14);
+			
+			service.deleteFile(bsBno, fileName);
 			new File(uploadPath + (front+end).replace('/', File.separatorChar)).delete();
 		}
 		
+		service.deleteFile(bsBno, fileName);
 		new File(uploadPath + fileName.replace('/', File.separatorChar)).delete();
 		
 		return new ResponseEntity<String>("deleted", HttpStatus.OK);

@@ -428,6 +428,9 @@ a:hover {
 
 .bg-light-gray {
 	background-color: #f9f9f9;
+	min-height: 100%;
+	margin-bottom: -50px;
+	padding-bottom:50px;
 }
 
 .bg-white {

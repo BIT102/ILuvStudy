@@ -269,4 +269,7 @@ public class LoginController {
 		
 		return "redirect:/study/main";
 	}
+	
+	
+	
 }
