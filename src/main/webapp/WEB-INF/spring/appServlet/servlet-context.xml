@@ -108,20 +108,20 @@
 	</beans:bean>
 	
 	
-<!-- 	<beans:bean id="uploadPath" class="java.lang.String">
+  	<beans:bean id="uploadPath" class="java.lang.String">
 		<beans:constructor-arg value="C:/zzz/upload"></beans:constructor-arg>
 	</beans:bean>
 	<beans:bean id="uploadPathUser" class="java.lang.String">
 		<beans:constructor-arg value="C:/zzz/user"></beans:constructor-arg>
-	</beans:bean>  -->
+	</beans:bean> 
 	
-	<beans:bean id="uploadPath" class="java.lang.String">
+<!-- 	<beans:bean id="uploadPath" class="java.lang.String">
 	<beans:constructor-arg value="study"></beans:constructor-arg>
 	</beans:bean>
 	<beans:bean id="uploadPathUser" class="java.lang.String">
 		<beans:constructor-arg value="user"></beans:constructor-arg>
-	</beans:bean>
-	
+	</beans:bean> -->
+
 </beans:beans>
 
 

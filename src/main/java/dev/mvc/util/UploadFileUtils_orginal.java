@@ -1,4 +1,4 @@
-package dev.mvc.util;
+/*package dev.mvc.util;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -108,3 +108,4 @@ public class UploadFileUtils_orginal {
 		return thumbnailName.substring(uploadPath.length()).replace(File.separatorChar, '/');
 	}	
 }//uploadfileutile 클래스종료
+*/

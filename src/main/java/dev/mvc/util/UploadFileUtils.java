@@ -13,12 +13,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.FileCopyUtils;
 
-
-//// ============================영원 수정본=========
-
-
-
 //우선연습할께용
+//하하하하하
 public class UploadFileUtils {
 
 	private static final Logger logger = LoggerFactory.getLogger(UploadFileUtils.class);
@@ -26,20 +22,11 @@ public class UploadFileUtils {
 	public static String uploadFile(String uploadPath,
 			                        String originalName,
 			                        byte[] fileData) throws Exception {
-		
-		// AWS s3 추가
-		S3Util s3 = new S3Util();
-		String bucketName = "iluvstudy";
-		// s3 끝
-		
 		//파일 이름 중복 안하기위해서합니다
 		UUID uid = UUID.randomUUID();
 		
 		
-//		String saverDName = uid.toString() + "_" +originalName;
-		String saverDName = "/"+ uid.toString() + "_" +originalName;
-		
-		logger.info("업로드 경로 : " + uploadPath);
+		String saverDName = uid.toString() + "_" +originalName;
 		
 		//저장파일(날짜)
 		String savedPath = calcPath(uploadPath);
@@ -51,16 +38,6 @@ public class UploadFileUtils {
 		String formatName = originalName.substring(originalName.lastIndexOf(".")+1);
 		
 		String uploadedFileName = null;
-		
-		// s3 추가 시작
-		uploadedFileName = (savedPath + saverDName).replace(File.separatorChar, '/');
-		//S3Util 의 fileUpload 메서드로 파일을 업로드한다.
-		
-		s3.fileUpload(bucketName, uploadPath+uploadedFileName, fileData);		
-		logger.info("업로드 파일명:"+ uploadedFileName);
-		// s3 추가 끝
-		
-		
 		//확장자확인
 		if(MediaUtils.getMediaType(formatName) != null) {
 			uploadedFileName = makeThumbnail(uploadPath, savedPath, saverDName);

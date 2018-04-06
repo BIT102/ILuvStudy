@@ -106,7 +106,6 @@
                 <td>{recruitList.bno}</td>
                 <td><a href="#">{recruitList.title}</a></td>
                 <td><button type="button">신청자 보기 </button></td>
-                <td><img src="/study/displayFile?fileName=${recruitList.name}"></td>
                 <td>${bookmarkList.writer}</td>
                 <td>${bookmarkList.rDName} ${bookmarkList.rSName}</td>
                 <td>${bookmarkList.sd}</td>
@@ -129,6 +128,10 @@
     </table>        
     
    
+   <!-- 다시 하겠습니다 모집 --> 
+    
+    
+    
     
 
     

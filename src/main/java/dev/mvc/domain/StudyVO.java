@@ -73,6 +73,9 @@ public class StudyVO {
 	
 	// 북마크 카운트 수(영원)
 	private int bookmarkCount;
+	
+	// 신청 상태값
+	private String apStatus; // D:신청 대기중, O:신청 수락, X: 신청 거절 
 
 	private String msgRegist; //채팅
 	
@@ -108,7 +111,7 @@ public class StudyVO {
 	public void setWriter(String writer) {
 		this.writer = writer;
 	}
-	
+
 	public String[] getCategoryD() {
 		return categoryD;
 	}
@@ -300,12 +303,15 @@ public class StudyVO {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
 	public String getUserEmail() {
 		return userEmail;
 	}
+
 	public void setUserEmail(String userEmail) {
 		this.userEmail = userEmail;
 	}
+
 	public String[] getFiles() {
 		return files;
 	}
@@ -338,6 +344,14 @@ public class StudyVO {
 		this.bookmarkCount = bookmarkCount;
 	}
 
+	public String getApStatus() {
+		return apStatus;
+	}
+
+	public void setApStatus(String apStatus) {
+		this.apStatus = apStatus;
+	}
+
 	@Override
 	public String toString() {
 		return "StudyVO [bno=" + bno + ", title=" + title + ", writer=" + writer + ", categoryD="
@@ -347,8 +361,10 @@ public class StudyVO {
 				+ ", enddate=" + enddate + ", rDName=" + rDName + ", rSName=" + rSName + ", cDName=" + cDName
 				+ ", cSName=" + cSName + ", nickname=" + nickname + ", no=" + no + ", name=" + name + ", status="
 				+ status + ", userEmail=" + userEmail + ", files=" + Arrays.toString(files) + ", cDId=" + cDId
-				+ ", cSId=" + cSId + ", bookmarkCount=" + bookmarkCount + ", msgRegist=" + msgRegist + "]";
+				+ ", cSId=" + cSId + ", bookmarkCount=" + bookmarkCount + ", apStatus=" + apStatus + ", msgRegist="
+				+ msgRegist + "]";
 	}
+
 	
 }
 

@@ -8,8 +8,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-  <script type="text/javascript">
-    self.location = "/study/main";
-  </script>
+ <script>
+   self.location = "/study/main";
+ </script>
 </body>
 </html>

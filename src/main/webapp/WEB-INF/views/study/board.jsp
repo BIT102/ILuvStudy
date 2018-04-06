@@ -250,76 +250,29 @@
                 	좋아용/나빠용
                <!-- 로그인 했을때 -->
  
-           		<c:forEach items="${bolist}" var="book" varStatus="status">
-           		<c:if test="${not empty login}">
+
 					<script>
-					${book}
+					${bolist}
 					${studyVO.bno}
-					${book.bsBno}
-					${book.userEmail}
 					${login.email}
 					</script>
-	
-				<c:if test="${(studyVO.bno eq book.bsBno) and (book.userEmail eq login.email)}">
-				<i class="fa fa-heartbeat" onclick="myFunction(this)"></i>
-				</c:if>
-				<c:if test="${(studyVO.bno ne book.bsBno) and (book.userEmail ne login.email) and (status.first)}">
-				 
-				<i class="fa fa-heart-o" onclick="myFunction(this)"></i>
-				</c:if>
-				</c:if>
-				</c:forEach>
-		
-           			
-  		
-           		
-           		
-        <%--    		<c:choose>
-   				<c:when test="${empty login}">
-   					<c:if test="${login.email ne book.userEmail}">
-               	 <i class="fa fa-heart-o" onclick="myFunction(this)"></i>
-                	</c:if>
-                	</c:when>
-                <c:otherwise>
-        
-                	<c:if test="${login.email eq book.userEmail}">
-               		<i class="fa fa-heartbeat" onclick="myFunction(this)"></i>	
-                 	</c:if>
-                 	<i class="fa fa-heart-o" onclick="myFunction(this)"></i>
-                </c:otherwise>
-                </c:choose> --%>
-<%-- 
-				<c:if test="${login.email eq book.userEmail}">
-				<i class="fa fa-heartbeat" onclick="myFunction(this)"></i>
-				</c:if>   	
-    --%>
-   		
- <%--          		<c:choose>
-           		
-            		
-           		<c:when test="${login.email ne book.userEmail}">
-				</c:when>
-				<c:otherwise>				
-                <i class="fa fa-heartbeat" onclick="myFunction(this)"></i>
-                </c:otherwise>
-                </c:choose>
-           		</c:forEach> --%>
+					
+ 					<c:if test="${bolist.checked == 1}">
+					<i class="fa fa-heartbeat" onclick="myFunction2(this)" style="font-size:0px;">저장됨</i>	
+					</c:if> 
+					<c:if test="${bolist.checked == 0}">
+					<i class="fa fa-heart-o" onclick="myFunction1(this)" value="saved"></i>
+					</c:if>  
+
  <script>
-	//북마크
-	//홀수이면 등록 짝수이면 삭제
-	var count = 0;
-	
-function myFunction(x) {
-	
-	x.classList.toggle("fa-heartbeat");
+
+//북마크를 등록합니다	
+function myFunction1(x) {
+
+	var bno = $("#bno").val();
 		
-	++count;
+	var writer = $("#writer").val();
 	
-		var bno = $("#bno").val();
-		
-		var writer = $("#writer").val();
-	if(count%2!=0) {
-		//등록
 		$.ajax({
 			type:"post",
 			url:"/study/bookmark/a",
@@ -335,12 +288,19 @@ function myFunction(x) {
 			success : function(result) {
 				if(result=='success') {
 					alert("등록됨");
+					x.classList.toggle("fa-heartbeat");
 				}
 			}
 		});
+}
 	// 취소
-		}  else {
-			
+	
+function myFunction2(x) {	
+	
+	var bno = $("#bno").val();
+	
+	var writer = $("#writer").val();
+	
 			$.ajax({
 				type:"post",
 				url:"/study/bookmark/dee",
@@ -352,12 +312,12 @@ function myFunction(x) {
 				success : function(result) {
 					if(result=='success') {
 						alert("삭제욤 ");
+						x.classList.toggle("fa-heartbeat");
 					}
 				}
 			});
 		}	
-}	
-	
+
 </script>               
 
             </div>
@@ -914,6 +874,5 @@ $(document).ready(function(){
 	
 });
 </script>   
- 
 </body>
 </html>

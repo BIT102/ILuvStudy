@@ -22,14 +22,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import dev.mvc.domain.BookmarkVO;
 import dev.mvc.domain.Criteria;
 import dev.mvc.domain.CriteriaStudy;
 import dev.mvc.domain.PageMakerStudy;
 import dev.mvc.domain.SearchCriteriaStudy;
 import dev.mvc.domain.StudyVO;
 import dev.mvc.domain.UserVO;
-import dev.mvc.service.ReplyStudyService;
 import dev.mvc.service.BookmarkService;
+import dev.mvc.service.ReplyStudyService;
 import dev.mvc.service.StudyService;
 
 @Controller
@@ -74,14 +75,14 @@ public class StudyController {
 		System.out.println("vo = "+vo);
 		
 		
-		if(vo.getTitle()==null||vo.getNow()==null||vo.getMax()==null||vo.getrDId()==null
+/*		if(vo.getTitle()==null||vo.getNow()==null||vo.getMax()==null||vo.getrDId()==null
 				||vo.getAge()==null||vo.getSc()==null||vo.getSd()==null||vo.getSt()==null||vo.getEt()==null) {
 			
 			rttr.addFlashAttribute("msg", "no");
 			return "redirect:/study/register";
 		} else {
-			service.regist(vo);
-		}		
+		}		*/
+		service.regist(vo);
 		return "redirect:/study/main";
 	}
 
@@ -209,13 +210,14 @@ public class StudyController {
 		map.put("writer", email);
 		map.put("bsbno", bno);
 		
-		System.out.println("!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-		System.out.println(map);
-		System.out.println(bookservice.bolist());
-		System.out.println("!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+
+		bookservice.bolist(map);
+		
+		//북마크 넘긴다요 
+		model.addAttribute("bolist",bookservice.bolist(map));
 		
 		model.addAttribute(service.read(bno));
-		model.addAttribute("bolist", bookservice.bolist());
+		
 		}
 	}
 

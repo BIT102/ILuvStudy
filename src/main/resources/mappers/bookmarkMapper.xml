@@ -20,15 +20,18 @@ useremail
 )
 </insert>
 
+
+<!-- sohee 수정 -->
 <select id="bolist" resultType="BookmarkVO">
 SELECT 
-bo.ID
-, bo.USEREMAIL
-, bo.BSBNO
-, bs.bno
+count(*) as checked
+, id
+, bsbno
+, USEREMAIL
 FROM
-bookmark bo
-right outer join board_study bs on bs.bno = bo.bsbno
+bookmark
+WHERE bsbno = #{bsbno}
+AND USEREMAIL = #{writer}
 </select>
 
 <select id="list" resultType="StudyVO">
@@ -78,7 +81,7 @@ DELETE
 FROM
 bookmark
 WHERE
-useremail = #{email}
+useremail = #{userEmail}
 AND bsbno = #{bsBno}
 </delete> 
 </mapper>

@@ -2,6 +2,8 @@ package dev.mvc.domain;
 
 import java.util.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
 //User테이블 VO
 public class UserVO {
 
@@ -13,6 +15,7 @@ public class UserVO {
 	private String phoneNum;			 // 전화번호
 	private int birth;  				// 생년월일
 	private String photo; 				// 사용자 사진
+//	private MultipartFile photo;
 	private String homepage;			// 사용자 홈페이지
 	private String introduction;		// 자기소개
 	private Date registDate;			// 회원가입일
@@ -24,12 +27,6 @@ public class UserVO {
 	private String social;				// 소셜 로그인인 경우
 	
 	
-	public String getSocial() {
-		return social;
-	}
-	public void setSocial(String social) {
-		this.social = social;
-	}
 	public String getEmail() {
 		return email;
 	}
@@ -126,6 +123,13 @@ public class UserVO {
 	public void setEmailConf(int emailConf) {
 		this.emailConf = emailConf;
 	}
+	public String getSocial() {
+		return social;
+	}
+	public void setSocial(String social) {
+		this.social = social;
+	}
+	
 	@Override
 	public String toString() {
 		return "UserVO [email=" + email + ", password=" + password + ", name=" + name + ", nickName=" + nickName
@@ -134,6 +138,5 @@ public class UserVO {
 				+ ", modifyDate=" + modifyDate + ", quitDate=" + quitDate + ", isDel=" + isDel + ", bno=" + bno
 				+ ", emailConf=" + emailConf + ", social=" + social + "]";
 	}
-	
 	
 }

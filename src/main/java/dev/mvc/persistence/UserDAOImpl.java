@@ -74,8 +74,8 @@ public class UserDAOImpl implements UserDAO {
 		session.update(namespace+".insertImg", vo);
 	}
 	
-/*	//북마크 리스트 불러오기
-	@Override
+	//북마크 리스트 불러오기
+/*	@Override
 	public List<StudyVO> bookmarkList(String email) throws Exception {
 		return session.selectList(namespace+".bookmarkList", email);
 	}*/
@@ -95,6 +95,12 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public List<StudyVO> recruitList(String email) throws Exception {
 		return session.selectList(namespace +".recruitList", email);
+	}
+	
+	//신청 스터디 불러오기
+	@Override
+	public List<StudyVO> applyList(String email) throws Exception {
+		return session.selectList(namespace +".applyList", email);
 	}
 
 	

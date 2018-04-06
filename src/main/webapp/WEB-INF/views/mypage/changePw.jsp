@@ -5,7 +5,7 @@
 <head>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script> 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>프로필</title>
+<title>비밀번호 변경</title>
 <style>
     .border{border:2px solid grey; }
     .basic{width:300px; height:50px; float:left; text-align: center;}
@@ -64,23 +64,21 @@
         <table id="actable">
             <tr>
                 <td><label for="nowPw">기존 비밀번호</label></td>
-                <td><input id="nowPw" type="password" name="nowPw"></td>
-              
-                	
+                <td><input id="nowPw" type="password" name="nowPw"></td>   	
             </tr>
             <tr>
                 <td><label for="newPw1">새 비밀번호</label></td>
-                <td><input id="newPw1" type="password" name="newPw1" placeholder="8자리에서 20자리 이하 영문, 숫자로만 설정해 주세요."></td>
+                <td><input id="newPw1" type="password" name="newPw1" placeholder="8자리에서 16자리 이하 영문, 숫자로만 설정해 주세요."></td>
             </tr>
             <tr>
                 <td><label for="newPw2">비밀번호 확인</label></td>
                 <td><input id="newPw2" type="password" name="newPw2" placeholder="비밀번호를 한번 더 입력해주세요." ></td>
-             
+            </tr>
         </table>
         <input type="hidden" value="${login.email}" name="email" readonly> 
    </div>
 <div>
-   <input class="changePw" type="button" value="변경하기">
+   <input class="changePw" type="submit" value="변경하기">
 </div>
 
 

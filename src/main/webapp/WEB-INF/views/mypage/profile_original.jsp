@@ -46,9 +46,7 @@
 
 <script>
 	$(document).ready(function(){
-		if("${result11}"=="수정되었습니다."){
-			alert("${result11}");
-		}
+		alert("${result}");
 	})
 </script>
 
@@ -113,7 +111,8 @@
 	
 	    <p3>프로필 사진</p3>
 
-	<img id="changeImg" src="pDisplayFile?fileName=${vo.photo}"> <!-- DB에서 담긴 이미지 -->
+	<img id="changeImg" src="study/displayFile?fileName=${vo.photo}"> <!-- DB에서 담긴 이미지 --> <!-- DB에서 담긴 이미지 -->
+	
 
 	<script>
 		$(".fileDrop").on("dragenter dragover", function(event){
@@ -133,14 +132,14 @@
 			
 			//Ajax 활용
 			$.ajax({
-				url: "/pUploadAjax",
+				url: "/uploadAjax",
 				data: formData,
 				dataType: 'text',
 				processData: false,
 				contentType: false,
 				type : 'POST',
 				success : function(data){ // 파일명(스트링)이 담김
-//					alert(data);
+					alert(data);
 					
 					console.log(data);
 					console.log(checkImageType(data));
@@ -148,11 +147,11 @@
 					var str = "";
 					
 					if(checkImageType(data)){
-						  str ="<div><a href=pDisplayFile?fileName="+getImageLink(data)+">"
-								  +"<img src='pDisplayFile?fileName="+data+"'/>"
+						  str ="<div><a href=study/displayFile?fileName="+getImageLink(data)+">"
+								  +"<img src='study/displayFile?fileName="+data+"'/>"
 								  +"</a><small data-src="+data+">X</small></div>";
 					  }else{
-						  str = "<div><a href='displayFile?fileName="+data+"'>" 
+						  str = "<div><a href='study/displayFile?fileName="+data+"'>" 
 								  + getOriginalName(data)+"</a>"
 								  +"<small data-src="+data+">X</small></div></div>";
 					  }
@@ -169,7 +168,7 @@
 	        		email : document.getElementById("email").value 
 	        	},
 	        	success:function(result){
-//	        		alert(result);
+	        		alert(result);
 	        	}
 		        	})
 		        	
@@ -179,7 +178,7 @@
 		       	// 이러지말고 src전체를 		
 		        
 //		    	document.getElementById("changeImg").src = "pDisplayFile?fileName="+data;
-	        	document.getElementById("changeImg").setAttribute("src","pDisplayFile?fileName="+data);
+	        	document.getElementById("changeImg").setAttribute("src","study/displayFile?fileName="+data);
 	        						
 //				$(".uploadedList").append(str);
 					
@@ -237,7 +236,7 @@
 				dataType:"text",
 				success:function(result){
 					if(result == 'deleted'){
-//						alert("deleted");
+						alert("deleted");
 						that.parent("div").remove(); // 파일 삭제 후 브라우져 화면에서 썸네일 삭제
 					}
 				}
@@ -248,7 +247,7 @@
   
 	<form name="profileForm" action="/profile" method="post" enctype="multipart/form-data">
     <br><br><br><br><br>
-	
+
 	<!-- 개인 프로필 정보 보기 &수정 -->
    <div id="acinfo">
         <p3>계정 정보</p3>

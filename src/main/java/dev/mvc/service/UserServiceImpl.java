@@ -73,7 +73,7 @@ public class UserServiceImpl implements UserService {
 		}
 	/*	
 		// 북마크 불러오기
-		@Override
+/*		@Override
 		public List<StudyVO> bookmarkList(String email) throws Exception {
 			
 			dao.bookmarkList(email); // 이게 리스트고
@@ -120,6 +120,12 @@ public class UserServiceImpl implements UserService {
 		@Override
 		public List<StudyVO> recruitList(String email) throws Exception {
 			return dao.recruitList(email);
+		}
+		
+		//신청 스터디 불러오기
+		@Override
+		public List<StudyVO> applyList(String email) throws Exception {
+			return dao.applyList(email);
 		}
 	
 
@@ -210,7 +216,7 @@ public class UserServiceImpl implements UserService {
 		return dao.chkNickname(nickName); 
 	}
 
-	
+	@Override
 	public void emailConf(String email)throws Exception{
 		dao.emailConf(email);
 	}

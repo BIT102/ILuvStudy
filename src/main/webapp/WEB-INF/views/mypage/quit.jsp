@@ -76,8 +76,9 @@
 	<p3>회원 탈퇴</p3><br><br>
 	<!-- <input id="butt" type="text" name="quit" > -->
 	
-	<input type="submit" value="탈퇴하기">
+	<input type="submit" class="quit" value="탈퇴하기">
 	<input type="hidden" value="${login.email}" name="email" readonly> 
+	
 
 	</form>
 </body>
