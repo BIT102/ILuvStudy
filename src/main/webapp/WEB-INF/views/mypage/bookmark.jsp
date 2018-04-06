@@ -343,7 +343,60 @@
                                             	신청<span class="faq-t">+</span>
                                         </div>
                                         <div class="faq-a">
-		
+													<!-- 신청 스터디 불러오기 -->
+											<c:forEach items="${aplist}" var="studyVO">
+												<div class="col-md-4 col-sm-6">
+													<div class="portfolio-item">
+														<div class="item-image">
+														<!-- 페이지 나누기 -->
+															<a href="/study/board${pageMakerStudy.makeSearch(pageMakerStudy.cri.page)}&bno=${studyVO.bno}">
+																<c:choose>
+																<%-- 이미지 가져오기 --%>
+																	<c:when test="${studyVO.name ne 'a'}">
+																		<img src="/study/displayFile?fileName=${studyVO.name}"
+																			class="img-responsive center-block"
+																			style="width: 370px; height: 216px;">
+																	</c:when>
+																<%-- 이미지 없을 시, 기본 이미지 표출 --%>	
+																	<c:otherwise>
+																		<img src="/resources/assets/img/ha.jpg"
+																			class="img-responsive center-block"
+																			style="width: 370px; height: 216px;">
+																	</c:otherwise>
+																</c:choose>
+																<div>
+																	<span><i class="fa fa-plus"></i></span>
+																</div>
+															</a>
+														</div>
+														<div class="item-description">
+															<div class="row">
+																<div class="col-xs-6">
+																<!-- 스터디 상세 내용 불러오기 -->
+																	<span class="item-name" style="width: 230px;">
+																	제목 : ${studyVO.title} </span> 
+																	<span style="width: 280px;">
+																	작성자 : ${studyVO.nickname}<br> 
+																	카테고리 : ${studyVO.cDName} / ${studyVO.cSName}<br> 
+																	지역 : ${studyVO.rDName} / ${studyVO.rSName}<br> 
+																	<%-- 승인여부 : ${studyVO.apStatus}<br> --%>
+																	시작일 : ${studyVO.sd}
+																	<!-- 승인 여부(버튼) **버튼으로 할 지, 그냥 텍스트로 띄울 지 모르겠어요. 아래 쪽에 버튼 스크립트 있어요**-->
+																	<button type="button" class="apStatus" value="${studyVO.apStatus}">승인 여부</button>
+																	</span>
+																</div>
+																<div class="col-xs-6">
+																	<span class="like"> <i class="fa fa-eercast"></i>
+																		${studyVO.vct}
+																	</span>
+																</div>
+															</div>
+														</div>
+														<!-- end of /.item-description -->
+													</div>
+													<!-- end of /.portfolio-item -->
+												</div>
+											</c:forEach>
 	                                     	</div>
 	                                    </div>
 	                                </div>
@@ -376,34 +429,39 @@
 <script>
 function quit() {
 	var msg = "정말 탈퇴하시겠습니까?"
-	var flag = confirm(msg);
-	
-	if(flag==true) {
+		var flag = confirm(msg);
 		
-		var nowPw = $('#nowPw').val();			//화면에서 입력된 내용은 변수 처리
-		var newPw1 = $('#newPw1').val();
-		var newPw2 = $('#newPw2').val();
-		
-		$.ajax({
-			url: '/changePw',
-			type: 'POST',
-			header:{
-				"X-HTTP-Method-Override" : "POST"
-			},
-			data:{ 	nowPw : nowPw,
-					newPw1 : newPw1, // 앞에는 컨트롤러에서 가져다 쓸 이름이고 뒤에는 값임!!
-					newPw2 : newPw2		
-			},
-			success : function(result){ //alert으로 result값을 하면 컨트롤에서 ""안에 쓴 값이 뜸
-			alert("안녕히가세요");
-			}
-		});
-		
-	} else {
-		alert("취소하였습니다.")
-	}
+		if(flag==true) {
+				
+			$.ajax({
+				url: '/quit',
+				type: 'POST',
+				header:{
+					"X-HTTP-Method-Override" : "POST"
+				},
+				success : function(result){ //alert으로 result값을 하면 컨트롤에서 ""안에 쓴 값이 뜸
+				alert("안녕히가세요");
+				}
+			});
+			
+		} else {
+			alert("취소하였습니다.")
+		}
 }
 
 </script>
-
+	<!-- 승인 여부(버튼) -->
+	<script>
+		$(".apStatus").on("click", function(){
+			console.log($(this).val());				
+				
+			if($(this).val() =="O") {
+					alert("승인 되었습니다.")
+			}else if($(this).val() =="D"){
+					alert("승인 대기중입니다.")
+			}else{
+					alert("승인 거절되었습니다.")
+			};
+		});
+	</script>  
 </html>

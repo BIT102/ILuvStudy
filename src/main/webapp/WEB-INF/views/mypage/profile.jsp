@@ -447,32 +447,24 @@
 
 function quit() {
 	var msg = "정말 탈퇴하시겠습니까?"
-	var flag = confirm(msg);
-	
-	if(flag==true) {
+		var flag = confirm(msg);
 		
-		var nowPw = $('#nowPw').val();			//화면에서 입력된 내용은 변수 처리
-		var newPw1 = $('#newPw1').val();
-		var newPw2 = $('#newPw2').val();
-		
-		$.ajax({
-			url: '/changePw',
-			type: 'POST',
-			header:{
-				"X-HTTP-Method-Override" : "POST"
-			},
-			data:{ 	nowPw : nowPw,
-					newPw1 : newPw1, // 앞에는 컨트롤러에서 가져다 쓸 이름이고 뒤에는 값임!!
-					newPw2 : newPw2		
-			},
-			success : function(result){ //alert으로 result값을 하면 컨트롤에서 ""안에 쓴 값이 뜸
-			alert("안녕히가세요");
-			}
-		});
-		
-	} else {
-		alert("취소하였습니다.")
-	}
+		if(flag==true) {
+				
+			$.ajax({
+				url: '/quit',
+				type: 'POST',
+				header:{
+					"X-HTTP-Method-Override" : "POST"
+				},
+				success : function(result){ //alert으로 result값을 하면 컨트롤에서 ""안에 쓴 값이 뜸
+				alert("안녕히가세요");
+				}
+			});
+			
+		} else {
+			alert("취소하였습니다.")
+		}
 }
 
 </script>

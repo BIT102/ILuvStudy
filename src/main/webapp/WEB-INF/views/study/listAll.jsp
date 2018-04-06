@@ -266,7 +266,7 @@ select::-ms-expand {
 	<!--   end of portfolio section  -->
 
 	<!-- paging -->
-	<div class="text-center1">
+	<div class="text-center1" style="margin-top:35px;">
 		<ul class="pagination">
 			<c:if test="${pageMakerStudy.prev}">
 				<li><a

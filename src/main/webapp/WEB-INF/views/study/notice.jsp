@@ -149,7 +149,7 @@ color:#6b456a !important;
 </div>
 
 		<!-- 페이징처리 -->
-	<div class="text-center1">
+	<div class="text-center1" style="margin-top:35px;">
 		<ul class="pagination">
 		
 		<!-- 스프링 MVC를 이용하는 방식 -->
