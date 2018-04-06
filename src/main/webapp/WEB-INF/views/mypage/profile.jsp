@@ -24,8 +24,6 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
 
-
-
 <!-- stylesheets -->
 <link rel="stylesheet" href="/resources/assets/css/bootstrap.min.css">
 <link rel="stylesheet" href="/resources/assets/css/font-awesome.min.css">
@@ -47,26 +45,20 @@
 	src="/resources/assets/js/modernizr.custom.97074.js"></script>
 
 <style>
-
 .service-list .col-md-4 {
  	 width:280px !important;
 }
-
 .service-list .service-content text-center {
  	 width:280px !important;
 }
-
-
 .row {
  margin:0 !important;
 }
-
 #btn-success:hover {
     background-color: #31b0d5;
     border-color: #269abc;
     color:white;
 }
-
 #btn-success {
     background-color: #5bc0de;
     border: 1px solid black;
@@ -74,11 +66,9 @@
     float:right;
     color:white;
 }
-
 .center-block i{
 	margin-top:10px;
 }
-
 </style>
 
 <script>
@@ -300,7 +290,6 @@
 	
 	 $(document).ready(function(){
 	        $("#nickCheck").click(function(){
-
 	        	$.ajax({
 	        		url : "/nickCheck",
 	        		type : "post",
@@ -444,7 +433,6 @@
 				}
 			}); 
 		});
-
 function quit() {
 	var msg = "정말 탈퇴하시겠습니까?"
 	var flag = confirm(msg);
@@ -474,7 +462,6 @@ function quit() {
 		alert("취소하였습니다.")
 	}
 }
-
 </script>
 
 </html>
