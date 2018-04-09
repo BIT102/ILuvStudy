@@ -7,5 +7,6 @@ import dev.mvc.domain.MessageVO;
 public interface MessageDAO {
 	public void send(MessageVO vo) throws Exception;
 	public List<MessageVO> adminMessage(String id) throws Exception;
-	public List<MessageVO> adminMessageView() throws Exception;
+	public List<MessageVO> adminMessageView(int bno) throws Exception;
+	public List<MessageVO> adminMessageList() throws Exception;
 }

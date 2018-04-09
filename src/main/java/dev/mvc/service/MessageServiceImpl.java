@@ -22,8 +22,13 @@ public class MessageServiceImpl implements MessageService{
 	}
 	
 	@Override
-	public List<MessageVO> adminMessageView() throws Exception{
-		return dao.adminMessageView();
+	public List<MessageVO> adminMessageView(int bno) throws Exception{
+		return dao.adminMessageView(bno);
+	}
+	
+	@Override
+	public List<MessageVO> adminMessageList() throws Exception{
+		return dao.adminMessageList();
 	}
 
 }

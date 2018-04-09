@@ -21,10 +21,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 관리자 문의 메시지 조회 -->
 	<select id="adminMessageView" resultType="MessageVO">
-		select bno,email, message, type, receiver, date_format(msgregist,'%Y-%m-%d %h:%m') as msgRegist
+		select bno, email, message, type, receiver, date_format(msgregist,'%Y-%m-%d %h:%m') as msgRegist
 		from message
-		where (email = 'admin')
-		or (receiver = 'admin');
+		where (email = 'admin' and receiver = (select email from user where bno = #{bno}))
+		or (receiver = 'admin' and email = (select email from user where bno = #{bno}));
 	</select>
+	
+	<!-- 관리자 문의 메시지 리스트 -->
+	<select id="adminMessageList" resultType="MessageVO">
+		select distinct(m.email), u.bno
+		from message m, user u
+		where m.email = u.email
+		and m.receiver = 'admin'
+		group by m.email;
+	</select>
+	
 	
 </mapper>

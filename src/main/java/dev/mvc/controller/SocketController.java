@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -60,18 +61,30 @@ public class SocketController {
 	}
 	
 	//관리자 문의 페이지(관리자단)
-	@RequestMapping(value = "/chatAdmin", method = {RequestMethod.GET, RequestMethod.POST})
-	public ResponseEntity<List<MessageVO>> viewChattinPageAdmin() throws Exception{
+	@ResponseBody
+	@RequestMapping(value = "/chatAdminView/{bno}", method = {RequestMethod.GET, RequestMethod.POST})
+	public ResponseEntity<List<MessageVO>> viewChattinPageAdmin(@PathVariable("bno") int bno) throws Exception{
 		
 		/*model.addAttribute("list", service.adminMessageView()); //관리자 문의/답변불러오기
 */		
-		logger.info("chatAdmin 데려온다...");
+		logger.info("chatAdminView 데려온다...");
 		
 		ResponseEntity<List<MessageVO>> entity=null;
 		
-		entity = new ResponseEntity<List<MessageVO>>(service.adminMessageView(), HttpStatus.OK);
+		entity = new ResponseEntity<List<MessageVO>>(service.adminMessageView(bno), HttpStatus.OK);
 		
 		return entity;
 	}
+	
+	//관리자 문의 페이지(관리자단)
+	@RequestMapping(value = "/chatAdmin", method = RequestMethod.GET)
+	public void listChattinPageAdmin(Model model) throws Exception{
+		
+		logger.info("chatAdmin 데려온다...");
+		model.addAttribute("list", service.adminMessageList()); //관리자 문의 리스트
+		
+	}
+	
+	
 
 }
