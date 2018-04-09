@@ -503,10 +503,14 @@ and sc.CDID = bc.CATEGORYD and sc.CSID = bc.CATEGORYS
 <!-- 검색에 필요한 화면구성 -->
 <sql id="search">
  		<if test="searchType != null">
- 			<if test="searchType == 'tcnrg'.toString()">
- 				and (title like CONCAT('%', #{keyword}, '%') or nickname like CONCAT('%', #{keyword}, '%')
- 				     and content like CONCAT('%', #{keyword}, '%') or r.rdname like CONCAT('%', #{keyword}, '%') or r.rsname like CONCAT('%', #{keyword}, '%')
- 				     or sc.cdname like CONCAT('%', #{keyword}, '%') or csname like CONCAT('%', #{keyword}, '%'))
+ 			<if test="searchType == 'x'.toString()">
+ 				and (title like CONCAT('%', #{keyword}, '%') 
+ 					 or nickname like CONCAT('%', #{keyword}, '%') 
+ 					 or content like CONCAT('%', #{keyword}, '%') 
+ 					 or r.rdname like CONCAT('%', #{keyword}, '%') 
+ 					 or r.rsname like CONCAT('%', #{keyword}, '%')
+ 				     or sc.cdname like CONCAT('%', #{keyword}, '%') 
+ 				     or csname like CONCAT('%', #{keyword}, '%'))
  			</if>
   			<if test="searchType == 't'.toString()">
   				and title like CONCAT('%', #{keyword}, '%')

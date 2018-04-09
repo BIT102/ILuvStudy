@@ -469,7 +469,7 @@ function myFunction1(x) {
 	<!-- 파일업로드 핸들러 -->
 	<script id="templateAttach" type="text/x-handlebars-template">
     <li data-src='{{name}}'>
-		<span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment"></span>
+		<span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment" style="width:150px; height:150px;"></span>
   		<div class="mailbox-attachment-info">
 		</span>
 		</div>

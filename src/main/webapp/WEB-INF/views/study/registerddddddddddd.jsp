@@ -7,13 +7,8 @@
 <script type="text/javascript" src="/resources/js/upload.js"></script>
 
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script>
-  var jb = jQuery.noConflict();
-
-  </script>
-
-
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 
 <script
 	src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
@@ -124,7 +119,6 @@ small {
 </head>
 <body>
 		<%@include file="../nav.jsp"%>
-
 	<div id="wrapper">
 
 
@@ -369,12 +363,9 @@ small {
 													<td>
 														<div class="studyfile">
 
-															<h5>첫 사진은 메인 화면에 등록됩니다.</h5>
-															<p> 드레그하여 사진의 순서를 변경할 수 있습니다.</p>
+															<h3>첫 사진은 메인 화면에 등록됩니다.</h3>
 															<div class='fileDrop'></div>
-																
-															<ul class='uploadedList'></ul>
-															
+															<div class='uploadedList'></div>
 														</div>
 													</td>
 												</tr>
@@ -406,22 +397,19 @@ small {
 	</div>
 
 	<script id="template" type="text/x-handlebars-template">
+	
 	<div class="mailbox-attachment-info">
 		<span class="mailbox-attachment-icon has-img">
-			<img src="{{imgsrc}}" alt="Attachment" style="width:150px; height:150px;">
+			<img src="{{imgsrc}}" alt="Attachment">
 		</span>
-		<a href="{{getLink}}" class="mailbox-attachment-name"></a>
+		<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>
 		<small class = "small" value = "{{name}}" data-src=data style="cursor:pointer">X</small>
+		</span>
 	</div>
 </script>
-	<script>
-	  jb( function() {
-		    jb( ".uploadedList" ).sortable();
-		    jb( ".uploadedList" ).disableSelection();
-		  } );
-	
-	</script>
-	
+
+
+
 	<script>
 		$(".st").change(function() {
 			var stval = $(".st option:selected").val();

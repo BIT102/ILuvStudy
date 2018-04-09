@@ -166,7 +166,6 @@ select::-ms-expand {
 					<div class="dropdown">
 						<select class="dropdown-select-version select" id="select1"
 							name="options" style="float: right;">
-							<option value="">--</option>
 							<option value="x">전체</option>
 							<option value="t"
 								<c:out value="${cri.searchType eq 't'? 'selected' : ''}"/>>제목</option>

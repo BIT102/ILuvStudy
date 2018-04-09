@@ -117,7 +117,7 @@
 		<!--  begin testimonial section  -->
 
 		<section class="bg-light-gray">
-			<div class="container">
+			<div class="container" style="margin-top:100px;">
 
 				<div class="headline text-center">
 					<div class="row">
@@ -326,7 +326,7 @@
 		  self.location = "listAll"
 				+ '${pageMakerStudy.makeQuery(1)}'
 				+ "&searchType="
-				+ "tcnrg"
+				+ "x"
 				/* + $("select option:selected").val() */
 				+ "&keyword=" + encodeURIComponent($('#keywordInput').val());  
 	  }
