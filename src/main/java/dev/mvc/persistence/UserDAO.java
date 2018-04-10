@@ -1,11 +1,10 @@
 package dev.mvc.persistence;
 
-import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import dev.mvc.domain.StudyVO;
 import dev.mvc.domain.UserVO;
-import dev.mvc.dto.LoginDTO;
 
 public interface UserDAO {
 
@@ -31,7 +30,7 @@ public interface UserDAO {
 	public int nickCheck(String nickName) throws Exception;
 	
 	//프로필 사진 수정
-	public void insertImg(UserVO vo) throws Exception;
+	public void insertImg(Map<String, Object> map) throws Exception;
 	
 	//프로필 사진 수정222
 	

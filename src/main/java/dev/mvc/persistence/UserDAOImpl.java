@@ -70,8 +70,8 @@ public class UserDAOImpl implements UserDAO {
 	
 	//프로필 사진 수정
 	@Override
-	public void insertImg(UserVO vo) throws Exception { //data가 여기서만
-		session.update(namespace+".insertImg", vo);
+	public void insertImg(Map<String, Object> map) throws Exception { //data가 여기서만
+		session.update(namespace+".insertImg", map);
 	}
 	
 	//북마크 리스트 불러오기

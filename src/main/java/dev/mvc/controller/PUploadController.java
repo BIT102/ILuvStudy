@@ -1,37 +1,38 @@
 package dev.mvc.controller;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.util.UUID;
-
 import javax.annotation.Resource;
+import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
-import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import dev.mvc.util.MediaUtils;
-import dev.mvc.util.pMediaUtils;
-import dev.mvc.util.pUploadFileUtils;
+import dev.mvc.domain.UserVO;
+import dev.mvc.service.UserService;
+import dev.mvc.util.S3Util;
+import dev.mvc.util.UploadFileUtils;
 
 @Controller
 public class PUploadController {
 	
+	S3Util s3 = new S3Util();
+    String bucketName = "iluvstudy";
+	
 	@Resource(name = "uploadPath")
 	private String uploadPath;
-
+	@Resource(name="uploadPathUser")
+	private String uploadPathUser;
+	
+	@Inject
+	private UserService service;
 	
 	private static final Logger logger = 
 			LoggerFactory.getLogger(PUploadController.class);
@@ -43,97 +44,118 @@ public class PUploadController {
 	}
 	
 	// iframe을 활용 업로드
-	@RequestMapping(value="/pUploadForm", method = RequestMethod.POST)
+	@RequestMapping(value="/pUploadForm", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
 //	public void uploadForm(MultipartFile file, Model model) throws Exception{
-	public String uploadForm(MultipartFile file, Model model) throws Exception{	
-		
-		logger.info("orginalName:" + file.getOriginalFilename());
-		logger.info("size:" + file.getSize());
-		logger.info("contentType:" + file.getContentType());
-		
-		String savedName = uploadFile(file.getOriginalFilename(), file.getBytes());
-		
-		model.addAttribute("savedName", savedName);
-		
-		return "pUploadResult";  // iframe 동작을 위해 String타입 변환하여 pUploadResult 페이지로 리턴 시킴
-	}
+	public ResponseEntity<String> uploadForm(UserVO vo, MultipartFile file, Model model, HttpServletRequest request) throws Exception{	
 
-	
-	// 파일 업로드 파일명 키값 생성
-	private String uploadFile(String originalName, byte[] fileData) throws Exception {
 		
-		UUID uid = UUID.randomUUID(); // UUID - 중복되지 않는 고유한 키 값을 설정할 때 사용
+		System.out.println("업로드시작============");
+		logger.info("originalName: "+file.getOriginalFilename());
+//		logger.info("size: "+file.getSize());
+//		logger.info("contentType: "+file.getContentType());
 		
-		String savedName = uid.toString() + "_"+ originalName; // uid에 담긴 UUID_실제파일명
+		System.out.println("업로드패스스스" +UploadFileUtils.uploadFile(uploadPath,
+				file.getOriginalFilename(), 
+				file.getBytes()));
+			
+		HttpSession session = request.getSession();
+		UserVO sUser = (UserVO)session.getAttribute("login");
+		String email = sUser.getEmail();
 		
-		File target = new File(uploadPath, savedName);
 		
-		FileCopyUtils.copy(fileData, target); // 패키지에 설정된 클래스
+		vo.setPhoto(UploadFileUtils.uploadFile(uploadPath,
+				file.getOriginalFilename(), 
+				file.getBytes()));
 		
-		return savedName;
-	}
+		vo.setEmail(email);
+		
+		service.insertImg(vo);
+		
+		
 
-	// Ajax 업로드
-	@RequestMapping(value="/pUploadAjax", method = RequestMethod.GET)
-	public void uploadAjax(){
-		
+		return new ResponseEntity<>(UploadFileUtils.uploadFile(uploadPath,
+				file.getOriginalFilename(), 
+				file.getBytes()),
+				HttpStatus.CREATED);
 	}
 	
-	@ResponseBody
-	@RequestMapping(value = "/pUploadAjax", method = RequestMethod.POST, 
-					produces = "text/plain; charset=UTF-8") // produces는 한국어를 정상적으로 전달하기 위함
-	public ResponseEntity<String> pUploadAjax(MultipartFile file) throws Exception{
-		
-		logger.info("orginalName:" + file.getOriginalFilename());
-		logger.info("size:" + file.getSize());
-		logger.info("contentType:" + file.getContentType());
-		
-		return
-	//		new ResponseEntity<String>(file.getOriginalFilename(), HttpStatus.CREATED); // HttpStatus.OK와 같음
-			new ResponseEntity<>(pUploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes()), HttpStatus.OK);
-	}
 	
-	@ResponseBody	//byte[] 데이터가 그대로 전송
+	
+	
+
+
+/*	@ResponseBody	//byte[] 데이터가 그대로 전송
 	@RequestMapping("/pDisplayFile")
 	public ResponseEntity<byte[]> DisplayFile(String fileName) throws Exception{
 								// 파라미터로 브라우저에서 전송받기를 원하는 파일의 이름을 받음(년/월/일/파일명 형태로)
 
-		InputStream in = null;
-		ResponseEntity<byte[]> entity = null; // 리턴타입이 ResponseEntity<byte[]> 결과는 실제 파일의 데이터
-				
-				logger.info("FILE NAME : " + fileName);
-				
-		try { 
-			System.out.println(fileName);
-			String formatName = fileName.substring(fileName.lastIndexOf(".")+1); // 파일에서 확장자 추출
-	
-			MediaType mType = MediaUtils.getMediaType(formatName); 
-			
-			HttpHeaders headers = new HttpHeaders();
-			
-			in = new FileInputStream(uploadPath+fileName);
-			
-			if(mType != null){
-				headers.setContentType(mType);
-			} else {
-				
-				fileName = fileName.substring(fileName.indexOf("_")+1);
-				headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-				headers.add("Content-Disposition", "attachment; filename=\""+
-							new String(fileName.getBytes("UTF-8"), "ISO-8859-1")+"\"");
-			}
-			
-			entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in),
-					                            headers,
-					                            HttpStatus.CREATED);
-		} catch(Exception e) {
-			e.printStackTrace();
-			entity = new ResponseEntity<byte[]>(HttpStatus.BAD_REQUEST);
-			} finally { 
-				in.close();
+    	System.out.println("업로드컨트롤러 : 파일 업로드 2222");
+        InputStream in = null;
+        ResponseEntity<byte[]> entity = null;
+        HttpURLConnection uCon = null;
+        System.out.println("FILE NAME: " + fileName);
 
-			}
-		return entity;
+        System.out.println("업로드컨트롤러 : 파일 업로드 3333");
+        try{
+            String formatName = fileName.substring(fileName.lastIndexOf(".")+1);
+
+            MediaType mType = MediaUtils.getMediaType(formatName);
+            HttpHeaders headers = new HttpHeaders();
+
+            String inputDirectory = "study";
+            URL url;
+
+            //in = new FileInputStream(uploadPath+fileName);
+            //System.out.println("in : "+in);
+//            if(mType != null){
+//                headers.setContentType(mType);
+//            }else{
+//
+//                fileName = fileName.substring(fileName.indexOf("_")+1);
+//                headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+//                headers.add("Content-Disposition","attachment; filename=\""+new String(fileName.getBytes("UTF-8"),"ISO-8859-1")+"\"");
+//            }
+            
+            System.out.println("업로드컨트롤러 : 파일 업로드 44444");
+
+            try {
+                url = new URL(s3.getFileURL(bucketName, inputDirectory+fileName));
+                System.out.println("https://s3.ap-northeast-2.amazonaws.com/"+inputDirectory+"/study"+fileName);
+                System.out.println("유알엘 :" + url);
+                uCon = (HttpURLConnection) url.openConnection();
+                System.out.println("유콘 :" + uCon);
+                in = uCon.getInputStream(); // 이미지를 불러옴
+                System.out.println("인인인 :" + in);
+            } catch (Exception e) {
+                url = new URL(s3.getFileURL(bucketName, "default.jpg"));
+                uCon = (HttpURLConnection) url.openConnection();
+                in = uCon.getInputStream();
+            }
+
+            System.out.println("업로드컨트롤러 : 파일 업로드 55555");
+            entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in),
+            headers,
+            HttpStatus.CREATED);
+        }catch (FileNotFoundException effe){
+            System.out.println("File Not found Exception");
+            String formatName = fileName.substring(fileName.lastIndexOf(".")+1);
+            MediaType mType = MediaUtils.getMediaType(formatName);
+            HttpHeaders headers = new HttpHeaders();
+            in = new FileInputStream(uploadPath+"/noimg.jpg");
+
+                headers.setContentType(mType);
+
+            entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in),
+                    headers,
+                    HttpStatus.CREATED);
+            System.out.println("업로드컨트롤러 : 파일 업로드 666666");
+        }catch (Exception e){
+            e.printStackTrace();
+            entity = new ResponseEntity<byte[]>(HttpStatus.BAD_REQUEST);
+        }finally {
+            in.close();
+        }
+        return entity;
 		}
 	
 	@ResponseBody
@@ -156,6 +178,6 @@ public class PUploadController {
 		new File(uploadPath + fileName.replace('/', File.separatorChar)).delete();
 		
 		return new ResponseEntity<String>("deleted", HttpStatus.OK);
-	}
+	}*/
 	
 }

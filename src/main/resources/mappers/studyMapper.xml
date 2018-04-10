@@ -163,6 +163,7 @@ ba.name
 , bs.title
 , bs.writer
 , u.NICKNAME
+, u.photo
 , bs.now
 , bs.max
 , r.rDName
@@ -421,6 +422,7 @@ ba.name
 , bs.bno
 , bs.title
 , bs.writer
+, u.photo
 , u.NICKNAME
 , bs.now
 , bs.max

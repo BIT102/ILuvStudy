@@ -204,7 +204,7 @@ small {
 													<td>
 														<!-- ======== 지 역 =========== --> <!-- 스터디에 선택된 지역정보 셀렉트 표시 -->
 														<select id="rDName" name='rDId' class="form-control">
-															<option value="">--</option>
+															<option value="z">--</option>
 															<c:forEach items="${region}" var="studyVO">
 																<c:if test="${studyVO.rSId eq 1}">
 																	<option value="${studyVO.rDId}">${studyVO.rDName}</option>
@@ -213,12 +213,19 @@ small {
 													</select> <select id="rSName" name='rSId' class="form-control">
 															<option value="">--</option>
 													</select>
-													<!-- 지도입니다. -->
+													
 												
-													 <div id="map"></div>
+													 
 							
 													</td>
 												</tr>
+												
+												<tr>
+												<th>상세지역</th>
+												
+												<td><div id="map"></div></td>
+												</tr>
+												
 												<tr>
 													<th>스터디 방장</th>
 													<!--  세션으로 전송 -->
@@ -226,7 +233,6 @@ small {
 													<td><input class="form-control" name="writer"
 														value="${email}" style="width: 460px;"></td>
 												</tr>
-
 											</tbody>
 										</table>
 
@@ -441,13 +447,19 @@ small {
 			console.log("1*****************");
 			event.preventDefault();
 		});
+		
+		var count;
+
 		//파일을 떨구는 장소 
 		$(".fileDrop").on("drop", function(event) {
+			
+			count++;
+
 			console.log("2*****************");
 			event.preventDefault();
 			var files = event.originalEvent.dataTransfer.files;
 			var file = files[0];
-			console.log(file);
+			
 			var formData = new FormData();
 			formData.append("file", file);
 			$.ajax({
@@ -462,13 +474,20 @@ small {
 					console.log("3*****************");
 					var fileInfo = getFileInfo(data);
 					var html = template(fileInfo);
-					$(".uploadedList").append(html);
+					//파일 유효성 5장 이상시 등록x
+					if(count > 5) {
+						alert("사진은 5장까지 등록할 수 있습니다.")	
+						count = 5;
+					} else {
+						$(".uploadedList").append(html);
+					}
 				}
 			});
 		});
+
 		//취소버튼
 		$(".uploadedList").on("click", "small", function(event) {
-			
+			--count;
 			var that = $(this);
 			$.ajax({
 				url : "deleteFile",
@@ -478,7 +497,7 @@ small {
 				},
 				dataType : "text",
 				success : function(result) {
-
+						
 						alert("deleted");
 						that.parent("div").remove();
 				}
@@ -612,6 +631,7 @@ small {
 				//rdid의 값 전송
 				}),
 				success : function(result) { //반환받은 지역테이블 정보, list 배열
+					
 					var option = "";
 					if (result.length < 2) {
 						option = "<option>--</option>"
@@ -722,7 +742,7 @@ small {
     		$("#studyTitle").focus();
     		return false;
     		//지역 대 
-    	} else if($("#rDName option:selected").val()=="") {
+    	} else if($("#rDName option:selected").val()=="z") {
     		
        		alert("지역을 입력하세요")
     		$("#rDName").focus();
@@ -814,89 +834,42 @@ small {
     }) 
     </script>
     
+ 
     <!--지도 크르깁트 -->
+    
     <script>
-   function initMap() {
-   		var uluru = {lat:37.5663797, lng:126.9777154};
-   	    var map = new google.maps.Map(document.getElementById('map'),{
-   		zoom: 16,
-   		center:uluru
-   	});
-   	var marker = new google.maps.Marker({
-   		position:uluru,
-   		map:map
-   	});
-   }
-   </script> 
-   
-   <!-- 지도 검색을 위한 스크립트 -->
-<!--    <script>
-   	function initAutocomplete() {
-   	
-   		var map = new google.maps.Map(document.getElementById('map'), {
-   			center : {lat:37.5663797, lng:126.9777154},
-   			zoom:13,
-   			mapTyleId:'roadmap'
-   		});
-   		
-   		var input = document.getElementById('pac-input');
-   		
-   		alert(input);
-   		
-   		var searchBox = new google.maps.places.SearchBox(input);
-   		map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-   		
-   		map.addListener('bounds_changed', function(){
-   			searchBox.setBounds(map.getBounds());
-   		});
-   		   		
-   		var markers = [];
-   		
-   		searchBox.addListener('places_changed'), function(){
-   			var places = searchBox.getPlaces();
-   			
-   			if(places.length==0){
-   				return;
-   			}
-   			
-   			markers.forEach(function(marker){
-   				marker.setMap(null);
-   			});
-   			markers=[];
-   			
-   			var bounds = new google.maps.LatLngBounds();
-   			places.forEach(function(place){
-   				if(!place.geometry){
-   					console.log("없습니다");
-   					return;
-   				}
-   				var icon = {
-   						url:place.icon,
-   						size:new google.maps.Size(71, 71),
-   						origin:new google.maps.Point(0, 0),
-   						anchor:new google.maps.Point(17, 34),
-   						scaledSize: new google.maps.Size(25, 25)
-   				};
-   				
-   				margers.push(new google.maps.Marker({
-   					map:map,
-   					icon:icon,
-   					title:place.name,
-   					position:place.geometry.location
-   				}));
-   				
-   				if(place.geometry.viewport){
-   					bounds.union(place.geometry.viewport);
-   				} else {
-   					bounds.extend(place.geometry.location);
-   				}
-   			});
-   			map.fitBounds(bounds);
-   		};
-   	}
-   </script>
- -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAiNU7soIIqpN1Jdu0tV1CWBb6u1jJAH5o&callback=initMap"
+    
+    var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    var labelIndex = 0;
+
+    function initialize() {
+    	var korea = {lat:37.5663797, lng:126.9777154};
+    	var map = new google.maps.Map(document.getElementById('map'),{
+    	zoom: 16,
+    	center:korea
+    });
+    
+    google.maps.event.addListener(map, 'click', function(event){
+
+    		markert =[];
+	    	addMarker(event.latLng, map);
+	    	alert(event.latLng)
+
+    });	
+  }
+    
+    function addMarker(location, map) {
+    	var marker = new google.maps.Marker({
+    		position:location,
+    		label:labels[labelIndex++ % labels.length],
+    		map:map
+    	});
+	    	
+    }
+	
+    </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAiNU7soIIqpN1Jdu0tV1CWBb6u1jJAH5o&callback=initialize"
     async defer></script>
     
     

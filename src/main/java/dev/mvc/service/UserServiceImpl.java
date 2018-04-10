@@ -1,8 +1,8 @@
 package dev.mvc.service;
 
-import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
-import java.util.UUID;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.mail.internet.MimeMessage;
@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import dev.mvc.domain.StudyVO;
 import dev.mvc.domain.UserVO;
-import dev.mvc.dto.LoginDTO;
 import dev.mvc.persistence.UserDAO;
 
 @Service
@@ -69,7 +68,16 @@ public class UserServiceImpl implements UserService {
 		// 프로필 사진 수정
 		@Override
 		public void insertImg(UserVO vo) throws Exception { // data = 값이. 단순히 변수명인데 헷갈려함. 바보바보. 기대값은 이미지 이름
-			dao.insertImg(vo);
+			
+			String files = vo.getPhoto();
+			String email = vo.getEmail();
+
+			Map<String, Object> map = new HashMap<>();
+			
+			map.put("photo", files);
+			map.put("email", email);
+			
+			dao.insertImg(map);
 		}
 	/*	
 		// 북마크 불러오기

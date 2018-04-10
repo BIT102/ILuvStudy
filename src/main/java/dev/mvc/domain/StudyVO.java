@@ -55,6 +55,7 @@ public class StudyVO {
 	
 	// 작성자는 닉네임으로 표시
 	private String nickname;
+	private String photo;
 	
 
 	//파일을 엄로드합니다
@@ -78,15 +79,6 @@ public class StudyVO {
 	private String apStatus; // D:신청 대기중, O:신청 수락, X: 신청 거절 
 
 	private String msgRegist; //채팅
-	
-	
-	public String getMsgRegist() {
-		return msgRegist;
-	}
-
-	public void setMsgRegist(String msgRegist) {
-		this.msgRegist = msgRegist;
-	}
 
 	public Integer getBno() {
 		return bno;
@@ -280,6 +272,14 @@ public class StudyVO {
 		this.nickname = nickname;
 	}
 
+	public String getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
+
 	public int getNo() {
 		return no;
 	}
@@ -352,6 +352,14 @@ public class StudyVO {
 		this.apStatus = apStatus;
 	}
 
+	public String getMsgRegist() {
+		return msgRegist;
+	}
+
+	public void setMsgRegist(String msgRegist) {
+		this.msgRegist = msgRegist;
+	}
+
 	@Override
 	public String toString() {
 		return "StudyVO [bno=" + bno + ", title=" + title + ", writer=" + writer + ", categoryD="
@@ -359,12 +367,11 @@ public class StudyVO {
 				+ max + ", rDId=" + rDId + ", rSId=" + rSId + ", age=" + age + ", sc=" + sc + ", sd=" + sd + ", st="
 				+ st + ", et=" + et + ", content=" + content + ", vct=" + vct + ", rct=" + rct + ", regdate=" + regdate
 				+ ", enddate=" + enddate + ", rDName=" + rDName + ", rSName=" + rSName + ", cDName=" + cDName
-				+ ", cSName=" + cSName + ", nickname=" + nickname + ", no=" + no + ", name=" + name + ", status="
-				+ status + ", userEmail=" + userEmail + ", files=" + Arrays.toString(files) + ", cDId=" + cDId
-				+ ", cSId=" + cSId + ", bookmarkCount=" + bookmarkCount + ", apStatus=" + apStatus + ", msgRegist="
-				+ msgRegist + "]";
+				+ ", cSName=" + cSName + ", nickname=" + nickname + ", photo=" + photo + ", no=" + no + ", name=" + name
+				+ ", status=" + status + ", userEmail=" + userEmail + ", files=" + Arrays.toString(files) + ", cDId="
+				+ cDId + ", cSId=" + cSId + ", bookmarkCount=" + bookmarkCount + ", apStatus=" + apStatus
+				+ ", msgRegist=" + msgRegist + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
+				+ ", toString()=" + super.toString() + "]";
 	}
-
-	
+		
 }
-

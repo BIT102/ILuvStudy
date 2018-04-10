@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import dev.mvc.service.UserService;
 import dev.mvc.util.MediaUtils;
 import dev.mvc.util.S3Util;
 import dev.mvc.util.UploadFileUtils;
@@ -42,6 +43,8 @@ public class UploadController {
 	@Resource(name="uploadPathUser")
 	private String uploadPathUser;
 	
+	
+	
 	private static final Logger logger = LoggerFactory.getLogger(UploadController.class);
 	   @RequestMapping(value ="/uploadAjax", method =RequestMethod.GET)
 	   public void uploadAjax(){
@@ -55,6 +58,7 @@ public class UploadController {
 		                produces = "text/plain;charset=UTF-8")
 		public ResponseEntity<String> uploadAjax(MultipartFile file) throws Exception {
 			
+			
 			System.out.println("업로드시작============");
 			logger.info("originalName: "+file.getOriginalFilename());
 //			logger.info("size: "+file.getSize());
@@ -62,12 +66,13 @@ public class UploadController {
 			
 			System.out.println("업로드컨트롤러 : 파일 업로드 11111");
 			
-			
 			// **************이 아래 못 들어와요 ㅠㅠ **************************************
 			// 이거 안 찍힘.........................................
 			System.out.println("업로드패스스스" +UploadFileUtils.uploadFile(uploadPath,
 					file.getOriginalFilename(), 
 					file.getBytes()));
+		
+			
 			
 			return new ResponseEntity<>(UploadFileUtils.uploadFile(uploadPath,
 					file.getOriginalFilename(), 
