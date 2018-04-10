@@ -15,12 +15,12 @@
 			<!-- MAIN CONTENT -->
 			<div class="main-content">
 				<div class="container-fluid">
-					<h3 class="page-title">QNA 관리</h3>
+					<h3 class="page-title">FAQ 관리</h3>
 					<div class="row">
 						<div class="col-md-12">
     						<div class="panel">
         <div class="panel-heading">
-			<h3 class="panel-title">QNA 관리</h3>
+			<h3 class="panel-title">FAQ 관리</h3>
 		</div>
         
         <!--검색-->
@@ -28,13 +28,13 @@
         <table class="table">
         <thead>
 			<tr>
-				<th>FAQ</th>
+				<!-- <th>FAQ</th> -->
 				<th>아이디</th>
 			</tr>
 		</thead>
 		<tbody>
             <tr>
-                <td>
+                <%-- <td>
                     <select name="faqType" id="faqTypeSelect" class="form-control">
                 		<!-- 0: 미등록  1: 등록 -->
                         <option value="n"
@@ -44,7 +44,7 @@
                         <option value="d"
                         	<c:out value="${cri.faqType eq 'd'?'selected':''}"/>>미등록</option>
                     </select>
-                </td>
+                </td> --%>
                 <td><input type="text" name="emailKeyword" id="emailKeywordInput" value="${cri.emailKeyword}" class="form-control"></td>
             </tr>
 		</tbody>
@@ -67,8 +67,8 @@
                 <th>번호</th>
                 <th>아이디</th>
                 <th>제목</th>
-                <th>FAQ</th>
-                <th>댓글수</th>
+                <!-- <th>FAQ</th> -->
+                <!-- <th>댓글수</th> -->
                 <th>작성일</th>
             </tr>
 		</thead>
@@ -80,11 +80,11 @@
                 <td>${qnaVO.writer}</td>
                 <td><a href="/admin/qnaDetail${pageMaker.qnaSearch(pageMaker.cri.page)}&bno=${qnaVO.bno}">${qnaVO.title}</a></td>
                 <!-- 0: 미등록  1: 등록 -->
-                <td>
+               <%--  <td>
                 	<c:if test="${qnaVO.type eq 0}">미등록 </c:if>
                 	<c:if test="${qnaVO.type eq 1}">등록</c:if>
-                </td>
-                <td>${qnaVO.rct}</td>
+                </td> --%>
+                <%-- <td>${qnaVO.rct}</td> --%>
                 <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${qnaVO.regdate}"/></td>
             </tr>
 </c:forEach>
@@ -111,6 +111,11 @@
         	</c:if>
         </ul>
         </div>
+        
+        <div class="text-right">
+        <button type="button" id="registerBtn" class="btn btn-primary">등록</button>
+        </div>
+        
         </div>
         <!-- panel-body end -->
         
@@ -134,6 +139,11 @@
 		$("#qnaListsuv").attr("class", "active");
 		$("#qnaListnav").attr("class", "active");
 		$("#subPages2").attr("class", "in");
+		
+		//등록 클릭 시 액션
+		$("#registerBtn").on("click", function(){
+			self.location = "/admin/qnaRegister";
+		});
 		
 		//검색 클릭 시 액션
  		$("#searchBtn").on("click", function(event){

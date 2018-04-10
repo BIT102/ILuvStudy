@@ -96,7 +96,7 @@ color:#6b456a !important;
 
                                 <ol class="breadcrumb">
                                     <li><a href="/study/main">Home</a></li>
-                                    <li class="active">FAQ</li>
+                                    <li class="active">자주 묻는 질문</li>
                                 </ol> <!-- end of /.breadcrumb -->
 
                             </div>
@@ -125,7 +125,7 @@ color:#6b456a !important;
 <section class="row-section">
     <div class="container contentB">
 	    <div class="row">
-		    <h2 class="text-center"><span>F A Q</span></h2>
+		    <h2 class="text-center"><span>자주 묻는 질문</span></h2>
 	    </div>
 	    <div class="col-md-12 offset-md-1 row-block">
 	        <div class="panel-group" id="accordion">
@@ -137,7 +137,7 @@ color:#6b456a !important;
 	      			  <h4 class="panel-title">
 	        		  <a data-toggle="collapse" data-parent="#accordion" href="#collapse${QnaVO.bno}">${QnaVO.title}</a>
 	        		  <small>(admin)</small>
-	        		  <span class="time"><fmt:formatDate pattern="yyyy-MM-dd" value="${QnaVO.regdate}"/></span>
+	        		  <span class="time"><fmt:formatDate pattern="yyyy.MM.dd" value="${QnaVO.regdate}"/></span>
 	       			 </h4>
 	      			</div>
 				      <div id="collapse${QnaVO.bno}" class="panel-collapse collapse">

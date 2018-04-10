@@ -179,8 +179,8 @@
 
 #chatClick{
 	position:fixed;
-	bottom:100;
-	right:50;
+	bottom:100 !important;;
+	right:50 !important;;
 	z-index:999;
 }
 
@@ -387,6 +387,10 @@ display:none;
 	height: 44px;
 	margin-left: 5px;
 }
+
+.msg_container_base{
+height:400px;
+}
 </style>
 
 </head>
@@ -435,14 +439,14 @@ display:none;
 						<div class="form-box">
 							<form action="/loginPost" method="post" class="form login">
 
-								<input name="id" type="text" placeholder="username" required>
-								<input type="password" name="pw" placeholder="password" required>
+								<input name="id" type="text" placeholder="아이디" required>
+								<input type="password" name="pw" placeholder="비밀번호" required>
 
 								<!-- 3월 25일 머지 주석 처리 	-->
 								<!-- <input name="email" type="text" placeholder="username"> 
 								<input type="password" name="password" placeho2lder="password"> -->
 								<div class="btttt">
-								<button class="btn btn-info btn-block login" type="submit">Login</button>
+								<button class="btn btn-info btn-block login" type="submit" style="margin-bottom:9px;">로그인</button>
 							
 			<!-- ======== 구글 로그인 api========== -->
 								<img id="googleimg" src="/resources/img/google.png">
@@ -454,15 +458,15 @@ display:none;
 									<input type="checkbox"
 										style="width: 20px; vertical-align: middle; margin: 0;"
 										id="ida"><label for="idaa"
-										style="vertical-align: middle; margin: 0;"> 아이디저장</label><br>
+										style="vertical-align: middle; margin: 0;">&nbsp;아이디저장</label><br>
 								</div>
 								<div class="texttext">
 									<input type="checkbox" name="useCookies"
 										style="width: 20px; vertical-align: middle; margin: 0;"
 										id="idb"><label for="idbb"
-										style="vertical-align: middle; margin: 0;"> 자동로그인</label>
+										style="vertical-align: middle; margin: 0;">&nbsp;자동로그인</label>
 								</div>
-								<br> 아이디/비밀번호를 잊으셨나요?<br> <a href="/searchEmail.jsp">아이디찾기 / </a><a
+								<br>* 아이디/비밀번호를 잊으셨나요?<br> <a href="/searchEmail.jsp">아이디찾기 / </a><a
 									href="/searchPW">비밀번호찾기</a>
 							</form>
 						</div>
@@ -485,8 +489,7 @@ display:none;
 							<li class="dropdown"><a href="/join"><span>회원가입</span></a></li>
 						</c:when>
 						<c:otherwise>
-							<li class="dropdown"><a href="/profile"><span>My
-										page</span></a></li>
+							<li class="dropdown"><a href="/profile"><span>마이페이지</span></a></li>
 							<!-- end of /.dropdown -->
 							<li class="dropdown"><a href="/logout"><span>로그아웃</span></a>
 							</li>
@@ -495,7 +498,7 @@ display:none;
 					</c:choose>
 					<li class="dropdown"><a href="/study/listAll"><span>스터디
 								구경하기</span></a></li>
-					<li class="dropdown"><a href="/sqna/list"><span>FAQ</span></a>
+					<li class="dropdown"><a href="/sqna/list"><span>자주 묻는 질문</span></a>
 					</li>
 					<li class="dropdown"><a href="/study/notice"><span>공지사항</span></a>
 					</li>
@@ -512,7 +515,7 @@ display:none;
 <c:if test="${login ne null}">
 <!-- =============== 문의 채팅 시작 ====================== -->
 <%-- <jsp:include page="/WEB-INF/views/chatting/chatAdmin22.jsp" flush="false" /> --%>
-<div id="chatClick" onclick="getChat()" style="cursor:pointer;"><img src="/resources/img/chatchat.png"></div> 
+<div id="chatClick" style="cursor:pointer;"><img src="/resources/img/chatchat.png"></div> 
 
 <div class="chatNone" id="chat">      
     <div class="row chat-window col-xs-5 col-md-3" id="chat_window_1" style="margin-left:10px;">
@@ -562,44 +565,6 @@ window.onclick = function(event) {
     if (event.target == modal) {
         modal.style.display = "none";
     }
-}
-
-function getChat(){
-	$.ajax({ 
-		type:'POST',
-		url:'/chatting/chatAdmin22',
-			headers : {
-			"Content-Type" : "application/json",
-			"X-HTTP-Method-Override" : "POST"}, 
-		dataType:'json',
-		data:JSON.stringify({
-			
-		}),
-		success:function(result){ 
-			console.log("데려왔따");
-			console.log(result);
-			
-			console.log(result[0].msgRegist);
-			
-			var message = "";
-			
-			for(var i=0;i<result.length;i++){
-				if(result[i].email == "admin"){
-					message = "<div class='row msg_container base_receive'><div class='col-md-10 col-xs-10' style='padding:0;'><div class='messages msg_receive'>"
-						+ result[i].message + "<br><time>"
-						+ result[i].msgRegist + "</time></div></div></div>";
-					$('.msg_container_base').append(message);
-				}else{
-					message = "<div class='row msg_container base_sent'><div class='col-md-10 col-xs-10' style='padding:0;'><div class='messages msg_sent'>"
-						+ result[i].message + "<br><time>"
-						+ result[i].msgRegist + "</time></div></div></div>";
-					$('.msg_container_base').append(message);
-				}
-				
-				$('.msg_container_base').scrollTop(9999);
-			}
-		}
-	}); //$.ajax 끝
 }
 
 
@@ -665,11 +630,51 @@ $(document).ready(function(){
 		}
 	});
 	
+	//채팅 아이콘 클릭 시 액션
 	$('#chatClick').click(function(){
+		//채팅창이 안보이는 경우
 		if($('#chat').hasClass('chatNone')){
-			$('#chat').removeClass('chatNone');
-			$('#chat').addClass('chatBlock');	
-			$('.msg_container_base').scrollTop(9999);
+			$('.msg_container_base').html("");  //불러온 메시지 삭제
+			$('#chat').removeClass('chatNone');  //채팅창 안보이도록 처리한 클래스 삭제
+			$('#chat').addClass('chatBlock');	//채팅창 보이도록 처리한 클래스 추가
+			
+			//ajax로 채팅 내용 불러옴
+			$.ajax({ 
+				type:'POST',
+				url:'/chatting/chatAdmin22',
+					headers : {
+					"Content-Type" : "application/json",
+					"X-HTTP-Method-Override" : "POST"}, 
+				dataType:'json',
+				data:JSON.stringify({
+					
+				}),
+				success:function(result){ 
+					console.log("데려왔따");
+					console.log(result);
+					
+					console.log(result[0].msgRegist);
+					
+					var message = "";
+					
+					//채팅창에 내용 추가
+					for(var i=0;i<result.length;i++){
+						if(result[i].email == "admin"){
+							message = "<div class='row msg_container base_receive'><div class='col-md-10 col-xs-10' style='padding:0;'><div class='messages msg_receive'>"
+								+ result[i].message + "<br><time>"
+								+ result[i].msgRegist + "</time></div></div></div>";
+							$('.msg_container_base').append(message);
+						}else{
+							message = "<div class='row msg_container base_sent'><div class='col-md-10 col-xs-10' style='padding:0;'><div class='messages msg_sent'>"
+								+ result[i].message + "<br><time>"
+								+ result[i].msgRegist + "</time></div></div></div>";
+							$('.msg_container_base').append(message);
+						}
+						
+						$('.msg_container_base').scrollTop(9999); //채팅창 스크롤 가장 아래로 내림
+					}
+				}
+			}); //$.ajax 끝
 		}else{
 			$('#chat').removeClass('chatBlock');
 			$('#chat').addClass('chatNone');	

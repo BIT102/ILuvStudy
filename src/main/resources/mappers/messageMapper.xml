@@ -19,6 +19,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		or (receiver = 'admin' and email = #{email});
 	</select>
 	
+	<!-- 관리자 문의 메시지 리스트 -->
+	<select id="adminMessageList" resultType="MessageVO">
+		select distinct(m.email), u.bno, ifnull(c.readCheck,0) as readCheck
+		from message m
+		left join (select email, count(*) as readCheck
+		from message
+		where receiver = 'admin' 
+		and readtime is null
+		group by email) c
+		on m.email = c.email
+		, user u
+		where m.email = u.email
+		and m.receiver = 'admin'
+		group by m.email;
+	</select>
+
 	<!-- 관리자 문의 메시지 조회 -->
 	<select id="adminMessageView" resultType="MessageVO">
 		select bno, email, message, type, receiver, date_format(msgregist,'%Y-%m-%d %h:%m') as msgRegist
@@ -27,14 +43,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		or (receiver = 'admin' and email = (select email from user where bno = #{bno}));
 	</select>
 	
-	<!-- 관리자 문의 메시지 리스트 -->
-	<select id="adminMessageList" resultType="MessageVO">
-		select distinct(m.email), u.bno
-		from message m, user u
-		where m.email = u.email
-		and m.receiver = 'admin'
-		group by m.email;
-	</select>
-	
+	<!-- 관리자에서 읽은 메시지인 경우 업데이트 처리 -->
+	<update id="adminMessageRead">
+		update message set readtime=now()
+		where (email = 'admin' and receiver = (select email from user where bno = #{bno}))
+		or (receiver = 'admin' and email = (select email from user where bno = #{bno}));
+	</update>
 	
 </mapper>

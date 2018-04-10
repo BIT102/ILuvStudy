@@ -93,7 +93,7 @@ color:#6b456a !important;
 
                                 <ol class="breadcrumb">
                                     <li><a href="/study/main">Home</a></li>
-                                    <li class="active">NOTICE</li>
+                                    <li class="active">공지사항</li>
                                 </ol> <!-- end of /.breadcrumb -->
 
                             </div>
@@ -131,7 +131,7 @@ color:#6b456a !important;
 	      			  <h4 class="panel-title">
 	        		  <a data-toggle="collapse" data-parent="#accordion" href="#collapse${noticeVO.bno}">${noticeVO.title}</a>
 	        		  <small>(admin)</small>
-	        		 <span class="time"><fmt:formatDate pattern="yyyy-MM-dd" value="${noticeVO.regdate}"/></span>
+	        		 <span class="time"><fmt:formatDate pattern="yyyy.MM.dd" value="${noticeVO.regdate}"/></span>
 	       			 </h4>
 	      			</div>
 				      <div id="collapse${noticeVO.bno}" class="panel-collapse collapse">

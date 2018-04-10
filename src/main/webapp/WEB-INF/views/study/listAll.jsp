@@ -147,7 +147,7 @@ select::-ms-expand {
 
                                 <ol class="breadcrumb">
                                     <li><a href="/study/main">Home</a></li>
-                                    <li class="active">List All</li>
+                                    <li class="active">스터디 구경하기</li>
                                 </ol> <!-- end of /.breadcrumb -->
 
                             </div>

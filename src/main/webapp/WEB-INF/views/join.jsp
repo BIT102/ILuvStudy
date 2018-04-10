@@ -31,19 +31,17 @@ select.form-control:not([size]):not([multiple]) {
 	border-color: #269abc;
 }
 
-.btn {
-	padding: 5px 20px !important;
-	margin-left: 20px !important;
+th{
+	width:120px;
 }
 
-.btn-xs {
-	margin-top: 5px;
+.btn-black{
+	margin-top:5px;
 }
 
 </style>
 
 <%@ include file="nav.jsp"%>
-
 
 </head>    
 <script>
@@ -332,7 +330,7 @@ select.form-control:not([size]):not([multiple]) {
 
                                 <ol class="breadcrumb">
                                     <li><a href="/study/main">Home</a></li>
-                                    <li class="active">Sign Up</li>
+                                    <li class="active">회원가입</li>
                                 </ol> <!-- end of /.breadcrumb -->
 
                             </div>
@@ -354,24 +352,24 @@ select.form-control:not([size]):not([multiple]) {
 										<table class="table table-hover">
 						
 												<tr>
-													<th>Email ID </th>
+													<th>아이디</th>
 													<td>
 			                <div class="form-group">
-	                  <div class="col-md-8 col-sm-9">
+	                  <div class="col-md-12 col-sm-9">
 	                    <div class="input-group">
 	                   	 	<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-	                    	<input class="form-control" style = "width:160px" id = "email1" type="text" placeholder="아이디를 입력하세요" name="email1">
-		              		<input class="form-control" style = "width:140px; margin-left:5px;" id = "email2" type="text" placeholder="주소값 직접입력" name="email1">
-		              		<select   id="selectEmail" class = "form-control" style = "width:130px; height: calc(2.25rem + 11px);"> 
+	                    	<input class="form-control" style = "width:185px" id = "email1" type="text" placeholder="아이디를 입력하세요" name="email1">
+		              		<input class="form-control" style = "width:160px; margin-left:5px;" id = "email2" type="text" placeholder="주소값 직접입력" name="email1">
+		              		<select id="selectEmail" class = "form-control" style = "width:140px; height:50px; margin-left:5px;"> 
 								<option id = "selectEmail1" selected>직접입력</option>
 								<option id = "selectEmail2">naver.com</option>
 								<option id = "selectEmail3">daum.net</option>
 								<option id = "selectEmail4">gmail.com</option>
 							</select>
 							
+	                 	 <input type="button" id="chkEmail" class="btn btn-black" style="margin-left:5px;"value="중복체크" />
 	                 	 </div>
-	                 	 <input type="button" id="chkEmail" value="중복체크" />
-	                    <small> Your Email Id is being used for ensuring the security of your account, authorization and access recovery. </small> </div>
+	                   </div>
 	                </div>
 	                <input  id = "email" type="text" name="email" style = "position: absolute; visibility: hidden;" />
 	                
@@ -381,48 +379,51 @@ select.form-control:not([size]):not([multiple]) {
 					</table>
 					<table class="table table-hover">
 					<tr>
-					<th>Set Password</th>
+					<th>비밀번호</th>
 					<td>
 					<div class="form-group">   
 	                  <div class="col-md-5 col-sm-8">
 	                    <div class="input-group">
 	                      <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-	                      <input type="password" class="form-control" name="password" id="password" placeholder="Choose password (8-16 chars)" value="">
+	                      <input type="password" class="form-control" name="password" id="password" placeholder="9~16자 영문 대소문자를 사용하세요." value="">
 	                   </div>
 	                  </div>
-	                  <small id = "pwcheck" style = "color:red">비밀번호를 입력하세요</small>
+	                  <p id = "pwcheck" style = "color:red;padding-top: 15px;margin: 0;">비밀번호를 입력하세요</p>
 	                </div>
 	                <div class="form-group">          
 	                  <div class="col-md-5 col-sm-8">
 	                    <div class="input-group">
 	                      <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-	                      <input type="password" class="form-control" name="cpassword" id="passwordConf" placeholder="Confirm your password" value="">
+	                      <input type="password" class="form-control" name="cpassword" id="passwordConf" placeholder="비밀번호를 재입력하세요." value="">
 	                    </div>  
 	                  </div>
-	                  <small id = "pwcheck2" style = "color:red">비밀번호를 재입력하세요</small>
+	                  <p id = "pwcheck2" style = "color:red;padding-top: 15px;margin: 0;">비밀번호를 재입력하세요</p>
 	                </div>
 			</tr>										
 												<tr>
-													<th>Name</th>
+													<th>이름</th>
 													<td>
 													  <div class="form-group">
 	                
 	                  <div class="col-md-8 col-sm-9">
-	                    <input type="text" id = "name" class="form-control" name="name" id="mem_name" placeholder="Enter your Name here" value="">
+	                    <input type="text" id = "name" class="form-control" name="name" id="mem_name" value="">
 	                  </div>
 	                </div>
+	                  							</td>
+	                  						<tr>
+	                  							<th>닉네임</th>
+	                  							<td>
 	                <div class="form-group">
-	                  
 	                  <div class="col-md-8 col-sm-9">
-	                    <input type="text" class="form-control" name="nickName" id="nickName" placeholder="Enter your NICKNAME here" value="">
-	                    <input type="button" id="chkNickname" value="중복체크" />
-	                    <p id = "nickNamecheck" style = "color:red"></p>
+	                    <input type="text" class="form-control" name="nickName" id="nickName" value="">
+	                    <input type="button" id="chkNickname" class="btn btn-black" value="중복체크" />
+	                    <p id = "nickNamecheck" style = "color:red;"></p>
 	                  </div>
 	                </div>
 													</td>
 												</tr>
 												<tr>
-													<th>Date of Birth</th>
+													<th>생년월일</th>
 													<!-- 아래 방장은 나중에 세션으로 전송 -->
 													<%-- <td><input name="writer" value="${studyVO.writer}"></td> --%>
 													<td>
@@ -430,7 +431,7 @@ select.form-control:not([size]):not([multiple]) {
 													 <div class="form-group">
 	                  
 	                  <div class="col-md-8 col-sm-9">
-	                    <input type="text" id = "birth" class="form-control" name="birth" placeholder="Enter Your Birth(ex.901111)" value="">
+	                    <input type="text" id = "birth" class="form-control" name="birth" placeholder="901111 형식으로 입력하세요." value="">
 	                  </div>
 	                </div>
 													
@@ -438,51 +439,44 @@ select.form-control:not([size]):not([multiple]) {
 												</tr>
 	
 												<tr>
-													<th>Gender</th>
+													<th>성별</th>
 													<td>
 													  <div class="form-group">
 	                  
 	                  <div class="col-md-8 col-sm-9">
 	                    <label>
-	                    <input name="gender" type="radio" value="1" checked>
-	                    Male </label>
+	                    <input name="gender" type="radio" value="1" checked>&nbsp;남자</label>
 	                       
 	                    <label>
-	                    <input name="gender" type="radio" value="2" >
-	                    Female </label>
+	                    <input name="gender" type="radio" value="2" >&nbsp;여자</label>
 	                  </div>
 	                </div>
 													</td>
 												</tr>
 												<tr>
 
-													<th>Contact No.</th>
+													<th>핸드폰번호</th>
 													<td>
-														                <div class="form-group">
-	                  
-	                  <div class="col-md-5 col-sm-8">
-                      	<div class="input-group">
+					<div class="form-group">
+	                  <div class="col-md-12 col-sm-12">
+                      	<div class="input-group" style="width:360px;">
 	                      <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
 	                      <input type="text" class="form-control" style="width:30%" name="phoneNum1" id="phoneNum1" placeholder="" value="">
 	                      <input type="text" class="form-control" style="width:30%" name="phoneNum2" id="phoneNum2" placeholder="" value="">
 	                      <input type="text" class="form-control" style="width:30%" name="phoneNum3" id="phoneNum3" placeholder="" value="">
-	                      
 	                    </div>
-	                    <input type = "button" class = "smsForm" value = "인증번호 전송">
+	                    <input type = "button" class = "smsForm btn btn-black" value = "인증번호 전송">
 	                  </div>
 	                  <input type = "text" id = "phoneNum" name = "phoneNum" style="visibility: hidden; position: absolute;">
 	                </div>
 	                <div class="form-group">
 	               
 	                  <div class="col-md-5 col-sm-8">
-	                    <div >
-	                        <input type="text" name="smsText" id="smsText" placeholder = "인증번호를 입력하세요" class="form-control label-warning"  />
-	                        <input type = "button" id = "smsConfirm" value = "확인">                
+	                    <div>
+	                        <input type="text" name="smsText" id="smsText" placeholder = "인증번호를 입력하세요." class="form-control label-warning"  />
+	                        <input type = "button" id = "smsConfirm" class="btn btn-black" value = "확인">                
 	                    </div>
 	                  </div>
-	                </div>
-	                <div class="form-group">
-	                  <div class="col-xs-offset-3 col-md-8 col-sm-9"><span class="text-muted"><span class="label label-danger">Note:-</span> By clicking Sign Up, you agree to our <a href="#">Terms</a> and that you have read our <a href="#">Policy</a>, including our <a href="#">Cookie Use</a>.</span> </div>
 	                </div>
 													</td>
 												</tr>

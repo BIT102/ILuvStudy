@@ -9,4 +9,5 @@ public interface MessageDAO {
 	public List<MessageVO> adminMessage(String id) throws Exception;
 	public List<MessageVO> adminMessageView(int bno) throws Exception;
 	public List<MessageVO> adminMessageList() throws Exception;
+	public void adminMessageRead(int bno)throws Exception;
 }

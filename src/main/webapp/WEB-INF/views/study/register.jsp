@@ -58,8 +58,8 @@ small {
 	border-color: #269abc;
 }
 .btn {
-	padding: 5px 20px !important;
-	margin-left: 20px !important;
+	padding: 5px 20px;
+	margin-left: 20px;
 }
 .btn-xs {
 	margin-top: 5px;
@@ -68,6 +68,10 @@ small {
 #map {
 	height: 300px;
 	margin-top:15px;
+}
+#chatClick{
+	bottom:10%;
+	right:3%;
 }
 </style>
 </head>
@@ -84,7 +88,7 @@ small {
 
                                 <ol class="breadcrumb">
                                     <li><a href="/study/main">Home</a></li>
-                                    <li class="active">Regist</li>
+                                    <li class="active">스터디 등록하기</li>
                                 </ol> <!-- end of /.breadcrumb -->
 
                             </div>

@@ -23,6 +23,7 @@ public class MessageServiceImpl implements MessageService{
 	
 	@Override
 	public List<MessageVO> adminMessageView(int bno) throws Exception{
+		dao.adminMessageRead(bno);		//관리자가 메시지 읽을 경우
 		return dao.adminMessageView(bno);
 	}
 	

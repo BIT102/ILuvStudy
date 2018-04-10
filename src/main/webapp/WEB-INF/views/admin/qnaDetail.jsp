@@ -44,17 +44,17 @@ form th{
             </tr>
             <tr>
                 <th>제목</th>
-                <td>${qnaVO.title}</td>
+                <td><input type="text" name="title" class="form-control" value="${qnaVO.title}"></td>
             </tr>
             <tr>
                 <th>내용</th>
-                <td>${qnaVO.content}</td>
+                <td><textarea name="content" class="form-control">${qnaVO.content}</textarea></td>
             </tr>
             <tr>
                 <th>작성일</th>
                 <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${qnaVO.regdate}"/></td>
             </tr>
-            <tr>
+        <%--     <tr>
                 <th>댓글수</th>
                 <td>${qnaVO.rct}</td>
             </tr>
@@ -69,13 +69,16 @@ form th{
             			<button type="submit" id="updateRBtn" class="btn btn-default btn-xs">등록취소</button>    	
                 	</c:if>
                 </td>
-            </tr>
+            </tr> --%>
             </tbody>
         </table>
+        
+       		<button type="button" id="listBtn" class="btn btn-primary">목록</button>
+        
        </div>
        <!-- panel-body end --> 
         
-  <div class="panel-body">      
+<%--   <div class="panel-body">      
 <form role="form" method="post">
         <div>* 관리자 답변</div>
         <table class="table table-hover">
@@ -143,9 +146,9 @@ form th{
 		</tbody>
 		</table>
 
-        <button type="button" id="listBtn" class="btn btn-primary">목록</button>
-        </div>
+        </div> --%>
         <!-- panel-body end -->
+   
         
     						</div>
 						</div>

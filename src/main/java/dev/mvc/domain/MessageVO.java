@@ -10,7 +10,7 @@ public class MessageVO {
 	private String receiver;	//귓속말 대상 (기본 : admin)
 	private String email;		//메시지 보낸 이메일
 	private String msgRegist;	//메시지 전송일
-	
+	private int readCheck;		//관리자가 메시지 읽은 여부 체크
 	
 	
 	public static MessageVO converMessage(String source){
@@ -21,6 +21,14 @@ public class MessageVO {
 		return message;
 	}
 	
+	public int getReadCheck() {
+		return readCheck;
+	}
+
+	public void setReadCheck(int readCheck) {
+		this.readCheck = readCheck;
+	}
+
 	public int getBno() {
 		return bno;
 	}
@@ -72,8 +80,7 @@ public class MessageVO {
 	@Override
 	public String toString() {
 		return "MessageVO [bno=" + bno + ", message=" + message + ", type=" + type + ", receiver=" + receiver
-				+ ", email=" + email + ", msgRegist=" + msgRegist + "]";
+				+ ", email=" + email + ", msgRegist=" + msgRegist + ", readCheck=" + readCheck + "]";
 	}
-
 
 }

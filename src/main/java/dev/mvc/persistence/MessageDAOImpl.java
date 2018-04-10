@@ -36,4 +36,10 @@ public class MessageDAOImpl implements MessageDAO {
 	public List<MessageVO> adminMessageList() throws Exception{
 		return session.selectList(namespace + ".adminMessageList");			//관리자 문의 메시지 리스트
 	}
+	
+	@Override
+	public void adminMessageRead(int bno)throws Exception{
+		session.update(namespace+".adminMessageRead", bno); 		//관리자가 메시지 읽을 경우 업데이트
+	}
+	
 }

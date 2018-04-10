@@ -22,7 +22,6 @@ import dev.mvc.domain.UserVO;
 import dev.mvc.service.MessageService;
 
 @Controller
-@RequestMapping("/chatting")
 public class SocketController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(SocketController.class);
@@ -30,19 +29,19 @@ public class SocketController {
 	@Inject
 	private MessageService service;
 
-	@RequestMapping("/chat")
+	@RequestMapping("/chatting/chat")
 	public String viewChattinPage(){
 		return "chatting/chat";
 	}
 	
-	@RequestMapping("/paint")
+	@RequestMapping("/chatting/paint")
     public String viewPaintingPage() {
         return "chatting/paint";
     }
 	
 	//관리자 문의 페이지 문의 고고
 	@ResponseBody
-	@RequestMapping(value = "/chatAdmin22", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "/chatting/chatAdmin22", method = {RequestMethod.GET, RequestMethod.POST})
 	public ResponseEntity<List<MessageVO>> viewChattinPageAdmin22(Model model, HttpServletRequest request) throws Exception{
 		
 		//로그인한 세션에 담겨있는 정보 가져옴
@@ -62,7 +61,7 @@ public class SocketController {
 	
 	//관리자 문의 페이지(관리자단)
 	@ResponseBody
-	@RequestMapping(value = "/chatAdminView/{bno}", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "/chatting/chatAdminView/{bno}", method = {RequestMethod.GET, RequestMethod.POST})
 	public ResponseEntity<List<MessageVO>> viewChattinPageAdmin(@PathVariable("bno") int bno) throws Exception{
 		
 		/*model.addAttribute("list", service.adminMessageView()); //관리자 문의/답변불러오기
@@ -77,12 +76,13 @@ public class SocketController {
 	}
 	
 	//관리자 문의 페이지(관리자단)
-	@RequestMapping(value = "/chatAdmin", method = RequestMethod.GET)
-	public void listChattinPageAdmin(Model model) throws Exception{
+	@RequestMapping(value = "/admin/chatAdmin")
+	public String listChattinPageAdmin(Model model) throws Exception{
 		
 		logger.info("chatAdmin 데려온다...");
 		model.addAttribute("list", service.adminMessageList()); //관리자 문의 리스트
 		
+		return "chatting/chatAdmin";
 	}
 	
 	

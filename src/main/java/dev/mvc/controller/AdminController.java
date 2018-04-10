@@ -338,6 +338,11 @@ public class AdminController {
 		
 		model.addAttribute("pageMaker", pageMaker);
 	}	
+	
+	@RequestMapping(value="/qnaRegister", method = RequestMethod.GET)
+	public void qnaRegister() throws Exception{
+		logger.info("qnaRegister get...");
+	}
 		
 	//admin/qnaDetail.jsp
 	@RequestMapping(value="/qnaDetail", method = RequestMethod.GET)

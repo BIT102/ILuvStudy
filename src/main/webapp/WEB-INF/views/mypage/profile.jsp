@@ -94,7 +94,7 @@
 
                                 <ol class="breadcrumb">
                                     <li><a href="/study/main">Home</a></li>
-                                    <li class="active">Profile</li>
+                                    <li class="active">마이페이지</li>
                                 </ol> <!-- end of /.breadcrumb -->
 
                             </div>
@@ -120,7 +120,7 @@
                             <div class="row">
 
                                 <div class="col-md-6 col-md-offset-3">
-                                    <h2 class="section-title">My page</h2>
+                                    <h2 class="section-title">마이페이지</h2>
                                 </div>
                             </div>
                         </div> <!-- /.headline -->
@@ -138,7 +138,7 @@
                                             </div>
                                         </div> <!--  end of .service-icon-box  -->
                                         <div class="service-info">
-                                            <h3 class="service-heading">My profile</h3>
+                                            <h3 class="service-heading">프로필</h3>
                                         </div> <!--   end of .service-info  -->
                                     </div> <!--  end of .service-content  -->
                                 </div>
@@ -194,7 +194,7 @@
                             <div class="row">
 
                                 <div class="col-md-6 col-md-offset-3">
-                                    <h2 class="section-title">My profile</h2>
+                                    <h2 class="section-title">프로필</h2>
                                 </div>
                             </div>
                         </div> <!-- /.headline -->

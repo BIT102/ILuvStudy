@@ -11,10 +11,7 @@
  
 /* chat */
 #chat{
-	position:fixed;
-	bottom:100;
-	left:50%;
-	z-index:999;
+	float:right;
 }
 
 .col-md-2, .col-md-10{
@@ -44,11 +41,13 @@
   overflow-x:hidden;
 }
 .top-bar {
-  background: #666;
+  background: #00AAFF;
   color: white;
   position: relative;
   overflow: hidden;
   height:41px;
+  padding:0;
+  box-shadow:0 1px 1px;
 }
 .msg_receive{
     padding-left:0;
@@ -149,7 +148,7 @@
 
 /*---*CHAT*-----*/
 #chat .panel-heading{
-    background: #519D9E;
+    background: #00AAFF;
     background-position: center 30%;
 }
 #chat .panel-heading, #chat .panel-heading a {
@@ -207,13 +206,24 @@ display:none;
 }
 
 #btn-chat{
-	background: #519D9E;
+	background: #00AAFF;
 	border: none;
 	height: 44px;
 	margin-left: 5px;
 }
 .chatClick{
 cursor:pointer;
+text-aligh:left;
+padding:8px 10px 5px;
+border-bottom:1px solid #ddd;
+}
+
+.msg_container_base{
+height:400px;
+}
+.chat-list{
+height:475px;
+overflow:auto;
 }
 </style>
 </head>
@@ -237,21 +247,27 @@ cursor:pointer;
 			<div class="panel-body">
 			
 <!--========= 문의 채팅 리스트 ============-->
-<!-- DB데이터 가져옴 -->
-<c:forEach items="${list}" var="messageVO">
-<div class="chatClick" id="${messageVO.bno}">${messageVO.email}</div>
-</c:forEach>
-<!--========= 리스트 끝 ==============-->
-
-			<!-- =============== 문의 채팅 시작 ====================== -->
-
-<div class="chatNone" id="chat">      
-    <div class="row chat-window col-xs-5 col-md-3" id="chat_window_1" style="margin-left:10px;">
-        <div class="col-xs-12 col-md-12">
-         	<div class="panel panel-default">
-                <div class="panel-heading top-bar" style="padding:0;">
+    <div class="row chat-window col-xs-12 col-md-12" id="chat_window_1" style="margin-left:10px;">
+         <div class="col-md-5" style="padding:0;">
+         	  <div class="top-bar">
                 	<div style="height:40px; line-height:40px;padding-left:20px;">
-                		<h4 class="panel-title" style="height:40px; line-height:40px;"><span class="glyphicon glyphicon-comment"></span>&nbsp;1:1 문의하기</h4>
+                		<h4 class="panel-title" style="height:40px; line-height:40px;">리스트</h4>
+                	</div>
+              </div>
+			<div class="chat-list">
+		<!-- DB데이터 가져옴 -->
+			<c:forEach items="${list}" var="messageVO">
+				<div class="chatClick" id="${messageVO.bno}">${messageVO.email}<span style="float:right;" class="badge">${messageVO.readCheck}</span></div>
+			</c:forEach>
+		<!--========= 리스트 끝 ==============-->
+        	</div>
+         </div>
+
+<!-- =============== 문의 채팅 시작 ====================== -->
+<div class="chatNone col-md-7" id="chat" style="padding:0;">      
+                <div class="top-bar">
+                	<div style="height:40px; line-height:40px;padding-left:20px;">
+                		<h4 class="panel-title" style="height:40px; line-height:40px;"><span class="glyphicon glyphicon-comment"></span>&nbsp;1:1 문의내용</h4>
                 	</div>
             	</div>
             	
@@ -273,14 +289,11 @@ cursor:pointer;
                         </span>
                     </div>
                 </div>
-			</div>
 		</div>
-	</div>
 </div>
 
 <!-- =============== 문의 채팅 끝 ======================  -->
-			</div>
-			
+								</div>
 							</div>
 						</div>
 					</div>
@@ -301,7 +314,10 @@ var sock = null;
 var message = {};
 
 $(document).ready(function(){
-
+	$("#qnaListsuv").attr("class", "active");
+	$("#chatAdminnav").attr("class", "active");
+	$("#subPages2").attr("class", "in");
+	
 	//웹 소켓을 지정한 url로 연결
 	sock = new SockJS("/chat");
 	
@@ -358,12 +374,15 @@ $(document).ready(function(){
 		}
 	});
 	
+	//리스트에서 아이디 클릭 시 액션
 	$('.chatClick').click(function(){
+		
 		//if($('#chat').hasClass('chatNone')){
-			$('.msg_container_base').html("");
+			$('.msg_container_base').html("");  //기존 채팅창 내용 삭제
 			$('#chat').removeClass('chatNone');
 			$('#chat').addClass('chatBlock');	
 			
+			//ajax로 채팅창 내용 불러옴
 			$.ajax({ 
 				type:'POST',
 				url:'/chatting/chatAdminView/'+$(this).attr('id'),
@@ -372,7 +391,7 @@ $(document).ready(function(){
 					"X-HTTP-Method-Override" : "POST"}, 
 				dataType:'json',
 				data:JSON.stringify({
-					bno : $(this).attr('id')
+					bno : $(this).attr('id') 		//클릭한 bno값을 가져감, 클릭한 아이디의 채팅목록 조회
 				}),
 				success:function(result){ 
 					console.log("데려왔따");
@@ -382,6 +401,7 @@ $(document).ready(function(){
 					
 					var message = "";
 					
+					//채팅 내용 추가
 					for(var i=0;i<result.length;i++){
 						if(result[i].email != "admin"){
 							receiver = result[i].email;
@@ -396,7 +416,7 @@ $(document).ready(function(){
 							$('.msg_container_base').append(message);
 						}
 						
-						$('.msg_container_base').scrollTop(9999);
+						$('.msg_container_base').scrollTop(9999);	//스크롤 가장 아래로 내리기
 					}
 				}
 			}); //$.ajax 끝
