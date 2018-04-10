@@ -451,7 +451,7 @@ display:none;
 			<!-- ======== end ================= -->
 								</div>
 								<div class="texttext" style="margin-top: 15px;">
-									<input type="checkbox"
+									<input type="checkbox" name="rememberId" value="1" ${checked111}
 										style="width: 20px; vertical-align: middle; margin: 0;"
 										id="ida"><label for="idaa"
 										style="vertical-align: middle; margin: 0;"> 아이디저장</label><br>

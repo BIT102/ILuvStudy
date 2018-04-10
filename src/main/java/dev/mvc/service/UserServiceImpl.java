@@ -9,6 +9,7 @@ import javax.mail.internet.MimeMessage;
 
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import dev.mvc.domain.StudyVO;
@@ -23,10 +24,16 @@ public class UserServiceImpl implements UserService {
 	private UserDAO dao;
 	@Inject
 	private JavaMailSender mailSender;
+	@Inject
+	private BCryptPasswordEncoder passwordEncoder; //스프링시큐리티 비밀번호 암호화
 	
-	//회원가입
+		//회원가입
 		@Override
 		public void joinUser(UserVO vo) throws Exception {
+			String enPassword = passwordEncoder.encode(vo.getPassword());   //스프링시큐리티 비밀번호 암호화
+			vo.setPassword(enPassword);
+			System.out.println("암호화된 비밀번호 :" + vo.getPassword());
+			
 			dao.joinUser(vo);
 		}
 
