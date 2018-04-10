@@ -251,7 +251,7 @@
 							
 						  <tr>
 							<th>생년월일</th>
-								<td><input type="text" name="birth"
+								<td><input type="text" pattern="[0-9]{6}" placeholder="생년월일 6자리를 입력해 주세요. ex) 950101" name="birth"
 									value="${vo.birth}" class="form-control" id="birth"
 									style="width: 550px;">
 								</td>
@@ -269,8 +269,8 @@
 							<th>전화번호</th>
 								<td style="width:550px"><input type="text" name="phoneNum"
 									value="${vo.phoneNum}" class="form-control" id="phone"
-									style="width: 550px; display:inline-block">
-								<input type="button" value="인증하기" class="btn btn-black"></input>
+									style="width: 550px; display:inline-block" readonly>
+								<!-- <input type="button" value="인증하기" class="btn btn-black"></input> -->
 								</td>
 						</tr>
 						
@@ -279,7 +279,7 @@
 						     	<td> 회원님의 정면 사진을 올려주세요!<br>
 						     	     상대방이 신뢰를 갖고 연락할 확률이 높아져요!<br><br>
 						     	  <!-- DB에서 담긴 이미지 -->
-								  <img id="changeImg" src="/study/displayFile?fileName=${vo.photo}">  
+								  <img id="changeImg" src="/study/displayFile?fileName=${login.photo}">  
 						     	  <input type='file' name='file' value=${vo.photo} style="display:inline-block;"/> 
 						     	  <input type="submit" value="사진업로드">
 						     	</td>
@@ -306,6 +306,7 @@
 
 <script>
 	
+	// 닉네임 변경
 	 $(document).ready(function(){
 	        $("#nickCheck").click(function(){
 
@@ -328,6 +329,7 @@
 	    });
 	 
 	 
+		// 프로필 사진 첨부
 		$(".fileDrop").on("dragenter dragover", function(event){
 			event.preventDefault();  // dragenter, dragover, drop시 기본 동작을 막도록 작성
 		});

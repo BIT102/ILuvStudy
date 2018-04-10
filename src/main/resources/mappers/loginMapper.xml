@@ -33,7 +33,8 @@
   	
   	<!-- 로그인시 사용자가 세션키를 가지고 있나 체크 (loginCookie에 기록된 값으로 사용자의 정보 조회)   -->
   	<select id="checkUserWithSessionKey" resultType="UserVO"> 
-  		select * from user where sessionKey = #{value}
+  		<!-- select * from user where sessionKey = #{value} and sessionLimit > now() -->
+  		select * from user where sessionKey = #{value} 
   	</select>
   	
   	<!-- 전화번호로 이메일찾기 -->

@@ -360,7 +360,7 @@ select.form-control:not([size]):not([multiple]) {
 	                  <div class="col-md-8 col-sm-9">
 	                    <div class="input-group">
 	                   	 	<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-	                    	<input class="form-control" style = "width:160px" id = "email1" type="text" placeholder="아이디를 입력하세요" name="email1">
+	                    	<input class="form-control" style = "width:160px" id = "email1" type="text" placeholder="아이디를 입력하세요" name="email1">@
 		              		<input class="form-control" style = "width:140px; margin-left:5px;" id = "email2" type="text" placeholder="주소값 직접입력" name="email1">
 		              		<select   id="selectEmail" class = "form-control" style = "width:130px; height: calc(2.25rem + 11px);"> 
 								<option id = "selectEmail1" selected>직접입력</option>

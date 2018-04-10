@@ -68,11 +68,11 @@
             </tr>
             <tr>
                 <td><label for="newPw1">새 비밀번호</label></td>
-                <td><input id="newPw1" type="password" name="newPw1" placeholder="8자리에서 16자리 이하 영문, 숫자로만 설정해 주세요."></td>
+                <td><input id="newPw1" type="password" name="newPw1" pattern=".{8,}" placeholder="8자리에서 16자리 이하 영문, 숫자로만 설정해 주세요."></td>
             </tr>
             <tr>
                 <td><label for="newPw2">비밀번호 확인</label></td>
-                <td><input id="newPw2" type="password" name="newPw2" placeholder="비밀번호를 한번 더 입력해주세요." ></td>
+                <td><input id="newPw2" type="password" name="newPw2" pattern=".{8,}" placeholder="비밀번호를 한번 더 입력해주세요." ></td>
             </tr>
         </table>
         <input type="hidden" value="${login.email}" name="email" readonly> 
@@ -83,7 +83,7 @@
 
 
 	
-	<script>
+ 	<script>
 	
 	$(".changePw").on("click", function(){
 		
@@ -112,7 +112,7 @@
 		})
 	})
 	
-	</script>
+	</script>  
 	
 	
 </body>

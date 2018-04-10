@@ -182,7 +182,7 @@ public class UserServiceImpl implements UserService {
 		System.out.println("==============================");
 		String setfrom = "lswkim322@gmail.com";         
 	    String tomail  = email;     // 받는 사람 이메일
-	    String title   = "[ILOVESTUDY]인증번호 발송";      // 제목
+	    String title   = "[ILOVESTUDY]인증 확인 메일 발송";      // 제목
 	    
 	    
 	    String content = "aaa";    // 내용

@@ -294,7 +294,7 @@
 													<div>
 														<input type="submit" id="btn-success" value="저장하기">
 													</div>
-										</form>								
+										<!-- </form>	 -->							
 													
                                                 <!-- begin faq-widget -->
                             <div class="faq-widget" style="margin-top:70px;">
@@ -318,7 +318,7 @@
 												 		
 												 		<tr>
 												 		<th>새 비밀번호</th>
-															<td><input type="password" name="newPw1"
+															<td><input type="password" pattern=".{8,20}" name="newPw1"
 																 class="form-control" id="newPw1"
 																style="width: 550px;" placeholder="8자리에서 20자리 이하 영문, 숫자로만 설정해 주세요.">
 															</td>
@@ -326,7 +326,7 @@
 												 		
 												 		<tr>												 		<tr>
 												 		<th>비밀번호 확인</th>
-															<td><input type="password" name="newPw2"
+															<td><input type="password" pattern=".{8,20}" name="newPw2"
 																 class="form-control" id="newPw2"
 																style="width: 550px;" placeholder="비밀번호를 한번 더 입력해주세요.">
 															</td>
@@ -337,7 +337,7 @@
 												 	<input type="hidden" value="${login.email}" name="email" readonly>
 												 		
 												 	<div>
-  														 <input id="btn-success" class="changePw" type="button" value="변경하기">
+  														 <input id="btn-success" class="changePw" type="submit" value="변경하기">
 													</div>		
 	                                        </div>
 	                                    </div>
@@ -346,12 +346,14 @@
 
                  </div> <!-- end of .container -->
         </div>
+  </form>	      
 </section>
+
 <%@include file="../footer.jsp"%>
 
 </body>
 
-	<!-- 메뉴 드랍다운 버튼 (비밀번호 뜨게 하는 거) -->
+	<!-- 메뉴 드랍다운 버튼 (비밀번호 변경 뜨게 하는 거) -->
 	 <script>
 	 $(".faq-q").click( function () {
 	     var container = $(this).parents(".faq-c");
@@ -454,7 +456,7 @@
 					newPw2 : newPw2		
 			},
 			success : function(result){ //alert으로 result값을 하면 컨트롤에서 ""안에 쓴 값이 뜸
-			alert(result);
+			alert("수정되었습니다.");
 			}
 		})
 	})
@@ -486,6 +488,8 @@
 	}
 
 	</script>
+	
+	
 		
 
 </html>

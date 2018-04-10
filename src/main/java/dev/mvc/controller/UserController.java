@@ -63,7 +63,7 @@ public class UserController {
 	//회원가입 컨트롤러
 	@RequestMapping(value = "/join", method = RequestMethod.GET)
 	public String joinUserGET(UserVO vo, Model model) {
-		System.out.println("YWTEST................");
+
 		return "join";
 	}
 
@@ -95,7 +95,6 @@ public class UserController {
 		HttpSession session = request.getSession();
 		UserVO sUser = (UserVO)session.getAttribute("login");
 		String email = sUser.getEmail();
-		
 		UserVO vo = service.read(email);
 		model.addAttribute("vo", vo);
 		
@@ -261,53 +260,17 @@ public class UserController {
 	@RequestMapping(value = "/changePw", method = RequestMethod.GET)
 	public String changePwGET(Model model) throws Exception {
 		
+		System.out.println("비번변경 겟");
+		
 		return "/mypage/changePw";
 	}
 	
 
-//	@RequestMapping(value = "/changePw", method = RequestMethod.POST)
-//	public String changePwPOST(Model model, String nowPw, String newPw1, String newPw2, HttpServletRequest request) throws Exception {
-//		
-//		//1. 입력한 비밀번호가 DB값과 일치하는지 체크
-//		HttpSession session = request.getSession();
-//		UserVO sUser = (UserVO)session.getAttribute("login");
-//		String email = sUser.getEmail();
-//		
-//		UserVO vo = service.read(email);
-//		vo.getPassword();
-//		
-//		System.out.println("겟패스워드="+vo.getPassword());
-//		System.out.println("나우패스워드="+nowPw);
-//		
-//		
-//		if(nowPw.equals(vo.getPassword())){  // String이니 equals로 비교해줘야 함.
-//			System.out.println("==========if문 기존 비번 = 입력 비번============");			
-//		}
-//			System.out.println("===========if문 찍히니2222==============");
-//		//2. 새 비번1과 새 비번2가 같나 비교하고
-//		if(newPw1.equals(newPw2)){
-//			System.out.println("=================pw1pw2이거 같니.....?");
-//		}
-//		//3. 같으면 유효성 검사
-//		
-//		service.changePw(vo);
-//		model.addAttribute("vo", vo);
-//		
-//		return "/mypage/changePw";
-//	}
-	
-	//ajax 비번 수정
 	@RequestMapping(value = "/changePw", method = RequestMethod.POST)
-	public ResponseEntity<String> changePw(@RequestParam("nowPw")String nowPw,
-									@RequestParam("newPw1") String newPw1, 
-									@RequestParam("newPw2") String newPw2, 
-									HttpServletRequest request) throws Exception{
-			
-		System.out.println("======nowPw 나우Pw=============");
-		System.out.println(nowPw);
-		System.out.println(newPw1);
-		System.out.println(newPw2);
+	public String changePwPOST(Model model, String nowPw, String newPw1, String newPw2, HttpServletRequest request) throws Exception {
 		
+		System.out.println("비번변경 포스트");
+		//1. 입력한 비밀번호가 DB값과 일치하는지 체크
 		HttpSession session = request.getSession();
 		UserVO sUser = (UserVO)session.getAttribute("login");
 		String email = sUser.getEmail();
@@ -315,13 +278,55 @@ public class UserController {
 		UserVO vo = service.read(email);
 		vo.getPassword();
 		
-		System.out.println("======겟패스워드==========");
-		System.out.println(vo.getPassword());
+		System.out.println("겟패스워드="+vo.getPassword());
+		System.out.println("나우패스워드="+nowPw);
+		
+		
+		if(nowPw.equals(vo.getPassword()) && newPw1.equals(newPw2)){  // String이니 equals로 비교해줘야 함.
+			vo.setPassword(newPw1);
+			System.out.println("비밀번호 변경 완료");			
+		}else
+			System.out.println("비밀번호 변경 불가");
+		//2. 새 비번1과 새 비번2가 같나 비교하고
+//		if(newPw1.equals(newPw2)){
+//			System.out.println("=================pw1pw2이거 같니.....?");
+//		}
+		//3. 같으면 유효성 검사
+		
+		service.changePw(vo);
+		model.addAttribute("vo", vo);
+		model.addAttribute("result", "변경 되었습니다.");
+		
+		return "/mypage/changePw";
+	}
+	
+	//ajax 비번 수정
+/*	@RequestMapping(value = "/changePw", method = RequestMethod.POST)
+	public ResponseEntity<String> changePw(@RequestParam("nowPw")String nowPw,
+									@RequestParam("newPw1") String newPw1, 
+									@RequestParam("newPw2") String newPw2, 
+									HttpServletRequest request) throws Exception{
+			
+		System.out.println("======nowPw 나우Pw=============");
+		System.out.println("현재비번 :" + nowPw);
+		System.out.println("새비번1 :" +newPw1);
+		System.out.println("새비번2 :" +newPw2);
+		
+		HttpSession session = request.getSession();
+		UserVO sUser = (UserVO)session.getAttribute("login");
+		String email = sUser.getEmail();
+		System.out.println("이메일 : " + email);
+		
+		UserVO vo = service.read(email);
+		
+		vo.getPassword();
+		System.out.println("겟패스워드:" + vo.getPassword());
 		
 		vo.setPassword(newPw1);
+		System.out.println();
+		
 		
 		ResponseEntity<String> entity = null;
-		
 		
 		if(nowPw.equals(vo.getPassword())){
 			entity = new ResponseEntity<String>("pw equal", HttpStatus.OK); // "" 이 안에 값이 jsp파일에 result값이 됨
@@ -332,10 +337,9 @@ public class UserController {
 			entity = new ResponseEntity<String>("Please Check your password", HttpStatus.OK);
 		}
 			
-		
 		return entity;
 		
-	}
+	}*/
 	
 	
 	
