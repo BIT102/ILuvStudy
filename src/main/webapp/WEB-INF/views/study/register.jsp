@@ -74,15 +74,15 @@ small {
 .btn-xs {
 	margin-top: 5px;
 }
+}
+/* #chatClick{
+	bottom:13%;
+	right:3%;
+} */
 /*지도스타일입니다*/
 #map {
 	height: 300px;
 	margin-top:15px;
-}
-#chatClick{
-	bottom:10%;
-	right:3%;
-}
 
      }
       .controls {
@@ -425,10 +425,6 @@ small {
 		<span class="mailbox-attachment-icon has-img">
 			<img src="{{imgsrc}}" alt="Attachment" style="width:150px; height:150px;">
 		</span>
-		<div>
-			<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>
-			<small class = "small" value = "{{name}}" data-src=data style="cursor:pointer">X</small>
-		</div>
 		<a href="{{getLink}}" class="mailbox-attachment-name"></a>
 		<small class = "small" value = "{{name}}" data-src=data style="cursor:pointer">X</small>
 	</div>

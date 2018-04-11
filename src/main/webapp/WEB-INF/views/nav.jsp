@@ -179,9 +179,11 @@
 
 #chatClick{
 	position:fixed;
-	bottom:100 !important;;
-	right:50 !important;;
+	bottom:120;
+	right:50;
 	z-index:999;
+	bottom:15%;
+	right:3%;
 }
 
 
