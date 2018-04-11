@@ -300,23 +300,10 @@
 								<!-- <input type="button" value="인증하기" class="btn btn-black"></input> -->
 								</td>
 						</tr>
-						
-						<tr>
-						     <th>프로필 사진</th>
-						     	<td> 회원님의 정면 사진을 올려주세요!<br>
-						     	     상대방이 신뢰를 갖고 연락할 확률이 높아져요!<br><br>
-						     	  <!-- DB에서 담긴 이미지 -->
-								  <img id="changeImg" src="/study/displayFile?fileName=${login.photo}">  
-						     	  <input type='file' name='file' value=${vo.photo} style="display:inline-block;"/> 
-						     	  <input type="submit" value="사진업로드">
-						     	</td>
+					
 						</tbody>	
 
-					</table>
-					
-					<!-- 프로필 사진 -->
-				   	<div class="fileDrop"></div>
-					<div class="uploadedList"></div>
+					</table>	
 					
 		<div>
 			<input type="submit" id="btn-success" value="저장하기">
@@ -414,133 +401,6 @@ function handleImgFileSelect(e) {
 	        });
 	    });
 	 
-	 
-		// 프로필 사진 첨부
-		$(".fileDrop").on("dragenter dragover", function(event){
-			event.preventDefault();  // dragenter, dragover, drop시 기본 동작을 막도록 작성
-		});
-		
-		$(".fileDrop").on("drop", function(event){
-			event.preventDefault();
-			
-			var files = event.originalEvent.dataTransfer.files; // 전달된 파일 데이터를 가져오는 부분(dataTransfer.files)
-			var file = files[0];
-			console.log(file);
-		
-			var formData = new FormData();
-			formData.append("file", file);
-			
-			
-			//Ajax 활용
-			$.ajax({
-				url: "/study/uploadAjax",
-				data: formData,
-				dataType: 'text',
-				processData: false,
-				contentType: false,
-				type : 'POST',
-				success : function(data){ // 파일명(스트링)이 담김
-//					alert(data);
-					
-					console.log(data);
-					console.log(checkImageType(data));
-					
-					var str = "";
-					
-					if(checkImageType(data)){
-						  str ="<div><a href=displayFile?fileName="+getImageLink(data)+">"
-								  +"<img src='displayFile?fileName="+data+"'/>"
-								  +"</a><small data-src="+data+">X</small></div>";
-					  }else{
-						  str = "<div><a href='displayFile?fileName="+data+"'>" 
-								  + getOriginalName(data)+"</a>"
-								  +"<small data-src="+data+">X</small></div></div>";
-					  }
-					
-	        	$.ajax({
-	        		url : "/insertImgUrl",
-	        		type : "post",
-	        		headers : {
-	        			"X-HTTP-Method-Override" : "POST"
-	        		},
-	        	data:{
-//	        		imgAddrParam : imgAddr
-	        		photo : data,
-	        		email : document.getElementById("email").value 
-	        	},
-	        	success:function(result){
-//	        		alert(result);
-	        	}
-		        	})
-		        	
-		        
-		        //photo에 담긴 스트링값(이름)을 vo.photo에 보내고 싶어요.
-		       	// 그러려면 어떻게 해야 할까요?
-		       	// 이러지말고 src전체를 		
-		        
-//		    	document.getElementById("changeImg").src = "pDisplayFile?fileName="+data;
-	        	document.getElementById("changeImg").setAttribute("src","displayFile?fileName="+data);
-	        						
-//				$(".uploadedList").append(str);
-					
-//					imgAddr = data; //data를 imgAddr에 담아 둠
-				}
-			});
-			
-		});
-		
-		// jsp에서 파일 출력하기
-		function checkImageType(fileName){
-			
-			var pattern  = /jpg$|gif$|png$|jpeg$/i; 	//마지막 i는 대,소문자 구분 없음
-			
-			return fileName.match(pattern);
-		}
-		
-		
-		//파일 링크 처리(파일의 이름이 길게 출력되는 걸 줄여주는 기능)
-		function getOriginalName(fileName){
-			
-			if(checkImageType(fileName)){
-				return;
-			}
-			
-			var idx = fileName.indexOf("_") + 1;
-			return fileName.substr(idx);
-		}
-		
-		
-		//이미지 파일의 원본 파일 찾기
-		function getImageLink(fileName){
-			
-			if(!checkImageType(fileName)){
-				return;
-			}
-			var front = fileName.substr(0,12); //년/월/일 경로를 추출하는 용도
-			var end = fileName.substr(14);		// 파일 이름 앞의 's_'를 제거하는 용도
-			
-			return front + end;
-		}
-		
-		// 첨부파일 삭제 처리
- 		$(".uploadedList").on("click", "small", function(event){
-			
-			var that = $(this);
-			
-			$.ajax({
-				url:"deleteFile",
-				type:"post",
-				data:{fileName:$(this).attr("data-src")},
-				dataType:"text",
-				success:function(result){
-					if(result == 'deleted'){
-//						alert("deleted");
-						that.parent("div").remove(); // 파일 삭제 후 브라우져 화면에서 썸네일 삭제
-					}
-				}
-			}); 
-		}); */
-
 		// 회원 탈퇴 스크립트
 		function quit() {
 			var msg = "정말 탈퇴하시겠습니까?"
