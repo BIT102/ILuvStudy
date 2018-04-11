@@ -455,7 +455,7 @@ height:400px;
 			<!-- ======== end ================= -->
 								</div>
 								<div class="texttext" style="margin-top: 15px;">
-									<input type="checkbox"
+									<input type="checkbox" name="rememberId" value="1" ${checked111}
 										style="width: 20px; vertical-align: middle; margin: 0;"
 										id="ida"><label for="idaa"
 										style="vertical-align: middle; margin: 0;">&nbsp;아이디저장</label><br>
@@ -466,8 +466,7 @@ height:400px;
 										id="idb"><label for="idbb"
 										style="vertical-align: middle; margin: 0;">&nbsp;자동로그인</label>
 								</div>
-								<br>* 아이디/비밀번호를 잊으셨나요?<br> <a href="/searchEmail.jsp">아이디찾기 / </a><a
-									href="/searchPW">비밀번호찾기</a>
+								<br> 아이디/비밀번호를 잊으셨나요?<br> <a href="/searchEmail">아이디찾기 / </a><a href="/searchPW">비밀번호찾기</a>
 							</form>
 						</div>
 					</div>

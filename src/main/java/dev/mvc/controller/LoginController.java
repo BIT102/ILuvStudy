@@ -40,7 +40,7 @@ import dev.mvc.service.UserService;
 //@RequestMapping(value = "/mypage/")
 public class LoginController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 	
 	@Inject
 	private LoginService service;
@@ -69,7 +69,7 @@ public class LoginController {
 		logger.info("Login merge get.......");
 		
 		String rememberable = WebUtils.getCookie(request, "rememberId").getValue();
-		System.out.println(rememberable);
+		System.out.println("=========리멤버블:================================"+rememberable);
 		
 		if(rememberable != null){
 			model.addAttribute("id", rememberable);
@@ -86,6 +86,7 @@ public class LoginController {
 		
 		// 2. UserLogin
 		UserVO userVO = service.userLogin(dto);		
+		System.out.println("로그인포스트11====================="+service.userLogin(dto));
 		model.addAttribute("UserVO", userVO); // 모델에 담아 인터셉터에서 활용
 		if(userVO != null){
 			// 로그인 유지 클릭시 관리자는 로그인 유지하지 않는다(혹시 모를 상황을 대비)
@@ -113,7 +114,7 @@ public class LoginController {
 		String rememberId = request.getParameter("rememberId");
 		
 		System.out.println("=======rememberId 값 가져오기 ========");
-		System.out.println(WebUtils.getCookie(request, "rememberId"));
+		System.out.println("리멤버id : "+WebUtils.getCookie(request, "rememberId"));
 		
 		if(rememberId != null){
 			
@@ -121,6 +122,9 @@ public class LoginController {
 			cookie.setMaxAge(60*60*24*7); // 1주일
 			cookie.setPath("/");
 			model.addAttribute("cookie",cookie);
+			
+			System.out.println("리멤버id22 : " + rememberId);
+			System.out.println("쿠키22 : " + cookie);
 			
 			//response.addCookie(cookie); // 로그인아이디 기억하기 쿠기의 생성
 			System.out.println("cookie : " + cookie);
@@ -131,6 +135,9 @@ public class LoginController {
 			Cookie cookie = WebUtils.getCookie(request, "rememberId"); 
 			cookie.setMaxAge(0);
 			model.addAttribute("cookie",cookie);
+			
+			System.out.println("리멤버id33 : " + rememberId);
+			System.out.println("쿠키33 : " + cookie);
 			
 		}
 

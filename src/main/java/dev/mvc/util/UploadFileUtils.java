@@ -60,7 +60,7 @@ public class UploadFileUtils {
 				//확장자확인
 				if(MediaUtils.getMediaType(formatName) != null) {
 					System.out.println("확장자 확인 1111111111");
-			//		uploadedFileName = makeThumbnail(uploadPath, savedPath, saverDName);
+//					uploadedFileName = makeThumbnail(uploadPath, savedPath, saverDName);
 					
 					// ********여기서부터 안돼요 ㅠㅠㅠ************************************
 					System.out.println("확장자 확인222 :" + uploadedFileName);
@@ -115,7 +115,7 @@ public class UploadFileUtils {
 				}
 			}
 			// 썸네일 생성하기 (이미지 파일이라면 썸네일 파일 이름으로 반환)
-	/*		private static String makeThumbnail(String uploadPath,
+/*			private static String makeThumbnail(String uploadPath,
 					                            String path,
 												String fileName) throws Exception {
 			
@@ -124,7 +124,7 @@ public class UploadFileUtils {
 				System.out.println("그냥패스 : " + path);
 				System.out.println("파일네임 : " + fileName);
 				
-				File aaa = new File(uploadPath+path, fileName);
+				File aaa = new File((uploadPath+path +  fileName));
 				System.out.println("aaa :"+ aaa);
 				
 				// !!!!!!!! 여기서 안돼안돼안돼안돼안돼안돼 !!!!!!!!!!!11

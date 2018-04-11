@@ -9,7 +9,7 @@
 </head>
 <body>
  <script>
-   self.location = "/study/main";
+    self.location = "/study/main"; 
  </script>
 </body>
 </html>

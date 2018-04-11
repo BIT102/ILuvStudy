@@ -23,7 +23,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 	private static final Logger logger = LoggerFactory.getLogger(AuthInterceptor.class);
 	
 	private void saveDest(HttpServletRequest req){
-		
+		logger.info("saveDest ¿Œ≈Õº¡≈Õ ¬Ô»˜¥œ???==========================");
 		String uri = req.getRequestURI();
 		String query = req.getQueryString();
 

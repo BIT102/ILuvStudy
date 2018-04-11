@@ -45,6 +45,20 @@
 	src="/resources/assets/js/modernizr.custom.97074.js"></script>
 
 <style>
+/* 프로필 사진 폼 */
+.fileDrop{
+	width: 150px;
+	height: 100px;
+	border: 1px dotted blue;
+	}
+
+	small{
+	margin-left: 3px;
+	font-weight: bold;
+	color: gray;
+	}
+/* 프로필 사진 끝     */
+
 .service-list .col-md-4 {
  	 width:280px !important;
 }
@@ -190,9 +204,7 @@
                         
                         <!-- 프로필 -->
                         <div class="headline text-center">
-                        
                             <div class="row">
-
                                 <div class="col-md-6 col-md-offset-3">
                                     <h2 class="section-title">프로필</h2>
                                 </div>
@@ -202,8 +214,8 @@
                         <div>* 기본정보</div>
 						<table class="table table-hover">
 						<tbody>
+
                         <tr>
-								
 							<th>이메일</th>
 								<td><input type="text" name="email"
 									value="${login.email}" class="form-control" id="email"
@@ -212,7 +224,6 @@
 						</tr>
 							
 						 <tr>
-								
 							<th>이름</th>
 								<td><input type="text" name="name"
 									value="${vo.name}" class="form-control" id="name"
@@ -221,7 +232,6 @@
 						</tr>
 							
 					     <tr>
-								
 							<th>닉네임</th>
 								<td><input type="text" name="nickName"
 									value="${vo.nickName}" class="form-control" id="nickName"
@@ -231,15 +241,13 @@
 							</tr>		
 							
 						  <tr>
-								
 							<th>생년월일</th>
-								<td><input type="text" name="birth"
+								<td><input type="text" pattern="[0-9]{6}" placeholder="생년월일 6자리를 입력해 주세요. ex) 950101" name="birth"
 									value="${vo.birth}" class="form-control" id="birth"
 									style="width: 550px;">
 								</td>
 							</tr>
-							
-							
+														
 						<tr>
 							<th>성별</th>
 							<td>
@@ -249,29 +257,30 @@
 					   </tr>
 					   
 					   	<tr>
-								
 							<th>전화번호</th>
 								<td style="width:550px"><input type="text" name="phoneNum"
 									value="${vo.phoneNum}" class="form-control" id="phone"
-									style="width: 550px; display:inline-block">
-								<input type="button" value="인증하기" class="btn btn-black"></input>
+									style="width: 550px; display:inline-block" readonly>
+								<!-- <input type="button" value="인증하기" class="btn btn-black"></input> -->
 								</td>
 						</tr>
 						
 						<tr>
-						
 						     <th>프로필 사진</th>
 						     	<td> 회원님의 정면 사진을 올려주세요!<br>
 						     	     상대방이 신뢰를 갖고 연락할 확률이 높아져요!<br><br>
-						     	     
-						     	  <input type='file' name='file' value=${login.photo } style="display:inline-block;"/> 
+						     	  <!-- DB에서 담긴 이미지 -->
+								  <img id="changeImg" src="/study/displayFile?fileName=${login.photo}">  
+						     	  <input type='file' name='file' value=${vo.photo} style="display:inline-block;"/> 
 						     	  <input type="submit" value="사진업로드">
-						     	    
 						     	</td>
-		
-										
 						</tbody>	
+
 					</table>
+					
+					<!-- 프로필 사진 -->
+				   	<div class="fileDrop"></div>
+					<div class="uploadedList"></div>
 					
 		<div>
 			<input type="submit" id="btn-success" value="저장하기">
@@ -288,6 +297,7 @@
 
 <script>
 	
+	// 닉네임 변경
 	 $(document).ready(function(){
 	        $("#nickCheck").click(function(){
 	        	$.ajax({
@@ -309,6 +319,7 @@
 	    });
 	 
 	 
+		// 프로필 사진 첨부
 		$(".fileDrop").on("dragenter dragover", function(event){
 			event.preventDefault();  // dragenter, dragover, drop시 기본 동작을 막도록 작성
 		});
@@ -326,7 +337,7 @@
 			
 			//Ajax 활용
 			$.ajax({
-				url: "/pUploadAjax",
+				url: "/study/uploadAjax",
 				data: formData,
 				dataType: 'text',
 				processData: false,
@@ -341,8 +352,8 @@
 					var str = "";
 					
 					if(checkImageType(data)){
-						  str ="<div><a href=pDisplayFile?fileName="+getImageLink(data)+">"
-								  +"<img src='pDisplayFile?fileName="+data+"'/>"
+						  str ="<div><a href=displayFile?fileName="+getImageLink(data)+">"
+								  +"<img src='displayFile?fileName="+data+"'/>"
 								  +"</a><small data-src="+data+">X</small></div>";
 					  }else{
 						  str = "<div><a href='displayFile?fileName="+data+"'>" 
@@ -357,7 +368,7 @@
 	        			"X-HTTP-Method-Override" : "POST"
 	        		},
 	        	data:{
-	    //    		imgAddrParam : imgAddr
+//	        		imgAddrParam : imgAddr
 	        		photo : data,
 	        		email : document.getElementById("email").value 
 	        	},
@@ -372,7 +383,7 @@
 		       	// 이러지말고 src전체를 		
 		        
 //		    	document.getElementById("changeImg").src = "pDisplayFile?fileName="+data;
-	        	document.getElementById("changeImg").setAttribute("src","pDisplayFile?fileName="+data);
+	        	document.getElementById("changeImg").setAttribute("src","displayFile?fileName="+data);
 	        						
 //				$(".uploadedList").append(str);
 					
@@ -433,27 +444,30 @@
 				}
 			}); 
 		});
-function quit() {
-	var msg = "정말 탈퇴하시겠습니까?"
-		var flag = confirm(msg);
-		
-		if(flag==true) {
+
+		// 회원 탈퇴 스크립트
+		function quit() {
+			var msg = "정말 탈퇴하시겠습니까?"
+				var flag = confirm(msg);
 				
-			$.ajax({
-				url: '/quit',
-				type: 'POST',
-				header:{
-					"X-HTTP-Method-Override" : "POST"
-				},
-				success : function(result){ //alert으로 result값을 하면 컨트롤에서 ""안에 쓴 값이 뜸
-				alert("안녕히가세요");
+				if(flag==true) {
+						
+					$.ajax({
+						url: '/quit',
+						type: 'POST',
+						header:{
+							"X-HTTP-Method-Override" : "POST"
+						},
+						success : function(result){ //alert으로 result값을 하면 컨트롤에서 ""안에 쓴 값이 뜸
+						alert("안녕히가세요");
+						}
+					});
+					
+				} else {
+					alert("취소하였습니다.")
 				}
-			});
-			
-		} else {
-			alert("취소하였습니다.")
 		}
-}
+
 </script>
 
 </html>
