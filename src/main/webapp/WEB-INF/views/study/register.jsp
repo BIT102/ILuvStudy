@@ -74,15 +74,10 @@ small {
 .btn-xs {
 	margin-top: 5px;
 }
-}
-/* #chatClick{
-	bottom:13%;
-	right:3%;
-} */
-/*지도스타일입니다*/
+
 #map {
+	width: 100%;
 	height: 300px;
-	margin-top:15px;
 
      }
       .controls {
@@ -847,42 +842,64 @@ S3 수정 (파일 업로드 2개가 되어서 주석 처리)
     </script>
     
  
-    <!--지도 크르깁트 -->
-    
-    <script>
-    
-    var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    var labelIndex = 0;
 
-    function initialize() {
-    	var korea = {lat:37.5663797, lng:126.9777154};
-    	var map = new google.maps.Map(document.getElementById('map'),{
-    	zoom: 16,
-    	center:korea
-    });
-    
-    google.maps.event.addListener(map, 'click', function(event){
-
-    		markert =[];
-	    	addMarker(event.latLng, map);
-	    	alert(event.latLng)
-
-    });	
-  }
-    
-    function addMarker(location, map) {
-    	var marker = new google.maps.Marker({
-    		position:location,
-    		label:labels[labelIndex++ % labels.length],
-    		map:map
-    	});
-	    	
-    }
-	
-    </script>
-
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAiNU7soIIqpN1Jdu0tV1CWBb6u1jJAH5o&callback=initialize"
-    async defer></script>
+ 	<!--지도 크르깁트 -->
+<script>
+   var markers = [];
+   var labels = 'A';
+   var labelIndex = 1;
+   var map;
+   
+   function initialize() {
+	    var	uluru = {lat:37.5663797, lng:126.9777154};
+   	    map = new google.maps.Map(document.getElementById('map'),{
+   		zoom: 16,
+   		center:uluru
+	   	});
+	   	    
+	   	google.maps.event.addListener(map,'click', function(event){
+	   		console.log(labelIndex)
+	   		//처음 클릭했을때 등록
+	   		if(labelIndex == 1){
+	   			addMarker(event.latLng, map);
+	   			alert("lat" + event.latLng.lat() + "lng" + event.latLng.lng())
+	   			labelIndex = 2;
+	   		//두번째부터 위치변경	
+	   		} else {
+	   		hide(); 
+	   		addMarker(event.latLng, map);
+	   		alert("lat" + event.latLng.lat() + "lng" + event.latLng.lng())
+	   		}
+	   		
+	   	})    
+   }
+   
+   
+   function addMarker(location, map) {
+		var marker = new google.maps.Marker({
+	   		position:location,
+	   		map:map,
+	   		label:labels
+	   	});
+	   
+		markers.push(marker);
+   }
+   
+   function setMarkers(map) {
+	   for(var i=0; i<markers.length; i++){
+		   markers[i].setMap(map);
+	   }
+   }
+   
+   function hide() {
+	   setMarkers(null);
+   }
+   
+   
+</script>
+	<script
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAiNU7soIIqpN1Jdu0tV1CWBb6u1jJAH5o&callback=initialize"
+		async defer></script>
     
     
     		<%@include file="../footer.jsp"%>
