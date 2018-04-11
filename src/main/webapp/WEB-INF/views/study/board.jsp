@@ -84,14 +84,10 @@ body {
 }
 
 .imgstyle {
-	border: 1px solid #f1f1f1;
-	width: 1170px;
 	margin-top: 25px;
 }
 
 .app {
-	border: 1px solid #f1f1f1;
-	width: 1170px;
 	margin-top: 25px;
 }
 
@@ -209,11 +205,11 @@ body {
 								<div class="about-author" style="margin-top: 20px;">
 									<div class="row">
 										<div class="col-md-3">
-											<img src="assets/img/commenter2.jpg"
-												class="img-responsive center-block img-circle">
+											<img src="/study/displayFile?fileName=${studyVO.photo}"
+												class="img-responsive center-block img-circle" style="width:150px; height:150px;">
 										</div>
-										<div class="col-md-9">
-											<p>
+										<div class="col-md-9" style="margin-top:50px;">
+											<p >
 												<strong>주인 :</strong> <span
 													class="author-name text-uppercase">${studyVO.nickname}</span>
 											</p>
@@ -391,7 +387,7 @@ body {
 			onclick="wait();">
 		<div id='amodDiv' style="display: none;">
 			<div class='modal-applyList'></div>
-			<button type="button" id="applyclose" class="btn">닫기</button>
+			<button type="button" id="applyclose" class="btn" style="position:absolute; right:5px; bottom:5px;">닫기</button>
 
 		</div>
 		<input type="submit" class="btn preee" value="목록으로"> 
@@ -469,7 +465,7 @@ function myFunction1(x) {
 	<!-- 파일업로드 핸들러 -->
 	<script id="templateAttach" type="text/x-handlebars-template">
     <li data-src='{{name}}'>
-		<span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment"></span>
+		<span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment" style="width:150px; height:150px;"></span>
   		<div class="mailbox-attachment-info">
 		</span>
 		</div>
@@ -637,10 +633,10 @@ $.getJSON("/study/apply/"+bno, function(data){
 		if(this.status=='D'){
 		
 		str +="<div class='applyLi' data-usEmail='"+this.usEmail+"'>"
-			+ "<span class='mailbox-attachment-icon has-img'><img src='/study/displayFile?fileName="+this.photo+"'"
-			+ "alt=Attachment></span>"
+			+ "<span class='mailbox-attachment-icon has-img'><img src='/study/displayFile?fileName=${studyVO.photo}'"
+			+ "alt=Attachment style='width:50px; height:50px;'></span>"
 		    + this.usEmail
-		    + "<button type='button' onclick='okstudy(this);' class='btn'>수락</button>"
+		    + "<button type='button' onclick='okstudy(this);' class='btn' style='margin:0 10px;'>수락</button>"
 		    + "<button type='button' onclick='nostudy(this);' class='btn'>거절</button>"
 		    +"</div>";   
 		}
@@ -658,8 +654,8 @@ function apply(){
 		if(this.status=='O'){
 		
 		str += "<div class='applyLi' data-usEmail='"+this.usEmail+"'>"
-			+ "<span class='mailbox-attachment-icon has-img'><img src='/study/displayFile?fileName="+this.photo+"'"
-			+ "alt=Attachment></span>"
+			+ "<span class='mailbox-attachment-icon has-img'><img src='/study/displayFile?fileName=/study/displayFile?fileName=${studyVO.photo}'"
+			+ "alt=Attachment style='width:50px; height:50px;'></span>"
 		    + this.usEmail
 		    +"</div>";
 		    
@@ -679,8 +675,8 @@ $.getJSON("/study/apply/"+bno, function(data){
 		if(this.status=='O'){
 		
 		str += "<div class='applyLi' data-usEmail='"+this.usEmail+"'>"
-			+ "<span class='mailbox-attachment-icon has-img'><img src='/study/displayFile?fileName="+this.photo+"'"
-			+ "alt=Attachment></span>"
+			+ "<span class='mailbox-attachment-icon has-img'><img src='/study/displayFile?fileName=/study/displayFile?fileName=${studyVO.photo}'"
+			+ "alt=Attachment style='width:50px; height:50px;'></span>"
 		    + this.usEmail
 		    +"</div>";
 		    
@@ -950,10 +946,5 @@ $(document).ready(function(){
 	<script
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAiNU7soIIqpN1Jdu0tV1CWBb6u1jJAH5o&callback=initMap"
 		async defer></script>
-	
-	
-<script>
-'${ap.checked}'
-</script>		
 </body>
 </html>

@@ -74,6 +74,7 @@
 				<mapping path="/quit"/>
 				<mapping path="/recurit"/>
 				<mapping path="/study/register"/>
+				<mapping path="/study/update"/>
 				<beans:ref bean="authInterceptor"/>
 			</interceptor>
 		</interceptors>

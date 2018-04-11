@@ -19,8 +19,10 @@
 자신이 속한 화면의 바깥족 parent의 addFilePath() 함수 호출 -->
 
 <script>
-var result = '$'{savedName};
+var result = '${savedName}';
+
 parent.addFilePath(result);
+
 </script>
 
 </body>

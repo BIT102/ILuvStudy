@@ -7,6 +7,17 @@
 <script type="text/javascript" src="/resources/js/upload.js"></script>
 <script
 	src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+	
+	
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script>
+  var jb = jQuery.noConflict();
+
+  </script>
+
+
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>	
+	
 <title>스터디 상세</title>
 
 <style>
@@ -311,11 +322,14 @@ small {
 													<td>
 														<div class="studyfile">
 
-															<h3>첫 사진은 메인 화면에 등록됩니다.</h3>
+															<h5>첫 사진은 메인 화면에 등록됩니다.</h5>
+															<p> 드레그하여 사진의 순서를 변경할 수 있습니다.</p>
 															<div class='fileDrop'></div>
 																				<div class="imgstyle">
 													<p>스터디 이미지</p>
-															<div class='uploadedList'></div>
+															<ul class='uploadedList'>
+															
+															</ul>
 														</div>
 														</div>
 													</td>
@@ -350,13 +364,21 @@ small {
 	<script id="template" type="text/x-handlebars-template">
 	<div class="mailbox-attachment-info">
 		<span class="mailbox-attachment-icon has-img">
-			<img src="{{imgsrc}}" alt="Attachment">
+			<img src="{{imgsrc}}" alt="Attachment" style="width:150px; height:150px;">
 		</span>
-		<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>
+		<a href="{{getLink}}" class="mailbox-attachment-name"></a>
 		<small class = "small" value = "{{name}}" data-src=data style="cursor:pointer">X</small>
 		</span>
 	</div>
 </script>
+	<script>
+	  jb( function() {
+		    jb( ".uploadedList" ).sortable();
+		    jb( ".uploadedList" ).disableSelection();
+		  } );
+	
+	</script>
+
 	<!-- 파일업로드 핸들러 -->
 	<script id="templateAttach" type="text/x-handlebars-template">
     <li data-src='{{name}}'>
@@ -468,6 +490,8 @@ small {
 	
 	<script>
 	
+	var count=0;
+	
 	$(document).ready(function(){
 		
 		$("select option[value='${studyVO.st}']").attr("selected", true);
@@ -559,21 +583,63 @@ small {
 			getCat();
 		});
 		
+		var setd;
+		var sets;
+		
 		//카테고리 추가 버튼 클릭 시 액션
-		$("#addCat").on("click", function(){
-       		
-			var catd=$('#catD option:selected').val();
-			var cats=$('#catS option:selected').val();
+		$("#addCat").on("click", function() {
 			
-			var catd2=$('#catD option:selected').text();
-			var cats2=$('#catS option:selected').text();
+			alert(count)
 			
-			var cat="<span><input type='hidden' name='categoryD' value="+catd+">"
-			+"<input type='hidden' name='categoryS' value="+cats+">"
-			+"<div>"+catd2 +" > "+cats2+"</span><button type='button' onclick = 'btn_delete(this)' class='btn btn-default btn-xs'>삭제</button></div>";
+			var catd = $('#catD option:selected').val();
+			var cats = $('#catS option:selected').val();
+
 			
-       		$("#addCatArea").append(cat);
-		});
+			if(count==0){
+				
+				count++;
+				
+				var catd2 = $('#catD option:selected').text();
+				var cats2 = $('#catS option:selected').text();
+				var cat = "<span><input type='hidden' name='categoryD' value="+catd+">"
+						+ "<input type='hidden' name='categoryS' value="+cats+">"
+						+ "<div>"
+						+ catd2
+						+ " > "
+						+ cats2
+						+ "</span><button type='button' onclick = 'btn_delete(this)' class='btn btn-default btn-xs'>삭제</button></div>";
+				$("#addCatArea").append(cat);
+
+				setd = catd;
+				sets = cats;
+				
+			} else {
+				
+				//2번째꺼들어와
+				//대분류다르면
+				if(catd != setd) {
+					alert("다른 카테고리를 선택할 수 없습니다.")
+				//대분류같은데
+				//소분류가 같으면
+				} else if(cats == sets) {
+					alert("이미 선택하셨습니다.")
+				} else {
+					
+					var catd2 = $('#catD option:selected').text();
+					var cats2 = $('#catS option:selected').text();
+					var cat = "<span><input type='hidden' name='categoryD' value="+catd+">"
+							+ "<input type='hidden' name='categoryS' value="+cats+">"
+							+ "<div>"
+							+ catd2
+							+ " > "
+							+ cats2
+							+ "</span><button type='button' onclick = 'btn_delete(this)' class='btn btn-default btn-xs'>삭제</button></div>";
+					$("#addCatArea").append(cat);
+				}
+
+			}//count esle 끝
+
+}); //addcat끝
 		
 		//시간영역 추가 버튼 클릭 시 액션
 		$("#addTime").on("click", function(){
@@ -595,6 +661,10 @@ small {
 	});
 		//카테고리 삭제 버튼
 		function btn_delete(x){
+			count--;
+			
+			if(count<0) {count=0;}
+			
 			$(x).parent("div").parent("span").remove();
 			
 		}

@@ -23,6 +23,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
+<script type="text/javascript" src="/resources/js/upload.js"></script>
+<script
+	src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 
 <!-- stylesheets -->
 <link rel="stylesheet" href="/resources/assets/css/bootstrap.min.css">
@@ -83,6 +86,13 @@
 .center-block i{
 	margin-top:10px;
 }
+
+/*  iframe{
+	width:0px;
+	height:0px;
+	border:0px;
+}  */
+
 </style>
 
 <script>
@@ -119,9 +129,9 @@
 </div>
 
 
-<form name="profileForm" method="post">
+
 <section class="bg-light-gray">
-		<div class="container" style="top:30%; background-color: #f9f9f9;">
+		<div class="container" style="top:30%; background-color: #f9f9f9; margin-bottom:50px;">
 
 
       <div id="service-page">
@@ -210,7 +220,33 @@
                                 </div>
                             </div>
                         </div> <!-- /.headline -->
+ 						<table class="table table-hover">
+						<tbody>
+						                       
+	                       <tr>
+							     <th>프로필 사진</th>
+		
+							     	<td> 회원님의 정면 사진을 올려주세요!<br>
+							     	     상대방이 신뢰를 갖고 연락할 확률이 높아져요!<br><br>
+							     	     
+							     	  <input type='file' name='file' style="display:inline-block;" id="i_file"/> 
+
+									  <div class='uploadedList'>
+									  
+									  	<div class="mailbox-attachment-info">
+											<span class="mailbox-attachment-icon has-img">
+												<img src="/study/displayFile?fileName=${vo.photo}" alt="Attachment" style="width:150px; height:150px;" id="proimg">
+											</span>
+										</div>
+									  
+									  </div>					     	   
+							     	</td>	
+							</tr>	
+                       </tbody>
+                       </table>
                         
+                        
+<form name="profileForm" method="post">                        
                         <div>* 기본정보</div>
 						<table class="table table-hover">
 						<tbody>
@@ -251,7 +287,7 @@
 						<tr>
 							<th>성별</th>
 							<td>
-								<input type="radio" id="userWoman" name="gender" value="1"  <c:if test="${vo.gender eq '1'}">checked</c:if>> 남성 
+								<input type="radio" id="userman" name="gender" value="1"  <c:if test="${vo.gender eq '1'}">checked</c:if>> 남성 
                 				<input type="radio" id="userWoman" name="gender" value="2"  <c:if test="${vo.gender eq '2'}">checked</c:if>> 여성 
                 			</td>
 					   </tr>
@@ -285,16 +321,76 @@
 		<div>
 			<input type="submit" id="btn-success" value="저장하기">
 		</div>
-					
+</form>					
                  </div> <!-- end of .container -->
         </div> <!--  end of #service-page  -->
 
 </section>
-	</form>
+
 <%@include file="../footer.jsp"%>
 </body>
+<script id="template" type="text/x-handlebars-template">
+	<div class="mailbox-attachment-info">
+		<span class="mailbox-attachment-icon has-img">
+			<img src="{{imgsrc}}" alt="Attachment" style="width:150px; height:150px;" value = "{{name}}" id="proimg">
+		</span>
+	</div>
+</script>
+<script>
 
+var count=1;
+var sel_file; 
+var template = Handlebars.compile($("#template").html()); 
 
+$(document).ready(function(){
+	$("#i_file").on("change", handleImgFileSelect);
+	
+});
+
+function handleImgFileSelect(e) {
+
+	var files = e.target.files;
+	var file = files[0]
+	
+	/* var filesArr = Array.prototype.slice.call(files); */
+	
+	var formData = new FormData();
+	formData.append("file", file);
+	
+
+	$.ajax({
+		url : '/pUploadForm',
+		data : formData,
+		dataType : 'text',
+		processData : false,
+		contentType : false,
+		type : 'POST',
+		//파일을 드롭했을때 성공시
+		success : function(data) {
+
+			console.log("3*****************");
+			var fileInfo = getFileInfo(data);
+			var html = template(fileInfo);
+			if(count>=1){
+				/* alert("프로필사진은 한 장만 등록됩니다.") */
+				
+				console.log($(".uploadedList img").parent().parent());
+				
+				$(".uploadedList img").parent().parent().remove();
+				
+				$(".uploadedList").append(html);
+				
+				count = 1;
+			} else {
+			$(".uploadedList").append(html);
+			count++;
+			
+			}
+		}
+	});
+}	
+
+</script> 
 <script>
 	
 	// 닉네임 변경
@@ -443,7 +539,7 @@
 					}
 				}
 			}); 
-		});
+		}); */
 
 		// 회원 탈퇴 스크립트
 		function quit() {
