@@ -96,7 +96,7 @@ small {
         font-family: Roboto;
         font-size: 15px;
         font-weight: 300;
-        margin-left: 12px;
+        margin-bottom: 15px;
         padding: 0 11px 0 13px;
         text-overflow: ellipsis;
         width: 300px;
@@ -227,7 +227,14 @@ small {
 												<tr>
 												<th>상세지역</th>
 												
-												<td><div id="map"></div></td>
+												<td>
+												<!-- 검색기능 -->
+												<input id="pac-input" class="controls" type="text" placeholder="Search Box">
+												<div id="map"></div>
+												<!-- 경도와 위도 값을 넘깁니다. -->
+														<input type="hidden" id="lat" name="lat">
+														<input type="hidden" id="lng" name="lng">
+													</td>
 												</tr>
 												
 												<tr>
@@ -755,6 +762,12 @@ S3 수정 (파일 업로드 2개가 되어서 주석 처리)
     		$("#rDName").focus();
     		return false;
     		
+    		
+    	} else if($("#lat").val()=="") {
+    		
+    		alert("상세지역을 클릭해주세요");
+    		$("#map").focus();
+    		return false;
     		//나이대
     	} else if(age == ""){
     		
@@ -849,6 +862,8 @@ S3 수정 (파일 업로드 2개가 되어서 주석 처리)
    var labels = 'A';
    var labelIndex = 1;
    var map;
+   var lat;
+   var lng;
    
    function initialize() {
 	    var	uluru = {lat:37.5663797, lng:126.9777154};
@@ -856,22 +871,66 @@ S3 수정 (파일 업로드 2개가 되어서 주석 처리)
    		zoom: 16,
    		center:uluru
 	   	});
-	   	    
+
+   	    
+   	    
+   	    
+   	    
+   	    
+/*    	    // 검색을 위한
+   	    var input = document.getElementById('pac-input');
+   	    var searchBox = new google.maps.places.SearchBox(input);
+   	    
+   	    //검색을 위한
+   	    map.addListener('bounds_changed', function(){
+   	    	searchBox.setBounds(map.getBounds())
+   	    });
+   	    
+   	    searchBox.addListener('places_changed', function(){
+   	    	var places = searchBox.getPlaces();
+   	    	
+   	    	if(places.length == 0){
+   	    		return;
+   	    	}
+   	    }); */
+
+	   	//마커를 클릭하면 등록   
 	   	google.maps.event.addListener(map,'click', function(event){
 	   		console.log(labelIndex)
 	   		//처음 클릭했을때 등록
 	   		if(labelIndex == 1){
 	   			addMarker(event.latLng, map);
-	   			alert("lat" + event.latLng.lat() + "lng" + event.latLng.lng())
+	   			//경도 위도 변수에 저장
+				lat = event.latLng.lat();
+				lng = event.latLng.lng();
+				
+				$('#lat').attr('value', lat);
+				$('#lng').attr('value', lng);
+				
+				
 	   			labelIndex = 2;
 	   		//두번째부터 위치변경	
+				console.log($("#lat").val())
 	   		} else {
 	   		hide(); 
-	   		addMarker(event.latLng, map);
-	   		alert("lat" + event.latLng.lat() + "lng" + event.latLng.lng())
-	   		}
+			//value 변경후 다시 추가
+			$('#lat').removeAttr('value');
+			$('#lng').removeAttr('value');
+
+			addMarker(event.latLng, map);
 	   		
-	   	})    
+			lat = event.latLng.lat();
+			lng = event.latLng.lng();
+			
+			//value 추가 
+			$('#lat').attr('value', lat);
+			$('#lng').attr('value', lng);
+			
+			alert(lat + " ,,,,," + lng)	
+	   		}
+	   	})
+	   	
+	  
    }
    
    

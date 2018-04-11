@@ -107,7 +107,7 @@ small {
 			<!-- MAIN CONTENT -->
 			<div class="main-content" style="background-color: #f9f9f9">
 				<div class="container">
-					<h3 class="page-title">스터디 등록하기</h3>
+					<h3 class="page-title">스터디 수정하기</h3>
 					<div class="row">
 						<div class="col-md-12">
 							<div class="panel">
@@ -168,10 +168,18 @@ small {
 													</select> <select id="rSName" name='rSId' class="form-control">
 															<option value="">--</option>
 													</select>
-													<!-- 지도입니다. -->
-													 <div id="map"></div>
 													</td>
+													</tr>
+													
+													<tr>
+												<th>상세지역</th>
+														
+														<td><div id="map"></div>
+																<input type="hidden" id="lat" name="lat">
+																<input type="hidden" id="lng" name="lng">
+															</td>
 												</tr>
+												
 												<tr>
 													<th>스터디 방장</th>
 													<!--  세션으로 전송 -->
@@ -791,26 +799,6 @@ small {
 			}); //$.ajax 끝
 		} //getStudy() 끝
 </script>
-	
-	
-
-   <!--지도 크르깁트 -->
-   <script>
-   function initMap() {
-   		var uluru = {lat:37.5663797, lng:126.9777154};
-   	    var map = new google.maps.Map(document.getElementById('map'),{
-   		zoom: 16,
-   		center:uluru
-   	});
-   	var marker = new google.maps.Marker({
-   		position:uluru,
-   		map:map
-   	});
-   }
-   </script>
-
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAiNU7soIIqpN1Jdu0tV1CWBb6u1jJAH5o&callback=initMap"
-    async defer></script>
 
 <!-- 우효성 검사 -->
     <!-- 유효성 검사 스크립트 -->
@@ -848,7 +836,14 @@ small {
     		$("#rDName").focus();
     		return false;
     		
-    		//나이대
+    		//상세지역 
+    	} else if($("#lat").val()=="") {
+    		
+    		alert("상세지역을 클릭해주세요");
+    		$("#map").focus();
+    		return false;
+    		//나이대 
+    	
     	} else if(age == ""){
     		
 			alert("원하는 나이대를 입력하세요");
@@ -934,7 +929,93 @@ small {
     	
     }) 
     </script>
+ 	<!--지도 크르깁트 -->
+<script>
+   var markers = [];
+   var labels = 'A';
+   var labelIndex = 1;
+   var map;
+   var lat;
+   var lng;
+   
+   //등록지역 경도와 위도를 저장해 줍니다
+   var lpoint = ${studyVO.lat}
+   var rpoint = ${studyVO.lng}
+   
+   function initialize() {
+	    var	uluru = {lat:lpoint, lng:rpoint};
+   	    map = new google.maps.Map(document.getElementById('map'),{
+   		zoom: 16,
+   		center:uluru
+	   	});
+	   	
+   	    //처음 지정위치에 마커ㅣㄱ기
+   	    if(labelIndex == 1) {
+   			var marker = new google.maps.Marker({
+   		   		position:uluru,
+   		   		map:map,
+   		   		label:labels
+   		   	});
+   			
+			$('#lat').attr('value', lpoint);
+			$('#lng').attr('value', rpoint);
 
+			markers.push(marker);
+			
+			labelIndex = 2;
+   	    }
+   	    
+
+	   	google.maps.event.addListener(map,'click', function(event){
+
+	   		hide(); 
+			//value 변경후 다시 추가
+			$('#lat').removeAttr('value');
+			$('#lng').removeAttr('value');
+
+			addMarker(event.latLng, map);
+	   		
+			lat = event.latLng.lat();
+			lng = event.latLng.lng();
+			
+			//value 추가 
+			$('#lat').attr('value', lat);
+			$('#lng').attr('value', lng);
+			
+			alert(lat + " ,,,,," + lng)	
+	   		
+	   	})
+   }
+   
+   
+   function addMarker(location, map) {
+		var marker = new google.maps.Marker({
+	   		position:location,
+	   		map:map,
+	   		label:labels
+	   	});
+	   
+		markers.push(marker);
+   }
+   
+   function setMarkers(map) {
+	   for(var i=0; i<markers.length; i++){
+		   markers[i].setMap(map);
+	   }
+   }
+   
+   function hide() {
+	   setMarkers(null);
+   }
+   
+   
+</script>
+	<script
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAiNU7soIIqpN1Jdu0tV1CWBb6u1jJAH5o&callback=initialize"
+		async defer></script>
+    
+    
+    		<%@include file="../footer.jsp"%>
    
 </body>
 </html>

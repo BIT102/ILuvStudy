@@ -39,6 +39,8 @@ title = #{title}
 , st = #{st}
 , et = #{et}
 , content = #{content} <!-- null허용 -->
+, lat = #{lat}
+, lng = #{lng}
 where bno = #{bno}
 </update>
 
@@ -85,6 +87,8 @@ title
 , st
 , et
 , content
+, lat
+, lng
 ) values (
 #{title}
 , #{writer}
@@ -97,6 +101,8 @@ title
 , #{st}
 , #{et}
 , #{content} <!-- null허용 -->
+, #{lat}
+, #{lng}
 )
 </insert>
 
@@ -181,7 +187,9 @@ ba.name
 , bs.regdate
 , bs.enddate
 , sc.cdname
-, group_concat(sc.csname) csname 
+, group_concat(sc.csname) csname
+, bs.lat
+, bs.lng  
 FROM 
 board_study bs
 left outer join user u on bs.writer = u.EMAIL

@@ -930,17 +930,20 @@ $(document).ready(function(){
 </script>
 	<!--지도 크르깁트 -->
 	<script>
+	
+   var labels = 'A';
+	
    function initMap() {
-   		var uluru = {lat:37.5663797, lng:126.9777154};
+   		var uluru = {lat:${studyVO.lat}, lng:${studyVO.lng}};
    	    var map = new google.maps.Map(document.getElementById('map'),{
    		zoom: 16,
    		center:uluru
    	});
    	var marker = new google.maps.Marker({
    		position:uluru,
-   		map:map
+   		map:map,
+   		label:labels
    	});
-   	
    }
    </script>
 	<script

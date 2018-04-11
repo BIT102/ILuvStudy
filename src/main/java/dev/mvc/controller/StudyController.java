@@ -108,11 +108,7 @@ public class StudyController {
 		String email = sUser.getEmail();
 		
 		
-		
-		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-		System.out.println(email);
-		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-		
+	
 		model.addAttribute("email", email);
 		
 		return "/study/register";
@@ -120,6 +116,13 @@ public class StudyController {
 	
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String registerPOST(StudyVO vo, RedirectAttributes rttr)throws Exception{
+		
+		
+		System.out.println("<><><><<><><><><><><><><><><><><><><>><");
+		System.out.println(vo);
+		System.out.println("<><><><><>><><><><><><><><><><><><><><><>");
+		
+		
 		
 		logger.info("register POST...........");
 		System.out.println("vo = "+vo);
