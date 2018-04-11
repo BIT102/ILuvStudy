@@ -193,6 +193,8 @@
 	bottom:100;
 	right:95;
 	z-index:999;
+	bottom:15%;
+	right:6%;
 }
 
 .col-md-2, .col-md-10{

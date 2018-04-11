@@ -146,6 +146,25 @@ body {
 	paddiong:10px;
 	z-index:1000;
 }
+
+.main-img{
+	width:100%;
+	height:100%;
+	background-color:rgba(0,0,0,0.4);
+	position:absolute;
+	top:0;
+	left:0;
+}
+
+.main-imgcon{
+	width:1170px;
+	height:480px;
+	position:relative;
+	background-position:center;
+	background-repeat:no-repeat;
+	background-size:cover;
+	overflow:hidden;
+}
 </style>
 </head>
 
@@ -188,14 +207,16 @@ body {
 
 					<c:choose>
 						<c:when test="${studyVO.name ne 'a'}">
+						<div class="main-imgcon">
 							<img src="/study/displayFile?fileName=${studyVO.name}"
-								class="img-responsive center-block"
-								style="width: 1170px; height: 380px;">
+								class="img-responsive center-block main-img">
+						</div>
 						</c:when>
 						<c:otherwise>
+						<div class="main-imgcon">
 							<img src="/resources/assets/img/ha.jpg"
-								class="img-responsive center-block"
-								style="width: 1170px; height: 380px;">
+								class="img-responsive center-block main-img">
+						</div>
 						</c:otherwise>
 					</c:choose>
 
@@ -229,13 +250,13 @@ body {
 														<!-- 등록 안되어있을때 -->
 														<c:if test="${bolist.checked == 0}">
 															<i class="fa fa-heart-o" id="heart"
-																onclick="myFunction1(this)" style="font-size: 20px;"></i>
+																onclick="myFunction1(this)" style="font-size: 20px; cursor:pointer;"></i>
 														</c:if>
 														<!-- 북마크 등록되어있을때 -->
 														<c:if test="${bolist.checked == 1}">
 															<span id="delete"> <i class="fa fa-heartbeat"
 																id="heart" onclick="myFunction1(this)"
-																style="font-size: 20px;"></i>
+																style="font-size: 20px; cursor:pointer;"></i>
 															</span>
 														</c:if>
 														<strong> 즐겨찾기에 추가해 주세요 </strong>

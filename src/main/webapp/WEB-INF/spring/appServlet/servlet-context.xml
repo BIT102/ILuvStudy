@@ -116,7 +116,7 @@
 	</beans:bean>  --> 
 	
 	<beans:bean id="uploadPath" class="java.lang.String">
-	<beans:constructor-arg value="study"></beans:constructor-arg>
+		<beans:constructor-arg value="study"></beans:constructor-arg>
 	</beans:bean>
 	<beans:bean id="uploadPathUser" class="java.lang.String">
 		<beans:constructor-arg value="user"></beans:constructor-arg>
