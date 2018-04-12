@@ -76,6 +76,50 @@ small {
 	height: 300px;
 	margin-top:15px;
 }
+      .controls {
+        margin-top: 10px;
+        border: 1px solid transparent;
+        border-radius: 2px 0 0 2px;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        height: 32px;
+        outline: none;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+      }
+
+      #pac-input {
+        background-color: #fff;
+        font-family: Roboto;
+        font-size: 15px;
+        font-weight: 300;
+        margin-bottom: 15px;
+        padding: 0 11px 0 13px;
+        text-overflow: ellipsis;
+        width: 300px;
+      }
+
+      #pac-input:focus {
+        border-color: #4d90fe;
+      }
+
+      .pac-container {
+        font-family: Roboto;
+      }
+
+      #type-selector {
+        color: #fff;
+        background-color: #4d90fe;
+        padding: 5px 11px 0px 11px;
+      }
+
+      #type-selector label {
+        font-family: Roboto;
+        font-size: 13px;
+        font-weight: 300;
+      }
+      #target {
+        width: 345px;
+      }
 </style>
 </head>
 <body>
@@ -173,8 +217,9 @@ small {
 													
 													<tr>
 												<th>상세지역</th>
-														
-														<td><div id="map"></div>
+														<td>
+														<input id="pac-input" class="controls" type="text" placeholder="상세지역을 검색해 주세요">
+														<div id="map"></div>
 																<input type="hidden" id="lat" name="lat">
 																<input type="hidden" id="lng" name="lng">
 															</td>
@@ -351,7 +396,7 @@ small {
 											<!-- <input type="submit" id = "insertBtn" class = "btn btn-success" value = "등록" /> -->
 										</div>
 									</form>
-											<button type="submit" id="btn-success"
+											<button type="button" id="btn-success"
 												class="btn btn-success">등록</button>
 
 								</div>
@@ -927,22 +972,23 @@ small {
     		alert("등록이 완료되었습니다")
     	} */
     	
+  
     }) 
     </script>
  	<!--지도 크르깁트 -->
 <script>
    var markers = [];
-   var labels = 'A';
    var labelIndex = 1;
    var map;
    var lat;
    var lng;
    
-   //등록지역 경도와 위도를 저장해 줍니다
+	   //등록지역 경도와 위도를 저장해 줍니다
    var lpoint = ${studyVO.lat}
    var rpoint = ${studyVO.lng}
+
    
-   function initialize() {
+   function initAutocomplete() {
 	    var	uluru = {lat:lpoint, lng:rpoint};
    	    map = new google.maps.Map(document.getElementById('map'),{
    		zoom: 16,
@@ -951,10 +997,10 @@ small {
 	   	
    	    //처음 지정위치에 마커ㅣㄱ기
    	    if(labelIndex == 1) {
+   	    	hide();4
    			var marker = new google.maps.Marker({
    		   		position:uluru,
    		   		map:map,
-   		   		label:labels
    		   	});
    			
 			$('#lat').attr('value', lpoint);
@@ -985,19 +1031,69 @@ small {
 			alert(lat + " ,,,,," + lng)	
 	   		
 	   	})
+	   	
+	   	//검색기능 추가해보자
+	    // 지도안에 검색상자를 넣는다
+        var input = document.getElementById('pac-input');
+        var searchBox = new google.maps.places.SearchBox(input);
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+        // 검색결과가 viewpoint로 넘긴다
+        map.addListener('bounds_changed', function() {
+          searchBox.setBounds(map.getBounds());
+        });
+
+        //장소 출력 마커표시도
+        searchBox.addListener('places_changed', function() {
+          var places = searchBox.getPlaces();
+
+          if (places.length == 0) {
+            return;
+          }
+
+          // 장소없으면 안됨
+          var bounds = new google.maps.LatLngBounds();
+          places.forEach(function(place) {
+            if (!place.geometry) {
+              console.log("Returned place contains no geometry");
+              return;
+            }
+            
+    		var marker = new google.maps.Marker({
+    	   		position:location,
+    	   		map:map,
+    	   	});
+    		
+            // 배열에담아
+            markers.push(new google.maps.Marker({
+                  map: map,
+                  marker: marker,
+               	  position: place.geometry.location
+            }));
+
+            if (place.geometry.viewport) {   
+              bounds.union(place.geometry.viewport);
+            } else {
+              bounds.extend(place.geometry.location);
+            }
+          });
+          map.fitBounds(bounds);
+
+        });
    }
+	   	
    
-   
+	//마커를 추가하는 함수
    function addMarker(location, map) {
 		var marker = new google.maps.Marker({
 	   		position:location,
 	   		map:map,
-	   		label:labels
 	   	});
 	   
 		markers.push(marker);
    }
-   
+	
+   //마커를 지우는 함수
    function setMarkers(map) {
 	   for(var i=0; i<markers.length; i++){
 		   markers[i].setMap(map);
@@ -1011,7 +1107,7 @@ small {
    
 </script>
 	<script
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAiNU7soIIqpN1Jdu0tV1CWBb6u1jJAH5o&callback=initialize"
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAiNU7soIIqpN1Jdu0tV1CWBb6u1jJAH5o&callback=initAutocomplete&libraries=places"
 		async defer></script>
     
     

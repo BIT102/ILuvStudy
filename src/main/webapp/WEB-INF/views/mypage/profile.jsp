@@ -87,12 +87,6 @@
 	margin-top:10px;
 }
 
-/*  iframe{
-	width:0px;
-	height:0px;
-	border:0px;
-}  */
-
 </style>
 
 <script>
@@ -131,7 +125,7 @@
 
 
 <section class="bg-light-gray">
-		<div class="container" style="top:30%; background-color: #f9f9f9; margin-bottom:50px;">
+		<div class="container" style="top:30%; background-color: #f9f9f9; margin-bottom:30px;">
 
 
       <div id="service-page">
@@ -225,21 +219,23 @@
 						                       
 	                       <tr>
 							     <th>프로필 사진</th>
-		
-							     	<td> 회원님의 정면 사진을 올려주세요!<br>
-							     	     상대방이 신뢰를 갖고 연락할 확률이 높아져요!<br><br>
-							     	     
-							     	  <input type='file' name='file' style="display:inline-block;" id="i_file"/> 
+									<td>
+										 <div class='uploadedList'>
+										  
+										  	<div class="mailbox-attachment-info">
+												<span class="mailbox-attachment-icon has-img">
+													<img src="/study/displayFile?fileName=${vo.photo}" alt="Attachment" style="width:150px; height:150px;" id="proimg">
+												</span>
+											</div>
+										  
+										  </div>	
+									
+									</td>
+							     	<td> 
+							     	    <p style="margin-bottom:0;">회원님의 정면 사진을 올려주세요!</p>
+							     	    <p>상대방이 신뢰를 갖고 연락할 확률이 높아져요!</p>
+							     		<input type='file' name='file' style="display:inline-block;" id="i_file"/> 
 
-									  <div class='uploadedList'>
-									  
-									  	<div class="mailbox-attachment-info">
-											<span class="mailbox-attachment-icon has-img">
-												<img src="/study/displayFile?fileName=${vo.photo}" alt="Attachment" style="width:150px; height:150px;" id="proimg">
-											</span>
-										</div>
-									  
-									  </div>					     	   
 							     	</td>	
 							</tr>	
                        </tbody>
@@ -306,7 +302,7 @@
 					</table>	
 					
 		<div>
-			<input type="submit" id="btn-success" value="저장하기">
+			<input type="submit" id="btn-success" value="저장하기" style="width:80px; height:42px;">
 		</div>
 </form>					
                  </div> <!-- end of .container -->

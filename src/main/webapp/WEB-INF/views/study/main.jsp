@@ -117,7 +117,7 @@
 		<!--  begin testimonial section  -->
 
 		<section class="bg-light-gray">
-			<div class="container" style="margin-top:100px;">
+			<div class="container">
 
 				<div class="headline text-center">
 					<div class="row">
@@ -209,11 +209,23 @@
 					</c:forEach>
 				</div>
 			</div>
-	</div>
-	<!-- end of /#client-speech  /.owl-carousel -->
+			
+			<div class="container">
 
-	</div>
-	<!-- end of .container -->
+				<div class="headline text-center">
+					<div class="row">
+						<div class="col-md-6 col-md-offset-3">
+							<h2 class="section-title">Best Study</h2>
+							<p class="section-sub-title">방문 Best 스터디 입니다 &amp; 방문을 원하시면
+								이미지를 클릭해 주세요</p>
+							<p class="section-sub-title">더 보기를 눌러서 항목을 늘려주세요 </p>
+							<!-- /.section-sub-title -->
+						</div>
+					</div>
+				</div>
+				
+				
+			</div>		
 	</section>
 	<!--  end of testimonial  section -->
 
