@@ -147,23 +147,25 @@ body {
 	z-index:1000;
 }
 
-.main-img{
-	width:100%;
-	height:100%;
-	background-color:rgba(0,0,0,0.4);
-	position:absolute;
-	top:0;
-	left:0;
+<!--팝업-->
+.setDiv {
+	padding-top: 100px;
+	text-align: center;
 }
-
-.main-imgcon{
-	width:1170px;
-	height:480px;
-	position:relative;
-	background-position:center;
-	background-repeat:no-repeat;
-	background-size:cover;
-	overflow:hidden;
+.mask {
+	position:absolute;
+	left:0;
+	top:0;
+	z-index:9999;
+	background-color:#000;
+	display:none;
+}
+.window {
+	display: none;
+	background-color: #ffffff;
+	height: 80%;
+	width:auto;
+	z-index:99999;
 }
 </style>
 </head>
@@ -207,16 +209,14 @@ body {
 
 					<c:choose>
 						<c:when test="${studyVO.name ne 'a'}">
-						<div class="main-imgcon">
 							<img src="/study/displayFile?fileName=${studyVO.name}"
-								class="img-responsive center-block main-img">
-						</div>
+								class="img-responsive center-block "
+								style="max-width:1170px; width:100%; height:480px;object-fit: cover;">
 						</c:when>
 						<c:otherwise>
-						<div class="main-imgcon">
 							<img src="/resources/assets/img/ha.jpg"
-								class="img-responsive center-block main-img">
-						</div>
+								class="img-responsive center-block "
+								style="max-width:1170px; width:100%; height:480px;object-fit: cover;">
 						</c:otherwise>
 					</c:choose>
 
@@ -319,7 +319,7 @@ body {
 					<div class="col-md-12">
 
 			<div class="comment-post">
-				<h3>댓글을 달아주세요</h3>
+				<h3>댓글</h3>
 				<div class="row">
 					<div class="col-md-4">
 						<div class="form-group">
@@ -336,7 +336,7 @@ body {
 				</div>
 
 				<button type="button" id="addBtn" class="btn btn-black"
-					style="color: white;">댓글 추가하기</button>
+					style="color: white;">댓글 등록</button>
 				<button type="button" id="seeBtn" class="btn btn-black"
 					style="color: white;">댓글 보기</button>
 			</div>
@@ -481,20 +481,85 @@ function myFunction1(x) {
 		alert("이미 처리되었습니다");
 	}
 }
-</script>
 
+</script>
 	<!-- 파일업로드 핸들러 -->
 	<script id="templateAttach" type="text/x-handlebars-template">
     <li data-src='{{name}}'>
-		<span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment" style="width:150px; height:150px;"></span>
-  		<div class="mailbox-attachment-info">
+		<span class="mailbox-attachment-icon has-img">
+			<div class="setDiv">
+				<img src="{{imgsrc}}" class="showMask" alt="Attachment" style="width:150px; height:150px;">
+				<img src="{{imgsrc}}" class="window">
+			</div>
 		</span>
+  		<div class="mailbox-attachment-info">
 		</div>
 	</li>
     </script>
+    
+<div class="setDiv">
+    <a class="showMask">검은 마스크와 레이어 팝업 띄우기</a>
+ 
+	<div class="mask"></div>
+    <div class="window">
+ 		<input type="button" class="close" value="닫기"/>
+    </div>
+</div>
 
 	<script>
-    
+	
+	//==========레이어 팝업============
+   $(document).ready(function(){
+        // showMask를 클릭시 작동하며 검은 마스크 배경과 레이어 팝업을 띄웁니다.
+      /*   $('.showMask').click(function(){
+        	console.log("클릭했다");
+            // preventDefault는 href의 링크 기본 행동을 막는 기능입니다.
+            wrapWindowByMask();
+        }); */
+        
+        $(document).on('click', '.showMask', function(){
+        	console.log("클릭했다22");
+        	console.log(this);
+        	console.log($(this).next());
+        	
+            // preventDefault는 href의 링크 기본 행동을 막는 기능입니다.
+        	// 화면의 높이와 너비를 변수로 만듭니다.
+            var maskHeight = $(document).height();
+            var maskWidth = $(window).width();
+     
+            // 마스크의 높이와 너비를 화면의 높이와 너비 변수로 설정합니다.
+            $('.mask').css({'width':maskWidth,'height':maskHeight});
+     
+            // fade 애니메이션 : 80%의 불투명으로 변합니다.
+            $('.mask').fadeTo(0,0.8);
+     
+            // 레이어 팝업을 가운데로 띄우기 위해 화면의 높이와 너비의 가운데 값과 스크롤 값을 더하여 변수로 만듭니다.
+            var left = ( $(window).scrollLeft() + ( $(window).width() - $(this).next().width()) / 2 );
+            var top = ( $(window).scrollTop() + ( $(window).height() - $(this).next().height()) / 2 );
+     
+            // css 스타일을 변경합니다.
+            $(this).next().css({'left':left,'top':top, 'position':'absolute'});
+     
+            // 레이어 팝업을 띄웁니다.
+            $(this).next().show();
+        });
+ 
+        // 닫기(close)를 눌렀을 때 작동합니다.
+        $('.window .close').click(function (e) {
+            e.preventDefault();
+            $('.mask, .window').hide();
+        });
+ 
+        // 뒤 검은 마스크를 클릭시에도 모두 제거하도록 처리합니다.
+        $('.mask').click(function () {
+            $(this).hide();
+            $('.window').hide();
+        });
+  });
+   //==========레이어 팝업 end===============
+	
+	
+	
     //파일불러오기
     var bno = ${studyVO.bno};
     var template = Handlebars.compile($("#templateAttach").html());
@@ -509,6 +574,7 @@ function myFunction1(x) {
     	})
     })
     
+
     </script>
 	<script>
 var applyEmail = $("#writer").val();

@@ -129,6 +129,10 @@ small {
       #target {
         width: 345px;
       }
+
+th{
+	width:300px;
+}
 </style>
 </head>
 <body>

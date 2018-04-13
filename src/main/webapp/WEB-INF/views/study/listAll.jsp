@@ -131,6 +131,7 @@ select::-ms-expand {
 	border-color: white !important;
 	cursor: default;
 }
+
 </style>
 
 </head>
@@ -214,14 +215,14 @@ select::-ms-expand {
 
 										<c:choose>
 											<c:when test="${studyVO.name ne 'a'}">
-												<img src="/study/displayFile?fileName=${studyVO.name}"
-													class="img-responsive center-block"
-													style="width: 370px; height: 216px;">
+											 	<img src="/study/displayFile?fileName=${studyVO.name}"
+													class="list-img img-responsive center-block "
+													style="max-width:370px; width:100%;height:215px;object-fit: cover;">
 											</c:when>
 											<c:otherwise>
-												<img src="/resources/assets/img/ha.jpg"
-													class="img-responsive center-block"
-													style="width: 370px; height: 216px;">
+												 <img src="/resources/assets/img/ha.jpg"
+													class="list-img img-responsive center-block "
+													style="max-width:370px; width:100%;height:215px;object-fit: cover;">
 											</c:otherwise>
 										</c:choose>
 

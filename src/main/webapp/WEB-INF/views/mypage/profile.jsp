@@ -92,6 +92,9 @@
 	height:0px;
 	border:0px;
 }  */
+th{
+	width:270px;
+}
 
 </style>
 

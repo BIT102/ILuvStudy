@@ -145,10 +145,12 @@
 													
 													<c:choose>
 													<c:when test="${studyVO.name ne 'a'}">
-													<img src="/study/displayFile?fileName=${studyVO.name}" style="width:140px; height:120px;">
+													<img src="/study/displayFile?fileName=${studyVO.name}" 
+													style="max-width:140px; width:100%;height:120px;object-fit: cover;">
 													</c:when>
 													<c:otherwise>
-													<img src="/resources/assets/img/ha.jpg" style="width:140px; height:120px;">
+													<img src="/resources/assets/img/ha.jpg" 
+													style="max-width:140px; width:100%;height:120px;object-fit: cover;">
 													</c:otherwise>
 													</c:choose>
 												</a>
@@ -180,10 +182,12 @@
 											
 											<c:choose>
 											<c:when test="${test.name ne 'a'}">
-											<img src="/study/displayFile?fileName=${test.name}" style="width:140px; height:120px;">
+											<img src="/study/displayFile?fileName=${test.name}" 
+											style="max-width:140px; width:100%;height:120px;object-fit: cover;">
 											</c:when>
 											<c:otherwise>
-											<img src="/resources/assets/img/ha.jpg" style="width:140px; height:120px;">
+											<img src="/resources/assets/img/ha.jpg" 
+											style="max-width:140px; width:100%;height:120px;object-fit: cover;">
 											</c:otherwise>
 											</c:choose>
 				

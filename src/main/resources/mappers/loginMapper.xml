@@ -13,7 +13,7 @@
   	
   	<!-- admin 계정 로그인 처리 -->
 	<select id="adminLogin" resultType="AdminVO">
-		select id, pw, bno from admin where id=#{id} and pw=#{pw}
+		select id, pw, bno from admin where id=#{id} and pw=#{pw} and status='V'
 	</select>
 	
 	<!-- 로그인 시 마지막 접속일 갱신 -->

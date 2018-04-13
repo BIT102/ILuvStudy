@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 <!-- admin 계정 로그인 처리 -->
 	<select id="adminLogin" resultType="AdminVO">
-		select id, pw from admin where id=#{id} and pw=#{pw} and status='V'
+		select id, pw from admin where status='V' and id=#{id} and pw=#{pw}
 	</select>
 	
 	
