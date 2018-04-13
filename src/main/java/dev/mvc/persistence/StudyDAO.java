@@ -69,7 +69,7 @@ public interface StudyDAO {
 	
 	//페이지 데이터 불러오기
 	public List<StudyVO> listCriteria(CriteriaStudy cri) throws Exception;
-	
+		
 	//페이지 데이터를 위한 전체수 반환 할 수 있게
 	public int countPaging(CriteriaStudy cri) throws Exception;
 	
@@ -78,7 +78,9 @@ public interface StudyDAO {
 	
 	//검색 
 	public List<StudyVO> listSearch(SearchCriteriaStudy cri) throws Exception;	
-	
+
+	//방문자수 리스트를 위해 만들어요
+	public List<StudyVO> vctList(SearchCriteriaStudy cri) throws Exception;	
 	
 	//검색수
 	public int listSearchCount(SearchCriteriaStudy cri) throws Exception;
@@ -88,6 +90,9 @@ public interface StudyDAO {
 	//참여자수
 	public void updateNow(Integer bno, int amount) throws Exception;
 
+	
+	
+	
 	
 	//동적SQL을 적용하기 위한 메소드
 	public List<StudyVO> catList()throws Exception;

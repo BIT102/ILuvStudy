@@ -20,6 +20,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
+<!-- fafa img -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <!-- stylesheets -->
 <link rel="stylesheet" href="/resources/assets/css/bootstrap.min.css">
@@ -52,25 +55,33 @@
 	background-color: transparent;
 }
 
-/*  #load {
-	width: 100%;
-	height: 100%;
-	top: 0;
-	left: 0;
-	position: fixed;
-	display: block;
-	opacity: 0.8;
-	background: white;
-	z-index: 99;
-	text-align: center;
+#loadMore { 
+	width:100%;
+	height:35px;
+	background-color:white;
+	border:1px solid gray;
+
 }
 
-#load > img {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	z-index: 100;
-}  */
+.vctmo {
+	top:100%;
+	position:absolute;
+	left:33%;
+	right:33%;
+	bottom:3px;
+}
+
+.container{
+	position:relative;
+}
+
+input:focus{
+	outline:0;
+}
+
+.itemmore{
+	display:none;
+}
 </style>
 
 </head>
@@ -83,6 +94,7 @@
 	<img src="/resources/assets/img/loader.gif" alt="loading">
 </div>
  -->
+
 
 
 	<div id="home-page">
@@ -132,8 +144,7 @@
 				<!-- /.headline -->
 
 				<div id="client-speech" class="owl-carousel owl-theme">
-					<c:forEach items="${list}" var="studyVO" step="2"
-						varStatus="status">
+					<c:forEach items="${list}" var="studyVO" step="2" varStatus="status">
 						<div class="item">
 							<div class="row">
 								<c:if test="${staus.index%2==0}">
@@ -210,26 +221,77 @@
 				</div>
 			</div>
 			
-			<div class="container">
+			<div class="container" style="margin-bottom:70px; margin-top:30px;">
 
 				<div class="headline text-center">
 					<div class="row">
 						<div class="col-md-6 col-md-offset-3">
 							<h2 class="section-title">Best Study</h2>
-							<p class="section-sub-title">방문 Best 스터디 입니다 &amp; 방문을 원하시면
+							<p class="section-sub-title">조회 Best 스터디 입니다 &amp; 방문을 원하시면
 								이미지를 클릭해 주세요</p>
 							<p class="section-sub-title">더 보기를 눌러서 항목을 늘려주세요 </p>
 							<!-- /.section-sub-title -->
 						</div>
 					</div>
 				</div>
+
 				
-				
+				<c:forEach items="${vctList}" var="studyVO" >
+						<div class="col-md-4 col-sm-6 itemmore">
+							<div class="portfolio-item">
+								<div class="item-image">
+									<a
+										href="/study/board${pageMakerStudy.makeSearch(pageMakerStudy.cri.page)}&bno=${studyVO.bno}">
+
+
+										<c:choose>
+											<c:when test="${studyVO.name ne 'a'}">
+												<img src="/study/displayFile?fileName=${studyVO.name}"
+													class="img-responsive center-block"
+													style="width: 370px; height: 216px;">
+											</c:when>
+											<c:otherwise>
+												<img src="/resources/assets/img/ha.jpg"
+													class="img-responsive center-block"
+													style="width: 370px; height: 216px;">
+											</c:otherwise>
+										</c:choose>
+
+										<div>
+											<span><i class="fa fa-plus"></i></span>
+										</div>
+									</a>
+								</div>
+
+								<div class="item-description">
+									<div class="row">
+										<div class="col-xs-6">
+											<span class="item-name" style="width: 230px;">제목 :
+												${studyVO.title} </span> <span style="width: 280px;">주인 :
+												${studyVO.nickname}<br> 종류 : ${studyVO.cDName} /
+												${studyVO.cSName}<br> 지역 : ${studyVO.rDName} /
+												${studyVO.rSName}<br> 등록 : <fmt:formatDate
+													pattern="yyyy-MM-dd" value="${studyVO.regdate}" />
+											</span>
+										</div>
+										<div class="col-xs-6">
+											<span class="like"> <i class="fa fa-eercast"></i>
+												${studyVO.vct}
+											</span>
+										</div>
+									</div>
+								</div>
+								<!-- end of /.item-description -->
+							</div>
+							<!-- end of /.portfolio-item -->
+						</div>
+					</c:forEach>
+					<div class="vctmo">
+						<input type="button" id="loadMore" value="더 보기" onclick="more();">
+					</div>
 			</div>		
 	</section>
 	<!--  end of testimonial  section -->
-
-
 
 	<!-- footer-navigation start -->
 	<nav class="hidden-xs hidden-sm navbar footer-nav" role="navigation">
@@ -269,6 +331,21 @@
 		src="/resources/assets/js/owl.carousel.js"></script>
 	<script type="text/javascript"
 		src="/resources/assets/js/jquery.hoverdir.js"></script>
+
+
+	<script>
+	//더보기하려고 만든 함수입니다
+	$(function () {
+		//세개먼저보여주기
+		$(".itemmore").slice(0,3).show()
+		//더보기 클릭햇을대
+		$("#loadMore").on("click", function(){
+			//숨겨진걸 보여준다 3개 더
+			$(".itemmore:hidden").slice(0, 3).slideDown();
+		})
+	});
+
+	</script>
 
 
 	<!-- script for portfolio section using hoverdirection -->
@@ -345,15 +422,6 @@
   }
   
   </script>
-  
-<!-- <script>
 
-$(document).ready(function() {
-
-	$("#load").hide();
-	
-});
-
-</script> -->
 </body>
 </html>

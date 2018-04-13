@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -179,13 +180,17 @@ public class StudyController {
 
 		logger.info("show list..........");
 
-		List<StudyVO> studyList = service.studyList().subList(0, 8);
+/*		List<StudyVO> studyList = service.studyList().subList(0, 8);
 
-		model.addAttribute("list", studyList);
+		model.addAttribute("list", studyList);*/
 
 		List<StudyVO> SearchList = service.listSearchCriteria(cri).subList(0, 8);
 
 		model.addAttribute("list", SearchList);
+		
+		
+		
+		model.addAttribute("vctList", service.vctList(cri));
 
 		PageMakerStudy pageMakerStudy = new PageMakerStudy();
 

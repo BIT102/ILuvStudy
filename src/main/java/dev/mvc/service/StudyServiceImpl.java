@@ -200,6 +200,53 @@ public class StudyServiceImpl implements StudyService {
 		// 스터디 리스트 가져온다
 		return dao.listSearch(cri);
 	}
+	
+	//방문자수 리스트를 위해 만들어요
+	@Override
+	public List<StudyVO> vctList(SearchCriteriaStudy cri) throws Exception {
+		
+		List<StudyVO> list = dao.vctList(cri);
+
+		//bno 값을 담자
+		int bno;
+		
+		StudyVO vo = new StudyVO();
+
+		List<String> caS = new ArrayList<>();
+		// 소분류 스트링으로 바꾼다
+		String getcaS = "";
+		
+		System.out.println("============================");
+		System.out.println(list);
+		System.out.println("============================");
+		
+		// 카테고리 소분류의 다중선택을 처리하기위해 스트링으로 만들어 set해준다.
+
+		// bno 가져온다
+		for (int i = 0; i < list.size(); i++) {
+
+			bno = list.get(i).getBno();
+			// bno와 비교해서 대분류 가져온다
+			list.get(i).setcDName(dao.getcaD(bno));
+
+			caS = dao.getcaS(bno);
+
+			String[] arrcaS = caS.toArray(new String[caS.size()]);
+
+			getcaS = Arrays.toString(arrcaS);
+
+			System.out.println("+++++++++++++++++++++++++++++++++++++++++++");
+			System.out.println(list);
+			System.out.println("+++++++++++++++++++++++++++++++++++++++++++");
+
+			// 영어 <- set getcaS
+			list.get(i).setcSName(getcaS);
+		}
+
+		// 스터디 리스트 가져온다
+		return dao.vctList(cri);
+	}
+
 
 	// 검색수
 	@Override

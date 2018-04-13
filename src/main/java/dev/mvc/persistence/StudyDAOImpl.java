@@ -230,6 +230,15 @@ public class StudyDAOImpl implements StudyDAO {
 		return session.selectList(namespace+".listSearch", cri);
 	}
 	
+	//방문자수 리스트를 위해 만들어요
+	@Override
+	public List<StudyVO> vctList(SearchCriteriaStudy cri) throws Exception {
+		
+		return session.selectList(namespace+".vctList", cri);
+	}
+	
+	
+	
 	//검색수
 	@Override
 	public int listSearchCount(SearchCriteriaStudy cri) throws Exception {

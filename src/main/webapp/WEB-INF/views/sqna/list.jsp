@@ -122,7 +122,7 @@ color:#6b456a !important;
 
 
 <section class="bg-light-gray" style="padding-top:50px;">
-<section class="row-section">
+<section class="row-section"  style="margin-top:130px;">
     <div class="container contentB">
 	    <div class="row">
 		    <h2 class="text-center"><span>자주 묻는 질문</span></h2>

@@ -87,6 +87,13 @@
 	margin-top:10px;
 }
 
+.page-head {
+    background: url(/resources/assets/img/services-bg.jpg) !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+}
+
 </style>
 
 <script>

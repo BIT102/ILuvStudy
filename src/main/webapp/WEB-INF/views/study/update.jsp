@@ -379,11 +379,13 @@ small {
 															<p> 드레그하여 사진의 순서를 변경할 수 있습니다.</p>
 															<div class='fileDrop'></div>
 																				<div class="imgstyle">
-													<p>스터디 이미지</p>
-															<ul class='uploadedList'>
-															
-															</ul>
-														</div>
+														<p>스터디 이미지</p>	
+					
+																	<ul class='uploadedList'>
+																	
+																	</ul>
+	
+															</div>
 														</div>
 													</td>
 												</tr>
@@ -415,6 +417,7 @@ small {
 	</div>
 
 	<script id="template" type="text/x-handlebars-template">
+
 	<div class="mailbox-attachment-info">
 		<span class="mailbox-attachment-icon has-img">
 			<img src="{{imgsrc}}" alt="Attachment" style="width:150px; height:150px;">
@@ -422,6 +425,7 @@ small {
 		<a href="{{getLink}}" class="mailbox-attachment-name"></a>
 		<small class = "small" value = "{{name}}" data-src=data style="cursor:pointer">X</small>
 		</span>
+
 	</div>
 </script>
 	<script>
@@ -579,53 +583,7 @@ small {
 		var formObj = $("form[role='form']");
 		
 		console.log(formObj);
-		
-		//유효성 검사 변수
-/* 		categoryV = false;
-		titleV = false;
-		ageV = false;
-		maxV = false;
-		 */
-		//수정 클릭 시 액션
-	/* 	$("#modifyBtn").on("click", function(){
-			//form 데이터 유효성 검사 추가 필요
-			
- 			//카테고리 유효성
-  			if($("#addCatArea").find("div").length){
-				categoryV = true;
-			}
-			
-			// title 유효성
-			if($("#title").val() != ""){
-				titleV = true;
-			}
-			
-			//age 유효성
-			if($(".age").val() != ""){
-				ageV = true;
-			}
-			
-			//max 유효성
-			if($("#max").val() != ""){
-				maxV = true;
-			}
-			
-			console.log("categoryV : "+categoryV+" titleV : "+titleV+" ageV : "+ageV+" maxV : "+maxV);
-			
-			if(categoryV && titleV && ageV && maxV){
-				formObj.submit();
-			}else{
-				alert("내용을 확인하세요");
-			}   
-			
-		}); */
-		
-		//목록 클릭 시 액션
-/* 		$("#listBtn").on("click", function(){
-			self.location = "/admin/studyList?page=${cri.page}&perPageNum=${cri.perPageNum}"
-							+"&stStatusType=${cri.stStatusType}&titleKeyword=${cri.titleKeyword}&writerKeyword=${cri.writerKeyword}";
-		});
-		 */
+
 		//지역 정보 셀렉트 박스 변경 시 액션
 		$("#rDName").on("change", function(){
 			getRegion();

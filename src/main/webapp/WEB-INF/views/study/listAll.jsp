@@ -131,6 +131,13 @@ select::-ms-expand {
 	border-color: white !important;
 	cursor: default;
 }
+.page-head {
+    background: url(/resources/assets/img/multiple_blog-bg.jpg) !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+}
+
 </style>
 
 </head>
@@ -139,7 +146,7 @@ select::-ms-expand {
 	<%@include file="../nav.jsp"%>
 	
 	
-            <header class="page-head"  style="background:url(/resources/assets/img/multiple_blog-bg.jpg);">
+            <header class="page-head">
                 <div class="header-wrapper">
                     <div class="container">
                         <div class="row">
@@ -188,9 +195,26 @@ select::-ms-expand {
 				</div>
 				<!-- /.intro -->
 			</div>
+			
 
 
-			<div class="headline text-center">
+
+			<div class="headline text-center" style="position:relative;">
+			
+			<div class="pall" style="position:absolute; width:150px;">
+				<form>
+					<div class="dropdown">
+						<select class="dropdown-select-version select" id="pallsel"
+							name="options" style="float: left; width:100%; height:30px;">
+							<option>최신순</option>
+							<option>북마크순</option>
+							<option>조회순</option>
+							<option>댓글순</option>
+						</select>
+					</div>
+				</form>
+			</div>
+			
 				<div class="row">
 					<div class="col-md-6 col-md-offset-3">
 						<h2 class="section-title">스터디를 구경하세요</h2>
@@ -376,7 +400,7 @@ select::-ms-expand {
 	function onKeyDown() {
 	  if(event.keyCode==13){
     	 
-			
+	
 		  self.location = "listAll"
 				+ '${pageMakerStudy.makeQuery(1)}'
 				+ "&searchType="

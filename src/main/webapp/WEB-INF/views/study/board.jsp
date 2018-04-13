@@ -123,10 +123,22 @@ body {
 
 #modDiv{
 	width:450px;
-	height:200px;
-	background-color:gray;
+	height:220px;
+	background-color:white;
 	position:absolute;
 	top:50%;
+	left:30%;
+	z-index:1000;
+	border: 3px double gray;
+}
+
+#amodDiv {
+	width:450px;
+	height:600px;
+	background-color:white;
+	border:3px double gray;
+	position:absolute;
+	top:160%;
 	left:50%;
 	margin-top:-50px;
 	margin-left:-150px;
@@ -134,18 +146,21 @@ body {
 	z-index:1000;
 }
 
-#amodDiv {
-	width:450px;
-	height:200px;
-	background-color:gray;
-	position:absolute;
-	top:200%;
-	left:50%;
-	margin-top:-50px;
-	margin-left:-150px;
-	paddiong:10px;
-	z-index:1000;
+.modal-title{
+	color:white;
 }
+
+.btn-clipboard {
+	width:200px !important;
+	height:40px;
+	font-size:13px;
+}
+
+.col-md-2 img{
+	width:100px;
+	height:90px;
+}
+
 </style>
 </head>
 
@@ -181,7 +196,7 @@ body {
 		</form>
 
 
-		<div class="container">
+		<div class="container" style="margin-bottom:30px;">
 			<div class="row">
 
 				<article class="blog-item">
@@ -332,7 +347,7 @@ body {
 							
 								<input type="text" id="recon" style="width:350px; height:70px; padding-left:15px;">
 							</div>
-							<div style="text-align:center;">
+							<div style="text-align:center; margin-bottom:10px;">
 								<button type="button" id="remodify" class="btn">수정하기</button>
 								<button type="button" id="redelege" class="btn">지우기</button>
 								<button type="button" id="reclose" class="btn">닫기</button>
@@ -360,6 +375,7 @@ body {
 		<!-- 신청하면 이미지와 닉네임 만들기 -->
 		<div class="aplist">
 <c:if test="${empty login}">
+   로그인 하면 다양한 기능들을 이용할 수 있습니다　　　　　　　　　　　　　　　　　　　　　　　　　
  <input type="submit" class="btn preee" value="목록으로" style="float:right;">
 </c:if>
 
@@ -397,10 +413,11 @@ body {
 	</c:if>
 	</div>
 	
-	
+
+		</div>
+	</div>
 </div>
-
-
+	<%@include file="../footer.jsp"%>	
 	<script>
 //북마크를 등록합니다	
 
@@ -828,7 +845,7 @@ $(document).ready(function(){
         			str += "<div class='replyLi' ><div class='cmnt-clipboard'>"
         			    +  "<button class='btn-clipboard' value='"+this.rno+"'>수정하기</button></div>"
         			    +  "<div class='well'><div class='row'><div class='col-md-2'>"
-        			    +  "<img src='assets/img/commenter2.jpg' class='img-responsive center-block'></div>"
+        			    +  "<img src="+"'/study/displayFile?fileName=${studyVO.photo}'"+"　class='img-responsive center-block'></div>"
                         +  "<div class='col-md-10'><p class='comment-info'>"
                         +  "<strong>" + this.writer + "</strong>" + "<span>" + this.regdate + "</span>"
                         + "</p><div class='contentre'>" + this.content + "</div></div></div></div></div>"
@@ -947,5 +964,6 @@ $(document).ready(function(){
 	<script
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAiNU7soIIqpN1Jdu0tV1CWBb6u1jJAH5o&callback=initMap"
 		async defer></script>
+		
 </body>
 </html>

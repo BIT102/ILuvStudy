@@ -401,7 +401,7 @@ small {
 
 										<div class="text-right">
 											<!-- <button type="submit" id="btn-success" class = "btn btn-success" style="background-color:#5bc0de; border:1px solid black;">등록</button> -->
-											<button type="button" id="btn-success"
+											<button type="submit" id="btn-success"
 												class="btn btn-success">등록</button>
 											<!-- <input type="submit" id = "insertBtn" class = "btn btn-success" value = "등록" /> -->
 										</div>

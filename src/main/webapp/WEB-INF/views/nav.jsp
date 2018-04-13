@@ -398,6 +398,8 @@ height:400px;
 </head>
 <body>
 
+
+
 	<!-- site-navigation start -->
 	<nav id="mainNavigation" class="navbar navbar-dafault main-navigation"
 		role="navigation">
@@ -426,7 +428,6 @@ height:400px;
 
 			</div>
 			<!-- /.navbar-header -->
-
 
 			<!-- 로그인 모달 -->
 			<div id="id01" class="modal">

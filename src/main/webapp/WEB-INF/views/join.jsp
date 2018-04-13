@@ -39,6 +39,14 @@ th{
 	margin-top:5px;
 }
 
+.page-head {
+    background: url(/resources/assets/img/portfolio-bg.jpg) !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+}
+
+
 </style>
 
 <%@ include file="nav.jsp"%>
@@ -322,7 +330,7 @@ th{
 
 
 <body>
-            <header class="page-head" style="background:url(/resources/assets/img/portfolio-bg.jpg);">
+            <header class="page-head">
                 <div class="header-wrapper">
                     <div class="container">
                         <div class="row">
@@ -415,7 +423,7 @@ th{
 	                  							<td>
 	                <div class="form-group">
 	                  <div class="col-md-8 col-sm-9">
-	                    <input type="text" class="form-control" name="nickName" id="nickName" value="">
+	                    <input type="text" class="form-control" name="nickName" id="nickName" value="" style="width:638px;">
 	                    <input type="button" id="chkNickname" class="btn btn-black" value="중복체크" />
 	                    <p id = "nickNamecheck" style = "color:red;"></p>
 	                  </div>

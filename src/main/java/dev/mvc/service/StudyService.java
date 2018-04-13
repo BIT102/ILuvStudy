@@ -50,12 +50,18 @@ public interface StudyService {
 		
 	//페이징 ㅈ개수전체
 	public int listCountCriteria(CriteriaStudy cri) throws Exception;
+
+	
 	
 	//보드 삭제히가
 	public void remove(Integer bno) throws Exception;
 	
 	//검색
 	public List<StudyVO> listSearchCriteria(SearchCriteriaStudy cri) throws Exception;
+
+	//방문자수 리스트를 위해 만들어요
+	public List<StudyVO> vctList(SearchCriteriaStudy cri) throws Exception;	
+	
 	
 	//검색수
 	public int listSearchCount(SearchCriteriaStudy cri) throws Exception;	
