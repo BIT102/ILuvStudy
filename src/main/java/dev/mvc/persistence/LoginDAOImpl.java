@@ -31,6 +31,7 @@ public class LoginDAOImpl implements LoginDAO{
 			vo.setPassword(dto.getPw());
 			System.out.println("userLogin..............");
 			System.out.println(vo);
+			System.out.println("로그인다오임플 : ============여기 들어옴?");
 			return session.selectOne(namespace + ".userLogin",vo);
 		}
 
@@ -86,4 +87,12 @@ public class LoginDAOImpl implements LoginDAO{
 	public int googleSelect(UserVO vo)throws Exception{
 		return session.selectOne(namespace + ".googleSelect", vo);
 	}
+
+	// 시큐리티 비밀번호 암호화 패스워드 가져오기
+	@Override
+	public UserVO getUserPw(String email) throws Exception {
+		return session.selectOne(namespace + ".getUserPassword", email);
+	}
+
+	
 }

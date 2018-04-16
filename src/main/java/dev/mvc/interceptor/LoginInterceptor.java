@@ -29,7 +29,6 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView)throws Exception{
-		
 
 		logger.info("Login interceptor postHandle............");
 		HttpSession session = request.getSession();
@@ -39,7 +38,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 		UserVO userVO = (UserVO)modelMap.get("UserVO");
 		Cookie cookie = (Cookie)modelMap.get("cookie");
 		
-		System.out.println(cookie);
+		System.out.println("쿠키 :======================" + cookie);
 		
 		if(adminVO != null){
 			logger.info("new login success");
@@ -47,7 +46,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 			service.loginupdate(adminVO);  //로그인 성공 시 
 
 			if(cookie != null)
-				response.addCookie(cookie); // 로그인아이디 기억하기 쿠기의 생성	
+				response.addCookie(cookie); // 로그인 아이디 기억하기 쿠기의 생성	
 			
 			//로그인 성공 시 회원리스트로 이동
 			response.sendRedirect("/admin/userList");
@@ -101,6 +100,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception{
+		
 		HttpSession session = request.getSession();
 		
 		if(session.getAttribute(LOGIN) != null){

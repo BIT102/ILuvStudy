@@ -92,10 +92,13 @@ public class LoginController {
 			// 로그인 유지 클릭시 관리자는 로그인 유지하지 않는다(혹시 모를 상황을 대비)
 			if(dto.isUseCookies()){
 				logger.info("isUseCookies.......");
+				
 				int amount = 60 * 60 * 24 * 7; // 1주일
 				Date sessionLimit = new Date(System.currentTimeMillis()+(1000*amount));
+				
 				System.out.println("=============세션 getid==============");
 				System.out.println(userVO.getEmail()+",,,"+ session.getId()+",,,"+ sessionLimit);
+				
 				service.keepLogin(userVO.getEmail(), session.getId(), sessionLimit);
 			}
 		}

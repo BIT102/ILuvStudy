@@ -1,4 +1,4 @@
-package dev.mvc.interceptor;
+/*package dev.mvc.interceptor;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -25,11 +25,15 @@ public class UserLoginInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
+		
+		System.out.println("유저로그인인터셉터11...이거씀?=====================");
+		
 		HttpSession session = request.getSession();
+		
 		
 		ModelMap modelMap = modelAndView.getModelMap();
 
-		Object userVO = (UserVO)modelMap.get("userVO"); // 도메인 값이 아니라 컨트롤러에 담아준 값을 담아 온다. U u 대소문자
+		Object userVO = (UserVO)modelMap.get("userVO"); // 도메인 값이 아니라 컨트롤러에 담아준 값을 담아 온다. 
 		System.out.println("===========유저vo=============");
 		System.out.println(userVO);
 		System.out.println("========================");
@@ -64,6 +68,7 @@ public class UserLoginInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request,
 		HttpServletResponse response, Object handler) throws Exception{
 	
+		System.out.println("유저로그인인터셉터22...이거씀?=====================");
 		HttpSession session = request.getSession();
 		
 		if(session.getAttribute(LOGIN) !=null){
@@ -74,3 +79,4 @@ public class UserLoginInterceptor extends HandlerInterceptorAdapter {
 	}	
 			
 }
+*/

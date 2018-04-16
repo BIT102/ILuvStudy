@@ -191,7 +191,7 @@ th{
 						$('#nickNamecheck').html("사용가능한 닉네임입니다.");
 						document.getElementById("nickNamecheck").style.color = 'blue';
 					}else{
-						$('#nickNamecheck').html("사용불가능한 닉네임입니다.");
+						$('#nickNamecheck').html("사용불가능한 닉네임입니다.").style.color = 'red';
 					}
 				}
 			})
@@ -385,7 +385,7 @@ th{
 	                  <div class="col-md-5 col-sm-8">
 	                    <div class="input-group">
 	                      <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-	                      <input type="password" class="form-control" name="password" id="password" placeholder="9~16자 영문 대소문자를 사용하세요." value="">
+	                      <input type="password" class="form-control" name="password" id="password" placeholder="8~16자 영문 대소문자를 사용하세요." value="">
 	                   </div>
 	                  </div>
 	                  <p id = "pwcheck" style = "color:red;padding-top: 15px;margin: 0;">비밀번호를 입력하세요</p>

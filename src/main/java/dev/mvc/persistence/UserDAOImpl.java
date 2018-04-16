@@ -109,21 +109,24 @@ public class UserDAOImpl implements UserDAO {
 	//=================================================
 		// sangwook
 		
-		@Override
-		public int chkEmail(String email) throws Exception {
-			return session.selectOne(namespace+".chkEmail", email);
-		}
-		
-		@Override
-		public int chkNickname(String nickName) throws Exception{
-			return session.selectOne(namespace+".chkNickname", nickName);
-		}
+	// 이메일 중복 체크
+	@Override
+	public int chkEmail(String email) throws Exception {
+		return session.selectOne(namespace+".chkEmail", email);
+	}
+	
+	// 닉네임 중복 체크
+	@Override
+	public int chkNickname(String nickName) throws Exception{
+		return session.selectOne(namespace+".chkNickname", nickName);
+	}
 
-		@Override
-		public void emailConf(String email) throws Exception {
-			session.update(namespace+".emailConf",email);
-			
-		}
+	// 이메일 인증
+	@Override
+	public void emailConf(String email) throws Exception {
+		session.update(namespace+".emailConf",email);
+		
+	}
 
 
 	
