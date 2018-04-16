@@ -167,6 +167,7 @@ body {
 	width:auto;
 	z-index:99999;
 }
+
 </style>
 </head>
 
@@ -484,7 +485,7 @@ function myFunction1(x) {
 
 </script>
 	<!-- 파일업로드 핸들러 -->
-	<script id="templateAttach" type="text/x-handlebars-template">
+<!--  <script id="templateAttach" type="text/x-handlebars-template">
     <li data-src='{{name}}'>
 		<span class="mailbox-attachment-icon has-img">
 			<div class="setDiv">
@@ -495,16 +496,27 @@ function myFunction1(x) {
   		<div class="mailbox-attachment-info">
 		</div>
 	</li>
+    </script>	-->
+    
+	<script id="templateAttach" type="text/x-handlebars-template">
+    <li data-src='{{name}}'>
+		<span class="mailbox-attachment-icon has-img">
+			<div class="setDiv">
+				<img src="{{imgsrc}}" class="showMask" alt="Attachment" style="width:150px; height:150px;">
+				<img src="{{imgsrc}}" class="window">
+			</div>
+		</span>
+	</li>
     </script>
     
 <div class="setDiv">
-    <a class="showMask">검은 마스크와 레이어 팝업 띄우기</a>
+    <a class="showMask"></a>
  
 	<div class="mask"></div>
     <div class="window">
- 		<input type="button" class="close" value="닫기"/>
+ 		<input type="button" class="close" value="X"/>
     </div>
-</div>
+</div> 
 
 	<script>
 	
@@ -518,7 +530,6 @@ function myFunction1(x) {
         }); */
         
         $(document).on('click', '.showMask', function(){
-        	console.log("클릭했다22");
         	console.log(this);
         	console.log($(this).next());
         	
@@ -557,9 +568,7 @@ function myFunction1(x) {
         });
   });
    //==========레이어 팝업 end===============
-	
-	
-	
+
     //파일불러오기
     var bno = ${studyVO.bno};
     var template = Handlebars.compile($("#templateAttach").html());
