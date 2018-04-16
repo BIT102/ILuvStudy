@@ -4,8 +4,12 @@ import java.util.Date;
 
 import javax.inject.Inject;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import dev.mvc.controller.UserController;
 import dev.mvc.domain.AdminVO;
 import dev.mvc.domain.UserVO;
 import dev.mvc.dto.LoginDTO;
@@ -13,12 +17,33 @@ import dev.mvc.persistence.LoginDAO;
 
 @Service
 public class LoginServiceImpl implements LoginService {
+	
+	private static final Logger logger = LoggerFactory.getLogger(LoginServiceImpl.class);
 
 	@Inject
 	LoginDAO dao;
+	@Inject
+	private BCryptPasswordEncoder passwordEncoder; //스프링시큐리티 비밀번호 암호화
 	
 	@Override
 	public UserVO userLogin(LoginDTO dto) throws Exception{
+		
+		// 시큐리티 암호화 된 부분 디코더
+		//============================================================
+		// 여기 추가하면 관리자 로그인 안돼요
+		String pw = dao.getUserPw(dto.getId()).getPassword();
+		logger.info("암호화 비밀번호 : " + pw);
+		String rawPw = dto.getPw();
+		logger.info("비밀번호 : " + rawPw);
+
+		if(passwordEncoder.matches(rawPw, pw)){
+		logger.info("비밀번호 일치");
+		dto.setPw(pw);
+		}else {
+		logger.info("비밀번호 불일치");    
+		}
+		
+		//==============================================================
 		return dao.userLogin(dto);
 	}
 	

@@ -57,6 +57,10 @@ public class UserServiceImpl implements UserService {
 		// 비밀번호 변경
 		@Override
 		public void changePw(UserVO vo) throws Exception {
+			String enPassword = passwordEncoder.encode(vo.getPassword());   //스프링시큐리티 비밀번호 암호화
+			vo.setPassword(enPassword);
+			System.out.println("암호화된 비밀번호 :" + vo.getPassword());
+			
 			dao.changePw(vo);
 		}
 

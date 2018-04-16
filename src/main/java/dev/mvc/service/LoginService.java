@@ -26,8 +26,6 @@ public interface LoginService {
 	// 전화번호로 이메일찾기
 	public String searchEmail(String phone) throws Exception;
 
-	
-	
 	//구글 로그인 api
 	public void googleLogin(UserVO vo)throws Exception;
 }

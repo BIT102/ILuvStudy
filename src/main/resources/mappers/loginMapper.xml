@@ -27,7 +27,8 @@
   	</select>
   	
   	<!-- sessionKey로 로그인 여부 판단  -->
-  	<update id="keepLogin" parameterType="map">
+<!--   	<update id="keepLogin" parameterType="map"> -->
+  	<update id="keepLogin">
   		update user set sessionKey = #{sessionId}, sessionLimit = #{next} where email=#{email};
   	</update>
   	
@@ -51,5 +52,10 @@
   	<select id="googleSelect" resultType="int">
 		select count(email) from user where email=#{email}
 	</select>
+	
+	<!-- 시큐리티 비밀번호 가져오기 -->
+    <select id="getUserPassword" resultType="UserVO">
+	    select password from user where email = #{email}
+    </select>
   		
   </mapper>

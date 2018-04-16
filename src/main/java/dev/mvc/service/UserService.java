@@ -65,6 +65,4 @@ public interface UserService {
 	public void emailConf(String email)throws Exception;
 	
 	
-
-
 }

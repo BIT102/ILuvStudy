@@ -23,6 +23,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 	private static final Logger logger = LoggerFactory.getLogger(AuthInterceptor.class);
 	
 	private void saveDest(HttpServletRequest req){
+		
 		logger.info("saveDest 인터셉터 찍히니???==========================");
 		String uri = req.getRequestURI();
 		String query = req.getQueryString();
@@ -42,13 +43,14 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception{
+		
 		logger.info("auth 인터셉터 찍히니???==========================");
 		HttpSession session = request.getSession();
 		
 		if(session.getAttribute("login") == null){
 			
 			logger.info("current user is not logined");
-			
+			System.out.println("현재사용자 낫 로그인");
 			saveDest(request);
 			
 			Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
@@ -56,7 +58,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 			if(loginCookie != null){
 				UserVO userVO = service.checkLoginBefore(loginCookie.getValue());
 				logger.info("USERVO:" + userVO);
-				
+				System.out.println("사용자정보");
 				if(userVO != null){
 					session.setAttribute("login", userVO);
 					return true;
@@ -71,22 +73,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 			return true;
 
 	}
-/*	
-	@Override
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, 
-				Object handler) throws Exception{
-		HttpSession session = request.getSession();
-		
-		if(session.getAttribute("login") == null){
-			logger.info("current user is not logined");
-			
-			response.sendRedirect("/login");
-			return false;
-		}
-		return true;
 
-	}
-	*/
 }
 
 

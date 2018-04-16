@@ -32,8 +32,6 @@ public interface UserDAO {
 	//프로필 사진 수정
 	public void insertImg(Map<String, Object> map) throws Exception;
 	
-	//프로필 사진 수정222
-	
 	
 	//북마크 리스트 불러오기
 /*	public List<StudyVO> bookmarkList(String email) throws Exception;*/
@@ -59,9 +57,10 @@ public interface UserDAO {
 	// email 중복체크
 	public int chkEmail(String email) throws Exception;
 	
+	// 닉네임 중복체크
 	public int chkNickname(String nickName) throws Exception;
 
-	
+	// 이메일 인증 확인
 	public void emailConf(String email) throws Exception;
 	
 	

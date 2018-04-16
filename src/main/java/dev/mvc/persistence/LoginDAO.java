@@ -30,4 +30,6 @@ public interface LoginDAO {
 	//구글 로그인을 위한 아이디 찾기
 	public int googleSelect(UserVO vo)throws Exception;
 	
+	// 시큐리티 비밀번호 암호화 패스워드 가져오기
+	public UserVO getUserPw(String email) throws Exception;
 }

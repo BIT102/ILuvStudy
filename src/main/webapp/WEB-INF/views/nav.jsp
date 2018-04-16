@@ -460,15 +460,15 @@ height:400px;
 									<input type="checkbox" name="rememberId" value="1" ${checked111}
 										style="width: 20px; vertical-align: middle; margin: 0;"
 										id="ida"><label for="idaa"
-										style="vertical-align: middle; margin: 0;">&nbsp;아이디저장</label><br>
+										style="vertical-align: middle; margin: 0;">&nbsp;아이디 저장</label><br>
 								</div>
 								<div class="texttext">
 									<input type="checkbox" name="useCookies"
 										style="width: 20px; vertical-align: middle; margin: 0;"
 										id="idb"><label for="idbb"
-										style="vertical-align: middle; margin: 0;">&nbsp;자동로그인</label>
+										style="vertical-align: middle; margin: 0;">&nbsp;자동 로그인</label>
 								</div>
-								<br> 아이디/비밀번호를 잊으셨나요?<br> <a href="/searchEmail">아이디찾기 / </a><a href="/searchPW">비밀번호찾기</a>
+								<br> 아이디/비밀번호를 잊으셨나요?<br> <a href="/searchEmail">아이디 찾기 / </a><a href="/searchPW">비밀번호 찾기</a>
 							</form>
 						</div>
 					</div>

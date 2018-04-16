@@ -77,7 +77,7 @@ public class UserController {
 			e.printStackTrace();
 		}
 		
-		return "login";
+		return "/study/main";
 	}
 	
 // profile 컨트롤러
@@ -261,7 +261,6 @@ public class UserController {
 	public String changePwGET(Model model) throws Exception {
 		
 		System.out.println("비번변경 겟");
-		
 		return "/mypage/changePw";
 	}
 	
