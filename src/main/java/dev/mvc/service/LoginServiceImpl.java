@@ -30,19 +30,20 @@ public class LoginServiceImpl implements LoginService {
 		
 		// 시큐리티 암호화 된 부분 디코더
 		//============================================================
-		// 여기 추가하면 관리자 로그인 안돼요
-		String pw = dao.getUserPw(dto.getId()).getPassword();
-		logger.info("암호화 비밀번호 : " + pw);
-		String rawPw = dto.getPw();
-		logger.info("비밀번호 : " + rawPw);
+		if(dao.getUserPw(dto.getId()) != null){
+			String pw = dao.getUserPw(dto.getId()).getPassword();
+			logger.info("암호화 비밀번호 : " + pw);
+			String rawPw = dto.getPw();
+			logger.info("비밀번호 : " + rawPw);
 
-		if(passwordEncoder.matches(rawPw, pw)){
-		logger.info("비밀번호 일치");
-		dto.setPw(pw);
-		}else {
-		logger.info("비밀번호 불일치");    
-		}
+			if(passwordEncoder.matches(rawPw, pw)){
+				logger.info("비밀번호 일치");
+				dto.setPw(pw);
+			}else {
+				logger.info("비밀번호 불일치");    
+			}
 		
+		}
 		//==============================================================
 		return dao.userLogin(dto);
 	}
