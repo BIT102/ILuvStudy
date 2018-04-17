@@ -27,7 +27,21 @@ public class StudyDAOImpl implements StudyDAO {
 	private static final Logger logger = LoggerFactory.getLogger(StudyDAOImpl.class);
 
 	
+	//댓글수 업
+		@Override
+		public void upReply(Integer bno, int amount) throws Exception {
+			
+			Map<String, Object> map = new HashMap<String, Object>();
+			
+			map.put("bno", bno);
+			map.put("amount", amount);
+			
+			session.update(namespace + ".updateReplyCnt", map);
+		}
+	
+	
 	//카테고리등록
+		@Override
 		public void createCa(Map<String, Object> map) throws Exception {
 			 session.insert(namespace+".createCa", map);
 		}

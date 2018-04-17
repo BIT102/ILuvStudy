@@ -91,8 +91,8 @@ public interface StudyDAO {
 	public void updateNow(Integer bno, int amount) throws Exception;
 
 	
-	
-	
+	//댓글수 업데이트
+	public void upReply(Integer bno, int amount) throws Exception;
 	
 	//동적SQL을 적용하기 위한 메소드
 	public List<StudyVO> catList()throws Exception;

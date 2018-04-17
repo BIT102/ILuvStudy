@@ -5,14 +5,19 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import dev.mvc.domain.Criteria;
 import dev.mvc.domain.ReplyStudyVO;
 import dev.mvc.persistence.ReplyStudyDAO;
+import dev.mvc.persistence.StudyDAO;
 
 @Service
 public class ReplyStudyServiceImpl implements ReplyStudyService{
 
+	@Inject
+	private StudyDAO sdao;
+	
 	@Inject
 	private ReplyStudyDAO dao;
 	
@@ -23,9 +28,11 @@ public class ReplyStudyServiceImpl implements ReplyStudyService{
 	}
 	
 	//¥Ò±€ µÓ∑œ
+	@Transactional
 	@Override
 	public void addReply(ReplyStudyVO vo) throws Exception {
 		dao.create(vo);
+		sdao.upReply(vo.getBsBno(), 1);
 	}
 	
 	//¥Ò±€ ºˆ¡§
@@ -35,9 +42,14 @@ public class ReplyStudyServiceImpl implements ReplyStudyService{
 	}
 	
 	//¥Ò±€ ªË¡¶
+	@Transactional
 	@Override
 	public void removeReply(Integer rno) throws Exception {
+		
+		int bno = dao.getBno(rno);
+		
 		dao.delete(rno);
+		sdao.upReply(bno, -1);
 	}
 	
 	//∆‰¿Ã¬°

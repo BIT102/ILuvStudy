@@ -226,7 +226,7 @@ body {
 										<div class="col-md-9" style="margin-top:50px;">
 											<p >
 												<strong>주인 :</strong> <span
-													class="author-name text-uppercase">${studyVO.nickname}</span>
+													class="author-name text-uppercase" style="font-size:30px;">${studyVO.nickname}</span>
 											</p>
 											<p>${studyVO.content}</p>
 										</div>
@@ -313,7 +313,7 @@ body {
 					<div class="col-md-12">
 
 			<div class="comment-post">
-				<h3>댓글을 달아주세요</h3>
+				<h3>댓글을 달아주세요　[${studyVO.rct}]</h3>
 				<div class="row">
 					<div class="col-md-4">
 						<div class="form-group">

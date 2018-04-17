@@ -299,7 +299,7 @@
 													<input type="hidden" value="${login.email}" name="email" readonly>
 											
 													<div>
-														<input type="submit" id="btn-success" value="저장하기">
+														<input type="submit" id="btn-success" value="저장하기" style="width:80px; height:42px;">
 													</div>
 										<!-- </form>	 -->							
 													
@@ -344,7 +344,7 @@
 												 	<input type="hidden" value="${login.email}" name="email" readonly>
 												 		
 												 	<div>
-  														 <input id="btn-success" class="changePw" type="submit" value="변경하기">
+  														 <input id="btn-success" class="changePw" type="submit" value="변경하기" style="width:80px; height:42px;">
 													</div>		
 	                                        </div>
 	                                    </div>

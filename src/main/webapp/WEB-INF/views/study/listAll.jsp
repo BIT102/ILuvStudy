@@ -172,7 +172,7 @@ select::-ms-expand {
 				<form>
 					<div class="dropdown">
 						<select class="dropdown-select-version select" id="select1"
-							name="options" style="float: right;">
+							name="options" style="float: right; margin-top:20px;">
 							<option value="x">전체</option>
 							<option value="t"
 								<c:out value="${cri.searchType eq 't'? 'selected' : ''}"/>>제목</option>
@@ -205,15 +205,19 @@ select::-ms-expand {
 				<form>
 					<div class="dropdown">
 						<select class="dropdown-select-version select" id="pallsel"
-							name="options" style="float: left; width:100%; height:30px;">
-							<option>최신순</option>
-							<option>북마크순</option>
-							<option>조회순</option>
-							<option>댓글순</option>
+							name="pallType" style="float: left; width:100%; height:30px;">
+							<option value="a"
+							 <c:out value="${cri.pallType eq 'a'? 'selected':''}"/>>최신순</option>
+							<option value="b"
+							 <c:out value="${cri.pallType eq 'b'? 'selected':''}"/>>북마크순</option>
+							<option value="q"
+							 <c:out value="${cri.pallType eq 'q'? 'selected':''}"/>>조회순</option>
+							<option value="w"
+							 <c:out value="${cri.pallType eq 'w'? 'selected':''}"/>>댓글순</option>
 						</select>
 					</div>
 				</form>
-			</div>
+			</div> 
 			
 				<div class="row">
 					<div class="col-md-6 col-md-offset-3">
@@ -383,32 +387,49 @@ select::-ms-expand {
 	</script>
 
 	<!-- 검색을 위한 스크립트 -->
+	<!-- 정렬조건을 주는 스크립트 -->
 	<script>
 	  $(document).ready(function(){
-		  
+			//정렬합니다
+			var pallsel;
+			
+			//클릭할때마다 변경
+			$("#pallsel").on("change", function(){
+				pallsel = $("#pallsel option:selected").val()
+				
+				self.location="listAll"
+					+ '${pageMakerStudy.makeQuery(1)}'
+					+ "&pallType="
+					+ pallsel
+			});
+		  	//정렬조건 최신순, 북마크순, 조회순, 댓글순
+
 			$(".btn-white").on("click", function(event){
-						
+				
 				self.location = "listAll"
 					+ '${pageMakerStudy.makeQuery(1)}'
 					+ "&searchType="
-					+ $("select option:selected").val()
-					+ "&keyword=" + encodeURIComponent($('#keywordInput').val());            
-			})  
+					+ $("#select1 option:selected").val()
+					+ "&keyword=" + encodeURIComponent($('#keywordInput').val())
+					+ "&pallType="+ $("#pallsel option:selected").val();
+		})  
+				
 	  })		 
 	
 	//타자누르면 검색됨
 	function onKeyDown() {
 	  if(event.keyCode==13){
     	 
-	
 		  self.location = "listAll"
 				+ '${pageMakerStudy.makeQuery(1)}'
 				+ "&searchType="
-				+ $("select option:selected").val()
-				+ "&keyword=" + encodeURIComponent($('#keywordInput').val());  
+				+ $("#select1 option:selected").val()
+				+ "&keyword=" + encodeURIComponent($('#keywordInput').val());
+				  + "&pallType="+ $("#pallsel option:selected").val();
 	  }
-  }
-			
+  }	
 </script>
+
+
 </body>
 </html>

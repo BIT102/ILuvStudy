@@ -25,9 +25,7 @@ public class StudyVO {
 //	BS_ENDDATE	스터디완료일
 // 	bookmarkCount	북마크(즐겨찾기 개수)		
 
-	//더보기를 하기위해 추가
-	private Integer vctcount;
-	
+
 	private String lat;
 	private String lng;
 	
@@ -84,14 +82,6 @@ public class StudyVO {
 	private String apStatus; // D:신청 대기중, O:신청 수락, X: 신청 거절 
 
 	private String msgRegist; //채팅
-
-	public Integer getVctcount() {
-		return vctcount;
-	}
-
-	public void setVctcount(Integer vctcount) {
-		this.vctcount = vctcount;
-	}
 
 	public String getLat() {
 		return lat;
@@ -391,16 +381,16 @@ public class StudyVO {
 
 	@Override
 	public String toString() {
-		return "StudyVO [vctcount=" + vctcount + ", lat=" + lat + ", lng=" + lng + ", bno=" + bno + ", title=" + title
-				+ ", writer=" + writer + ", categoryD=" + Arrays.toString(categoryD) + ", categoryS="
-				+ Arrays.toString(categoryS) + ", now=" + now + ", max=" + max + ", rDId=" + rDId + ", rSId=" + rSId
-				+ ", age=" + age + ", sc=" + sc + ", sd=" + sd + ", st=" + st + ", et=" + et + ", content=" + content
-				+ ", vct=" + vct + ", rct=" + rct + ", regdate=" + regdate + ", enddate=" + enddate + ", rDName="
-				+ rDName + ", rSName=" + rSName + ", cDName=" + cDName + ", cSName=" + cSName + ", nickname=" + nickname
-				+ ", photo=" + photo + ", no=" + no + ", name=" + name + ", status=" + status + ", userEmail="
-				+ userEmail + ", files=" + Arrays.toString(files) + ", cDId=" + cDId + ", cSId=" + cSId
-				+ ", bookmarkCount=" + bookmarkCount + ", apStatus=" + apStatus + ", msgRegist=" + msgRegist
-				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
-				+ "]";
+		return "StudyVO [lat=" + lat + ", lng=" + lng + ", bno=" + bno + ", title=" + title + ", writer=" + writer
+				+ ", categoryD=" + Arrays.toString(categoryD) + ", categoryS=" + Arrays.toString(categoryS) + ", now="
+				+ now + ", max=" + max + ", rDId=" + rDId + ", rSId=" + rSId + ", age=" + age + ", sc=" + sc + ", sd="
+				+ sd + ", st=" + st + ", et=" + et + ", content=" + content + ", vct=" + vct + ", rct=" + rct
+				+ ", regdate=" + regdate + ", enddate=" + enddate + ", rDName=" + rDName + ", rSName=" + rSName
+				+ ", cDName=" + cDName + ", cSName=" + cSName + ", nickname=" + nickname + ", photo=" + photo + ", no="
+				+ no + ", name=" + name + ", status=" + status + ", userEmail=" + userEmail + ", files="
+				+ Arrays.toString(files) + ", cDId=" + cDId + ", cSId=" + cSId + ", bookmarkCount=" + bookmarkCount
+				+ ", apStatus=" + apStatus + ", msgRegist=" + msgRegist + ", getClass()=" + getClass() + ", hashCode()="
+				+ hashCode() + ", toString()=" + super.toString() + "]";
 	}
+
 }

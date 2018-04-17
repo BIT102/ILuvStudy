@@ -324,6 +324,7 @@
 		<span class="mailbox-attachment-icon has-img">
 			<img src="{{imgsrc}}" alt="Attachment" style="width:150px; height:150px;" value = "{{name}}" id="proimg">
 		</span>
+			<small class = "small" value = "{{name}}" data-src=data style="cursor:pointer">X</small>
 	</div>
 </script>
 <script>
@@ -379,6 +380,26 @@ function handleImgFileSelect(e) {
 		}
 	});
 }	
+
+//취소버튼
+$(".uploadedList").on("click", "small", function(event) {
+	--count;
+	var that = $(this);
+	$.ajax({
+		url : "/study/deleteFile",
+		type : "post",
+		data : {
+			fileName : $(this).attr("data-src")
+		},
+		dataType : "text",
+		success : function(result) {
+				
+				alert("deleted");
+				$(this).parent("div").remove();
+				$(".uploadedList img").parent().parent().remove();
+		}
+	});
+});
 
 </script> 
 <script>

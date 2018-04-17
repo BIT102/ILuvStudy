@@ -15,6 +15,7 @@ public interface StudyService {
 	
 /*	public List<String> getcaD() throws Exception;*/
 	
+	
 	//스터디 수정부분
 	public void update(StudyVO vo) throws Exception;
 	

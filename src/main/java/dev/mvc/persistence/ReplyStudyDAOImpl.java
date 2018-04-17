@@ -20,6 +20,13 @@ public class ReplyStudyDAOImpl implements ReplyStudyDAO {
 	
 	private static String namespace = "dev.mvc.mapper.replyStudyMapper";
 	
+	
+	//댓글 게시물 번호 알아오기
+	@Override
+	public int getBno(Integer rno) throws Exception {
+		return session.selectOne(namespace + ".getBno", rno);
+	}
+	
 	// 댓글목록
 	@Override
 	public List<ReplyStudyVO> list(Integer bsBno) throws Exception {

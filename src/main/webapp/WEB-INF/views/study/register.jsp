@@ -75,11 +75,16 @@ small {
 	margin-top: 5px;
 }
 
+.age {
+	padding:30px;
+}
+
+
 #map {
 	width: 100%;
 	height: 300px;
-
      }
+
       .controls {
         margin-top: 10px;
         border: 1px solid transparent;
@@ -182,8 +187,8 @@ small {
                  	<label class="fancy-checkbox" style="display:inline-block;">
                  		<input type="checkbox" name="categoryS" class="${studyVO.cDName}" id="${studyVO.cSName}"><span>${studyVO.cSName}</span>
                  	</label>
-                 </c:forEach> --%> <!-- ======== 카테고리 =========== --> <select
-														id="catD" class="form-control">
+                 </c:forEach> --%> <!-- ======== 카테고리 =========== --> 
+                 									<select id="catD" class="form-control">
 															<option>--</option>
 															<c:forEach items="${studyCategory}" var="studyVO">
 																<option value="${studyVO.cDId}">${studyVO.cDName}</option>
@@ -279,14 +284,24 @@ small {
 														</span>
 													</label>
 													</td>
+													<td>
+													</td>
+													<td>
+													</td>
 												</tr>
 												<tr>
 													<th>최대인원</th>
 													<td>
 														<div class="studymax">
 															<input class="form-control" type="number" name="max"
-																min="0" style="width: 345px;" id="studymax">
+																min="0" style="width: 345px;" id="studymax">　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　
 														</div>
+													</td>
+													<td>
+													</td>
+													<td>
+													</td>
+														<td>
 													</td>
 												</tr>
 												<tr>
@@ -298,6 +313,10 @@ small {
 																style="width: 345px;" id="studysd">
 														</div>
 													</td>
+													<td>
+													</td>
+													<td>
+													</td>
 												</tr>
 												<tr>
 													<th>시간</th>
@@ -305,7 +324,7 @@ small {
 														<%-- <input type="text" name="sc" value="${studyVO.sc}" style="width:30%; display: inline;" class="form-control">
                 	<input type="text" name="st" value="${studyVO.st}" style="width:30%; display: inline;" class="form-control"> ~
                 	<input type="text" name="et" value="${studyVO.et}" style="width:30%; display: inline;" class="form-control"><br> --%>
-														<select id="sc" name="sc" class="form-control">
+														<select id="sc" class="form-control">
 															<option value="" selected>--</option>
 															<option value="월요일">월요일</option>
 															<option value="화요일">화요일</option>
@@ -314,7 +333,7 @@ small {
 															<option value="금요일">금요일</option>
 															<option value="토요일">토요일</option>
 															<option value="일요일">일요일</option>
-													</select> <select id="st" name="st" class="form-control">
+													</select> <select id="st" class="form-control">
 															<option value="" selected>--</option>
 															<option value="6">6시</option>
 															<option value="7">7시</option>
@@ -335,39 +354,35 @@ small {
 															<option value="22">22시</option>
 															<option value="23">23시</option>
 															<option value="24">24시</option>
-													</select> <select id="et" name="et" class="form-control">
+													</select> <select id="et" class="form-control">
 															<option value="" selected>--</option>
-													</select> <script>
-														/* 		$("#st").change(function(){
-														 console.log($(this).val());
-														 var tval = $(this).val();
-														 $("#et option").remove(val="tval")
-														 }); //시작시간 끝나는시간  */
-														$("#st")
-																.change(
-																		function() {
-																			var stval = $(
-																					"#st option:selected")
-																					.val();
-																			console
-																					.log("str="
-																							+ stval);
+													</select> 
+
+									                <div id="addTimeArea">
+									                </div>    
+											
+													<script>
+
+														$("#st").change(function() {
+																			var stval = $("#st option:selected").val();
+																			console.log("str="+ stval);
 																			var str = "";
+																			if(stval==""){
+																				str = "<option>--</option>"
+																			}
 																			for (var i = stval; i <= 24; i++) {
 																				str += "<option value'"+i+"'>"
 																						+ i
 																						+ "시</option>";
-																				$(
-																						"#et")
-																						.html(
-																								str);
+																				$("#et").html(str);
 																			}
 																		});
-													</script> <!-- 시간 추가 등록 가능 
-                <div id="addTimeArea">
-                </div>    
-                    <button type="button" id="addTime" class="btn btn-default btn-xs">추가</button> -->
+													</script> <!-- 시간 추가 등록 가능 -->
 													</td>
+													<td>	
+														<button type="button" id="addTime" class="btn btn-default btn-xs">추가</button> 
+													</td>
+													
 												</tr>
 
 											</tbody>
@@ -401,7 +416,7 @@ small {
 
 										<div class="text-right">
 											<!-- <button type="submit" id="btn-success" class = "btn btn-success" style="background-color:#5bc0de; border:1px solid black;">등록</button> -->
-											<button type="submit" id="btn-success"
+											<button type="button" id="btn-success"
 												class="btn btn-success">등록</button>
 											<!-- <input type="submit" id = "insertBtn" class = "btn btn-success" value = "등록" /> -->
 										</div>
@@ -611,12 +626,29 @@ small {
 							
 							
 							//시간영역 추가 버튼 클릭 시 액션
-							$("#addTime")
-									.on(
-											"click",
-											function() {
-												var time = "<input type='text' name='sc' value='' style='width:30%; display: inline;' class='form-control'> <input type='text' name='st' value='' style='width:30%; display: inline;' class='form-control'> ~ <input type='text' name='et' value='' style='width:30%; display: inline;' class='form-control'><br>";
-												$("#addTimeArea").append(time);
+							$("#addTime").on("click",function() {
+								
+							var scval = $("#sc option:selected").val();
+							var stval = $("#st option:selected").val();
+							var etval = $("#et option:selected").val();
+							
+							//시간 추가할때 선택하지 않은거 있으면 경고 다시
+							if(scval==""||stval==""||etval==""){
+
+					    		alert("항목을 모두 입력하세요");
+					    		$("#st").focus();
+					    		return false;
+							}
+							
+							var time = "<span><input type='hidden' name='sc' value="+scval+"/"+stval+"~"+etval+">"
+							+ "<div>"
+							+ scval
+							+ " > "
+							+ stval
+							+ "시~" + etval
+							+ "</span><button type='button' onclick = 'btn_delete(this)' class='btn btn-default btn-xs'>삭제</button></div>";
+											
+										     $("#addTimeArea").append(time);
 											});
 						});
 		//카테고리 삭제 버튼
@@ -900,8 +932,10 @@ S3 수정 (파일 업로드 2개가 되어서 주석 처리)
                   marker: marker,
             	  position: place.geometry.location
             }));
+            	
+           
+     //       alert("search"+place.geometry.location.lat())
 
-            
 
             if (place.geometry.viewport) {   
               bounds.union(place.geometry.viewport);
@@ -909,6 +943,16 @@ S3 수정 (파일 업로드 2개가 되어서 주석 처리)
               bounds.extend(place.geometry.location);
             }
           });
+          
+          alert(markers[0].getPosition().lat())
+          
+          if(labelIndex == 1){
+          		lat = markers[0].getPosition().lat();
+				lng = markers[0].getPosition().lng();
+				
+				$('#lat').attr('value', lat);
+				$('#lng').attr('value', lng);
+          }
           map.fitBounds(bounds);
 
         });

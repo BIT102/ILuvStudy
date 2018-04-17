@@ -6,6 +6,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- board_study mapper -->
 <mapper namespace="dev.mvc.mapper.StudyMapper">
 
+
+<!-- 댓글수 없데이트 -->
+<update id="updateReplyCnt">
+update
+board_study
+set rct = rct + #{amount}
+where bno = #{bno}
+</update>
+
 <!-- 카테고리 수정부분 -->
 <delete id="caDelete">
 delete 
@@ -448,21 +457,24 @@ ba.name
 , bs.enddate
 , sc.cdname
 , group_concat(sc.csname) csname 
+, ifnull(book.count, 0) count
 FROM 
 board_study bs
 left outer join user u on bs.writer = u.EMAIL
 left outer join (select * from board_attach where status = "O") ba on bs.bno = ba.bsbno
 left outer join region r on bs.RDID = r.RDID and bs.RSID = r.RSID
 left outer join board_category bc on bs.bno = bc.bsbno
+left outer join (select count(bsbno) count, bsbno from bookmark group by bsbno) book on bs.bno = book.bsbno
 , study_category sc
 WHERE bs.bno > 0
 and sc.CDID = bc.CATEGORYD and sc.CSID = bc.CATEGORYS
 ]]>
 <include refid="search"></include>
-
 <![CDATA[
 group by bs.bno
-ORDER BY bno desc
+]]>
+<include refid="pall"></include>
+<![CDATA[
 limit #{pageStart}
 , #{perPageNum}
 ]]>
@@ -531,18 +543,21 @@ count(distinct bs.bno)
 , bs.regdate
 , bs.enddate
 , sc.cdname
-, sc.csname
+, sc.csname 
+, ifnull(book.count, 0) count
 FROM 
 board_study bs
 left outer join user u on bs.writer = u.EMAIL
 left outer join (select * from board_attach where status = "O") ba on bs.bno = ba.bsbno
 left outer join region r on bs.RDID = r.RDID and bs.RSID = r.RSID
 left outer join board_category bc on bs.bno = bc.bsbno
+left outer join (select count(bsbno) count, bsbno from bookmark group by bsbno) book on bs.bno = book.bsbno
 , study_category sc
 WHERE bs.bno > 0
 and sc.CDID = bc.CATEGORYD and sc.CSID = bc.CATEGORYS
 ]]>
 <include refid="search"></include>
+<include refid="pall"></include>
 </select>
 
 
@@ -578,6 +593,27 @@ and sc.CDID = bc.CATEGORYD and sc.CSID = bc.CATEGORYS
   		</if> 
   </sql>
 	
+<!-- 정렬을 위한 구성 -->
+ <sql id="pall">
+		<if test="pallType != null">
+			<!-- 최신순  -->
+			<if test="pallType == 'a'.toString()">
+				ORDER BY bs.bno desc
+			</if>
+			<!-- 조회순  -->
+			<if test="pallType == 'q'.toString()">
+				ORDER BY bs.vct desc
+			</if>
+			<!-- 댓글순 -->
+			<if test="pallType == 'w'.toString()">
+				ORDER BY bs.rct desc
+			</if>
+						<!-- 댓글순 -->
+			<if test="pallType == 'b'.toString()">
+				ORDER BY book.count desc
+			</if>
+		</if>
+</sql> 
 
   	 		  <select id="getNextBno" resultType="int">
 
