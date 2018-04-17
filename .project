@@ -32,14 +32,12 @@
 		</buildCommand>
 		<buildCommand>
 			<name>org.eclipse.m2e.core.maven2Builder</name>
-<<<<<<< HEAD
-=======
+
 			<arguments>
 			</arguments>
 		</buildCommand>
 		<buildCommand>
 			<name>org.zeroturnaround.eclipse.rebelXmlBuilder</name>
->>>>>>> branch 'YWPARK' of https://github.com/BIT102/ILuvStudy.git
 			<arguments>
 			</arguments>
 		</buildCommand>
