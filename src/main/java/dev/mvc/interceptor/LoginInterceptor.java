@@ -81,7 +81,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 						loginCookie.setPath("/");
 						loginCookie.setMaxAge(60*60*24*7);
 						response.addCookie(loginCookie);
-						}
+					}
 			// ³Í ¹¹´Ï??? ¾Ë¾ÆºÁ¾ß ÇØ¿ä..
 //			response.sendRedirect("/study/main"); 
 

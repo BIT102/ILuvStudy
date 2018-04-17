@@ -65,7 +65,6 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 				}
 			}
 			
-			
 			response.sendRedirect("/study/main"); // 비로그인 사용자의 경우 로그인 페이지로 리다이렉트 시킴
 			return false;
 		}

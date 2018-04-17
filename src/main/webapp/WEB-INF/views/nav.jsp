@@ -429,7 +429,33 @@ height:400px;
 			</div>
 			<!-- /.navbar-header -->
 
+<% request.setCharacterEncoding("euc-kr");%>
+<% 
+Cookie[] cookies = request.getCookies(); //쿠키 정보 가져온다
 
+String name="";
+String value="";
+String useCookie="";
+String loginSession = "";
+
+for(int i=0; i < cookies.length; i++){
+	Cookie c = cookies[i];
+         
+    if(c.getName().equals("rememberId")){ //쿠키 이름이 rememberId인 경우
+ 	// 저장된 쿠키 이름을 가져온다
+		name = c.getName();
+    // 쿠키값을 가져온다
+		value = c.getValue();
+    }else if(c.getName().equals("loginCookie")){
+    	useCookie = c.getName();
+    }
+}
+
+if(session.getAttribute("login") != null){
+	loginSession = "test";	
+} 
+
+%>
 			<!-- 로그인 모달 -->
 			<div id="id01" class="modal">
 				<div class="container">
@@ -442,8 +468,7 @@ height:400px;
 							style="background-image: url(/resources/assets/img/login.png);"></div>
 						<div class="form-box">
 							<form action="/loginPost" method="post" class="form login">
-
-								<input name="id" type="text" placeholder="아이디" required>
+								<input name="id" type="text" placeholder="아이디" required value="<%=value %>">
 								<input type="password" name="pw" placeholder="비밀번호" required>
 
 								<!-- 3월 25일 머지 주석 처리 	-->
@@ -459,16 +484,16 @@ height:400px;
 			<!-- ======== end ================= -->
 								</div>
 								<div class="texttext" style="margin-top: 15px;">
-									<input type="checkbox" name="rememberId" value="1" ${checked111}
+									<input type="checkbox" name="rememberId" value="1" 
 										style="width: 20px; vertical-align: middle; margin: 0;"
-										id="ida"><label for="idaa"
-										style="vertical-align: middle; margin: 0;">&nbsp;아이디 저장</label><br>
+										id="ida" <%if(name != ""){ %> checked = "checked" <%} %> >
+										<label for="idaa"tyle="vertical-align: middle; margin: 0;" >&nbsp;아이디 저장</label><br>
 								</div>
 								<div class="texttext">
 									<input type="checkbox" name="useCookies"
 										style="width: 20px; vertical-align: middle; margin: 0;"
-										id="idb"><label for="idbb"
-										style="vertical-align: middle; margin: 0;">&nbsp;자동 로그인</label>
+										id="idb">
+										<label for="idbb" style="vertical-align: middle; margin: 0;">&nbsp;자동 로그인</label>
 								</div>
 								<br> 아이디/비밀번호를 잊으셨나요?<br> <a href="/searchEmail">아이디 찾기 / </a><a href="/searchPW">비밀번호 찾기</a>
 							</form>
@@ -478,13 +503,13 @@ height:400px;
 				</div>
 
 			</div>
-
+			
 
 			<!-- nav links -->
 			<div class="collapse navbar-collapse" id="main-nav-collapse">
 				<ul class="nav navbar-nav navbar-right text-uppercase">
 
-					<c:choose>
+				 <%-- 	<c:choose>
 						<c:when test="${login eq null}">
 							<li><a><span
 									onclick="document.getElementById('id01').style.display='block'"
@@ -498,7 +523,21 @@ height:400px;
 							</li>
 							<li class="dropdown"><a href="/study/register">스터디 등록하기</a>
 						</c:otherwise>
-					</c:choose>
+					</c:choose>  --%>
+					
+					<% if(useCookie == "" && loginSession == "" ){ %>
+							<li><a><span
+									onclick="document.getElementById('id01').style.display='block'"
+									style="width: auto;">로그인</span></a></li>
+							<li class="dropdown"><a href="/join"><span>회원가입</span></a></li>
+					<% }else{ %>
+							<li class="dropdown"><a href="/profile"><span>마이페이지</span></a></li>
+							<!-- end of /.dropdown -->
+							<li class="dropdown"><a href="/logout"><span>로그아웃</span></a>
+							</li>
+							<li class="dropdown"><a href="/study/register">스터디 등록하기</a>
+					<%} %> 
+					
 					<li class="dropdown"><a href="/study/listAll"><span>스터디
 								구경하기</span></a></li>
 					<li class="dropdown"><a href="/sqna/list"><span>자주 묻는 질문</span></a>
@@ -555,6 +594,7 @@ height:400px;
 
 <!-- =============== 문의 채팅 끝 ======================  -->
 </c:if>
+
 
 <script src="/resources/js/sockjs.js"></script>
 <script src="/resources/js/sockjs.min.js"></script>
@@ -683,6 +723,7 @@ $(document).ready(function(){
 			$('#chat').addClass('chatNone');	
 		}
 	});
+	
 })
 
 $(document).on('focus', '.panel-footer input.chat_input', function (e) {

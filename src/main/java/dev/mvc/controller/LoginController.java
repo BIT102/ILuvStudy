@@ -1,7 +1,5 @@
 package dev.mvc.controller;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Date;
 
 import javax.inject.Inject;
@@ -13,6 +11,8 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.google.api.Google;
 import org.springframework.social.google.api.impl.GoogleTemplate;
@@ -28,13 +28,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.WebUtils;
 
 import dev.mvc.domain.AdminVO;
 import dev.mvc.domain.UserVO;
 import dev.mvc.dto.LoginDTO;
 import dev.mvc.service.LoginService;
-import dev.mvc.service.UserService;
 
 @Controller
 //@RequestMapping(value = "/mypage/")
