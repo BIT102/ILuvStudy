@@ -161,6 +161,17 @@ body {
 	height:90px;
 }
 
+.time{
+	margin-top:30px;
+}
+
+.time td {
+	width:100px;
+	border-left:1px solid gray;
+	border-right:1px solid gray;
+	padding:10px;
+}
+
 </style>
 </head>
 
@@ -283,13 +294,25 @@ body {
 								날짜 : ${studyVO.sd}<br> <br> 시간 : ${studyVO.st} /
 								${studyVO.et}
 							</p>
+
 							<div id="map"></div>
 						</div>
 						<!-- 지도입니다. -->
 
 					</div>
 					<!-- 콘덴트바디바디 -->
-
+					
+						<table class="time">
+							<tr>
+								<td><p>월요일</p><br>${studyVO.clock.get("월요일")}</td>
+								<td><p>화요일</p><br>${studyVO.clock.get("화요일")}</td>
+								<td><p>수요일</p><br>${studyVO.clock.get("수요일")}</td>
+								<td><p>목요일</p><br>${studyVO.clock.get("목요일")}</td>
+								<td><p>금요일</p><br>${studyVO.clock.get("금요일")}</td>
+								<td><p>토요일</p><br>${studyVO.clock.get("토요일")}</td>
+								<td><p>일요일</p><br>${studyVO.clock.get("일요일")}</td>
+							</tr>
+						</table>
 
 					<div class="imgstyle">
 						<p>스터디 이미지</p>

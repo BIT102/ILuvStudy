@@ -184,7 +184,9 @@ public class StudyController {
 
 		model.addAttribute("list", studyList);*/
 
-		List<StudyVO> SearchList = service.listSearchCriteria(cri).subList(0, 8);
+		List<StudyVO> SearchList = service.newList(cri).subList(0, 8);
+		
+		/*List<StudyVO> SearchList = service.listSearchCriteria(cri).subList(0, 8);*/
 
 		model.addAttribute("list", SearchList);
 		

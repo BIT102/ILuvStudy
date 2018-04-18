@@ -3,7 +3,6 @@ package dev.mvc.persistence;
 import java.util.List;
 import java.util.Map;
 
-import dev.mvc.admin.Criteria;
 import dev.mvc.domain.CriteriaStudy;
 import dev.mvc.domain.SearchCriteriaStudy;
 import dev.mvc.domain.StudyVO;
@@ -30,6 +29,19 @@ public interface StudyDAO {
 	//스터디등록
 	public void createStudy(StudyVO vo) throws Exception;
 	
+	//시간등록하기
+	public void clock(Map<String, Object> map) throws Exception;
+	
+	//시간 지우기
+	public void deleteClock(Integer bsBno) throws Exception;
+	
+	//요일불러오기
+	public List<String> getStart(Integer bsBno) throws Exception;
+	
+	//날짜불러오기
+	public List<String> getStet(Map<String, Object> map) throws Exception;
+	
+	
 	// 카테고리부분 김상욱 수정
 	public List<StudyVO> studyCategory() throws Exception;
 	public List<StudyVO> studyCategory2(String cDId) throws Exception;
@@ -48,6 +60,7 @@ public interface StudyDAO {
 	
 	//전체읽기
 	public List<StudyVO> studyList() throws Exception;	
+
 
 	//파일업로드
 	public void addFile(Map<String, Object> map) throws Exception;
@@ -81,6 +94,9 @@ public interface StudyDAO {
 
 	//방문자수 리스트를 위해 만들어요
 	public List<StudyVO> vctList(SearchCriteriaStudy cri) throws Exception;	
+	
+	//최신순으로 불러옵ㄴ디ㅏ 메인페이지
+	public List<StudyVO> newList(SearchCriteriaStudy cri) throws Exception;
 	
 	//검색수
 	public int listSearchCount(SearchCriteriaStudy cri) throws Exception;

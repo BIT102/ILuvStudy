@@ -416,7 +416,7 @@ small {
 
 										<div class="text-right">
 											<!-- <button type="submit" id="btn-success" class = "btn btn-success" style="background-color:#5bc0de; border:1px solid black;">등록</button> -->
-											<button type="button" id="btn-success"
+											<button type="submit" id="btn-success"
 												class="btn btn-success">등록</button>
 											<!-- <input type="submit" id = "insertBtn" class = "btn btn-success" value = "등록" /> -->
 										</div>
@@ -624,6 +624,8 @@ small {
 
 				}); //addcat끝
 							
+				
+							var setsc;
 							
 							//시간영역 추가 버튼 클릭 시 액션
 							$("#addTime").on("click",function() {
@@ -638,9 +640,14 @@ small {
 					    		alert("항목을 모두 입력하세요");
 					    		$("#st").focus();
 					    		return false;
+							} else if(setsc == scval) {
+								alert("이미 추가하신 요일입니다.");
+								return false;
 							}
+							 
 							
-							var time = "<span><input type='hidden' name='sc' value="+scval+"/"+stval+"~"+etval+">"
+							var time = "<span><input type='hidden' name='startSc' value="+scval+">"
+							+ "<input type='hidden' name='stEt' value="+stval+"시~"+etval+">"
 							+ "<div>"
 							+ scval
 							+ " > "
@@ -649,6 +656,8 @@ small {
 							+ "</span><button type='button' onclick = 'btn_delete(this)' class='btn btn-default btn-xs'>삭제</button></div>";
 											
 										     $("#addTimeArea").append(time);
+										     
+										     setsc = scval;
 											});
 						});
 		//카테고리 삭제 버튼

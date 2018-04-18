@@ -11,7 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
-import dev.mvc.admin.Criteria;
 import dev.mvc.domain.CriteriaStudy;
 import dev.mvc.domain.SearchCriteriaStudy;
 import dev.mvc.domain.StudyVO;
@@ -80,6 +79,26 @@ public class StudyDAOImpl implements StudyDAO {
 	@Override
 	public void createStudy(StudyVO vo) throws Exception {
 		session.insert(namespace+".createStudy", vo);
+	}
+	
+	//시간을 따로 등록합니다
+	public void clock(Map<String, Object> map) throws Exception {
+		session.insert(namespace+".clock", map);
+	}
+	
+	//시간 지우기
+	public void deleteClock(Integer bsBno) throws Exception {
+		session.delete(namespace+".deleteClock", bsBno);
+	}
+
+	//요일을 불러온다
+	public List<String> getStart(Integer bsBno) throws Exception {
+		return session.selectList(namespace+".getStart", bsBno);
+	}
+	
+	//날짜불러오기
+	public List<String> getStet(Map<String, Object> map) throws Exception {
+		return session.selectList(namespace+".getStet", map);
 	}
 	
 	// 카테고리 김상욱 수정
@@ -251,7 +270,11 @@ public class StudyDAOImpl implements StudyDAO {
 		return session.selectList(namespace+".vctList", cri);
 	}
 	
-	
+	//새로운 리스트를 위해 만들어요 메인페이지
+	@Override
+	public List<StudyVO> newList(SearchCriteriaStudy cri) throws Exception {
+		return session.selectList(namespace+".newList", cri);
+	}
 	
 	//검색수
 	@Override

@@ -114,6 +114,50 @@ title
 , #{lng}
 )
 </insert>
+<!-- 시간등록 -->
+<insert id="clock">
+insert
+into
+clock (
+bsbno
+, startSc
+, stEt
+) values (
+#{bno}
+, #{startSc}
+, #{stEt}
+)
+</insert>
+
+<!-- 시간삭제 -->
+<delete id="deleteClock">
+delete
+from
+clock
+where
+bsbno = #{bsBno}
+</delete>
+
+<!-- 시간불러오기 -->
+<select id="getStart" resultType="String">
+select
+STARTSC
+from
+clock
+where BSBNO = #{bsBno}
+order by bsbno
+</select>
+
+<!-- 요일불러오기 -->
+<select id="getStet" resultType="String">
+select
+STET
+from
+clock
+where BSBNO = #{bsBno}
+and STARTSC = #{sc}
+order by bsbno
+</select>
 
 <!-- 카테고리 김상욱수정 -->
 <select id="studyCategory" resultType="StudyVO">
@@ -516,6 +560,45 @@ WHERE bs.bno > 0
 and sc.CDID = bc.CATEGORYD and sc.CSID = bc.CATEGORYS
 group by bs.bno
 ORDER BY bs.vct desc
+]]>
+</select>
+
+<select id="newList" resultType="studyVO">
+<![CDATA[
+SELECT
+ba.name
+, bs.bno
+, bs.title
+, bs.writer
+, u.photo
+, u.NICKNAME
+, bs.now
+, bs.max
+, r.rDName
+, r.rSName
+, bs.age
+, bs.sc
+, bs.sd
+, bs.st
+, bs.et
+, bs.content
+, bs.vct
+, bs.rct
+, bs.regdate
+, bs.enddate
+, sc.cdname
+, group_concat(sc.csname) csname 
+FROM 
+board_study bs
+left outer join user u on bs.writer = u.EMAIL
+left outer join (select * from board_attach where status = "O") ba on bs.bno = ba.bsbno
+left outer join region r on bs.RDID = r.RDID and bs.RSID = r.RSID
+left outer join board_category bc on bs.bno = bc.bsbno
+, study_category sc
+WHERE bs.bno > 0
+and sc.CDID = bc.CATEGORYD and sc.CSID = bc.CATEGORYS
+group by bs.bno
+ORDER BY bs.bno desc
 ]]>
 </select>
 

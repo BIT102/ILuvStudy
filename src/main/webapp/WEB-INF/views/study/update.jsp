@@ -295,7 +295,7 @@ small {
                 	<input type="text" name="st" value="${studyVO.st}" style="width:30%; display: inline;" class="form-control"> ~
                 	<input type="text" name="et" value="${studyVO.et}" style="width:30%; display: inline;" class="form-control"><br> --%>
 														<select id="sc" name="sc" class="form-control">
-															<option selected>--</option>
+															<option value="" selected>--</option>
 															<option value="월요일">월요일</option>
 															<option value="화요일">화요일</option>
 															<option value="수요일">수요일</option>
@@ -304,7 +304,7 @@ small {
 															<option value="토요일">토요일</option>
 															<option value="일요일">일요일</option>
 													</select> <select id="st" name="st" class="form-control">
-															<option selected>--</option>
+															<option value="" selected>--</option>
 															<option value="6">6시</option>
 															<option value="7">7시</option>
 															<option value="8">8시</option>
@@ -325,37 +325,29 @@ small {
 															<option value="23">23시</option>
 															<option value="24">24시</option>
 													</select> <select id="et" name="et" class="form-control">
-															<option selected>--</option>
-													</select> <script>
-														/* 		$("#st").change(function(){
-														 console.log($(this).val());
-														 var tval = $(this).val();
-														 $("#et option").remove(val="tval")
-														 }); //시작시간 끝나는시간  */
-														$("#st")
-																.change(
-																		function() {
-																			var stval = $(
-																					"#st option:selected")
-																					.val();
-																			console
-																					.log("str="
-																							+ stval);
+															<option value="" selected>--</option>
+													</select>
+													
+												  	   <div id="addTimeArea">
+             										   </div>    
+													
+													<script>
+		
+														$("#st").change(function() {
+																			var stval = $("#st option:selected").val();
+																			console.log("str="+ stval);
 																			var str = "";
 																			for (var i = stval; i <= 24; i++) {
 																				str += "<option value'"+i+"'>"
 																						+ i
 																						+ "시</option>";
-																				$(
-																						"#et")
-																						.html(
-																								str);
+																				$("#et").html(str);
 																			}
 																		});
-													</script> <!-- 시간 추가 등록 가능 
-                <div id="addTimeArea">
-                </div>    
-                    <button type="button" id="addTime" class="btn btn-default btn-xs">추가</button> -->
+													</script> <!-- 시간 추가 등록 가능 -->
+													</td>
+													<td>
+               											<button type="button" id="addTime" class="btn btn-default btn-xs">추가</button> 
 													</td>
 												</tr>
 
@@ -558,6 +550,10 @@ small {
 		console.log("str="+stval);
 		var str = "";
 		
+		if(stval==""){
+			str = "<option value="">--</option>"
+		}
+		
 		for (var i = stval; i <= 24; i++) {
 			
 			if(i == '${studyVO.et}'){
@@ -651,15 +647,42 @@ small {
 			}//count esle 끝
 
 }); //addcat끝
+		var setsc;
 		
 		//시간영역 추가 버튼 클릭 시 액션
-		$("#addTime").on("click", function(){
-       		
-       		var time="<input type='text' name='sc' value='' style='width:30%; display: inline;' class='form-control'> <input type='text' name='st' value='' style='width:30%; display: inline;' class='form-control'> ~ <input type='text' name='et' value='' style='width:30%; display: inline;' class='form-control'><br>";
-       	
-       		$("#addTimeArea").append(time);
-		});
+		$("#addTime").on("click",function() {
+			
+		var scval = $("#sc option:selected").val();
+		var stval = $("#st option:selected").val();
+		var etval = $("#et option:selected").val();
 		
+		//시간 추가할때 선택하지 않은거 있으면 경고 다시
+		if(scval==""||stval==""||etval==""){
+
+    		alert("항목을 모두 입력하세요");
+    		$("#st").focus();
+    		return false;
+		} else if(setsc == scval) {
+			alert("이미 추가하신 요일입니다.");
+			return false;
+		}
+		 
+		
+		var time = "<span><input type='hidden' name='startSc' value="+scval+">"
+		+ "<input type='hidden' name='stEt' value="+stval+"시~"+etval+">"
+		+ "<div>"
+		+ scval
+		+ " > "
+		+ stval
+		+ "시~" + etval
+		+ "</span><button type='button' onclick = 'btn_delete(this)' class='btn btn-default btn-xs'>삭제</button></div>";
+						
+					     $("#addTimeArea").append(time);
+					     
+					     setsc = scval;
+						});
+		
+
 		//연령 체크박스 2개 초과하여 선택 시 알럿 처리
 		$(".age").on("click", function(){
 			console.log($("input:checkbox[class=age]:checked").length)
@@ -933,6 +956,7 @@ small {
   
     }) 
     </script>
+    
  	<!--지도 크르깁트 -->
 <script>
    var markers = [];

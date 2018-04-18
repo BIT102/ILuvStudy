@@ -206,6 +206,7 @@ select::-ms-expand {
 					<div class="dropdown">
 						<select class="dropdown-select-version select" id="pallsel"
 							name="pallType" style="float: left; width:100%; height:30px;">
+							<option value="" selected>Filter</option>
 							<option value="a"
 							 <c:out value="${cri.pallType eq 'a'? 'selected':''}"/>>최신순</option>
 							<option value="b"
@@ -389,19 +390,21 @@ select::-ms-expand {
 	<!-- 검색을 위한 스크립트 -->
 	<!-- 정렬조건을 주는 스크립트 -->
 	<script>
+	  var count;
 	  $(document).ready(function(){
 			//정렬합니다
 			var pallsel;
-			
+
 			//클릭할때마다 변경
-			$("#pallsel").on("change", function(){
+ 			$("#pallsel").on("change", function(){
+				//선택조건 바꿨을때 
 				pallsel = $("#pallsel option:selected").val()
 				
 				self.location="listAll"
 					+ '${pageMakerStudy.makeQuery(1)}'
 					+ "&pallType="
 					+ pallsel
-			});
+			}); 
 		  	//정렬조건 최신순, 북마크순, 조회순, 댓글순
 
 			$(".btn-white").on("click", function(event){
