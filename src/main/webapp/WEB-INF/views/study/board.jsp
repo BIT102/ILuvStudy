@@ -409,14 +409,14 @@ body {
 
 <div>
 		<!-- 신청하면 이미지와 닉네임 만들기 -->
-		<div class="aplist" style="height:63px;">
-<c:if test="${empty login}">
-   로그인 하면 다양한 기능들을 이용할 수 있습니다　　　　　　　　　　　　　　　　　　　　　　　　　
- <input type="submit" class="btn preee" value="목록으로" style="float:right;">
-</c:if>
+	<div class="aplist">
+			<c:if test="${empty login}">
+   				로그인 하면 다양한 기능들을 이용할 수 있습니다　　　　　　　　　　　　　　　　　　　　　　　　　
+ 				<input type="submit" class="btn preee" value="목록으로" style="float:right;">
+			</c:if>
 
 		<c:if test="${not empty login}">
-		 <c:if test="${login.email != studyVO.writer}">
+		  <c:if test="${login.email != studyVO.writer}">
 		 
 			<c:if test="${ap.checked == 0 }">
 				<input type="submit" class="btn apply" id="apap" value="신청하기">
@@ -428,25 +428,23 @@ body {
 				<input type="submit" class="btn deapply" id="apap" value="신청취소">
 			</c:if>
 				<input type="submit" class="btn preee" value="목록으로">
-		</c:if>		
-		<!-- 로그인시 -->
-		<br> <br>
-
-		<!-- 로그인한아이디가 글쓴이일때. -->
-		
-		<c:if test="${login.email == studyVO.writer}">
-		<br> <input type="submit" class="btn aList" value="신청자목록"
-			onclick="wait();">
-		<div id='amodDiv' style="display: none;">
-			<div class='modal-applyList'></div>
-			<button type="button" id="applyclose" class="btn" style="position:absolute; right:5px; bottom:5px;">닫기</button>
-
-		</div>
-		<input type="submit" class="btn preee" value="목록으로"> 
-		<input type="submit" class="btn modifybo" value="스터디 수정"> 
-		<input type="submit" class="btn delete" value="스터디 지우기">
-	</c:if>
-	</c:if>
+		  </c:if>		
+			
+			<!-- 로그인시 -->
+			<br> <br>
+			<!-- 로그인한아이디가 글쓴이일때. -->
+			<c:if test="${login.email == studyVO.writer}">
+				<br>
+				<input type="submit" class="btn aList" value="신청자목록"	onclick="wait();">
+				<input type="submit" class="btn preee" value="목록으로"> 
+				<input type="submit" class="btn modifybo" value="스터디 수정"> 
+				<input type="submit" class="btn delete" value="스터디 지우기">
+				<div id='amodDiv' style="display: none;">
+					<div class='modal-applyList'></div>
+					<button type="button" id="applyclose" class="btn" style="position:absolute; right:5px; bottom:5px;">닫기</button>
+				</div>
+			</c:if>
+		</c:if>
 	</div>
 	
 
