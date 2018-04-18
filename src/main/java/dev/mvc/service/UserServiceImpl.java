@@ -159,11 +159,12 @@ public class UserServiceImpl implements UserService {
 		
 		// 소문자로 변경
 		email = email.toLowerCase();
-
+		System.out.println("유저서비스이메일1:"+email);
 		// 길이
 		String email1 = email.substring(0,email.indexOf('@'));
+		System.out.println("유저서비스이메일2:"+email1);
 		
-		if(6 > email1.length()||email1.length()>12) 
+		if(3 > email1.length()||email1.length()>30) 
 			return -1; 
 		
 		// @, . 1개
@@ -176,6 +177,9 @@ public class UserServiceImpl implements UserService {
 			else if(email.charAt(i)=='.')
 				dotCnt++;
 		}
+		
+		System.out.println("annCnt : "+annCnt);
+		System.out.println("dotCnt : "+dotCnt);
 		
 		if(annCnt!=1 || dotCnt!=1)
 			return -1;

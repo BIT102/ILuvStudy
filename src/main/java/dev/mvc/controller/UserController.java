@@ -281,7 +281,7 @@ public class UserController {
 		System.out.println("나우패스워드="+nowPw);
 		
 		
-		if(nowPw.equals(vo.getPassword()) && newPw1.equals(newPw2)){  // String이니 equals로 비교해줘야 함.
+		if(nowPw.equals(vo.getPassword()) && newPw1.equals(newPw2)){ 
 			vo.setPassword(newPw1);
 			System.out.println("비밀번호 변경 완료");			
 		}else
@@ -473,12 +473,13 @@ public class UserController {
 			
 			logger.info("chkEmail.......................");
 			ResponseEntity<String> entity = null;
-			
-			if(service.chkEmail(email)==1){
+			System.out.println("체크이메일:"+service.chkEmail(email));
+			if(service.chkEmail(email)==1 || service.chkEmail(email)==-1){
 				entity = new ResponseEntity<String>("fail", HttpStatus.OK);
 				System.out.println("이미가입된이메일");
 			}else{
 				entity = new ResponseEntity<String>("success", HttpStatus.OK);
+				System.out.println("사용가능한이메일");
 			}
 			
 			return entity;
