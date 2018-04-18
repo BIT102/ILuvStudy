@@ -95,6 +95,13 @@
 	background-color:white;
 	margin-bottom:15px;
 }
+
+.page-head {
+    background: url(/resources/assets/img/services-bg.jpg) !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+}
     
     </style>
 </head>
@@ -299,7 +306,7 @@
 													<input type="hidden" value="${login.email}" name="email" readonly>
 											
 													<div>
-														<input type="submit" id="btn-success" value="저장하기">
+														<input type="submit" id="btn-success" value="저장하기" style="width:80px; height:42px;">
 													</div>
 										<!-- </form>	 -->							
 													
@@ -347,7 +354,7 @@
 												 	<input type="hidden" value="${login.email}" name="email" readonly>
 												 		
 												 	<div>
-  														 <input id="btn-success" class="changePw" id="changePw" type="submit" value="변경하기">
+  														 <input id="btn-success" class="changePw" type="submit" value="변경하기" style="width:80px; height:42px;">
 													</div>		
 	                                        </div>
 	                                    </div>

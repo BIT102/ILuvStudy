@@ -123,10 +123,22 @@ body {
 
 #modDiv{
 	width:450px;
-	height:200px;
-	background-color:gray;
+	height:220px;
+	background-color:white;
 	position:absolute;
 	top:50%;
+	left:30%;
+	z-index:1000;
+	border: 3px double gray;
+}
+
+#amodDiv {
+	width:450px;
+	height:600px;
+	background-color:white;
+	border:3px double gray;
+	position:absolute;
+	top:160%;
 	left:50%;
 	margin-top:-50px;
 	margin-left:-150px;
@@ -134,17 +146,8 @@ body {
 	z-index:1000;
 }
 
-#amodDiv {
-	width:450px;
-	height:200px;
-	background-color:gray;
-	position:absolute;
-	top:200%;
-	left:50%;
-	margin-top:-50px;
-	margin-left:-150px;
-	paddiong:10px;
-	z-index:1000;
+.modal-title{
+	color:white;
 }
 
 <!--팝업-->
@@ -168,12 +171,35 @@ body {
 	z-index:99999;
 }
 
+.btn-clipboard {
+	width:200px important;
+	height:40px;
+	font-size:13px;
+}
+
+.col-md-2 img{
+	width:100px;
+	height:90px;
+}
+
+.time{
+	margin-top:30px;
+}
+
+.time td {
+	width:100px;
+	border-left:1px solid gray;
+	border-right:1px solid gray;
+	padding:10px;
+}
+
 </style>
 </head>
 
 <body>
 
-	<%@include file="../nav.jsp"%>
+	<%@ include file="../nav.jsp" %>
+		
 	<div id="multiple-blog-page">
 		<!-- header begin -->
 		<header class="page-head">
@@ -203,7 +229,7 @@ body {
 		</form>
 
 
-		<div class="container">
+		<div class="container" style="margin-bottom:30px;">
 			<div class="row">
 
 				<article class="blog-item">
@@ -233,7 +259,7 @@ body {
 										<div class="col-md-9" style="margin-top:50px;">
 											<p >
 												<strong>주인 :</strong> <span
-													class="author-name text-uppercase">${studyVO.nickname}</span>
+													class="author-name text-uppercase" style="font-size:30px;">${studyVO.nickname}</span>
 											</p>
 											<p>${studyVO.content}</p>
 										</div>
@@ -290,13 +316,25 @@ body {
 								날짜 : ${studyVO.sd}<br> <br> 시간 : ${studyVO.st} /
 								${studyVO.et}
 							</p>
+
 							<div id="map"></div>
 						</div>
 						<!-- 지도입니다. -->
 
 					</div>
 					<!-- 콘덴트바디바디 -->
-
+					
+						<table class="time">
+							<tr>
+								<td><p>월요일</p><br>${studyVO.clock.get("월요일")}</td>
+								<td><p>화요일</p><br>${studyVO.clock.get("화요일")}</td>
+								<td><p>수요일</p><br>${studyVO.clock.get("수요일")}</td>
+								<td><p>목요일</p><br>${studyVO.clock.get("목요일")}</td>
+								<td><p>금요일</p><br>${studyVO.clock.get("금요일")}</td>
+								<td><p>토요일</p><br>${studyVO.clock.get("토요일")}</td>
+								<td><p>일요일</p><br>${studyVO.clock.get("일요일")}</td>
+							</tr>
+						</table>
 
 					<div class="imgstyle">
 						<p>스터디 이미지</p>
@@ -320,7 +358,7 @@ body {
 					<div class="col-md-12">
 
 			<div class="comment-post">
-				<h3>댓글</h3>
+				<h3>댓글을 달아주세요　[${studyVO.rct}]</h3>
 				<div class="row">
 					<div class="col-md-4">
 						<div class="form-group">
@@ -354,7 +392,7 @@ body {
 							
 								<input type="text" id="recon" style="width:350px; height:70px; padding-left:15px;">
 							</div>
-							<div style="text-align:center;">
+							<div style="text-align:center; margin-bottom:10px;">
 								<button type="button" id="remodify" class="btn">수정하기</button>
 								<button type="button" id="redelege" class="btn">지우기</button>
 								<button type="button" id="reclose" class="btn">닫기</button>
@@ -373,6 +411,7 @@ body {
 		<!-- 신청하면 이미지와 닉네임 만들기 -->
 		<div class="aplist" style="height:63px;">
 <c:if test="${empty login}">
+   로그인 하면 다양한 기능들을 이용할 수 있습니다　　　　　　　　　　　　　　　　　　　　　　　　　
  <input type="submit" class="btn preee" value="목록으로" style="float:right;">
 </c:if>
 
@@ -410,7 +449,9 @@ body {
 	</c:if>
 	</div>
 	
-	
+
+		</div>
+	</div>
 </div>
 
 <div class="setDiv">
@@ -422,12 +463,9 @@ body {
     </div>
 </div> 
 
-</div>
-</div>
 
 <%@include file="../footer.jsp"%>	
 
-  
 	<script>
 //북마크를 등록합니다	
 
@@ -920,7 +958,7 @@ $(document).ready(function(){
         			str += "<div class='replyLi' ><div class='cmnt-clipboard'>"
         			    +  "<button class='btn-clipboard' value='"+this.rno+"'>수정하기</button></div>"
         			    +  "<div class='well'><div class='row'><div class='col-md-2'>"
-        			    +  "<img src='assets/img/commenter2.jpg' class='img-responsive center-block'></div>"
+        			    +  "<img src="+"'/study/displayFile?fileName=${studyVO.photo}'"+"　class='img-responsive center-block'></div>"
                         +  "<div class='col-md-10'><p class='comment-info'>"
                         +  "<strong>" + this.writer + "</strong>" + "<span>" + this.regdate + "</span>"
                         + "</p><div class='contentre'>" + this.content + "</div></div></div></div></div>"
@@ -1022,23 +1060,21 @@ $(document).ready(function(){
 </script>
 	<!--지도 크르깁트 -->
 	<script>
+	
    function initMap() {
-   		var uluru = {lat:37.5663797, lng:126.9777154};
+   		var uluru = {lat:${studyVO.lat}, lng:${studyVO.lng}};
    	    var map = new google.maps.Map(document.getElementById('map'),{
    		zoom: 16,
    		center:uluru
    	});
    	var marker = new google.maps.Marker({
    		position:uluru,
-   		map:map
+   		map:map,
    	});
-   	
    }
    </script>
 	<script
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAiNU7soIIqpN1Jdu0tV1CWBb6u1jJAH5o&callback=initMap"
 		async defer></script>
-
-
 </body>
 </html>

@@ -39,6 +39,14 @@ th{
 	margin-top:5px;
 }
 
+.page-head {
+    background: url(/resources/assets/img/portfolio-bg.jpg) !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+}
+
+
 </style>
 
 <%@ include file="nav.jsp"%>
@@ -322,7 +330,7 @@ th{
 
 
 <body>
-            <header class="page-head" style="background:url(/resources/assets/img/portfolio-bg.jpg);">
+            <header class="page-head">
                 <div class="header-wrapper">
                     <div class="container">
                         <div class="row">

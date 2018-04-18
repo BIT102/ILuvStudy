@@ -25,7 +25,7 @@ function getFileInfo(name){
 		getLink = "/study/displayFile?fileName="+front+end;
 		
 	} else {
-		imgsrc = "/resources/dist/img/file.png";
+		imgsrc = "/resources/assets/img/ha.jpg";
 		fileLink = name.substr(12);
 		getLink = "/study/displayFile?fileName="+name;
 	}

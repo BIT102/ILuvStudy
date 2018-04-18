@@ -107,6 +107,7 @@ html {
 .btn-white {
 	background-color: #fff;
 	color: #000;
+	margin-top:5px;
 }
 
 .btn-black:hover {
@@ -124,6 +125,7 @@ html {
 	border: 1px solid #cdcdcd;
 	color: #000;
 }
+
 
 .blog-btn {
     width: 100%;

@@ -74,17 +74,17 @@ small {
 .btn-xs {
 	margin-top: 5px;
 }
-}
-/* #chatClick{
-	bottom:13%;
-	right:3%;
-} */
-/*지도스타일입니다*/
-#map {
-	height: 300px;
-	margin-top:15px;
 
+.age {
+	padding:30px;
+}
+
+
+#map {
+	width: 100%;
+	height: 300px;
      }
+
       .controls {
         margin-top: 10px;
         border: 1px solid transparent;
@@ -101,7 +101,7 @@ small {
         font-family: Roboto;
         font-size: 15px;
         font-weight: 300;
-        margin-left: 12px;
+        margin-bottom: 15px;
         padding: 0 11px 0 13px;
         text-overflow: ellipsis;
         width: 300px;
@@ -191,8 +191,8 @@ th{
                  	<label class="fancy-checkbox" style="display:inline-block;">
                  		<input type="checkbox" name="categoryS" class="${studyVO.cDName}" id="${studyVO.cSName}"><span>${studyVO.cSName}</span>
                  	</label>
-                 </c:forEach> --%> <!-- ======== 카테고리 =========== --> <select
-														id="catD" class="form-control">
+                 </c:forEach> --%> <!-- ======== 카테고리 =========== --> 
+                 									<select id="catD" class="form-control">
 															<option>--</option>
 															<c:forEach items="${studyCategory}" var="studyVO">
 																<option value="${studyVO.cDId}">${studyVO.cDName}</option>
@@ -236,7 +236,14 @@ th{
 												<tr>
 												<th>상세지역</th>
 												
-												<td><div id="map"></div></td>
+												<td>
+												<!-- 검색기능 -->
+												<input id="pac-input" class="controls" type="text" placeholder="상세지역을 검색해 주세요">
+												<div id="map"></div> 
+												<!-- 경도와 위도 값을 넘깁니다. -->
+														<input type="hidden" id="lat" name="lat">
+														<input type="hidden" id="lng" name="lng">
+													</td>
 												</tr>
 												
 												<tr>
@@ -281,14 +288,24 @@ th{
 														</span>
 													</label>
 													</td>
+													<td>
+													</td>
+													<td>
+													</td>
 												</tr>
 												<tr>
 													<th>최대인원</th>
 													<td>
 														<div class="studymax">
 															<input class="form-control" type="number" name="max"
-																min="0" style="width: 345px;" id="studymax">
+																min="0" style="width: 345px;" id="studymax">　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　
 														</div>
+													</td>
+													<td>
+													</td>
+													<td>
+													</td>
+														<td>
 													</td>
 												</tr>
 												<tr>
@@ -300,6 +317,10 @@ th{
 																style="width: 345px;" id="studysd">
 														</div>
 													</td>
+													<td>
+													</td>
+													<td>
+													</td>
 												</tr>
 												<tr>
 													<th>시간</th>
@@ -307,7 +328,7 @@ th{
 														<%-- <input type="text" name="sc" value="${studyVO.sc}" style="width:30%; display: inline;" class="form-control">
                 	<input type="text" name="st" value="${studyVO.st}" style="width:30%; display: inline;" class="form-control"> ~
                 	<input type="text" name="et" value="${studyVO.et}" style="width:30%; display: inline;" class="form-control"><br> --%>
-														<select id="sc" name="sc" class="form-control">
+														<select id="sc" class="form-control">
 															<option value="" selected>--</option>
 															<option value="월요일">월요일</option>
 															<option value="화요일">화요일</option>
@@ -316,7 +337,7 @@ th{
 															<option value="금요일">금요일</option>
 															<option value="토요일">토요일</option>
 															<option value="일요일">일요일</option>
-													</select> <select id="st" name="st" class="form-control">
+													</select> <select id="st" class="form-control">
 															<option value="" selected>--</option>
 															<option value="6">6시</option>
 															<option value="7">7시</option>
@@ -337,39 +358,37 @@ th{
 															<option value="22">22시</option>
 															<option value="23">23시</option>
 															<option value="24">24시</option>
-													</select> <select id="et" name="et" class="form-control">
+													</select> <select id="et" class="form-control">
 															<option value="" selected>--</option>
-													</select> <script>
-														/* 		$("#st").change(function(){
-														 console.log($(this).val());
-														 var tval = $(this).val();
-														 $("#et option").remove(val="tval")
-														 }); //시작시간 끝나는시간  */
-														$("#st")
-																.change(
-																		function() {
-																			var stval = $(
-																					"#st option:selected")
-																					.val();
-																			console
-																					.log("str="
-																							+ stval);
+													</select> 
+
+									                <div id="addTimeArea">
+									                </div>    
+											
+													<script>
+
+														$("#st").change(function() {
+																			var stval = $("#st option:selected").val();
+																			console.log("str="+ stval);
 																			var str = "";
+																			if(stval==""){
+																				str = "<option>--</option>"
+																				$("#et").html(str);
+																			} else {
 																			for (var i = stval; i <= 24; i++) {
 																				str += "<option value'"+i+"'>"
 																						+ i
 																						+ "시</option>";
-																				$(
-																						"#et")
-																						.html(
-																								str);
+																				$("#et").html(str);
+																				}
 																			}
 																		});
-													</script> <!-- 시간 추가 등록 가능 
-                <div id="addTimeArea">
-                </div>    
-                    <button type="button" id="addTime" class="btn btn-default btn-xs">추가</button> -->
+													</script> <!-- 시간 추가 등록 가능 -->
 													</td>
+													<td>	
+														<button type="button" id="addTime" class="btn btn-default btn-xs">추가</button> 
+													</td>
+													
 												</tr>
 
 											</tbody>
@@ -440,21 +459,7 @@ th{
 		  } );
 	
 	</script>
-	
-	<script>
-		$(".st").change(function() {
-			var stval = $(".st option:selected").val();
-			var str = "";
-			for (var i = stval; i <= 24; i++) {
-				str += "<option value'"+i+"'>" + i + "시</option>";
-				$(".et").html(str);
-				if (stval = 24) {
-					
-				}
-			}
-		});
-		var str = "";
-	</script>
+
 	<script>
 		var template = Handlebars.compile($("#template").html());
 		$(".fileDrop").on("dragenter dragover", function(event) {
@@ -611,14 +616,39 @@ th{
 
 				}); //addcat끝
 							
+							var setsc;
 							
 							//시간영역 추가 버튼 클릭 시 액션
-							$("#addTime")
-									.on(
-											"click",
-											function() {
-												var time = "<input type='text' name='sc' value='' style='width:30%; display: inline;' class='form-control'> <input type='text' name='st' value='' style='width:30%; display: inline;' class='form-control'> ~ <input type='text' name='et' value='' style='width:30%; display: inline;' class='form-control'><br>";
-												$("#addTimeArea").append(time);
+							$("#addTime").on("click",function() {
+								
+							var scval = $("#sc option:selected").val();
+							var stval = $("#st option:selected").val();
+							var etval = $("#et option:selected").val();
+							
+							//시간 추가할때 선택하지 않은거 있으면 경고 다시
+							if(scval==""||stval==""||etval==""){
+
+					    		alert("항목을 모두 입력하세요");
+					    		$("#st").focus();
+					    		return false;
+							} else if(setsc == scval) {
+								alert("이미 추가하신 요일입니다.");
+								return false;
+							}
+							 
+							
+							var time = "<span><input type='hidden' name='startSc' value="+scval+">"
+							+ "<input type='hidden' name='stEt' value="+stval+"시~"+etval+">"
+							+ "<div>"
+							+ scval
+							+ " > "
+							+ stval
+							+ "시~" + etval
+							+ "</span><button type='button' onclick = 'btn_delete(this)' class='btn btn-default btn-xs'>삭제</button></div>";
+											
+										     $("#addTimeArea").append(time);
+										     
+										     setsc = scval;
 											});
 						});
 		//카테고리 삭제 버튼
@@ -734,11 +764,12 @@ S3 수정 (파일 업로드 2개가 되어서 주석 처리)
     <!-- 유효성 검사 스크립트 -->
     <script>
     
+
     
-  // 카테고리 대 소 , 스터디명, 지역 대, 연력, 최대인원, 시작날짜, 요일, 시간
+    
+    // 카테고리 대 소 , 스터디명, 지역 대, 연력, 최대인원, 시작날짜, 요일, 시간
     $("#btn-success").on("click", function(e){
-    
-    	
+    		
     	var age = "";	
     	
     	$("input[name=age]:checked").each(function(e){
@@ -747,7 +778,7 @@ S3 수정 (파일 업로드 2개가 되어서 주석 처리)
 
     	//카테고리 대소
     	if($("#addCatArea").html() == "") {
-    		
+
     		alert("카테고리를 입력하세요");
     		$("#catD").focus();
     		return false;
@@ -764,6 +795,12 @@ S3 수정 (파일 업로드 2개가 되어서 주석 처리)
     		$("#rDName").focus();
     		return false;
     		
+    		
+    	} else if($("#lat").val()=="") {
+    		
+    		alert("상세지역을 클릭해주세요");
+    		$("#map").focus();
+    		return false;
     		//나이대
     	} else if(age == ""){
     		
@@ -805,89 +842,146 @@ S3 수정 (파일 업로드 2개가 되어서 주석 처리)
 		} else {
 			alert("등록이 완료되었습니다")
 		} 
-    		
-    		
-    /* 	//연령
-	    var chk = false;
- 	   	
-    	for(var i=0; document.myform.age.length; i++) {
-    		if(document.myfrom.car[i].checked) {chk = ture} {
-    		}
-    		//체크가 안되었을 때
-    		if(!chk){
-    			alert("원하는 나이대를 입력하세요")
-    		}
-   
-    
-    	//시작날짜		
-    	} else if($(".studysd").val()==""){
-    		
-    		alert("시작날짜를 입력하세요")
-    		$(".studysd").focus();
-    		return false;
-    	//요일	
-    	} else if($("#sc").is(':checked')==false){
-    		
-    		alert("요일을 입력하세요") 
-    		$("#sc").focus();
-    		return false;
-    	//시작시간	
-    	} else if($("#st").is(':checked')==false){
-    		
-    		alert("시작시간을 입력하세요")
-    		$("#st").focus();
-    		return false;
-    	} else if($("#et").is(':checked')==false){
-    		
-    		alert("시작시간을 입력하세요")
-    		$("#et").focus();
-    		return false;
-    		
-    	} else {
-    		alert("등록이 완료되었습니다")
-    	} */
-    	
     }) 
     </script>
     
  
-    <!--지도 크르깁트 -->
-    
-    <script>
-    
-    var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    var labelIndex = 0;
 
-    function initialize() {
-    	var korea = {lat:37.5663797, lng:126.9777154};
-    	var map = new google.maps.Map(document.getElementById('map'),{
-    	zoom: 16,
-    	center:korea
-    });
-    
-    google.maps.event.addListener(map, 'click', function(event){
+ 	<!--지도 크르깁트 -->
+<script>
+   var markers = [];
+   var labelIndex = 1;
+   var map;
+   var lat;
+   var lng;
+   
+   function initAutocomplete() {
+	   
+	    var	uluru = {lat:37.5663797, lng:126.9777154};
+   	    map = new google.maps.Map(document.getElementById('map'),{
+	   	zoom: 16,
+	   	center:uluru
+	   	});
+	   	//마커를 클릭하면 등록   
+	   	google.maps.event.addListener(map,'click', function(event){
+	   		console.log(labelIndex)
+	   		//처음 클릭했을때 등록
+	   		if(labelIndex == 1){
+	   			hide(); 
+	   			addMarker(event.latLng, map);
+	   			//경도 위도 변수에 저장
+				lat = event.latLng.lat();
+				lng = event.latLng.lng();
+				
+				$('#lat').attr('value', lat);
+				$('#lng').attr('value', lng);
 
-    		markert =[];
-	    	addMarker(event.latLng, map);
-	    	alert(event.latLng)
+	   			labelIndex = 2;
+	   		//두번째부터 위치변경	
+	   		} else {
+		   		hide(); 
+				//value 변경후 다시 추가
+				$('#lat').removeAttr('value');
+				$('#lng').removeAttr('value');
+				addMarker(event.latLng, map);
+		   		
+				lat = event.latLng.lat();
+				lng = event.latLng.lng();
+				
+				//value 추가 
+				$('#lat').attr('value', lat);
+				$('#lng').attr('value', lng);
+	   		}
+	   	})
+	   	
+	   	//검색기능 추가해보자
+	    // 지도안에 검색상자를 넣는다
+        var input = document.getElementById('pac-input');
+        var searchBox = new google.maps.places.SearchBox(input);
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
-    });	
-  }
-    
-    function addMarker(location, map) {
-    	var marker = new google.maps.Marker({
-    		position:location,
-    		label:labels[labelIndex++ % labels.length],
-    		map:map
-    	});
-	    	
-    }
-	
-    </script>
+        // 검색결과가 viewpoint로 넘긴다
+        map.addListener('bounds_changed', function() {
+          searchBox.setBounds(map.getBounds());
+        });
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAiNU7soIIqpN1Jdu0tV1CWBb6u1jJAH5o&callback=initialize"
-    async defer></script>
-    
+        //장소 출력 마커표시도
+        searchBox.addListener('places_changed', function() {
+          var places = searchBox.getPlaces();
+
+          if (places.length == 0) {
+            return;
+          }
+
+          // 장소없으면 안됨
+          var bounds = new google.maps.LatLngBounds();
+          places.forEach(function(place) {
+            if (!place.geometry) {
+              console.log("Returned place contains no geometry");
+              return;
+            }
+            
+    		var marker = new google.maps.Marker({
+    	   		position:location,
+    	   		map:map,
+    	   	});
+
+            // 배열에담아.
+            markers.push(new google.maps.Marker({
+                  map: map,
+                  marker: marker,
+            	  position: place.geometry.location
+            }));
+            	
+           
+     //       alert("search"+place.geometry.location.lat())
+
+
+            if (place.geometry.viewport) {   
+              bounds.union(place.geometry.viewport);
+            } else {
+              bounds.extend(place.geometry.location);
+            }
+          });
+          
+          alert(markers[0].getPosition().lat())
+          
+          if(labelIndex == 1){
+          		lat = markers[0].getPosition().lat();
+				lng = markers[0].getPosition().lng();
+				
+				$('#lat').attr('value', lat);
+				$('#lng').attr('value', lng);
+          }
+          map.fitBounds(bounds);
+
+        });
+   }
+ 	//마커를 추가하는 함수
+   function addMarker(location, map) {
+		var marker = new google.maps.Marker({
+	   		position:location,
+	   		map:map,
+	   	});
+	   
+		markers.push(marker);
+   }
+ 	
+   //마커를 지우는 함수
+   function setMarkers(map) {
+	   for(var i=0; i<markers.length; i++){
+		   markers[i].setMap(map);
+	   }
+   }
+   
+   function hide() {
+	   setMarkers(null);
+   }
+
+</script>
+	<script
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAiNU7soIIqpN1Jdu0tV1CWBb6u1jJAH5o&callback=initAutocomplete&libraries=places"
+		async defer></script>
     
     		<%@include file="../footer.jsp"%>
 </body>

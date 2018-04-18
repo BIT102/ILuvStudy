@@ -24,4 +24,8 @@ public interface ReplyStudyDAO {
 	
 	//데이터수
 	public int count(Integer bsBno) throws Exception;
+	
+	//해당게시물번호
+	public int getBno(Integer rno) throws Exception;
+
 }

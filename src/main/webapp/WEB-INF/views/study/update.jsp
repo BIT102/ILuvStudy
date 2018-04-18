@@ -12,7 +12,6 @@
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script>
   var jb = jQuery.noConflict();
-
   </script>
 
 
@@ -76,6 +75,38 @@ small {
 	height: 300px;
 	margin-top:15px;
 }
+
+#pac-input {
+    background-color: #fff;
+    font-family: Roboto;
+    font-size: 15px;
+    font-weight: 300;
+    margin-bottom: 15px;
+    padding: 0 11px 0 13px;
+    text-overflow: ellipsis;
+    width: 300px;
+}
+
+.controls {
+    margin-top: 10px;
+    border: 1px solid transparent;
+    border-radius: 2px 0 0 2px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    height: 32px;
+    outline: none;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+input{
+	line-height: inherit;
+	 margin: 0;
+    font: inherit;
+    color: inherit;
+    -webkit-appearance: textfield;
+    -webkit-rtl-ordering: logical;
+    cursor: text;
+}
 </style>
 </head>
 <body>
@@ -107,7 +138,7 @@ small {
 			<!-- MAIN CONTENT -->
 			<div class="main-content" style="background-color: #f9f9f9">
 				<div class="container">
-					<h3 class="page-title">스터디 등록하기</h3>
+					<h3 class="page-title">스터디 수정하기</h3>
 					<div class="row">
 						<div class="col-md-12">
 							<div class="panel">
@@ -144,7 +175,7 @@ small {
 															<%-- <option value="${studyVO.cSName}">${studyVO.cSName}</option> --%>
 													</select>
 														<button type="button" id="addCat"
-															class="btn btn-default btn-xs">추가</button>
+															class="btn btn-default btn-xs" style="width:76px; height:40px;">추가</button>
 														<div id="addCatArea"></div>
 													</td>
 												</tr>
@@ -168,10 +199,22 @@ small {
 													</select> <select id="rSName" name='rSId' class="form-control">
 															<option value="">--</option>
 													</select>
-													<!-- 지도입니다. -->
-													 <div id="map"></div>
 													</td>
 												</tr>
+												
+												<tr>
+												<th>상세지역</th>
+												
+													<td>
+													<!-- 검색기능 -->
+													<input id="pac-input" class="controls" type="text" placeholder="상세지역을 검색해 주세요">
+													<div id="map"></div> 
+													<!-- 경도와 위도 값을 넘깁니다. -->
+															<input type="hidden" id="lat" name="lat">
+															<input type="hidden" id="lng" name="lng">
+													</td>
+												</tr>
+												
 												<tr>
 													<th>스터디 방장</th>
 													<!--  세션으로 전송 -->
@@ -241,8 +284,8 @@ small {
 														<%-- <input type="text" name="sc" value="${studyVO.sc}" style="width:30%; display: inline;" class="form-control">
                 	<input type="text" name="st" value="${studyVO.st}" style="width:30%; display: inline;" class="form-control"> ~
                 	<input type="text" name="et" value="${studyVO.et}" style="width:30%; display: inline;" class="form-control"><br> --%>
-														<select id="sc" name="sc" class="form-control">
-															<option selected>--</option>
+													<select id="sc" name="sc" class="form-control">
+															<option value="" selected>--</option>
 															<option value="월요일">월요일</option>
 															<option value="화요일">화요일</option>
 															<option value="수요일">수요일</option>
@@ -250,8 +293,9 @@ small {
 															<option value="금요일">금요일</option>
 															<option value="토요일">토요일</option>
 															<option value="일요일">일요일</option>
-													</select> <select id="st" name="st" class="form-control">
-															<option selected>--</option>
+													</select> 
+													<select id="st" name="st" class="form-control">
+															<option value="" selected>--</option>
 															<option value="6">6시</option>
 															<option value="7">7시</option>
 															<option value="8">8시</option>
@@ -271,39 +315,44 @@ small {
 															<option value="22">22시</option>
 															<option value="23">23시</option>
 															<option value="24">24시</option>
-													</select> <select id="et" name="et" class="form-control">
-															<option selected>--</option>
-													</select> <script>
+													</select>
+													 <select id="et" name="et" class="form-control">
+															<option value="" selected>--</option>
+													</select> 
+													
+													<div id="addTimeArea">
+									                </div>    
+													
+													<script>
 														/* 		$("#st").change(function(){
 														 console.log($(this).val());
 														 var tval = $(this).val();
 														 $("#et option").remove(val="tval")
 														 }); //시작시간 끝나는시간  */
-														$("#st")
-																.change(
-																		function() {
-																			var stval = $(
-																					"#st option:selected")
-																					.val();
-																			console
-																					.log("str="
-																							+ stval);
+														$("#st").change(function() {
+																			var stval = $("#st option:selected").val();
+																			console.log("str="+ stval);
 																			var str = "";
+																			
+																			if(stval == ""){
+								
+																				str = "<option>--</option>";
+																				$("#et").html(str);
+																			} else {	
 																			for (var i = stval; i <= 24; i++) {
 																				str += "<option value'"+i+"'>"
 																						+ i
 																						+ "시</option>";
-																				$(
-																						"#et")
-																						.html(
-																								str);
+																				$("#et").html(str);
+																				}
 																			}
 																		});
-													</script> <!-- 시간 추가 등록 가능 
-                <div id="addTimeArea">
-                </div>    
-                    <button type="button" id="addTime" class="btn btn-default btn-xs">추가</button> -->
+													</script> 
 													</td>
+													<td>
+														<button type="button" id="addTime" class="btn btn-default btn-xs" style="width:76px; height:40px;">추가</button> 
+													</td>
+	
 												</tr>
 
 											</tbody>
@@ -344,7 +393,7 @@ small {
 										</div>
 									</form>
 											<button type="submit" id="btn-success"
-												class="btn btn-success">등록</button>
+												class="btn btn-success"  style="width:80px; height:42px;">수정</button>
 
 								</div>
 								<!-- panel-body end -->
@@ -404,19 +453,6 @@ small {
     	})
     })
     </script>
-	<script>
-		$(".st").change(function() {
-			var stval = $(".st option:selected").val();
-			var str = "";
-			for (var i = stval; i <= 24; i++) {
-				str += "<option value'"+i+"'>" + i + "시</option>";
-				$(".et").html(str);
-				if (stval = 24) {
-				}
-			}
-		});
-		var str = "";
-	</script>
 	<script>
 		var template = Handlebars.compile($("#template").html());
 		$(".fileDrop").on("dragenter dragover", function(event) {
@@ -493,30 +529,7 @@ small {
 	var count=0;
 	
 	$(document).ready(function(){
-		
-		$("select option[value='${studyVO.st}']").attr("selected", true);
-		
-		var stval = $("#st option:selected").val();
-		
-		console.log("str="+stval);
-		var str = "";
-		
-		for (var i = stval; i <= 24; i++) {
-			
-			if(i == '${studyVO.et}'){
-			str += "<option value'"+i+"' selected>"
-					+ i
-					+ "시</option>";
-			$("#et").html(str);
-			} else {
-				str += "<option value'"+i+"'>"
-				+ i
-				+ "시</option>";
-		$("#et").html(str);
-			}
-		}
-		
-		
+				
 		$("#studyListsuv").attr("class", "active");
 		$("#studyListnav").attr("class", "active");
 		$("#subPages").attr("class", "in");
@@ -527,52 +540,6 @@ small {
 		
 		console.log(formObj);
 		
-		//유효성 검사 변수
-/* 		categoryV = false;
-		titleV = false;
-		ageV = false;
-		maxV = false;
-		 */
-		//수정 클릭 시 액션
-	/* 	$("#modifyBtn").on("click", function(){
-			//form 데이터 유효성 검사 추가 필요
-			
- 			//카테고리 유효성
-  			if($("#addCatArea").find("div").length){
-				categoryV = true;
-			}
-			
-			// title 유효성
-			if($("#title").val() != ""){
-				titleV = true;
-			}
-			
-			//age 유효성
-			if($(".age").val() != ""){
-				ageV = true;
-			}
-			
-			//max 유효성
-			if($("#max").val() != ""){
-				maxV = true;
-			}
-			
-			console.log("categoryV : "+categoryV+" titleV : "+titleV+" ageV : "+ageV+" maxV : "+maxV);
-			
-			if(categoryV && titleV && ageV && maxV){
-				formObj.submit();
-			}else{
-				alert("내용을 확인하세요");
-			}   
-			
-		}); */
-		
-		//목록 클릭 시 액션
-/* 		$("#listBtn").on("click", function(){
-			self.location = "/admin/studyList?page=${cri.page}&perPageNum=${cri.perPageNum}"
-							+"&stStatusType=${cri.stStatusType}&titleKeyword=${cri.titleKeyword}&writerKeyword=${cri.writerKeyword}";
-		});
-		 */
 		//지역 정보 셀렉트 박스 변경 시 액션
 		$("#rDName").on("change", function(){
 			getRegion();
@@ -593,7 +560,6 @@ small {
 			
 			var catd = $('#catD option:selected').val();
 			var cats = $('#catS option:selected').val();
-
 			
 			if(count==0){
 				
@@ -609,7 +575,6 @@ small {
 						+ cats2
 						+ "</span><button type='button' onclick = 'btn_delete(this)' class='btn btn-default btn-xs'>삭제</button></div>";
 				$("#addCatArea").append(cat);
-
 				setd = catd;
 				sets = cats;
 				
@@ -636,18 +601,72 @@ small {
 							+ "</span><button type='button' onclick = 'btn_delete(this)' class='btn btn-default btn-xs'>삭제</button></div>";
 					$("#addCatArea").append(cat);
 				}
-
 			}//count esle 끝
-
 }); //addcat끝
 		
-		//시간영역 추가 버튼 클릭 시 액션
+		
+
+var setsc;
+
+var starval = new Array();
+
+//시간영역 추가 버튼 클릭 시 액션
+$("#addTime").on("click",function() {
+	
+	var scval = $("#sc option:selected").val();
+	var stval = $("#st option:selected").val();
+	var etval = $("#et option:selected").val();
+
+	//입력항목이 없으면 리턴한다
+	if(scval==""||stval==""||etval==""){
+		alert("항목을 모두 입력하세요");
+		$("#st").focus();
+		return false;
+	} 
+
+	// 있는 항목의 리스트를 배열에 담는다
+	$("#addTimeArea input[name='startSc']").each(function(){
+		starval.push($(this).val());
+	})
+		
+	
+	// 만약 항목에 있으면 리턴
+	var no = "";
+	
+	for(var i=0; i<starval.length; i++) {
+		if(starval[i]==scval) {
+			no = "no";
+		}
+	}
+
+	if(no=="no") {
+		alert("이미 추가하신 요일입니다.")
+		return false;
+		
+	} else {
+		
+		var time = "<span><input type='hidden' name='startSc' value="+scval+">"
+		+ "<input type='hidden' name='stEt' value="+stval+"시~"+etval+">"
+		+ "<div>"
+		+ scval
+		+ " > "
+		+ stval
+		+ "시~" + etval
+		+ "</span><button type='button' onclick = 'btn_delete(this)' class='btn btn-default btn-xs'>삭제</button></div>";
+						
+					     $("#addTimeArea").append(time);
+	}
+});
+		
+/* 		//시간영역 추가 버튼 클릭 시 액션
 		$("#addTime").on("click", function(){
        		
        		var time="<input type='text' name='sc' value='' style='width:30%; display: inline;' class='form-control'> <input type='text' name='st' value='' style='width:30%; display: inline;' class='form-control'> ~ <input type='text' name='et' value='' style='width:30%; display: inline;' class='form-control'><br>";
        	
        		$("#addTimeArea").append(time);
-		});
+		}); */
+		
+		
 		
 		//연령 체크박스 2개 초과하여 선택 시 알럿 처리
 		$(".age").on("click", function(){
@@ -731,34 +750,54 @@ small {
 				
 				$("#addCatArea").append(recat);
 			</c:forEach>
-			 
-			 
-			//카테고리 정보 불러오기 테스트
-/* 			var recatd = "${studyVO.categoryD}";
-			var recats = "${studyVO.categoryS}";
-			var recats2 = recats.split(',');
 			
-			<c:forEach items="${studyCategory}" var="studyVO">
-     			if(recatd == "${studyVO.cDId}"){
-     				var recatd2 = "${studyVO.cDName}";
-     			}
-     			for(var i=0;i<recats2.length;i++){
-     				if(${studyVO.cSId} == recats2[i]){
-     					var recats3 = "${studyVO.cSName}";
-     					
-						var recat="<span><input type='hidden' name='categoryD' value="+recatd+">"
-						+"<input type='hidden' name='categoryS' value="+recats+">"
-						+"<div>"+recatd2 +" > "+recats3+"</span><button type='button' onclick = 'btn_delete(this)' class='btn btn-default btn-xs'>삭제</button></div>";
+			var scset;
+			var stset;
+			
+			//시간정보 불러옵니다
+			var sclist = new Array();
+			var stetlist = new Array();
+			//요일
+			<c:forEach items="${sc}" var="sc" varStatus="status">
+				scset = "${sc}"
+				sclist.push(scset);
+			</c:forEach>
+			//날짜
+			<c:forEach items="${stet}" var="stet" varStatus="status">
+				stset = "${stet}"
+				stetlist.push(stset);
+			</c:forEach>
 				
-						$("#addCatArea").append(recat);
-     				}
-     			}
-     			
-     		</c:forEach>
-			
-			 */
-			//테스트 끝
-			
+				console.log("length"+sclist.length);
+				console.log(sclist)
+				console.log(stetlist)
+				
+			for(var i=0; i<sclist.length; i++) {
+				console.log(i);
+
+				var time = "<span><input type='hidden' name='startSc' value="+sclist[i]+">"
+					     + "<input type='hidden' name='stEt' value="+stetlist[i]+">"
+					     + "<div>"
+				         + sclist[i]
+						 + " > "
+						 + stetlist[i]
+						 +"</span><button type='button' onclick = 'btn_delete(this)' class='btn btn-default btn-xs'>삭제</button></div>";
+				
+				$("#addTimeArea").append(time);			 
+			}	
+				
+/* 				var time = "<span><input type='hidden' name='startSc' value="+scval+">"
+				+ "<input type='hidden' name='stEt' value="+stval+"시~"+etval+">"
+				+ "<div>"
+				+ scval
+				+ " > "
+				+ stval
+				+ "시~" + etval
+				+ "</span><button type='button' onclick = 'btn_delete(this)' class='btn btn-default btn-xs'>삭제</button></div>";
+								
+							     $("#addTimeArea").append(time); */
+				
+				
 			// 연령 정보 불러옴
 			var check_value="${studyVO.age}";  //연령 DB 데이터 변수에 저장
 			var check_value2=check_value.split(',');   //콤마를 구분자로 배열에 담음 
@@ -793,24 +832,164 @@ small {
 </script>
 	
 	
+ 	<!--지도 크르깁트 -->
+<script>
+   var markers = [];
+   var labelIndex = 1;
+   var map;
+   var lat;
+   var lng;
+   
+   function initAutocomplete() {
+	   
+	   var latset = ${studyVO.lat};
+	   var lngset = ${studyVO.lng};
+	   
+	    var	uluru = {lat:latset, lng:lngset};
+   	    map = new google.maps.Map(document.getElementById('map'),{
+	   	zoom: 16,
+	   	center:uluru
+	   	});
+   	    
+   	    if(labelIndex == 1) {
+			hide();
+			
+   			var marker = new google.maps.Marker({
+   		   		position:uluru,
+   		   		map:map,
+   		   	});
+   			
+   			$('#lat').attr('value', latset);
+			$('#lng').attr('value', lngset);
+			
+			markers.push(marker);
+			
+   			labelIndex = 2;
+   	    }
+	   	//마커를 클릭하면 등록   
+	   	google.maps.event.addListener(map,'click', function(event){
+	   		console.log(labelIndex)
+	   		//처음 클릭했을때 등록
+	   		if(labelIndex == 1){
+	   			hide(); 
+				alert("1");
+				alert("2");
+	   			addMarker(event.latLng, map);
+	   			
+				$('#lat').attr('value', lat);
+				$('#lng').attr('value', lng);
+	   			//경도 위도 변수에 저장
+				lat = event.latLng.lat();
+				lng = event.latLng.lng();
+				alert("3");
+	   			labelIndex = 2;
+	   		//두번째부터 위치변경	
+	   		} else {
+		   		hide(); 
+				//value 변경후 다시 추가
+				$('#lat').removeAttr('value');
+				$('#lng').removeAttr('value');
+				addMarker(event.latLng, map);
+		   		
+				lat = event.latLng.lat();
+				lng = event.latLng.lng();
+				
+				//value 추가 
+				$('#lat').attr('value', lat);
+				$('#lng').attr('value', lng);
+	   		}
+	   	})
+	   	
+	   	//검색기능 추가해보자
+	    // 지도안에 검색상자를 넣는다
+        var input = document.getElementById('pac-input');
+        var searchBox = new google.maps.places.SearchBox(input);
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
-   <!--지도 크르깁트 -->
-   <script>
-   function initMap() {
-   		var uluru = {lat:37.5663797, lng:126.9777154};
-   	    var map = new google.maps.Map(document.getElementById('map'),{
-   		zoom: 16,
-   		center:uluru
-   	});
-   	var marker = new google.maps.Marker({
-   		position:uluru,
-   		map:map
-   	});
+        // 검색결과가 viewpoint로 넘긴다
+        map.addListener('bounds_changed', function() {
+          searchBox.setBounds(map.getBounds());
+        });
+
+        //장소 출력 마커표시도
+        searchBox.addListener('places_changed', function() {
+          var places = searchBox.getPlaces();
+
+          if (places.length == 0) {
+            return;
+          }
+
+          // 장소없으면 안됨
+          var bounds = new google.maps.LatLngBounds();
+          places.forEach(function(place) {
+            if (!place.geometry) {
+              console.log("Returned place contains no geometry");
+              return;
+            }
+            
+    		var marker = new google.maps.Marker({
+    	   		position:location,
+    	   		map:map,
+    	   	});
+
+            // 배열에담아.
+            markers.push(new google.maps.Marker({
+                  map: map,
+                  marker: marker,
+            	  position: place.geometry.location
+            }));
+            	
+           
+     //       alert("search"+place.geometry.location.lat())
+
+
+            if (place.geometry.viewport) {   
+              bounds.union(place.geometry.viewport);
+            } else {
+              bounds.extend(place.geometry.location);
+            }
+          });
+          
+          alert(markers[0].getPosition().lat())
+          
+          if(labelIndex == 1){
+          		lat = markers[0].getPosition().lat();
+				lng = markers[0].getPosition().lng();
+				
+				$('#lat').attr('value', lat);
+				$('#lng').attr('value', lng);
+          }
+          map.fitBounds(bounds);
+
+        });
    }
-   </script>
+   
+ 	//마커를 추가하는 함수
+   function addMarker(location, map) {
+	   alert("4");
+		var marker = new google.maps.Marker({
+	   		position:location,
+	   		map:map,
+	   	});
+	   
+		markers.push(marker);
+   }
+ 	
+   //마커를 지우는 함수
+   function setMarkers(map) {
+	   for(var i=0; i<markers.length; i++){
+		   markers[i].setMap(map);
+	   }
+   }
+   
+   function hide() {
+	   setMarkers(null);
+   }
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAiNU7soIIqpN1Jdu0tV1CWBb6u1jJAH5o&callback=initMap"
-    async defer></script>
+</script>
+	<script
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAiNU7soIIqpN1Jdu0tV1CWBb6u1jJAH5o&callback=initAutocomplete&libraries=places"
+		async defer></script>
 
 <!-- 우효성 검사 -->
     <!-- 유효성 검사 스크립트 -->
@@ -820,7 +999,6 @@ small {
   // 카테고리 대 소 , 스터디명, 지역 대, 연력, 최대인원, 시작날짜, 요일, 시간
     $("#btn-success").on("click", function(e){
     	console.log("등록등록등록등록등록등록등록등록등록등록등록등록등록등록등록등록")
-
     	 var formObj = $("form[role='form']");
 	   
     	 var age = "";	
@@ -828,7 +1006,6 @@ small {
     	$("input[name=age]:checked").each(function(e){
     		age += $(this).val();
     	})
-
     	//카테고리 대소
     	if($("#addCatArea").html() == "") {
     		
@@ -890,48 +1067,7 @@ small {
 			alert("등록이 완료되었습니다");
 			   formObj.submit();
 		} 
-    		
-    		
-    /* 	//연령
-	    var chk = false;
- 	   	
-    	for(var i=0; document.myform.age.length; i++) {
-    		if(document.myfrom.car[i].checked) {chk = ture} {
-    		}
-    		//체크가 안되었을 때
-    		if(!chk){
-    			alert("원하는 나이대를 입력하세요")
-    		}
-   
-    
-    	//시작날짜		
-    	} else if($(".studysd").val()==""){
-    		
-    		alert("시작날짜를 입력하세요")
-    		$(".studysd").focus();
-    		return false;
-    	//요일	
-    	} else if($("#sc").is(':checked')==false){
-    		
-    		alert("요일을 입력하세요") 
-    		$("#sc").focus();
-    		return false;
-    	//시작시간	
-    	} else if($("#st").is(':checked')==false){
-    		
-    		alert("시작시간을 입력하세요")
-    		$("#st").focus();
-    		return false;
-    	} else if($("#et").is(':checked')==false){
-    		
-    		alert("시작시간을 입력하세요")
-    		$("#et").focus();
-    		return false;
-    		
-    	} else {
-    		alert("등록이 완료되었습니다")
-    	} */
-    	
+	
     }) 
     </script>
 

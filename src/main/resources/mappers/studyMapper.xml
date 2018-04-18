@@ -6,6 +6,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- board_study mapper -->
 <mapper namespace="dev.mvc.mapper.StudyMapper">
 
+
+<!-- 댓글수 없데이트 -->
+<update id="updateReplyCnt">
+update
+board_study
+set rct = rct + #{amount}
+where bno = #{bno}
+</update>
+
 <!-- 카테고리 수정부분 -->
 <delete id="caDelete">
 delete 
@@ -39,6 +48,8 @@ title = #{title}
 , st = #{st}
 , et = #{et}
 , content = #{content} <!-- null허용 -->
+, lat = #{lat}
+, lng = #{lng}
 where bno = #{bno}
 </update>
 
@@ -85,6 +96,8 @@ title
 , st
 , et
 , content
+, lat
+, lng
 ) values (
 #{title}
 , #{writer}
@@ -97,8 +110,54 @@ title
 , #{st}
 , #{et}
 , #{content} <!-- null허용 -->
+, #{lat}
+, #{lng}
 )
 </insert>
+<!-- 시간등록 -->
+<insert id="clock">
+insert
+into
+clock (
+bsbno
+, startSc
+, stEt
+) values (
+#{bno}
+, #{startSc}
+, #{stEt}
+)
+</insert>
+
+<!-- 시간삭제 -->
+<delete id="deleteClock">
+delete
+from
+clock
+where
+bsbno = #{bsBno}
+</delete>
+
+<!-- 시간불러오기 -->
+<select id="getStart" resultType="String">
+select
+STARTSC
+from
+clock
+where BSBNO = #{bsBno}
+order by bsbno
+</select>
+
+<!-- 요일불러오기 -->
+<select id="getStet" resultType="String">
+select
+STET
+from
+clock
+where BSBNO = #{bsBno}
+and STARTSC = #{sc}
+order by bsbno
+</select>
 
 <!-- 카테고리 김상욱수정 -->
 <select id="studyCategory" resultType="StudyVO">
@@ -181,7 +240,9 @@ ba.name
 , bs.regdate
 , bs.enddate
 , sc.cdname
-, group_concat(sc.csname) csname 
+, group_concat(sc.csname) csname
+, bs.lat
+, bs.lng  
 FROM 
 board_study bs
 left outer join user u on bs.writer = u.EMAIL
@@ -440,6 +501,54 @@ ba.name
 , bs.enddate
 , sc.cdname
 , group_concat(sc.csname) csname 
+, ifnull(book.count, 0) count
+FROM 
+board_study bs
+left outer join user u on bs.writer = u.EMAIL
+left outer join (select * from board_attach where status = "O") ba on bs.bno = ba.bsbno
+left outer join region r on bs.RDID = r.RDID and bs.RSID = r.RSID
+left outer join board_category bc on bs.bno = bc.bsbno
+left outer join (select count(bsbno) count, bsbno from bookmark group by bsbno) book on bs.bno = book.bsbno
+, study_category sc
+WHERE bs.bno > 0
+and sc.CDID = bc.CATEGORYD and sc.CSID = bc.CATEGORYS
+]]>
+<include refid="search"></include>
+<![CDATA[
+group by bs.bno
+]]>
+<include refid="pall"></include>
+<![CDATA[
+limit #{pageStart}
+, #{perPageNum}
+]]>
+</select>
+
+<select id="vctList" resultType="studyVO">
+<![CDATA[
+SELECT
+ba.name
+, bs.bno
+, bs.title
+, bs.writer
+, u.photo
+, u.NICKNAME
+, bs.now
+, bs.max
+, r.rDName
+, r.rSName
+, bs.age
+, bs.sc
+, bs.sd
+, bs.st
+, bs.et
+, bs.content
+, bs.vct
+, bs.rct
+, bs.regdate
+, bs.enddate
+, sc.cdname
+, group_concat(sc.csname) csname 
 FROM 
 board_study bs
 left outer join user u on bs.writer = u.EMAIL
@@ -449,22 +558,54 @@ left outer join board_category bc on bs.bno = bc.bsbno
 , study_category sc
 WHERE bs.bno > 0
 and sc.CDID = bc.CATEGORYD and sc.CSID = bc.CATEGORYS
-
-]]>
-<include refid="search"></include>
-
-<![CDATA[
 group by bs.bno
-ORDER BY bno desc
-limit #{pageStart}
-, #{perPageNum}
+ORDER BY bs.vct desc
+]]>
+</select>
+
+<select id="newList" resultType="studyVO">
+<![CDATA[
+SELECT
+ba.name
+, bs.bno
+, bs.title
+, bs.writer
+, u.photo
+, u.NICKNAME
+, bs.now
+, bs.max
+, r.rDName
+, r.rSName
+, bs.age
+, bs.sc
+, bs.sd
+, bs.st
+, bs.et
+, bs.content
+, bs.vct
+, bs.rct
+, bs.regdate
+, bs.enddate
+, sc.cdname
+, group_concat(sc.csname) csname 
+FROM 
+board_study bs
+left outer join user u on bs.writer = u.EMAIL
+left outer join (select * from board_attach where status = "O") ba on bs.bno = ba.bsbno
+left outer join region r on bs.RDID = r.RDID and bs.RSID = r.RSID
+left outer join board_category bc on bs.bno = bc.bsbno
+, study_category sc
+WHERE bs.bno > 0
+and sc.CDID = bc.CATEGORYD and sc.CSID = bc.CATEGORYS
+group by bs.bno
+ORDER BY bs.bno desc
 ]]>
 </select>
 
 <select id="listSearchCount" resultType="int">
 <![CDATA[
 SELECT
-count(bs.bno)
+count(distinct bs.bno)
 ,ba.name
 , bs.bno
 , bs.title
@@ -485,18 +626,21 @@ count(bs.bno)
 , bs.regdate
 , bs.enddate
 , sc.cdname
-, sc.csname
+, sc.csname 
+, ifnull(book.count, 0) count
 FROM 
 board_study bs
 left outer join user u on bs.writer = u.EMAIL
 left outer join (select * from board_attach where status = "O") ba on bs.bno = ba.bsbno
 left outer join region r on bs.RDID = r.RDID and bs.RSID = r.RSID
 left outer join board_category bc on bs.bno = bc.bsbno
+left outer join (select count(bsbno) count, bsbno from bookmark group by bsbno) book on bs.bno = book.bsbno
 , study_category sc
 WHERE bs.bno > 0
 and sc.CDID = bc.CATEGORYD and sc.CSID = bc.CATEGORYS
 ]]>
 <include refid="search"></include>
+<include refid="pall"></include>
 </select>
 
 
@@ -532,6 +676,27 @@ and sc.CDID = bc.CATEGORYD and sc.CSID = bc.CATEGORYS
   		</if> 
   </sql>
 	
+<!-- 정렬을 위한 구성 -->
+ <sql id="pall">
+		<if test="pallType != null">
+			<!-- 최신순  -->
+			<if test="pallType == 'a'.toString()">
+				ORDER BY bs.bno desc
+			</if>
+			<!-- 조회순  -->
+			<if test="pallType == 'q'.toString()">
+				ORDER BY bs.vct desc
+			</if>
+			<!-- 댓글순 -->
+			<if test="pallType == 'w'.toString()">
+				ORDER BY bs.rct desc
+			</if>
+						<!-- 댓글순 -->
+			<if test="pallType == 'b'.toString()">
+				ORDER BY book.count desc
+			</if>
+		</if>
+</sql> 
 
   	 		  <select id="getNextBno" resultType="int">
 

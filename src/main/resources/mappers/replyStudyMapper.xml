@@ -5,6 +5,12 @@
   
 	<mapper namespace="dev.mvc.mapper.replyStudyMapper">
 	
+	<!-- 게시물 번호 가져오기 -->
+	<select id="getBno" resultType="int">
+	select bsBno from reply_study where rno = #{rno}
+	
+	</select>
+	
 	<!-- 댓글 불러오기 -->
 	<select id="list" resultType="ReplyStudyVO">
 		select *

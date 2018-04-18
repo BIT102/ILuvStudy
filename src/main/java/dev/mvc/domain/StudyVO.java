@@ -2,6 +2,7 @@ package dev.mvc.domain;
 
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Map;
 
 public class StudyVO {
 //	BS_BNO	번호
@@ -24,7 +25,11 @@ public class StudyVO {
 //	BS_REGDATE	올린 날짜
 //	BS_ENDDATE	스터디완료일
 // 	bookmarkCount	북마크(즐겨찾기 개수)		
+	
+	
 
+	private String lat;
+	private String lng;
 	
 	private Integer bno; 
 	private String title; 
@@ -36,6 +41,15 @@ public class StudyVO {
 	private String rDId;
 	private	Integer rSId;
 	private String age;
+	
+	
+	//시간 받아서 쪼개기
+	//혹시몰라서 변수 새로 만들어요
+	private Map<String, String> clock;
+	private String[] startSc;
+	private String[] stEt;
+	
+	
 	private String sc;
 	private String sd;
 	private String st;
@@ -79,6 +93,22 @@ public class StudyVO {
 	private String apStatus; // D:신청 대기중, O:신청 수락, X: 신청 거절 
 
 	private String msgRegist; //채팅
+
+	public String getLat() {
+		return lat;
+	}
+
+	public void setLat(String lat) {
+		this.lat = lat;
+	}
+
+	public String getLng() {
+		return lng;
+	}
+
+	public void setLng(String lng) {
+		this.lng = lng;
+	}
 
 	public Integer getBno() {
 		return bno;
@@ -158,6 +188,31 @@ public class StudyVO {
 
 	public void setAge(String age) {
 		this.age = age;
+	}
+
+	public Map<String, String> getClock() {
+		return clock;
+	}
+
+	public void setClock(Map<String, String> clock) {
+		
+		this.clock = clock;
+	}
+
+	public String[] getStartSc() {
+		return startSc;
+	}
+
+	public void setStartSc(String[] startSc) {
+		this.startSc = startSc;
+	}
+
+	public String[] getStEt() {
+		return stEt;
+	}
+
+	public void setStEt(String[] stEt) {
+		this.stEt = stEt;
 	}
 
 	public String getSc() {
@@ -362,16 +417,17 @@ public class StudyVO {
 
 	@Override
 	public String toString() {
-		return "StudyVO [bno=" + bno + ", title=" + title + ", writer=" + writer + ", categoryD="
-				+ Arrays.toString(categoryD) + ", categoryS=" + Arrays.toString(categoryS) + ", now=" + now + ", max="
-				+ max + ", rDId=" + rDId + ", rSId=" + rSId + ", age=" + age + ", sc=" + sc + ", sd=" + sd + ", st="
-				+ st + ", et=" + et + ", content=" + content + ", vct=" + vct + ", rct=" + rct + ", regdate=" + regdate
-				+ ", enddate=" + enddate + ", rDName=" + rDName + ", rSName=" + rSName + ", cDName=" + cDName
-				+ ", cSName=" + cSName + ", nickname=" + nickname + ", photo=" + photo + ", no=" + no + ", name=" + name
-				+ ", status=" + status + ", userEmail=" + userEmail + ", files=" + Arrays.toString(files) + ", cDId="
-				+ cDId + ", cSId=" + cSId + ", bookmarkCount=" + bookmarkCount + ", apStatus=" + apStatus
-				+ ", msgRegist=" + msgRegist + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
-				+ ", toString()=" + super.toString() + "]";
+		return "StudyVO [lat=" + lat + ", lng=" + lng + ", bno=" + bno + ", title=" + title + ", writer=" + writer
+				+ ", categoryD=" + Arrays.toString(categoryD) + ", categoryS=" + Arrays.toString(categoryS) + ", now="
+				+ now + ", max=" + max + ", rDId=" + rDId + ", rSId=" + rSId + ", age=" + age + ", clock=" + clock
+				+ ", startSc=" + Arrays.toString(startSc) + ", stEt=" + Arrays.toString(stEt) + ", sc=" + sc + ", sd="
+				+ sd + ", st=" + st + ", et=" + et + ", content=" + content + ", vct=" + vct + ", rct=" + rct
+				+ ", regdate=" + regdate + ", enddate=" + enddate + ", rDName=" + rDName + ", rSName=" + rSName
+				+ ", cDName=" + cDName + ", cSName=" + cSName + ", nickname=" + nickname + ", photo=" + photo + ", no="
+				+ no + ", name=" + name + ", status=" + status + ", userEmail=" + userEmail + ", files="
+				+ Arrays.toString(files) + ", cDId=" + cDId + ", cSId=" + cSId + ", bookmarkCount=" + bookmarkCount
+				+ ", apStatus=" + apStatus + ", msgRegist=" + msgRegist + ", getClass()=" + getClass() + ", hashCode()="
+				+ hashCode() + ", toString()=" + super.toString() + "]";
 	}
-		
+
 }

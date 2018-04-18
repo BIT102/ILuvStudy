@@ -15,6 +15,7 @@ public interface StudyService {
 	
 /*	public List<String> getcaD() throws Exception;*/
 	
+	
 	//스터디 수정부분
 	public void update(StudyVO vo) throws Exception;
 	
@@ -50,12 +51,19 @@ public interface StudyService {
 		
 	//페이징 ㅈ개수전체
 	public int listCountCriteria(CriteriaStudy cri) throws Exception;
+
 	
 	//보드 삭제히가
 	public void remove(Integer bno) throws Exception;
 	
 	//검색
 	public List<StudyVO> listSearchCriteria(SearchCriteriaStudy cri) throws Exception;
+
+	//방문자수 리스트를 위해 만들어요
+	public List<StudyVO> vctList(SearchCriteriaStudy cri) throws Exception;	
+	
+	//새로등록된 스터디 메인페이지
+	public List<StudyVO> newList(SearchCriteriaStudy cri) throws Exception;
 	
 	//검색수
 	public int listSearchCount(SearchCriteriaStudy cri) throws Exception;	
@@ -72,5 +80,6 @@ public interface StudyService {
 	
 	public List<StudyVO> rgList2(String rsId) throws Exception;
 
-
+	//시간을 불러옵니다
+	/*public List<StudyVO> getClock(Integer bsBno) throws Exception;*/
 }

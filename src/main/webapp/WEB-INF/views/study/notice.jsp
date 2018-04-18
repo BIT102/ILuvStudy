@@ -76,6 +76,13 @@ color:#6b456a !important;
 			margin-bottom:5px;}
 			
 .time{float:right;}
+
+.page-head {
+    background: url(/resources/assets/img/about-bg.jpg) !important;
+    background-size: cover  !important;
+    background-position: center  !important;
+    background-repeat: no-repeat  !important;
+}
 </style>
 
 </head>
@@ -116,7 +123,7 @@ color:#6b456a !important;
 
 
 <section class="bg-light-gray" style="padding-top:50px;">
-<section class="row-section">
+<section class="row-section" style="margin-top:130px;">
     <div class="container contentB" >
 	    <div class="row">
 		    <h2 class="text-center"><span>공 지 사 항</span></h2>

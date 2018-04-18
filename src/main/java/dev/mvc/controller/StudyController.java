@@ -1,8 +1,11 @@
 package dev.mvc.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -69,6 +72,37 @@ public class StudyController {
 		model.addAttribute(adservice.studyDetail(bno));
 		//스터디 카테고리 선택 정보
 		model.addAttribute("studyDC", adservice.studyDetailC(bno));
+		
+		Map<String, String> map = service.read(bno).getClock();
+		
+		Set set = map.entrySet();
+		
+		set = map.keySet();
+		//요일을 배열에 담아서 넘깁니다 .  왜 맵으로 담았을까 후회합니다
+		List<String> sc = new ArrayList<>(); 
+		
+		//시간을 배열에 담아서 넘깁니다
+		List<String> stet = new ArrayList<>(); 
+		
+		
+		Iterator it = set.iterator();
+		
+		for(int i=0; i<map.size(); i++) {
+			
+			//요일을 배열에담아
+			sc.add((String)it.next());
+			
+			//시간을 배열에 담아
+			stet.add(map.get(sc.get(i)));
+		}
+		
+		System.out.println("<><<><><><><><><><><><><><<<<<><><><><><><><><>");
+		System.out.println("sc : " + sc);
+		System.out.println("stet : " + stet);
+		System.out.println("<><<><><><><><><><><><><><<<<<><><><><><><><><>");
+		
+		model.addAttribute("stet", stet);
+		model.addAttribute("sc", sc);
 
 	}
 	
@@ -108,11 +142,7 @@ public class StudyController {
 		String email = sUser.getEmail();
 		
 		
-		
-		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-		System.out.println(email);
-		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-		
+	
 		model.addAttribute("email", email);
 		
 		return "/study/register";
@@ -120,6 +150,13 @@ public class StudyController {
 	
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String registerPOST(StudyVO vo, RedirectAttributes rttr)throws Exception{
+		
+		
+		System.out.println("<><><><<><><><><><><><><><><><><><><>><");
+		System.out.println(vo);
+		System.out.println("<><><><><>><><><><><><><><><><><><><><><>");
+		
+		
 		
 		logger.info("register POST...........");
 		System.out.println("vo = "+vo);
@@ -176,13 +213,19 @@ public class StudyController {
 
 		logger.info("show list..........");
 
-		List<StudyVO> studyList = service.studyList().subList(0, 8);
+/*		List<StudyVO> studyList = service.studyList().subList(0, 8);
 
-		model.addAttribute("list", studyList);
+		model.addAttribute("list", studyList);*/
 
-		List<StudyVO> SearchList = service.listSearchCriteria(cri).subList(0, 8);
+		List<StudyVO> SearchList = service.newList(cri).subList(0, 8);
+		
+		/*List<StudyVO> SearchList = service.listSearchCriteria(cri).subList(0, 8);*/
 
 		model.addAttribute("list", SearchList);
+		
+		
+		
+		model.addAttribute("vctList", service.vctList(cri));
 
 		PageMakerStudy pageMakerStudy = new PageMakerStudy();
 

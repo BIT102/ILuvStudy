@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
-import javax.swing.plaf.synth.SynthSeparatorUI;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -32,6 +31,26 @@ public class StudyServiceImpl implements StudyService {
 		
 		int bsBno = vo.getBno();
 		
+		//요일과 시간을 지우고 다시 등록
+		dao.deleteClock(bsBno);
+		
+		//시간등록
+		Map<String, Object> clock = new HashMap<>();
+		String[] startSc =  vo.getStartSc();
+		String[] stEt = vo.getStEt();
+		
+		for(int i=0; i<startSc.length; i++) {
+			String sc = startSc[i];
+			String st = stEt[i];
+			
+			clock.put("bno", bsBno);
+			clock.put("startSc", sc);
+			clock.put("stEt", st);
+			
+			dao.clock(clock);	
+		}
+		
+	
 		//카테고리 다지워 다시 등록해
 		dao.caDelete(bsBno);
 		
@@ -57,9 +76,6 @@ public class StudyServiceImpl implements StudyService {
 		
 		// 파일등록하기
 		String[] files = vo.getFiles();
-		
-		
-		
 		
 		// 사진등록
 		Map<String, Object> map = new HashMap<>();
@@ -108,17 +124,43 @@ public class StudyServiceImpl implements StudyService {
 	@Transactional(isolation = Isolation.READ_COMMITTED)
 	@Override
 	public StudyVO read(Integer bno) throws Exception {
-
+		
+		//방문수
 		dao.upVct(bno);
 		
-	
-		StudyVO vo = dao.readStudy(bno);
-
-		System.out.println("************************************************");
-		System.out.println(vo);
-		System.out.println("************************************************");
+		//리스트에 담아서 bno 가져오꼐요
+		StudyVO list = dao.readStudy(bno);
 		
-		return dao.readStudy(bno);
+		//시간 출력하기 위해서
+		int bsBno = list.getBno();
+		
+		//요일을 받아온다
+		List<String> start = dao.getStart(bsBno);
+		
+		Map<String, Object> map = new HashMap<>();
+		Map<String, String> clock = new HashMap<>();
+		
+		
+		String sc="";
+		String et="";
+		
+	for(int i=0; i<start.size(); i++){
+			//요일을 변수에 저장
+			sc = start.get(i); 
+			
+			//시간를 불러온다
+			map.put("bsBno", bsBno); 
+			map.put("sc", sc);
+
+			et = dao.getStet(map).get(0);
+			
+			//맵에 담아서 clock변수에 셋합니다
+			clock.put(sc, et);
+			
+		}
+			list.setClock(clock);
+		
+		return list;
 	}
 
 	// 전체불러오기
@@ -155,15 +197,48 @@ public class StudyServiceImpl implements StudyService {
 		//bno 값을 담자
 		int bno;
 
+		StudyVO vo = new StudyVO();
 
-		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-		System.out.println(list.size());
-		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++");
-		System.out.println(dao.studyList().size());
-		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++");
+		List<String> caS = new ArrayList<>();
+		// 소분류 스트링으로 바꾼다
+		String getcaS = "";
+		
+		// bno 가져온다
+		for (int i = 0; i < list.size(); i++) {
 
+			bno = list.get(i).getBno();
+			// bno와 비교해서 대분류 가져온다
+			list.get(i).setcDName(dao.getcaD(bno));
 
+			caS = dao.getcaS(bno);
 
+			String[] arrcaS = caS.toArray(new String[caS.size()]);
+
+			getcaS = Arrays.toString(arrcaS);
+
+			System.out.println("+++++++++++++++++++++++++++++++++++++++++++");
+			System.out.println(list);
+			System.out.println("+++++++++++++++++++++++++++++++++++++++++++");
+
+			// 영어 <- set getcaS
+			list.get(i).setcSName(getcaS);
+		}
+		
+		
+
+		// 스터디 리스트 가져온다
+		return dao.listSearch(cri);
+	}
+	
+	//방문자수 리스트를 위해 만들어요
+	@Override
+	public List<StudyVO> vctList(SearchCriteriaStudy cri) throws Exception {
+		
+		List<StudyVO> list = dao.vctList(cri);
+
+		//bno 값을 담자
+		int bno;
+		
 		StudyVO vo = new StudyVO();
 
 		List<String> caS = new ArrayList<>();
@@ -198,7 +273,53 @@ public class StudyServiceImpl implements StudyService {
 		}
 
 		// 스터디 리스트 가져온다
-		return dao.listSearch(cri);
+		return dao.vctList(cri);
+	}
+
+	
+	//새로운 스터디 메인페이지 
+	@Override
+	public List<StudyVO> newList(SearchCriteriaStudy cri) throws Exception {
+		
+		List<StudyVO> list = dao.newList(cri);
+
+		//bno 값을 담자
+		int bno;
+		
+		StudyVO vo = new StudyVO();
+
+		List<String> caS = new ArrayList<>();
+		// 소분류 스트링으로 바꾼다
+		String getcaS = "";
+		
+		System.out.println("============================");
+		System.out.println(list);
+		System.out.println("============================");
+		
+		// 카테고리 소분류의 다중선택을 처리하기위해 스트링으로 만들어 set해준다.
+
+		// bno 가져온다
+		for (int i = 0; i < list.size(); i++) {
+
+			bno = list.get(i).getBno();
+			// bno와 비교해서 대분류 가져온다
+			list.get(i).setcDName(dao.getcaD(bno));
+
+			caS = dao.getcaS(bno);
+
+			String[] arrcaS = caS.toArray(new String[caS.size()]);
+
+			getcaS = Arrays.toString(arrcaS);
+
+			System.out.println("+++++++++++++++++++++++++++++++++++++++++++");
+			System.out.println(list);
+			System.out.println("+++++++++++++++++++++++++++++++++++++++++++");
+
+			// 영어 <- set getcaS
+			list.get(i).setcSName(getcaS);
+		}
+		
+		return dao.newList(cri);
 	}
 
 	// 검색수
@@ -226,8 +347,11 @@ public class StudyServiceImpl implements StudyService {
 	public List<String> getFileup(Integer bsBno) throws Exception {
 		return dao.getFileup(bsBno);
 	}
+	
 
-	// 스터디등록, 파일등록, 지역등록
+
+	// 스터디등록, 파일등록, 지역등록, 시간도 등록
+
 	@Transactional
 	@Override
 	public void regist(StudyVO vo) throws Exception {
@@ -261,6 +385,23 @@ public class StudyServiceImpl implements StudyService {
 			System.out.println("========================");
 
 			dao.createCa(ca); // 스터디 카테고리 등록
+		}
+	
+		
+		//시간등록
+		Map<String, Object> clock = new HashMap<>();
+		String[] startSc =  vo.getStartSc();
+		String[] stEt = vo.getStEt();
+		
+		for(int i=0; i<startSc.length; i++) {
+			String sc = startSc[i];
+			String st = stEt[i];
+			
+			clock.put("bno", bno);
+			clock.put("startSc", sc);
+			clock.put("stEt", st);
+			
+			dao.clock(clock);	
 		}
 
 		// 파일등록하기
