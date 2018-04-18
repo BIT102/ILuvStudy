@@ -369,12 +369,14 @@ small {
 																			var str = "";
 																			if(stval==""){
 																				str = "<option>--</option>"
-																			}
+																				$("#et").html(str);
+																			} else {
 																			for (var i = stval; i <= 24; i++) {
 																				str += "<option value'"+i+"'>"
 																						+ i
 																						+ "시</option>";
 																				$("#et").html(str);
+																				}
 																			}
 																		});
 													</script> <!-- 시간 추가 등록 가능 -->
@@ -453,21 +455,7 @@ small {
 		  } );
 	
 	</script>
-	
-	<script>
-		$(".st").change(function() {
-			var stval = $(".st option:selected").val();
-			var str = "";
-			for (var i = stval; i <= 24; i++) {
-				str += "<option value'"+i+"'>" + i + "시</option>";
-				$(".et").html(str);
-				if (stval = 24) {
-					
-				}
-			}
-		});
-		var str = "";
-	</script>
+
 	<script>
 		var template = Handlebars.compile($("#template").html());
 		$(".fileDrop").on("dragenter dragover", function(event) {
@@ -624,7 +612,6 @@ small {
 
 				}); //addcat끝
 							
-				
 							var setsc;
 							
 							//시간영역 추가 버튼 클릭 시 액션

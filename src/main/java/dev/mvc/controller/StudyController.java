@@ -1,8 +1,11 @@
 package dev.mvc.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +19,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -70,6 +72,37 @@ public class StudyController {
 		model.addAttribute(adservice.studyDetail(bno));
 		//스터디 카테고리 선택 정보
 		model.addAttribute("studyDC", adservice.studyDetailC(bno));
+		
+		Map<String, String> map = service.read(bno).getClock();
+		
+		Set set = map.entrySet();
+		
+		set = map.keySet();
+		//요일을 배열에 담아서 넘깁니다 .  왜 맵으로 담았을까 후회합니다
+		List<String> sc = new ArrayList<>(); 
+		
+		//시간을 배열에 담아서 넘깁니다
+		List<String> stet = new ArrayList<>(); 
+		
+		
+		Iterator it = set.iterator();
+		
+		for(int i=0; i<map.size(); i++) {
+			
+			//요일을 배열에담아
+			sc.add((String)it.next());
+			
+			//시간을 배열에 담아
+			stet.add(map.get(sc.get(i)));
+		}
+		
+		System.out.println("<><<><><><><><><><><><><><<<<<><><><><><><><><>");
+		System.out.println("sc : " + sc);
+		System.out.println("stet : " + stet);
+		System.out.println("<><<><><><><><><><><><><><<<<<><><><><><><><><>");
+		
+		model.addAttribute("stet", stet);
+		model.addAttribute("sc", sc);
 
 	}
 	

@@ -34,9 +34,23 @@ public class StudyServiceImpl implements StudyService {
 		//요일과 시간을 지우고 다시 등록
 		dao.deleteClock(bsBno);
 		
+		//시간등록
+		Map<String, Object> clock = new HashMap<>();
+		String[] startSc =  vo.getStartSc();
+		String[] stEt = vo.getStEt();
 		
+		for(int i=0; i<startSc.length; i++) {
+			String sc = startSc[i];
+			String st = stEt[i];
+			
+			clock.put("bno", bsBno);
+			clock.put("startSc", sc);
+			clock.put("stEt", st);
+			
+			dao.clock(clock);	
+		}
 		
-		
+	
 		//카테고리 다지워 다시 등록해
 		dao.caDelete(bsBno);
 		
