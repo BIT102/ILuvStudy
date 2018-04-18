@@ -9,8 +9,8 @@
 </head>
 <body>
  <script>
-   /* self.location = "/study/main";  */
-   self.location = "/changePw"; 
+   self.location = "/study/main"; 
+  /*  self.location = "/changePw";  */
  </script>
 </body>
 </html>

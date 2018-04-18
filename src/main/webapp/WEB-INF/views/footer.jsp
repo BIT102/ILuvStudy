@@ -50,7 +50,12 @@
 
 <style>
 footer{
-height: 50px;
+height: 90px;
+background-color:#2d2d2d;
+}
+.navbar-brand div{
+font-size:12px;
+color:#6b6b6b;
 }
 </style>
 <body>
@@ -61,14 +66,15 @@ height: 50px;
 		<div class="container">
 
 			<div class="navbar-header">
-
 				<!-- navbar logo -->
 				<div class="navbar-brand">
-					<span class="sr-only">&copy;ILuvStudy</span> <a href="/study/main">
-						&copy;ILuvStudy </a>
+				<!-- 	<span class="sr-only">&copy;ILuvStudy</span> 
+					<a href="/study/main">&copy;ILuvStudy </a> -->
+					<div>프로젝트명 : I Luv Study</div>
+					<div>팀명 : 코드인</div>
+					<div>팀원 : 김상욱, 김소희, 조정인, 박영원, 권한길</div>
 				</div>
 				<!-- navbar logo -->
-
 			</div>
 			<!-- /.navbar-header -->
 
@@ -100,7 +106,9 @@ height: 50px;
 				</ul>
 			</div>
 			<!-- nav links -->
-
+			<div class="navbar-header">
+				
+			</div>
 		</div>
 		<!-- /.container -->
 	</nav>

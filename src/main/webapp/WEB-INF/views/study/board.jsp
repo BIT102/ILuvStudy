@@ -366,21 +366,12 @@ body {
 	</div>
 </c:if>
 
-
-
-
-
-
-
-
-
-
 		<br> <br>
 		<!-- 로그인했는데 로그인아이디가 글작성자와 같지않을때. -->
 
 <div>
 		<!-- 신청하면 이미지와 닉네임 만들기 -->
-		<div class="aplist">
+		<div class="aplist" style="height:63px;">
 <c:if test="${empty login}">
  <input type="submit" class="btn preee" value="목록으로" style="float:right;">
 </c:if>
@@ -422,7 +413,21 @@ body {
 	
 </div>
 
+<div class="setDiv">
+    <a class="showMask"></a>
+ 
+	<div class="mask"></div>
+    <div class="window">
+ 		<input type="button" class="close" value="X"/>
+    </div>
+</div> 
 
+</div>
+</div>
+
+<%@include file="../footer.jsp"%>	
+
+  
 	<script>
 //북마크를 등록합니다	
 
@@ -509,15 +514,6 @@ function myFunction1(x) {
 	</li>
     </script>
     
-<div class="setDiv">
-    <a class="showMask"></a>
- 
-	<div class="mask"></div>
-    <div class="window">
- 		<input type="button" class="close" value="X"/>
-    </div>
-</div> 
-
 	<script>
 	
 	//==========레이어 팝업============
@@ -1042,5 +1038,7 @@ $(document).ready(function(){
 	<script
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAiNU7soIIqpN1Jdu0tV1CWBb6u1jJAH5o&callback=initMap"
 		async defer></script>
+
+
 </body>
 </html>

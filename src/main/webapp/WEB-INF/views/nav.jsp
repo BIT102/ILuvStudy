@@ -483,7 +483,7 @@ if(session.getAttribute("login") != null){
 							
 			<!-- ======== 구글 로그인 api========== -->
 								<img id="googleimg" src="/resources/img/google.png">
-								<a class="btn btn-block login"  href="../googleLogin">구글 로그인&nbsp;&nbsp;&nbsp;</a>
+								<a class="btn btn-block login"  href="../googleLogin" style="background-color:white; color:black;">구글 로그인&nbsp;&nbsp;&nbsp;</a>
 								<!-- ===========카카오톡 ================-->
 			<!-- ======== end ================= -->
 								</div>

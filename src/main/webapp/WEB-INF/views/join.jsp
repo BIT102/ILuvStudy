@@ -32,7 +32,7 @@ select.form-control:not([size]):not([multiple]) {
 }
 
 th{
-	width:120px;
+	width:170px;
 }
 
 .btn-black{
@@ -355,20 +355,23 @@ th{
 													<th>아이디</th>
 													<td>
 			                <div class="form-group">
-	                  <div class="col-md-12 col-sm-9">
+	                  <div class="col-md-8 col-sm-9">
 	                    <div class="input-group">
 	                   	 	<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-	                    	<input class="form-control" style = "width:185px" id = "email1" type="text" placeholder="아이디를 입력하세요" name="email1">
-		              		<input class="form-control" style = "width:160px; margin-left:5px;" id = "email2" type="text" placeholder="주소값 직접입력" name="email1">
-		              		<select id="selectEmail" class = "form-control" style = "width:140px; height:50px; margin-left:5px;"> 
+	                    	<input class="form-control" style = "width:38%" id = "email1" type="text" placeholder="아이디를 입력하세요" name="email1">
+		              		<input class="form-control" style = "width:33%; margin-left:2%;" id = "email2" type="text" placeholder="주소값 직접입력" name="email1">
+		              		<select id="selectEmail" class = "form-control" style = "width:25%; height:50px; margin-left:2%; padding:0px;"> 
 								<option id = "selectEmail1" selected>직접입력</option>
 								<option id = "selectEmail2">naver.com</option>
 								<option id = "selectEmail3">daum.net</option>
 								<option id = "selectEmail4">gmail.com</option>
 							</select>
 							
-	                 	 <input type="button" id="chkEmail" class="btn btn-black" style="margin-left:5px;"value="중복체크" />
+	                 	<!--  <input type="button" id="chkEmail" class="btn btn-black" style="margin-left:5px;"value="중복체크" /> -->
 	                 	 </div>
+	                   </div>
+	                   <div class="col-md-4 col-sm-3" style="padding:0px;">
+	                 	 <input type="button" id="chkEmail" class="btn btn-black"value="중복체크" />
 	                   </div>
 	                </div>
 	                <input  id = "email" type="text" name="email" style = "position: absolute; visibility: hidden;" />
@@ -405,7 +408,7 @@ th{
 													<td>
 													  <div class="form-group">
 	                
-	                  <div class="col-md-8 col-sm-9">
+	                  <div class="col-md-6 col-sm-7">
 	                    <input type="text" id = "name" class="form-control" name="name" id="mem_name" value="">
 	                  </div>
 	                </div>
@@ -414,11 +417,17 @@ th{
 	                  							<th>닉네임</th>
 	                  							<td>
 	                <div class="form-group">
-	                  <div class="col-md-8 col-sm-9">
-	                    <input type="text" class="form-control" name="nickName" id="nickName" value="">
-	                    <input type="button" id="chkNickname" class="btn btn-black" value="중복체크" />
-	                    <p id = "nickNamecheck" style = "color:red;"></p>
-	                  </div>
+	                  <!-- <div class="col-md-8 col-sm-9"> -->
+	                  	<div class="col-md-6 col-sm-7">
+	                    	<input type="text" class="form-control" name="nickName" id="nickName" value="">
+	                    </div>
+	                    <div class="col-md-6 col-sm-5" style="padding:0px;">
+	                    	<input type="button" id="chkNickname" class="btn btn-black" value="중복체크" />
+	                    </div>
+	                    <div class="col-md-12 col-sm-12">
+	                    	<p id = "nickNamecheck" style = "color:red;"></p>
+	                    </div>
+	                  <!-- </div> -->
 	                </div>
 													</td>
 												</tr>
@@ -430,7 +439,7 @@ th{
 													
 													 <div class="form-group">
 	                  
-	                  <div class="col-md-8 col-sm-9">
+	                  <div class="col-md-6 col-sm-7">
 	                    <input type="text" id = "birth" class="form-control" name="birth" placeholder="901111 형식으로 입력하세요." value="">
 	                  </div>
 	                </div>
@@ -458,24 +467,26 @@ th{
 													<th>핸드폰번호</th>
 													<td>
 					<div class="form-group">
-	                  <div class="col-md-12 col-sm-12">
-                      	<div class="input-group" style="width:360px;">
+	                  <div class="col-md-6 col-sm-8">
+                      	<div class="input-group">
 	                      <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
-	                      <input type="text" class="form-control" style="width:30%" name="phoneNum1" id="phoneNum1" placeholder="" value="">
-	                      <input type="text" class="form-control" style="width:30%" name="phoneNum2" id="phoneNum2" placeholder="" value="">
-	                      <input type="text" class="form-control" style="width:30%" name="phoneNum3" id="phoneNum3" placeholder="" value="">
+	                      <input type="text" class="form-control" style="width:33%" name="phoneNum1" id="phoneNum1" placeholder="" value="">
+	                      <input type="text" class="form-control" style="width:33%" name="phoneNum2" id="phoneNum2" placeholder="" value="">
+	                      <input type="text" class="form-control" style="width:33%" name="phoneNum3" id="phoneNum3" placeholder="" value="">
 	                    </div>
+	                  </div>
+	                  <div class="col-md-6 col-sm-4" style="padding:0px;">
 	                    <input type = "button" class = "smsForm btn btn-black" value = "인증번호 전송">
 	                  </div>
 	                  <input type = "text" id = "phoneNum" name = "phoneNum" style="visibility: hidden; position: absolute;">
 	                </div>
 	                <div class="form-group">
 	               
-	                  <div class="col-md-5 col-sm-8">
-	                    <div>
-	                        <input type="text" name="smsText" id="smsText" placeholder = "인증번호를 입력하세요." class="form-control label-warning"  />
-	                        <input type = "button" id = "smsConfirm" class="btn btn-black" value = "확인">                
-	                    </div>
+	                  <div class="col-md-4 col-sm-8">
+	                     <input type="text" name="smsText" id="smsText" placeholder = "인증번호를 입력하세요." class="form-control label-warning"  />
+	                  </div>
+	                  <div class="col-md-8 col-sm-4" style="padding:0px;">
+	                     <input type = "button" id = "smsConfirm" class="btn btn-black" value = "확인">                
 	                  </div>
 	                </div>
 													</td>
