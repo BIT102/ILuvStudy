@@ -438,17 +438,21 @@ String value="";
 String useCookie="";
 String loginSession = "";
 
-for(int i=0; i < cookies.length; i++){
-	Cookie c = cookies[i];
+if(cookies != null){
+	for(int i=0; i < cookies.length; i++){
+		Cookie c = cookies[i];
          
-    if(c.getName().equals("rememberId")){ //쿠키 이름이 rememberId인 경우
- 	// 저장된 쿠키 이름을 가져온다
-		name = c.getName();
-    // 쿠키값을 가져온다
-		value = c.getValue();
-    }else if(c.getName().equals("loginCookie")){
-    	useCookie = c.getName();
-    }
+    	if(c.getName().equals("rememberId")){ //쿠키 이름이 rememberId인 경우
+ 		// 저장된 쿠키 이름을 가져온다
+			name = c.getName();
+    	// 쿠키값을 가져온다
+			value = c.getValue();
+    	}
+    
+    	if(c.getName().equals("loginCookie")){
+    		useCookie = c.getName();
+    	}
+	}
 }
 
 if(session.getAttribute("login") != null){
