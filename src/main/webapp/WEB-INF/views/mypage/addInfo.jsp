@@ -104,6 +104,17 @@
 }
     
     </style>
+    
+    
+    <script>
+	$(document).ready(function(){
+		if("${result}"=="수정되었습니다."){
+			alert("${result}");
+		}
+	})
+</script>
+    
+    
 </head>
 
 
@@ -504,10 +515,12 @@
 					newPw2 : newPw2		
 			},
 			success : function(result){ //alert으로 result값을 하면 컨트롤에서 ""안에 쓴 값이 뜸
-			alert(result);
+				if(result == "success"){
+					alert("수정되었습니다.");
+				}
 			}
-		})
-	})
+		});
+	});
 	
 		var charPw = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 	

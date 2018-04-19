@@ -17,7 +17,7 @@
 <body>
 
 	<p>인증이 완료 되었습니다. 로그인 하세요</p>
-	<a href="http://localhost:8080/login">I LUV STUDY 로 이동하기</a>
+	<a href="http://localhost:8080/study/main">I LUV STUDY 로 이동하기</a>
 	
 </body>
 </html>

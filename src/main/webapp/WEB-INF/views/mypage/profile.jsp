@@ -302,7 +302,7 @@ th{
 							<th>전화번호</th>
 								<td style="width:550px"><input type="text" name="phoneNum"
 									value="${vo.phoneNum}" class="form-control" id="phone"
-									style="width: 550px; display:inline-block" readonly>
+									style="width: 550px; display:inline-block">
 								<!-- <input type="button" value="인증하기" class="btn btn-black"></input> -->
 								</td>
 						</tr>
@@ -404,30 +404,34 @@ $(".uploadedList").on("click", "small", function(event) {
 	});
 });
 
-</script> 
+</script>
+ 
 <script>
-	
 	// 닉네임 변경
-	 $(document).ready(function(){
-	        $("#nickCheck").click(function(){
-	        	$.ajax({
-	        		url : "/nickCheck",
-	        		type : "post",
-	        		headers : {
-	        			"X-HTTP-Method-Override" : "POST"
-	        		},
-	        		data:{
-	        			nickName : document.getElementById("nickName").value // id가 nickCheck인 value값(중복확인)을 가지고 오겠다.
-	        		},
-	        		success:function(result){
-	        		alert(result);
-	        	}
-	        	
-	        	})	 
-	        	 
-	        });
-	    });
-	 
+   $(document).ready(function(){
+        $("#nickCheck").click(function(){
+        	$.ajax({
+        		url : "/nickCheck",
+        		type : "post",
+        		headers : {
+        			"X-HTTP-Method-Override" : "POST"
+        		},
+        		data:{
+        			nickName : document.getElementById("nickName").value // id가 nickCheck인 value값(중복확인)을 가지고 오겠다.
+        		},
+        		success: function(result){
+					console.log(result);
+					if(result == "success"){
+						console.log("들어옴");
+						alert("사용 가능한 닉네임입니다.")
+					}else{
+						alert("중복된 닉네임입니다.");		
+					}
+				}	
+        	})	 
+        });
+    });
+	
 		// 회원 탈퇴 스크립트
 		function quit() {
 			var msg = "정말 탈퇴하시겠습니까?"

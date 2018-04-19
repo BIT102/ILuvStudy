@@ -256,7 +256,7 @@
 															<div class="row">
 																<div class="col-xs-6">
 																	<span class="item-name" style="width: 230px;">제목 :
-																		${studyVO.title} </span> <span style="width: 280px;">주인 :
+																		${studyVO.title} </span> <span style="width: 280px;">작성자 :
 																		${studyVO.nickname}<br> 종류 : ${studyVO.cDName} /
 																		${studyVO.cSName}<br> 지역 : ${studyVO.rDName} /
 																		${studyVO.rSName}<br> 등록 : <fmt:formatDate
@@ -317,7 +317,7 @@
 																<div class="row">
 																	<div class="col-xs-6">
 																		<span class="item-name" style="width: 230px;">제목 :
-																			${studyVO.title} </span> <span style="width: 280px;">주인 :
+																			${studyVO.title} </span> <span style="width: 280px;">작성자 :
 																			${studyVO.nickname}<br> 종류 : ${studyVO.cDName} /
 																			${studyVO.cSName}<br> 지역 : ${studyVO.rDName} /
 																			${studyVO.rSName}<br> 
@@ -387,9 +387,14 @@
 																	카테고리 : ${studyVO.cDName} / ${studyVO.cSName}<br> 
 																	지역 : ${studyVO.rDName} / ${studyVO.rSName}<br> 
 																	<%-- 승인여부 : ${studyVO.apStatus}<br> --%>
-																	시작일 : ${studyVO.sd}
+																	시작일 : ${studyVO.sd}<br>
+																	<font color = "red">
+																	<c:if test="${studyVO.apStatus eq 'O'}">신청 승인이 되었습니다. </c:if>
+																	<c:if test="${studyVO.apStatus eq 'D'}">신청 승인이 대기 중입니다.</c:if>
+																	<c:if test="${studyVO.apStatus eq 'X'}">신청 승인이 거절되었습니다.</c:if>
+																	</font><br>
 																	<!-- 승인 여부(버튼) **버튼으로 할 지, 그냥 텍스트로 띄울 지 모르겠어요. 아래 쪽에 버튼 스크립트 있어요**-->
-																	<button type="button" class="apStatus" value="${studyVO.apStatus}">승인 여부</button>
+																	<%-- <button type="button" class="apStatus" value="${studyVO.apStatus}">승인 여부</button> --%>
 																	</span>
 																</div>
 																<div class="col-xs-6">
