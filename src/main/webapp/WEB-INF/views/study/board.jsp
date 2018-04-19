@@ -543,7 +543,7 @@ function myFunction1(x) {
     <li data-src='{{name}}'>
 		<span class="mailbox-attachment-icon has-img">
 			<div class="setDiv">
-				<img src="{{imgsrc}}" class="showMask" alt="Attachment" style="width:150px; height:150px;">
+				<img src="{{imgsrc}}" class="showMask" alt="Attachment" style="width:150px; height:150px; object-fit: cover;">
 				<img src="{{imgsrc}}" class="window">
 			</div>
 		</span>

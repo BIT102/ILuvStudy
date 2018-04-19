@@ -185,10 +185,10 @@ input:focus{
 											
 											<c:choose>
 											<c:when test="${test.name ne 'a'}">
-											<img src="/study/displayFile?fileName=${test.name}" style="width:140px; height:120px;">
+											<img src="/study/displayFile?fileName=${test.name}" style="width:140px; height:120px; object-fit: cover;">
 											</c:when>
 											<c:otherwise>
-											<img src="/resources/assets/img/ha.jpg" style="width:140px; height:120px;">
+											<img src="/resources/assets/img/ha.jpg" style="width:140px; height:120px; object-fit: cover;">
 											</c:otherwise>
 											</c:choose>
 				
@@ -221,8 +221,7 @@ input:focus{
 					<div class="row">
 						<div class="col-md-6 col-md-offset-3">
 							<h2 class="section-title">Best Study</h2>
-							<p class="section-sub-title">조회 Best 스터디 입니다 &amp; 방문을 원하시면
-								이미지를 클릭해 주세요</p>
+							<p class="section-sub-title">조회 Best 스터디 입니다 &amp; 방문을 원하시면 이미지를 클릭해 주세요</p>
 							<p class="section-sub-title">더 보기를 눌러서 항목을 늘려주세요 </p>
 							<!-- /.section-sub-title -->
 						</div>
@@ -242,12 +241,12 @@ input:focus{
 											<c:when test="${studyVO.name ne 'a'}">
 												<img src="/study/displayFile?fileName=${studyVO.name}"
 													class="img-responsive center-block"
-													style="width: 370px; height: 216px;">
+													style="width: 370px; height: 216px;object-fit: cover;">
 											</c:when>
 											<c:otherwise>
 												<img src="/resources/assets/img/ha.jpg"
 													class="img-responsive center-block"
-													style="width: 370px; height: 216px;">
+													style="width: 370px; height: 216px;object-fit: cover;">
 											</c:otherwise>
 										</c:choose>
 
@@ -260,7 +259,7 @@ input:focus{
 								<div class="item-description">
 									<div class="row">
 										<div class="col-xs-6">
-											<span class="item-name" style="width: 230px;">제목 :
+											<span class="item-name" style="width: 300px;">제목 :
 												${studyVO.title} </span> <span style="width: 280px;">주인 :
 												${studyVO.nickname}<br> 종류 : ${studyVO.cDName} /
 												${studyVO.cSName}<br> 지역 : ${studyVO.rDName} /
