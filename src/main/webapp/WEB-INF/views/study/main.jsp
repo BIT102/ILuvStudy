@@ -76,6 +76,13 @@ input:focus{
 .itemmore{
 	display:none;
 }
+.text-cut{
+	display: inline-block;
+	width:283px;
+	white-space: nowrap;
+	overflow: hidden; 
+	text-overflow: ellipsis;
+}
 </style>
 
 </head>
@@ -161,7 +168,7 @@ input:focus{
 											<!-- end of /.about-client -->
 											<div class="main-speech">
 												<p>
-													<strong>제목 : ${studyVO.title}</strong><br> 주인 :
+													<strong class="text-cut">제목 : ${studyVO.title}</strong><br> 주인 :
 													${studyVO.nickname}<br> 종류 : ${studyVO.cDName} /
 													${studyVO.cSName}<br> 지역 : ${studyVO.rDName} /
 													${studyVO.rSName}<br> 등록 :
@@ -197,7 +204,7 @@ input:focus{
 										<!-- end of /.about-client -->
 										<div class="main-speech">
 											<p>
-												<strong>제목 : ${test.title}</strong><br> 주인 :
+												<strong class="text-cut">제목 : ${test.title}</strong><br> 주인 :
 												${test.nickname}<br> 종류 : ${test.cDName} /
 												${test.cSName}<br> 지역 : ${test.rDName} / ${test.rSName}<br>
 												등록 :

@@ -83,7 +83,7 @@ color:#6b6b6b;
 				<ul class="nav navbar-nav navbar-right text-capitalize">
 					<c:choose>
 						<c:when test="${login eq null}">
-							<li><a><span
+							<li style="cursor:pointer;"><a><span
 									onclick="document.getElementById('id01').style.display='block'"
 									style="width: auto;">로그인</span></a></li>
 							<li class="dropdown"><a href="/join"><span>회원가입</span></a></li>

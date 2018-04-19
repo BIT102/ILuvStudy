@@ -533,9 +533,9 @@ if(session.getAttribute("login") != null){
 					</c:choose>  --%>
 					
 					<% if(useCookie == "" && loginSession == "" ){ %>
-							<li><a><span
+							<li style="cursor:pointer;"><a><span
 									onclick="document.getElementById('id01').style.display='block'"
-									style="width: auto;">로그인</span></a></li>
+									style="width: auto; cursor:pointer;">로그인</span></a></li>
 							<li class="dropdown"><a href="/join"><span>회원가입</span></a></li>
 					<% }else{ %>
 							<li class="dropdown"><a href="/profile"><span>마이페이지</span></a></li>
@@ -545,8 +545,7 @@ if(session.getAttribute("login") != null){
 							<li class="dropdown"><a href="/study/register">스터디 등록하기</a>
 					<%} %> 
 					
-					<li class="dropdown"><a href="/study/listAll"><span>스터디
-								구경하기</span></a></li>
+					<li class="dropdown"><a href="/study/listAll"><span>스터디 구경하기</span></a></li>
 					<li class="dropdown"><a href="/sqna/list"><span>자주 묻는 질문</span></a>
 					</li>
 					<li class="dropdown"><a href="/study/notice"><span>공지사항</span></a>

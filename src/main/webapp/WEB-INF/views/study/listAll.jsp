@@ -137,7 +137,13 @@ select::-ms-expand {
     background-position: center !important;
     background-repeat: no-repeat !important;
 }
-
+.text-cut{
+	display: inline-block;
+	width:283px;
+	white-space: nowrap;
+	overflow: hidden; 
+	text-overflow: ellipsis;
+}
 </style>
 
 </head>
@@ -263,7 +269,7 @@ select::-ms-expand {
 								<div class="item-description">
 									<div class="row">
 										<div class="col-xs-9">
-											<span class="item-name" style="width: 230px;">제목 :
+											<span class="item-name text-cut">제목 :
 												${studyVO.title} </span> <span style="width: 280px;">주인 :
 												${studyVO.nickname}<br> 종류 : ${studyVO.cDName} /
 												${studyVO.cSName}<br> 지역 : ${studyVO.rDName} /
