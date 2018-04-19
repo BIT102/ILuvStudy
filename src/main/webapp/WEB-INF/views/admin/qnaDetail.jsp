@@ -31,7 +31,7 @@ form th{
 		</div>
 
 	<div class="panel-body default">
-        <div>* 기본정보</div>
+	<form role="form" method="post">
         <table class="table table-hover">
         <tbody>
        		<tr>
@@ -39,16 +39,27 @@ form th{
                 <td>${qnaVO.bno}</td>
             </tr>
             <tr>
-                <th>아이디</th>
-                <td>${qnaVO.writer}</td>
+                <th>작성자</th>
+                <td><input type="hidden" name="writer" value="${login.id}" class="form-control">${qnaVO.writer}</td>
             </tr>
             <tr>
                 <th>제목</th>
-                <td><input type="text" name="title" class="form-control" value="${qnaVO.title}"></td>
+                <td><input type="text" id="title" name="title" class="form-control" value="${qnaVO.title}"></td>
             </tr>
             <tr>
                 <th>내용</th>
-                <td><textarea name="content" class="form-control">${qnaVO.content}</textarea></td>
+                <td><textarea id="content" name="content" class="form-control">${qnaVO.content}</textarea></td>
+            </tr>
+            <tr>
+                <th>공개여부</th>
+                <td>
+                	<label class="fancy-radio" style="display:inline-block;">
+                    	<input type="radio" name="type" value="0"><span><i></i>공개&nbsp;</span>
+                    </label>
+                    <label class="fancy-radio" style="display:inline-block;">
+                    	<input type="radio" name="type" value="1"><span><i></i>비공개</span>
+                    </label>
+                </td>
             </tr>
             <tr>
                 <th>작성일</th>
@@ -72,8 +83,9 @@ form th{
             </tr> --%>
             </tbody>
         </table>
-        
+        </form>
        		<button type="button" id="listBtn" class="btn btn-primary">목록</button>
+       		<button type="submit" id="modifyBtn" class="btn btn-success" style="float:right">수정</button>
         
        </div>
        <!-- panel-body end --> 
@@ -169,6 +181,13 @@ form th{
 		
 		console.log(formObj);
 		
+		var type = ${qnaVO.type}; //공개여부 db값 체크
+		if(type==0){
+			$("input:radio[value='0']").attr("checked", "checked");
+		}else{
+			$("input:radio[value='1']").attr("checked", "checked");
+		}
+		
 		//등록 클릭 시 액션
 		$("#registerBtn").on("click", function(){
 			//form 데이터 유효성 검사 추가 필요
@@ -197,6 +216,17 @@ form th{
 			//type 0으로 변경 처리 필요
  			formObj.attr("action", "/admin/typeRUpdate");
 			formObj.submit();
+		});
+		
+		//수정 클릭 시 액션
+		$("#modifyBtn").on("click", function(){
+			//form 데이터 유효성 검사 추가 필요
+			
+			if($("#title").val().length >= 5 && $("#content").val().length >= 5){
+				formObj.submit();
+			}else{
+				alert("제목, 내용을 5자 이상 입력하세요");
+			}
 		});
 		
 	});

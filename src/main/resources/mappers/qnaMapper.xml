@@ -40,6 +40,7 @@
   	from 
   		board_qna
   	where bno = #{bno} 
+  	and type=0
   	</select>
   	
   	<update id="update">
@@ -63,6 +64,7 @@
   	from
   		board_qna
   	where bno > 0
+  	and type=0
   	order by bno desc, regdate desc
   	]]>
   	</select>
@@ -80,6 +82,7 @@
   	from
   		board_qna
   	where bno > 0
+  	and type=0
   	order by bno desc, regdate desc
   	limit #{page},10
   	]]>
@@ -98,6 +101,7 @@
   	from
   		board_qna
   	where bno > 0
+  	and type=0
   	order by bno desc, regdate desc
   	limit #{pageStart}, #{perPageNum}
   	]]>
@@ -112,6 +116,7 @@
   		board_qna
   	where
   		bno > 0
+  		and type=0
   	]]>
   	</select>
   	
@@ -149,6 +154,7 @@
   		board_qna
   	where
   		bno>0
+  		and type=0
   	]]>
   		
   		<include refid="search"></include> <!-- search sql태그에서 include -->
@@ -166,6 +172,7 @@
   		board_qna
   	where
   		bno>0
+  		and type=0
   	]]>
   	
   		<include refid="search"></include>

@@ -58,6 +58,7 @@
             <tr>
                 <th>번호</th>
                 <th>제목</th>
+                <th>공개여부</th>
                 <th>작성자</th>
                 <th>작성일</th>
             </tr>
@@ -68,6 +69,11 @@
             <tr>
                 <td>${noticeVO.bno}</td>
                 <td><a href="/admin/noticeDetail${pageMaker.noticeSearch(pageMaker.cri.page)}&bno=${noticeVO.bno}">${noticeVO.title}</a></td>
+                <td>
+                	<!-- 0: 사용 / 1: 미사용 -->
+                	<c:if test="${noticeVO.type == 0}">공개</c:if>
+                	<c:if test="${noticeVO.type == 1}">비공개</c:if>
+                </td>
                 <td>${noticeVO.writer}</td>
                 <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${noticeVO.regdate}"/></td>
             </tr>

@@ -204,6 +204,11 @@ public class AdminDAOImpl implements AdminDAO{
 	}
 	
 	@Override
+	public void qnaUpdate(QnaVO vo)throws Exception{
+		session.update(namespace+".qnaUpdate", vo);	//qna 정보 업데이트
+	}
+	
+	@Override
 	public List<ReplyVO> qnaReply(Integer bno) throws Exception{
 		return session.selectList(namespace + ".qnaReply", bno);   //qna 댓글 리스트 정보 가져옴  
 	}
@@ -211,6 +216,11 @@ public class AdminDAOImpl implements AdminDAO{
 	@Override
 	public void qnaRegister(ReplyVO vo)throws Exception{
 		session.update(namespace + ".qnaRegister", vo);   // qna 댓글 등록
+	}
+	
+	@Override
+	public void qnaRegister2(QnaVO vo)throws Exception{
+		session.update(namespace + ".qnaRegister2", vo);   // qna 등록
 	}
 	
 	@Override

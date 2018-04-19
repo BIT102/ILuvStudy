@@ -36,7 +36,7 @@ public class NoticeController {
 		
 		logger.info(cri.toString());
 
-		model.addAttribute("list", service.noticeList());
+		//model.addAttribute("list", service.noticeList());
 
 		model.addAttribute("list", service.listSearchCriteria(cri));
 

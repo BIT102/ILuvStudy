@@ -15,6 +15,17 @@ public class NoticeVO {
 	private Date regdate;
 	private String writer;
 	private Date lastModifyDate;
+	
+	private int type;	//공개 여부 확인(0:공개, 1:비공개)
+	
+	
+	
+	public int getType() {
+		return type;
+	}
+	public void setType(int type) {
+		this.type = type;
+	}
 	public int getBno() {
 		return bno;
 	}
@@ -54,7 +65,7 @@ public class NoticeVO {
 	@Override
 	public String toString() {
 		return "NoticeVO [bno=" + bno + ", title=" + title + ", content=" + content + ", regdate=" + regdate
-				+ ", writer=" + writer + ", lastModifyDate=" + lastModifyDate + "]";
+				+ ", writer=" + writer + ", lastModifyDate=" + lastModifyDate + ", type=" + type + "]";
 	}
 
 	

@@ -39,6 +39,17 @@
                 <th>내용</th>
                 <td><textarea name="content" id="content" class="form-control"></textarea></td>
             </tr>
+            <tr>
+                <th>공개여부</th>
+                <td>
+                	<label class="fancy-radio" style="display:inline-block;">
+                    	<input type="radio" name="type" value="0"><span><i></i>공개&nbsp;</span>
+                    </label>
+                    <label class="fancy-radio" style="display:inline-block;">
+                    	<input type="radio" name="type" value="1" checked><span><i></i>비공개</span>
+                    </label>
+                </td>
+            </tr>
         </table>
 	</form>
 	

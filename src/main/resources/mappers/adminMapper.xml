@@ -459,6 +459,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where bno = #{bno}
 	</update>
 	
+	<!-- qna 정보 업데이트 -->
+	<update id="qnaUpdate">
+		update board_qna
+		set title=#{title}, content=#{content}, writer=#{writer}, type=#{type}
+		where bno = #{bno}
+	</update>
+	
+	<!-- qna 정보 등록 -->
+	<insert id="qnaRegister2">
+		insert into board_qna (title, content, writer, type)
+		values (#{title},#{content}, #{writer}, #{type});
+	</insert>
+	
 	
 <!-- 사트관리 > 공지사항 등록 메뉴 -->
 	<!-- 검색 SQL -->
@@ -508,14 +521,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 공지사항 정보 업데이트 -->
 	<update id="noticeUpdate">
 		update notice 
-		set title=#{title}, content=#{content}, writer=#{writer}, lastModifyDate=now()
+		set title=#{title}, content=#{content}, writer=#{writer}, lastModifyDate=now(), type=#{type}
 		where bno = #{bno}
 	</update>
 	
 	<!-- 공지사항 정보 등록 -->
 	<insert id="noticeRegister">
-		insert into notice (title, content, regdate, writer)
-		values (#{title},#{content},now(), #{writer});
+		insert into notice (title, content, regdate, writer, type)
+		values (#{title},#{content},now(), #{writer}, #{type});
 	</insert>
 	
 

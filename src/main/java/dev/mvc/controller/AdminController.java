@@ -22,6 +22,7 @@ import dev.mvc.admin.Criteria;
 import dev.mvc.admin.PageMaker;
 import dev.mvc.domain.AdminVO;
 import dev.mvc.domain.NoticeVO;
+import dev.mvc.domain.QnaVO;
 import dev.mvc.domain.ReplyVO;
 import dev.mvc.domain.StatisticVO;
 import dev.mvc.domain.StudyVO;
@@ -343,6 +344,19 @@ public class AdminController {
 	public void qnaRegister() throws Exception{
 		logger.info("qnaRegister get...");
 	}
+	
+	//admin/qnaRegister.jsp 패아자에서 등록 시
+	@RequestMapping(value="/qnaRegister", method = RequestMethod.POST)
+	public String qnaRegisterPOST(QnaVO vo, RedirectAttributes rttr) throws Exception{
+		logger.info("qnaRegister post...");
+		logger.info(vo.toString());
+		
+		service.qnaRegister2(vo);
+		
+		rttr.addFlashAttribute("msg", "SUCCESS");
+		
+		return "redirect:/admin/qnaList";
+	}	
 		
 	//admin/qnaDetail.jsp
 	@RequestMapping(value="/qnaDetail", method = RequestMethod.GET)
@@ -355,14 +369,16 @@ public class AdminController {
 		model.addAttribute("list", service.qnaReply(bno));
 	}
 		
-	//admin/qnaDetail.jsp 에서 댓글 정보 등록 시
+	//admin/qnaDetail.jsp 에서 댓글 정보 등록 시 / 내용 수정 시
 	@RequestMapping(value="/qnaDetail", method = RequestMethod.POST)
-	public String qnaDetail(ReplyVO vo, Model model, Criteria cri, RedirectAttributes rttr) throws Exception{
+	public String qnaDetail(QnaVO vo,/* ReplyVO vo*/ Model model, Criteria cri, RedirectAttributes rttr) throws Exception{
 		logger.info("qnaDetail post...");
 		logger.info(cri.toString());
 		logger.info(vo.toString());
-		service.qnaRegister(vo);
-	
+		//service.qnaRegister(vo);
+		
+		service.qnaUpdate(vo);
+		
 		//페이징 정보 유지
 		rttr.addAttribute("page", cri.getPage());
 		rttr.addAttribute("perPageNum", cri.getPerPageNum());

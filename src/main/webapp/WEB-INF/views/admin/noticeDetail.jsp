@@ -41,6 +41,17 @@
                 </td>
             </tr>
             <tr>
+                <th>공개여부</th>
+                <td>
+                	<label class="fancy-radio" style="display:inline-block;">
+                    	<input type="radio" name="type" value="0"><span><i></i>공개&nbsp;</span>
+                    </label>
+                    <label class="fancy-radio" style="display:inline-block;">
+                    	<input type="radio" name="type" value="1"><span><i></i>비공개</span>
+                    </label>
+                </td>
+            </tr>
+            <tr>
                 <th>등록일</th>
                 <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${noticeVO.regdate}"/></td>
             </tr>
@@ -76,6 +87,14 @@
 		var formObj = $("form[role='form']");
 		
 		console.log(formObj);
+		
+		var type = ${noticeVO.type}; //공개여부 db값 체크
+		if(type==0){
+			$("input:radio[value='0']").attr("checked", "checked");
+		}else{
+			$("input:radio[value='1']").attr("checked", "checked");
+		}
+		
 		
 		//수정 클릭 시 액션
 		$("#modifyBtn").on("click", function(){

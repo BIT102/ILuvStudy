@@ -31,6 +31,7 @@ bno
 from
 notice
 where bno > 0
+and type=0
 order by bno desc, regdate desc
 ]]>
 </select>
@@ -47,6 +48,7 @@ bno
 FROM
 notice
 WHERE bno > 0
+and type=0
 ORDER BY bno desc
 , regdate desc
 limit #{page}, 10
@@ -64,6 +66,7 @@ bno
 FROM
 notice
 WHERE bno > 0
+and type=0
 ORDER BY bno desc
 , regdate desc
 limit #{pageStart}
@@ -99,6 +102,7 @@ COUNT(bno)
 FROM
 notice
 WHERE bno > 0
+and type=0
 ]]>
 </select>
 
@@ -124,6 +128,7 @@ COUNT(bno)
 FROM
 notice
 WHERE bno > 0
+and type=0
 ]]>
 
 <include refid="search"></include>
@@ -138,6 +143,7 @@ from
 notice
 where
 bno>0
+and type=0
 ]]>
 
 <include refid="search"></include>

@@ -69,6 +69,7 @@
                 <th>제목</th>
                 <!-- <th>FAQ</th> -->
                 <!-- <th>댓글수</th> -->
+                <th>공개여부</th>
                 <th>작성일</th>
             </tr>
 		</thead>
@@ -85,6 +86,11 @@
                 	<c:if test="${qnaVO.type eq 1}">등록</c:if>
                 </td> --%>
                 <%-- <td>${qnaVO.rct}</td> --%>
+                <td>
+                	<!-- 0: 사용 / 1: 미사용 -->
+                	<c:if test="${qnaVO.type == 0}">공개</c:if>
+                	<c:if test="${qnaVO.type == 1}">비공개</c:if>
+                </td>
                 <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${qnaVO.regdate}"/></td>
             </tr>
 </c:forEach>

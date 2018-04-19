@@ -16,7 +16,6 @@ public class AdminVO {
 	private String email;			//채팅
 	private String msgRegist;		//채팅 등록일
 	
-	
 	public String getMsgRegist() {
 		return msgRegist;
 	}

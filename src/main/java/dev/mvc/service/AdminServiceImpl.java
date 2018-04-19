@@ -219,6 +219,11 @@ public class AdminServiceImpl implements AdminService{
 	}
 	
 	@Override
+	public void qnaUpdate(QnaVO vo)throws Exception{
+		dao.qnaUpdate(vo);
+	}
+	
+	@Override
 	public List<ReplyVO> qnaReply(Integer bno) throws Exception{
 		return dao.qnaReply(bno);
 	}
@@ -226,6 +231,11 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public void qnaRegister(ReplyVO vo)throws Exception{
 		dao.qnaRegister(vo);
+	}
+	
+	@Override
+	public void qnaRegister2(QnaVO vo)throws Exception{
+		dao.qnaRegister2(vo);
 	}
 	
 	@Override

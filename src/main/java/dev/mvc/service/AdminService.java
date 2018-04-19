@@ -52,9 +52,11 @@ public interface AdminService {
 	public QnaVO qnaDetail(Integer bno)throws Exception;
 	public void typeUpdate(Integer bno)throws Exception;
 	public void typeRUpdate(Integer bno)throws Exception;
+	public void qnaUpdate(QnaVO vo)throws Exception;
 	
 	public List<ReplyVO> qnaReply(Integer bno) throws Exception;
 	public void qnaRegister(ReplyVO vo)throws Exception;
+	public void qnaRegister2(QnaVO vo)throws Exception;
 	
 	public List<NoticeVO> noticeList(Criteria cri) throws Exception;
 	public int noticeCountPaging(Criteria cri)throws Exception;
