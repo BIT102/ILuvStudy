@@ -66,16 +66,15 @@ body {
 
 /*지도스타일입니다*/
 #map {
-	width: 60%;
+	width: 100%;
 	height: 442px;
-	display: inline-block;
-	margin-left: 30px;
-	float: right;
+	margin-top:20px;
+	margin-bottom:100px;
 }
 
 .gallery {
-	margin-top: 25px;
-	margin-bottom: 25px;
+	margin-top: 40px;
+	margin-bottom: 100px;
 }
 
 .gallery li {
@@ -84,11 +83,12 @@ body {
 }
 
 .imgstyle {
-	margin-top: 25px;
+	margin-top: 100px;
 }
 
 .app {
 	margin-top: 25px;
+	margin-bottom:90px;
 }
 
 .applyList {
@@ -138,11 +138,11 @@ body {
 	background-color:white;
 	border:3px double gray;
 	position:absolute;
-	top:160%;
+	top:3150px;
 	left:50%;
 	margin-top:-50px;
 	margin-left:-150px;
-	paddiong:10px;
+	padding:20px;
 	z-index:1000;
 }
 
@@ -188,9 +188,40 @@ body {
 
 .time td {
 	width:100px;
-	border-left:1px solid gray;
-	border-right:1px solid gray;
 	padding:10px;
+}
+
+.fa-heartbeat {
+	color:red;
+}
+
+
+.basic-content td{
+	font-size:20px;
+	padding-bottom: 60px;
+    padding-top: 20px;
+}
+
+.basic-content th{
+	font-size:20px;
+	padding-right:230px;
+	padding-bottom: 60px;
+    padding-top: 20px;
+}
+
+.time td{
+	padding-bottom:0 !important;
+	width:127px;
+}
+
+.time th{
+	padding-bottom:0 !important;	
+	padding-right:200px;
+}
+
+.region td{
+	width:257px;	
+	
 }
 
 </style>
@@ -256,20 +287,17 @@ body {
 											<img src="/study/displayFile?fileName=${studyVO.photo}"
 												class="img-responsive center-block img-circle" style="width:150px; height:150px;">
 										</div>
-										<div class="col-md-9" style="margin-top:50px;">
-											<p >
-												<strong>주인 :</strong> <span
-													class="author-name text-uppercase" style="font-size:30px;">${studyVO.nickname}</span>
-											</p>
-											<p>${studyVO.content}</p>
+										<div class="col-md-9">
+											<p style="font-size:35px;"><strong>${studyVO.title}</strong></p>
+											<p style="font-size:20px;">${studyVO.nickname}</p>
 										</div>
 									</div>
 								</div>
 
 								<div class="author-contact">
 									<div class="row">
-										<div class="col-md-6">
-											<p class="pull-left">
+										<div class="col-md-6" style="float:right; height:40px;">
+											<p class="pull-left" style="position:absolute; right:5%;">
 
 
 												<!-- 북마크등록 // 로그인한 사람만 -->
@@ -286,8 +314,12 @@ body {
 																style="font-size: 20px; cursor:pointer;"></i>
 															</span>
 														</c:if>
-														<strong> 즐겨찾기에 추가해 주세요 </strong>
-													</c:if> </span> <span class="like"> <i class="fa fa-eercast"></i>${studyVO.vct}</span>
+														<strong> 북마크에 추가해 주세요 　　</strong>
+													</c:if> </span> <span class="like" style="margin-right:80px;"> <i class="fa fa-eercast"></i>${studyVO.vct}</span>
+																			<span class="date"><fmt:formatDate pattern="yyyy-MM-dd"
+																			value="${studyVO.regdate}" /></span>
+													
+											
 											</p>
 										</div>
 									</div>
@@ -296,59 +328,100 @@ body {
 						</div>
 					</div>
 
-
-					<div class="blog-heading">
-						<h2 class="text-capitalize">
-							<strong>${studyVO.title}</strong>
-						</h2>
-						<span class="date"><fmt:formatDate pattern="yyyy-MM-dd"
-								value="${studyVO.regdate}" /></span>
-
-					</div>
 					<div class="bodycontent">
+
 						<div class="nicecontent" style="float: top; margin-top: 25px;">
-							<p
-								style="display: inline-block; vertical-align: top; font-size: 20px;">
-								종류 : ${studyVO.cDName} / ${studyVO.cSName}<br> <br> 지역
-								:${studyVO.rDName} / ${studyVO.rSName}<br> <br> 참여인원 :
-								${studyVO.now} / ${studyVO.max}<br> <br> 선호나이 :
-								${studyVO.age}<br> <br> 요일 : ${studyVO.sc}<br> <br>
-								날짜 : ${studyVO.sd}<br> <br> 시간 : ${studyVO.st} /
-								${studyVO.et}
-							</p>
-
-							<div id="map"></div>
-						</div>
-						<!-- 지도입니다. -->
-
-					</div>
-					<!-- 콘덴트바디바디 -->
-					
-						<table class="time">
+							
+							<h2>기본정보</h2>
+							<table class="basic-content">
+								<tr>
+									<th>카테고리</th>
+									<td>${studyVO.cDName}　[ ${studyVO.cSName} ]</td>
+								</tr>
+							</table>
+							
+						<table class="basic-content time">
 							<tr>
-								<td><p>월요일</p><br>${studyVO.clock.get("월요일")}</td>
-								<td><p>화요일</p><br>${studyVO.clock.get("화요일")}</td>
-								<td><p>수요일</p><br>${studyVO.clock.get("수요일")}</td>
-								<td><p>목요일</p><br>${studyVO.clock.get("목요일")}</td>
-								<td><p>금요일</p><br>${studyVO.clock.get("금요일")}</td>
-								<td><p>토요일</p><br>${studyVO.clock.get("토요일")}</td>
-								<td><p>일요일</p><br>${studyVO.clock.get("일요일")}</td>
+								<th>모임시간</th>
+									<td style="padding-left:20px;">월요일</td>
+									<td style="padding-left:20px;">화요일</td>
+									<td style="padding-left:20px;">수요일</td>
+									<td style="padding-left:20px;">목요일</td>
+									<td style="padding-left:20px;">금요일</td>
+									<td style="padding-left:20px;">토요일</td>
+									<td style="padding-left:20px;">일요일</td>
+							</tr>
+							<tr>
+								<th></th>
+									<td>${studyVO.clock.get("월요일")}</td>
+									<td>${studyVO.clock.get("화요일")}</td>
+									<td>${studyVO.clock.get("수요일")}</td>
+									<td>${studyVO.clock.get("목요일")}</td>
+									<td>${studyVO.clock.get("금요일")}</td>
+									<td>${studyVO.clock.get("토요일")}</td>
+									<td>${studyVO.clock.get("일요일")}</td>
 							</tr>
 						</table>
+						
+						<table class="basic-content region" style="margin-top:70px;">
+							<tr>
+								<th>기본지역</th>
+								<td>${studyVO.rDName} [ ${studyVO.rSName} ]</td>	
+							</tr>
+							<tr>
+								<th style="padding-bottom:0;">상세지역</th>
+							</tr>
+						</table>
+						
+						<!-- 지도입니다 -->
+					<div id="map"></div>	
+							
+							
+							
+							<h2>추가정보</h2>
+							<table class="basic-content">
+								<tr>
+									<th>카테고리</th>
+									<td>${studyVO.cDName}　[${studyVO.cSName}]</td>
+								</tr>
+								<tr>
+									<th>참여인원</th>
+									<td>현재  ${studyVO.now}명　☞　최대  ${studyVO.max}명 </td>
+								</tr>
+								<tr>
+									<th>선호대상</th>
+									<td>${studyVO.age}</td>
+								</tr>
+								<tr>
+									<th style="padding-bottom:0;">스터디 소개</th>
+								</tr>
+							</table>
+								<div class="intro" style="margin-top:8px; padding:2px; font-size:20px;">
+										${studyVO.content}
 
+								</div>
+						</div>
+						<!-- 지도입니다. -->
+					</div>
+					<!-- 콘덴트바디바디 -->
+
+					<!-- 스터디 이미지 -->
 					<div class="imgstyle">
-						<p>스터디 이미지</p>
+						<h2>스터디 이미지</h2>
 						<div class="gallery"></div>
 					</div>
 
 
 					<!-- 신청한 사람 목록 -->
 					<div class="app">
-						<p>신청자목록</p>
-						<div class="applyList"></div>
+						<h2>신청자목록</h2>
+						<div class="applyList" style="display:inline-block"></div>
 					</div>
+					
+
 			</div>
 			<!-- end grycontainer -->
+			
 
 
 
@@ -406,7 +479,6 @@ body {
 
 		<br> <br>
 		<!-- 로그인했는데 로그인아이디가 글작성자와 같지않을때. -->
-
 <div>
 		<!-- 신청하면 이미지와 닉네임 만들기 -->
 	<div class="aplist">
@@ -648,7 +720,7 @@ $(".apply").on("click", function(){
 		}),
 		success : function(result){
 		wait();
-		alert("완전등록됨");
+		alert("대기상태입니다.");
 		$(".apply").hide();
 		$(".deapply").show();
 		}
@@ -697,11 +769,13 @@ $("#applyclose").on("click", function(){
 
 function okstudy(event) {
 	
-	var applyEmail = $(".applyLi").attr("data-usemail"); //잘못됬음
+	var applyEmail = $(".modal-applyList .applyLi").attr("data-usemail"); //잘못됬음
 	
 	console.log(applyEmail)
 	
 	var applybsBno = $("#bno").val();
+	
+	console.log(applybsBno)
 	
 	var kk = event.parentElement;
 	
@@ -761,9 +835,9 @@ $.getJSON("/study/apply/"+bno, function(data){
 		if(this.status=='D'){
 		
 		str +="<div class='applyLi' data-usEmail='"+this.usEmail+"'>"
-			+ "<span class='mailbox-attachment-icon has-img'><img src='/study/displayFile?fileName=${studyVO.photo}'"
-			+ "alt=Attachment style='width:50px; height:50px;'></span>"
-		    + this.usEmail
+			+ "<span class='mailbox-attachment-icon has-img'><img src='/study/displayFile?fileName="+this.photo+"'"
+			+ "alt=Attachment style='width:50px; height:50px; margin-right:10px; border-radius:50%;'></span>"
+		    + this.nickname
 		    + "<button type='button' onclick='okstudy(this);' class='btn' style='margin:0 10px;'>수락</button>"
 		    + "<button type='button' onclick='nostudy(this);' class='btn'>거절</button>"
 		    +"</div>";   
@@ -781,10 +855,10 @@ function apply(){
 		
 		if(this.status=='O'){
 		
-		str += "<div class='applyLi' data-usEmail='"+this.usEmail+"'>"
-			+ "<span class='mailbox-attachment-icon has-img'><img src='/study/displayFile?fileName=/study/displayFile?fileName=${studyVO.photo}'"
-			+ "alt=Attachment style='width:50px; height:50px;'></span>"
-		    + this.usEmail
+		str += "<div class='applyLi' data-usEmail='"+this.usEmail+"' style='display:inline-block; margin-right:10px;'>"
+			+ "<span class='mailbox-attachment-icon has-img'><img src='/study/displayFile?fileName="+this.photo+"'"
+			+ "alt=Attachment style='width:50px; height:50px; margin-right:10px; border-radius:50%;'></span>"
+		    + this.nickname
 		    +"</div>";
 		    
 	$(".applyList").html(str);
@@ -802,10 +876,10 @@ $.getJSON("/study/apply/"+bno, function(data){
 		
 		if(this.status=='O'){
 		
-		str += "<div class='applyLi' data-usEmail='"+this.usEmail+"'>"
-			+ "<span class='mailbox-attachment-icon has-img'><img src='/study/displayFile?fileName=/study/displayFile?fileName=${studyVO.photo}'"
-			+ "alt=Attachment style='width:50px; height:50px;'></span>"
-		    + this.usEmail
+		str += "<div class='applyLi' data-usEmail='"+this.usEmail+"' style='display:inline-block; margin-right:10px;'>"
+			+ "<span class='mailbox-attachment-icon has-img'><img src='/study/displayFile?fileName="+this.photo+"'"
+			+ "alt=Attachment style='width:50px; height:50px; margin-right:10px; border-radius:50%;'></span>"
+		    + this.nickname
 		    +"</div>";
 		    
 	$(".app .applyList").html(str);
@@ -950,6 +1024,8 @@ $(document).ready(function(){
         		
         		var str="";
         		
+        		var regdate = '<fmt:formatDate pattern="yyyy-MM-dd" value="${studyVO.regdate}" />';
+        		
         		$(data.list).each(function(){
         			
         			if(this.writer == '${login.email}'){
@@ -958,14 +1034,14 @@ $(document).ready(function(){
         			    +  "<div class='well'><div class='row'><div class='col-md-2'>"
         			    +  "<img src="+"'/study/displayFile?fileName=${studyVO.photo}'"+"　class='img-responsive center-block'></div>"
                         +  "<div class='col-md-10'><p class='comment-info'>"
-                        +  "<strong>" + this.writer + "</strong>" + "<span>" + this.regdate + "</span>"
+                        +  "<strong>" + this.nickname + "</strong>" + "<span>" + regdate + "</span>"
                         + "</p><div class='contentre'>" + this.content + "</div></div></div></div></div>"
         			} else {
         				str += "<div class='replyLi' ><div class='cmnt-clipboard'>"
             			    +  "<div class='well'><div class='row'><div class='col-md-2'>"
             			    +  "<img src='assets/img/commenter2.jpg' class='img-responsive center-block'></div>"
                             +  "<div class='col-md-10'><p class='comment-info'>"
-                            +  "<strong>" + this.writer + "</strong>" 
+                            +  "<strong>" + this.nickname + "</strong>" 
                             + "</p><div class='contentre'>" + this.content + "</div></div></div></div></div>"	
         			}
         			

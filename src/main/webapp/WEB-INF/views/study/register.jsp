@@ -821,24 +821,12 @@ S3 수정 (파일 업로드 2개가 되어서 주석 처리)
     		$(".studysd").focus();
     		return false;
     	//요일	
-		} else if($("#sc option:selected").val()==""){
-		
-			alert("요일을 입력하세요")
+		}  else if($("#addTimeArea").html() == "") { 
+
+			alert("시간을 입력하세요");
 			$("#sc").focus();
 			return false;
-	//시작시간	
-		} else if($("#st option:selected").val()==""){
-		
-			alert("시작시간을 입력하세요")
-			$("#st").focus();
-			return false;
-	//끝시간		
-		} else if($("#et option:selected").val()==""){
-		
-			alert("시작시간을 입력하세요")
-			$("#et").focus();
-			return false;
-		
+			
 		} else {
 			alert("등록이 완료되었습니다")
 		} 

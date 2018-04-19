@@ -13,10 +13,18 @@
 	
 	<!-- 댓글 불러오기 -->
 	<select id="list" resultType="ReplyStudyVO">
-		select *
-		from reply_study
-		where bsBno = #{bsBno}
-		order by rno desc		
+		select 
+		rs.RNO
+		, rs.BSBNO
+		, rs.CONTENT
+		, rs.WRITER
+		, rs.REGDATE
+		, u.NICKNAME
+		from 
+		reply_study rs
+		left outer join user u on u.EMAIL = rs.WRITER 
+		where rs.bsBno = #{bsBno}
+		order by rs.rno desc	
 	</select>
 	
 	<!-- 댓글등록 -->
@@ -39,9 +47,18 @@
 	
 	<!-- 페이징 처리 -->
 	<select id="listPage" resultType="ReplyStudyVO">
-		select * from reply_study
-		where bsBno = #{bsBno}
-		order by rno desc
+		select 
+		rs.RNO
+		, rs.BSBNO
+		, rs.CONTENT
+		, rs.WRITER
+		, rs.REGDATE
+		, u.NICKNAME
+		from 
+		reply_study rs
+		left outer join user u on u.EMAIL = rs.WRITER 
+		where rs.bsBno = #{bsBno}
+		order by rs.rno desc
 		limit #{cri.pageStart}, #{cri.perPageNum}
 	</select>
 	

@@ -320,8 +320,7 @@ input{
 															<option value="" selected>--</option>
 													</select> 
 													
-													<div id="addTimeArea">
-									                </div>    
+													<div id="addTimeArea"></div>    
 													
 													<script>
 														/* 		$("#st").change(function(){
@@ -786,18 +785,7 @@ $("#addTime").on("click",function() {
 				$("#addTimeArea").append(time);			 
 			}	
 				
-/* 				var time = "<span><input type='hidden' name='startSc' value="+scval+">"
-				+ "<input type='hidden' name='stEt' value="+stval+"시~"+etval+">"
-				+ "<div>"
-				+ scval
-				+ " > "
-				+ stval
-				+ "시~" + etval
-				+ "</span><button type='button' onclick = 'btn_delete(this)' class='btn btn-default btn-xs'>삭제</button></div>";
-								
-							     $("#addTimeArea").append(time); */
-				
-				
+
 			// 연령 정보 불러옴
 			var check_value="${studyVO.age}";  //연령 DB 데이터 변수에 저장
 			var check_value2=check_value.split(',');   //콤마를 구분자로 배열에 담음 
@@ -807,7 +795,7 @@ $("#addTime").on("click",function() {
 			}
 			
 			$("#rDName").val("${studyVO.rDId}"); // 스터디 지역 정보 불러옴
-			$("#sc").val("${studyVO.sc}"); // 시간 정보 불러옴
+	/* 		$("#sc").val("${studyVO.sc}"); // 시간 정보 불러옴 */
 			
 			$.ajax({ //rdid값을 POST형식으로 region 컨트롤러에 전송
 				type:'POST',
@@ -996,9 +984,11 @@ $("#addTime").on("click",function() {
     <script>
     
     
+    
   // 카테고리 대 소 , 스터디명, 지역 대, 연력, 최대인원, 시작날짜, 요일, 시간
     $("#btn-success").on("click", function(e){
-    	console.log("등록등록등록등록등록등록등록등록등록등록등록등록등록등록등록등록")
+		
+    	console.log("등록등록등록등록등록등록등록등록등록등록등록등록등록등록등록등록");
     	 var formObj = $("form[role='form']");
 	   
     	 var age = "";	
@@ -1045,7 +1035,19 @@ $("#addTime").on("click",function() {
     		$(".studysd").focus();
     		return false;
     	//요일	
-		} else if($("#sc option:selected").val()==""){
+		} else if($("#addTimeArea").html() == "") { 
+
+			alert("시간을 입력하세요");
+			$("#sc").focus();
+			return false;
+			
+		}  else {
+			alert("수정이 완료되었습니다");
+			   formObj.submit();
+		} 
+    }) 	
+    	
+    	/* else if($("#sc option:selected").val()==""){
 		
 			alert("요일을 입력하세요")
 			$("#sc").focus();
@@ -1063,12 +1065,9 @@ $("#addTime").on("click",function() {
 			$("#et").focus();
 			return false;
 		
-		} else {
-			alert("등록이 완료되었습니다");
-			   formObj.submit();
-		} 
+		} */
 	
-    }) 
+
     </script>
 
    

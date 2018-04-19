@@ -395,6 +395,7 @@ display:none;
 .msg_container_base{
 height:400px;
 }
+
 </style>
 
 </head>
@@ -405,7 +406,7 @@ height:400px;
 	<!-- site-navigation start -->
 	<nav id="mainNavigation" class="navbar navbar-dafault main-navigation"
 		role="navigation">
-		<div class="container">
+		<div class="container" style="width:80%"> 
 
 			<div class="navbar-header">
 
@@ -554,7 +555,7 @@ if(session.getAttribute("login") != null){
 			</div>
 			<!-- nav links -->
 
-		</div>
+		 </div> 
 		<!-- /.container -->
 	</nav>
 	<!-- site-navigation end -->

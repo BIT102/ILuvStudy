@@ -172,7 +172,7 @@ select::-ms-expand {
 				<form>
 					<div class="dropdown">
 						<select class="dropdown-select-version select" id="select1"
-							name="options" style="float: right; margin-top:20px;">
+							name="options" style="float: right; margin-top:19px;">
 							<option value="x">전체</option>
 							<option value="t"
 								<c:out value="${cri.searchType eq 't'? 'selected' : ''}"/>>제목</option>
@@ -262,7 +262,7 @@ select::-ms-expand {
 
 								<div class="item-description">
 									<div class="row">
-										<div class="col-xs-6">
+										<div class="col-xs-9">
 											<span class="item-name" style="width: 230px;">제목 :
 												${studyVO.title} </span> <span style="width: 280px;">주인 :
 												${studyVO.nickname}<br> 종류 : ${studyVO.cDName} /
@@ -271,7 +271,7 @@ select::-ms-expand {
 													pattern="yyyy-MM-dd" value="${studyVO.regdate}" />
 											</span>
 										</div>
-										<div class="col-xs-6">
+										<div class="col-xs-3">
 											<span class="like"> <i class="fa fa-eercast"></i>
 												${studyVO.vct}
 											</span>
@@ -413,7 +413,7 @@ select::-ms-expand {
 					+ "&searchType="
 					+ $("#select1 option:selected").val()
 					+ "&keyword=" + encodeURIComponent($('#keywordInput').val())
-					+ "&pallType="+ $("#pallsel option:selected").val();
+					+ "&pallType="+ pallsel;
 		})  
 				
 	  })		 
@@ -427,7 +427,7 @@ select::-ms-expand {
 				+ "&searchType="
 				+ $("#select1 option:selected").val()
 				+ "&keyword=" + encodeURIComponent($('#keywordInput').val());
-				  + "&pallType="+ $("#pallsel option:selected").val();
+				  + "&pallType="+ pallsel;
 	  }
   }	
 </script>

@@ -63,7 +63,7 @@ color:#6b6b6b;
 	<!-- footer-navigation start -->
 	<footer style="padding:0 !important">
 	<nav class="hidden-xs hidden-sm navbar footer-nav" role="navigation">
-		<div class="container">
+		<div class="container" style="width:80%">
 
 			<div class="navbar-header">
 				<!-- navbar logo -->

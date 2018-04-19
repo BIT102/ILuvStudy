@@ -45,6 +45,7 @@ u.photo
 , au.bsbno
 , au.status
 , au.regdate
+, u.NICKNAME
 FROM
 apply_user au
 LEFT JOIN (user u)
