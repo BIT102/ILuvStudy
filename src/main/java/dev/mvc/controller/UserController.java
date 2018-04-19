@@ -455,7 +455,8 @@ public class UserController {
 			}else{
 				entity = new ResponseEntity<String>("success", HttpStatus.OK);
 				System.out.println("사용가능한이메일");
-				
+				System.out.println("사용가능한이메일22");
+				System.out.println("사용가능한이메일33");
 				//============================
 				//service.sendEmail(email);
 				//=============================
