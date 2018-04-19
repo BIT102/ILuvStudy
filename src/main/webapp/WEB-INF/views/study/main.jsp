@@ -260,7 +260,7 @@ input:focus{
 								<div class="item-description">
 									<div class="row">
 										<div class="col-xs-6">
-											<span class="item-name" style="width: 230px;">제목 :
+											<span class="item-name" style="width: 300px;">제목 :
 												${studyVO.title} </span> <span style="width: 280px;">주인 :
 												${studyVO.nickname}<br> 종류 : ${studyVO.cDName} /
 												${studyVO.cSName}<br> 지역 : ${studyVO.rDName} /

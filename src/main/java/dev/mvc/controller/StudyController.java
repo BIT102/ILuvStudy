@@ -179,19 +179,19 @@ public class StudyController {
 		StudyVO vo = new StudyVO();
 
 		
+		
+		model.addAttribute("list", service.listSearchCriteria(cri));
+		
 		PageMakerStudy pageMakerStudy = new PageMakerStudy();
 		
+		model.addAttribute("pageMakerStudy", pageMakerStudy);
 		
 		pageMakerStudy.setCri(cri);
 		
 
-				
-		model.addAttribute("pageMakerStudy", pageMakerStudy);
-		
-		
-		model.addAttribute("list", service.listSearchCriteria(cri));
-
 		pageMakerStudy.setTotalCount(service.listSearchCount(cri));
+		
+		
 
 
 
