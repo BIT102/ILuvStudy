@@ -539,6 +539,7 @@ body {
 	<script>
 //북마크를 등록합니다	
 
+
 function myFunction1(x) {
 
 	var bno = $("#bno").val();
