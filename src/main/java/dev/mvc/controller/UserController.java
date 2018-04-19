@@ -68,16 +68,16 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
-	public String joinUserPOST(UserVO vo, Model model) {
+	public String joinUserPOST(UserVO vo, Model model) throws Exception {
 		
 		
-		try {
-			service.joinUser(vo);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		logger.info("join............................");
+		service.joinUser(vo);
+		System.out.println("==========");
+		service.sendEmail(vo.getEmail());
 		
-		return "/study/main";
+//		return "/study/main";
+		return "/join";
 	}
 	
 // profile 컨트롤러
@@ -163,32 +163,7 @@ public class UserController {
 	
 				
 		
-	// 닉네임 중복확인
-/*		@RequestMapping(value= "/nickCheck", method = RequestMethod.POST)
-		public ResponseEntity<String> nickCheck(@RequestParam("nickName") String nickName, UserVO vo) throws Exception{
-			System.out.println("======닉네임=====");
-			System.out.println(nickName);
-	
-			service.nickCheck(nickName);
-			System.out.println("========바보바보=======");
-			System.out.println("결과는:"+service.nickCheck(nickName));
-			
-			ResponseEntity<String> entity = null;
-			
-		try{	
-			if(service.nickCheck(nickName)==0){
-				entity = new ResponseEntity<String>("success", HttpStatus.OK); 
-			}else{
-				entity = new ResponseEntity<String>("fail", HttpStatus.OK);
-			}
-		}catch (Exception e) {
-			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
-		}
-	
-			return entity;						
-		}*/
-		
-		
+	// 닉네임 중복확인	
 		@RequestMapping(value="/nickCheck", method = RequestMethod.POST)
 		public ResponseEntity<String> nickCheck(@RequestParam("nickName") String nickName) throws Exception{
 			
@@ -198,9 +173,9 @@ public class UserController {
 			
 		try{	
 			if(service.nickCheck(nickName)==0){
-				entity = new ResponseEntity<String>("Available nickname.", HttpStatus.OK);
+				entity = new ResponseEntity<String>("success", HttpStatus.OK);
 			}else{
-				entity = new ResponseEntity<String>("Unavailable nickname.", HttpStatus.OK);
+				entity = new ResponseEntity<String>("fail", HttpStatus.OK);
 			}
 		}catch (Exception e){
 			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
@@ -480,6 +455,11 @@ public class UserController {
 			}else{
 				entity = new ResponseEntity<String>("success", HttpStatus.OK);
 				System.out.println("사용가능한이메일");
+				System.out.println("사용가능한이메일22");
+				System.out.println("사용가능한이메일33");
+				//============================
+				//service.sendEmail(email);
+				//=============================
 			}
 			
 			return entity;
@@ -489,7 +469,7 @@ public class UserController {
 		@RequestMapping(value = "/chkEmailAjax", method = RequestMethod.POST)
 		  public ResponseEntity<String> ajaxTest(@RequestParam("email1") String email1, @RequestParam("email2") String email2, Model model)throws Exception{
 			
-			logger.info("chkEmail.......................");
+			logger.info("..........");
 			
 			String email = email1+"@"+email2;
 			

@@ -199,7 +199,8 @@ th{
 						$('#nickNamecheck').html("사용가능한 닉네임입니다.");
 						document.getElementById("nickNamecheck").style.color = 'blue';
 					}else{
-						$('#nickNamecheck').html("사용불가능한 닉네임입니다.").style.color = 'red';
+						$('#nickNamecheck').html("사용불가능한 닉네임입니다.");
+						document.getElementById("nickNamecheck").style.color = 'red';
 					}
 				}
 			})
