@@ -14,14 +14,56 @@
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script>
   var jb = jQuery.noConflict();
-
   </script>
-
-
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
 <script
 	src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+
+<!-- 섬머노트 시작 -->
+<!-- include libraries(jQuery, bootstrap) -->
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
+
+<script>
+var sn = jQuery.noConflict();
+</script>
+<!-- include summernote css/js-->
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
+
+<script>
+sn(document).ready(function() {
+	
+	// 편집도구 툴팁 종류 선택
+	sn('#summernote').summernote({
+		  toolbar: [
+		    // [groupName, [list of button]]
+		    ['style', ['bold', 'italic', 'underline', 'clear']],
+		    ['font', ['strikethrough', 'superscript', 'subscript']],
+		    ['fontsize', ['fontsize']],
+		    ['color', ['color']],
+		    ['para', ['ul', 'ol', 'paragraph']],
+		    ['height', ['height']]
+		  ]
+		});
+	
+	// 페이지 높이
+	sn('#summernote').summernote({
+            height: 300,                 // set editor height
+            minHeight: 300,             // set minimum height of editor
+            maxHeight: 500,             // set maximum height of editor
+            focus: true                  // set focus to editable area after initializing summernote
+            
+    });
+});
+
+sn(document).ready(function() {
+	sn('#summernote').summernote();
+	});
+</script>
+<!-- 섬머노트 끝 -->
+
 <title>스터디 상세</title>
 
 <style>
@@ -397,9 +439,9 @@ th{
 										<div>* 소개</div>
 										<table class="table table-hover">
 											<tbody>
-												<tr>
+												<tr style="height:300px;">
 													<th>스터디 소개</th>
-													<td><textarea name="content" class="form-control"
+													<td><textarea id="summernote" name="content" class="form-control"
 															style="height: 140px;">${studyVO.content}</textarea></td>
 												</tr>
 												<tr>

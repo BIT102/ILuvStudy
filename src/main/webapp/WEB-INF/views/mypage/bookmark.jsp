@@ -131,7 +131,7 @@
 
       <div id="service-page">
 
-                <!--  begin services section -->
+                                <!--  begin services section -->
 
 
                         <div class="headline text-center">
@@ -145,9 +145,9 @@
                         </div> <!-- /.headline -->
 
                         <div class="service-list">
-                            <div class="row">
+                            <div class="row" style="padding-left: 100px;">
                             
-                                <div class="col-md-4">
+                                <div class="col-md-2">
                                     <div class="service-content text-center">
                                         <div class="service-icon-box">
                                             <div class="service-icon center-block">
@@ -160,7 +160,7 @@
                                     </div> <!--  end of .service-content  -->
                                 </div>
                             
-                                <div class="col-md-4">
+                                <div class="col-md-2">
                                     <div class="service-content text-center">
                                         <div class="service-icon-box">
                                             <div class="service-icon center-block">
@@ -168,14 +168,25 @@
                                             </div>
                                         </div> <!--  end of .service-icon-box  -->
                                         <div class="service-info">
-                                        
-                                        <!-- 부가정보랑 비밀번호 변경을 넣습니다. -->
                                             <h3 class="service-heading">부가정보 관리</h3>
                                         </div> <!--   end of .service-info  -->
                                     </div> <!--  end of .service-content  -->
                                 </div>
+                                
+                                <div class="col-md-2">
+                                    <div class="service-content text-center">
+                                        <div class="service-icon-box">
+                                            <div class="service-icon center-block">
+                                                <a href="changePw"><i class="fa fa-expeditedssl"></i>
+                                            </div>
+                                        </div> <!--  end of .service-icon-box  -->
+                                        <div class="service-info">
+                                            <h3 class="service-heading">비밀번호 변경</h3>
+                                        </div> <!--   end of .service-info  -->
+                                    </div> <!--  end of .service-content  -->
+                                </div>
 
-                                <div class="col-md-4">
+                                <div class="col-md-2">
                                     <div class="service-content text-center">
                                         <div class="service-icon-box">
                                             <div class="service-icon center-block">
@@ -188,7 +199,7 @@
                                     </div> <!--  end of .service-content  -->
 								</div>
 								
-								<div class="col-md-4">
+								<div class="col-md-2">
                                     <div class="service-content text-center">
                                         <div class="service-icon-box">
                                             <div class="service-icon center-block">
