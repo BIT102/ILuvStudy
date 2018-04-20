@@ -58,14 +58,10 @@ $(document).ready(function() {
 											<table class="table table-hover">
 												<tbody>
 												 <tr>
-								
 													<th>자기소개</th>
 														<td>
-																<%-- <textarea row="5" cols="50" name="introduction">${vo.introduction}</textarea> --%>
 														<textarea id="summernote" name="introduction">${vo.introduction}</textarea>
-														
 														</td>
-														
 												</tr>
 											
 																																															

@@ -19,7 +19,7 @@
 <script
 	src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 
-<!-- 섬머노트 시작 -->
+	<!-- 섬머노트 시작 -->
 <!-- include libraries(jQuery, bootstrap) -->
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
@@ -62,7 +62,7 @@ sn(document).ready(function() {
 	sn('#summernote').summernote();
 	});
 </script>
-<!-- 섬머노트 끝 -->
+	<!-- 섬머노트 끝 -->
 
 <title>스터디 상세</title>
 

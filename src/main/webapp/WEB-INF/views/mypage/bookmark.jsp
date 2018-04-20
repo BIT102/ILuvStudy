@@ -111,12 +111,10 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-md-12">
-
                                 <ol class="breadcrumb">
                                     <li><a href="/study/main">Home</a></li>
                                     <li class="active">Profile</li>
                                 </ol> <!-- end of /.breadcrumb -->
-
                             </div>
                         </div>
                     </div> <!-- /.container -->
@@ -131,13 +129,10 @@
 
       <div id="service-page">
 
-                                <!--  begin services section -->
-
+     				 <!--  begin services section -->
 
                         <div class="headline text-center">
-                        
                             <div class="row">
-
                                 <div class="col-md-6 col-md-offset-3">
                                     <h2 class="section-title">My page</h2>
                                 </div>
@@ -145,9 +140,8 @@
                         </div> <!-- /.headline -->
 
                         <div class="service-list">
-                            <div class="row" style="padding-left: 100px;">
-                            
-                                <div class="col-md-2">
+                            <div class="row">
+                                <div class="col-md-3">
                                     <div class="service-content text-center">
                                         <div class="service-icon-box">
                                             <div class="service-icon center-block">
@@ -159,21 +153,8 @@
                                         </div> <!--   end of .service-info  -->
                                     </div> <!--  end of .service-content  -->
                                 </div>
-                            
-                                <div class="col-md-2">
-                                    <div class="service-content text-center">
-                                        <div class="service-icon-box">
-                                            <div class="service-icon center-block">
-                                                <a href="addInfo"><i class="fa fa fa-address-card"></i></a>
-                                            </div>
-                                        </div> <!--  end of .service-icon-box  -->
-                                        <div class="service-info">
-                                            <h3 class="service-heading">부가정보 관리</h3>
-                                        </div> <!--   end of .service-info  -->
-                                    </div> <!--  end of .service-content  -->
-                                </div>
-                                
-                                <div class="col-md-2">
+               
+                                <div class="col-md-3">
                                     <div class="service-content text-center">
                                         <div class="service-icon-box">
                                             <div class="service-icon center-block">
@@ -186,7 +167,7 @@
                                     </div> <!--  end of .service-content  -->
                                 </div>
 
-                                <div class="col-md-2">
+                                <div class="col-md-3">
                                     <div class="service-content text-center">
                                         <div class="service-icon-box">
                                             <div class="service-icon center-block">
@@ -199,7 +180,7 @@
                                     </div> <!--  end of .service-content  -->
 								</div>
 								
-								<div class="col-md-2">
+								<div class="col-md-3">
                                     <div class="service-content text-center">
                                         <div class="service-icon-box">
                                             <div class="service-icon center-block">
@@ -222,7 +203,7 @@
                             <div class="row">
 
                                 <div class="col-md-6 col-md-offset-3">
-                                    <h2 class="section-title">상세정보 관리</h2>
+                                    <h2 class="section-title">스터디 관리</h2>
                                 </div>
                             </div>
                         </div> <!-- /.headline -->

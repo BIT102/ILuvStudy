@@ -27,13 +27,50 @@
 <script
 	src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 
-<!-- stylesheets -->
-<link rel="stylesheet" href="/resources/assets/css/bootstrap.min.css">
-<link rel="stylesheet" href="/resources/assets/css/font-awesome.min.css">
-<link rel="stylesheet" href="/resources/assets/css/animate.css">
-<link rel="stylesheet" href="/resources/assets/css/owl.carousel.css">
-<link rel="stylesheet" href="/resources/assets/css/owl.theme.css">
-<link rel="stylesheet" href="/resources/assets/css/style.css">
+	<!-- 섬머노트 시작 -->
+<!-- include libraries(jQuery, bootstrap) -->
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
+
+<script>
+var sn = jQuery.noConflict();
+</script>
+<!-- include summernote css/js-->
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
+
+<script>
+sn(document).ready(function() {
+	
+	// 편집도구 툴팁 종류 선택
+	sn('#summernote').summernote({
+		  toolbar: [
+		    // [groupName, [list of button]]
+		    ['style', ['bold', 'italic', 'underline', 'clear']],
+		    ['font', ['strikethrough', 'superscript', 'subscript']],
+		    ['fontsize', ['fontsize']],
+		    ['color', ['color']],
+		    ['para', ['ul', 'ol', 'paragraph']],
+		    ['height', ['height']]
+		  ]
+		});
+	
+	// 페이지 높이
+	sn('#summernote').summernote({
+            height: 300,                 // set editor height
+            minHeight: 300,             // set minimum height of editor
+            maxHeight: 500,             // set maximum height of editor
+            focus: true                  // set focus to editable area after initializing summernote
+            
+    });
+});
+
+sn(document).ready(function() {
+	sn('#summernote').summernote();
+	});
+</script>
+	<!-- 섬머노트 끝 -->
 
 <!-- fonts for this template -->
 <link rel="stylesheet"
@@ -144,9 +181,7 @@ th{
 
 
                         <div class="headline text-center">
-                        
                             <div class="row">
-
                                 <div class="col-md-6 col-md-offset-3">
                                     <h2 class="section-title">My page</h2>
                                 </div>
@@ -154,9 +189,8 @@ th{
                         </div> <!-- /.headline -->
 
                         <div class="service-list">
-                            <div class="row" style="padding-left: 100px;">
-                            
-                                <div class="col-md-2">
+                            <div class="row">
+                                <div class="col-md-3">
                                     <div class="service-content text-center">
                                         <div class="service-icon-box">
                                             <div class="service-icon center-block">
@@ -168,21 +202,8 @@ th{
                                         </div> <!--   end of .service-info  -->
                                     </div> <!--  end of .service-content  -->
                                 </div>
-                            
-                                <div class="col-md-2">
-                                    <div class="service-content text-center">
-                                        <div class="service-icon-box">
-                                            <div class="service-icon center-block">
-                                                <a href="addInfo"><i class="fa fa fa-address-card"></i></a>
-                                            </div>
-                                        </div> <!--  end of .service-icon-box  -->
-                                        <div class="service-info">
-                                            <h3 class="service-heading">부가정보 관리</h3>
-                                        </div> <!--   end of .service-info  -->
-                                    </div> <!--  end of .service-content  -->
-                                </div>
-                                
-                                <div class="col-md-2">
+               
+                                <div class="col-md-3">
                                     <div class="service-content text-center">
                                         <div class="service-icon-box">
                                             <div class="service-icon center-block">
@@ -195,7 +216,7 @@ th{
                                     </div> <!--  end of .service-content  -->
                                 </div>
 
-                                <div class="col-md-2">
+                                <div class="col-md-3">
                                     <div class="service-content text-center">
                                         <div class="service-icon-box">
                                             <div class="service-icon center-block">
@@ -208,7 +229,7 @@ th{
                                     </div> <!--  end of .service-content  -->
 								</div>
 								
-								<div class="col-md-2">
+								<div class="col-md-3">
                                     <div class="service-content text-center">
                                         <div class="service-icon-box">
                                             <div class="service-icon center-block">
@@ -313,6 +334,13 @@ th{
 									value="${vo.phoneNum}" class="form-control" id="phone"
 									style="width: 550px; display:inline-block">
 								<!-- <input type="button" value="인증하기" class="btn btn-black"></input> -->
+								</td>
+						</tr>
+						
+						<tr>
+							<th>자기소개</th>
+								<td>
+									<textarea id="summernote" name="introduction">${vo.introduction}</textarea>
 								</td>
 						</tr>
 					
