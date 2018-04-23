@@ -223,21 +223,19 @@ public class StudyController {
 
 		model.addAttribute("list", SearchList);
 		
-		
-		
 		model.addAttribute("vctList", service.vctList(cri));
-
-		PageMakerStudy pageMakerStudy = new PageMakerStudy();
-
+		
+		/*PageMakerStudy pageMakerStudy = new PageMakerStudy();
+		
 		pageMakerStudy.setCri(cri);
-
+		
 		pageMakerStudy.setTotalCount(service.listSearchCount(cri));
-
+		
 		model.addAttribute("pageMakerStudy", pageMakerStudy);
-
+		
 		System.out.println("++++++++++++++++++++++++++++++++++++++");
 		System.out.println(SearchList);
-		System.out.println("++++++++++++++++++++++++++++++++++++++");
+		System.out.println("++++++++++++++++++++++++++++++++++++++");*/
 
 	}
 

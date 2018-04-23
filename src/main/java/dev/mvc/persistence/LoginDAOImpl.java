@@ -93,6 +93,11 @@ public class LoginDAOImpl implements LoginDAO{
 	public UserVO getUserPw(String email) throws Exception {
 		return session.selectOne(namespace + ".getUserPassword", email);
 	}
+	
+	//비밀번호 재설정을 위한 이메일 찾기
+	public int searchEmailCnt(String email) throws Exception{
+		return session.selectOne(namespace + ".searchEmailCnt", email);
+	}
 
 	
 }

@@ -5,6 +5,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>스터디 목록</title>
+<style>
+.text-cut{
+	display: block;
+	white-space: nowrap;
+	overflow: hidden; 
+	text-overflow: ellipsis;
+}
+</style>
 </head>
 <body>
 <div id="wrapper">
@@ -76,7 +84,7 @@
 <c:forEach items="${list}" var="studyVO">
             <tr>
                 <td>${studyVO.bno}</td>
-                <td><a href="/admin/studyDetail${pageMaker.studySearch(pageMaker.cri.page)}&bno=${studyVO.bno}">${studyVO.title}</a></td>
+                <td class="text-cut"><a href="/admin/studyDetail${pageMaker.studySearch(pageMaker.cri.page)}&bno=${studyVO.bno}">${studyVO.title}</a></td>
                 <td>${studyVO.writer}</td>
                 <td>${studyVO.rDName} ${studyVO.rSName}</td>
                 <td>

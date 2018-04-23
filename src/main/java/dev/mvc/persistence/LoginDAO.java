@@ -32,4 +32,7 @@ public interface LoginDAO {
 	
 	// 시큐리티 비밀번호 암호화 패스워드 가져오기
 	public UserVO getUserPw(String email) throws Exception;
+	
+	//비밀번호 재설정을 위한 이메일 찾기
+	public int searchEmailCnt(String email) throws Exception;
 }

@@ -61,8 +61,6 @@
 						document.getElementById("pwcheck2").style.color = 'red';
 					}
 				});
-		
-		
 	})
 
 </script>
@@ -101,7 +99,6 @@
 		                 	 </div>
 		                    <input type = "button" id = "emailConfBtn" value = "전송"> 
 		                  </div>
-		                    
 	                </div>
 	    		</div>
 		    	<div id = "changePW" style="visibility: hidden">

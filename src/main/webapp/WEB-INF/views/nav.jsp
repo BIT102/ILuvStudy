@@ -396,6 +396,101 @@ display:none;
 height:400px;
 }
 
+/* 비밀번호 찾기 모달 */
+.form-box ul {
+	padding: 0px;
+}
+
+.findHeader{
+    margin: 0 auto;
+    font-size: 18px;
+    letter-spacing: 0;
+    font-weight: 400;
+    margin-bottom: 20px;
+    border-bottom: 1px dashed #dfdfdf;
+    padding-bottom: 14px;
+}
+
+.userText-header{
+    font-size: 14px;
+    font-weight: 500;
+    color: #757575;
+    letter-spacing: -1px;
+}
+
+.userPhone ul li,
+.userEmail ul li{
+    width: 83%;
+    margin: 10px auto;
+    text-align: left;
+    font-size: 15px;
+    letter-spacing: 0;
+}
+
+.userPhone li.userText-header::before{
+    content: '\0b7';
+}
+
+.userPhone ul li.userText-header {
+    font-size: 12px;
+    font-weight: 400;
+    color: #757575;
+    letter-spacing: -1px;
+    margin-bottom: 0 !important;
+    margin-top: 0 !important;
+}
+
+#resetPasswordButton{
+    border: none;
+    font-size: 15px;
+    padding: 9px 0;
+    width: 60%;
+    margin: 30px 0 0 0;
+    font-weight: 400;
+    background: #00beff;
+    border-radius: 5px;
+    color: white;
+}    
+/* [Toast] 결과메시지 */
+#toast {
+  	visibility: hidden;
+    position: fixed;
+    width: 300px;
+    top: 50px;
+    left: 50%;
+    margin-left: -150px;
+    background-color: rgb(0, 183, 238);
+    color: #fff;
+    padding: 15px 25px;
+    z-index: 100000;
+    text-align: center;
+    border-radius: 4px;
+
+}
+#toast.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+@-webkit-keyframes fadein {
+    from {top: 0; opacity: 0;} 
+    to {top: 50px; opacity: 1;}
+}
+
+@keyframes fadein {
+    from {top: 0; opacity: 0;}
+    to {top: 50px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+    from {top: 50px; opacity: 1;} 
+    to {top: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+    from {top: 50px; opacity: 1;}
+    to {top: 0; opacity: 0;}
+}
 </style>
 
 </head>
@@ -471,8 +566,7 @@ if(session.getAttribute("login") != null){
 						<span
 							onclick="document.getElementById('id01').style.display='none'"
 							class="close" title="Close Modal">&times;</span>
-						<div class="avatar"
-							style="background-image: url(/resources/assets/img/login.png);"></div>
+						<div class="avatar" style="background-image: url(/resources/assets/img/login.png);"></div>
 						<div class="form-box">
 							<form action="/loginPost" method="post" class="form login">
 								<input name="id" type="text" placeholder="아이디" required value="<%=value %>">
@@ -502,15 +596,68 @@ if(session.getAttribute("login") != null){
 										id="idb">
 										<label for="idbb" style="vertical-align: middle; margin: 0;">&nbsp;자동 로그인</label>
 								</div>
-								<br> 아이디/비밀번호를 잊으셨나요?<br> <a href="/searchEmail">아이디 찾기 / </a><a href="/searchPW">비밀번호 찾기</a>
+								<br>
+								<span onclick="document.getElementById('searchpw').style.display='block'" style="cursor:pointer;" id="pw-model">비밀번호를 잊으셨나요?</span>
 							</form>
 						</div>
 					</div>
-
 				</div>
-
 			</div>
 			
+			<!-- 비밀번호 재설정 모달 -->
+			<div id="searchpw" class="modal">
+				<div class="container">
+					<div class="login-container" style="width:450px;">
+						<div id="output"></div>
+					<div class="modal-header" style="border:white">
+                    	<span
+							onclick="document.getElementById('searchpw').style.display='none'"
+							class="close" title="Close Modal">&times;</span>
+                    </div>	
+                    <div class="findUser-modalBody form-box">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding:0px;">
+                                <div class="findPassword-wrap">
+                                    <div id="findUserForm">
+                                        <div class="findPassword-head">
+
+                                            <div class="findHeader">
+                                                <span style="padding-bottom: 3px;">비밀번호 재설정</span>
+                                            </div>
+
+                                        </div>
+                                        <div class="findPassword-body">
+                                            <div class="userEmail">
+                                                <ul>
+                                                    <li class="userText-header">이메일</li>
+                                                    <li class="userText">
+                                                        <input id="find_Email" type="text" name="resetUserEmail" placeholder="example@domain.com" />
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div>
+                                                <ul>
+                                                    <li class="userText-header">가입 시 기재했던 이메일 주소를 입력해주세요.</li>
+                                                    <li class="userText-header">헤당 이메일 주소로 비밀번호 재설정 메일이 전송됩니다.</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="findPassword-foot">
+                                            <input type="hidden" name="senderType" value="passReset" />
+                                            <input type="button" id="resetPasswordButton"  onclick="searchPW_click();" value="비밀번호 재설정">
+                                            <!-- <button type="button" id="resetPasswordButton" class="btn btn-white" onclick="searchPW_click();">비밀번호 재설정</button> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+					</div>
+				</div>
+			</div>
+			
+			<!-- 비밀번호 재설정 이메일 전송완료 스낵바 -->
+			<div id="toast"></div>
 
 			<!-- nav links -->
 			<div class="collapse navbar-collapse" id="main-nav-collapse">
@@ -609,10 +756,16 @@ if(session.getAttribute("login") != null){
 
 //Get the modal
 var modal = document.getElementById('id01');
+var pwmodal = document.getElementById('searchpw');
+var snackbar = document.getElementById('toast');
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
     if (event.target == modal) {
         modal.style.display = "none";
+    }
+    
+    if (event.target == pwmodal) {
+    	pwmodal.style.display = "none";
     }
 }
 
@@ -691,7 +844,7 @@ $(document).ready(function(){
 			$.ajax({ 
 				type:'POST',
 				url:'/chatting/chatAdmin22',
-					headers : {
+				headers : {
 					"Content-Type" : "application/json",
 					"X-HTTP-Method-Override" : "POST"}, 
 				dataType:'json',
@@ -731,6 +884,47 @@ $(document).ready(function(){
 	});
 	
 })
+
+//비밀번호 찾기 클릭 시 로그인 모달 안보이도록 처리
+$(document).on('click', '#pw-model', function(){
+	modal.style.display = "none";
+});
+
+//비밀번호 재설정 클릭 시
+function searchPW_click(){
+
+	//ajax 통신
+	$.ajax({ 
+		url:'/forgotPassword',
+		contentType: 'application/json',
+		method: 'POST',
+		data:JSON.stringify(
+			$('#find_Email').val()
+		),  
+		success:function(result){ 
+			console.log("데려왔따");
+			console.log(result);
+			pwmodal.style.display = "none";	//모달창 안보이도록 처리
+			
+			//결과값 1인 경우 정상 처리, 0인 경우 사용자가 입력한 이메일이 가입되어 있지 않을때
+			if(result == 1){
+				$('#toast').html('<em class="fa fa-check"></em> 전송완료!'); 
+				$('#toast').css('background-color', 'rgb(0, 183, 238)');
+				viewSnackbar(); //스낵바 띄움
+			}else{
+				$('#toast').html('<em class="fa fa-times"></em> 일치하는 이메일이 없습니다.'); 
+				$('#toast').css('background-color', 'rgb(255, 110, 110)');
+				viewSnackbar(); //스낵바 띄움
+			}
+		}
+	}); //$.ajax 끝
+}
+
+//스낵바 띄우는 메서드
+function viewSnackbar(){
+	snackbar.className = "show"; //스낵바 띄움
+	setTimeout(function(){ snackbar.className = snackbar.className.replace("show", ""); }, 3000);
+}
 
 $(document).on('focus', '.panel-footer input.chat_input', function (e) {
     var $this = $(this);

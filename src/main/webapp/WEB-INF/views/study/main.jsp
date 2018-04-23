@@ -153,7 +153,7 @@ input:focus{
 										<div class="client-box">
 											<div class="about-client">
 												<a
-													href="/study/board${pageMakerStudy.makeSearch(pageMakerStudy.cri.page)}&bno=${studyVO.bno}">
+													href="/study/board${pageMakerStudy.makeSearch(pageMakerStudy.cri.page)}?bno=${studyVO.bno}">
 													
 													<c:choose>
 													<c:when test="${studyVO.name ne 'a'}">
@@ -188,7 +188,7 @@ input:focus{
 									<div class="client-box">
 										<div class="about-client">
 											<a
-												href="/study/board${pageMakerStudy.makeSearch(pageMakerStudy.cri.page)}&bno=${test.bno}">
+												href="/study/board${pageMakerStudy.makeSearch(pageMakerStudy.cri.page)}?bno=${test.bno}">
 											
 											<c:choose>
 											<c:when test="${test.name ne 'a'}">
@@ -241,7 +241,7 @@ input:focus{
 							<div class="portfolio-item">
 								<div class="item-image">
 									<a
-										href="/study/board${pageMakerStudy.makeSearch(pageMakerStudy.cri.page)}&bno=${studyVO.bno}">
+										href="/study/board${pageMakerStudy.makeSearch(pageMakerStudy.cri.page)}?bno=${studyVO.bno}">
 
 
 										<c:choose>
@@ -400,7 +400,7 @@ input:focus{
 	$(".btn-white").on("click", function(event){
 		self.location = "listAll"
 			+ '${pageMakerStudy.makeQuery(1)}'
-			+ "&searchType="
+			+ "?searchType="
 			+ "tcn"
 			/* + $("select option:selected").val() */
 			+ "&keyword=" + encodeURIComponent($('#keywordInput').val());            
@@ -411,7 +411,7 @@ input:focus{
 	  if(event.keyCode==13){
 		  self.location = "listAll"
 				+ '${pageMakerStudy.makeQuery(1)}'
-				+ "&searchType="
+				+ "?searchType="
 				+ "x"
 				/* + $("select option:selected").val() */
 				+ "&keyword=" + encodeURIComponent($('#keywordInput').val());  

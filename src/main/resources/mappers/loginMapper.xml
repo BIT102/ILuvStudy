@@ -57,5 +57,10 @@
     <select id="getUserPassword" resultType="UserVO">
 	    select password from user where email = #{email}
     </select>
+    
+    <!-- 비밀번호 재설정을 위한 아이디 찾기 -->
+  	<select id = "searchEmailCnt" resultType="int">
+  		select count(email) from user where email = #{email}
+  	</select>
   		
   </mapper>

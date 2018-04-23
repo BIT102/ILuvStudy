@@ -231,6 +231,7 @@ public class StudyServiceImpl implements StudyService {
 	}
 	
 	//방문자수 리스트를 위해 만들어요
+	@Transactional
 	@Override
 	public List<StudyVO> vctList(SearchCriteriaStudy cri) throws Exception {
 		
@@ -278,6 +279,7 @@ public class StudyServiceImpl implements StudyService {
 
 	
 	//새로운 스터디 메인페이지 
+	@Transactional
 	@Override
 	public List<StudyVO> newList(SearchCriteriaStudy cri) throws Exception {
 		
@@ -318,6 +320,12 @@ public class StudyServiceImpl implements StudyService {
 			// 영어 <- set getcaS
 			list.get(i).setcSName(getcaS);
 		}
+		
+		
+		
+		
+		
+		
 		
 		return dao.newList(cri);
 	}

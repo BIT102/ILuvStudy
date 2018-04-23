@@ -524,8 +524,6 @@ th{
 			<!-- END MAIN CONTENT -->
 		</div>
 		<!-- END MAIN -->
-	</div>	
-	
 	        
 <%@include file="footer.jsp"%>	        
 	        

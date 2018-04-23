@@ -28,4 +28,8 @@ public interface LoginService {
 
 	//구글 로그인 api
 	public void googleLogin(UserVO vo)throws Exception;
+	
+	//비밀번호 찾기
+	public int sendEmail(String email) throws Exception;
+	
 }

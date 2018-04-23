@@ -1,9 +1,8 @@
 package dev.mvc.controller;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.Cookie;
@@ -19,10 +18,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.WebUtils;
 
 import dev.mvc.domain.PageMakerStudy;
@@ -273,6 +273,44 @@ public class UserController {
 		
 		return "/mypage/changePw";
 	}
+	
+	// 비밀번호 재설정 (발송 메일에서 비밀번호 재설정 클릭 시 인입)
+	@RequestMapping(value="/resetPassword", method=RequestMethod.GET)
+	public String resetPWGET(String email)throws Exception{
+		logger.info("resetPasswordGET........");
+		
+		return "resetPassword";
+	}
+	
+	@RequestMapping(value = "/resetPassword", method = RequestMethod.POST)
+	@ResponseBody
+	public int resetPWPOST(@RequestBody String data) throws Exception {
+		//값 제대로 넘어오는지 확인해야됨
+		//data 어떻게 찍히는지 보고 잘라서 쓰자
+		
+		System.out.println("비번변경 포스트============");
+		System.out.println(data);
+		System.out.println("===============================");
+		
+		UserVO vo = new UserVO(); //객체 생성
+		int result = 0; //결과값 변수
+		
+/*		vo.setEmail(email);  //ajax로 받은 email 값 주입
+		
+		if(newPw1.equals(newPw2)){  //비밀번호 입력, 확인이 동일한 경우
+			vo.setPassword(newPw1);	//비밀번호 주입
+			System.out.println("비밀번호 변경 완료");
+			service.changePw(vo);   //비밀번호 변경 처리
+			
+			result = 1; 	//결과값 1, 성공
+		}else{
+			System.out.println("비밀번호 변경 불가");
+			result = 0;		//결과값 0, 실패
+		}*/
+
+		return result;
+	}
+	
 	
 	//ajax 비번 수정
 /*	@RequestMapping(value = "/changePw", method = RequestMethod.POST)

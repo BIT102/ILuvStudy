@@ -99,7 +99,7 @@ color:#6b6b6b;
 					</c:choose>
 					<li class="dropdown"><a href="/study/listAll"><span>스터디
 								구경하기</span></a></li>
-					<li class="dropdown"><a href="/sqna/list"><span>FAQ</span></a>
+					<li class="dropdown"><a href="/sqna/list"><span>자주 묻는 질문</span></a>
 					</li>
 					<li class="dropdown"><a href="/study/notice"><span>공지사항</span></a>
 					</li>
