@@ -200,4 +200,10 @@
   	<update id = "emailConf" >
   		update user set emailconf = 1 where email = #{email};
   	</update>
+  	
+  	<!-- 시크릿키 확인, 비밀번호 재설정 시 체크 -->
+  	<select id = "chkSecretkey" resultType="int">
+  		select count(*) from user where email = #{email} and secretKey = #{secretKey};
+  	</select>
+  	
   </mapper>

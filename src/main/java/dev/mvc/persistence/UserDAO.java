@@ -64,6 +64,7 @@ public interface UserDAO {
 	public void emailConf(String email) throws Exception;
 	
 	
-	
+	// 시크릿키 확인
+	public int chkSecretkey(UserVO vo) throws Exception;
 
 }

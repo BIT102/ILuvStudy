@@ -35,4 +35,7 @@ public interface LoginDAO {
 	
 	//비밀번호 재설정을 위한 이메일 찾기
 	public int searchEmailCnt(String email) throws Exception;
+	
+	//시크릿키 업데이트
+	public void secretKeyUpdate(UserVO vo)throws Exception;
 }

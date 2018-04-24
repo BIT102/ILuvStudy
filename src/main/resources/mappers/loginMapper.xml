@@ -62,5 +62,10 @@
   	<select id = "searchEmailCnt" resultType="int">
   		select count(email) from user where email = #{email}
   	</select>
+  	
+  	<!-- 시크릿 키 업데이트 -->
+  	<update id="secretKeyUpdate">
+  		update user set secretKey = #{secretKey} where email=#{email};
+  	</update>
   		
   </mapper>

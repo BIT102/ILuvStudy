@@ -127,7 +127,11 @@ public class UserDAOImpl implements UserDAO {
 		session.update(namespace+".emailConf",email);
 		
 	}
-
+	
+	//시크릿키 확인
+	public int chkSecretkey(UserVO vo) throws Exception{
+		return session.selectOne(namespace + ".chkSecretkey", vo);
+	}
 
 	
 }

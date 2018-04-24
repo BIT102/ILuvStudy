@@ -244,5 +244,11 @@ public class UserServiceImpl implements UserService {
 		dao.emailConf(email);
 	}
 	
+	//시크릿키 확인
+	@Override
+	public int chkSecretkey(UserVO vo) throws Exception{
+		return dao.chkSecretkey(vo);
+	}
+	
 	
 }

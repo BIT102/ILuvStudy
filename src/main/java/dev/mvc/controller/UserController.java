@@ -276,26 +276,52 @@ public class UserController {
 	
 	// 비밀번호 재설정 (발송 메일에서 비밀번호 재설정 클릭 시 인입)
 	@RequestMapping(value="/resetPassword", method=RequestMethod.GET)
-	public String resetPWGET(String email)throws Exception{
+	public String resetPWGET(HttpServletRequest request)throws Exception{
 		logger.info("resetPasswordGET........");
 		
-		return "resetPassword";
+		UserVO vo = new UserVO();  //UserVO 생성
+		String result="";	//결과값 담을 변수 생성
+		
+		System.out.println(request.getParameter("secretKey"));
+		System.out.println(request.getParameter("email"));
+		
+		vo.setSecretKey(request.getParameter("secretKey"));  //파라미터에서 값 가져와서 vo에 담아줌
+		vo.setEmail(request.getParameter("email"));
+		
+		System.out.println(vo);
+		
+		//service.chkSecretkey(vo);  //시크릿키 일치하는 지 확인
+		
+		if(service.chkSecretkey(vo) == 1){  //시크릿키가 일치하는 경우 비밀번호 재설정 페이지로 이동
+			result = "resetPassword"; 
+		}else{ 
+			result = "false";  //시크릿키가 일치하지 않는 경우
+		}
+		
+		return result;
 	}
 	
 	@RequestMapping(value = "/resetPassword", method = RequestMethod.POST)
 	@ResponseBody
-	public int resetPWPOST(@RequestBody String data) throws Exception {
+	public int resetPWPOST(@RequestBody Map<String, String> data) throws Exception {
 		//값 제대로 넘어오는지 확인해야됨
 		//data 어떻게 찍히는지 보고 잘라서 쓰자
 		
 		System.out.println("비번변경 포스트============");
 		System.out.println(data);
+		System.out.println(data.get("email"));
+		System.out.println(data.get("newPw1"));
+		System.out.println(data.get("newPw2"));
 		System.out.println("===============================");
+		
+		String email = data.get("email");
+		String newPw1 = data.get("newPw1");
+		String newPw2 = data.get("newPw2");
 		
 		UserVO vo = new UserVO(); //객체 생성
 		int result = 0; //결과값 변수
 		
-/*		vo.setEmail(email);  //ajax로 받은 email 값 주입
+		vo.setEmail(email);  //ajax로 받은 email 값 주입
 		
 		if(newPw1.equals(newPw2)){  //비밀번호 입력, 확인이 동일한 경우
 			vo.setPassword(newPw1);	//비밀번호 주입
@@ -306,7 +332,7 @@ public class UserController {
 		}else{
 			System.out.println("비밀번호 변경 불가");
 			result = 0;		//결과값 0, 실패
-		}*/
+		}
 
 		return result;
 	}

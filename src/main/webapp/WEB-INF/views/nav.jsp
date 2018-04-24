@@ -182,19 +182,50 @@
 	bottom:120;
 	right:50;
 	z-index:999;
-	bottom:15%;
-	right:3%;
+	bottom:1.8%;
+	right:8%;
+    min-width: 56px;
+    height: 56px;
+    overflow: initial;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    box-sizing: border-box;
+    background-color: #00beff;
+    border-radius: 28px;
+    animation: eLtMsx 0.2s cubic-bezier(0.1,0,0.6,1);
+    cursor: pointer;
+    width:120px;
+}
+#chatClick > span{
+    display: block;
+    font-size: 14px;
+    max-width: 300px;
+    line-height: normal;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+}
+
+#chatClick > span > i{
+font-size:20px;
+font-weight: 800;
 }
 
 
 /* chat */
 #chat{
 	position:fixed;
-	bottom:100;
-	right:95;
+	bottom:120;
+	right:50;
 	z-index:999;
-	bottom:15%;
-	right:6%;
+	bottom:1.8%;
+	right:9%;
 }
 
 .col-md-2, .col-md-10{
@@ -206,6 +237,7 @@
 .chat-window{
     bottom:0;
     position:fixed;
+    
     float:right;
     margin-left:10px;
 }
@@ -329,7 +361,7 @@
 
 /*---*CHAT*-----*/
 #chat .panel-heading{
-    background: #519D9E;
+    background: #40b4e5;
     background-position: center 30%;
 }
 #chat .panel-heading, #chat .panel-heading a {
@@ -341,41 +373,48 @@
     
 }
 #chat .base_sent .messages{
-    background: #D1B6E1;
+    background: #40b4e5;
     border-radius: 8px 8px 0px 8px;
     -webkit-border-radius: 8px 8px 0px 8px;
     color: #fff;
-    border-bottom:1px solid #D1B6E1;
+    border-bottom:1px solid #40b4e5;
 }
 #chat .base_sent::after{
     top:0px;
     width: 0;
     height: 0;
     border-top:10px solid transparent;
-    border-left: 10px solid #D1B6E1;
+    border-left: 10px solid #40b4e5;
     
     border-bottom: 0px solid transparent;
     
 }
 #chat .base_receive .messages{
-    background: #9DC8C8;
+    background: #EEF1F4;
     border-radius: 0 8px 8px 8px;
-    border-bottom:1px solid #9DC8C8;
-    color:#fff;
+    border-bottom:1px solid #EEF1F4;
+    color:#516378;
     
+}
+.msg_receive > time{
+	color:#516378;
+	font-style: italic;
+}
+.msg_sent > time{
+	color:#fff;
+	font-style: italic;
 }
 #chat .base_receive::before{
     width: 0;
     height: 0;
     border-top: 0px solid transparent;
-    border-right: 10px solid #9DC8C8;
+    border-right: 10px solid #EEF1F4;
     border-bottom: 10px solid transparent;
 }
 
 #chat .msg_container_base{
     background:#fff;
 }
-#chat time{ color:#fff; font-style: italic; }
 
 .chatBlock{
 display:block;
@@ -386,7 +425,7 @@ display:none;
 }
 
 #btn-chat{
-	background: #519D9E;
+	background: #40b4e5;
 	border: none;
 	height: 44px;
 	margin-left: 5px;
@@ -451,6 +490,13 @@ height:400px;
     border-radius: 5px;
     color: white;
 }    
+
+#chatClose{
+	float:right;
+	cursor:pointer;
+	margin-right:10px;
+	font-weight: 600;
+}
 /* [Toast] 결과메시지 */
 #toast {
   	visibility: hidden;
@@ -491,6 +537,40 @@ height:400px;
     from {top: 50px; opacity: 1;}
     to {top: 0; opacity: 0;}
 }
+
+/* top 버튼 */
+#toTop { 
+	position: fixed; /* 포지션 고정 */ 
+	cursor:pointer;
+	bottom: 50px; /* 밑에서 100px */ 
+	display: none; /* 보여지지 없음 - 기본적으로 안보여지게 */ 
+	z-index: 9999; /* 포지션을 먼저 지정후 z-좌표(레이어) : 9999입니다. */
+	right:50px;
+	bottom:2%;
+	right:2%;
+	background:#00beff;
+	color:white;
+	-webkit-border-radius: 50%;
+    border-radius: 50%;
+    width:50px;
+    height:50px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+a#toTop{
+	font-weight: 600;
+    letter-spacing: 2px;
+    font-size: 16px;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 0.8;
+    padding-left: 2px;
+    padding-top: 7.5px;
+    text-decoration:none;
+}
+
+
 </style>
 
 </head>
@@ -710,15 +790,16 @@ if(session.getAttribute("login") != null){
 <c:if test="${login ne null}">
 <!-- =============== 문의 채팅 시작 ====================== -->
 <%-- <jsp:include page="/WEB-INF/views/chatting/chatAdmin22.jsp" flush="false" /> --%>
-<div id="chatClick" style="cursor:pointer;"><img src="/resources/img/chatchat.png"></div> 
+<div id="chatClick"><span><i class="fa fa-commenting-o"></i>  고객센터</span></div> 
 
 <div class="chatNone" id="chat">      
-    <div class="row chat-window col-xs-5 col-md-3" id="chat_window_1" style="margin-left:10px;">
-        <div class="col-xs-12 col-md-12">
-         	<div class="panel panel-default">
+    <div class="row chat-window col-xs-5 col-md-3" id="chat_window_1" style="margin-left:10px;padding:0px;">
+        <div class="col-xs-12 col-md-12" style="padding:0px;">
+         	<div class="panel panel-default" style="margin-bottom:0px;">
                 <div class="panel-heading top-bar">
                 	<div style="display:inline;">
-                		<h4 class="panel-title" style="display:inline;"><span class="glyphicon glyphicon-comment"></span>&nbsp;1:1 문의하기</h4>
+                		<h4 class="panel-title" style="display:inline;"><span class="glyphicon glyphicon-comment"></span>&nbsp;고객센터</h4>
+                		<span id="chatClose">x</span>
                 	</div>
             	</div>
             	
@@ -748,9 +829,13 @@ if(session.getAttribute("login") != null){
 <!-- =============== 문의 채팅 끝 ======================  -->
 </c:if>
 
+<!-- top 버튼 -->
+<a id="toTop" href="#"><i class="fa fa-sort-up"></i>TOP</a>
 
 <script src="/resources/js/sockjs.js"></script>
 <script src="/resources/js/sockjs.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+
 <script>
 
 
@@ -883,6 +968,10 @@ $(document).ready(function(){
 		}
 	});
 	
+	$('#chatClose').click(function(){
+		$('#chat').removeClass('chatBlock');
+		$('#chat').addClass('chatNone');	
+	});
 })
 
 //비밀번호 찾기 클릭 시 로그인 모달 안보이도록 처리
@@ -941,6 +1030,29 @@ $(document).on('click', '#new_chat', function (e) {
     var clone = $( "#chat_window_1" ).clone().appendTo( ".container" );
     clone.css("margin-left", size_total);
 });
+
+//top 버튼
+$(function() { 
+	// 보이기 | 숨기기
+	$(window).scroll(function() { 
+		if ($(this).scrollTop() > 250) { //250 넘으면 버튼이 보여짐니다. 
+			$('#toTop').fadeIn(); 
+			//$('#toTop').css('left', $('#sidebar').offset().left); // #sidebar left:0 죄표
+		} else { 
+			$('#toTop').fadeOut(); 
+		} 
+	}); // 버튼 클릭시
+	
+	$("#toTop").click(function() { 
+		$('html, body').animate({ 
+			scrollTop : 0 // 0 까지 animation 이동합니다. 
+		}, 400); // 속도 400 
+		
+		return false; 
+	}); 
+});
+
+
 
 </script>
 

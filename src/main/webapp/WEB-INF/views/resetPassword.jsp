@@ -149,14 +149,13 @@ $(".changePw").on("click", function(){
 	
 	$.ajax({
 		url: '/resetPassword',
-		type: 'POST',
-		header:{
-			"X-HTTP-Method-Override" : "POST"
-		},
-		data:{ 	email : email,
-				newPw1 : newPw1, // 앞에는 컨트롤러에서 가져다 쓸 이름이고 뒤에는 값임!!
-				newPw2 : newPw2		
-		},
+		contentType: 'application/json',
+		method: 'POST',
+		data:JSON.stringify({
+			"email" : email,
+			"newPw1" : newPw1, // 앞에는 컨트롤러에서 가져다 쓸 이름이고 뒤에는 값임!
+			"newPw2" : newPw2
+		}),  
 		success : function(result){ //alert으로 result값을 하면 컨트롤에서 ""안에 쓴 값이 뜸
 			console.log("통신 성공했음");
 			console.log(result);
@@ -166,6 +165,7 @@ $(".changePw").on("click", function(){
 				$('#toast').css('background-color', 'rgb(0, 183, 238)');
 				viewSnackbar(); //스낵바 띄움
 				//location.href = "/study/main.jsp"; //스낵바 내려간 후에 메인으로 이동 처리
+				setTimeout(function(){ location.href = "/study/main"; }, 2000);
 			}else{  //0인 경우 비밀번호 변경 실패, 비밀번호 입력, 확인 불일치한 경우
 				$('#toast').html('<em class="fa fa-times"></em> 입력하신 비밀번호가 다릅니다.'); 
 				$('#toast').css('background-color', 'rgb(255, 110, 110)');

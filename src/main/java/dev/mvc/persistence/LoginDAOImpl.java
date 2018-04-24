@@ -98,6 +98,11 @@ public class LoginDAOImpl implements LoginDAO{
 	public int searchEmailCnt(String email) throws Exception{
 		return session.selectOne(namespace + ".searchEmailCnt", email);
 	}
+	
+	//시크릿키 업데이트
+	public void secretKeyUpdate(UserVO vo)throws Exception{
+		session.update(namespace+".secretKeyUpdate", vo);
+	}
 
 	
 }

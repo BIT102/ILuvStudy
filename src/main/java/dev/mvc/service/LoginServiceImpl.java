@@ -1,6 +1,7 @@
 package dev.mvc.service;
 
 import java.util.Date;
+import java.util.Random;
 
 import javax.inject.Inject;
 import javax.mail.internet.MimeMessage;
@@ -114,7 +115,25 @@ public class LoginServiceImpl implements LoginService {
 			String setfrom = "piia_@naver.com";         
 			String tomail  = email;     // 받는 사람 이메일
 			String title   = "[ILOVESTUDY] 비밀번호 재설정 이메일 입니다.";      // 제목
+			String secretKey = ""; //난수 저장용
+			UserVO vo= new UserVO(); //vo 생성
+			vo.setEmail(emailCheck); //vo에 이메일 담아줌
 			
+			//난수 생성 ============================================
+			Random rand = new Random(10);
+			rand.setSeed(System.currentTimeMillis());
+			
+			for(int i=0;i<12;i++){
+				System.out.println(rand.nextInt(1000));
+				secretKey += rand.nextInt(1000);
+			}
+			
+			System.out.println("==============================");
+			System.out.println(secretKey);
+			System.out.println("==============================");
+			//난수 생성 끝 ============================================
+			
+			vo.setSecretKey(secretKey);  //vo에 시크릿키 담아줌
 			
 			String content = "안녕하세요.I Love Study입니다. 비밀번호 재설정 메일입니다. 비밀번호 재설정을 원할 경우 아래의 버튼을 클릭해주세요."
 					+ "만약 본인이 아니거나 이 메일을 요청하지 않으신 경우에는 해당 메일을 무시해주세요. 감사합니다.";    // 내용
@@ -125,7 +144,7 @@ public class LoginServiceImpl implements LoginService {
 							+"<title>/</title>"
 							+"</head>"
 							+"<body>"
-							+"<a href = 'http://localhost:8888/resetPassword?email="+emailCheck+"'>비밀번호 재설정</a>"
+							+"<a href = 'http://localhost:8888/resetPassword?email="+emailCheck+"&secretKey="+secretKey+"'>비밀번호 재설정</a>"
 							+"</body>"
 							+"</html>";
 			
@@ -138,9 +157,11 @@ public class LoginServiceImpl implements LoginService {
 			//messageHelper2.setText(content);  // 메일 내용
 			messageHelper2.setText(content, htmltext); 
 			
-			mailSender.send(message2);
+			mailSender.send(message2);  // 메일 발송
 			
-			result = 1;//이메일 발송 완료 후 완료 상태 리턴
+			dao.secretKeyUpdate(vo);  //메일 보낸 후 시크릿키 user 테이블에 업데이트
+			
+			result = 1;  //이메일 발송 완료 후 완료 상태 리턴
 		}
 		
 		return result;

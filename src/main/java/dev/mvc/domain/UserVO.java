@@ -25,8 +25,16 @@ public class UserVO {
 	private int bno;					// 번호
 	private int emailConf;				// 이메일 인증 (0 : 미인증 , 1: 인증)
 	private String social;				// 소셜 로그인인 경우
+	private String secretKey;			// 비밀번호 재설정 시크릿 키
 	
 	
+	
+	public String getSecretKey() {
+		return secretKey;
+	}
+	public void setSecretKey(String secretKey) {
+		this.secretKey = secretKey;
+	}
 	public String getEmail() {
 		return email;
 	}
@@ -136,7 +144,7 @@ public class UserVO {
 				+ ", gender=" + gender + ", phoneNum=" + phoneNum + ", birth=" + birth + ", photo=" + photo
 				+ ", homepage=" + homepage + ", introduction=" + introduction + ", registDate=" + registDate
 				+ ", modifyDate=" + modifyDate + ", quitDate=" + quitDate + ", isDel=" + isDel + ", bno=" + bno
-				+ ", emailConf=" + emailConf + ", social=" + social + "]";
+				+ ", emailConf=" + emailConf + ", social=" + social + ", secretKey=" + secretKey + "]";
 	}
 	
 }
