@@ -35,11 +35,162 @@ $(document).ready(function() {
 
 
 
+.faq-q {
+	background-color:white;
+	margin-bottom:15px;
+}
+
+.page-head {
+    background: url(/resources/assets/img/services-bg.jpg) !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+}
+    
+ 
+    </style>
+    
+    
+    <script>
+	$(document).ready(function(){
+		if("${result}"=="수정되었습니다."){
+			alert("${result}");
+		}
+	})
 </script>
 
 </head>
 <body>
 
+
+	<!-- // Navigation -->
+<%@include file="../nav.jsp"%>
+<!-- header begin -->
+<div id="about-page">
+            <header class="page-head">
+                <div class="header-wrapper">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+
+                                <ol class="breadcrumb">
+                                    <li><a href="/study/main">Home</a></li>
+                                    <li class="active">Profile</li>
+                                </ol> <!-- end of /.breadcrumb -->
+
+                            </div>
+                        </div>
+                    </div> <!-- /.container -->
+                </div> <!-- /.header-wrapper -->
+            </header> <!-- /.page-head (header end) -->
+</div>
+
+
+<section class="bg-light-gray">
+
+		<div class="container" style="top:30%; background-color: #f9f9f9;">
+
+      <div id="service-page">
+
+                <!--  begin services section -->
+
+
+                        <div class="headline text-center">
+                        
+                            <div class="row">
+
+                                <div class="col-md-6 col-md-offset-3">
+                                    <h2 class="section-title">My page</h2>
+                                </div>
+                            </div>
+                        </div> <!-- /.headline -->
+
+                        <div class="service-list">
+                            <div class="row">
+                            
+                                <div class="col-md-3">
+                                    <div class="service-content text-center">
+                                        <div class="service-icon-box">
+                                            <div class="service-icon center-block">
+                                                <a href="profile"><i class="fa fa-address-book"></i></a>
+                                            </div>
+                                        </div> <!--  end of .service-icon-box  -->
+                                        <div class="service-info">
+                                            <h3 class="service-heading">My profile</h3>
+                                        </div> <!--   end of .service-info  -->
+                                    </div> <!--  end of .service-content  -->
+                                </div>
+                            
+                                <div class="col-md-3">
+                                    <div class="service-content text-center">
+                                        <div class="service-icon-box">
+                                            <div class="service-icon center-block">
+                                                <a href="addInfo"><i class="fa fa fa-address-card"></i></a>
+                                            </div>
+                                        </div> <!--  end of .service-icon-box  -->
+                                        <div class="service-info">
+                                        
+                                        <!-- 부가정보랑 비밀번호 변경을 넣습니다. -->
+                                            <h3 class="service-heading">부가정보 관리</h3>
+                                        </div> <!--   end of .service-info  -->
+                                    </div> <!--  end of .service-content  -->
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="service-content text-center">
+                                        <div class="service-icon-box">
+                                            <div class="service-icon center-block">
+                                               <a href="bookmark"><i class="fa fa fa-leanpub"></i></a>
+                                            </div>
+                                        </div> <!--  end of .service-icon-box  -->
+                                        <div class="service-info">
+                                           <h3 class="service-heading">스터디 관리</h3>      
+                                        </div> <!--   end of .service-info  -->
+                                    </div> <!--  end of .service-content  -->
+								</div>
+								
+								<div class="col-md-3">
+                                    <div class="service-content text-center">
+                                        <div class="service-icon-box">
+                                            <div class="service-icon center-block">
+                                               <a href=""><i class="fa fa-frown-o" onclick="quit();"></i></a>
+                                            </div>
+                                        </div> <!--  end of .service-icon-box  -->
+                                        <div class="service-info">
+                                            <h3 class="service-heading">회원 탈퇴</h3>      
+                                        </div> <!--   end of .service-info  -->
+                                    </div> <!--  end of .service-content  -->
+								</div>
+								
+								<div class="col-md-3">
+                                    <div class="service-content text-center">
+                                        <div class="service-icon-box">
+                                            <div class="service-icon center-block">
+                                               <a href=""><i class="fa fa-frown-o" onclick="quit();"></i></a>
+                                            </div>
+                                        </div> <!--  end of .service-icon-box  -->
+                                        <div class="service-info">
+                                            <h3 class="service-heading">회원 탈퇴</h3>      
+                                        </div> <!--   end of .service-info  -->
+                                    </div> <!--  end of .service-content  -->
+								</div>
+
+								
+                            </div> <!--  end of .row  -->
+                        </div> <!--  end of .service-list  -->
+                        
+                        
+                        <!-- 프로필 -->
+                        <div class="headline text-center">
+                        
+                            <div class="row">
+
+                                <div class="col-md-6 col-md-offset-3">
+                                    <h2 class="section-title">부가정보 관리</h2>
+                                </div>
+                            </div>
+                        </div> <!-- /.headline -->
+                        
                      <form name="addInfoForm" action="/addInfo" method="post">   
                         				<div>* 부가정보</div>
 											<table class="table table-hover">
@@ -60,6 +211,65 @@ $(document).ready(function() {
 													<div>
 														<input type="submit" id="btn-success" value="저장하기" style="width:80px; height:42px;">
 													</div>
-  </form>	 
+										<!-- </form>	 -->							
+													
+                                                <!-- begin faq-widget -->
+                            <div class="faq-widget" style="margin-top:70px;">
+
+	                                <div class="topics">
+	                                    <div class="faq-c">
+	                                        <div class="faq-q">
+	                                                                                                            비밀번호 변경 <span class="faq-t">+</span>
+	                                        </div>
+	                                        <div class="faq-a">
+												<div>* 비밀번호변경</div>
+													<table class="table table-hover">
+													<tbody>
+												 		<tr>
+												 		<th>기존 비밀번호</th>
+															<td><input type="password" name="nowPw"
+																 class="form-control" id="nowPw"
+																style="width: 550px;">
+															</td>
+															
+												 		</tr>
+												 		
+												 		<tr>
+												 		<th>새 비밀번호</th>
+															<td><input type="password" pattern=".{8,16}" name="newPw1"
+																 class="form-control" id="newPw1"
+																style="width: 550px;" placeholder="8자리에서 16자리 이하 영문, 숫자로만 설정해 주세요.">
+																<p id = "pwcheck" style = "color:red;padding-top: 15px;margin: 0;">비밀번호를 입력하세요</p>
+															</td>
+												 		</tr>												 		
+												 		
+												 		<tr>												 		<tr>
+												 		<th>비밀번호 확인</th>
+															<td><input type="password" pattern=".{8,16}" name="newPw2"
+																 class="form-control" id="newPw2"
+																style="width: 550px;" placeholder="비밀번호를 한번 더 입력해주세요.">
+																<p id = "pwcheck2" style = "color:red;padding-top: 15px;margin: 0;">비밀번호를 재입력하세요</p>
+															</td>
+												 		</tr>	
+												 	</tbody>
+												 	</table>
+												 	
+												 	<input type="hidden" value="${login.email}" name="email" readonly>
+												 		
+												 	<div>
+  														 <input id="btn-success" class="changePw" type="submit" value="변경하기" style="width:80px; height:42px;">
+													</div>		
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                            </div> <!-- /.faq-widget -->
+					  </form>	    
+                 </div> <!-- end of .container -->
+        </div>
+  
+</section>
+
+<%@include file="../footer.jsp"%>
+
 </body>
 </html>

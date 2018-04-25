@@ -36,6 +36,7 @@ import dev.mvc.service.ApplyService;
 import dev.mvc.service.BookmarkService;
 import dev.mvc.service.ReplyStudyService;
 import dev.mvc.service.StudyService;
+import dev.mvc.service.UserService;
 
 @Controller
 @RequestMapping("/study/*")
@@ -58,6 +59,8 @@ public class StudyController {
 	@Inject
 	private ApplyService apservice;
 	
+	@Inject
+	private UserService uservice;
 	
 	//스터디 수정
 	@RequestMapping(value="/update", method = RequestMethod.GET)
@@ -118,7 +121,7 @@ public class StudyController {
 	
 		rttr.addFlashAttribute("msg", "success");
 		
-		return "redirect:/study/listAll";
+		return "redirect:/join";
 	}
 	
 	
@@ -253,6 +256,7 @@ public class StudyController {
 		model.addAttribute("list", replyService.listReply(bno));  //댓글 정보 가져옴
 
 		model.addAttribute("aplist", apservice.list(bno));
+
 		
 		} else {
 		
@@ -274,6 +278,10 @@ public class StudyController {
 		model.addAttribute("bolist",bookservice.bolist(map));
 		
 		model.addAttribute("aplist", apservice.list(bno));
+		
+		System.out.println("?????????????????????????????????????????????????????????");
+		System.out.println(apservice.list(bno));
+		System.out.println("?????????????????????????????????????????????????????????");
 		
 		model.addAttribute(service.read(bno));
 		

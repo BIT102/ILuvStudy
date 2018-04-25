@@ -59,6 +59,8 @@
 	height:35px;
 	background-color:white;
 	border:1px solid gray;
+	border-radius:8%;
+	margin-top:10px;
 }
 .vctmo {
 	top:100%;
@@ -82,6 +84,35 @@ input:focus{
 	white-space: nowrap;
 	overflow: hidden; 
 	text-overflow: ellipsis;
+}
+
+.img-text{
+	position:absolute;
+	top:0;
+	z-index:1;
+	max-width: 370px;
+    width: 100%;
+	height:300px;
+    object-fit: cover;
+    background-color:black;
+    opacity:0.7;
+    color:white;
+    line-height:60px;
+}
+
+.portfolio-item {
+ 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);"
+ 	}
+.img-text p {
+	margin-bottom:0;
+	color:white;
+	margin-left:30px;
+	font-size:15px;
+}
+
+.img-text:hover{
+	background-color:#4892a8;
+    opacity:0.7;
 }
 </style>
 
@@ -168,13 +199,11 @@ input:focus{
 											<!-- end of /.about-client -->
 											<div class="main-speech">
 												<p>
-													<strong class="text-cut">제목 : ${studyVO.title}</strong><br> 주인 :
-													${studyVO.nickname}<br> 종류 : ${studyVO.cDName} /
-													${studyVO.cSName}<br> 지역 : ${studyVO.rDName} /
-													${studyVO.rSName}<br> 등록 :
-													<fmt:formatDate pattern="yyyy-MM-dd"
-														value="${studyVO.regdate}" />
-
+													<strong class="text-cut" style="font-size:25px; margin-bottom:10px;">${studyVO.title}</strong><br> 
+													${studyVO.nickname}<br> 
+													${studyVO.cDName} [ ${studyVO.cSName} ]<br> 
+													${studyVO.rDName} [ ${studyVO.rSName} ]<br> 
+										
 												</p>
 											</div>
 											<!-- end of /.main-speech  -->
@@ -204,12 +233,11 @@ input:focus{
 										<!-- end of /.about-client -->
 										<div class="main-speech">
 											<p>
-												<strong class="text-cut">제목 : ${test.title}</strong><br> 주인 :
-												${test.nickname}<br> 종류 : ${test.cDName} /
-												${test.cSName}<br> 지역 : ${test.rDName} / ${test.rSName}<br>
-												등록 :
-												<fmt:formatDate pattern="yyyy-MM-dd" value="${test.regdate}" />
-												<br>
+												<strong class="text-cut" style="font-size:25px; margin-bottom:10px;"> ${test.title}</strong><br> 
+												${test.nickname}<br> 
+												${test.cDName} [ ${test.cSName} ]<br> 
+												${test.rDName} [ ${test.rSName} ]<br>
+			
 											</p>
 										</div>
 										<!-- end of /.main-speech  -->
@@ -237,7 +265,80 @@ input:focus{
 
 				
 				<c:forEach items="${vctList}" var="studyVO" >
+				
 						<div class="col-md-4 col-sm-6 itemmore">
+						
+							<div class="portfolio-item" style="width:370px;">
+								
+								
+
+							<a href="/study/board${pageMakerStudy.makeSearch(pageMakerStudy.cri.page)}&bno=${studyVO.bno}">
+								<div class="img-text" >
+									<div style="margin-top:20px;">
+										<div class="col-md-12 col-xs-12 text-cut" style=" font-size:30px; text-align:center;">${studyVO.title}</div>
+										<div class="col-md-12 col-xs-12"></div>
+									</div>
+									<div>
+										<p style="margin-top:174px;"><strong>#  ${studyVO.cDName}</strong></p>
+										<p>#  ${studyVO.cSName}</p>
+										
+									</div>
+
+									<div style="margin-top:19px; margin-left:47%">
+									
+										<p style="width:150px; text-align:right;"><fmt:formatDate
+													pattern="yyyy-MM-dd" value="${studyVO.regdate}" /><br>
+										 <i class="fa fa-eye" style="color:red;"></i> ${studyVO.vct}　
+										 <i class="fa fa-user" style="color:red;"></i> ${studyVO.now}　
+										 <i class="fa fa-comment" style="color:red;"></i> ${studyVO.rct}
+										 </p>
+									</div>					
+								</div>
+							</a>
+							
+							
+								<div class="item-image">
+								
+									<a href="/study/board${pageMakerStudy.makeSearch(pageMakerStudy.cri.page)}&bno=${studyVO.bno}">
+
+										<c:choose>
+											<c:when test="${studyVO.name ne 'a'}">
+											
+											 	<img src="/study/displayFile?fileName=${studyVO.name}"
+													class="list-img img-responsive center-block"
+													style="max-width:370px; width:100%;height:300px;object-fit: cover;">
+											
+											
+											</c:when>
+											<c:otherwise>
+											
+												 <img src="/resources/assets/img/ha.jpg"
+													class="list-img img-responsive center-block "
+													style="max-width:370px; width:100%;height:300px;object-fit: cover;">
+											
+											</c:otherwise>
+										</c:choose>
+
+									</a>
+								
+								</div>
+									
+								<div class="item-description">
+									<div class="row">
+										<div style="margin-left:10%; font-size:15px;">
+											<p style="margin-bottom:0;"><strong>작성자 : ${studyVO.nickname}</strong></p>
+										</div>
+										<div style="margin-left:45%; font-size:17px; color:#5bc0de;">
+										<strong>${studyVO.rDName}[ ${studyVO.rSName} ]</strong>
+										</div>
+									</div>
+								</div>
+								<!-- end of /.item-description -->
+							</div>
+							<!-- end of /.portfolio-item -->
+						</div>
+				
+					<%-- 	<div class="col-md-4 col-sm-6 itemmore">
 							<div class="portfolio-item">
 								<div class="item-image">
 									<a
@@ -284,7 +385,7 @@ input:focus{
 								<!-- end of /.item-description -->
 							</div>
 							<!-- end of /.portfolio-item -->
-						</div>
+						</div> --%>
 					</c:forEach>
 					<div class="vctmo">
 						<input type="button" id="loadMore" value="더 보기">
@@ -294,19 +395,19 @@ input:focus{
 	<!--  end of testimonial  section -->
 
 	<!-- footer-navigation start -->
-	<nav class="hidden-xs hidden-sm navbar footer-nav" role="navigation">
+<!-- 	<nav class="hidden-xs hidden-sm navbar footer-nav" role="navigation">
 		<div class="container">
 
 			<div class="navbar-header">
 
-				<!-- navbar logo -->
+				navbar logo
 				<div class="navbar-brand">
 					<span class="sr-only">&copy;I Luv Study</span> <a href="index.html">
 						&copy;I Luv Study </a>
 				</div>
-				<!-- navbar logo -->
+				navbar logo
 
-			</div>
+			</div> -->
 			<!-- /.navbar-header -->
 
 			<!-- nav links -->
@@ -315,11 +416,6 @@ input:focus{
 
 		</div>
 		<!-- /.container -->
-	</nav>
-	<!-- footer-navigation end -->
-
-	</div>
-	<!-- end of /#home-page -->
 
 	<!--  Necessary scripts  -->
 

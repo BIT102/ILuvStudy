@@ -46,6 +46,9 @@ u.photo
 , au.status
 , au.regdate
 , u.NICKNAME
+, u.GENDER
+, u.HOMEPAGE
+, u.INTRODUCTION
 FROM
 apply_user au
 LEFT JOIN (user u)

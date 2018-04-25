@@ -772,7 +772,7 @@ if(session.getAttribute("login") != null){
 							<li class="dropdown"><a href="/study/register">스터디 등록하기</a>
 					<%} %> 
 					
-					<li class="dropdown"><a href="/study/listAll"><span>스터디 구경하기</span></a></li>
+					<li class="dropdown"><a href="/study/listAll?page=1&perPageNum=9&pallType=a"><span>스터디 구경하기</span></a></li>
 					<li class="dropdown"><a href="/sqna/list"><span>자주 묻는 질문</span></a>
 					</li>
 					<li class="dropdown"><a href="/study/notice"><span>공지사항</span></a>
@@ -802,6 +802,7 @@ if(session.getAttribute("login") != null){
                 		<span id="chatClose">x</span>
                 	</div>
             	</div>
+            	<!--조정인♥박영원  -->
             	
             	<!-- 내용이당 -->
             	<div class="panel-body msg_container_base">
