@@ -129,7 +129,7 @@
 
       <div id="service-page">
 
-     				 <!--  begin services section -->
+                <!--  begin services section -->
 
                         <div class="headline text-center">
                             <div class="row">
@@ -158,7 +158,8 @@
                                     <div class="service-content text-center">
                                         <div class="service-icon-box">
                                             <div class="service-icon center-block">
-                                                <a href="changePw"><i class="fa fa-expeditedssl"></i>
+                                                <!-- <a href="changePw"><i class="fa fa-expeditedssl"></i> -->
+                                                <a href="changePw"><i class="fa fa-lock"></i>
                                             </div>
                                         </div> <!--  end of .service-icon-box  -->
                                         <div class="service-info">
@@ -184,7 +185,7 @@
                                     <div class="service-content text-center">
                                         <div class="service-icon-box">
                                             <div class="service-icon center-block">
-                                               <a href=""><i class="fa fa-frown-o" onclick="quit();"></i></a>
+                                               <a href="quit"><i class="fa fa-frown-o"></i></a>
                                             </div>
                                         </div> <!--  end of .service-icon-box  -->
                                         <div class="service-info">
@@ -414,6 +415,8 @@
 <%@include file="../footer.jsp"%>
 
 </body>
+ 
+ <!-- 아코디언 메뉴 -->
  <script>
  $(".faq-q").click( function () {
      var container = $(this).parents(".faq-c");
@@ -430,6 +433,8 @@
      }
    });
  </script>
+
+<!-- 회원 탈퇴 스크립트 --> 
 <script>
 function quit() {
 	var msg = "정말 탈퇴하시겠습니까?"

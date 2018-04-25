@@ -20,6 +20,7 @@
 	src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 
 	<!-- 섬머노트 시작 -->
+	
 <!-- include libraries(jQuery, bootstrap) -->
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
@@ -35,33 +36,28 @@ var sn = jQuery.noConflict();
 <script>
 sn(document).ready(function() {
 	
-	// 편집도구 툴팁 종류 선택
-	sn('#summernote').summernote({
-		  toolbar: [
-		    // [groupName, [list of button]]
-		    ['style', ['bold', 'italic', 'underline', 'clear']],
-		    ['font', ['strikethrough', 'superscript', 'subscript']],
-		    ['fontsize', ['fontsize']],
-		    ['color', ['color']],
-		    ['para', ['ul', 'ol', 'paragraph']],
-		    ['height', ['height']]
-		  ]
-		});
 	
-	// 페이지 높이
 	sn('#summernote').summernote({
-            height: 300,                 // set editor height
-            minHeight: 300,             // set minimum height of editor
-            maxHeight: 500,             // set maximum height of editor
-            focus: true                  // set focus to editable area after initializing summernote
-            
-    });
-});
 
-sn(document).ready(function() {
-	sn('#summernote').summernote();
-	});
+		height: 150,                 // set editor height
+		minHeight: null,             // set minimum height of editor
+		maxHeight: null,             // set maximum height of editor
+		focus: true,                  // set focus to editable area after initializing summernote
+		
+		// 편집도구 툴팁 종류 선택   
+		toolbar: [
+		   ['style', ['bold', 'italic', 'underline', 'clear']],
+		   ['font', ['strikethrough']], 
+		   ['fontsize', ['fontsize']],
+		   ['color', ['color']],
+		   ['para', ['ul', 'ol', 'paragraph']]
+		 ]
+           
+	});   
+ 
+});
 </script>
+
 	<!-- 섬머노트 끝 -->
 
 <title>스터디 상세</title>
@@ -175,6 +171,25 @@ small {
 th{
 	width:300px;
 }
+
+/* 썸머노트 버튼 스타일 시작 */
+button[type="button"] {
+
+	width:5px;
+	height:35px;
+	/* margin:5px; */
+	border-radius:10%;
+	border: 1px solid gray;
+	/* style="padding-right : 30px; */
+	padding-right : 30px;
+}
+
+.note-toolbar .note-fontsize .note-btn-group button,
+.note-toolbar .note-para .note-btn-group button {
+    line-height: 12px !important;
+}
+/* 썸머노트 버튼 스타일 끝 */
+
 </style>
 </head>
 <body>

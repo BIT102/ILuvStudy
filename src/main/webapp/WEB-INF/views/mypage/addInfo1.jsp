@@ -150,7 +150,7 @@
 
       <div id="service-page">
 
-                <!--  begin services section -->
+                                <!--  begin services section -->
 
 
                         <div class="headline text-center">
@@ -164,9 +164,9 @@
                         </div> <!-- /.headline -->
 
                         <div class="service-list">
-                            <div class="row">
+                            <div class="row" style="padding-left: 100px;">
                             
-                                <div class="col-md-4">
+                                <div class="col-md-2">
                                     <div class="service-content text-center">
                                         <div class="service-icon-box">
                                             <div class="service-icon center-block">
@@ -179,7 +179,7 @@
                                     </div> <!--  end of .service-content  -->
                                 </div>
                             
-                                <div class="col-md-4">
+                                <div class="col-md-2">
                                     <div class="service-content text-center">
                                         <div class="service-icon-box">
                                             <div class="service-icon center-block">
@@ -187,14 +187,25 @@
                                             </div>
                                         </div> <!--  end of .service-icon-box  -->
                                         <div class="service-info">
-                                        
-                                        <!-- 부가정보랑 비밀번호 변경을 넣습니다. -->
                                             <h3 class="service-heading">부가정보 관리</h3>
                                         </div> <!--   end of .service-info  -->
                                     </div> <!--  end of .service-content  -->
                                 </div>
+                                
+                                <div class="col-md-2">
+                                    <div class="service-content text-center">
+                                        <div class="service-icon-box">
+                                            <div class="service-icon center-block">
+                                                <a href="changePw"><i class="fa fa-expeditedssl"></i>
+                                            </div>
+                                        </div> <!--  end of .service-icon-box  -->
+                                        <div class="service-info">
+                                            <h3 class="service-heading">비밀번호 변경</h3>
+                                        </div> <!--   end of .service-info  -->
+                                    </div> <!--  end of .service-content  -->
+                                </div>
 
-                                <div class="col-md-4">
+                                <div class="col-md-2">
                                     <div class="service-content text-center">
                                         <div class="service-icon-box">
                                             <div class="service-icon center-block">
@@ -207,7 +218,7 @@
                                     </div> <!--  end of .service-content  -->
 								</div>
 								
-								<div class="col-md-4">
+								<div class="col-md-2">
                                     <div class="service-content text-center">
                                         <div class="service-icon-box">
                                             <div class="service-icon center-block">
@@ -321,57 +332,6 @@
 													</div>
 										<!-- </form>	 -->							
 													
-                                                <!-- begin faq-widget -->
-                            <div class="faq-widget" style="margin-top:70px;">
-
-	                                <div class="topics">
-	                                    <div class="faq-c">
-	                                        <div class="faq-q">
-	                                                                                                            비밀번호 변경 <span class="faq-t">+</span>
-	                                        </div>
-	                                        <div class="faq-a">
-												<div>* 비밀번호변경</div>
-													<table class="table table-hover">
-													<tbody>
-												 		<tr>
-												 		<th>기존 비밀번호</th>
-															<td><input type="password" name="nowPw"
-																 class="form-control" id="nowPw"
-																style="width: 550px;">
-															</td>
-															
-												 		</tr>
-												 		
-												 		<tr>
-												 		<th>새 비밀번호</th>
-															<td><input type="password" pattern=".{8,16}" name="newPw1"
-																 class="form-control" id="newPw1"
-																style="width: 550px;" placeholder="8자리에서 16자리 이하 영문, 숫자로만 설정해 주세요.">
-																<p id = "pwcheck" style = "color:red;padding-top: 15px;margin: 0;">비밀번호를 입력하세요</p>
-															</td>
-												 		</tr>												 		
-												 		
-												 		<tr>												 		<tr>
-												 		<th>비밀번호 확인</th>
-															<td><input type="password" pattern=".{8,16}" name="newPw2"
-																 class="form-control" id="newPw2"
-																style="width: 550px;" placeholder="비밀번호를 한번 더 입력해주세요.">
-																<p id = "pwcheck2" style = "color:red;padding-top: 15px;margin: 0;">비밀번호를 재입력하세요</p>
-															</td>
-												 		</tr>	
-												 	</tbody>
-												 	</table>
-												 	
-												 	<input type="hidden" value="${login.email}" name="email" readonly>
-												 		
-												 	<div>
-  														 <input id="btn-success" class="changePw" type="submit" value="변경하기" style="width:80px; height:42px;">
-													</div>		
-	                                        </div>
-	                                    </div>
-	                                </div>
-	                            </div> <!-- /.faq-widget -->
-
                  </div> <!-- end of .container -->
         </div>
   </form>	      

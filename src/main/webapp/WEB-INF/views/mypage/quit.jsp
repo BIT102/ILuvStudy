@@ -99,19 +99,11 @@
     background-repeat: no-repeat !important;
 }
     
-    </style>
-    
-    
-    <script>
-	$(document).ready(function(){
-		if("${result}"=="변경되었습니다."){
-			alert("${result}");
-		}
-	})
-</script>
-    
-    
+    </style> 
 </head>
+
+
+
 
 
 <body>
@@ -171,7 +163,7 @@
                                     </div> <!--  end of .service-content  -->
                                 </div>
                
-                                 <div class="col-md-3">
+                                <div class="col-md-3">
                                     <div class="service-content text-center">
                                         <div class="service-icon-box">
                                             <div class="service-icon center-block">
@@ -221,54 +213,39 @@
                             <div class="row">
 
                                 <div class="col-md-6 col-md-offset-3">
-                                    <h2 class="section-title">비밀번호 변경</h2>
+                                    <h2 class="section-title">회원 탈퇴</h2>
                                 </div>
                             </div>
                         </div> <!-- /.headline -->
                         
-                  <!--    <form name="changePwForm" action="/changePw" method="post">    -->
-                        				<div>* 비밀번호변경</div>
+                     <!-- <form name="quitForm" action="/quit" method="post">   --> 
+                        				<div>* 회원 탈퇴 시, 3개월간 재가입이 불가능합니다.
+                        					 	탈퇴를 원하시면, 비밀번호를 입력해 주시기 바랍니다.
+                        				</div>
 													<table class="table table-hover">
 													<tbody>
 												 		<tr>
-												 		<th>기존 비밀번호</th>
-															<td><input type="password" name="nowPw"
-																 class="form-control" id="nowPw"
+												 		<th>비밀번호 입력</th>
+															<td><input type="password" name="confirmPw"
+																 class="form-control" id="confirmPw"
 																style="width: 550px;">
-															</td>
-															
+															</td>											
 												 		</tr>
-												 		
-												 		<tr>
-												 		<th>새 비밀번호</th>
-															<td><input type="password" pattern=".{8,16}" name="newPw1"
-																 class="form-control" id="newPw1"
-																style="width: 550px;" placeholder="8자리에서 16자리 이하 영문, 숫자로만 설정해 주세요.">
-																<p id = "pwcheck" style = "color:red;padding-top: 15px;margin: 0;">비밀번호를 입력하세요</p>
-															</td>
-												 		</tr>												 		
-												 		
-												 		<tr>												 		<tr>
-												 		<th>비밀번호 확인</th>
-															<td><input type="password" pattern=".{8,16}" name="newPw2"
-																 class="form-control" id="newPw2"
-																style="width: 550px;" placeholder="비밀번호를 한번 더 입력해주세요.">
-																<p id = "pwcheck2" style = "color:red;padding-top: 15px;margin: 0;">비밀번호를 재입력하세요</p>
-															</td>
-												 		</tr>	
+							
 												 	</tbody>
 												 	</table>
 												 	
 												 	<input type="hidden" value="${login.email}" name="email" readonly>
 												 		
 												 	<div>
-  														 <input id="btn-success" class="changePw" type="submit" value="변경하기" style="width:80px; height:42px;">
+  														 <input id="btn-success" class="quit" type="submit" value="탈퇴하기" style="width:80px; height:42px;">
+  														 <!-- <button id="btn-success" class="quit" onclick="quit();" style="width:80px; height:42px;">탈퇴하기</button> -->
 													</div>		
 			    
 
                  </div> <!-- end of .container -->
         </div>
-<!--   </form>	  -->     
+					<!-- </form> -->
 </section>
 
 <%@include file="../footer.jsp"%>
@@ -276,109 +253,45 @@
 </body>
 
 
-	
-	
-	 	<script>
-	
-	$(".changePw").on("click", function(){
-		
-		var nowPw = $('#nowPw').val();			//화면에서 입력된 내용은 변수 처리
-		var newPw1 = $('#newPw1').val();
-		var newPw2 = $('#newPw2').val();
-		
-		
-		console.log(nowPw);
-		console.log(newPw1);
-		console.log(newPw2);
-		
-		$.ajax({
-			url: '/changePw',
-			type: 'POST',
-			header:{
-				"Content-type" : "application/json",
-				"X-HTTP-Method-Override" : "POST"
-			},
-			data:{ 	nowPw : nowPw,
-					newPw1 : newPw1, // 앞에는 컨트롤러에서 가져다 쓸 이름이고 뒤에는 값임!!
-					newPw2 : newPw2		
-			},
-			success : function(result){ //alert으로 result값을 하면 컨트롤에서 ""안에 쓴 값이 뜸
-				console.log("ajax 통신");
-				console.log(result);
-				
-				if(result == "success"){
-					alert("변경 되었습니다.");
-				}else{
-					alert("비밀번호를 확인해 주세요.");
-				}
-			}
-		});
-	});
-	 
-		var charPw = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-	
-		// 알파벳 소문자, 숫자로만 이루어졌는지 체크
-		function containsCharOnly(input, chars){ // input값이 chars에 있는 값인지를 체크
-			console.log(input)
-			console.log((input.charAt(2)));
-			for(var i=0; i<input.length ; i++)
-				if(chars.indexOf(input.charAt(i))==-1){
-					console.log("문자체크 이거안되");
-					return false;
-				}
-	
-			return true;
-		}
-	
-			//========= Password 부분 ============
-			
-		// 비밀번호 유효성검사 비밀번호의 경우에는 버튼을 누를때마다 변화가 생기도록 하여 keyup event를 활용함.
-		$('#newPw1').keyup(function(){
-			var password = document.getElementById("newPw1").value;
 
-			// 길이, 알파벳 
-			if(password.length >= 8 && password.length <= 16 
-						&& containsCharOnly(password, charPw)){
+	<!-- 회원 탈퇴 -->
+	<script>
+ 	
+ 	$(".quit").on("click", function(){
+		
+		var msg = "정말 탈퇴하시겠습니까?"
+		var flag = confirm(msg);
+		var confirmPw = $('#confirmPw').val();
+		
+			if(flag==true) {
 					
-				$('#pwcheck').html("사용 가능한 비밀번호입니다.");
-				document.getElementById("pwcheck").style.color = 'blue';
-			}else{
-				$('#pwcheck').html("사용 불가능한 비밀번호입니다.");
-				document.getElementById("pwcheck").style.color = 'red';
+				$.ajax({
+					url: '/quit',
+					type: 'POST',
+					header:{
+						"Content-type" : "application/json",
+						"X-HTTP-Method-Override" : "POST"
+					},
+					data:{
+						confirmPw : confirmPw
+					},
+					success : function(result){ //alert으로 result값을 하면 컨트롤에서 ""안에 쓴 값이 뜸
+						console.log(result);
+						if(result == "success"){
+							alert("안녕히 가세요");
+						}else{
+							alert("비밀번호를 확인해 주세요.")
+						}	
+					}
+				});
+				
+			} else {
+				alert("취소하였습니다.")
+				return false;
 			}
-		});
-		
-		//========= Password 확인부분 ============
-		// 단순히 password와 비교만 하면됨.
-		$('#newPw2').keyup(function(){
-			var passwordConf = document.getElementById("newPw2").value;
-			var password = document.getElementById("newPw1").value; 
-			
-			if(passwordConf == password){
-				$('#pwcheck2').html("비밀번호 일치");
-				document.getElementById("pwcheck2").style.color = 'blue';
-			}else{
-				$('#pwcheck2').html("비밀번호 불일치");
-				document.getElementById("pwcheck2").style.color = 'red';
-			}
-		});
-		
-		var passwordV = false;
-		
-		// 비밀번호 변경하기 클릭 시,
-		$('.changePw').on("click", function(){
-	 		
-			// password 유효성
-			if(document.getElementById("pwcheck").style.color == 'blue' && 
-					document.getElementById("pwcheck2").style.color == 'blue'){
-				passwordV = true;
-			}
-		});
-		
-		
-		
+	});  
 	
-	</script>  
-
+	</script>
+	
 
 </html>
