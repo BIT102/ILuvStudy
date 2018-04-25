@@ -144,6 +144,37 @@ select::-ms-expand {
 	overflow: hidden; 
 	text-overflow: ellipsis;
 }
+
+.img-text{
+	position:absolute;
+	top:0;
+	z-index:1;
+	max-width: 370px;
+    width: 100%;
+	height:300px;
+    object-fit: cover;
+    background-color:black;
+    opacity:0.7;
+    color:white;
+    line-height:60px;
+}
+
+.portfolio-item {
+ 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);"
+ 	}
+.img-text p {
+	margin-bottom:0;
+	color:white;
+	margin-left:30px;
+	font-size:15px;
+}
+
+.img-text:hover{
+	background-color:#4892a8;
+    opacity:0.7;
+}
+
+
 </style>
 
 </head>
@@ -173,7 +204,7 @@ select::-ms-expand {
 
 	<!--  begin portfolio section  -->
 	<section class="bg-light-gray">
-		<div class="container">
+		<div class="container" style="width:1200px;">
 			<div class="row">
 				<form>
 					<div class="dropdown">
@@ -212,11 +243,10 @@ select::-ms-expand {
 					<div class="dropdown">
 						<select class="dropdown-select-version select" id="pallsel"
 							name="pallType" style="float: left; width:100%; height:30px;">
-							<option value="" selected>Filter</option>
 							<option value="a"
 							 <c:out value="${cri.pallType eq 'a'? 'selected':''}"/>>최신순</option>
 							<option value="b"
-							 <c:out value="${cri.pallType eq 'b'? 'selected':''}"/>>북마크순</option>
+							 <c:out value="${cri.pallType eq 'b'? 'selected':''}"/>>스크립순</option>
 							<option value="q"
 							 <c:out value="${cri.pallType eq 'q'? 'selected':''}"/>>조회순</option>
 							<option value="w"
@@ -237,50 +267,74 @@ select::-ms-expand {
 			</div>
 			<!-- /.headline -->
 			<div class="portfolio-item-list" style="background-color:#f9f9f9;">
+				
 				<div class="row">
-
+					
 					<c:forEach items="${list}" var="studyVO">
 						<div class="col-md-4 col-sm-6">
-							<div class="portfolio-item">
-								<div class="item-image">
-									<a
-										href="/study/board${pageMakerStudy.makeSearch(pageMakerStudy.cri.page)}&bno=${studyVO.bno}">
+						
+							<div class="portfolio-item" style="width:370px;">
+								
+								
 
+							<a href="/study/board${pageMakerStudy.makeSearch(pageMakerStudy.cri.page)}&bno=${studyVO.bno}">
+								<div class="img-text" >
+									<div style="margin-top:20px;">
+										<div class="col-md-12 col-xs-12 text-cut" style=" font-size:30px; text-align:center;">${studyVO.title}</div>
+										<div class="col-md-12 col-xs-12"></div>
+									</div>
+									<div>
+										<p style="margin-top:174px;"><strong>#  ${studyVO.cDName}</strong></p>
+										<p>#  ${studyVO.cSName}</p>
+										
+									</div>
+
+									<div style="margin-top:19px; margin-left:47%">
+									
+										<p style="width:150px; text-align:right;"><fmt:formatDate
+													pattern="yyyy-MM-dd" value="${studyVO.regdate}" /><br>
+										 <i class="fa fa-eye" style="color:red;"></i> ${studyVO.vct}　
+										 <i class="fa fa-user" style="color:red;"></i> ${studyVO.now}　
+										 <i class="fa fa-comment" style="color:red;"></i> ${studyVO.rct}
+										 </p>
+									</div>					
+								</div>
+							</a>
+							
+							
+								<div class="item-image">
+								
+									<a href="/study/board${pageMakerStudy.makeSearch(pageMakerStudy.cri.page)}&bno=${studyVO.bno}">
 
 										<c:choose>
 											<c:when test="${studyVO.name ne 'a'}">
+											
 											 	<img src="/study/displayFile?fileName=${studyVO.name}"
-													class="list-img img-responsive center-block "
-													style="max-width:370px; width:100%;height:215px;object-fit: cover;">
+													class="list-img img-responsive center-block"
+													style="max-width:370px; width:100%;height:300px;object-fit: cover;">
+											
+											
 											</c:when>
 											<c:otherwise>
+											
 												 <img src="/resources/assets/img/ha.jpg"
 													class="list-img img-responsive center-block "
-													style="max-width:370px; width:100%;height:215px;object-fit: cover;">
+													style="max-width:370px; width:100%;height:300px;object-fit: cover;">
+											
 											</c:otherwise>
 										</c:choose>
 
-										<div>
-											<span><i class="fa fa-plus"></i></span>
-										</div>
 									</a>
+								
 								</div>
-
+									
 								<div class="item-description">
 									<div class="row">
-										<div class="col-xs-9">
-											<span class="item-name text-cut">제목 :
-												${studyVO.title} </span> <span style="width: 280px;">주인 :
-												${studyVO.nickname}<br> 종류 : ${studyVO.cDName} /
-												${studyVO.cSName}<br> 지역 : ${studyVO.rDName} /
-												${studyVO.rSName}<br> 등록 : <fmt:formatDate
-													pattern="yyyy-MM-dd" value="${studyVO.regdate}" />
-											</span>
+										<div style="margin-left:10%; font-size:15px;">
+											<p style="margin-bottom:0;"><strong>작성자 : ${studyVO.nickname}</strong></p>
 										</div>
-										<div class="col-xs-3">
-											<span class="like"> <i class="fa fa-eercast"></i>
-												${studyVO.vct}
-											</span>
+										<div style="margin-left:45%; font-size:17px; color:#5bc0de;">
+										<strong>${studyVO.rDName}[ ${studyVO.rSName} ]</strong>
 										</div>
 									</div>
 								</div>
@@ -336,6 +390,12 @@ select::-ms-expand {
 	<script type="text/javascript"
 		src="/resources/assets/js/jquery.hoverdir.js"></script>
 
+	<script>
+	$(".img-text").mouseover(function(){
+		$("")
+	})
+	
+	</script>
 	<!-- script for portfolio section using hoverdirection -->
 	<script type="text/javascript">
 		$(function() {
@@ -395,12 +455,10 @@ select::-ms-expand {
 	<!-- 검색을 위한 스크립트 -->
 	<!-- 정렬조건을 주는 스크립트 -->
 	<script>
-	  var count;
-	  $(document).ready(function(){
-			//정렬합니다
-			var pallsel;
 
-			//클릭할때마다 변경
+	//정렬합니다
+	var pallsel="";
+	//클릭할때마다 변경
  			$("#pallsel").on("change", function(){
 				//선택조건 바꿨을때 
 				pallsel = $("#pallsel option:selected").val()
@@ -409,7 +467,8 @@ select::-ms-expand {
 					+ '${pageMakerStudy.makeQuery(1)}'
 					+ "&pallType="
 					+ pallsel
-			}); 
+			});	
+			
 		  	//정렬조건 최신순, 북마크순, 조회순, 댓글순
 
 			$(".btn-white").on("click", function(event){
@@ -419,23 +478,22 @@ select::-ms-expand {
 					+ "&searchType="
 					+ $("#select1 option:selected").val()
 					+ "&keyword=" + encodeURIComponent($('#keywordInput').val())
-					+ "&pallType="+ pallsel;
-		})  
-				
-	  })		 
-	
+					+ "&pallType="+ $("#pallsel option:selected").val();
+		})  					 
 	//타자누르면 검색됨
 	function onKeyDown() {
+		  			  		
 	  if(event.keyCode==13){
     	 
 		  self.location = "listAll"
 				+ '${pageMakerStudy.makeQuery(1)}'
 				+ "&searchType="
 				+ $("#select1 option:selected").val()
-				+ "&keyword=" + encodeURIComponent($('#keywordInput').val());
-				  + "&pallType="+ pallsel;
-	  }
-  }	
+				+ "&keyword=" + encodeURIComponent($('#keywordInput').val())
+				+ "&pallType="+ $("#pallsel option:selected").val();
+		  }
+	  }	
+	
 </script>
 
 

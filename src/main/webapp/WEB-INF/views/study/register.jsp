@@ -24,6 +24,9 @@
 	src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 <title>스터디 상세</title>
 
+
+
+
 <style>
 form th {
 	width: 30%;
@@ -32,11 +35,7 @@ form th {
 	width: 30%;
 	display: inline;
 }
-.fileDrop {
-	width: 200px;
-	height: 200px;
-	border: 1px dotted blue;
-}
+
 .small {
 	margin-left: 3px;
 	font-weight: bold;
@@ -51,9 +50,13 @@ small {
 	color: gray;
 }
 .fileDrop {
-	border: none;
-	width: 800px;
-	background-color: gray;
+	border:none;
+	width: 100%;
+	height:100%;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	padding-left:10px;
+	padding-top:10px;
+
 }
 .mailbox-attachment-info {
 	display: inline
@@ -130,9 +133,18 @@ small {
         width: 345px;
       }
 
-th{
-	width:300px;
+form th{
+	width:176px !important; 
+}   
+
+input[type=checkbox] {
+  -ms-transform: scale(2); /* IE */
+  -moz-transform: scale(2); /* FF */
+  -webkit-transform: scale(2); /* Safari and Chrome */
+  -o-transform: scale(2); /* Opera */
+  margin-right: 8px !important;
 }
+
 </style>
 </head>
 <body>
@@ -193,38 +205,38 @@ th{
                  	</label>
                  </c:forEach> --%> <!-- ======== 카테고리 =========== --> 
                  									<select id="catD" class="form-control">
-															<option>--</option>
+															<option value="z">대분류</option>
 															<c:forEach items="${studyCategory}" var="studyVO">
 																<option value="${studyVO.cDId}">${studyVO.cDName}</option>
 															</c:forEach>
 													</select> <select id="catS" class="form-control">
-															<option>--</option>
+															<option>소분류</option>
 															<%-- <option value="${studyVO.cSName}">${studyVO.cSName}</option> --%>
 													</select>
 														<button type="button" id="addCat"
 															class="btn btn-default btn-xs">추가</button>
-														<div id="addCatArea"></div>
+														<div id="addCatArea" style="margin-top:10px;"></div>
 													</td>
 												</tr>
 												<tr>
 													<th>스터디명</th>
 													<td><input type="text" name="title"
 														value="${studyVO.title}" class="form-control" id="studyTitle"
-														style="width: 550px;"></td>
+														style="width: 550px;" placeholder="스터디 제목을 입력해 주세요"></td>
 												</tr>
 												<tr>
 													<th>지역</th>
 													<td>
 														<!-- ======== 지 역 =========== --> <!-- 스터디에 선택된 지역정보 셀렉트 표시 -->
 														<select id="rDName" name='rDId' class="form-control">
-															<option value="z">--</option>
+															<option value="z">대지역</option>
 															<c:forEach items="${region}" var="studyVO">
 																<c:if test="${studyVO.rSId eq 1}">
 																	<option value="${studyVO.rDId}">${studyVO.rDName}</option>
 																</c:if>
 															</c:forEach>
 													</select> <select id="rSName" name='rSId' class="form-control">
-															<option value="">--</option>
+															<option value="">소지역</option>
 													</select>
 													
 												
@@ -263,27 +275,27 @@ th{
 													<th>연령</th>
 													<td>
 													<label class="fancy-checkbox"
-														style="display: inline-block;"> <input
+														style="display: inline-block; margin-right:8px; font-size:16px;"> <input
 															type="checkbox" class="age" name="age" value="10대"><span>10대
 														</span>
 													</label> <label class="fancy-checkbox"
-														style="display: inline-block;"> <input
+														style="display: inline-block; margin-right:8px; font-size:16px;"> <input
 															type="checkbox" class="age" name="age" value="20대"><span>20대
 														</span>
 													</label> <label class="fancy-checkbox"
-														style="display: inline-block;"> <input
+														style="display: inline-block; margin-right:8px; font-size:16px;"> <input
 															type="checkbox" class="age" name="age" value="30대"><span>30대
 														</span>
 													</label> <label class="fancy-checkbox"
-														style="display: inline-block;"> <input
+														style="display: inline-block; margin-right:8px; font-size:16px;"> <input
 															type="checkbox" class="age" name="age" value="40대"><span>40대
 														</span>
 													</label> <label class="fancy-checkbox"
-														style="display: inline-block;"> <input
+														style="display: inline-block; margin-right:8px; font-size:16px;"> <input
 															type="checkbox" class="age" name="age" value="50대"><span>50대
 														</span>
 													</label> <label class="fancy-checkbox"
-														style="display: inline-block;"> <input
+														style="display: inline-block; margin-right:8px; font-size:16px;"> <input
 															type="checkbox" class="age" name="age" value="무관"><span>무관
 														</span>
 													</label>
@@ -298,7 +310,7 @@ th{
 													<td>
 														<div class="studymax">
 															<input class="form-control" type="number" name="max"
-																min="0" style="width: 345px;" id="studymax">　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　
+																min="1" style="width: 345px;" id="studymax" value="1">　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　
 														</div>
 													</td>
 													<td>
@@ -329,7 +341,7 @@ th{
                 	<input type="text" name="st" value="${studyVO.st}" style="width:30%; display: inline;" class="form-control"> ~
                 	<input type="text" name="et" value="${studyVO.et}" style="width:30%; display: inline;" class="form-control"><br> --%>
 														<select id="sc" class="form-control">
-															<option value="" selected>--</option>
+															<option value="" selected>요일</option>
 															<option value="월요일">월요일</option>
 															<option value="화요일">화요일</option>
 															<option value="수요일">수요일</option>
@@ -338,7 +350,7 @@ th{
 															<option value="토요일">토요일</option>
 															<option value="일요일">일요일</option>
 													</select> <select id="st" class="form-control">
-															<option value="" selected>--</option>
+															<option value="" selected>시작시간</option>
 															<option value="6">6시</option>
 															<option value="7">7시</option>
 															<option value="8">8시</option>
@@ -359,10 +371,10 @@ th{
 															<option value="23">23시</option>
 															<option value="24">24시</option>
 													</select> <select id="et" class="form-control">
-															<option value="" selected>--</option>
+															<option value="" selected>종료시간</option>
 													</select> 
 
-									                <div id="addTimeArea">
+									                <div id="addTimeArea" style="margin-top:10px;">
 									                </div>    
 											
 													<script>
@@ -372,7 +384,7 @@ th{
 																			console.log("str="+ stval);
 																			var str = "";
 																			if(stval==""){
-																				str = "<option>--</option>"
+																				str = "<option>종료시간</option>"
 																				$("#et").html(str);
 																			} else {
 																			for (var i = stval; i <= 24; i++) {
@@ -400,20 +412,20 @@ th{
 												<tr>
 													<th>스터디 소개</th>
 													<td><textarea name="content" class="form-control"
-															style="height: 140px;">${studyVO.content}</textarea></td>
+															style="height: 140px; resize: none;">${studyVO.content}</textarea></td>
 												</tr>
 												<tr>
 													<th>이미지</th>
 													<td>
-														<div class="studyfile">
+														<div class='fileDrop'>
 
-															<h5>첫 사진은 메인 화면에 등록됩니다.</h5>
-															<p> 드레그하여 사진의 순서를 변경할 수 있습니다.</p>
-															<div class='fileDrop'></div>
+															<h5>드래그하여 사진을 등록해 주세요</h5>
+															<p> 첫 사진은 메인 화면에 등록됩니다 &amp; 드래그하여 사진의 순서를 변경할 수 있습니다</p>
+														
 																
-															<ul class='uploadedList'></ul>
-															
-														</div>
+															<ul class='uploadedList' style="height:154px;"></ul>
+														</div>	
+														
 													</td>
 												</tr>
 											</tbody>
@@ -456,7 +468,7 @@ th{
 	  jb( function() {
 		    jb( ".uploadedList" ).sortable();
 		    jb( ".uploadedList" ).disableSelection();
-		  } );
+		  } );//바보
 	
 	</script>
 
@@ -568,7 +580,14 @@ th{
 								
 								var catd = $('#catD option:selected').val();
 								var cats = $('#catS option:selected').val();
-
+									
+								if(catd == "z"){
+						    		alert("항목을 모두 입력하세요");
+						    		$("#addCat").focus();
+						    		return false;
+									
+								}
+								
 								
 								if(count==0){
 									
@@ -576,13 +595,12 @@ th{
 									
 									var catd2 = $('#catD option:selected').text();
 									var cats2 = $('#catS option:selected').text();
-									var cat = "<span><input type='hidden' name='categoryD' value="+catd+">"
+									var cat = "<div class='col-md-4'><input type='hidden' name='categoryD' value="+catd+">"
 											+ "<input type='hidden' name='categoryS' value="+cats+">"
-											+ "<div>"
 											+ catd2
 											+ " > "
 											+ cats2
-											+ "</span><button type='button' onclick = 'btn_delete(this)' class='btn btn-default btn-xs'>삭제</button></div>";
+											+ "<small class='small' onclick='btn_delete(this)' >X</small></div>";
 									$("#addCatArea").append(cat);
 
 									setd = catd;
@@ -602,13 +620,12 @@ th{
 										
 										var catd2 = $('#catD option:selected').text();
 										var cats2 = $('#catS option:selected').text();
-										var cat = "<span><input type='hidden' name='categoryD' value="+catd+">"
+										var cat = "<div class='col-md-4'><input type='hidden' name='categoryD' value="+catd+">"
 												+ "<input type='hidden' name='categoryS' value="+cats+">"
-												+ "<div>"
 												+ catd2
 												+ " > "
 												+ cats2
-												+ "</span><button type='button' onclick = 'btn_delete(this)' class='btn btn-default btn-xs'>삭제</button></div>";
+												+"<small class='small' onclick='btn_delete(this)' >X</small></div>";
 										$("#addCatArea").append(cat);
 									}
 	
@@ -637,14 +654,13 @@ th{
 							}
 							 
 							
-							var time = "<span><input type='hidden' name='startSc' value="+scval+">"
+							var time = "<div class='col-md-4'><input type='hidden' name='startSc' value="+scval+">"
 							+ "<input type='hidden' name='stEt' value="+stval+"시~"+etval+">"
-							+ "<div>"
 							+ scval
 							+ " > "
 							+ stval
 							+ "시~" + etval
-							+ "</span><button type='button' onclick = 'btn_delete(this)' class='btn btn-default btn-xs'>삭제</button></div>";
+							+ "<small class='small' onclick='btn_delete(this)' >X</small></div>";
 											
 										     $("#addTimeArea").append(time);
 										     
@@ -678,7 +694,7 @@ th{
 					
 					var option = "";
 					if (result.length < 2) {
-						option = "<option>--</option>"
+						option = "<option>소지역</option>"
 					} else {
 						for (var i = 0; i < result.length; i++) {
 							option += "<option value="+result[i].rSId+">"
@@ -707,8 +723,9 @@ th{
 				success : function(result) { //반환받은 지역테이블 정보, list 배열
 					var option = "";
 					var str = $("#catD option:selected").val();
+					
 					if (result.length == 0) {
-						option = "<option>--</option>";
+						option = "<option>소분류</option>";
 					} else {
 						for (var i = 0; i < result.length; i++) {
 							option += "<option value="+result[i].cSId+">"

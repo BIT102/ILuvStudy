@@ -97,7 +97,7 @@ color:#6b6b6b;
 							<li class="dropdown"><a href="/study/register">스터디 등록하기</a>
 						</c:otherwise>
 					</c:choose>
-					<li class="dropdown"><a href="/study/listAll"><span>스터디
+					<li class="dropdown"><a href="/study/listAll?page=1&perPageNum=9&pallType=a"><span>스터디
 								구경하기</span></a></li>
 					<li class="dropdown"><a href="/sqna/list"><span>FAQ</span></a>
 					</li>

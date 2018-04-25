@@ -94,6 +94,42 @@
     background-position: center !important;
     background-repeat: no-repeat !important;
 }
+.text-cut{
+	display: inline-block;
+	width:283px;
+	white-space: nowrap;
+	overflow: hidden; 
+	text-overflow: ellipsis;
+}
+
+.img-text{
+	position:absolute;
+	top:0;
+	z-index:1;
+	max-width: 370px;
+    width: 100%;
+	height:300px;
+    object-fit: cover;
+    background-color:black;
+    opacity:0.7;
+    color:white;
+    line-height:60px;
+}
+
+.portfolio-item {
+ 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);"
+ 	}
+.img-text p {
+	margin-bottom:0;
+	color:white;
+	margin-left:30px;
+	font-size:15px;
+}
+
+.img-text:hover{
+	background-color:#4892a8;
+    opacity:0.7;
+}
     
     </style>
 </head>
@@ -226,47 +262,70 @@
                                         </div>
                                         <div class="faq-a">
 						                    <c:forEach items="${list}" var="studyVO">
-												<div class="col-md-4 col-sm-6">
-													<div class="portfolio-item">
-														<div class="item-image">
-															<a
-																href="/study/board${pageMakerStudy.makeSearch(pageMakerStudy.cri.page)}&bno=${studyVO.bno}">
+												<div class="col-md-4 col-sm-6 itemmore">
+												
+													<div class="portfolio-item" style="width:370px;">
+														
+														
 						
+													<a href="/study/board${pageMakerStudy.makeSearch(pageMakerStudy.cri.page)}&bno=${studyVO.bno}">
+														<div class="img-text" >
+															<div style="margin-top:20px;">
+																<div class="col-md-12 col-xs-12 text-cut" style=" font-size:30px; text-align:center;">${studyVO.title}</div>
+																<div class="col-md-12 col-xs-12"></div>
+															</div>
+															<div>
+																<p style="margin-top:174px;"><strong>#  ${studyVO.cDName}</strong></p>
+																<p>#  ${studyVO.cSName}</p>
+																
+															</div>
+						
+															<div style="margin-top:19px; margin-left:47%">
+															
+																<p style="width:150px; text-align:right;"><fmt:formatDate
+																			pattern="yyyy-MM-dd" value="${studyVO.regdate}" /><br>
+																 <i class="fa fa-eye" style="color:red;"></i> ${studyVO.vct}　
+																 <i class="fa fa-user" style="color:red;"></i> ${studyVO.now}　
+																 <i class="fa fa-comment" style="color:red;"></i> ${studyVO.rct}
+																 </p>
+															</div>					
+														</div>
+													</a>
+													
+													
+														<div class="item-image">
+														
+															<a href="/study/board${pageMakerStudy.makeSearch(pageMakerStudy.cri.page)}&bno=${studyVO.bno}">
 						
 																<c:choose>
 																	<c:when test="${studyVO.name ne 'a'}">
-																		<img src="/study/displayFile?fileName=${studyVO.name}"
-																			class="img-responsive center-block"
-																			style="width: 370px; height: 216px;">
+																	
+																	 	<img src="/study/displayFile?fileName=${studyVO.name}"
+																			class="list-img img-responsive center-block"
+																			style="max-width:370px; width:100%;height:300px;object-fit: cover;">
+																	
+																	
 																	</c:when>
 																	<c:otherwise>
-																		<img src="/resources/assets/img/ha.jpg"
-																			class="img-responsive center-block"
-																			style="width: 370px; height: 216px;">
+																	
+																		 <img src="/resources/assets/img/ha.jpg"
+																			class="list-img img-responsive center-block "
+																			style="max-width:370px; width:100%;height:300px;object-fit: cover;">
+																	
 																	</c:otherwise>
 																</c:choose>
 						
-																<div>
-																	<span><i class="fa fa-plus"></i></span>
-																</div>
 															</a>
+														
 														</div>
-						
+															
 														<div class="item-description">
 															<div class="row">
-																<div class="col-xs-6">
-																	<span class="item-name" style="width: 230px;">제목 :
-																		${studyVO.title} </span> <span style="width: 280px;">작성자 :
-																		${studyVO.nickname}<br> 종류 : ${studyVO.cDName} /
-																		${studyVO.cSName}<br> 지역 : ${studyVO.rDName} /
-																		${studyVO.rSName}<br> 등록 : <fmt:formatDate
-																			pattern="yyyy-MM-dd" value="${studyVO.regdate}" />
-																	</span>
+																<div style="margin-left:10%; font-size:15px;">
+																	<p style="margin-bottom:0;"><strong>작성자 : ${studyVO.nickname}</strong></p>
 																</div>
-																<div class="col-xs-6">
-																	<span class="like"> <i class="fa fa-eercast"></i>
-																		${studyVO.vct}
-																	</span>
+																<div style="margin-left:45%; font-size:17px; color:#5bc0de;">
+																<strong>${studyVO.rDName}[ ${studyVO.rSName} ]</strong>
 																</div>
 															</div>
 														</div>
@@ -287,54 +346,77 @@
 	                                        <div class="faq-a">
 	          
 								          		<c:forEach items="${relist}" var="studyVO">
-													<div class="col-md-4 col-sm-6">
-														<div class="portfolio-item">
-															<div class="item-image">
-																<a
-																	href="/study/board${pageMakerStudy.makeSearch(pageMakerStudy.cri.page)}&bno=${studyVO.bno}">
-							
-							
-																	<c:choose>
-																		<c:when test="${studyVO.name ne 'a'}">
-																			<img src="/study/displayFile?fileName=${studyVO.name}"
-																				class="img-responsive center-block"
-																				style="width: 370px; height: 216px;">
-																		</c:when>
-																		<c:otherwise>
-																			<img src="/resources/assets/img/ha.jpg"
-																				class="img-responsive center-block"
-																				style="width: 370px; height: 216px;">
-																		</c:otherwise>
-																	</c:choose>
-							
-																	<div>
-																		<span><i class="fa fa-plus"></i></span>
-																	</div>
-																</a>
+													<div class="col-md-4 col-sm-6 itemmore">
+												
+													<div class="portfolio-item" style="width:370px;">
+														
+														
+						
+													<a href="/study/board${pageMakerStudy.makeSearch(pageMakerStudy.cri.page)}&bno=${studyVO.bno}">
+														<div class="img-text" >
+															<div style="margin-top:20px;">
+																<div class="col-md-12 col-xs-12 text-cut" style=" font-size:30px; text-align:center;">${studyVO.title}</div>
+																<div class="col-md-12 col-xs-12"></div>
 															</div>
-							
-															<div class="item-description">
-																<div class="row">
-																	<div class="col-xs-6">
-																		<span class="item-name" style="width: 230px;">제목 :
-																			${studyVO.title} </span> <span style="width: 280px;">작성자 :
-																			${studyVO.nickname}<br> 종류 : ${studyVO.cDName} /
-																			${studyVO.cSName}<br> 지역 : ${studyVO.rDName} /
-																			${studyVO.rSName}<br> 
-																			등록 : <fmt:formatDate pattern="yyyy-MM-dd" value="${studyVO.regdate}" />
-																		</span>
-																	</div>
-																	<div class="col-xs-6">
-																		<span class="like"> <i class="fa fa-eercast"></i>
-																			${studyVO.vct}
-																		</span>
-																	</div>
+															<div>
+																<p style="margin-top:174px;"><strong>#  ${studyVO.cDName}</strong></p>
+																<p>#  ${studyVO.cSName}</p>
+																
+															</div>
+						
+															<div style="margin-top:19px; margin-left:47%">
+															
+																<p style="width:150px; text-align:right;"><fmt:formatDate
+																			pattern="yyyy-MM-dd" value="${studyVO.regdate}" /><br>
+																 <i class="fa fa-eye" style="color:red;"></i> ${studyVO.vct}　
+																 <i class="fa fa-user" style="color:red;"></i> ${studyVO.now}　
+																 <i class="fa fa-comment" style="color:red;"></i> ${studyVO.rct}
+																 </p>
+															</div>					
+														</div>
+													</a>
+													
+													
+														<div class="item-image">
+														
+															<a href="/study/board${pageMakerStudy.makeSearch(pageMakerStudy.cri.page)}&bno=${studyVO.bno}">
+						
+																<c:choose>
+																	<c:when test="${studyVO.name ne 'a'}">
+																	
+																	 	<img src="/study/displayFile?fileName=${studyVO.name}"
+																			class="list-img img-responsive center-block"
+																			style="max-width:370px; width:100%;height:300px;object-fit: cover;">
+																	
+																	
+																	</c:when>
+																	<c:otherwise>
+																	
+																		 <img src="/resources/assets/img/ha.jpg"
+																			class="list-img img-responsive center-block "
+																			style="max-width:370px; width:100%;height:300px;object-fit: cover;">
+																	
+																	</c:otherwise>
+																</c:choose>
+						
+															</a>
+														
+														</div>
+															
+														<div class="item-description">
+															<div class="row">
+																<div style="margin-left:10%; font-size:15px;">
+																	<p style="margin-bottom:0;"><strong>작성자 : ${studyVO.nickname}</strong></p>
+																</div>
+																<div style="margin-left:45%; font-size:17px; color:#5bc0de;">
+																<strong>${studyVO.rDName}[ ${studyVO.rSName} ]</strong>
 																</div>
 															</div>
-															<!-- end of /.item-description -->
 														</div>
-														<!-- end of /.portfolio-item -->
+														<!-- end of /.item-description -->
 													</div>
+													<!-- end of /.portfolio-item -->
+												</div>
 												</c:forEach>
 	                                        </div>
 	                                    </div>
@@ -352,55 +434,70 @@
                                         <div class="faq-a">
 													<!-- 신청 스터디 불러오기 -->
 											<c:forEach items="${aplist}" var="studyVO">
-												<div class="col-md-4 col-sm-6">
-													<div class="portfolio-item">
+												<div class="col-md-4 col-sm-6 itemmore">
+												
+													<div class="portfolio-item" style="width:370px;">
+														
+														
+						
+													<a href="/study/board${pageMakerStudy.makeSearch(pageMakerStudy.cri.page)}&bno=${studyVO.bno}">
+														<div class="img-text" >
+															<div style="margin-top:20px;">
+																<div class="col-md-12 col-xs-12 text-cut" style=" font-size:30px; text-align:center;">${studyVO.title}</div>
+																<div class="col-md-12 col-xs-12"></div>
+															</div>
+															<div>
+																<p style="margin-top:174px;"><strong>#  ${studyVO.cDName}</strong></p>
+																<p>#  ${studyVO.cSName}</p>
+																
+															</div>
+						
+															<div style="margin-top:19px; margin-left:47%">
+															
+																<p style="width:150px; text-align:right;"><fmt:formatDate
+																			pattern="yyyy-MM-dd" value="${studyVO.regdate}" /><br>
+																 <i class="fa fa-eye" style="color:red;"></i> ${studyVO.vct}　
+																 <i class="fa fa-user" style="color:red;"></i> ${studyVO.now}　
+																 <i class="fa fa-comment" style="color:red;"></i> ${studyVO.rct}
+																 </p>
+															</div>					
+														</div>
+													</a>
+													
+													
 														<div class="item-image">
-														<!-- 페이지 나누기 -->
+														
 															<a href="/study/board${pageMakerStudy.makeSearch(pageMakerStudy.cri.page)}&bno=${studyVO.bno}">
+						
 																<c:choose>
-																<%-- 이미지 가져오기 --%>
 																	<c:when test="${studyVO.name ne 'a'}">
-																		<img src="/study/displayFile?fileName=${studyVO.name}"
-																			class="img-responsive center-block"
-																			style="width: 370px; height: 216px;">
+																	
+																	 	<img src="/study/displayFile?fileName=${studyVO.name}"
+																			class="list-img img-responsive center-block"
+																			style="max-width:370px; width:100%;height:300px;object-fit: cover;">
+																	
+																	
 																	</c:when>
-																<%-- 이미지 없을 시, 기본 이미지 표출 --%>	
 																	<c:otherwise>
-																		<img src="/resources/assets/img/ha.jpg"
-																			class="img-responsive center-block"
-																			style="width: 370px; height: 216px;">
+																	
+																		 <img src="/resources/assets/img/ha.jpg"
+																			class="list-img img-responsive center-block "
+																			style="max-width:370px; width:100%;height:300px;object-fit: cover;">
+																	
 																	</c:otherwise>
 																</c:choose>
-																<div>
-																	<span><i class="fa fa-plus"></i></span>
-																</div>
+						
 															</a>
+														
 														</div>
+															
 														<div class="item-description">
 															<div class="row">
-																<div class="col-xs-6">
-																<!-- 스터디 상세 내용 불러오기 -->
-																	<span class="item-name" style="width: 230px;">
-																	제목 : ${studyVO.title} </span> 
-																	<span style="width: 280px;">
-																	작성자 : ${studyVO.nickname}<br> 
-																	카테고리 : ${studyVO.cDName} / ${studyVO.cSName}<br> 
-																	지역 : ${studyVO.rDName} / ${studyVO.rSName}<br> 
-																	<%-- 승인여부 : ${studyVO.apStatus}<br> --%>
-																	시작일 : ${studyVO.sd}<br>
-																	<font color = "red">
-																	<c:if test="${studyVO.apStatus eq 'O'}">신청 승인이 되었습니다. </c:if>
-																	<c:if test="${studyVO.apStatus eq 'D'}">신청 승인이 대기 중입니다.</c:if>
-																	<c:if test="${studyVO.apStatus eq 'X'}">신청 승인이 거절되었습니다.</c:if>
-																	</font><br>
-																	<!-- 승인 여부(버튼) **버튼으로 할 지, 그냥 텍스트로 띄울 지 모르겠어요. 아래 쪽에 버튼 스크립트 있어요**-->
-																	<%-- <button type="button" class="apStatus" value="${studyVO.apStatus}">승인 여부</button> --%>
-																	</span>
+																<div style="margin-left:10%; font-size:15px;">
+																	<p style="margin-bottom:0;"><strong>작성자 : ${studyVO.nickname}</strong></p>
 																</div>
-																<div class="col-xs-6">
-																	<span class="like"> <i class="fa fa-eercast"></i>
-																		${studyVO.vct}
-																	</span>
+																<div style="margin-left:45%; font-size:17px; color:#5bc0de;">
+																<strong>${studyVO.rDName}[ ${studyVO.rSName} ]</strong>
 																</div>
 															</div>
 														</div>

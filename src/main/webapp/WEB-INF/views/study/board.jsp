@@ -26,6 +26,11 @@ h1 {
 	float: left;
 }
 
+h2 {
+	color:#5bc0de !important;
+} 
+
+
 #nav1 {
 	float: left;
 	height: 40px;
@@ -121,7 +126,7 @@ body {
 }
 
 
-#modDiv{
+/* #modDiv{
 	width:450px;
 	height:220px;
 	background-color:white;
@@ -130,9 +135,9 @@ body {
 	left:30%;
 	z-index:1000;
 	border: 3px double gray;
-}
+} */
 
-#amodDiv {
+/* #amodDiv {
 	width:450px;
 	height:600px;
 	background-color:white;
@@ -145,7 +150,7 @@ body {
 	padding:20px;
 	z-index:1000;
 }
-
+ */
 .modal-title{
 	color:white;
 }
@@ -186,7 +191,7 @@ body {
 	margin-top:30px;
 }
 
-.time td {
+.time th {
 	width:100px;
 	padding:10px;
 }
@@ -196,32 +201,111 @@ body {
 }
 
 
-.basic-content td{
-	font-size:20px;
-	padding-bottom: 60px;
-    padding-top: 20px;
-}
-
 .basic-content th{
 	font-size:20px;
-	padding-right:230px;
-	padding-bottom: 60px;
+	padding-bottom: 20px;
     padding-top: 20px;
 }
 
-.time td{
+.basic-content td{
+	font-size:20px;
+	padding-right:220px;
+	padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+.time th{
 	padding-bottom:0 !important;
 	width:127px;
 }
 
-.time th{
+.time td{
 	padding-bottom:0 !important;	
 	padding-right:200px;
 }
 
-.region td{
+.region th{
 	width:257px;	
 	
+}
+
+.back-img{
+	position:relative;
+}
+
+.back{
+	position:absolute;
+	top:0;
+    object-fit: cover;
+    background-color:black;
+    width:50px;
+    height:50px;
+    opacity:0.7;
+    width:100%;
+    height:480px;
+}
+
+
+.modal {
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgb(0, 0, 0); /* Fallback color */
+	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+	padding-top: 60px;
+}
+
+
+#amodDiv {
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgb(0, 0, 0); /* Fallback color */
+	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+	padding-top: 60px;
+}
+
+
+.login-container {
+	position: relative;
+	width: 300px;
+	margin: 80px auto;
+	padding: 20px 40px 40px;
+	text-align: center;
+	background: #fff;
+	border: 1px solid #ccc;
+}
+
+.login-container::after {
+	top: 5px;
+	z-index: -2;
+	-webkit-transform: rotateZ(-2deg);
+	-moz-transform: rotateZ(-2deg);
+	-ms-transform: rotateZ(-2deg);
+}
+
+.close {
+	position: absolute;
+	right: 25px;
+	top: 20px;
+	color: #000;
+	font-size: 35px;
+	font-weight: bold;
+}
+
+.close:hover, .close:focus {
+	color: red;
+	cursor: pointer;
 }
 
 </style>
@@ -233,7 +317,7 @@ body {
 		
 	<div id="multiple-blog-page">
 		<!-- header begin -->
-		<header class="page-head">
+		<header class="page-head" style="margin-bottom:10px;">
 			<div class="header-wrapper">
 				<div class="container">
 					<div class="row">
@@ -260,73 +344,77 @@ body {
 		</form>
 
 
+	
+		<div class="back-img">
+			<c:choose>
+				<c:when test="${studyVO.name ne 'a'}">
+					<img src="/study/displayFile?fileName=${studyVO.name}"
+						 class="img-responsive center-block "
+						 style="width:100%; height:480px;object-fit: cover;">
+				</c:when>
+			    <c:otherwise>
+					<img src="/resources/assets/img/ha.jpg"
+						 class="img-responsive center-block "
+						 style="width:100%; height:480px;object-fit: cover;">
+			    </c:otherwise>
+			</c:choose>
+		<div class="back">
+			<div class=container style="height:100%; width:1300px; margin-top:80px; padding:10px;">
+			
+				<div class="row" style="text-align:center; color:white; font-size:50px;">
+						${studyVO.title}
+				</div>
+					<div style="margin-top:150px;">
+						<img src="/study/displayFile?fileName=${studyVO.photo}"
+							 class="img-responsive center-block img-circle" style="width:150px; height:150px; margin-left:65px;">
+
+					</div>
+					<div>
+						<p style="font-size:20px; color:white; margin-top:-72px; margin-left:257px;">${studyVO.nickname}<br>
+						<i class="fa fa-eercast" style="color:red;"></i> ${studyVO.vct}　　<fmt:formatDate pattern="yyyy-MM-dd" value="${studyVO.regdate}" /></p>	 
+					</div>
+					
+					<div style="margin-top:-65px; color:white;">
+						<p class="pull-left" style="position:absolute; margin-left:950px;">
+					<!-- 북마크등록 // 로그인한 사람만 -->
+						<span><c:if test="${not empty login}">
+							<!-- 등록 안되어있을때 -->
+							<c:if test="${bolist.checked == 0}">
+								<i class="fa fa-heart-o" id="heart"
+								onclick="myFunction1(this)" style="font-size: 35px; cursor:pointer;"></i>
+							</c:if>
+							<!-- 북마크 등록되어있을때 -->
+							<c:if test="${bolist.checked == 1}">
+								<span id="delete"> <i class="fa fa-heartbeat"
+														id="heart" onclick="myFunction1(this)"
+														style="font-size: 35px; cursor:pointer;"></i>
+								</span>
+							</c:if>
+							<strong  style="color:white; font-size:20px;"> 스크립을 해주세요 </strong>
+							</c:if> </span> 					
+						</p>
+					</div>
+					
+<%-- 				
+					<div class="col-md-12" >
+						<h1 style="color:white; font-size:50px; margin-left:30px;">${studyVO.title}</h1>
+											
+					</div>
+					<div class="imgback">
+						<img src="/study/displayFile?fileName=${studyVO.photo}"
+												class="img-responsive center-block img-circle" style="width:150px; height:150px;">
+					</div>  --%>
+			</div>
+		</div>
+		
+  
 		<div class="container" style="margin-bottom:30px;">
 			<div class="row">
 
 				<article class="blog-item">
 
-					<c:choose>
-						<c:when test="${studyVO.name ne 'a'}">
-							<img src="/study/displayFile?fileName=${studyVO.name}"
-								class="img-responsive center-block "
-								style="max-width:1170px; width:100%; height:480px;object-fit: cover;">
-						</c:when>
-						<c:otherwise>
-							<img src="/resources/assets/img/ha.jpg"
-								class="img-responsive center-block "
-								style="max-width:1170px; width:100%; height:480px;object-fit: cover;">
-						</c:otherwise>
-					</c:choose>
-
-					<div class="author">
-						<div class="row">
-							<div class="col-md-12">
-								<div class="about-author" style="margin-top: 20px;">
-									<div class="row">
-										<div class="col-md-3">
-											<img src="/study/displayFile?fileName=${studyVO.photo}"
-												class="img-responsive center-block img-circle" style="width:150px; height:150px;">
-										</div>
-										<div class="col-md-9">
-											<p style="font-size:35px;"><strong>${studyVO.title}</strong></p>
-											<p style="font-size:20px;">${studyVO.nickname}</p>
-										</div>
-									</div>
-								</div>
-
-								<div class="author-contact">
-									<div class="row">
-										<div class="col-md-6" style="float:right; height:40px;">
-											<p class="pull-left" style="position:absolute; right:5%;">
 
 
-												<!-- 북마크등록 // 로그인한 사람만 -->
-												<span><c:if test="${not empty login}">
-														<!-- 등록 안되어있을때 -->
-														<c:if test="${bolist.checked == 0}">
-															<i class="fa fa-heart-o" id="heart"
-																onclick="myFunction1(this)" style="font-size: 20px; cursor:pointer;"></i>
-														</c:if>
-														<!-- 북마크 등록되어있을때 -->
-														<c:if test="${bolist.checked == 1}">
-															<span id="delete"> <i class="fa fa-heartbeat"
-																id="heart" onclick="myFunction1(this)"
-																style="font-size: 20px; cursor:pointer;"></i>
-															</span>
-														</c:if>
-														<strong> 북마크에 추가해 주세요 　　</strong>
-													</c:if> </span> <span class="like" style="margin-right:80px;"> <i class="fa fa-eercast"></i>${studyVO.vct}</span>
-																			<span class="date"><fmt:formatDate pattern="yyyy-MM-dd"
-																			value="${studyVO.regdate}" /></span>
-													
-											
-											</p>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
 
 					<div class="bodycontent">
 
@@ -335,41 +423,41 @@ body {
 							<h2>기본정보</h2>
 							<table class="basic-content">
 								<tr>
-									<th>카테고리</th>
-									<td>${studyVO.cDName}　[ ${studyVO.cSName} ]</td>
+									<td>카테고리</td>
+									<th>${studyVO.cDName}　[ ${studyVO.cSName} ]</th>
 								</tr>
 							</table>
 							
 						<table class="basic-content time">
 							<tr>
-								<th>모임시간</th>
-									<td style="padding-left:20px;">월요일</td>
-									<td style="padding-left:20px;">화요일</td>
-									<td style="padding-left:20px;">수요일</td>
-									<td style="padding-left:20px;">목요일</td>
-									<td style="padding-left:20px;">금요일</td>
-									<td style="padding-left:20px;">토요일</td>
-									<td style="padding-left:20px;">일요일</td>
+								<td>모임시간</td>
+									<th style="padding-left:20px;">월요일</th>
+									<th style="padding-left:20px;">화요일</th>
+									<th style="padding-left:20px;">수요일</th>
+									<th style="padding-left:20px;">목요일</th>
+									<th style="padding-left:20px;">금요일</th>
+									<th style="padding-left:20px;">토요일</th>
+									<th style="padding-left:20px;">일요일</th>
 							</tr>
 							<tr>
-								<th></th>
-									<td>${studyVO.clock.get("월요일")}</td>
-									<td>${studyVO.clock.get("화요일")}</td>
-									<td>${studyVO.clock.get("수요일")}</td>
-									<td>${studyVO.clock.get("목요일")}</td>
-									<td>${studyVO.clock.get("금요일")}</td>
-									<td>${studyVO.clock.get("토요일")}</td>
-									<td>${studyVO.clock.get("일요일")}</td>
+								<td></td>
+									<th>${studyVO.clock.get("월요일")}</th>
+									<th>${studyVO.clock.get("화요일")}</th>
+									<th>${studyVO.clock.get("수요일")}</th>
+									<th>${studyVO.clock.get("목요일")}</th>
+									<th>${studyVO.clock.get("금요일")}</th>
+									<th>${studyVO.clock.get("토요일")}</th>
+									<th>${studyVO.clock.get("일요일")}</th>
 							</tr>
 						</table>
 						
 						<table class="basic-content region" style="margin-top:70px;">
 							<tr>
-								<th>기본지역</th>
-								<td>${studyVO.rDName} [ ${studyVO.rSName} ]</td>	
+								<td>기본지역</td>
+								<th>${studyVO.rDName} [ ${studyVO.rSName} ]</th>	
 							</tr>
 							<tr>
-								<th style="padding-bottom:0;">상세지역</th>
+								<td style="padding-bottom:0;">상세지역</td>
 							</tr>
 						</table>
 						
@@ -380,26 +468,20 @@ body {
 							
 							<h2>추가정보</h2>
 							<table class="basic-content">
+
 								<tr>
-									<th>카테고리</th>
-									<td>${studyVO.cDName}　[${studyVO.cSName}]</td>
+									<td>참여인원</td>
+									<th>현재  ${studyVO.now}명　☞　최대  ${studyVO.max}명 </th>
 								</tr>
 								<tr>
-									<th>참여인원</th>
-									<td>현재  ${studyVO.now}명　☞　최대  ${studyVO.max}명 </td>
+									<td>선호대상</td>
+									<th>${studyVO.age}</th>
 								</tr>
 								<tr>
-									<th>선호대상</th>
-									<td>${studyVO.age}</td>
-								</tr>
-								<tr>
-									<th style="padding-bottom:0;">스터디 소개</th>
+									
 								</tr>
 							</table>
-								<div class="intro" style="margin-top:8px; padding:2px; font-size:20px;">
-										${studyVO.content}
 
-								</div>
 						</div>
 						<!-- 지도입니다. -->
 					</div>
@@ -407,7 +489,13 @@ body {
 
 					<!-- 스터디 이미지 -->
 					<div class="imgstyle">
-						<h2>스터디 이미지</h2>
+						
+						<h2>스터디 소개</h2>
+						<p style="font-size:20px; color:black; margin-top:30px;">스터디 소개</p>
+						<div class="intro" style="margin-top:8px; padding:2px; font-size:20px;">
+								<strong>${studyVO.content}</strong>
+						</div>
+						<p style="font-size:20px; color:black; margin-top:30px;">스터디 이미지</p>
 						<div class="gallery"></div>
 					</div>
 
@@ -457,20 +545,32 @@ body {
 
 
 			<div id="replies" style="margin-top:15px;"></div>
-							<!-- 댓글 수정 삭제 부분 -->
-						<div id="modDiv" style="display: none ">
-				<div class="modal-title"></div>
+					
+				<!-- 댓글 수정 삭제 부분 -->
+
+				<div id="modDiv" class="modal">
+					<div class="container">
+						<div class="login-container" style="width:470px;">
+							<div class="modal-title"></div>
 				
+							<span
+							onclick="document.getElementById('modDiv').style.display='none'"
+							class="close" title="Close Modal">&times;</span>
+							
 							<div style="text-align:center; margin-bottom:30px; margin-top:30px;">
 							
-								<input type="text" id="recon" style="width:350px; height:70px; padding-left:15px;">
+							<input type="text" id="recon" style="width:350px; height:70px; padding-left:15px;">
 							</div>
+							
 							<div style="text-align:center; margin-bottom:10px;">
 								<button type="button" id="remodify" class="btn">수정하기</button>
 								<button type="button" id="redelege" class="btn">지우기</button>
 								<button type="button" id="reclose" class="btn">닫기</button>
 							</div>
 						</div>
+					</div>
+				</div>
+			
 			<ul class="replypage"></ul>
 		</div>
 	</div>
@@ -511,10 +611,21 @@ body {
 				<input type="submit" class="btn preee" value="목록으로"> 
 				<input type="submit" class="btn modifybo" value="스터디 수정"> 
 				<input type="submit" class="btn delete" value="스터디 지우기">
-				<div id='amodDiv' style="display: none;">
-					<div class='modal-applyList'></div>
-					<button type="button" id="applyclose" class="btn" style="position:absolute; right:5px; bottom:5px;">닫기</button>
+
+				<div id="amodDiv" class="modal">
+					<div class="container">
+						<div class="login-container" style="width:600px; padding-bottom:70px;">
+							<span
+							onclick="document.getElementById('amodDiv').style.display='none'"
+							class="close" title="Close Modal">&times;</span>
+						
+							<div class='modal-applyList'></div>
+							
+						</div>
+					</div>
 				</div>
+				
+				
 			</c:if>
 		</c:if>
 	</div>
@@ -757,7 +868,7 @@ $.ajax({
 })
 //신청자목록
 $(".aList").on("click", function(){
-	$("#amodDiv").show("slow");
+		$("#amodDiv").show("slow");
 })
 //신청자 목록 닫기
 $("#applyclose").on("click", function(){
@@ -828,6 +939,7 @@ function nostudy(event) {
 }
 //신청자 대기상태
 function wait(){
+			
 $.getJSON("/study/apply/"+bno, function(data){
 	
 	var str="";
@@ -835,7 +947,7 @@ $.getJSON("/study/apply/"+bno, function(data){
 		
 		if(this.status=='D'){
 		
-		str +="<div class='applyLi' data-usEmail='"+this.usEmail+"'>"
+		str +="<div class='applyLi' data-usEmail='"+this.usEmail+"' style='float:left;'>"
 			+ "<span class='mailbox-attachment-icon has-img'><img src='/study/displayFile?fileName="+this.photo+"'"
 			+ "alt=Attachment style='width:50px; height:50px; margin-right:10px; border-radius:50%;'></span>"
 		    + this.nickname
@@ -1033,14 +1145,14 @@ $(document).ready(function(){
         			str += "<div class='replyLi' ><div class='cmnt-clipboard'>"
         			    +  "<button class='btn-clipboard' value='"+this.rno+"'>수정하기</button></div>"
         			    +  "<div class='well'><div class='row'><div class='col-md-2'>"
-        			    +  "<img src="+"'/study/displayFile?fileName=${studyVO.photo}'"+"　class='img-responsive center-block'></div>"
+        			    +  "<img src="+"'/study/displayFile?fileName=${studyVO.photo}'"+"　class='img-responsive center-block' style='border-radius:50%;'></div>"
                         +  "<div class='col-md-10'><p class='comment-info'>"
                         +  "<strong>" + this.nickname + "</strong>" + "<span>" + regdate + "</span>"
                         + "</p><div class='contentre'>" + this.content + "</div></div></div></div></div>"
         			} else {
         				str += "<div class='replyLi' ><div class='cmnt-clipboard'>"
             			    +  "<div class='well'><div class='row'><div class='col-md-2'>"
-            			    +  "<img src='assets/img/commenter2.jpg' class='img-responsive center-block'></div>"
+            			    +  "<img src='assets/img/commenter2.jpg' class='img-responsive center-block' style='border-radius:50%;'></div>"
                             +  "<div class='col-md-10'><p class='comment-info'>"
                             +  "<strong>" + this.nickname + "</strong>" 
                             + "</p><div class='contentre'>" + this.content + "</div></div></div></div></div>"	
@@ -1114,7 +1226,7 @@ $(document).ready(function(){
 	var formObj = $("form[role='form']");
 	
 	$(".preee").on("click", function(){
-		self.location = "/study/listAll?page=${cri.page}&perPageNum=${cri.perPageNum}";
+		self.location = "/study/listAll?page=${cri.page}&perPageNum=${cri.perPageNum}&pallType=a";
 	});
 	
 	$(".delete").on("click", function(){

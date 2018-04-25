@@ -103,6 +103,7 @@
     background-repeat: no-repeat !important;
 }
     
+ 
     </style>
     
     
@@ -166,7 +167,7 @@
                         <div class="service-list">
                             <div class="row">
                             
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="service-content text-center">
                                         <div class="service-icon-box">
                                             <div class="service-icon center-block">
@@ -179,7 +180,7 @@
                                     </div> <!--  end of .service-content  -->
                                 </div>
                             
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="service-content text-center">
                                         <div class="service-icon-box">
                                             <div class="service-icon center-block">
@@ -194,7 +195,7 @@
                                     </div> <!--  end of .service-content  -->
                                 </div>
 
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="service-content text-center">
                                         <div class="service-icon-box">
                                             <div class="service-icon center-block">
@@ -207,7 +208,7 @@
                                     </div> <!--  end of .service-content  -->
 								</div>
 								
-								<div class="col-md-4">
+								<div class="col-md-3">
                                     <div class="service-content text-center">
                                         <div class="service-icon-box">
                                             <div class="service-icon center-block">
@@ -219,6 +220,20 @@
                                         </div> <!--   end of .service-info  -->
                                     </div> <!--  end of .service-content  -->
 								</div>
+								
+								<div class="col-md-3">
+                                    <div class="service-content text-center">
+                                        <div class="service-icon-box">
+                                            <div class="service-icon center-block">
+                                               <a href=""><i class="fa fa-frown-o" onclick="quit();"></i></a>
+                                            </div>
+                                        </div> <!--  end of .service-icon-box  -->
+                                        <div class="service-info">
+                                            <h3 class="service-heading">회원 탈퇴</h3>      
+                                        </div> <!--   end of .service-info  -->
+                                    </div> <!--  end of .service-content  -->
+								</div>
+
 								
                             </div> <!--  end of .row  -->
                         </div> <!--  end of .service-list  -->
@@ -371,10 +386,10 @@
 	                                    </div>
 	                                </div>
 	                            </div> <!-- /.faq-widget -->
-
+					  </form>	    
                  </div> <!-- end of .container -->
         </div>
-  </form>	      
+  
 </section>
 
 <%@include file="../footer.jsp"%>

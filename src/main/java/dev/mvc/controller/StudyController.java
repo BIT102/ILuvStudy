@@ -118,7 +118,7 @@ public class StudyController {
 	
 		rttr.addFlashAttribute("msg", "success");
 		
-		return "redirect:/study/listAll";
+		return "redirect:/join";
 	}
 	
 	

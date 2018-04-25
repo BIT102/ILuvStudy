@@ -21,16 +21,19 @@
 
 <style>
 form th {
-	width: 30%;
+	width: 176px !important;
 }
 #rDName, #rSName, #age, #sc, #st, #et, #catD, #catS {
 	width: 30%;
 	display: inline;
 }
 .fileDrop {
-	width: 200px;
-	height: 200px;
-	border: 1px dotted blue;
+	border:none;
+	width: 100%;
+	height:100%;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	padding-left:10px;
+	padding-top:10px;
 }
 .small {
 	margin-left: 3px;
@@ -45,11 +48,7 @@ small {
 	font-weight: bold;
 	color: gray;
 }
-.fileDrop {
-	border: none;
-	width: 800px;
-	background-color: gray;
-}
+
 .mailbox-attachment-info {
 	display: inline
 }
@@ -98,7 +97,7 @@ small {
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
-input{
+/* input{
 	line-height: inherit;
 	 margin: 0;
     font: inherit;
@@ -106,7 +105,17 @@ input{
     -webkit-appearance: textfield;
     -webkit-rtl-ordering: logical;
     cursor: text;
+} */
+
+input[type=checkbox] {
+  -ms-transform: scale(2); /* IE */
+  -moz-transform: scale(2); /* FF */
+  -webkit-transform: scale(2); /* Safari and Chrome */
+  -o-transform: scale(2); /* Opera */
+  margin-right: 8px !important;
+  padding:30px !important;
 }
+
 </style>
 </head>
 <body>
@@ -166,12 +175,12 @@ input{
                  	</label>
                  </c:forEach> --%> <!-- ======== 카테고리 =========== --> <select
 														id="catD" class="form-control">
-															<option>--</option>
+															<option value="">대분류</option>
 															<c:forEach items="${studyCategory}" var="studyVO">
 																<option value="${studyVO.cDId}">${studyVO.cDName}</option>
 															</c:forEach>
 													</select> <select id="catS" class="form-control">
-															<option value="">--</option>
+															<option value="">소분류</option>
 															<%-- <option value="${studyVO.cSName}">${studyVO.cSName}</option> --%>
 													</select>
 														<button type="button" id="addCat"
@@ -190,7 +199,7 @@ input{
 													<td>
 														<!-- ======== 지 역 =========== --> <!-- 스터디에 선택된 지역정보 셀렉트 표시 -->
 														<select id="rDName" name='rDId' class="form-control">
-															<option>--</option>
+															<option value="">대지역</option>
 															<c:forEach items="${region}" var="studyVO">
 																<c:if test="${studyVO.rSId eq 1}">
 																	<option value="${studyVO.rDId}">${studyVO.rDName}</option>
@@ -233,27 +242,27 @@ input{
 													<th>연령</th>
 													<td>
 													<label class="fancy-checkbox"
-														style="display: inline-block;"> <input
+														style="display: inline-block; margin-right:8px; font-size:16px;"> <input
 															type="checkbox" class="age" name="age" value="10대"><span>10대
 														</span>
 													</label> <label class="fancy-checkbox"
-														style="display: inline-block;"> <input
+														style="display: inline-block; margin-right:8px; font-size:16px;"> <input
 															type="checkbox" class="age" name="age" value="20대"><span>20대
 														</span>
 													</label> <label class="fancy-checkbox"
-														style="display: inline-block;"> <input
+														style="display: inline-block; margin-right:8px; font-size:16px;"> <input
 															type="checkbox" class="age" name="age" value="30대"><span>30대
 														</span>
 													</label> <label class="fancy-checkbox"
-														style="display: inline-block;"> <input
+														style="display: inline-block; margin-right:8px; font-size:16px;"> <input
 															type="checkbox" class="age" name="age" value="40대"><span>40대
 														</span>
 													</label> <label class="fancy-checkbox"
-														style="display: inline-block;"> <input
+														style="display: inline-block; margin-right:8px; font-size:16px;"> <input
 															type="checkbox" class="age" name="age" value="50대"><span>50대
 														</span>
 													</label> <label class="fancy-checkbox"
-														style="display: inline-block;"> <input
+														style="display: inline-block; margin-right:8px; font-size:16px;"> <input
 															type="checkbox" class="age" name="age" value="무관"><span>무관
 														</span>
 													</label>
@@ -285,7 +294,7 @@ input{
                 	<input type="text" name="st" value="${studyVO.st}" style="width:30%; display: inline;" class="form-control"> ~
                 	<input type="text" name="et" value="${studyVO.et}" style="width:30%; display: inline;" class="form-control"><br> --%>
 													<select id="sc" name="sc" class="form-control">
-															<option value="" selected>--</option>
+															<option value="" selected>요일</option>
 															<option value="월요일">월요일</option>
 															<option value="화요일">화요일</option>
 															<option value="수요일">수요일</option>
@@ -295,7 +304,7 @@ input{
 															<option value="일요일">일요일</option>
 													</select> 
 													<select id="st" name="st" class="form-control">
-															<option value="" selected>--</option>
+															<option value="" selected>시작시간</option>
 															<option value="6">6시</option>
 															<option value="7">7시</option>
 															<option value="8">8시</option>
@@ -317,7 +326,7 @@ input{
 															<option value="24">24시</option>
 													</select>
 													 <select id="et" name="et" class="form-control">
-															<option value="" selected>--</option>
+															<option value="" selected>종료시간</option>
 													</select> 
 													
 													<div id="addTimeArea"></div>    
@@ -335,7 +344,7 @@ input{
 																			
 																			if(stval == ""){
 								
-																				str = "<option>--</option>";
+																				str = "<option>종료시간</option>";
 																				$("#et").html(str);
 																			} else {	
 																			for (var i = stval; i <= 24; i++) {
@@ -368,17 +377,15 @@ input{
 												<tr>
 													<th>이미지</th>
 													<td>
-														<div class="studyfile">
-
-															<h5>첫 사진은 메인 화면에 등록됩니다.</h5>
-															<p> 드레그하여 사진의 순서를 변경할 수 있습니다.</p>
-															<div class='fileDrop'></div>
-																				<div class="imgstyle">
-													<p>스터디 이미지</p>
-															<ul class='uploadedList'>
+														
+													<div class='fileDrop'>
+														<h5>첫 사진은 메인 화면에 등록됩니다.</h5>
+														<p>  첫 사진은 메인 화면에 등록됩니다 &amp; 드래그하여 사진의 순서를 변경할 수 있습니다</p>
 															
-															</ul>
-														</div>
+
+														<ul class='uploadedList' style="height:154px;">
+														</ul>
+															
 														</div>
 													</td>
 												</tr>
@@ -555,10 +562,13 @@ input{
 		//카테고리 추가 버튼 클릭 시 액션
 		$("#addCat").on("click", function() {
 			
-			alert(count)
-			
 			var catd = $('#catD option:selected').val();
 			var cats = $('#catS option:selected').val();
+			
+			if($('#catD option:selected').val()=="") {
+				alert("항목을 모두 입력하세요")
+				return false;
+			}
 			
 			if(count==0){
 				
@@ -690,6 +700,11 @@ $("#addTime").on("click",function() {
 		//지역정보 2단 콤보박스 메서드
 		function getRegion(){
 			//$("#rSName").children("option").remove(); //소분류의 option 삭제
+			if($("#rDName option:selected").val()==""){
+
+				var option="<option>소지역</option>";
+				$("#rSName").html(option); 
+			} else {
 			
 			$.ajax({ //rdid값을 POST형식으로 region 컨트롤러에 전송
 				type:'POST',
@@ -709,12 +724,17 @@ $("#addTime").on("click",function() {
 					$("#rSName").html(option); //html에 뿌려줌
 				}
 			}); //$.ajax 끝
+			}
 		}
-		
 		//카테고리 대분류 선택 시 소분류 변경
 		function getCat(){
 			//$("#catS").children("option").remove(); //소분류의 option 삭제, append()가 아닌 html() 사용으로 주석 처리
-			
+			if($("#catD option:selected").val()==""){
+				var option="<option>소분류</option>";
+				$("#catS").html(option);
+			} else {
+				
+				
 			$.ajax({ //categoryD값을 POST형식으로 category 컨트롤러에 전송
 				type:'POST',
 				url:'/admin/category/'+ $("#catD option:selected").val(),
@@ -733,6 +753,7 @@ $("#addTime").on("click",function() {
 					$("#catS").html(option); //html에 뿌려줌
 				}
 			}); //$.ajax 끝
+			}
 		}
 		
 		function getStudy(){
