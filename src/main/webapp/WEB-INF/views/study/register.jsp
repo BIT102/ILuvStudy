@@ -39,7 +39,7 @@ sn(document).ready(function() {
 	
 	sn('#summernote').summernote({
 
-		height: 150,                 // set editor height
+		height: 200,                 // set editor height
 		minHeight: null,             // set minimum height of editor
 		maxHeight: null,             // set maximum height of editor
 		focus: true,                  // set focus to editable area after initializing summernote
@@ -467,7 +467,7 @@ button[type="button"] {
 											<tbody>
 												<tr style="height:300px;">
 													<th>스터디 소개</th>
-													<td><textarea name="content" class="form-control"
+													<td><textarea name="content" class="form-control" id="summernote"
 															style="height: 140px; resize: none;">${studyVO.content}</textarea></td>
 												</tr>
 												<tr>
