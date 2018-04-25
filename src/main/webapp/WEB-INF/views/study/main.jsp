@@ -272,8 +272,8 @@ input:focus{
 								
 								
 
-							<a href="/study/board${pageMakerStudy.makeSearch(pageMakerStudy.cri.page)}&bno=${studyVO.bno}">
-								<div class="img-text" >
+							<a href="/study/board${pageMakerStudy.makeSearch(pageMakerStudy.cri.page)}?bno=${studyVO.bno}">
+								<div class="img-text">
 									<div style="margin-top:20px;">
 										<div class="col-md-12 col-xs-12 text-cut" style=" font-size:30px; text-align:center;">${studyVO.title}</div>
 										<div class="col-md-12 col-xs-12"></div>
@@ -299,7 +299,7 @@ input:focus{
 							
 								<div class="item-image">
 								
-									<a href="/study/board${pageMakerStudy.makeSearch(pageMakerStudy.cri.page)}&bno=${studyVO.bno}">
+									<a href="/study/board${pageMakerStudy.makeSearch(pageMakerStudy.cri.page)}?bno=${studyVO.bno}">
 
 										<c:choose>
 											<c:when test="${studyVO.name ne 'a'}">
