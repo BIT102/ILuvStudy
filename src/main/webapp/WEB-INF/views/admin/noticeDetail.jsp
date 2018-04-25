@@ -61,6 +61,19 @@
                 	<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${noticeVO.lastModifyDate}"/>
                 </td>
             </tr>
+            <tr>
+            	<th>프로필사진</th>
+            	<td>
+            	 <%-- 	<div class='uploadedList'>
+						<div class="mailbox-attachment-info">
+							<span class="mailbox-attachment-icon has-img">
+								<img src="/study/displayFile?fileName=${noticeVO.photo}" alt="Attachment" style="width:150px; height:150px;" id="proimg">
+							</span>
+						</div>
+					</div> --%>
+					<input type='file' name="photo" style="display:inline-block;" id="i_file"/> 
+            	</td>
+            </tr>
         </table>
 	</form>
 		<button type="button" id="listBtn" class="btn btn-primary">목록</button>
@@ -79,7 +92,11 @@
 		</div>
 
 <script>
-	$(document).ready(function(){
+
+var count=1;
+var sel_file; 
+
+$(document).ready(function(){
 		$("#qnaListsuv").attr("class", "active");
 		$("#noticeListnav").attr("class", "active");
 		$("#subPages2").attr("class", "in");
@@ -114,7 +131,74 @@
 							+"&idKeyword=${cri.idKeyword}";
 
 		});
+		
+		$("#i_file").on("change", handleImgFileSelect);
 	});
+	
+function handleImgFileSelect(e) {
+
+	var files = e.target.files;
+	var file = files[0]
+	
+	/* var filesArr = Array.prototype.slice.call(files); */
+	
+	var formData = new FormData();
+	formData.append("file", file);
+	
+	console.log(files[0]);
+	console.log("check");
+	
+	$.ajax({
+		url : '/pUploadForm',
+		data : formData,
+		dataType : 'text',
+		processData : false,
+		contentType : false,
+		type : 'POST',
+		//파일을 드롭했을때 성공시
+		success : function(data) {
+
+			console.log("3*****************");
+			var fileInfo = getFileInfo(data);
+			var html = template(fileInfo);
+			if(count>=1){
+				/* alert("프로필사진은 한 장만 등록됩니다.") */
+				
+				console.log($(".uploadedList img").parent().parent());
+				
+				$(".uploadedList img").parent().parent().remove();
+				
+				$(".uploadedList").append(html);
+				
+				count = 1;
+			} else {
+			$(".uploadedList").append(html);
+			count++;
+			
+			}
+		}
+	});
+}	
+
+//취소버튼
+$(".uploadedList").on("click", "small", function(event) {
+	--count;
+	var that = $(this);
+	$.ajax({
+		url : "/study/deleteFile",
+		type : "post",
+		data : {
+			fileName : $(this).attr("data-src")
+		},
+		dataType : "text",
+		success : function(result) {
+				
+				alert("deleted");
+				$(this).parent("div").remove();
+				$(".uploadedList img").parent().parent().remove();
+		}
+	});
+});
 </script>
 
 </body>

@@ -158,7 +158,7 @@ th{
                         <div class="service-list">
                             <div class="row">
                             
-                                <div class="col-md-4">
+                                <div class="col-md-4 col-xs-4">
                                     <div class="service-content text-center">
                                         <div class="service-icon-box">
                                             <div class="service-icon center-block">
@@ -171,7 +171,7 @@ th{
                                     </div> <!--  end of .service-content  -->
                                 </div>
                             
-                                <div class="col-md-4">
+                                <div class="col-md-4 col-xs-4">
                                     <div class="service-content text-center">
                                         <div class="service-icon-box">
                                             <div class="service-icon center-block">
@@ -186,7 +186,7 @@ th{
                                     </div> <!--  end of .service-content  -->
                                 </div>
 
-                                <div class="col-md-4">
+                                <div class="col-md-4 col-xs-4">
                                     <div class="service-content text-center">
                                         <div class="service-icon-box">
                                             <div class="service-icon center-block">
@@ -199,7 +199,7 @@ th{
                                     </div> <!--  end of .service-content  -->
 								</div>
 								
-								<div class="col-md-4">
+								<div class="col-md-4 col-xs-4">
                                     <div class="service-content text-center">
                                         <div class="service-icon-box">
                                             <div class="service-icon center-block">
@@ -351,7 +351,9 @@ function handleImgFileSelect(e) {
 	var formData = new FormData();
 	formData.append("file", file);
 	
-
+	console.log(files[0]);
+	console.log("check");
+	
 	$.ajax({
 		url : '/pUploadForm',
 		data : formData,
