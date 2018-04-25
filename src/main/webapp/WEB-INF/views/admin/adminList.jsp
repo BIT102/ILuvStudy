@@ -23,13 +23,14 @@
 		</div>
         
         <!--검색-->
-        <div class="panel-body">
+        <div class="panel-body col-xs-12 col-md-12">
         <table class="table">
         <thead>
 			<tr>
 				<th>사용여부</th>
 				<th>아이디</th>
 				<th>이름</th>
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -46,14 +47,13 @@
                 </td>
                 <td><input type="text" name="idKeyword" id="idKeywordInput" value="${cri.idKeyword}" class="form-control"></td>
                 <td><input type="text" name="nameKeyword" id="nameKeywordInput" value="${cri.nameKeyword}" class="form-control"></td>
+            	<td>
+            		<button type="button" id="searchBtn" class="btn btn-primary">검색</button>
+        			<button type="button" id="removeBtn" class="btn btn-primary">초기화</button>
+            	</td>
             </tr>
 		</tbody>
         </table>
-        
-        <div class="text-center">
-        	<button type="button" id="searchBtn" class="btn btn-primary">검색</button>
-        	<button type="button" id="removeBtn" class="btn btn-primary">초기화</button>
-        </div>
         
 		</div>
 		<!-- panel-body end -->

@@ -24,26 +24,26 @@
 		</div>
 
         <!--검색-->
-        <div class="panel-body">
+        <div class="panel-body col-xs-12 col-md-12">
         <table class="table">
         <thead>
 			<tr>
 				<th>제목</th>
 				<th>작성자</th>
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>
             <tr>
                 <td><input type="text" name="titleKeyword" id="titleKeywordInput" value="${cri.titleKeyword}" class="form-control"></td>
                 <td><input type="text" name="idKeyword" id="idKeywordInput" value="${cri.idKeyword}" class="form-control"></td>
+            	<td>
+            		<button type="button" id="searchBtn" class="btn btn-primary">검색</button>
+        			<button type="button" id="removeBtn" class="btn btn-primary">초기화</button>
+            	</td>
             </tr>            
 		</tbody>
         </table>
-        
-        <div class="text-center">
-        	<button type="button" id="searchBtn" class="btn btn-primary">검색</button>
-        	<button type="button" id="removeBtn" class="btn btn-primary">초기화</button>
-        </div>
         
         </div>
         <!-- panel-body end -->

@@ -1,6 +1,7 @@
 package dev.mvc.persistence;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -76,5 +77,11 @@ public class NoticeDAOImpl implements NoticeDAO {
 	//공지사항 수정
 	public void update(NoticeVO vo) throws Exception {
 		session.update(namespace+".update", vo);
+	}
+	
+	//이미지 등록
+	@Override
+	public void insertImg(Map<String, Object> map) throws Exception { 
+		session.update(namespace+".insertImg", map);
 	}
 }

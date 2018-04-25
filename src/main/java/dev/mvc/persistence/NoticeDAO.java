@@ -1,6 +1,7 @@
 package dev.mvc.persistence;
 
 import java.util.List;
+import java.util.Map;
 
 import dev.mvc.domain.Criteria;
 import dev.mvc.domain.NoticeVO;
@@ -34,4 +35,7 @@ public interface NoticeDAO {
 	
 	//수정(관리자만)
 	public void update(NoticeVO vo) throws Exception;
+	
+	//이미지 등록
+	public void insertImg(Map<String, Object> map) throws Exception;
 }

@@ -6,6 +6,7 @@
 
 <html>
 <head>
+ <title>채팅 문의 관리</title>
 <style>
 
  
@@ -160,34 +161,34 @@
     
 }
 #chat .base_sent .messages{
-    background: #D1B6E1;
+    background: #40b4e5;
     border-radius: 8px 8px 0px 8px;
     -webkit-border-radius: 8px 8px 0px 8px;
     color: #fff;
-    border-bottom:1px solid #D1B6E1;
+    border-bottom:1px solid #40b4e5;
 }
 #chat .base_sent::after{
     top:0px;
     width: 0;
     height: 0;
     border-top:10px solid transparent;
-    border-left: 10px solid #D1B6E1;
+    border-left: 10px solid #40b4e5;
     
     border-bottom: 0px solid transparent;
     
 }
 #chat .base_receive .messages{
-    background: #9DC8C8;
+    background: #EEF1F4;
     border-radius: 0 8px 8px 8px;
-    border-bottom:1px solid #9DC8C8;
-    color:#fff;
+    border-bottom:1px solid #EEF1F4;
+    color:#516378;
     
 }
 #chat .base_receive::before{
     width: 0;
     height: 0;
     border-top: 0px solid transparent;
-    border-right: 10px solid #9DC8C8;
+    border-right: 10px solid #EEF1F4;
     border-bottom: 10px solid transparent;
 }
 
@@ -195,7 +196,14 @@
 #chat .msg_container_base{
     background:#fff;
 }
-#chat time{ color:#fff; font-style: italic; }
+.msg_receive > time{
+	color:#516378;
+	font-style: italic;
+}
+.msg_sent > time{
+	color:#fff;
+	font-style: italic;
+}
 
 .chatBlock{
 display:block;
@@ -235,14 +243,14 @@ overflow:auto;
 			<!-- MAIN CONTENT -->
 			<div class="main-content">
 				<div class="container-fluid">
-					<h3 class="page-title">1:1문의 관리</h3>
+					<h3 class="page-title">채팅문의 관리</h3>
 					<div class="row">
 						<div class="col-md-12">
     						<div class="panel">
 
-			<div class="panel-heading">
+<!-- 			<div class="panel-heading">
 				<h3 class="panel-title">1:1문의 관리</h3>
-			</div>
+			</div> -->
 
 			<div class="panel-body">
 			
@@ -251,7 +259,7 @@ overflow:auto;
          <div class="col-md-5" style="padding:0;">
          	  <div class="top-bar">
                 	<div style="height:40px; line-height:40px;padding-left:20px;">
-                		<h4 class="panel-title" style="height:40px; line-height:40px;">리스트</h4>
+                		<h4 class="panel-title" style="height:40px; line-height:40px;">문의 리스트</h4>
                 	</div>
               </div>
 			<div class="chat-list">
@@ -264,10 +272,10 @@ overflow:auto;
          </div>
 
 <!-- =============== 문의 채팅 시작 ====================== -->
-<div class="chatNone col-md-7" id="chat" style="padding:0;">      
+<div class="chatBlock col-md-7" id="chat" style="padding:0;">      
                 <div class="top-bar">
                 	<div style="height:40px; line-height:40px;padding-left:20px;">
-                		<h4 class="panel-title" style="height:40px; line-height:40px;"><span class="glyphicon glyphicon-comment"></span>&nbsp;1:1 문의내용</h4>
+                		<h4 class="panel-title" style="height:40px; line-height:40px;"><span class="glyphicon glyphicon-comment"></span>&nbsp;문의내용</h4>
                 	</div>
             	</div>
             	
@@ -377,10 +385,8 @@ $(document).ready(function(){
 	//리스트에서 아이디 클릭 시 액션
 	$('.chatClick').click(function(){
 		
-		//if($('#chat').hasClass('chatNone')){
 			$('.msg_container_base').html("");  //기존 채팅창 내용 삭제
-			$('#chat').removeClass('chatNone');
-			$('#chat').addClass('chatBlock');	
+		//	$('#chat').addClass('chatBlock');	
 			
 			//ajax로 채팅창 내용 불러옴
 			$.ajax({ 
@@ -420,12 +426,6 @@ $(document).ready(function(){
 					}
 				}
 			}); //$.ajax 끝
-			
-	//	}else{
-	//		$('#chat').removeClass('chatBlock');
-	//		$('#chat').addClass('chatNone');
-	//		$('.msg_container_base').html("");
-	//	}
 	});
 })
 

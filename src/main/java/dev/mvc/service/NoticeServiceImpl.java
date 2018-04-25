@@ -1,6 +1,8 @@
 package dev.mvc.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -63,5 +65,20 @@ public class NoticeServiceImpl implements NoticeService {
 	@Override
 	public void modify(NoticeVO vo) throws Exception {
 		dao.update(vo);
+	}
+	
+	//이미지 등록
+	@Override
+	public void insertImg(NoticeVO vo) throws Exception { 
+		
+		String files = vo.getPhoto();
+		int bno = vo.getBno();
+
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("photo", files);
+		map.put("bno", bno);
+		
+		dao.insertImg(map);
 	}
 }

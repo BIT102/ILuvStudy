@@ -182,5 +182,9 @@ limit #{pageStart}, #{perPageNum}
   </sql>		
 
   	 		
+<!-- 공지사항 이미지 등록 -->
+<update id="insertImg">
+  	update notice set photo=#{photo} where bno=#{bno};
+</update>
 
 </mapper>

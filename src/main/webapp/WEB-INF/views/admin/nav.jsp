@@ -28,7 +28,9 @@
 	<script src="/resources/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 	<script src="/resources/scripts/klorofil-common.js"></script>
 <style>
-
+.searchBtn{
+margin-right:8px;
+}
 </style>
 
 
@@ -77,7 +79,7 @@
 							<a href="#subPages2" data-toggle="collapse" class="collapsed" id="qnaListsuv"><i class="lnr lnr-cog"></i> <span>사이트관리</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
 							<div id="subPages2" class="collapse">
 								<ul class="nav">
-									<li><a href="chatAdmin" id="chatAdminnav">1:1문의 관리</a></li>
+									<li><a href="chatAdmin" id="chatAdminnav">채팅문의 관리</a></li>
 									<li><a href="qnaList" id="qnaListnav">FAQ 관리</a></li>
 									<li><a href="noticeList" id="noticeListnav">공지사항 등록</a></li>
 								</ul>

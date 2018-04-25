@@ -527,8 +527,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 공지사항 정보 등록 -->
 	<insert id="noticeRegister">
-		insert into notice (title, content, regdate, writer, type)
-		values (#{title},#{content},now(), #{writer}, #{type});
+		insert into notice (title, content, regdate, writer, type, photo)
+		values (#{title},#{content},now(), #{writer}, #{type}, #{photo});
 	</insert>
 	
 

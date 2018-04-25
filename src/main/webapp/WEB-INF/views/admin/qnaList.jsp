@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>QNA 관리</title>
+    <title>FAQ 관리</title>
 </head>
 <body>
 <div id="wrapper">
@@ -24,12 +24,13 @@
 		</div>
         
         <!--검색-->
-        <div class="panel-body">
+        <div class="panel-body col-xs-12 col-md-12">
         <table class="table">
         <thead>
 			<tr>
 				<!-- <th>FAQ</th> -->
 				<th>아이디</th>
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -46,13 +47,13 @@
                     </select>
                 </td> --%>
                 <td><input type="text" name="emailKeyword" id="emailKeywordInput" value="${cri.emailKeyword}" class="form-control"></td>
+            	<td>
+            		<button type="button" id="searchBtn" class="btn btn-primary">검색</button>
+        			<button type="button" id="removeBtn" class="btn btn-primary">초기화</button>
+            	</td>
             </tr>
 		</tbody>
         </table>
-        <div class="text-center">
-        	<button type="button" id="searchBtn" class="btn btn-primary">검색</button>
-        	<button type="button" id="removeBtn" class="btn btn-primary">초기화</button>
-        </div>
         </div>
         <!-- panel-body end -->
 

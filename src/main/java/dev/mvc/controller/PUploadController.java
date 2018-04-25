@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
+import dev.mvc.domain.NoticeVO;
 import dev.mvc.domain.UserVO;
+import dev.mvc.service.NoticeService;
 import dev.mvc.service.UserService;
 import dev.mvc.util.S3Util;
 import dev.mvc.util.UploadFileUtils;
@@ -33,6 +35,9 @@ public class PUploadController {
 	
 	@Inject
 	private UserService service;
+	
+	@Inject
+	private NoticeService noticeService;
 	
 	private static final Logger logger = 
 			LoggerFactory.getLogger(PUploadController.class);
@@ -54,29 +59,51 @@ public class PUploadController {
 //		logger.info("size: "+file.getSize());
 //		logger.info("contentType: "+file.getContentType());
 		
-		System.out.println("업로드패스스스" +UploadFileUtils.uploadFile(uploadPath,
+		String uploadFile = UploadFileUtils.uploadFile(uploadPath,
 				file.getOriginalFilename(), 
-				file.getBytes()));
+				file.getBytes());
+		
+		System.out.println("업로드패스스스" +uploadFile);
 			
 		HttpSession session = request.getSession();
 		UserVO sUser = (UserVO)session.getAttribute("login");
 		String email = sUser.getEmail();
 		
 		
-		vo.setPhoto(UploadFileUtils.uploadFile(uploadPath,
-				file.getOriginalFilename(), 
-				file.getBytes()));
+		vo.setPhoto(uploadFile);
 		
 		vo.setEmail(email);
 		
 		service.insertImg(vo);
 		
+		return new ResponseEntity<>(uploadFile, HttpStatus.CREATED);
+	}
+	
+	// iframe을 활용 업로드, 공지사항 사진 업데이트용
+	@RequestMapping(value="/noticeUpload", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
+	public ResponseEntity<String> noticeuploadForm(NoticeVO vo, MultipartFile file, Model model, HttpServletRequest request) throws Exception{	
 		
-
-		return new ResponseEntity<>(UploadFileUtils.uploadFile(uploadPath,
+		
+		System.out.println("업로드시작============");
+		logger.info("originalName: "+file.getOriginalFilename());
+		
+		String uploadFile = UploadFileUtils.uploadFile(uploadPath,
 				file.getOriginalFilename(), 
-				file.getBytes()),
-				HttpStatus.CREATED);
+				file.getBytes());
+		
+		System.out.println("업로드패스스스" +uploadFile);
+		
+		System.out.println(request.getParameter("bno"));
+		System.out.println(Integer.parseInt(request.getParameter("bno")));
+		
+		
+		vo.setPhoto(uploadFile);
+
+		vo.setBno(Integer.parseInt(request.getParameter("bno")));  //쿼리스트링에서 bno값 가져와서 담아줌
+
+		noticeService.insertImg(vo); //db에 bno, photo 경로 담아줌
+		
+		return new ResponseEntity<>(uploadFile, HttpStatus.CREATED);
 	}
 	
 	

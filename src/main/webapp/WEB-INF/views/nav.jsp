@@ -811,7 +811,7 @@ if(session.getAttribute("login") != null){
                 </div>
                 <!-- 내용끝났땅 -->
                 
-                <!-- 메시지 작성부분이당 -->
+                <!-- 메시지 작성부분이당=== -->
                 <div class="panel-footer">
                     <div class="input-group">
 <!--                         <input id="btn-input" type="text" class="form-control input-sm chat_input" /> -->

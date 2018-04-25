@@ -27,13 +27,14 @@
 								</div>
 								
 		<!--검색-->
-		<div class="panel-body">
+		<div class="panel-body col-xs-12 col-md-12">
 		<table class="table">
 		<thead>
 			<tr>
 				<th>가입상태</th>
 				<th>아이디</th>
 				<th>닉네임</th>
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -55,13 +56,13 @@
 				<td>
                 	<input type="text" name="nickNameKeyword" id="nickNameKeywordInput" value="${cri.nickNameKeyword}" class="form-control">
 				</td>
+				<td>
+					<button type="button" id="searchBtn" class="btn btn-primary">검색</button>
+					<button type="button" id="removeBtn" class="btn btn-primary">초기화</button>
+				</td>
 			</tr>
 		</tbody>
         </table>
-        	<div class="text-center">
-        		<button type="button" id="searchBtn" class="btn btn-primary">검색</button>
-        		<button type="button" id="removeBtn" class="btn btn-primary">초기화</button>
-        	</div>
         </div>
 
 								

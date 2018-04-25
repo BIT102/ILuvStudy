@@ -18,8 +18,15 @@ public class NoticeVO {
 	
 	private int type;	//공개 여부 확인(0:공개, 1:비공개)
 	
+	private String photo; //사진
 	
 	
+	public String getPhoto() {
+		return photo;
+	}
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
 	public int getType() {
 		return type;
 	}
@@ -65,7 +72,8 @@ public class NoticeVO {
 	@Override
 	public String toString() {
 		return "NoticeVO [bno=" + bno + ", title=" + title + ", content=" + content + ", regdate=" + regdate
-				+ ", writer=" + writer + ", lastModifyDate=" + lastModifyDate + ", type=" + type + "]";
+				+ ", writer=" + writer + ", lastModifyDate=" + lastModifyDate + ", type=" + type + ", photo=" + photo
+				+ "]";
 	}
 
 	

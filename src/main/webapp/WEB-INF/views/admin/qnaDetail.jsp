@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>QNA 관리</title>
+    <title>FAQ 관리</title>
 <style>
 form th{
 	width:30%;
@@ -22,12 +22,12 @@ form th{
 			<!-- MAIN CONTENT -->
 			<div class="main-content">
 				<div class="container-fluid">
-					<h3 class="page-title">QNA 관리</h3>
+					<h3 class="page-title">FAQ 관리</h3>
 					<div class="row">
 						<div class="col-md-12">
     						<div class="panel">
         <div class="panel-heading">
-			<h3 class="panel-title">QNA 상세</h3>
+			<h3 class="panel-title">FAQ 상세</h3>
 		</div>
 
 	<div class="panel-body default">

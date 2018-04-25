@@ -484,6 +484,8 @@ public class AdminController {
 		logger.info("noticeRegister post...");
 		logger.info(vo.toString());
 		
+		//s3에 파일 등록 처리 필요 
+		
 		service.noticeRegister(vo);
 		
 		rttr.addFlashAttribute("msg", "SUCCESS");

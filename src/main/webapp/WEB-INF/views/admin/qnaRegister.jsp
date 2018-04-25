@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>공지사항 등록</title>
+    <title>FAQ 등록</title>
 
 </head>
 <body>

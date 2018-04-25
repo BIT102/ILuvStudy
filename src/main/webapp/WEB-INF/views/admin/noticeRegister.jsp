@@ -50,6 +50,12 @@
                     </label>
                 </td>
             </tr>
+            <tr>
+            	<th>프로필사진</th>
+            	<td>
+					<input type='file' name="photo" style="display:inline-block;" id="i_file"/> 
+            	</td>
+            </tr>
         </table>
 	</form>
 	
@@ -94,7 +100,9 @@
 		$("#listBtn").on("click", function(){
 			self.location = "/admin/noticeList";
 		});
+		
 	});
+	
 </script>
 </body>
 </html>
