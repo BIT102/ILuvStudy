@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -23,12 +24,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndViewDefiningException;
 import org.springframework.web.util.WebUtils;
 
 import dev.mvc.domain.PageMakerStudy;
 import dev.mvc.domain.SearchCriteriaStudy;
 import dev.mvc.domain.StudyVO;
 import dev.mvc.domain.UserVO;
+import dev.mvc.dto.LoginDTO;
 import dev.mvc.persistence.UserDAO;
 import dev.mvc.service.BookmarkService;
 import dev.mvc.service.LoginService;
@@ -59,6 +63,9 @@ public class UserController {
 	
 	@Inject
 	private LoginService lservice;
+	
+	@Inject
+	private BCryptPasswordEncoder passwordEncoder; 
 	
 	//회원가입 컨트롤러
 	@RequestMapping(value = "/join", method = RequestMethod.GET)
@@ -117,24 +124,11 @@ public class UserController {
 
 		}
 		
-				
-	// 	profile 사진첨부 컨트롤러(Ajax)
-		/*@RequestMapping(value = "/insertImg", method = RequestMethod.GET)
-		public void insertImg(){
-			
-		}*/
 		
-//		@RequestMapping(value = "/insertImg", method = RequestMethod.POST)
-//		public void insertImg(@RequestParam("data") String data) throws Exception{
-//			
-//			System.out.println("======데이터========");
-//			System.out.println(data);
-//		}
-		
+	// 프로필 사진 첨부	
 	@RequestMapping(value = "/insertImgUrl", method = RequestMethod.POST)
 	public ResponseEntity<String> insertImg(UserVO vo) throws Exception{
-// 그냥 void로 해도 됨
-		
+
 		System.out.println("==========인서트이미지==========");
 		
 		ResponseEntity<String> entity = null;
@@ -239,12 +233,14 @@ public class UserController {
 		return "/mypage/changePw";
 	}
 	
-
-	@RequestMapping(value = "/changePw", method = RequestMethod.POST)
+	
+	
+/*	@RequestMapping(value = "/changePw", method = RequestMethod.POST)
 	public String changePwPOST(Model model, String nowPw, String newPw1, String newPw2, HttpServletRequest request) throws Exception {
 		
 		System.out.println("비번변경 포스트");
-		//1. 입력한 비밀번호가 DB값과 일치하는지 체크
+
+
 		HttpSession session = request.getSession();
 		UserVO sUser = (UserVO)session.getAttribute("login");
 		String email = sUser.getEmail();
@@ -256,23 +252,21 @@ public class UserController {
 		System.out.println("나우패스워드="+nowPw);
 		
 		
-		if(nowPw.equals(vo.getPassword()) && newPw1.equals(newPw2)){ 
+		if(passwordEncoder.matches(nowPw, vo.getPassword()) || vo.getPassword().equals(nowPw) && newPw1.equals(newPw2)) { 
 			vo.setPassword(newPw1);
-			System.out.println("비밀번호 변경 완료");			
-		}else
+			
+			service.changePw(vo);
+			model.addAttribute("vo", vo);
+			model.addAttribute("result", "success");
+			
+			System.out.println("비밀번호 변경 완료");		
+		}else{
 			System.out.println("비밀번호 변경 불가");
-		//2. 새 비번1과 새 비번2가 같나 비교하고
-//		if(newPw1.equals(newPw2)){
-//			System.out.println("=================pw1pw2이거 같니.....?");
-//		}
-		//3. 같으면 유효성 검사
-		
-		service.changePw(vo);
-		model.addAttribute("vo", vo);
-		model.addAttribute("result", "변경 되었습니다.");
+			model.addAttribute("result", "false");
+		}
 		
 		return "/mypage/changePw";
-	}
+	}*/
 	
 	// 비밀번호 재설정 (발송 메일에서 비밀번호 재설정 클릭 시 인입)
 	@RequestMapping(value="/resetPassword", method=RequestMethod.GET)
@@ -339,47 +333,40 @@ public class UserController {
 	
 	
 	//ajax 비번 수정
-/*	@RequestMapping(value = "/changePw", method = RequestMethod.POST)
+	@RequestMapping(value = "/changePw", method = RequestMethod.POST)
 	public ResponseEntity<String> changePw(@RequestParam("nowPw")String nowPw,
 									@RequestParam("newPw1") String newPw1, 
 									@RequestParam("newPw2") String newPw2, 
 									HttpServletRequest request) throws Exception{
-			
-		System.out.println("======nowPw 나우Pw=============");
-		System.out.println("현재비번 :" + nowPw);
-		System.out.println("새비번1 :" +newPw1);
-		System.out.println("새비번2 :" +newPw2);
 		
+		System.out.println("비번변경 포스트");
+
+
 		HttpSession session = request.getSession();
 		UserVO sUser = (UserVO)session.getAttribute("login");
 		String email = sUser.getEmail();
-		System.out.println("이메일 : " + email);
 		
 		UserVO vo = service.read(email);
-		
 		vo.getPassword();
-		System.out.println("겟패스워드:" + vo.getPassword());
 		
-		vo.setPassword(newPw1);
-		System.out.println();
-		
+		System.out.println("겟패스워드="+vo.getPassword());
+		System.out.println("나우패스워드="+nowPw);
 		
 		ResponseEntity<String> entity = null;
 		
-		if(nowPw.equals(vo.getPassword())){
-			entity = new ResponseEntity<String>("pw equal", HttpStatus.OK); // "" 이 안에 값이 jsp파일에 result값이 됨
-			System.out.println("============pw1pw2 같니??=============");
+		if((passwordEncoder.matches(nowPw, vo.getPassword()) || vo.getPassword().equals(nowPw)) && newPw1.equals(newPw2)) { 
 			vo.setPassword(newPw1);
-			System.out.println("뉴패스1:"+newPw1);
+			service.changePw(vo);
+			entity = new ResponseEntity<>("success", HttpStatus.OK);
+			System.out.println("비밀번호 변경 완료");		
 		}else{
-			entity = new ResponseEntity<String>("Please Check your password", HttpStatus.OK);
+			entity = new ResponseEntity<String>("fail", HttpStatus.OK);
+			System.out.println("비밀번호 변경 불가");		
 		}
-			
+		
 		return entity;
 		
-	}*/
-	
-	
+	}
 	
 
 
@@ -394,34 +381,54 @@ public class UserController {
 		
 	}
 	
+
 	@RequestMapping(value = "/quit", method = RequestMethod.POST)
-	public String quitPost(HttpServletRequest request,
+	public ResponseEntity<String> quitPost(HttpServletRequest request,
 			HttpServletResponse response, HttpSession session) throws Exception{
 		
 		logger.info("logout..........");
-		Object obj = session.getAttribute("login");
+		System.out.println("탈퇴 포스트==================");
 		
-		if(obj != null){
-			
-			UserVO vo = (UserVO) obj;
-			
-			session.removeAttribute("login");
-			session.invalidate();
-			
-			Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
-			
-			if(loginCookie != null){
-				loginCookie.setPath("/");
-				loginCookie.setMaxAge(0);
-				response.addCookie(loginCookie);
-				lservice.keepLogin(vo.getEmail(), session.getId(), new Date());
-			}
-			
-			service.quit(vo);
-		}
+		UserVO sUser = (UserVO)session.getAttribute("login");
+		String email = sUser.getEmail();
+		String confirmPw = request.getParameter("confirmPw");
+		
+		UserVO vo = service.read(email);
+		vo.getPassword();
+		
+		System.out.println("컨펌pw : " + confirmPw);
+		System.out.println("vo겟패스워드 : " + vo.getPassword());
+		
+		ResponseEntity<String> entity = null;
+		
+		if(passwordEncoder.matches(confirmPw, vo.getPassword()) || confirmPw.equals(vo.getPassword())){
+			if(sUser != null){
 				
-		return "redirect:/study/main";
+				session.removeAttribute("login");
+				session.invalidate();
+				
+				Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
+				
+				if(loginCookie != null){
+					loginCookie.setPath("/");
+					loginCookie.setMaxAge(0);
+					response.addCookie(loginCookie);
+					lservice.keepLogin(vo.getEmail(), session.getId(), new Date());
+				}
+				
+				service.quit(vo);
+				entity = new ResponseEntity<>("success", HttpStatus.OK);
+				System.out.println("회원탈퇴 완료");	
+			}
+				
+		}else{
+			entity = new ResponseEntity<String>("fail", HttpStatus.OK);
+			System.out.println("회원탈퇴 불가");
+		} return 
+				entity;
+
 	}
+	
 	
 	// 북마크 (bookmark) 컨트롤러  =길=
 	@RequestMapping(value = "/bookmark", method = RequestMethod.GET)
@@ -446,51 +453,6 @@ public class UserController {
 		return "/mypage/bookmark";
 	}
 
-	
-/*	// 신청 (application) 컨트롤러
-	@RequestMapping(value = "/application", method = RequestMethod.GET)
-	public String application(@ModelAttribute("cri") SearchCriteriaStudy cri, Model model, HttpServletRequest request) throws Exception {
-		
-		HttpSession session = request.getSession();
-		UserVO sUser = (UserVO)session.getAttribute("login");
-		String email = sUser.getEmail();
-		
-		model.addAttribute("list", service.applyList(email));
-		
-		System.out.println("신청신청 : " + service.applyList(email));
-		
-		PageMakerStudy pageMakerStudy = new PageMakerStudy();
-		
-		pageMakerStudy.setCri(cri);
-			
-		model.addAttribute("pageMakerStudy", pageMakerStudy);
-		
-		return "/mypage/application";
-	
-	}*/
-	
-/*	// 모집 (recruit) 컨트롤러 내가했습니다
-	@RequestMapping(value = "/recruit", method = RequestMethod.GET)
-	public String recruit(@ModelAttribute("cri") SearchCriteriaStudy cri, Model model, HttpServletRequest request) throws Exception {
-		
-		
-		HttpSession session = request.getSession();
-		UserVO sUser = (UserVO)session.getAttribute("login");
-		String email = sUser.getEmail();
-		
-		
-		
-		PageMakerStudy pageMakerStudy = new PageMakerStudy();
-		
-		pageMakerStudy.setCri(cri);
-			
-		model.addAttribute("pageMakerStudy", pageMakerStudy);
-		
-			
-		return "/mypage/recruit";
-
-	}*/
-	
 
 		
 	// 	완료(completed) 컨트롤러
@@ -519,11 +481,6 @@ public class UserController {
 			}else{
 				entity = new ResponseEntity<String>("success", HttpStatus.OK);
 				System.out.println("사용가능한이메일");
-				System.out.println("사용가능한이메일22");
-				System.out.println("사용가능한이메일33");
-				//============================
-				//service.sendEmail(email);
-				//=============================
 			}
 			
 			return entity;

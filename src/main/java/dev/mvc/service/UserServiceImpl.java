@@ -7,6 +7,8 @@ import java.util.Map;
 import javax.inject.Inject;
 import javax.mail.internet.MimeMessage;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -18,6 +20,8 @@ import dev.mvc.persistence.UserDAO;
 
 @Service
 public class UserServiceImpl implements UserService {
+	
+	private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 	
 	@Inject
 	private UserDAO dao;
@@ -57,9 +61,10 @@ public class UserServiceImpl implements UserService {
 		// 비밀번호 변경
 		@Override
 		public void changePw(UserVO vo) throws Exception {
+			
 			String enPassword = passwordEncoder.encode(vo.getPassword());   //스프링시큐리티 비밀번호 암호화
 			vo.setPassword(enPassword);
-			System.out.println("암호화된 비밀번호 :" + vo.getPassword());
+			System.out.println("암호화된 비밀번호123 :" + vo.getPassword());
 			
 			dao.changePw(vo);
 		}

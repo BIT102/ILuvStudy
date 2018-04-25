@@ -111,12 +111,10 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-md-12">
-
                                 <ol class="breadcrumb">
                                     <li><a href="/study/main">Home</a></li>
                                     <li class="active">Profile</li>
                                 </ol> <!-- end of /.breadcrumb -->
-
                             </div>
                         </div>
                     </div> <!-- /.container -->
@@ -133,11 +131,8 @@
 
                 <!--  begin services section -->
 
-
                         <div class="headline text-center">
-                        
                             <div class="row">
-
                                 <div class="col-md-6 col-md-offset-3">
                                     <h2 class="section-title">My page</h2>
                                 </div>
@@ -146,8 +141,7 @@
 
                         <div class="service-list">
                             <div class="row">
-                            
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="service-content text-center">
                                         <div class="service-icon-box">
                                             <div class="service-icon center-block">
@@ -159,23 +153,22 @@
                                         </div> <!--   end of .service-info  -->
                                     </div> <!--  end of .service-content  -->
                                 </div>
-                            
-                                <div class="col-md-4">
+               
+                                <div class="col-md-3">
                                     <div class="service-content text-center">
                                         <div class="service-icon-box">
                                             <div class="service-icon center-block">
-                                                <a href="addInfo"><i class="fa fa fa-address-card"></i></a>
+                                                <!-- <a href="changePw"><i class="fa fa-expeditedssl"></i> -->
+                                                <a href="changePw"><i class="fa fa-lock"></i>
                                             </div>
                                         </div> <!--  end of .service-icon-box  -->
                                         <div class="service-info">
-                                        
-                                        <!-- 부가정보랑 비밀번호 변경을 넣습니다. -->
-                                            <h3 class="service-heading">부가정보 관리</h3>
+                                            <h3 class="service-heading">비밀번호 변경</h3>
                                         </div> <!--   end of .service-info  -->
                                     </div> <!--  end of .service-content  -->
                                 </div>
 
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="service-content text-center">
                                         <div class="service-icon-box">
                                             <div class="service-icon center-block">
@@ -188,11 +181,11 @@
                                     </div> <!--  end of .service-content  -->
 								</div>
 								
-								<div class="col-md-4">
+								<div class="col-md-3">
                                     <div class="service-content text-center">
                                         <div class="service-icon-box">
                                             <div class="service-icon center-block">
-                                               <a href=""><i class="fa fa-frown-o" onclick="quit();"></i></a>
+                                               <a href="quit"><i class="fa fa-frown-o"></i></a>
                                             </div>
                                         </div> <!--  end of .service-icon-box  -->
                                         <div class="service-info">
@@ -211,7 +204,7 @@
                             <div class="row">
 
                                 <div class="col-md-6 col-md-offset-3">
-                                    <h2 class="section-title">상세정보 관리</h2>
+                                    <h2 class="section-title">스터디 관리</h2>
                                 </div>
                             </div>
                         </div> <!-- /.headline -->
@@ -422,6 +415,8 @@
 <%@include file="../footer.jsp"%>
 
 </body>
+ 
+ <!-- 아코디언 메뉴 -->
  <script>
  $(".faq-q").click( function () {
      var container = $(this).parents(".faq-c");
@@ -438,6 +433,8 @@
      }
    });
  </script>
+
+<!-- 회원 탈퇴 스크립트 --> 
 <script>
 function quit() {
 	var msg = "정말 탈퇴하시겠습니까?"

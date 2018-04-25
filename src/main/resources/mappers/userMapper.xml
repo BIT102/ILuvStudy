@@ -33,22 +33,22 @@
   	<!-- 프로필 수정 -->
   	<update id="update">
   	update user set name=#{name}, nickname=#{nickName}, gender=#{gender}, phoneNum=#{phoneNum}, 
-  	birth=#{birth} where email=#{email};
+  	birth=#{birth}, introduction=#{introduction}, modifyDate=now() where email=#{email};
   	</update>
   	
   	<!-- 부가정보 수정 -->
   	<update id="updateAddInfo">
-  	update user set homepage=#{homepage}, introduction=#{introduction} where email=#{email}; 
+  	update user set homepage=#{homepage}, introduction=#{introduction}, modifyDate=now() where email=#{email}; 
   	</update>
   	
   	<!-- 비밀번호 변경 -->
   	<update id="changePw">
-  	update user set password=#{password} where email=#{email};
+  	update user set password=#{password}, modifyDate=now() where email=#{email};
   	</update>
   	 
   	<!-- 회원 탈퇴 -->
   	<update id="quit">
-  	update user set isDel=1 where email=#{email};
+  	update user set isDel=1, quitDate=now() where email=#{email};
   	</update>
   
   	<!-- 비밀번호 체크 -->
@@ -63,7 +63,7 @@
   	
   	<!-- 프로필 사진 수정 -->
   	<update id="insertImg">
-  	update user set photo=#{photo} where email=#{email};
+  	update user set photo=#{photo}, modifyDate=now() where email=#{email};
   	</update>
   	
   	<!-- 북마크 불러오기 -->

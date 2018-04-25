@@ -41,6 +41,10 @@
 <!-- scripts -->
 <script type="text/javascript"
 	src="/resources/assets/js/modernizr.custom.97074.js"></script>
+	
+<!-- include summernote css/js-->
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
 
 <!-- ========================================================= -->
 <!-- include libraries(jQuery, bootstrap) -->
@@ -104,7 +108,7 @@
     
     <script>
 	$(document).ready(function(){
-		if("${result}"=="변경되었습니다."){
+		if("${result}"=="수정되었습니다."){
 			alert("${result}");
 		}
 	})
@@ -146,10 +150,13 @@
 
       <div id="service-page">
 
-                <!--  begin services section -->
+                                <!--  begin services section -->
+
 
                         <div class="headline text-center">
+                        
                             <div class="row">
+
                                 <div class="col-md-6 col-md-offset-3">
                                     <h2 class="section-title">My page</h2>
                                 </div>
@@ -157,8 +164,9 @@
                         </div> <!-- /.headline -->
 
                         <div class="service-list">
-                            <div class="row">
-                                <div class="col-md-3">
+                            <div class="row" style="padding-left: 100px;">
+                            
+                                <div class="col-md-2">
                                     <div class="service-content text-center">
                                         <div class="service-icon-box">
                                             <div class="service-icon center-block">
@@ -170,13 +178,25 @@
                                         </div> <!--   end of .service-info  -->
                                     </div> <!--  end of .service-content  -->
                                 </div>
-               
-                                 <div class="col-md-3">
+                            
+                                <div class="col-md-2">
                                     <div class="service-content text-center">
                                         <div class="service-icon-box">
                                             <div class="service-icon center-block">
-                                                <!-- <a href="changePw"><i class="fa fa-expeditedssl"></i> -->
-                                                <a href="changePw"><i class="fa fa-lock"></i>
+                                                <a href="addInfo"><i class="fa fa fa-address-card"></i></a>
+                                            </div>
+                                        </div> <!--  end of .service-icon-box  -->
+                                        <div class="service-info">
+                                            <h3 class="service-heading">부가정보 관리</h3>
+                                        </div> <!--   end of .service-info  -->
+                                    </div> <!--  end of .service-content  -->
+                                </div>
+                                
+                                <div class="col-md-2">
+                                    <div class="service-content text-center">
+                                        <div class="service-icon-box">
+                                            <div class="service-icon center-block">
+                                                <a href="changePw"><i class="fa fa-expeditedssl"></i>
                                             </div>
                                         </div> <!--  end of .service-icon-box  -->
                                         <div class="service-info">
@@ -185,7 +205,7 @@
                                     </div> <!--  end of .service-content  -->
                                 </div>
 
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <div class="service-content text-center">
                                         <div class="service-icon-box">
                                             <div class="service-icon center-block">
@@ -198,11 +218,11 @@
                                     </div> <!--  end of .service-content  -->
 								</div>
 								
-								<div class="col-md-3">
+								<div class="col-md-2">
                                     <div class="service-content text-center">
                                         <div class="service-icon-box">
                                             <div class="service-icon center-block">
-                                               <a href="quit"><i class="fa fa-frown-o"></i></a>
+                                               <a href=""><i class="fa fa-frown-o" onclick="quit();"></i></a>
                                             </div>
                                         </div> <!--  end of .service-icon-box  -->
                                         <div class="service-info">
@@ -221,62 +241,215 @@
                             <div class="row">
 
                                 <div class="col-md-6 col-md-offset-3">
-                                    <h2 class="section-title">비밀번호 변경</h2>
+                                    <h2 class="section-title">부가정보 관리</h2>
                                 </div>
                             </div>
                         </div> <!-- /.headline -->
                         
-                  <!--    <form name="changePwForm" action="/changePw" method="post">    -->
-                        				<div>* 비밀번호변경</div>
-													<table class="table table-hover">
-													<tbody>
-												 		<tr>
-												 		<th>기존 비밀번호</th>
-															<td><input type="password" name="nowPw"
-																 class="form-control" id="nowPw"
-																style="width: 550px;">
-															</td>
-															
-												 		</tr>
-												 		
-												 		<tr>
-												 		<th>새 비밀번호</th>
-															<td><input type="password" pattern=".{8,16}" name="newPw1"
-																 class="form-control" id="newPw1"
-																style="width: 550px;" placeholder="8자리에서 16자리 이하 영문, 숫자로만 설정해 주세요.">
-																<p id = "pwcheck" style = "color:red;padding-top: 15px;margin: 0;">비밀번호를 입력하세요</p>
-															</td>
-												 		</tr>												 		
-												 		
-												 		<tr>												 		<tr>
-												 		<th>비밀번호 확인</th>
-															<td><input type="password" pattern=".{8,16}" name="newPw2"
-																 class="form-control" id="newPw2"
-																style="width: 550px;" placeholder="비밀번호를 한번 더 입력해주세요.">
-																<p id = "pwcheck2" style = "color:red;padding-top: 15px;margin: 0;">비밀번호를 재입력하세요</p>
-															</td>
-												 		</tr>	
-												 	</tbody>
-												 	</table>
-												 	
-												 	<input type="hidden" value="${login.email}" name="email" readonly>
-												 		
-												 	<div>
-  														 <input id="btn-success" class="changePw" type="submit" value="변경하기" style="width:80px; height:42px;">
-													</div>		
-			    
-
+                     <form name="addInfoForm" action="/addInfo" method="post">   
+                        				<div>* 부가정보</div>
+											<table class="table table-hover">
+												<tbody>
+												 <tr>
+								
+													<th>관심 카테고리</th>
+														<td><button onclick="show()">#IT</button></span> <span><button
+															onclick="show2()">#영어</button></span> <span><button
+															onclick="show3()">#공무원</button></span> <br>
+																<div class="IT" id="IT">
+																	<input type="checkbox" name="IT" value="JAVA" id="01"> JAVA <input
+																		type="checkbox" name="IT" value="spring" id="02"> SPRING <input
+																		type="checkbox" name="IT" value="html" id="03"> HTML/CSS
+																</div>
+														
+																<div class="ENGLISH" id="ENGLISH">
+																	<input type="checkbox" name="english" value="toeic" id="04">
+																	TOEIC <input type="checkbox" name="english" value="speaking" id="05">
+																	SPEAKING <input type="checkbox" name="english" value="opic" id="06">
+																	OPIC
+																</div>
+														
+																<div class="GONG" id="GONG">
+																	<input type="checkbox" name="civil" value="administration" id="07">
+																	행정 <input type="checkbox" name="civil" value="police" id="08">
+																	경찰 <input type="checkbox" name="civil" value="fireman" id="09">
+																	소방
+																</div>
+														</td>
+														
+												</tr>
+												 <tr>
+								
+													<th>관심지역</th>
+													<td>
+													<p>지역대분류</p>
+													<select name="rDId" id="rDId">
+									
+														<option value='' selected>--</option>
+									
+														<% int cataNum2 = 64; %>
+														<c:forEach items="${rglist}" var="StudyVO">
+															<% cataNum2++; %>
+															<option value="<%=(char)cataNum2%>">${StudyVO.rDName}</option>
+														</c:forEach>
+													</select>
+									
+													<!-- 소분류 -->
+													<p>지역소분류</p>
+													<select name="rSId" id="rSId">
+														<option selected>--</option>
+													</select>
+														</td>
+														
+												</tr>
+												 <tr>
+								
+													<th>자기소개</th>
+														<td>
+																<%-- <textarea row="5" cols="50" name="introduction">${vo.introduction}</textarea> --%>
+														<textarea id="summernote" name="introduction">${vo.introduction}</textarea>
+														
+														</td>
+														
+												</tr>
+												 <tr>
+								
+													<th>홈페이지</th>
+														<td><input type="url" name="homepage"
+														value="${vo.homepage}" class="form-control" id="homepage"
+														style="width: 550px;" readonly>
+														</td>
+														
+												</tr>
+																																															
+												</tbody>	
+											</table>
+											
+													<input type="hidden" value="${login.email}" name="email" readonly>
+											
+													<div>
+														<input type="submit" id="btn-success" value="저장하기" style="width:80px; height:42px;">
+													</div>
+										<!-- </form>	 -->							
+													
                  </div> <!-- end of .container -->
         </div>
-<!--   </form>	  -->     
+  </form>	      
 </section>
 
 <%@include file="../footer.jsp"%>
 
 </body>
 
+	<!-- 메뉴 드랍다운 버튼 (비밀번호 변경 뜨게 하는 거) -->
+	 <script>
+	 $(".faq-q").click( function () {
+	     var container = $(this).parents(".faq-c");
+	     var answer = container.find(".faq-a");
+	     var trigger = container.find(".faq-t");
+	     
+	     answer.slideToggle(200);
+	     
+	     if (trigger.hasClass("faq-o")) {
+	       trigger.removeClass("faq-o");
+	     }
+	     else {
+	       trigger.addClass("faq-o");
+	     }
+	   });
+	</script>
 
+	<!-- 카테고리 -->
+ 	<script>
+			function show() {
+				document.getElementById("IT").style.visibility = "visible";
+			}
+
+			function show2() {
+				document.getElementById("ENGLISH").style.visibility = "visible";
+			}
+
+			function show3() {
+				document.getElementById("GONG").style.visibility = "visible";
+			}
+
+			// // class명으로 보이기/사라지기
+			// function show(){
+			//     var kk = document.getElementsByClassName("IT");
+			//     kk[0].style.visibility = "visible"
+			// }
 	
+	</script>
+	<!-- select지역 이벤트       -->
+ 	<script>
+		$("#rDId").change(function(){
+		
+			var bigNum2 = $(this).val()
+			
+			console.log(bigNum2);
+			smallCat2(bigNum2);
+		})
+
+		function smallCat2(bigNum2){
+			$.getJSON(
+				"register1/region/"+bigNum2,
+				function(data){
+					var str = "";
+
+					$(data).each(function(){
+						str += "<option value="+this.rSId+">"+this.rSName+"</option>";							
+					});
+					
+					$("#rSId").html(str);
+				}
+			)
+		}			
+	</script> 
+			
+	<!-- 자기소개 -->		
+	<script>
+		$(document).ready(function() {
+			  $('#summernote').summernote();
+			});
+	</script>
+			
+	<script>
+		$(document).ready(function() {
+			alert("${result}");
+		})
+	</script>
+	
+	<!-- 비밀번호 변경 -->	
+<!-- 	<script>
+	
+	$(".changePw").on("click", function(){
+		
+		var nowPw = $('#nowPw').val();			//화면에서 입력된 내용은 변수 처리
+		var newPw1 = $('#newPw1').val();
+		var newPw2 = $('#newPw2').val();
+		
+		
+		console.log(nowPw);
+		console.log(newPw1);
+		console.log(newPw2);
+		
+		$.ajax({
+			url: '/changePw',
+			type: 'POST',
+			header:{
+				"X-HTTP-Method-Override" : "POST"
+			},
+			data:{ 	nowPw : nowPw,
+					newPw1 : newPw1, // 앞에는 컨트롤러에서 가져다 쓸 이름이고 뒤에는 값임!!
+					newPw2 : newPw2		
+			},
+			success : function(result){ //alert으로 result값을 하면 컨트롤에서 ""안에 쓴 값이 뜸
+			alert("수정되었습니다.");
+			}
+		})
+	})
+	
+	</script> -->
 	
 	 	<script>
 	
@@ -295,7 +468,6 @@
 			url: '/changePw',
 			type: 'POST',
 			header:{
-				"Content-type" : "application/json",
 				"X-HTTP-Method-Override" : "POST"
 			},
 			data:{ 	nowPw : nowPw,
@@ -303,18 +475,13 @@
 					newPw2 : newPw2		
 			},
 			success : function(result){ //alert으로 result값을 하면 컨트롤에서 ""안에 쓴 값이 뜸
-				console.log("ajax 통신");
-				console.log(result);
-				
 				if(result == "success"){
-					alert("변경 되었습니다.");
-				}else{
-					alert("비밀번호를 확인해 주세요.");
+					alert("수정되었습니다.");
 				}
 			}
 		});
 	});
-	 
+	
 		var charPw = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 	
 		// 알파벳 소문자, 숫자로만 이루어졌는지 체크
@@ -379,6 +546,46 @@
 		
 	
 	</script>  
+	
+	<!-- 회원 탈퇴 -->
+	<script>
+	function quit() {
+		var msg = "정말 탈퇴하시겠습니까?"
+		var flag = confirm(msg);
+		
+		if(flag==true) {
+				
+			$.ajax({
+				url: '/quit',
+				type: 'POST',
+				header:{
+					"X-HTTP-Method-Override" : "POST"
+				},
+				success : function(result){ //alert으로 result값을 하면 컨트롤에서 ""안에 쓴 값이 뜸
+				alert("안녕히가세요");
+				}
+			});
+			
+		} else {
+			alert("취소하였습니다.")
+		}
+	}
 
+	</script>
+	
+	<script>
+	$(document).ready(function() {
+	     $('#summernote').summernote({
+	             height: 300,                 // set editor height
+	             minHeight: null,             // set minimum height of editor
+	             maxHeight: null,             // set maximum height of editor
+	             focus: true                  // set focus to editable area after initializing summernote
+	     });
+	});
+
+	
+	</script>
+	
+		
 
 </html>

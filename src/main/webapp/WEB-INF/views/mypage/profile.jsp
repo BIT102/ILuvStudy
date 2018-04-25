@@ -27,13 +27,47 @@
 <script
 	src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 
-<!-- stylesheets -->
-<link rel="stylesheet" href="/resources/assets/css/bootstrap.min.css">
-<link rel="stylesheet" href="/resources/assets/css/font-awesome.min.css">
-<link rel="stylesheet" href="/resources/assets/css/animate.css">
-<link rel="stylesheet" href="/resources/assets/css/owl.carousel.css">
-<link rel="stylesheet" href="/resources/assets/css/owl.theme.css">
-<link rel="stylesheet" href="/resources/assets/css/style.css">
+	<!-- 섬머노트 시작 -->
+	
+<!-- include libraries(jQuery, bootstrap) -->
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
+
+<script>
+var sn = jQuery.noConflict();
+</script>
+
+<!-- include summernote css/js-->
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
+
+<script>
+sn(document).ready(function() {
+	
+	
+	sn('#summernote').summernote({
+
+		height: 150,                 // set editor height
+		minHeight: null,             // set minimum height of editor
+		maxHeight: null,             // set maximum height of editor
+		focus: true,                  // set focus to editable area after initializing summernote
+		
+		// 편집도구 툴팁 종류 선택   
+		toolbar: [
+		   ['style', ['bold', 'italic', 'underline', 'clear']],
+		   ['font', ['strikethrough']], 
+		   ['fontsize', ['fontsize']],
+		   ['color', ['color']],
+		   ['para', ['ul', 'ol', 'paragraph']]
+		 ]
+           
+	});   
+ 
+});
+</script>
+
+	<!-- 섬머노트 끝 -->
 
 <!-- fonts for this template -->
 <link rel="stylesheet"
@@ -97,6 +131,25 @@ th{
     background-repeat: no-repeat !important;
 }
 
+
+/* 썸머노트 버튼 스타일 시작 */
+button[type="button"] {
+
+	width:1px;
+	height:35px;
+	/* margin:5px; */
+	border-radius:10%;
+	border: 1px solid gray;
+	/* style="padding-right : 30px; */
+	padding-right : 30px;
+}
+
+.note-toolbar .note-fontsize .note-btn-group button,
+.note-toolbar .note-para .note-btn-group button {
+    line-height: 12px !important;
+}
+/* 썸머노트 버튼 스타일 끝 */
+
 </style>
 
 <script>
@@ -140,25 +193,20 @@ th{
 
       <div id="service-page">
      
-                <!--  begin services section -->
-
+                 <!--  begin services section -->
 
                         <div class="headline text-center">
-                        
                             <div class="row">
-
                                 <div class="col-md-6 col-md-offset-3">
-                                    <h2 class="section-title">마이페이지</h2>
+                                    <h2 class="section-title">My page</h2>
                                 </div>
                             </div>
                         </div> <!-- /.headline -->
 
-
-		
                         <div class="service-list">
                             <div class="row">
                             
-                                <div class="col-md-4 col-xs-4">
+                                <div class="col-md-3 col-xs-4">
                                     <div class="service-content text-center">
                                         <div class="service-icon-box">
                                             <div class="service-icon center-block">
@@ -166,27 +214,26 @@ th{
                                             </div>
                                         </div> <!--  end of .service-icon-box  -->
                                         <div class="service-info">
-                                            <h3 class="service-heading">프로필</h3>
+                                            <h3 class="service-heading">My profile</h3>
                                         </div> <!--   end of .service-info  -->
                                     </div> <!--  end of .service-content  -->
                                 </div>
                             
-                                <div class="col-md-4 col-xs-4">
+                                <div class="col-md-3 col-xs-4">
                                     <div class="service-content text-center">
                                         <div class="service-icon-box">
                                             <div class="service-icon center-block">
-                                                <a href="addInfo"><i class="fa fa fa-address-card"></i></a>
+                                                <!-- <a href="changePw"><i class="fa fa-expeditedssl"></i> -->
+                                                <a href="changePw"><i class="fa fa-lock"></i>
                                             </div>
                                         </div> <!--  end of .service-icon-box  -->
                                         <div class="service-info">
-                                        
-                                        <!-- 부가정보랑 비밀번호 변경을 넣습니다. -->
-                                            <h3 class="service-heading">부가정보 관리</h3>
+                                            <h3 class="service-heading">비밀번호 변경</h3>
                                         </div> <!--   end of .service-info  -->
                                     </div> <!--  end of .service-content  -->
                                 </div>
 
-                                <div class="col-md-4 col-xs-4">
+                                <div class="col-md-3 col-xs-4">
                                     <div class="service-content text-center">
                                         <div class="service-icon-box">
                                             <div class="service-icon center-block">
@@ -199,11 +246,11 @@ th{
                                     </div> <!--  end of .service-content  -->
 								</div>
 								
-								<div class="col-md-4 col-xs-4">
+								<div class="col-md-3 col-xs-4">
                                     <div class="service-content text-center">
                                         <div class="service-icon-box">
                                             <div class="service-icon center-block">
-                                               <a href=""><i class="fa fa-frown-o" onclick="quit();"></i></a>
+                                               <a href="quit"><i class="fa fa-frown-o"></i></a>
                                             </div>
                                         </div> <!--  end of .service-icon-box  -->
                                         <div class="service-info">
@@ -245,7 +292,6 @@ th{
 							     	    <p style="margin-bottom:0;">회원님의 정면 사진을 올려주세요!</p>
 							     	    <p>상대방이 신뢰를 갖고 연락할 확률이 높아져요!</p>
 							     		<input type='file' name='file' style="display:inline-block;" id="i_file"/> 
-
 							     	</td>	
 							</tr>	
                        </tbody>
@@ -277,7 +323,8 @@ th{
 							<th>닉네임</th>
 								<td><input type="text" name="nickName"
 									value="${vo.nickName}" class="form-control" id="nickName"
-									style="width: 550px; display:inline-block;">
+									style="width: 550px; display:inline-block;"
+									onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this);">
 									<input type="button" id="nickCheck" value="중복확인" class="btn btn-black"></input>
 								</td>
 							</tr>		
@@ -302,8 +349,16 @@ th{
 							<th>전화번호</th>
 								<td style="width:550px"><input type="text" name="phoneNum"
 									value="${vo.phoneNum}" class="form-control" id="phone"
-									style="width: 550px; display:inline-block">
+									style="width: 550px; display:inline-block" pattern="[0-9]{11}"
+									placeholder="ex)01012345678">
 								<!-- <input type="button" value="인증하기" class="btn btn-black"></input> -->
+								</td>
+						</tr>
+						
+						<tr>
+							<th>자기소개</th>
+								<td>
+									<textarea id="summernote" name="introduction">${vo.introduction}</textarea>
 								</td>
 						</tr>
 					
@@ -322,6 +377,7 @@ th{
 
 <%@include file="../footer.jsp"%>
 </body>
+
 <script id="template" type="text/x-handlebars-template">
 	<div class="mailbox-attachment-info">
 		<span class="mailbox-attachment-icon has-img">
@@ -330,6 +386,7 @@ th{
 			<small class = "small" value = "{{name}}" data-src=data style="cursor:pointer">X</small>
 	</div>
 </script>
+
 <script>
 
 var count=1;
@@ -434,29 +491,18 @@ $(".uploadedList").on("click", "small", function(event) {
         });
     });
 	
-		// 회원 탈퇴 스크립트
-		function quit() {
-			var msg = "정말 탈퇴하시겠습니까?"
-				var flag = confirm(msg);
-				
-				if(flag==true) {
-						
-					$.ajax({
-						url: '/quit',
-						type: 'POST',
-						header:{
-							"X-HTTP-Method-Override" : "POST"
-						},
-						success : function(result){ //alert으로 result값을 하면 컨트롤에서 ""안에 쓴 값이 뜸
-						alert("안녕히가세요");
-						}
-					});
-					
-				} else {
-					alert("취소하였습니다.")
-				}
-		}
-
+   
+   function noSpaceForm(obj) { // 공백사용못하게
+       var str_space = /\s/;  // 공백체크
+       if(str_space.exec(obj.value)) { //공백 체크
+           alert("해당 항목에는 공백을 사용할수 없습니다.\n\n공백은 자동적으로 제거 됩니다.");
+           obj.focus();
+           obj.value = obj.value.replace(' ',''); // 공백제거
+           return false;
+       }
+    // onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this);"
+   }
+   
 </script>
 
 </html>

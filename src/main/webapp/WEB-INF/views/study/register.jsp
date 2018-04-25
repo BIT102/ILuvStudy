@@ -14,14 +14,52 @@
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script>
   var jb = jQuery.noConflict();
-
   </script>
-
-
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
 <script
 	src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+
+	<!-- 섬머노트 시작 -->
+	
+<!-- include libraries(jQuery, bootstrap) -->
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
+
+<script>
+var sn = jQuery.noConflict();
+</script>
+<!-- include summernote css/js-->
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
+
+<script>
+sn(document).ready(function() {
+	
+	
+	sn('#summernote').summernote({
+
+		height: 150,                 // set editor height
+		minHeight: null,             // set minimum height of editor
+		maxHeight: null,             // set maximum height of editor
+		focus: true,                  // set focus to editable area after initializing summernote
+		
+		// 편집도구 툴팁 종류 선택   
+		toolbar: [
+		   ['style', ['bold', 'italic', 'underline', 'clear']],
+		   ['font', ['strikethrough']], 
+		   ['fontsize', ['fontsize']],
+		   ['color', ['color']],
+		   ['para', ['ul', 'ol', 'paragraph']]
+		 ]
+           
+	});   
+ 
+});
+</script>
+
+	<!-- 섬머노트 끝 -->
+
 <title>스터디 상세</title>
 
 <style>
@@ -133,6 +171,25 @@ small {
 th{
 	width:300px;
 }
+
+/* 썸머노트 버튼 스타일 시작 */
+button[type="button"] {
+
+	width:5px;
+	height:35px;
+	/* margin:5px; */
+	border-radius:10%;
+	border: 1px solid gray;
+	/* style="padding-right : 30px; */
+	padding-right : 30px;
+}
+
+.note-toolbar .note-fontsize .note-btn-group button,
+.note-toolbar .note-para .note-btn-group button {
+    line-height: 12px !important;
+}
+/* 썸머노트 버튼 스타일 끝 */
+
 </style>
 </head>
 <body>
@@ -397,9 +454,9 @@ th{
 										<div>* 소개</div>
 										<table class="table table-hover">
 											<tbody>
-												<tr>
+												<tr style="height:300px;">
 													<th>스터디 소개</th>
-													<td><textarea name="content" class="form-control"
+													<td><textarea id="summernote" name="content" class="form-control"
 															style="height: 140px;">${studyVO.content}</textarea></td>
 												</tr>
 												<tr>
