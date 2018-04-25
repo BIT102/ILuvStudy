@@ -260,6 +260,21 @@ body {
 	padding-top: 60px;
 }
 
+#applyDiv {
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgb(0, 0, 0); /* Fallback color */
+	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+	padding-top: 60px;
+
+}
+
 
 #amodDiv {
 	display: none; /* Hidden by default */
@@ -306,6 +321,14 @@ body {
 .close:hover, .close:focus {
 	color: red;
 	cursor: pointer;
+}
+
+.introdu .col-md-6 {
+	border:1px solid gray;
+	height:57px; 
+	padding-top:10px; 
+	font-size:25px;
+	border-radius:10px;
 }
 
 </style>
@@ -607,14 +630,15 @@ body {
 			<!-- 로그인한아이디가 글쓴이일때. -->
 			<c:if test="${login.email == studyVO.writer}">
 				<br>
-				<input type="submit" class="btn aList" value="신청자목록"	onclick="wait();">
+				<input type="submit" class="btn aList" value="신청자목록" onclick="wait();">
 				<input type="submit" class="btn preee" value="목록으로"> 
 				<input type="submit" class="btn modifybo" value="스터디 수정"> 
 				<input type="submit" class="btn delete" value="스터디 지우기">
 
 				<div id="amodDiv" class="modal">
 					<div class="container">
-						<div class="login-container" style="width:600px; padding-bottom:70px;">
+						<div class="login-container" style="width:600px; padding-bottom:70px; overflow: hidden !important;
+    					height: auto !important; padding-top:50px;">
 							<span
 							onclick="document.getElementById('amodDiv').style.display='none'"
 							class="close" title="Close Modal">&times;</span>
@@ -630,11 +654,55 @@ body {
 		</c:if>
 	</div>
 	
+		
+	 
 
 		</div>
 	</div>
 </div>
 
+	<!-- 신청자 정보보기 -->
+			<div id="applyDiv" class="modal">
+					<div class="container">
+						<div class="login-container" style="width:600px; height:700px;">
+
+							<span
+							onclick="document.getElementById('applyDiv').style.display='none'"
+							class="close" title="Close Modal">&times;</span>
+								
+								<div class="intro-img">
+					 				<img src=""
+									 class="img-responsive center-block img-circle" style=" width:200px; height:200px;">  
+								</div>
+								
+								<div class="introdu" style="margin-top:30px;">
+										<div class="col-md-6" style="background-color:#5bc0de; color:white;">
+											기본정보
+										</div>
+										<div class="col-md-6">	
+											소개글
+										</div>
+										
+										<table class="intro-table">
+											<tr>
+												<th>닉네임</th>
+												<td class="intro-nick"></td>
+											</tr>
+											<tr>
+												<th>성별</th>
+												<td class="intro-gender"></td>
+											</tr>
+											<tr>
+												<th>홈페이지</th>
+												<td class="intro-home"></td>
+											</tr>
+										</table>
+								</div>
+								
+					</div>
+				</div>
+			</div> 
+				
 <div class="setDiv">
     <a class="showMask"></a>
  
@@ -872,7 +940,7 @@ $(".aList").on("click", function(){
 })
 //신청자 목록 닫기
 $("#applyclose").on("click", function(){
-	$("#amodDiv").hide("slow")
+	$("#amodDiv").hide("slow");
 })
 //신청자 수락 거절 status 바꾸자
 //수락지 o
@@ -937,28 +1005,59 @@ function nostudy(event) {
 		 }
 	});
 }
+
 //신청자 대기상태
 function wait(){
 			
 $.getJSON("/study/apply/"+bno, function(data){
 	
+
+	
 	var str="";
 	$(data).each(function(){
 		
 		if(this.status=='D'){
-		
+			
 		str +="<div class='applyLi' data-usEmail='"+this.usEmail+"' style='float:left;'>"
 			+ "<span class='mailbox-attachment-icon has-img'><img src='/study/displayFile?fileName="+this.photo+"'"
-			+ "alt=Attachment style='width:50px; height:50px; margin-right:10px; border-radius:50%;'></span>"
+			+ "alt=Attachment style='width:50px; height:50px; margin-right:10px; border-radius:50%;' onclick='mypage(this);'></span>"
 		    + this.nickname
 		    + "<button type='button' onclick='okstudy(this);' class='btn' style='margin:0 10px;'>수락</button>"
 		    + "<button type='button' onclick='nostudy(this);' class='btn'>거절</button>"
+		    + "<input type='hidden' class='intro-nick' value='"+this.nickname+"'/>"
+		    + "<input type='hidden' class='intro-gender' value='"+this.gender+"'/>"
+		    + "<input type='hidden' class='intro-home' value='"+this.homepage+"'/>"
+		    + "<input type='hidden' class='intro-intro' value='"+this.introduction+"'>"
 		    +"</div>";   
 		}
 	});
 	$(".modal-applyList").html(str);
 });
 }
+
+// 신청자 정보 보기
+function mypage(x) {
+	
+	console.log($(x).parent().parent().children("input.intro-nick").val())
+	
+	var img = $(x).attr("src");
+	var nick = $(x).parent().parent().children("input.intro-nick").val();
+	var gender = $(x).parent().parent().children("input.intro-gender").val();
+	var home = $(x).parent().parent().children("input.intro-home").val();
+	
+	$(".intro-img img").attr("src", img);
+ 	$(".intro-nick").html(nick) 
+ 	$(".intro-gender").html(gender) 
+	$(".intro-home").html(home)
+	
+	
+	$("#applyDiv").show();
+
+}
+	
+
+
+
 //스터디 등록자 불러오기
 function apply(){
  $.getJSON("/study/apply/"+bno, function(data){

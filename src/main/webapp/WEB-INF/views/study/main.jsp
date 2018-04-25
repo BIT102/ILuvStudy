@@ -59,6 +59,8 @@
 	height:35px;
 	background-color:white;
 	border:1px solid gray;
+	border-radius:8%;
+	margin-top:10px;
 }
 .vctmo {
 	top:100%;
