@@ -281,7 +281,9 @@ button[type="button"] {
 										  
 										  	<div class="mailbox-attachment-info">
 												<span class="mailbox-attachment-icon has-img">
-													<img src="/study/displayFile?fileName=${vo.photo}" alt="Attachment" style="width:150px; height:150px;" id="proimg">
+													<%-- <img src="/study/displayFile?fileName=${vo.photo}" alt="Attachment" style="width:150px; height:150px;" id="proimg"> --%>
+													<img src="/study/displayFile?fileName=${vo.photo}" border='0' onclick=document.all.file.click();
+													alt="Attachment" style="width:150px; height:150px;" id="proimg">
 												</span>
 											</div>
 										  
@@ -292,6 +294,8 @@ button[type="button"] {
 							     	    <p style="margin-bottom:0;">회원님의 정면 사진을 올려주세요!</p>
 							     	    <p>상대방이 신뢰를 갖고 연락할 확률이 높아져요!</p>
 							     		<input type='file' name='file' style="display:inline-block;" id="i_file"/> 
+							     		<!-- <input type=file name='file' style='display: none;' id="i_file"/>  -->
+										 
 							     	</td>	
 							</tr>	
                        </tbody>

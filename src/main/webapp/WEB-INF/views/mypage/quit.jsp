@@ -279,6 +279,7 @@
 						console.log(result);
 						if(result == "success"){
 							alert("안녕히 가세요");
+							location.href = "http://localhost:8080/study/main"
 						}else{
 							alert("비밀번호를 확인해 주세요.")
 						}	
