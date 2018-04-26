@@ -168,12 +168,14 @@ body {
 	background-color:#000;
 	display:none;
 }
-.window {
+.popwindow {
 	display: none;
 	background-color: #ffffff;
-	height: 80%;
-	width:auto;
 	z-index:99999;
+	max-width:100%;
+	max-height:100%;
+	width:auto !important;
+	height:auto !important;
 }
 
 .btn-clipboard {
@@ -707,7 +709,7 @@ body {
     <a class="showMask"></a>
  
 	<div class="mask"></div>
-    <div class="window">
+    <div class="popwindow">
  		<input type="button" class="close" value="X"/>
     </div>
 </div> 
@@ -796,7 +798,7 @@ function myFunction1(x) {
 		<span class="mailbox-attachment-icon has-img">
 			<div class="setDiv">
 				<img src="{{imgsrc}}" class="showMask" alt="Attachment" style="width:150px; height:150px; object-fit: cover;">
-				<img src="{{imgsrc}}" class="window">
+				<img src="{{imgsrc}}" class="popwindow">
 			</div>
 		</span>
 	</li>
@@ -830,7 +832,7 @@ function myFunction1(x) {
      
             // 레이어 팝업을 가운데로 띄우기 위해 화면의 높이와 너비의 가운데 값과 스크롤 값을 더하여 변수로 만듭니다.
             var left = ( $(window).scrollLeft() + ( $(window).width() - $(this).next().width()) / 2 );
-            var top = ( $(window).scrollTop() + ( $(window).height() - $(this).next().height()) / 2 );
+             var top = ( $(window).scrollTop() + ( $(window).height() - $(this).next().height()*2) / 2 );  
      
             // css 스타일을 변경합니다.
             $(this).next().css({'left':left,'top':top, 'position':'absolute'});
@@ -840,15 +842,15 @@ function myFunction1(x) {
         });
  
         // 닫기(close)를 눌렀을 때 작동합니다.
-        $('.window .close').click(function (e) {
+        $('.popwindow .close').click(function (e) {
             e.preventDefault();
-            $('.mask, .window').hide();
+            $('.mask, .popwindow').hide();
         });
  
         // 뒤 검은 마스크를 클릭시에도 모두 제거하도록 처리합니다.
         $('.mask').click(function () {
             $(this).hide();
-            $('.window').hide();
+            $('.popwindow').hide();
         });
   });
    //==========레이어 팝업 end===============
