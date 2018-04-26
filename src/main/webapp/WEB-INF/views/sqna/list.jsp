@@ -130,7 +130,7 @@ color:#6b456a !important;
 	    <div class="col-md-12 offset-md-1 row-block">
 	        <div class="panel-group" id="accordion">
 	        
-	    <c:forEach items="${list}" var="QnaVO">    
+	    <c:forEach items="${list}" var="QnaVO" varStatus="status">    
 	    
 	    		<div class="panel panel-default">
 	      			<div class="panel-heading">
@@ -140,9 +140,19 @@ color:#6b456a !important;
 	        		  <span class="time"><fmt:formatDate pattern="yyyy.MM.dd" value="${QnaVO.regdate}"/></span>
 	       			 </h4>
 	      			</div>
-				      <div id="collapse${QnaVO.bno}" class="panel-collapse collapse">
+	      			
+	      			<c:choose>
+	      			<c:when test="${status.index eq '0'}">
+				      <div id="collapse${QnaVO.bno}" class="panel-collapse collapse in">
 				        <div class="panel-body">${QnaVO.content}</div>
 				      </div>
+					</c:when> 
+					<c:otherwise>	      
+				        <div id="collapse${QnaVO.bno}" class="panel-collapse collapse">
+				        <div class="panel-body">${QnaVO.content}</div>
+				      </div>
+					</c:otherwise>
+					</c:choose>	      
 			    </div>
 			    
 	     </c:forEach>

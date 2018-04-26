@@ -45,6 +45,29 @@
 
 
 <style>
+
+#load {
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	position: fixed;
+	display: block;
+	opacity: 0.8;
+	background: white;
+	z-index: 99;
+	text-align: center;
+}
+
+#load > img {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	z-index: 100;
+}
+
+
+
 #keywordInput {
 	width: 300px;
 	height: 40px;
@@ -121,6 +144,11 @@ input:focus{
 
 
 <body onload="gogogo();">
+
+<div id="load">
+	<img src="/resources/assets/img/loading.gif" alt="loading">
+</div>
+
 <!-- 
 <div id="load">
 	<img src="/resources/assets/img/loader.gif" alt="loading">
@@ -201,7 +229,7 @@ input:focus{
 												<p>
 													<strong class="text-cut" style="font-size:25px; margin-bottom:10px;">${studyVO.title}</strong><br> 
 													${studyVO.nickname}<br> 
-													${studyVO.cDName} [ ${studyVO.cSName} ]<br> 
+													${studyVO.cDName} ${studyVO.cSName}<br> 
 													${studyVO.rDName} [ ${studyVO.rSName} ]<br> 
 										
 												</p>
@@ -235,7 +263,7 @@ input:focus{
 											<p>
 												<strong class="text-cut" style="font-size:25px; margin-bottom:10px;"> ${test.title}</strong><br> 
 												${test.nickname}<br> 
-												${test.cDName} [ ${test.cSName} ]<br> 
+												${test.cDName} ${test.cSName}<br> 
 												${test.rDName} [ ${test.rSName} ]<br>
 			
 											</p>
@@ -516,5 +544,10 @@ input:focus{
   
   </script>
 
+<script type="text/javascript">
+	$(window).load(function() {
+		$('#load').hide();
+	});
+</script>
 </body>
 </html>

@@ -422,9 +422,9 @@
                                 <div class="topics">
                                     <div class="faq-c">
                                         <div class="faq-q">
-                                            	신청<span class="faq-t">+</span>
+                                            	신청<span class="faq-t faq-o">+</span>
                                         </div>
-                                        <div class="faq-a">
+                                        <div class="faq-a" style="display:block">
 													<!-- 신청 스터디 불러오기 -->
 											<c:forEach items="${aplist}" var="studyVO">
 												<div class="col-md-4 col-sm-6 itemmore">
