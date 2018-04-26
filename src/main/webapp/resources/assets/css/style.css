@@ -1172,8 +1172,8 @@ section {
 }
 
 .service-content:hover .service-icon {
-	background-color: #000;
-	border: 1px solid #000;
+
+	border: 3px solid #000;
 	color: #fff;
 }
 

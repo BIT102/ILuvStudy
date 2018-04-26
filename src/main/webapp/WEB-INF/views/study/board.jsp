@@ -333,6 +333,18 @@ body {
 	border-radius:10px;
 }
 
+.intro-table th{
+	padding-right:50px;
+}
+
+.intro-table td{
+	text-align:left;
+}
+
+
+.intro-is th {
+	padding-bottom:7px;
+}
 </style>
 </head>
 
@@ -666,26 +678,29 @@ body {
 	<!-- 신청자 정보보기 -->
 			<div id="applyDiv" class="modal">
 					<div class="container">
-						<div class="login-container" style="width:600px; height:700px;">
+						<div class="login-container" style="width:600px; height:350px;">
 
 							<span
 							onclick="document.getElementById('applyDiv').style.display='none'"
 							class="close" title="Close Modal">&times;</span>
-								
-								<div class="intro-img">
-					 				<img src=""
-									 class="img-responsive center-block img-circle" style=" width:200px; height:200px;">  
-								</div>
-								
+							
+					
 								<div class="introdu" style="margin-top:30px;">
-										<div class="col-md-6" style="background-color:#5bc0de; color:white;">
-											기본정보
+										<div class="col-md-12" style="background-color:#5bc0de; color:white; height:53px; 
+										                              border-radius:19px; font-size:30px; padding-top:6px;">
+											회원소개
 										</div>
-										<div class="col-md-6">	
-											소개글
-										</div>
-										
-										<table class="intro-table">
+								</div>	
+							
+								
+								<div class="intro-img" style="margin-top:120px;">
+					 				<img src=""
+									 class="img-responsive center-block img-circle" style=" width:150px; height:150px; margin:0;">  
+								</div>
+
+									
+								<div class="introtro" style="margin-top:-154px; margin-left:200px;">
+										<table class="intro-table" style="font-size:18px;">
 											<tr>
 												<th>닉네임</th>
 												<td class="intro-nick"></td>
@@ -699,8 +714,17 @@ body {
 												<td class="intro-home"></td>
 											</tr>
 										</table>
+										
+										<table class="intro-is" style="font-size:18px; margin-top:20px;">
+																					
+											<tr>
+												<th>소개</th>
+											</tr>
+											<tr>	
+												<td class="intro-intro"></td>
+											<tr>
+										</table>
 								</div>
-								
 					</div>
 				</div>
 			</div> 
@@ -1024,7 +1048,7 @@ $.getJSON("/study/apply/"+bno, function(data){
 			+ "<span class='mailbox-attachment-icon has-img'><img src='/study/displayFile?fileName="+this.photo+"'"
 			+ "alt=Attachment style='width:50px; height:50px; margin-right:10px; border-radius:50%;' onclick='mypage(this);'></span>"
 		    + this.nickname
-		    + "<button type='button' onclick='okstudy(this);' class='btn' style='margin:0 10px;'>수락</button>"
+		    + "<button type='button' onclick='okstudy(this);' class='btn' style='margin:0 10px; margin-left:100px;'>수락</button>"
 		    + "<button type='button' onclick='nostudy(this);' class='btn'>거절</button>"
 		    + "<input type='hidden' class='intro-nick' value='"+this.nickname+"'/>"
 		    + "<input type='hidden' class='intro-gender' value='"+this.gender+"'/>"
@@ -1046,12 +1070,21 @@ function mypage(x) {
 	var nick = $(x).parent().parent().children("input.intro-nick").val();
 	var gender = $(x).parent().parent().children("input.intro-gender").val();
 	var home = $(x).parent().parent().children("input.intro-home").val();
+	var intro = $(x).parent().parent().children("input.intro-intro").val();
 	
 	$(".intro-img img").attr("src", img);
- 	$(".intro-nick").html(nick) 
- 	$(".intro-gender").html(gender) 
-	$(".intro-home").html(home)
+ 	$(".intro-nick").html(nick); 
+
+	$(".intro-home").html(home);
+	$(".intro-intro").html(intro);
 	
+	if(gender == 1) {
+		
+		$(".intro-gender").html("남자"); 	
+	} else {
+		$(".intro-gender").html("여자"); 	
+	}
+ 	
 	
 	$("#applyDiv").show();
 

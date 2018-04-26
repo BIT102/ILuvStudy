@@ -39,7 +39,8 @@ sn(document).ready(function() {
 	
 	sn('#summernote').summernote({
 
-		height: 150,                 // set editor height
+		height: 200,
+		width: 930,// set editor height
 		minHeight: null,             // set minimum height of editor
 		maxHeight: null,             // set maximum height of editor
 		focus: true,                  // set focus to editable area after initializing summernote
@@ -270,7 +271,7 @@ button[type="button"] {
 															<%-- <option value="${studyVO.cSName}">${studyVO.cSName}</option> --%>
 													</select>
 														<button type="button" id="addCat"
-															class="btn btn-default btn-xs">추가</button>
+															class="btn btn-default btn-xs" style="padding-right:50px;">추가</button>
 														<div id="addCatArea" style="margin-top:10px;"></div>
 													</td>
 												</tr>
@@ -454,7 +455,7 @@ button[type="button"] {
 													</script> <!-- 시간 추가 등록 가능 -->
 													</td>
 													<td>	
-														<button type="button" id="addTime" class="btn btn-default btn-xs">추가</button> 
+														<button type="button" id="addTime" class="btn btn-default btn-xs" style="padding-right:50px;">추가</button> 
 													</td>
 													
 												</tr>
@@ -467,7 +468,7 @@ button[type="button"] {
 											<tbody>
 												<tr style="height:300px;">
 													<th>스터디 소개</th>
-													<td><textarea name="content" class="form-control"
+													<td><textarea id="summernote" name="content" class="form-control"
 															style="height: 140px; resize: none;">${studyVO.content}</textarea></td>
 												</tr>
 												<tr>
