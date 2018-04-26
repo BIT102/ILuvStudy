@@ -293,8 +293,8 @@ button[type="button"] {
 							     	<td> 
 							     	    <p style="margin-bottom:0;">회원님의 정면 사진을 올려주세요!</p>
 							     	    <p>상대방이 신뢰를 갖고 연락할 확률이 높아져요!</p>
-							     		<!-- <input type='file' name='file' style="display:inline-block;" id="i_file"/> --> 
-							     		<input type=file name='file' style='display: none;' id="i_file"/> 
+							     		<input type='file' name='file' style="display:inline-block;" id="i_file"/> 
+							     		<!-- <input type=file name='file' style='display: none;' id="i_file"/>  -->
 										 
 							     	</td>	
 							</tr>	
