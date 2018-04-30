@@ -59,9 +59,9 @@ sn(document).ready(function() {
 		   ['font', ['strikethrough']], 
 		   ['fontsize', ['fontsize']],
 		   ['color', ['color']],
-		   ['para', ['ul', 'ol', 'paragraph']]
+		   ['para', ['ul', 'ol', 'paragraph']]		   
 		 ]
-           
+	       
 	});   
  
 });
@@ -281,9 +281,9 @@ button[type="button"] {
 										  
 										  	<div class="mailbox-attachment-info">
 												<span class="mailbox-attachment-icon has-img">
-													<%-- <img src="/study/displayFile?fileName=${vo.photo}" alt="Attachment" style="width:150px; height:150px;" id="proimg"> --%>
-													<img src="/study/displayFile?fileName=${vo.photo}" border='0' onclick=document.all.file.click();
-													alt="Attachment" style="width:150px; height:150px;" id="proimg">
+													<img src="/study/displayFile?fileName=${vo.photo}" alt="Attachment" style="width:150px; height:150px; border-radius: 100%;" id="proimg"> 
+													<%-- <img src="/study/displayFile?fileName=${vo.photo}" border='0' onclick=document.all.file.click();
+													alt="Attachment" style="width:150px; height:150px; border-radius: 100%;" id="proimg"> --%>
 												</span>
 											</div>
 										  
@@ -365,13 +365,21 @@ button[type="button"] {
 									<textarea id="summernote" name="introduction">${vo.introduction}</textarea>
 								</td>
 						</tr>
+						
+						<tr>
+							<th>홈페이지</th>
+								<td><input type="text" name="homepage" placeholder="홈페이지, 블로그, 인스타그램 등 주소를 넣어주세요."
+									value="${vo.homepage}" class="form-control" id="homepage"
+									style="width: 550px;">
+								</td>
+						</tr>
 					
 						</tbody>	
 
 					</table>	
 					
 		<div>
-			<input type="submit" id="btn-success" value="저장하기" style="width:80px; height:42px;">
+			<input type="submit" id="btn-success" value="수정하기" style="width:80px; height:42px;">
 		</div>
 </form>					
                  </div> <!-- end of .container -->
@@ -385,7 +393,7 @@ button[type="button"] {
 <script id="template" type="text/x-handlebars-template">
 	<div class="mailbox-attachment-info">
 		<span class="mailbox-attachment-icon has-img">
-			<img src="{{imgsrc}}" alt="Attachment" style="width:150px; height:150px;" value = "{{name}}" id="proimg">
+			<img src="{{imgsrc}}" alt="Attachment" style="width:150px; height:150px; border-radius: 100%;" value = "{{name}}" id="proimg">
 		</span>
 			<small class = "small" value = "{{name}}" data-src=data style="cursor:pointer">X</small>
 	</div>

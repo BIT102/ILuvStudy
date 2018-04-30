@@ -307,7 +307,7 @@
 				console.log(result);
 				
 				if(result == "success"){
-					alert("변경 되었습니다.");
+					alert("변경되었습니다.");
 				}else{
 					alert("비밀번호를 확인해 주세요.");
 				}

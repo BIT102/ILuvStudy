@@ -251,7 +251,7 @@
                                 <div class="topics">
                                     <div class="faq-c">
                                         <div class="faq-q">
-                                            	북마크 <span class="faq-t">+</span>
+                                            	스크랩 <span class="faq-t">+</span>
                                         </div>
                                         <div class="faq-a">
 						                    <c:forEach items="${list}" var="studyVO">
@@ -488,6 +488,13 @@
 															<div class="row">
 																<div style="margin-left:10%; font-size:15px;">
 																	<p style="margin-bottom:0;"><strong>작성자 : ${studyVO.nickname}</strong></p>
+																</div>
+																<div style="margin-left:10%; font-size:15px;">
+																	<p style="margin-bottom:0;"><strong>승인여부 : <font color = "red">
+ 																	<c:if test="${studyVO.apStatus eq 'O'}">승인되었습니다. </c:if>
+ 																	<c:if test="${studyVO.apStatus eq 'D'}">승인 대기 중입니다.</c:if>
+ 																	<c:if test="${studyVO.apStatus eq 'X'}">승인 거절되었습니다.</c:if>
+ 																	</font></strong></p>
 																</div>
 																<div style="margin-left:45%; font-size:17px; color:#5bc0de;">
 																<strong>${studyVO.rDName}[ ${studyVO.rSName} ]</strong>

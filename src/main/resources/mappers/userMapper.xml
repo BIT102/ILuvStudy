@@ -33,7 +33,7 @@
   	<!-- 프로필 수정 -->
   	<update id="update">
   	update user set name=#{name}, nickname=#{nickName}, gender=#{gender}, phoneNum=#{phoneNum}, 
-  	birth=#{birth}, introduction=#{introduction}, modifyDate=now() where email=#{email};
+  	birth=#{birth}, introduction=#{introduction}, homepage=#{homepage}, modifyDate=now() where email=#{email};
   	</update>
   	
   	<!-- 부가정보 수정 -->

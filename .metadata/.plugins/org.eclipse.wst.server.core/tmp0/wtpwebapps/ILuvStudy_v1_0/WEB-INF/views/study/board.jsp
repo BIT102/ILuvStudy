@@ -180,7 +180,7 @@ function myFunction(x) {
 			}),
 			success : function(result) {
 				if(result=='success') {
-					alert("등록됨");
+					alert("등록되었습니다.");
 				}
 			}
 		});
@@ -197,7 +197,7 @@ function myFunction(x) {
 				},
 				success : function(result) {
 					if(result=='success') {
-						alert("삭제욤 ");
+						alert("삭제되었습니다.");
 					}
 				}
 			});
@@ -371,7 +371,7 @@ $(".apply").on("click", function(){
 			usEmail : applyEmail
 		}),
 		success : function(result){
-		alert("완전등록됨");
+		alert("등록되었습니다.");
 		wait();
 		}
 	})
@@ -394,7 +394,7 @@ $.ajax({
 	}),
  	success : function(result) {
  		if(result=='success'){
- 			alert("삭제되었네");
+ 			alert("삭제되었습니다.");
  			wait();
  			apply();
  		}
@@ -552,7 +552,7 @@ $(document).ready(function(){
         		}),
         		success:function(result){
         			if(result=='success'){
-        				alert("등록");
+        				alert("등록되었습니다.");
         				getPageList(replyPage);
         			}
         		}
@@ -590,7 +590,7 @@ $(document).ready(function(){
         		dataType:"text",
         		success:function(result) {
         			if(result=="success") {
-        				alert("삭제욤");
+        				alert("삭제되었습니다.");
         				$("#modDiv").hide("slow");
         				getPageList(replyPage);
         			}

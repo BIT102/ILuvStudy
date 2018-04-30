@@ -427,7 +427,7 @@ body {
 														style="font-size: 35px; cursor:pointer;"></i>
 								</span>
 							</c:if>
-							<strong  style="color:white; font-size:20px;"> 스크립을 해주세요 </strong>
+							<strong  style="color:white; font-size:20px;"> 스크랩을 해주세요 </strong>
 							</c:if> </span> 					
 						</p>
 					</div>
@@ -908,7 +908,7 @@ $(".apply").on("click", function(){
 		console.log(now);
 		console.log(max);
 		
-	alert("참석하실수 없습니다");
+	alert("참석하실 수 없습니다");
 	
 	} else {
 	
@@ -926,7 +926,7 @@ $(".apply").on("click", function(){
 		}),
 		success : function(result){
 		wait();
-		alert("대기상태입니다.");
+		alert("승인을 기다려주세요.");
 		$(".apply").hide();
 		$(".deapply").show();
 		}
@@ -953,7 +953,7 @@ $.ajax({
  		if(result=='success'){
  			apply();
 			wait();
- 			alert("삭제되었네");
+ 			alert("삭제되었습니다.");
  			$(".deapply").hide();
  			$(".apply").show();
  		}
@@ -1000,7 +1000,7 @@ function okstudy(event) {
 			if(result=="success"){
 				kk.remove();
 				apply();
-				alert("수락했승ㅁ");
+				alert("수락했습니다.");
 
 			}
 		 }
@@ -1182,7 +1182,7 @@ $(document).ready(function(){
         		}),
         		success:function(result){
         			if(result=='success'){
-        				alert("등록");
+        				alert("댓글이 등록되었습니다.");
         				getPageList(replyPage);
         			}
         		}
@@ -1224,7 +1224,7 @@ $(document).ready(function(){
         		dataType:"text",
         		success:function(result) {
         			if(result=="success") {
-        				alert("삭제욤");
+        				alert("삭제되었습니다.");
         				$("#modDiv").hide("slow");
         				getPageList(replyPage);
         			}
@@ -1251,7 +1251,7 @@ $(document).ready(function(){
         		dataType:"text",
         		success:function(result) {
         			if(result=="success"){
-        				alert("수정입니다");
+        				alert("수정되었습니다.");
         				$("#modDiv").hide("slow");
         				getPageList(replyPage);
         			}

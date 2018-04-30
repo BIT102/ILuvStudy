@@ -246,7 +246,7 @@ select::-ms-expand {
 							<option value="a"
 							 <c:out value="${cri.pallType eq 'a'? 'selected':''}"/>>최신순</option>
 							<option value="b"
-							 <c:out value="${cri.pallType eq 'b'? 'selected':''}"/>>스크립순</option>
+							 <c:out value="${cri.pallType eq 'b'? 'selected':''}"/>>스크랩순</option>
 							<option value="q"
 							 <c:out value="${cri.pallType eq 'q'? 'selected':''}"/>>조회순</option>
 							<option value="w"
