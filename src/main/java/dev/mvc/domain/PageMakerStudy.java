@@ -65,7 +65,8 @@ public class PageMakerStudy  {
 				.queryParam("perPageNum", cri.getPerPageNum())
 				.queryParam("searchType", ((SearchCriteriaStudy) cri).getSearchType())
 				.queryParam("keyword", encoding(((SearchCriteriaStudy)cri).getKeyword()))
-				.queryParam("pallType", ((SearchCriteriaStudy) cri).getPallType()).build();
+				.queryParam("pallType", ((SearchCriteriaStudy) cri).getPallType())
+				.queryParam("cateType", ((SearchCriteriaStudy) cri).getPallType()).build();
 		
 		return uriComponents.toUriString();
 	}

@@ -174,6 +174,11 @@ select::-ms-expand {
     opacity:0.7;
 }
 
+.dropcate p{
+	font-size:16px !important;
+	margin-right:25px !important;
+	cursor:pointer !important;
+}
 
 </style>
 
@@ -181,6 +186,16 @@ select::-ms-expand {
 
 <body>
 	<%@include file="../nav.jsp"%>
+		
+	<div class="collapse navbar-collapse" id="main-nav-collapse" style="margin-right:10.3%; margin-left:30%">
+		<ul class="nav navbar-nav navbar-right text-uppercase">
+			<li class="dropcate" onclick="catenav(this);"><p>전체보기</p></li>
+			<li class="dropcate" onclick="catenav(this);"><p>외국어</p></li>
+			<li class="dropcate" onclick="catenav(this);"><p>IT</p></li>
+			<li class="dropcate" onclick="catenav(this);"><p>라이프스타일</p></li>
+			<li class="dropcate" onclick="catenav(this);"><p>취업</p></li>
+		</ul>
+	</div>
 	
 	
             <header class="page-head">
@@ -333,7 +348,7 @@ select::-ms-expand {
 										<div style="margin-left:10%; font-size:15px;">
 											<p style="margin-bottom:0;"><strong>작성자 : ${studyVO.nickname}</strong></p>
 										</div>
-										<div style="margin-left:45%; font-size:17px; color:#5bc0de;">
+										<div style="float:right; font-size:17px; color:#5bc0de; margin-right:30px;">
 										<strong>${studyVO.rDName}[ ${studyVO.rSName} ]</strong>
 										</div>
 									</div>
@@ -390,12 +405,8 @@ select::-ms-expand {
 	<script type="text/javascript"
 		src="/resources/assets/js/jquery.hoverdir.js"></script>
 
-	<script>
-	$(".img-text").mouseover(function(){
-		$("")
-	})
-	
-	</script>
+
+
 	<!-- script for portfolio section using hoverdirection -->
 	<script type="text/javascript">
 		$(function() {
@@ -456,29 +467,59 @@ select::-ms-expand {
 	<!-- 정렬조건을 주는 스크립트 -->
 	<script>
 
+
+	function catenav(y) {
+
+		var value = ""
+
+		if($(y).text()=="전체보기") value=""; 
+		
+		if($(y).text()=="외국어") value="lang"; 
+		
+		if($(y).text()=="IT") value="it";
+		
+		if($(y).text()=="라이프스타일") value="life"; 
+		
+		if($(y).text()=="취업") value="work"; 
+		
+		self.location="listAll"
+			+ '${pageMakerStudy.makeQuery(1)}'
+			+ "&cateType="
+			+ value;
+	}
+
+
 	//정렬합니다
 	var pallsel="";
 	//클릭할때마다 변경
  			$("#pallsel").on("change", function(){
 				//선택조건 바꿨을때 
+				
+				var value = ""
+
 				pallsel = $("#pallsel option:selected").val()
 				
 				self.location="listAll"
 					+ '${pageMakerStudy.makeQuery(1)}'
 					+ "&pallType="
 					+ pallsel
+					+ "&cateType="
+					+ "${cate}";
 			});	
 			
 		  	//정렬조건 최신순, 북마크순, 조회순, 댓글순
 
 			$(".btn-white").on("click", function(event){
 				
+
 				self.location = "listAll"
 					+ '${pageMakerStudy.makeQuery(1)}'
 					+ "&searchType="
 					+ $("#select1 option:selected").val()
 					+ "&keyword=" + encodeURIComponent($('#keywordInput').val())
-					+ "&pallType="+ $("#pallsel option:selected").val();
+					+ "&pallType="+ $("#pallsel option:selected").val()
+					+ "&cateType="
+					+ "${cate}";
 		})  					 
 	//타자누르면 검색됨
 	function onKeyDown() {
@@ -490,7 +531,9 @@ select::-ms-expand {
 				+ "&searchType="
 				+ $("#select1 option:selected").val()
 				+ "&keyword=" + encodeURIComponent($('#keywordInput').val())
-				+ "&pallType="+ $("#pallsel option:selected").val();
+				+ "&pallType="+ $("#pallsel option:selected").val()
+				+ "&cateType="
+				+ "${cate}";
 		  }
 	  }	
 	

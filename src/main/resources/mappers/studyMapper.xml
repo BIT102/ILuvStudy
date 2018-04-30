@@ -514,6 +514,7 @@ WHERE bs.bno > 0
 and sc.CDID = bc.CATEGORYD and sc.CSID = bc.CATEGORYS
 ]]>
 <include refid="search"></include>
+<include refid="cate"></include>
 <![CDATA[
 group by bs.bno
 ]]>
@@ -640,6 +641,7 @@ WHERE bs.bno > 0
 and sc.CDID = bc.CATEGORYD and sc.CSID = bc.CATEGORYS
 ]]>
 <include refid="search"></include>
+<include refid="cate"></include>
 <include refid="pall"></include>
 </select>
 
@@ -698,7 +700,25 @@ and sc.CDID = bc.CATEGORYD and sc.CSID = bc.CATEGORYS
 		</if>
 </sql> 
 
-  	 		  <select id="getNextBno" resultType="int">
+<!-- 카테고리별 나누기 -->
+<sql id="cate">
+	<if test="cateType != null">
+		<if test="cateType == 'lang'.toString()">
+			and sc.cdname = '외국어'
+		</if>
+		<if test="cateType == 'it'.toString()">
+			and sc.cdname = 'IT'
+		</if>
+		<if test="cateType == 'life'.toString()">
+			and sc.cdname = '라이프스타일'
+		</if>
+		<if test="cateType == 'work'.toString()">
+			and sc.cdname = '취업'
+		</if>						
+	
+	</if>
+</sql>
+  <select id="getNextBno" resultType="int">
 
   select LAST_INSERT_ID();
 

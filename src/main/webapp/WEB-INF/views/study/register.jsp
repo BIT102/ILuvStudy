@@ -613,7 +613,11 @@ button[type="button"] {
 	</script>
 	<script>
 		
+	//카테고리 추삭제
 	var count=0;
+	
+	//시간 추삭제
+	var clockcount=0;
 	
 		$(document).ready(function() {
 							//카테고리 소분류 체크 시 대분류 체크 되도록
@@ -705,25 +709,46 @@ button[type="button"] {
 					    		alert("항목을 모두 입력하세요");
 					    		$("#st").focus();
 					    		return false;
-							} else if(setsc == scval) {
-								alert("이미 추가하신 요일입니다.");
-								return false;
 							}
-							 
 							
-							var time = "<div class='col-md-4'><input type='hidden' name='startSc' value="+scval+">"
-							+ "<input type='hidden' name='stEt' value="+stval+"시~"+etval+">"
-							+ scval
-							+ " > "
-							+ stval
-							+ "시~" + etval
-							+ "<small class='small' onclick='btn_delete(this)' >X</small></div>";
-											
-										     $("#addTimeArea").append(time);
-										     
-										     setsc = scval;
-											});
+							
+							if(clockcount==0) {
+								
+								clockcount++;
+								
+								var time = "<div class='col-md-4'><input type='hidden' name='startSc' value="+scval+">"
+								+ "<input type='hidden' name='stEt' value="+stval+"시~"+etval+">"
+								+ scval
+								+ " > "
+								+ stval
+								+ "시~" + etval
+								+ "<small class='small' onclick='btn_delete1(this)' >X</small></div>";
+												
+								$("#addTimeArea").append(time);
+							
+							     setsc = scval;
+							} else {
+							
+								if(setsc == scval) {
+									alert("이미 추가하신 요일입니다.");
+									return false;
+								} else {
+									var time = "<div class='col-md-4'><input type='hidden' name='startSc' value="+scval+">"
+									+ "<input type='hidden' name='stEt' value="+stval+"시~"+etval+">"
+									+ scval
+									+ " > "
+									+ stval
+									+ "시~" + etval
+									+ "<small class='small' onclick='btn_delete1(this)'>X</small></div>";
+													
+									$("#addTimeArea").append(time);
+									
+								}
+	
+							}
+
 						});
+					});
 		//카테고리 삭제 버튼
 		function btn_delete(x) {
 			count--;
@@ -732,6 +757,17 @@ button[type="button"] {
 			
 			$(x).parent("div").remove();
 		}
+		
+		
+		//시간 삭제 버튼
+		function btn_delete1(x) {
+			clockcount--;
+			
+			if(clockcount<0) {clockcount=0;}
+			
+			$(x).parent("div").remove();
+		}
+		
 		//지역정보 2단 콤보박스 메서드
 		function getRegion() {
 			//$("#rSName").children("option").remove(); //소분류의 option 삭제
@@ -750,7 +786,7 @@ button[type="button"] {
 				success : function(result) { //반환받은 지역테이블 정보, list 배열
 					
 					var option = "";
-					if (result.length < 2) {
+					if (result.length < 1) {
 						option = "<option>소지역</option>"
 					} else {
 						for (var i = 0; i < result.length; i++) {
@@ -1006,8 +1042,7 @@ S3 수정 (파일 업로드 2개가 되어서 주석 처리)
             }
           });
           
-          alert(markers[0].getPosition().lat())
-          
+ 
           if(labelIndex == 1){
           		lat = markers[0].getPosition().lat();
 				lng = markers[0].getPosition().lng();

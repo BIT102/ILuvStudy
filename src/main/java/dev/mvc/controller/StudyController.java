@@ -36,7 +36,6 @@ import dev.mvc.service.ApplyService;
 import dev.mvc.service.BookmarkService;
 import dev.mvc.service.ReplyStudyService;
 import dev.mvc.service.StudyService;
-import dev.mvc.service.UserService;
 
 @Controller
 @RequestMapping("/study/*")
@@ -59,9 +58,7 @@ public class StudyController {
 	@Inject
 	private ApplyService apservice;
 	
-	@Inject
-	private UserService uservice;
-	
+
 	//스터디 수정
 	@RequestMapping(value="/update", method = RequestMethod.GET)
 	public void updateGET(int bno, Model model) throws Exception {
@@ -177,7 +174,7 @@ public class StudyController {
 
 		logger.info("show list..........");
 		System.out.println("=========================");
-		System.out.println(cri);
+		System.out.println(cri.getCateType());
 		System.out.println("=========================");
 		StudyVO vo = new StudyVO();
 
@@ -188,6 +185,8 @@ public class StudyController {
 		PageMakerStudy pageMakerStudy = new PageMakerStudy();
 		
 		model.addAttribute("pageMakerStudy", pageMakerStudy);
+		
+		model.addAttribute("cate", cri.getCateType());
 		
 		pageMakerStudy.setCri(cri);
 		
@@ -278,10 +277,6 @@ public class StudyController {
 		model.addAttribute("bolist",bookservice.bolist(map));
 		
 		model.addAttribute("aplist", apservice.list(bno));
-		
-		System.out.println("?????????????????????????????????????????????????????????");
-		System.out.println(apservice.list(bno));
-		System.out.println("?????????????????????????????????????????????????????????");
 		
 		model.addAttribute(service.read(bno));
 		

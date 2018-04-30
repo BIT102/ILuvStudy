@@ -20,6 +20,7 @@
 		, rs.WRITER
 		, rs.REGDATE
 		, u.NICKNAME
+		, u.photo
 		from 
 		reply_study rs
 		left outer join user u on u.EMAIL = rs.WRITER 
@@ -54,6 +55,7 @@
 		, rs.WRITER
 		, rs.REGDATE
 		, u.NICKNAME
+		, u.photo
 		from 
 		reply_study rs
 		left outer join user u on u.EMAIL = rs.WRITER 

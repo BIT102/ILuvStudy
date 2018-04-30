@@ -334,11 +334,13 @@ body {
 }
 
 .intro-table th{
-	padding-right:50px;
+	width:150px;
+	padding-bottom: 5px;
 }
 
 .intro-table td{
 	text-align:left;
+	padding-bottom: 5px;
 }
 
 
@@ -678,7 +680,7 @@ body {
 	<!-- 신청자 정보보기 -->
 			<div id="applyDiv" class="modal">
 					<div class="container">
-						<div class="login-container" style="width:600px; height:350px;">
+						<div class="login-container" style="width:700px; height:400px;">
 
 							<span
 							onclick="document.getElementById('applyDiv').style.display='none'"
@@ -1275,15 +1277,15 @@ $(document).ready(function(){
         		
         		$(data.list).each(function(){
         			
-        			if(this.writer == '${login.email}'){
+        		/* 	if(this.writer == '${login.email}'){ */
         			str += "<div class='replyLi' ><div class='cmnt-clipboard'>"
         			    +  "<button class='btn-clipboard' value='"+this.rno+"'>수정하기</button></div>"
         			    +  "<div class='well'><div class='row'><div class='col-md-2'>"
-        			    +  "<img src="+"'/study/displayFile?fileName=${studyVO.photo}'"+"　class='img-responsive center-block' style='border-radius:50%;'></div>"
+        			    +  "<img src="+"'/study/displayFile?fileName="+this.photo+"'"+"　class='img-responsive center-block' style='border-radius:50%;'></div>"
                         +  "<div class='col-md-10'><p class='comment-info'>"
                         +  "<strong>" + this.nickname + "</strong>" + "<span>" + regdate + "</span>"
                         + "</p><div class='contentre'>" + this.content + "</div></div></div></div></div>"
-        			} else {
+        		/* 	} else {
         				str += "<div class='replyLi' ><div class='cmnt-clipboard'>"
             			    +  "<div class='well'><div class='row'><div class='col-md-2'>"
             			    +  "<img src='assets/img/commenter2.jpg' class='img-responsive center-block' style='border-radius:50%;'></div>"
@@ -1291,7 +1293,7 @@ $(document).ready(function(){
                             +  "<strong>" + this.nickname + "</strong>" 
                             + "</p><div class='contentre'>" + this.content + "</div></div></div></div></div>"	
         			}
-        			
+        			 */
         		});
         		$("#replies").html(str);
         		

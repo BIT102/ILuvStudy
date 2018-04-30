@@ -227,7 +227,7 @@ input:focus{
 											<!-- end of /.about-client -->
 											<div class="main-speech">
 												<p>
-													<strong class="text-cut" style="font-size:25px; margin-bottom:10px;">${studyVO.title}</strong><br> 
+													<strong class="text-cut" style="font-size:20px; margin-bottom:10px;">${studyVO.title}</strong><br> 
 													${studyVO.nickname}<br> 
 													${studyVO.cDName} ${studyVO.cSName}<br> 
 													${studyVO.rDName} [ ${studyVO.rSName} ]<br> 
@@ -261,7 +261,7 @@ input:focus{
 										<!-- end of /.about-client -->
 										<div class="main-speech">
 											<p>
-												<strong class="text-cut" style="font-size:25px; margin-bottom:10px;"> ${test.title}</strong><br> 
+												<strong class="text-cut" style="font-size:20px; margin-bottom:10px;"> ${test.title}</strong><br> 
 												${test.nickname}<br> 
 												${test.cDName} ${test.cSName}<br> 
 												${test.rDName} [ ${test.rSName} ]<br>

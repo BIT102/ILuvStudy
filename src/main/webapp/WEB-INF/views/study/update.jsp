@@ -19,6 +19,48 @@
 	
 <title>스터디 상세</title>
 
+	<!-- 섬머노트 시작 -->
+	
+<!-- include libraries(jQuery, bootstrap) -->
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
+
+<script>
+var sn = jQuery.noConflict();
+</script>
+<!-- include summernote css/js-->
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
+
+<script>
+sn(document).ready(function() {
+	
+	
+	sn('#summernote').summernote({
+
+		height: 200,                 // set editor height
+		width : 930,
+		minHeight: null,             // set minimum height of editor
+		maxHeight: null,             // set maximum height of editor
+		focus: true,                  // set focus to editable area after initializing summernote
+		
+		// 편집도구 툴팁 종류 선택   
+		toolbar: [
+		   ['style', ['bold', 'italic', 'underline', 'clear']],
+		   ['font', ['strikethrough']], 
+		   ['fontsize', ['fontsize']],
+		   ['color', ['color']],
+		   ['para', ['ul', 'ol', 'paragraph']]
+		 ]
+           
+	});   
+ 
+});
+</script>
+
+
+
 <style>
 form th {
 	width: 176px !important;
@@ -64,7 +106,6 @@ small {
 }
 .btn {
 	padding: 5px 20px !important;
-	margin-left: 20px !important;
 }
 .btn-xs {
 	margin-top: 5px;
@@ -115,6 +156,25 @@ input[type=checkbox] {
   margin-right: 8px !important;
   padding:30px !important;
 }
+
+/* 썸머노트 버튼 스타일 시작 */
+button[type="button"] {
+
+	width:5px !important;
+	height:35px !important;
+	/* margin:5px; */
+	border-radius:10% !important;
+	border: 1px solid gray !important;
+	padding-right : 30px !important; 
+/* 	padding-right : 30px; */
+}
+
+.note-toolbar .note-fontsize .note-btn-group button,
+.note-toolbar .note-para .note-btn-group button {
+    line-height: 12px !important;
+}
+/* 썸머노트 버튼 스타일 끝 */
+
 
 </style>
 </head>
@@ -184,8 +244,8 @@ input[type=checkbox] {
 															<%-- <option value="${studyVO.cSName}">${studyVO.cSName}</option> --%>
 													</select>
 														<button type="button" id="addCat"
-															class="btn btn-default btn-xs" style="width:76px; height:40px;">추가</button>
-														<div id="addCatArea"></div>
+															class="btn btn-default btn-xs" style="padding-right:50px !important; margin-left:20px !important;">추가</button>
+														<div id="addCatArea" style="margin-top:10px;"></div>
 													</td>
 												</tr>
 												<tr>
@@ -206,7 +266,7 @@ input[type=checkbox] {
 																</c:if>
 															</c:forEach>
 													</select> <select id="rSName" name='rSId' class="form-control">
-															<option value="">--</option>
+															<option value="">소지역</option>
 													</select>
 													</td>
 												</tr>
@@ -329,7 +389,7 @@ input[type=checkbox] {
 															<option value="" selected>종료시간</option>
 													</select> 
 													
-													<div id="addTimeArea"></div>    
+													<div id="addTimeArea" style="margin-top:10px;"></div>    
 													
 													<script>
 														/* 		$("#st").change(function(){
@@ -358,7 +418,7 @@ input[type=checkbox] {
 													</script> 
 													</td>
 													<td>
-														<button type="button" id="addTime" class="btn btn-default btn-xs" style="width:76px; height:40px;">추가</button> 
+														<button type="button" id="addTime" class="btn btn-default btn-xs" style="padding-right:50px !important">추가</button> 
 													</td>
 	
 												</tr>
@@ -371,8 +431,8 @@ input[type=checkbox] {
 											<tbody>
 												<tr>
 													<th>스터디 소개</th>
-													<td><textarea name="content" class="form-control"
-															style="height:140px;">${studyVO.content}</textarea></td>
+													<td><textarea name="content" class="form-control" id="summernote"
+															style="height: 140px; resize: none;">${studyVO.content}</textarea></td>
 												</tr>
 												<tr>
 													<th>이미지</th>
@@ -532,7 +592,11 @@ input[type=checkbox] {
 	
 	<script>
 	
+	//카테고리 추삭제
 	var count=0;
+	
+	//시간 추삭제
+	var clockcount=0;
 	
 	$(document).ready(function(){
 				
@@ -576,14 +640,14 @@ input[type=checkbox] {
 				
 				var catd2 = $('#catD option:selected').text();
 				var cats2 = $('#catS option:selected').text();
-				var cat = "<span><input type='hidden' name='categoryD' value="+catd+">"
+				var cat = "<div class='col-md-4'><input type='hidden' name='categoryD' value="+catd+">"
 						+ "<input type='hidden' name='categoryS' value="+cats+">"
-						+ "<div>"
 						+ catd2
 						+ " > "
 						+ cats2
-						+ "</span><button type='button' onclick = 'btn_delete(this)' class='btn btn-default btn-xs'>삭제</button></div>";
+						+ "<small class='small' onclick='btn_delete(this)'>X</small></div>";
 				$("#addCatArea").append(cat);
+				
 				setd = catd;
 				sets = cats;
 				
@@ -601,13 +665,12 @@ input[type=checkbox] {
 					
 					var catd2 = $('#catD option:selected').text();
 					var cats2 = $('#catS option:selected').text();
-					var cat = "<span><input type='hidden' name='categoryD' value="+catd+">"
+					var cat = "<div class='col-md-4'><input type='hidden' name='categoryD' value="+catd+">"
 							+ "<input type='hidden' name='categoryS' value="+cats+">"
-							+ "<div>"
 							+ catd2
 							+ " > "
 							+ cats2
-							+ "</span><button type='button' onclick = 'btn_delete(this)' class='btn btn-default btn-xs'>삭제</button></div>";
+							+"<small class='small' onclick='btn_delete(this)'>X</small></div>";
 					$("#addCatArea").append(cat);
 				}
 			}//count esle 끝
@@ -654,16 +717,34 @@ $("#addTime").on("click",function() {
 		
 	} else {
 		
-		var time = "<span><input type='hidden' name='startSc' value="+scval+">"
-		+ "<input type='hidden' name='stEt' value="+stval+"시~"+etval+">"
-		+ "<div>"
-		+ scval
-		+ " > "
-		+ stval
-		+ "시~" + etval
-		+ "</span><button type='button' onclick = 'btn_delete(this)' class='btn btn-default btn-xs'>삭제</button></div>";
-						
-					     $("#addTimeArea").append(time);
+		if(clockcount==0){
+			
+			clockcount++;
+
+			var time = "<div class='col-md-4'><input type='hidden' name='startSc' value="+scval+">"
+			+ "<input type='hidden' name='stEt' value="+stval+"시~"+etval+">"
+			+ scval
+			+ " > "
+			+ stval
+			+ "시~" + etval
+			+ "<small class='small' onclick='btn_delete1(this)'>X</small></div>";
+							
+			 $("#addTimeArea").append(time);
+		
+		    setsc = scval;
+		} else { 
+			
+			var time = "<div class='col-md-4'><input type='hidden' name='startSc' value="+scval+">"
+			+ "<input type='hidden' name='stEt' value="+stval+"시~"+etval+">"
+			+ scval
+			+ " > "
+			+ stval
+			+ "시~" + etval
+			+ "<small class='small' onclick='btn_delete1(this)'>X</small></div>";
+							
+			 $("#addTimeArea").append(time);
+		}
+
 	}
 });
 		
@@ -696,6 +777,17 @@ $("#addTime").on("click",function() {
 			$(x).parent("div").parent("span").remove();
 			
 		}
+		
+		//카테고리 삭제 버튼
+		function btn_delete1(x){
+			clockcount--;
+			
+			if(clockcount<0) {clockcount=0;}
+			
+			$(x).parent("div").parent("span").remove();
+			
+		}
+		
 		
 		//지역정보 2단 콤보박스 메서드
 		function getRegion(){
@@ -764,9 +856,9 @@ $("#addTime").on("click",function() {
 				var recatd2 = "${studyVO.cDName}";
 				var recats2 = "${studyVO.cSName}";
 				
-				var recat="<span><input type='hidden' name='categoryD' value="+recatd+">"
+				var recat="<div class='col-md-4'><input type='hidden' name='categoryD' value="+recatd+">"
 				+"<input type='hidden' name='categoryS' value="+recats+">"
-				+"<div>"+recatd2 +" > "+recats2+"</span><button type='button' onclick = 'btn_delete(this)' class='btn btn-default btn-xs'>삭제</button></div>";
+				+recatd2 +" > "+recats2+"<small class='small' onclick='btn_delete(this)' >X</small></div>";
 				
 				$("#addCatArea").append(recat);
 			</c:forEach>
@@ -795,13 +887,13 @@ $("#addTime").on("click",function() {
 			for(var i=0; i<sclist.length; i++) {
 				console.log(i);
 
-				var time = "<span><input type='hidden' name='startSc' value="+sclist[i]+">"
+				var time = "<div class='col-md-4'><input type='hidden' name='startSc' value="+sclist[i]+">"
 					     + "<input type='hidden' name='stEt' value="+stetlist[i]+">"
-					     + "<div>"
+
 				         + sclist[i]
 						 + " > "
 						 + stetlist[i]
-						 +"</span><button type='button' onclick = 'btn_delete(this)' class='btn btn-default btn-xs'>삭제</button></div>";
+							+ "<small class='small' onclick='btn_delete(this)' >X</small></div>";
 				
 				$("#addTimeArea").append(time);			 
 			}	
@@ -958,9 +1050,7 @@ $("#addTime").on("click",function() {
               bounds.extend(place.geometry.location);
             }
           });
-          
-          alert(markers[0].getPosition().lat())
-          
+         
           if(labelIndex == 1){
           		lat = markers[0].getPosition().lat();
 				lng = markers[0].getPosition().lng();
